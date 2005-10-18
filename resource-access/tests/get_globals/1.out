@@ -1,0 +1,12 @@
+Key: logon home Value: \\%L\%U\.9xprofile
+Key: printcap name Value: cups
+Key: username map Value: /etc/samba/smbusers
+Key: printing Value: cups
+Key: logon path Value: \\%L\profiles\.msprofile
+Key: hosts allow Value: @foo 10.0.0.2
+Key: map to guest Value: Bad User
+Key: cups options Value: raw
+Key: logon drive Value: P:
+Key: workgroup Value: TUX-NET
+Key: printer admin Value: @ntadmin, root, administrator
+Key: printcap cache time Value: 750

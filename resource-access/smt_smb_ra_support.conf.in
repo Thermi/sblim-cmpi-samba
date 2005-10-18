@@ -1,0 +1,6 @@
+scriptdir ="@SCRIPTDIR@/"
+smbconf   ="/etc/samba/smb.conf"
+defaults  ="@SYSCONFDIR@/smt_smb_ra_defaults.conf"
+synonyms  ="@SYSCONFDIR@/smt_smb_ra_synonyms.conf" 
+groupmap  ="/var/lib/samba/group_mapping.tdb"
+cachefinterval ="10"

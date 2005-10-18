@@ -1,0 +1,5 @@
+path =  /home
+hosts allow =  @foo 10.0.0.2
+comment =  Test Share
+browseable =  Yes
+browseable =  (null)

@@ -1,0 +1,6 @@
+workgroup =  TUX-NET
+path =  /home
+path =  /var/tmp
+comment =  Test Share
+browseable =  Yes
+browseable =  (null)

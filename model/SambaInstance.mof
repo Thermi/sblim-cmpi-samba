@@ -1,0 +1,256 @@
+// ===================================================================
+// Title:	    	Samba Test Instances
+// Filename:		SambaInstance.mof
+// Date:	    	06/16/05
+// Author:	    	Bert Lange
+// Contributors:
+// ===================================================================
+//
+// Changes:
+//
+
+// ============================
+// Linux_SambaService instances
+// ============================
+
+instance of Linux_SambaService
+{
+  Name                       = "Linux_SambaService1";
+  SystemName				 = "Linux";
+  CreationClassName			 = "Linux_SambaService";
+  SystemCreationClassName	 = "com.ibm.wbem.smt.samba";
+  Started					 = "FALSE";
+  TimeOfLastStateChange		 = "19990610144012.000000+060";
+  InstallDate				 = "19990610144026.000000+060";
+  
+  Status					 = "Unknwon";
+  Caption					 = "Test Instance";
+  Description				 = "Instance for type Linux_SambaService";
+  ElementName				 = "Samba Service";
+};
+
+instance of Linux_SambaService
+{
+  Name                       = "Linux_SambaService2";
+  SystemName				 = "Linux";
+  CreationClassName			 = "Linux_SambaService";
+  SystemCreationClassName    = "com.ibm.wbem.smt.samba";
+  Started					 = "TRUE";
+  TimeOfLastStateChange		 = "19990610142012.000000+060";
+  InstallDate				 = "19990610142026.000000+060";
+  
+  Status					 = "Unknwon";
+  Caption					 = "Test Instance2";
+  Description				 = "Instance for type Linux_SambaService";
+  ElementName				 = "Samba Service";
+};
+
+instance of Linux_SambaServiceConfiguration
+{
+ Name						 = "Linux_SambaServiceConfiguration1";
+ ConfigurationFile			 = "/etc/samba/smb.conf";
+};
+
+instance of Linux_SambaServiceConfiguration
+{
+ Name						 = "Linux_SambaServiceConfiguration2";
+ ConfigurationFile			 = "etc/smb.conf";
+};
+
+instance of Linux_SambaGlobalOptions
+{
+ Name						 = "Linux_SambaGlobalOptions1";
+ Workgroup					 = "linux_test";
+ ServerString				 = "testServer";
+ InstanceID					 = "Linux_SambaService1";
+ BindInterfacesOnly			 = TRUE;
+};
+
+instance of Linux_SambaGlobalOptions
+{
+ Name						 = "Linux_SambaGlobalOptions2";
+ Workgroup					 = "boeb1";
+ ServerString				 = "IBM Server";
+ InstanceID					 = "Linux_SambaService1";
+};
+
+instance of Linux_SambaGlobalSecurityOptions
+{
+ Name 						 = "Linux_SambaGlobalOptions1";
+ MinPasswordLength			 = "22";
+ InstanceID					 = "Linux_SambaService1";
+};
+
+instance of Linux_SambaGlobalBrowseOptions
+{
+ Name 						 = "Linux_SambaGlobalBrowseOptions1";
+ Browsable					 = TRUE;
+ DomainMaster				 = "1";
+ InstanceID					 = "Linux_SambaService1";
+};
+
+instance of Linux_SambaGlobalBrowseOptions
+{
+ Name 						 = "Linux_SambaGlobalOptions1";
+ Browsable					 = TRUE;
+ DomainMaster				 = "1";
+ InstanceID					 = "Linux_SambaService1";
+};
+
+instance of Linux_SambaCommonSecurityOptions
+{
+ Name 						 = "Linux_SambaCommonSecurityOptions1";
+ GuestOK					 = TRUE;
+ InstanceID					 = "Linux_SambaService1";
+};
+
+instance of Linux_SambaCommonSecurityOptions
+{
+ Name 						 = "Linux_SambaCommonSecurityOptions2";
+ GuestOK					 = FALSE;
+ InstanceID					 = "Linux_SambaService1";
+};
+
+instance of Linux_SambaCommonSecurityOptions
+{
+ Name 						 = "Linux_SambaGlobalOptions1";
+ GuestOK					 = TRUE;
+ InstanceID					 = "Linux_SambaService1";
+};
+
+instance of Linux_SambaShareSecurityOptions
+{
+ Name 						 = "Linux_SambaGlobalOptions1";
+ //AdminUsers					 = "user11,user22,user33";
+ InstanceID					 = "Linux_SambaService1";
+};
+
+instance of Linux_SambaPrinterSecurityOptions
+{
+ Name 						 = "Linux_SambaGlobalOptions1";
+ //PrinterAdmin				 = "user11,user4";
+ InstanceID					 = "Linux_SambaService1";
+};
+
+
+instance of Linux_SambaGlobalFileNameHandlingOptions
+{
+ Name						 = "Linux_SambaGlobalFileNameHandlingOptions1";
+ InstanceID					 = "Linux_SambaService1";
+};
+
+instance of Linux_SambaGlobalPrintingOptions
+{
+ Name						 = "Linux_SambaGlobalPrintingOptions1";
+ InstanceID					 = "Linux_SambaService1";
+};
+
+instance of Linux_SambaGlobalProtocolOptions
+{
+ Name						 = "Linux_SambaGlobalProtocolOptions1";
+ InstanceID					 = "Linux_SambaService1";
+};
+
+instance of Linux_SambaGroup
+{
+ SambaGroupName				 = "SambaGroup1";
+ SystemGroupName			 = "systemgroup2";
+};
+
+instance of Linux_SambaGroup
+{
+ SambaGroupName				 = "SambaGroup2";
+ SystemGroupName			 = "group3";
+};
+
+instance of Linux_SambaGroup
+{
+ SambaGroupName				 = "SambaGroup3";
+ SystemGroupName			 = "groupTest";
+};
+
+instance of Linux_SambaGlobalFileNameHandlingForGlobal
+{
+ ManagedElement				 = "Linux_SambaGlobalOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+ SettingData				 = "Linux_SambaGlobalFileNameHandlingOptions.Name=\"Linux_SambaGlobalFileNameHandlingOptions1\",InstanceID=\"Linux_SambaService1\"";
+};
+
+instance of Linux_SambaGlobalPrintingForGlobal
+{
+ ManagedElement				 = "Linux_SambaGlobalOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+ SettingData				 = "Linux_SambaGlobalPrintingOptions.Name=\"Linux_SambaGlobalPrintingOptions1\",InstanceID=\"Linux_SambaService1\"";
+};
+
+instance of Linux_SambaGlobalProtocolForGlobal
+{
+ ManagedElement				 = "Linux_SambaGlobalOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+ SettingData				 = "Linux_SambaGlobalProtocolOptions.Name=\"Linux_SambaGlobalProtocolOptions1\",InstanceID=\"Linux_SambaService1\"";
+};
+
+
+instance of Linux_SambaServiceConfigurationForService
+{
+ Configuration			   	= "Linux_SambaServiceConfiguration.Name=\"Linux_SambaServiceConfiguration1\"";
+ Element		      		= "Linux_SambaService.Name=\"Linux_SambaService1\",SystemCreationClassName=\"com.ibm.wbem.smt.samba\",SystemName=\"Linux\",CreationClassName=\"Linux_SambaService\"";
+};
+
+instance of Linux_SambaServiceConfigurationForService
+{
+ Configuration			   	= "Linux_SambaServiceConfiguration.Name=\"Linux_SambaServiceConfiguration2\"";
+ Element		      		= "Linux_SambaService.Name=\"Linux_SambaService2\",SystemCreationClassName=\"com.ibm.wbem.smt.samba\",SystemName=\"Linux\",CreationClassName=\"Linux_SambaService\"";
+};
+
+instance of Linux_SambaGlobalForService
+{
+ ManagedElement				 = "Linux_SambaService.Name=\"Linux_SambaService1\",SystemCreationClassName=\"com.ibm.wbem.smt.samba\",SystemName=\"Linux\",CreationClassName=\"Linux_SambaService\"";
+ SettingData				 = "Linux_SambaGlobalOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+};
+
+instance of Linux_SambaGlobalForService
+{
+ ManagedElement				 = "Linux_SambaService.Name=\"Linux_SambaService2\",SystemCreationClassName=\"com.ibm.wbem.smt.samba\",SystemName=\"Linux\",CreationClassName=\"Linux_SambaService\"";
+ SettingData				 = "Linux_SambaGlobalOptions.Name=\"Linux_SambaGlobalOptions2\",InstanceID=\"Linux_SambaService1\"";
+};
+
+instance of Linux_SambaGlobalSecurityForGlobal
+{
+ ManagedElement				 = "Linux_SambaGlobalOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+ SettingData				 = "Linux_SambaGlobalSecurityOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+};
+
+instance of Linux_SambaGlobalBrowseForGlobal
+{
+ ManagedElement				 = "Linux_SambaGlobalOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+ SettingData				 = "Linux_SambaGlobalBrowseOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+};
+
+instance of Linux_SambaShareSecurityForGlobal
+{
+ ManagedElement				 = "Linux_SambaGlobalOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+ SettingData				 = "Linux_SambaShareSecurityOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+};
+
+instance of Linux_SambaPrinterSecurityForGlobal
+{
+ ManagedElement				 = "Linux_SambaGlobalOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+ SettingData				 = "Linux_SambaPrinterSecurityOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+};
+
+instance of Linux_SambaCommonSecurityForGlobal
+{
+ ManagedElement				 = "Linux_SambaGlobalOptions.Name=\"Linux_SambaGlobalOptions1\",InstanceID=\"Linux_SambaService1\"";
+ SettingData				 = "Linux_SambaCommonSecurityOptions.Name=\"Linux_SambaCommonSecurityOptions1\",InstanceID=\"Linux_SambaService1\"";
+};
+
+//instance of Linux_SambaGroupForUser
+//{
+// GroupComponent			   	= "Linux_SambaGroup.SambaGroupName=\"SambaGroup1\"";
+// PartComponent	      		= "Linux_SambaUser.SambaUserName=\"user1\"";
+//};
+
+//instance of Linux_SambaGroupForUser
+//{
+// GroupComponent			   	= "Linux_SambaGroup.SambaGroupName=\"SambaGroup1\"";
+// PartComponent	      		= "Linux_SambaUser.SambaUserName=\"user2\"";
+//};
+

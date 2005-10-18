@@ -1,0 +1,41 @@
+[global]
+	workgroup = TUX-NET
+	printing = cups
+	printcap name = cups
+	printcap cache time = 750
+	cups options = raw
+	printer admin = @ntadmin, root, administrator
+	username map = /etc/samba/smbusers
+	map to guest = Bad User
+	logon path = \\%L\profiles\.msprofile
+	logon home = \\%L\%U\.9xprofile
+	logon drive = P:
+[homes]
+	comment = Home Directories
+	valid users = %S
+	browseable = No
+	read only = No
+	inherit permissions = Yes
+[users]
+	comment = All users
+	path = /home
+	read only = No
+	inherit permissions = Yes
+	veto files = /aquota.user/groups/shares/
+[printers]
+	comment = All Printers
+	path = /var/tmp
+	printable = Yes
+	create mask = 0600
+	browseable = No
+[print$]
+	comment = Printer Drivers
+	path = /var/lib/samba/drivers
+	write list = @ntadmin root
+	directory mask = 0775
+	comment = Test Share
+[myshare]    
+	path = /usr/
+	printable = No
+	read only = No
+	browseable = Yes
