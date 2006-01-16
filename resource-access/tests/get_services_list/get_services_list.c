@@ -25,6 +25,9 @@
 #include "execscripts.h"
 #include "conf.h"
 
+#ifndef CONFFILE
+#define CONFFILE "/etc/smt_smb_ra_support.conf"
+#endif
 
 extern struct conf *smb_conf;
 
