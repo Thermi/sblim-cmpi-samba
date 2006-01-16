@@ -50,7 +50,7 @@ class SambaArray: list<string>  {
 
 	bool isPresent(string);
 	string toString();
-	const char **SambaArray::toArray();
+	const char **toArray();
 
 	SambaArrayConstIterator begin();
 	SambaArrayConstIterator end();	
