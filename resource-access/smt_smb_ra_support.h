@@ -75,10 +75,6 @@ extern "C" {
 #define DEF_SMBGRPMAPF "/etc/samba/smbusers"
 #define SMB_SERVICE "service" /*smb service path (ex,/etc/init.d/smbd) */
 
-#ifndef CONFFILE
-#define CONFFILE "@SYSCONFDIR@/smt_smb_ra_support.conf"
-#endif
-	
 /* miscellaneous */
 #define GET_SMBUSRS_CMD "pdbedit -L"
 #define GET_SYSGRPS_CMD "getent group"

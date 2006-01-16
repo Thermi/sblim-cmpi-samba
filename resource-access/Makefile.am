@@ -56,10 +56,10 @@ do_substDir = \
 
 ######################################################################################
 # Automake instructions for 'resource-access' dir
+AM_CPPFLAGS=-DCONFFILE=\"$(sysconfdir)/smt_smb_ra_support.conf\"
 
 BUILT_SOURCES += \
         $(srcdir)/smt_smb_ra_support.conf \
-        $(srcdir)/smt_smb_ra_support.h\
         $(srcdir)/scripts/smt_smb_ra_get_defaults.sh
 
 $(srcdir)/smt_smb_ra_support.conf: $(srcdir)/smt_smb_ra_support.conf.in
@@ -68,19 +68,15 @@ $(srcdir)/smt_smb_ra_support.conf: $(srcdir)/smt_smb_ra_support.conf.in
 $(srcdir)/scripts/smt_smb_ra_get_defaults.sh: $(srcdir)/scripts/smt_smb_ra_get_defaults.sh.in
 	$(do_substDir) < $(srcdir)/scripts/smt_smb_ra_get_defaults.sh.in > $(srcdir)/scripts/smt_smb_ra_get_defaults.sh
 
-$(srcdir)/smt_smb_ra_support.h: $(srcdir)/smt_smb_ra_support.h.in
-	$(do_substDir) < $(srcdir)/smt_smb_ra_support.h.in > $(srcdir)/smt_smb_ra_support.h
-
 # Adding new generated files to file list for clean up
 CLEANFILES += \
         $(srcdir)/smt_smb_ra_support.conf \
-        $(srcdir)/smt_smb_ra_get_support.h \
-        $(srcdir)/smt_smb_ra_synonyms.conf \
-        $(srcdir)/scripts/smt_smb_ra_support.h.in
+        $(srcdir)/scripts/smt_smb_ra_get_defaults.sh
 
 # Files for /etc directory
 sysconf_DATA += \
-        $(srcdir)/smt_smb_ra_support.conf 
+        $(srcdir)/smt_smb_ra_support.conf \
+	$(srcdir)/smt_smb_ra_synonyms.conf 
 
 #  LibRaTools libraries
 lib_LTLIBRARIES += \
@@ -89,12 +85,12 @@ lib_LTLIBRARIES += \
 # LibRaTools sources
 libRaToolsSmb_la_SOURCES = \
         $(srcdir)/smt_smb_ra_support.conf.in \
+        $(srcdir)/scripts/smt_smb_ra_get_defaults.sh.in \
+	$(srcdir)/smt_smb_ra_synonyms.conf \
         $(srcdir)/smt_smb_ra_support.c \
         $(srcdir)/smt_smb_ra_data.c \
         $(srcdir)/smt_smb_ra_path.c \
-        $(srcdir)/smt_smb_ra_support.h.in \
-        $(srcdir)/scripts/smt_smb_ra_get_defaults.sh.in
-		
+        $(srcdir)/smt_smb_ra_support.h 
 libRaToolsSmb_la_CPPFLAGS = \
         -DUSE_CACHE
 

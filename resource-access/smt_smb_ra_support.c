@@ -40,6 +40,10 @@
 #define CACHE_DFL 10
 #define USERMAP_DFL "/etc/samba/smbusers"
 
+#ifndef CONFFILE
+#define CONFFILE "/etc/smt_smb_ra_support.conf"
+#endif
+
 extern struct conf *smb_conf;
 extern struct monitor *services_list_monitor;
 extern struct monitor *usermap_file_monitor;

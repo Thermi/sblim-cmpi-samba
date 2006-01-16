@@ -17,6 +17,6 @@
 #
 #####################################################################
 
-echo "[defaults]" > @SYSCONFDIR@/smt_smb_ra_defaults.conf
+echo "[defaults]" > /etc/smt_smb_ra_defaults.conf
 dirname=`dirname $0`
-testparm -sv /dev/null | python $dirname/smt_smb_ra_parse-params.py >> @SYSCONFDIR@/smt_smb_ra_defaults.conf
+testparm -sv /dev/null | python $dirname/smt_smb_ra_parse-params.py >> /etc/smt_smb_ra_defaults.conf
