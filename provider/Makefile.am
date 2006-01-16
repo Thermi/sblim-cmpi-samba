@@ -45,6 +45,7 @@ EXTRA_DIST =
 # Pre Build requirements need to be compiled prior anything else
 BUILT_SOURCES =
 
+
 ################################################################################
 #
 lib_LTLIBRARIES += \
@@ -233,6 +234,8 @@ libcmpiLinux_SambaAdminUsersForGlobal_la_CPPFLAGS = \
 		-I$(srcdir)/Linux_SambaGlobalOptions \
 		-I$(srcdir)/Linux_SambaUser
 
+libcmpiLinux_SambaAdminUsersForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -276,6 +279,8 @@ libcmpiLinux_SambaAdminUsersForShare_la_CPPFLAGS = \
 		-I$(srcdir)/include \
 		-I$(srcdir)/Linux_SambaShareOptions \
 		-I$(srcdir)/Linux_SambaUser
+
+libcmpiLinux_SambaAdminUsersForShare_la_LDFLAGS = -avoid-version
 
 
 
@@ -321,6 +326,8 @@ libcmpiLinux_SambaCommonSecurityForGlobal_la_CPPFLAGS = \
 		-I$(srcdir)/Linux_SambaGlobalOptions \
 		-I$(srcdir)/Linux_SambaCommonSecurityOptions 
 
+libcmpiLinux_SambaCommonSecurityForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -364,6 +371,8 @@ libcmpiLinux_SambaCommonSecurityForPrinter_la_CPPFLAGS = \
 		-I$(srcdir)/include \
 		-I$(srcdir)/Linux_SambaPrinterOptions \
 		-I$(srcdir)/Linux_SambaCommonSecurityOptions 
+
+libcmpiLinux_SambaCommonSecurityForPrinter_la_LDFLAGS = -avoid-version
 
 
 
@@ -409,6 +418,8 @@ libcmpiLinux_SambaCommonSecurityForShare_la_CPPFLAGS = \
 		-I$(srcdir)/Linux_SambaShareOptions \
 		-I$(srcdir)/Linux_SambaCommonSecurityOptions 
 
+libcmpiLinux_SambaCommonSecurityForShare_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -448,6 +459,8 @@ libcmpiLinux_SambaCommonSecurityOptions_la_CPPFLAGS = \
         -D_COMPILE_UNIX -DCMPI_STANDALONE \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include
+
+libcmpiLinux_SambaCommonSecurityOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -493,6 +506,8 @@ libcmpiLinux_SambaForceGroupForGlobal_la_CPPFLAGS = \
 		-I$(srcdir)/Linux_SambaGlobalOptions \
 		-I$(srcdir)/Linux_SambaGroup
 
+libcmpiLinux_SambaForceGroupForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -536,6 +551,8 @@ libcmpiLinux_SambaForceGroupForPrinter_la_CPPFLAGS = \
 		-I$(srcdir)/include \
 		-I$(srcdir)/Linux_SambaPrinterOptions \
 		-I$(srcdir)/Linux_SambaGroup
+
+libcmpiLinux_SambaForceGroupForPrinter_la_LDFLAGS = -avoid-version
 
 
 
@@ -581,6 +598,8 @@ libcmpiLinux_SambaForceGroupForShare_la_CPPFLAGS = \
 		-I$(srcdir)/Linux_SambaShareOptions \
 		-I$(srcdir)/Linux_SambaGroup
 
+libcmpiLinux_SambaForceGroupForShare_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -624,6 +643,8 @@ libcmpiLinux_SambaForceUserForGlobal_la_CPPFLAGS = \
 		-I$(srcdir)/include \
 		-I$(srcdir)/Linux_SambaGlobalOptions \
 		-I$(srcdir)/Linux_SambaUser
+
+libcmpiLinux_SambaForceUserForGlobal_la_LDFLAGS = -avoid-version
 
 
 
@@ -669,6 +690,8 @@ libcmpiLinux_SambaForceUserForPrinter_la_CPPFLAGS = \
 		-I$(srcdir)/Linux_SambaPrinterOptions \
 		-I$(srcdir)/Linux_SambaUser
 
+libcmpiLinux_SambaForceUserForPrinter_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -712,6 +735,8 @@ libcmpiLinux_SambaForceUserForShare_la_CPPFLAGS = \
 		-I$(srcdir)/include \
 		-I$(srcdir)/Linux_SambaShareOptions \
 		-I$(srcdir)/Linux_SambaUser
+
+libcmpiLinux_SambaForceUserForShare_la_LDFLAGS = -avoid-version
 
 
 
@@ -757,6 +782,8 @@ libcmpiLinux_SambaGlobalBrowseForGlobal_la_CPPFLAGS = \
 		-I$(srcdir)/Linux_SambaGlobalBrowseOptions \
 		-I$(srcdir)/Linux_SambaGlobalOptions 
 
+libcmpiLinux_SambaGlobalBrowseForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -796,6 +823,8 @@ libcmpiLinux_SambaGlobalBrowseOptions_la_CPPFLAGS = \
         -D_COMPILE_UNIX -DCMPI_STANDALONE \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include
+
+libcmpiLinux_SambaGlobalBrowseOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -843,6 +872,8 @@ libcmpiLinux_SambaGlobalFileNameHandlingForGlobal_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaGlobalFileNameHandlingOptions \
         -I$(srcdir)/Linux_SambaGlobalOptions
 
+libcmpiLinux_SambaGlobalFileNameHandlingForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -884,6 +915,8 @@ libcmpiLinux_SambaGlobalFileNameHandlingOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaGlobalFileNameHandlingOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -931,6 +964,8 @@ libcmpiLinux_SambaGlobalForService_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaGlobalOptions \
         -I$(srcdir)/Linux_SambaService
 
+libcmpiLinux_SambaGlobalForService_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -972,6 +1007,8 @@ libcmpiLinux_SambaGlobalOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaGlobalOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -1019,6 +1056,8 @@ libcmpiLinux_SambaGlobalPrintingForGlobal_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaGlobalOptions \
         -I$(srcdir)/Linux_SambaGlobalPrintingOptions
 
+libcmpiLinux_SambaGlobalPrintingForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1060,6 +1099,8 @@ libcmpiLinux_SambaGlobalPrintingOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaGlobalPrintingOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -1107,6 +1148,8 @@ libcmpiLinux_SambaGlobalProtocolForGlobal_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaGlobalOptions \
         -I$(srcdir)/Linux_SambaGlobalProtocolOptions
 
+libcmpiLinux_SambaGlobalProtocolForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1148,6 +1191,8 @@ libcmpiLinux_SambaGlobalProtocolOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaGlobalProtocolOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -1195,6 +1240,8 @@ libcmpiLinux_SambaGlobalSecurityForGlobal_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaGlobalOptions \
         -I$(srcdir)/Linux_SambaGlobalSecurityOptions
 
+libcmpiLinux_SambaGlobalSecurityForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1237,6 +1284,8 @@ libcmpiLinux_SambaGlobalSecurityOptions_la_CPPFLAGS = \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
 
+libcmpiLinux_SambaGlobalSecurityOptions_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1278,6 +1327,8 @@ libcmpiLinux_SambaGroup_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaGroup_la_LDFLAGS = -avoid-version
 
 
 
@@ -1325,6 +1376,8 @@ libcmpiLinux_SambaGroupForUser_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaGroup \
         -I$(srcdir)/Linux_SambaUser
 
+libcmpiLinux_SambaGroupForUser_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1370,6 +1423,8 @@ libcmpiLinux_SambaGuestAccountForGlobal_la_CPPFLAGS = \
 		-I$(srcdir)/CIM_ConcreteJob \
         -I$(srcdir)/Linux_SambaGlobalOptions \
         -I$(srcdir)/Linux_SambaUser
+
+libcmpiLinux_SambaGuestAccountForGlobal_la_LDFLAGS = -avoid-version
 
 
 
@@ -1417,6 +1472,8 @@ libcmpiLinux_SambaInvalidUsersForGlobal_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaGlobalOptions \
         -I$(srcdir)/Linux_SambaUser
 
+libcmpiLinux_SambaInvalidUsersForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1462,6 +1519,8 @@ libcmpiLinux_SambaInvalidUsersForPrinter_la_CPPFLAGS = \
 		-I$(srcdir)/CIM_ConcreteJob \
         -I$(srcdir)/Linux_SambaPrinterOptions \
         -I$(srcdir)/Linux_SambaUser
+
+libcmpiLinux_SambaInvalidUsersForPrinter_la_LDFLAGS = -avoid-version
 
 
 
@@ -1509,6 +1568,8 @@ libcmpiLinux_SambaInvalidUsersForShare_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaShareOptions \
         -I$(srcdir)/Linux_SambaUser
 
+libcmpiLinux_SambaInvalidUsersForShare_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1554,6 +1615,8 @@ libcmpiLinux_SambaPrinterAdminForGlobal_la_CPPFLAGS = \
 		-I$(srcdir)/CIM_ConcreteJob \
         -I$(srcdir)/Linux_SambaGlobalOptions \
         -I$(srcdir)/Linux_SambaUser
+
+libcmpiLinux_SambaPrinterAdminForGlobal_la_LDFLAGS = -avoid-version
 
 
 
@@ -1601,6 +1664,8 @@ libcmpiLinux_SambaPrinterAdminForPrinter_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaPrinterOptions \
         -I$(srcdir)/Linux_SambaUser
 
+libcmpiLinux_SambaPrinterAdminForPrinter_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1647,6 +1712,8 @@ libcmpiLinux_SambaPrinterForService_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaPrinterOptions \
         -I$(srcdir)/Linux_SambaService
 
+libcmpiLinux_SambaPrinterForService_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1688,6 +1755,8 @@ libcmpiLinux_SambaPrinterOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaPrinterOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -1735,6 +1804,8 @@ libcmpiLinux_SambaPrinterPrintingForPrinter_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaPrinterOptions \
         -I$(srcdir)/Linux_SambaPrinterPrintingOptions
 
+libcmpiLinux_SambaPrinterPrintingForPrinter_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1776,6 +1847,8 @@ libcmpiLinux_SambaPrinterPrintingOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaPrinterPrintingOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -1823,6 +1896,8 @@ libcmpiLinux_SambaPrinterSecurityForGlobal_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaGlobalOptions \
         -I$(srcdir)/Linux_SambaPrinterSecurityOptions
 
+libcmpiLinux_SambaPrinterSecurityForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1869,6 +1944,8 @@ libcmpiLinux_SambaPrinterSecurityForPrinter_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaPrinterOptions \
         -I$(srcdir)/Linux_SambaPrinterSecurityOptions
 
+libcmpiLinux_SambaPrinterSecurityForPrinter_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -1910,6 +1987,8 @@ libcmpiLinux_SambaPrinterSecurityOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaPrinterSecurityOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -1957,6 +2036,8 @@ libcmpiLinux_SambaReadListForGlobal_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaGlobalOptions \
         -I$(srcdir)/Linux_SambaUser
 
+libcmpiLinux_SambaReadListForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2002,6 +2083,8 @@ libcmpiLinux_SambaReadListForPrinter_la_CPPFLAGS = \
 		-I$(srcdir)/CIM_ConcreteJob \
         -I$(srcdir)/Linux_SambaPrinterOptions \
         -I$(srcdir)/Linux_SambaUser
+
+libcmpiLinux_SambaReadListForPrinter_la_LDFLAGS = -avoid-version
 
 
 
@@ -2049,6 +2132,8 @@ libcmpiLinux_SambaReadListForShare_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaShareOptions \
         -I$(srcdir)/Linux_SambaUser
 
+libcmpiLinux_SambaReadListForShare_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2095,6 +2180,8 @@ libcmpiLinux_SambaScriptingForGlobal_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaScriptingOptions \
         -I$(srcdir)/Linux_SambaGlobalOptions
 
+libcmpiLinux_SambaScriptingForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2136,6 +2223,8 @@ libcmpiLinux_SambaScriptingOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaScriptingOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -2179,6 +2268,8 @@ libcmpiLinux_SambaService_la_CPPFLAGS = \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
 
+libcmpiLinux_SambaService_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2220,6 +2311,8 @@ libcmpiLinux_SambaServiceConfiguration_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaServiceConfiguration_la_LDFLAGS = -avoid-version
 
 
 
@@ -2267,6 +2360,8 @@ libcmpiLinux_SambaServiceConfigurationForService_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaServiceConfiguration \
         -I$(srcdir)/Linux_SambaService
 
+libcmpiLinux_SambaServiceConfigurationForService_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2313,6 +2408,8 @@ libcmpiLinux_SambaShareFileNameHandlingForShare_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaShareFileNameHandlingOptions \
         -I$(srcdir)/Linux_SambaShareOptions
 
+libcmpiLinux_SambaShareFileNameHandlingForShare_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2354,6 +2451,8 @@ libcmpiLinux_SambaShareFileNameHandlingOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaShareFileNameHandlingOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -2401,6 +2500,8 @@ libcmpiLinux_SambaShareForService_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaShareOptions \
         -I$(srcdir)/Linux_SambaService
 
+libcmpiLinux_SambaShareForService_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2442,6 +2543,8 @@ libcmpiLinux_SambaShareOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaShareOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -2489,6 +2592,8 @@ libcmpiLinux_SambaSharePrinterBrowseForPrinter_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaSharePrinterBrowseOptions \
         -I$(srcdir)/Linux_SambaPrinterOptions
 
+libcmpiLinux_SambaSharePrinterBrowseForPrinter_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2535,6 +2640,8 @@ libcmpiLinux_SambaSharePrinterBrowseForShare_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaShareOptions \
         -I$(srcdir)/Linux_SambaSharePrinterBrowseOptions
 
+libcmpiLinux_SambaSharePrinterBrowseForShare_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2576,6 +2683,8 @@ libcmpiLinux_SambaSharePrinterBrowseOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaSharePrinterBrowseOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -2623,6 +2732,8 @@ libcmpiLinux_SambaShareProtocolForShare_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaShareProtocolOptions \
         -I$(srcdir)/Linux_SambaShareOptions
 
+libcmpiLinux_SambaShareProtocolForShare_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2664,6 +2775,8 @@ libcmpiLinux_SambaShareProtocolOptions_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaShareProtocolOptions_la_LDFLAGS = -avoid-version
 
 
 
@@ -2711,6 +2824,8 @@ libcmpiLinux_SambaShareSecurityForGlobal_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaGlobalOptions \
         -I$(srcdir)/Linux_SambaShareSecurityOptions
 
+libcmpiLinux_SambaShareSecurityForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2757,6 +2872,8 @@ libcmpiLinux_SambaShareSecurityForShare_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaShareSecurityOptions \
         -I$(srcdir)/Linux_SambaShareOptions
 
+libcmpiLinux_SambaShareSecurityForShare_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2799,6 +2916,8 @@ libcmpiLinux_SambaShareSecurityOptions_la_CPPFLAGS = \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
 
+libcmpiLinux_SambaShareSecurityOptions_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2840,6 +2959,8 @@ libcmpiLinux_SambaUser_la_CPPFLAGS = \
 		-I$(srcdir)/../resource-access \
 		-I$(srcdir)/include \
 		-I$(srcdir)/CIM_ConcreteJob 
+
+libcmpiLinux_SambaUser_la_LDFLAGS = -avoid-version
 
 
 
@@ -2887,6 +3008,8 @@ libcmpiLinux_SambaUsersForService_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaUser \
         -I$(srcdir)/Linux_SambaService
 
+libcmpiLinux_SambaUsersForService_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -2932,6 +3055,8 @@ libcmpiLinux_SambaValidUsersForGlobal_la_CPPFLAGS = \
 		-I$(srcdir)/CIM_ConcreteJob \
         -I$(srcdir)/Linux_SambaUser \
         -I$(srcdir)/Linux_SambaGlobalOptions
+
+libcmpiLinux_SambaValidUsersForGlobal_la_LDFLAGS = -avoid-version
 
 
 
@@ -2979,6 +3104,8 @@ libcmpiLinux_SambaValidUsersForPrinter_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaUser \
         -I$(srcdir)/Linux_SambaPrinterOptions
 
+libcmpiLinux_SambaValidUsersForPrinter_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -3024,6 +3151,8 @@ libcmpiLinux_SambaValidUsersForShare_la_CPPFLAGS = \
 		-I$(srcdir)/CIM_ConcreteJob \
         -I$(srcdir)/Linux_SambaUser \
         -I$(srcdir)/Linux_SambaShareOptions
+
+libcmpiLinux_SambaValidUsersForShare_la_LDFLAGS = -avoid-version
 
 
 
@@ -3071,6 +3200,8 @@ libcmpiLinux_SambaWriteListForGlobal_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaUser \
         -I$(srcdir)/Linux_SambaGlobalOptions
 
+libcmpiLinux_SambaWriteListForGlobal_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -3117,6 +3248,8 @@ libcmpiLinux_SambaWriteListForPrinter_la_CPPFLAGS = \
         -I$(srcdir)/Linux_SambaUser \
         -I$(srcdir)/Linux_SambaPrinterOptions
 
+libcmpiLinux_SambaWriteListForPrinter_la_LDFLAGS = -avoid-version
+
 
 
 ################################################################################
@@ -3162,3 +3295,7 @@ libcmpiLinux_SambaWriteListForShare_la_CPPFLAGS = \
 		-I$(srcdir)/CIM_ConcreteJob \
         -I$(srcdir)/Linux_SambaUser \
         -I$(srcdir)/Linux_SambaShareOptions
+
+libcmpiLinux_SambaWriteListForShare_la_LDFLAGS = -avoid-version
+
+
