@@ -68,14 +68,14 @@ EXTRA_DIST += $(PACKAGE).spec
 
 ######################################################################################
 # Automake instructions for ./model subdir
-SCHEMAS = $(srcdir)/model/Linux_Samba.mof 
+SCHEMAS = model/Linux_Samba.mof 
 
-REGISTRATIONS = $(srcdir)/model/Linux_Samba.registration
+REGISTRATIONS = model/Linux_Samba.registration
 
 # We must explicity add all the schema files to the distribution package
 pkgdata_DATA = $(SCHEMAS) $(REGISTRATIONS)
 
-pkgdata_SCRIPTS += $(srcdir)/provider-register.sh
+pkgdata_SCRIPTS += provider-register.sh
 
 EXTRA_DIST += model $(pkgdata_SCRIPTS)
 

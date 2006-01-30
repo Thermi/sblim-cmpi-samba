@@ -30,6 +30,12 @@ sysconf_DATA =
 # Scripts that are used in the libraries
 pkgdata_SCRIPTS =
 
+# Scripts that are used in the libraries but are not content of the tar ball
+nodist_pkgdata_SCRIPTS =
+
+# Scripts that are used in the libraries but are not content of the tar ball
+nodist_pkgdata_DATA =
+
 # System wide libraries
 lib_LTLIBRARIES =
 
@@ -46,37 +52,32 @@ EXTRA_DIST =
 BUILT_SOURCES =
 
 
-######################################################################################
-# sed scriptlets for replacing values in .in files
-do_substDir = \
-        sed -e 's,[@]SYSCONFDIR[@],$(sysconfdir),g' \
-            -e 's,[@]SCRIPTDIR[@],$(pkgdatadir),g'
-
-
 
 ######################################################################################
 # Automake instructions for 'resource-access' dir
 AM_CPPFLAGS=-DCONFFILE=\"$(sysconfdir)/smt_smb_ra_support.conf\"
 
-BUILT_SOURCES += \
-        $(srcdir)/smt_smb_ra_support.conf \
-        $(srcdir)/scripts/smt_smb_ra_get_defaults.sh
+#BUILT_SOURCES += \
+#        $(srcdir)/smt_smb_ra_support.conf \
+#        $(srcdir)/scripts/smt_smb_ra_get_defaults.sh
 
-$(srcdir)/smt_smb_ra_support.conf: $(srcdir)/smt_smb_ra_support.conf.in
-	$(do_substDir) < $(srcdir)/smt_smb_ra_support.conf.in > $(srcdir)/smt_smb_ra_support.conf
+smt_smb_ra_support.conf: smt_smb_ra_support.conf.pre
+	sed -e 's,[@]SCRIPTDIR[@],$(pkgdatadir),g' -e s?$$\{prefix\}?$(prefix)?g -e s?$$\{exec_prefix\}?$(prefix)?g $< > $@
 
-$(srcdir)/scripts/smt_smb_ra_get_defaults.sh: $(srcdir)/scripts/smt_smb_ra_get_defaults.sh.in
-	$(do_substDir) < $(srcdir)/scripts/smt_smb_ra_get_defaults.sh.in > $(srcdir)/scripts/smt_smb_ra_get_defaults.sh
+scripts/smt_smb_ra_get_defaults.sh: scripts/smt_smb_ra_get_defaults.sh.pre
+	sed -e s?$$\{prefix\}?$(prefix)?g -e s?$$\{exec_prefix\}?$(prefix)?g $< > $@
 
 # Adding new generated files to file list for clean up
 CLEANFILES += \
-        $(srcdir)/smt_smb_ra_support.conf \
-        $(srcdir)/scripts/smt_smb_ra_get_defaults.sh
+        smt_smb_ra_support.conf \
+        smt_smb_ra_support.conf.pre \
+        scripts/smt_smb_ra_get_defaults.sh \
+        scripts/smt_smb_ra_get_defaults.sh.pre
 
 # Files for /etc directory
 sysconf_DATA += \
-        $(srcdir)/smt_smb_ra_support.conf \
-	$(srcdir)/smt_smb_ra_synonyms.conf 
+        smt_smb_ra_support.conf \
+	smt_smb_ra_synonyms.conf 
 
 #  LibRaTools libraries
 lib_LTLIBRARIES += \
@@ -84,13 +85,11 @@ lib_LTLIBRARIES += \
 
 # LibRaTools sources
 libRaToolsSmb_la_SOURCES = \
-        $(srcdir)/smt_smb_ra_support.conf.in \
-        $(srcdir)/scripts/smt_smb_ra_get_defaults.sh.in \
-	$(srcdir)/smt_smb_ra_synonyms.conf \
-        $(srcdir)/smt_smb_ra_support.c \
-        $(srcdir)/smt_smb_ra_data.c \
-        $(srcdir)/smt_smb_ra_path.c \
-        $(srcdir)/smt_smb_ra_support.h 
+        smt_smb_ra_synonyms.conf \
+        smt_smb_ra_support.c \
+        smt_smb_ra_data.c \
+        smt_smb_ra_path.c \
+        smt_smb_ra_support.h 
 libRaToolsSmb_la_CPPFLAGS = \
         -DUSE_CACHE
 
@@ -99,42 +98,45 @@ libRaToolsSmb_la_LIBADD = \
 
 # Scripts that are copied to an executable (at least for the libs) directory.
 pkgdata_SCRIPTS += \
-        $(srcdir)/scripts/smt_smb_ra_add_user_to_group.py \
-        $(srcdir)/scripts/smt_smb_ra_create_samba_group.py \
-        $(srcdir)/scripts/smt_smb_ra_create_samba_user.py \
-        $(srcdir)/scripts/smt_smb_ra_create_sys_user.py \
-        $(srcdir)/scripts/smt_smb_ra_delete_samba_group.py \
-        $(srcdir)/scripts/smt_smb_ra_delete_samba_user.py \
-        $(srcdir)/scripts/smt_smb_ra_delete_service.py \
-        $(srcdir)/scripts/smt_smb_ra_disable.py \
-        $(srcdir)/scripts/smt_smb_ra_enable.py \
-        $(srcdir)/scripts/smt_smb_ra_errors.py \
-        $(srcdir)/scripts/smt_smb_ra_get_all_services.py \
-        $(srcdir)/scripts/smt_smb_ra_get_db_entries.py \
-        $(srcdir)/scripts/smt_smb_ra_get_group_mappings.py \
-        $(srcdir)/scripts/smt_smb_ra_get_option.py \
-        $(srcdir)/scripts/smt_smb_ra_get_option_merge.py \
-        $(srcdir)/scripts/smt_smb_ra_get_service.py \
-        $(srcdir)/scripts/smt_smb_ra_get_services_list.py \
-        $(srcdir)/scripts/smt_smb_ra_get_synonyms.py \
-        $(srcdir)/scripts/smt_smb_ra_get_sys_printers.py \
-        $(srcdir)/scripts/smt_smb_ra_get_sys_users.py \
-        $(srcdir)/scripts/smt_smb_ra_get_user_mappings.py \
-        $(srcdir)/scripts/smt_smb_ra_get_user_sys_groups.py \
-        $(srcdir)/scripts/smt_smb_ra_parse-params.py \
-        $(srcdir)/scripts/smt_smb_ra_parser.py \
-        $(srcdir)/scripts/smt_smb_ra_remove_user_from_group.py \
-        $(srcdir)/scripts/smt_smb_ra_set_group_mapping.py \
-        $(srcdir)/scripts/smt_smb_ra_set_option.py \
-        $(srcdir)/scripts/smt_smb_ra_set_user_mappings.py \
-        $(srcdir)/scripts/smt_smb_ra_test.py \
-        $(srcdir)/scripts/smt_smb_ra_get_defaults.sh
+        scripts/smt_smb_ra_add_user_to_group.py \
+        scripts/smt_smb_ra_create_samba_group.py \
+        scripts/smt_smb_ra_create_samba_user.py \
+        scripts/smt_smb_ra_create_sys_user.py \
+        scripts/smt_smb_ra_delete_samba_group.py \
+        scripts/smt_smb_ra_delete_samba_user.py \
+        scripts/smt_smb_ra_delete_service.py \
+        scripts/smt_smb_ra_disable.py \
+        scripts/smt_smb_ra_enable.py \
+        scripts/smt_smb_ra_errors.py \
+        scripts/smt_smb_ra_get_all_services.py \
+        scripts/smt_smb_ra_get_db_entries.py \
+        scripts/smt_smb_ra_get_group_mappings.py \
+        scripts/smt_smb_ra_get_option.py \
+        scripts/smt_smb_ra_get_option_merge.py \
+        scripts/smt_smb_ra_get_service.py \
+        scripts/smt_smb_ra_get_services_list.py \
+        scripts/smt_smb_ra_get_synonyms.py \
+        scripts/smt_smb_ra_get_sys_printers.py \
+        scripts/smt_smb_ra_get_sys_users.py \
+        scripts/smt_smb_ra_get_user_mappings.py \
+        scripts/smt_smb_ra_get_user_sys_groups.py \
+        scripts/smt_smb_ra_parse-params.py \
+        scripts/smt_smb_ra_parser.py \
+        scripts/smt_smb_ra_remove_user_from_group.py \
+        scripts/smt_smb_ra_set_group_mapping.py \
+        scripts/smt_smb_ra_set_option.py \
+        scripts/smt_smb_ra_set_user_mappings.py \
+        scripts/smt_smb_ra_test.py 
+
+nodist_pkgdata_SCRIPTS += \
+        scripts/smt_smb_ra_get_defaults.sh
+
  
 # Installable Header Files
 sbliminc_HEADERS += \
-        $(srcdir)/smt_smb_ra_support.h
+        smt_smb_ra_support.h
 
 # We must explicity add the list of scripts to the target
 EXTRA_DIST += \
-        $(pkgdata_SCRIPTS)
+	$(pkgdata_SCRIPTS)
 

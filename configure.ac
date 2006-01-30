@@ -63,7 +63,7 @@ AC_FUNC_REALLOC
 AC_FUNC_SELECT_ARGTYPES
 AC_FUNC_STAT
 AC_CHECK_FUNCS([memmove select strchr strdup])
-AC_CONFIG_FILES(Makefile sblim-cmpi-samba.spec resource-access/Makefile provider/Makefile)
+AC_CONFIG_FILES(Makefile sblim-cmpi-samba.spec resource-access/Makefile resource-access/scripts/smt_smb_ra_get_defaults.sh.pre resource-access/smt_smb_ra_support.conf.pre provider/Makefile)
 
 # Display configuration options
 echo "-------------------------------------------------------"
