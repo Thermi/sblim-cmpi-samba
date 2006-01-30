@@ -103,6 +103,6 @@ is done during the "make postinstall".
 
 - with OpenCimom/SNIA CIMOM :
 ---------------------------
-Start the cimbrowser (/usr/sniacimom/bin). Load the schema file Linux_Dns.mof with 
+Start the cimbrowser (/usr/sniacimom/bin). Load the schema file Linux_Samba.mof with 
 "File" -> "Reload Mof" into the namespace root/cimv2. Before at least IBMQualifiers, 
 CIM Core and CIM System schemata have to be loaded into the repository.
