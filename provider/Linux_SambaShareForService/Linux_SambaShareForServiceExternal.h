@@ -1,112 +1,121 @@
-/**
- *  Linux_SambaShareForServiceExternal.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareForServiceExternal.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaShareForServiceExternal_h
 #define Linux_SambaShareForServiceExternal_h
+
 
 #include "Linux_SambaShareForServiceInstance.h"
 #include "Linux_SambaShareOptionsInstance.h"
 #include "Linux_SambaServiceInstance.h"
+
 #include "CmpiBroker.h"
 
 namespace genProvider {
 
   class Linux_SambaShareForServiceExternal {
+    
+    private:
+    CmpiBroker m_broker;
+    CmpiContext m_context;
   	
     public:
     Linux_SambaShareForServiceExternal(
-     const CmpiBroker& brkr, const CmpiContext& ctx);
+      const CmpiBroker& aBroker,
+      const CmpiContext& aContext);
     virtual ~Linux_SambaShareForServiceExternal();
     
     virtual void enumInstanceNames(
-     const char *nsp,
-     Linux_SambaShareForServiceInstanceNameEnumeration&);
+      const char *aNameSpaceP,
+      Linux_SambaShareForServiceInstanceNameEnumeration& anInstanceNameEnumeration);
      
     virtual void enumInstances(
-     const char *nsp,
-     const char* *properties,
-     Linux_SambaShareForServiceInstanceEnumeration&);
+      const char *anNameSpaceP,
+      const char** aPropertiesPP,
+      Linux_SambaShareForServiceInstanceEnumeration& anInstanceEnumeration);
      
     virtual Linux_SambaShareForServiceInstance getInstance(
-     const char* *properties,
-     const Linux_SambaShareForServiceInstanceName&);
+      const char** aPropertiesPP,
+      const Linux_SambaShareForServiceInstanceName& anInstanceName);
      
     virtual void setInstance(
-     const char* *properties,
-     const Linux_SambaShareForServiceInstance&);
+      const char** aPropertiesPP,
+      const Linux_SambaShareForServiceInstance& anInstance);
      
-    virtual void createInstance(
-     const Linux_SambaShareForServiceInstance&);
+    virtual Linux_SambaShareForServiceInstanceName createInstance(
+      const Linux_SambaShareForServiceInstance& anInstance);
      
     virtual void deleteInstance(
-     const Linux_SambaShareForServiceInstanceName&);
-    
+      const Linux_SambaShareForServiceInstanceName& anInstanceName);
+
+
     //association calls
-    
+
     void referencesSettingData( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaShareForServiceInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaServiceInstanceName& aSourceInstanceName,
+      Linux_SambaShareForServiceInstanceEnumeration& anInstanceEnumeration);
 
     void referenceNamesSettingData( 
-     const char *nsp,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaShareForServiceInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaServiceInstanceName& aSourceInstanceName,
+      Linux_SambaShareForServiceInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void referencesManagedElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaShareForServiceInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaShareForServiceInstanceEnumeration& anInstanceEnumeration);
 
     void referenceNamesManagedElement( 
-     const char *nsp,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaShareForServiceInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaShareForServiceInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void associatorsSettingData( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaShareOptionsInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaServiceInstanceName& aSourceInstanceName,
+      Linux_SambaShareOptionsInstanceEnumeration& anInstanceEnumeration);
 
     void associatorNamesSettingData( 
-     const char *nsp,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaShareOptionsInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaServiceInstanceName& aSourceInstanceName,
+      Linux_SambaShareOptionsInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void associatorsManagedElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaServiceInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaServiceInstanceEnumeration& anInstanceEnumeration);
 
     void associatorNamesManagedElement( 
-     const char *nsp,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaServiceInstanceNameEnumeration& instanceNames);
-
-     
-    private:
-    CmpiBroker  broker;
-    CmpiContext context;
+      const char *aNameSpaceP,
+      const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaServiceInstanceNameEnumeration& anInstanceNameEnumeration); 
+  
   };
+
 }
+
 #endif

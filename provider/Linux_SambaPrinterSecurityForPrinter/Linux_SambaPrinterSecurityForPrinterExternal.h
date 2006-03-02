@@ -1,112 +1,121 @@
-/**
- *  Linux_SambaPrinterSecurityForPrinterExternal.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterSecurityForPrinterExternal.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaPrinterSecurityForPrinterExternal_h
 #define Linux_SambaPrinterSecurityForPrinterExternal_h
+
 
 #include "Linux_SambaPrinterSecurityForPrinterInstance.h"
 #include "Linux_SambaPrinterSecurityOptionsInstance.h"
 #include "Linux_SambaPrinterOptionsInstance.h"
+
 #include "CmpiBroker.h"
 
 namespace genProvider {
 
   class Linux_SambaPrinterSecurityForPrinterExternal {
+    
+    private:
+    CmpiBroker m_broker;
+    CmpiContext m_context;
   	
     public:
     Linux_SambaPrinterSecurityForPrinterExternal(
-     const CmpiBroker& brkr, const CmpiContext& ctx);
+      const CmpiBroker& aBroker,
+      const CmpiContext& aContext);
     virtual ~Linux_SambaPrinterSecurityForPrinterExternal();
     
     virtual void enumInstanceNames(
-     const char *nsp,
-     Linux_SambaPrinterSecurityForPrinterInstanceNameEnumeration&);
+      const char *aNameSpaceP,
+      Linux_SambaPrinterSecurityForPrinterInstanceNameEnumeration& anInstanceNameEnumeration);
      
     virtual void enumInstances(
-     const char *nsp,
-     const char* *properties,
-     Linux_SambaPrinterSecurityForPrinterInstanceEnumeration&);
+      const char *anNameSpaceP,
+      const char** aPropertiesPP,
+      Linux_SambaPrinterSecurityForPrinterInstanceEnumeration& anInstanceEnumeration);
      
     virtual Linux_SambaPrinterSecurityForPrinterInstance getInstance(
-     const char* *properties,
-     const Linux_SambaPrinterSecurityForPrinterInstanceName&);
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterSecurityForPrinterInstanceName& anInstanceName);
      
     virtual void setInstance(
-     const char* *properties,
-     const Linux_SambaPrinterSecurityForPrinterInstance&);
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterSecurityForPrinterInstance& anInstance);
      
-    virtual void createInstance(
-     const Linux_SambaPrinterSecurityForPrinterInstance&);
+    virtual Linux_SambaPrinterSecurityForPrinterInstanceName createInstance(
+      const Linux_SambaPrinterSecurityForPrinterInstance& anInstance);
      
     virtual void deleteInstance(
-     const Linux_SambaPrinterSecurityForPrinterInstanceName&);
-    
+      const Linux_SambaPrinterSecurityForPrinterInstanceName& anInstanceName);
+
+
     //association calls
-    
+
     void referencesSettingData( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaPrinterSecurityForPrinterInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterSecurityForPrinterInstanceEnumeration& anInstanceEnumeration);
 
     void referenceNamesSettingData( 
-     const char *nsp,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaPrinterSecurityForPrinterInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterSecurityForPrinterInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void referencesManagedElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterSecurityOptionsInstanceName& sourceInst,
-     Linux_SambaPrinterSecurityForPrinterInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterSecurityOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterSecurityForPrinterInstanceEnumeration& anInstanceEnumeration);
 
     void referenceNamesManagedElement( 
-     const char *nsp,
-     const Linux_SambaPrinterSecurityOptionsInstanceName& sourceInst,
-     Linux_SambaPrinterSecurityForPrinterInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaPrinterSecurityOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterSecurityForPrinterInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void associatorsSettingData( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaPrinterSecurityOptionsInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterSecurityOptionsInstanceEnumeration& anInstanceEnumeration);
 
     void associatorNamesSettingData( 
-     const char *nsp,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaPrinterSecurityOptionsInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterSecurityOptionsInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void associatorsManagedElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterSecurityOptionsInstanceName& sourceInst,
-     Linux_SambaPrinterOptionsInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterSecurityOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterOptionsInstanceEnumeration& anInstanceEnumeration);
 
     void associatorNamesManagedElement( 
-     const char *nsp,
-     const Linux_SambaPrinterSecurityOptionsInstanceName& sourceInst,
-     Linux_SambaPrinterOptionsInstanceNameEnumeration& instanceNames);
-
-     
-    private:
-    CmpiBroker  broker;
-    CmpiContext context;
+      const char *aNameSpaceP,
+      const Linux_SambaPrinterSecurityOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterOptionsInstanceNameEnumeration& anInstanceNameEnumeration); 
+  
   };
+
 }
+
 #endif

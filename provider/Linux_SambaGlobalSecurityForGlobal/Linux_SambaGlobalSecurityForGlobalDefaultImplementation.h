@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaGlobalSecurityForGlobalDefaultImplementation.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalSecurityForGlobalDefaultImplementation.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGlobalSecurityForGlobalDefaultImplementation_h
 #define Linux_SambaGlobalSecurityForGlobalDefaultImplementation_h
 
@@ -32,6 +35,7 @@
 #include "Linux_SambaGlobalOptionsExternal.h"
 #include "Linux_SambaGlobalSecurityForGlobalInterface.h"
 
+
 namespace genProvider {
 
   class Linux_SambaGlobalSecurityForGlobalDefaultImplementation:
@@ -41,80 +45,102 @@ namespace genProvider {
     virtual ~Linux_SambaGlobalSecurityForGlobalDefaultImplementation() { };
     
     /* intrinsic methods */
+    
     virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaGlobalSecurityForGlobalInstanceNameEnumeration& instnames);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaGlobalSecurityForGlobalInstanceNameEnumeration& anInstanceNameEnumeration);
+    
   	
+    
     virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaGlobalSecurityForGlobalManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+  	  Linux_SambaGlobalSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration);
   	
+  	
+    
     virtual Linux_SambaGlobalSecurityForGlobalManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalSecurityForGlobalInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalSecurityForGlobalInstanceName& anInstanceName);
+    
   	
+    
     virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalSecurityForGlobalManualInstance&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalSecurityForGlobalManualInstance& aManualInstance);
+    
   	
-    virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaGlobalSecurityForGlobalManualInstance&);
+    
+    virtual Linux_SambaGlobalSecurityForGlobalInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaGlobalSecurityForGlobalManualInstance& aManualInstance);
+    
   	
+    
     virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaGlobalSecurityForGlobalInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaGlobalSecurityForGlobalInstanceName& anInstanceName);
+    
 	
     
     /* Association Interface */
 
+    
     virtual void referencesSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalSecurityForGlobalManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaGlobalSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration);
+    
 
+    
     virtual void referencesManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalSecurityOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalSecurityForGlobalManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalSecurityOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaGlobalSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration);
+    
 
+    
     virtual void associatorsSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalSecurityOptionsInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaGlobalSecurityOptionsInstanceEnumeration& anInstanceEnumeration);
+    
 
+    
     virtual void associatorsManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalSecurityOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalOptionsInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalSecurityOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration);
+    
 
    
+    
     /* extrinsic methods */
+    
 	
   };
+  
 }
 #endif
-

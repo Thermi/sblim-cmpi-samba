@@ -1,38 +1,53 @@
-/**
- *  Linux_SambaShareOptionsResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareOptionsResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaShareOptionsResourceAccess.h"
 
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
+
 namespace genProvider {
-  
-   void Linux_SambaShareOptionsResourceAccess::setInstanceNameProperties(const char* nsp,
-   char *instanceName,
-   Linux_SambaShareOptionsInstanceName& anInstanceName)
-  {
-    anInstanceName.setNamespace(nsp);
+
+
+  //----------------------------------------------------------------------------
+  // manual written methods
+
+  static void setInstanceNameProperties(
+      const char* aNameSpaceP,
+      char *instanceName,
+      Linux_SambaShareOptionsInstanceName& anInstanceName) {
+    
+    anInstanceName.setNamespace(aNameSpaceP);
     anInstanceName.setName(instanceName);
     anInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
   };
   
-  void Linux_SambaShareOptionsResourceAccess::setInstanceProperties(
-   Linux_SambaShareOptionsManualInstance& aManualInstance)
-  {
+  
+  //----------------------------------------------------------------------------
+  
+  
+  static void setInstanceProperties(
+      Linux_SambaShareOptionsManualInstance& aManualInstance) {
+
     char *option;
     
     option = get_option(aManualInstance.getInstanceName().getName(),AVAILABLE);	
@@ -58,55 +73,73 @@ namespace genProvider {
 	aManualInstance.setPrintable( false );
   }; 
   
-  void Linux_SambaShareOptionsResourceAccess::setRAProperties(
-   Linux_SambaShareOptionsManualInstance newInstance)
-  {
-    if ( newInstance.isAvailableSet() )
+  //----------------------------------------------------------------------------
+
+
+  static void setRAProperties(
+      Linux_SambaShareOptionsManualInstance aManualInstance) {
+    
+    if ( aManualInstance.isAvailableSet() )
       {
-	if(newInstance.getAvailable())  
-	  set_share_option(newInstance.getInstanceName().getName(),AVAILABLE,YES);
+	if(aManualInstance.getAvailable())  
+	  set_share_option(aManualInstance.getInstanceName().getName(),AVAILABLE,YES);
 	else
-	  set_share_option(newInstance.getInstanceName().getName(),AVAILABLE,NO);
+	  set_share_option(aManualInstance.getInstanceName().getName(),AVAILABLE,NO);
       }
 
-    if ( newInstance.isCommentSet() )
-      set_share_option(newInstance.getInstanceName().getName(),COMMENT,newInstance.getComment());
+    if ( aManualInstance.isCommentSet() )
+      set_share_option(aManualInstance.getInstanceName().getName(),COMMENT,aManualInstance.getComment());
 
-    if ( newInstance.isPathSet() )
-      set_share_option(newInstance.getInstanceName().getName(),PATH,newInstance.getPath());
+    if ( aManualInstance.isPathSet() )
+      set_share_option(aManualInstance.getInstanceName().getName(),PATH,aManualInstance.getPath());
     
     // If you are managing an instance of a share, the printable attribute must be 'no'
-    set_printer_option(newInstance.getInstanceName().getName(),PRINTABLE,NO);
+    set_printer_option(aManualInstance.getInstanceName().getName(),PRINTABLE,NO);
   };
 
+  //----------------------------------------------------------------------------
 
+
+  //----------------------------------------------------------------------------
   //Linux_SambaShareOptionsResourceAccess::Linux_SambaShareOptionsResourceAccess();
-  Linux_SambaShareOptionsResourceAccess::~Linux_SambaShareOptionsResourceAccess() { };
+
+  //----------------------------------------------------------------------------
+  Linux_SambaShareOptionsResourceAccess::~Linux_SambaShareOptionsResourceAccess() {
+    terminator();
+  }
     
-  /* intrinsic methods */
-  
-  void Linux_SambaShareOptionsResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaShareOptionsInstanceNameEnumeration& instnames)
-  { 
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareOptionsResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaShareOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
     char ** shares = get_shares_list();
     
     if(shares){
       for (int i=0; shares[i]; i++){
 	Linux_SambaShareOptionsInstanceName instanceName;
-	setInstanceNameProperties(nsp,shares[i],instanceName);
-	instnames.addElement(instanceName); 
+	setInstanceNameProperties(aNameSpaceP,shares[i],instanceName);
+	anInstanceNameEnumeration.addElement(instanceName); 
       }
     }
-  };
+  }
 
-  void Linux_SambaShareOptionsResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaShareOptionsManualInstanceEnumeration& instances)
-  {
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaShareOptionsResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaShareOptionsManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     char ** shares = get_shares_list();
 
     if(shares){
@@ -114,67 +147,89 @@ namespace genProvider {
 	Linux_SambaShareOptionsManualInstance aManualInstance;
 	Linux_SambaShareOptionsInstanceName instanceName;
 	
-	setInstanceNameProperties(nsp,shares[i],instanceName);
+	setInstanceNameProperties(aNameSpaceP,shares[i],instanceName);
 	aManualInstance.setInstanceName(instanceName);
 	
 	setInstanceProperties(aManualInstance);
 	
-	instances.addElement(aManualInstance);
+	aManualInstanceEnumeration.addElement(aManualInstance);
       }
     }
-  };
+  }
 
+  
+  //----------------------------------------------------------------------------
 
   Linux_SambaShareOptionsManualInstance 
-   Linux_SambaShareOptionsResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareOptionsInstanceName& instanceName)
-  {
+  Linux_SambaShareOptionsResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& anInstanceName) {
+
     Linux_SambaShareOptionsManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
+    aManualInstance.setInstanceName(anInstanceName);
     
     setInstanceProperties(aManualInstance);
     
-    return aManualInstance;  
-  };
+    return aManualInstance; 
+  }
 
-  void Linux_SambaShareOptionsResourceAccess::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareOptionsManualInstance& newInstance)
-  {
-    setRAProperties(newInstance);
-  };
+  //----------------------------------------------------------------------------
 
-  void Linux_SambaShareOptionsResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareOptionsManualInstance& newInstance)
-  {
-    if(!service_exists(newInstance.getInstanceName().getName())){
-      if(!add_share(newInstance.getInstanceName().getName()))
-	setRAProperties(newInstance);
+  void
+  Linux_SambaShareOptionsResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaShareOptionsManualInstance& aManualInstance) {
+    
+    setRAProperties(aManualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  Linux_SambaShareOptionsInstanceName
+  Linux_SambaShareOptionsResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareOptionsManualInstance& aManualInstance) {
+    
+    if(!service_exists(aManualInstance.getInstanceName().getName())){
+      if(!add_share(aManualInstance.getInstanceName().getName()))
+	setRAProperties(aManualInstance);
       else
 	throw CmpiStatus(CMPI_RC_ERR_FAILED,"Instance could not be created!");
-    }
-    else
-      throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exists!");
-  };
 
-  void Linux_SambaShareOptionsResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareOptionsInstanceName& instanceName)
-  {
-    if(service_exists(instanceName.getName())){
-      if(delete_share(instanceName.getName())) 
+    } else
+      throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exists!");
+
+    return aManualInstance.getInstanceName();
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaShareOptionsResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareOptionsInstanceName& anInstanceName) {
+    
+    if(service_exists(anInstanceName.getName())){
+      if(delete_share(anInstanceName.getName())) 
 	throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Instance could not be deleted!");
+      
     }else
       throw CmpiStatus(CMPI_RC_ERR_FAILED,"Instance does not exist!");
-  };
+  }
 
-    /* extrinsic methods */
+	
+
+  
+  // extrinsic methods
+
 	
 }
 

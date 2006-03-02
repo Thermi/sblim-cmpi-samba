@@ -1,233 +1,321 @@
-/**
- *  Linux_SambaGlobalPrintingForGlobalExternal.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaGlobalPrintingForGlobalExternal.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaGlobalPrintingForGlobalExternal.h"
 
-namespace genProvider{
+namespace genProvider {
 	
+	//----------------------------------------------------------------------------
   Linux_SambaGlobalPrintingForGlobalExternal::Linux_SambaGlobalPrintingForGlobalExternal(
-   const CmpiBroker& brkr, const CmpiContext& ctx ) 
-   : broker(brkr), context(ctx) {};
+    const CmpiBroker& aBroker,
+    const CmpiContext& aContext ) 
+    : m_broker(aBroker),
+    m_context(aContext) { }
    
-  Linux_SambaGlobalPrintingForGlobalExternal::
-   ~Linux_SambaGlobalPrintingForGlobalExternal(){};
+	//----------------------------------------------------------------------------
+  Linux_SambaGlobalPrintingForGlobalExternal::~Linux_SambaGlobalPrintingForGlobalExternal() { }
     
-  void Linux_SambaGlobalPrintingForGlobalExternal::enumInstanceNames(
-   const char *nsp,
-   Linux_SambaGlobalPrintingForGlobalInstanceNameEnumeration& instnames) {
+	//----------------------------------------------------------------------------
+  void 
+  Linux_SambaGlobalPrintingForGlobalExternal::enumInstanceNames(
+    const char *aNameSpaceP,
+    Linux_SambaGlobalPrintingForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
 
-    CmpiObjectPath op(nsp,"Linux_SambaGlobalPrintingForGlobal");
-    CmpiEnumeration en=broker.enumInstanceNames(context,op);
-    while(en.hasNext()) {
-      CmpiObjectPath opi = en.getNext();
-      Linux_SambaGlobalPrintingForGlobalInstanceName iname(opi);
-      instnames.addElement(iname);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaGlobalPrintingForGlobal");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstanceNames(m_context,classObjectPath);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath objectPath = cmpiEnumeration.getNext();
+      Linux_SambaGlobalPrintingForGlobalInstanceName instanceName(objectPath);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
-  };
+  
+  }
   	  
-  void Linux_SambaGlobalPrintingForGlobalExternal::enumInstances(
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaGlobalPrintingForGlobalInstanceEnumeration& instances) {
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalExternal::enumInstances(
+    const char *aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaGlobalPrintingForGlobalInstanceEnumeration& anInstanceEnumeration) {
    		
-    CmpiObjectPath op(nsp,"Linux_SambaGlobalPrintingForGlobal");
-    CmpiEnumeration en=broker.enumInstances(context,op,properties);
-    while(en.hasNext()) {
-      CmpiInstance inst = en.getNext();
-      Linux_SambaGlobalPrintingForGlobalInstance instance(inst,nsp);
-      instances.addElement(instance);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaGlobalPrintingForGlobal");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstances(m_context,classObjectPath,aPropertiesPP);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalPrintingForGlobalInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
     }
-  };
+  
+  }
   	  
+	//----------------------------------------------------------------------------
   Linux_SambaGlobalPrintingForGlobalInstance
-   Linux_SambaGlobalPrintingForGlobalExternal::getInstance(
-   const char* *properties,
-   const Linux_SambaGlobalPrintingForGlobalInstanceName& instanceName) {
+  Linux_SambaGlobalPrintingForGlobalExternal::getInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalPrintingForGlobalInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=broker.getInstance(context,op,properties);
-    return Linux_SambaGlobalPrintingForGlobalInstance(inst,instanceName.getNamespace());
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    CmpiInstance cmpiInstance = 
+      m_broker.getInstance(m_context,cmpiObjectPath,aPropertiesPP);
+  
+    return Linux_SambaGlobalPrintingForGlobalInstance(cmpiInstance,anInstanceName.getNamespace());
+  
   }
       
-  void Linux_SambaGlobalPrintingForGlobalExternal::setInstance(
-   const char* *properties,
-   const Linux_SambaGlobalPrintingForGlobalInstance& instance){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalExternal::setInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalPrintingForGlobalInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.setInstance(context,op,inst,properties);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    m_broker.setInstance(m_context,cmpiObjectPath,cmpiInstance,aPropertiesPP);
+  
   }
       
-  void Linux_SambaGlobalPrintingForGlobalExternal::createInstance(
-   const Linux_SambaGlobalPrintingForGlobalInstance& instance){
+	//----------------------------------------------------------------------------
+  Linux_SambaGlobalPrintingForGlobalInstanceName
+  Linux_SambaGlobalPrintingForGlobalExternal::createInstance(
+    const Linux_SambaGlobalPrintingForGlobalInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.createInstance(context,op,inst);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    return Linux_SambaGlobalPrintingForGlobalInstanceName(
+		m_broker.createInstance(m_context,cmpiObjectPath,cmpiInstance));
+
   }
   
-  void Linux_SambaGlobalPrintingForGlobalExternal::deleteInstance(
-   const Linux_SambaGlobalPrintingForGlobalInstanceName& instanceName){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalExternal::deleteInstance(
+    const Linux_SambaGlobalPrintingForGlobalInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    broker.deleteInstance(context,op);
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    m_broker.deleteInstance(m_context,cmpiObjectPath);
+  
   }
-      
-    //Reference calls
-    
-    void Linux_SambaGlobalPrintingForGlobalExternal::
-     referencesSettingData( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalPrintingForGlobalInstanceEnumeration& instances){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.references
-       (context, op, "Linux_SambaGlobalOptions",
-        "SettingData", properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaGlobalPrintingForGlobalInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
-    }
+  // Reference calls
 
-    void Linux_SambaGlobalPrintingForGlobalExternal::
-     referenceNamesSettingData( 
-     const char *nsp,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalPrintingForGlobalInstanceNameEnumeration& instanceNames){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalExternal::referencesSettingData( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalPrintingForGlobalInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.referenceNames
-       (context, op, "Linux_SambaGlobalOptions",
-        "SettingData");
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaGlobalPrintingForGlobalInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
 
-    void Linux_SambaGlobalPrintingForGlobalExternal::
-     referencesManagedElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalPrintingOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalPrintingForGlobalInstanceEnumeration& instances){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.references
-       (context, op, "Linux_SambaGlobalPrintingOptions",
-        "ManagedElement", properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaGlobalPrintingForGlobalInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
-    }
+    CmpiEnumeration cmpiEnumeration = m_broker.references(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaGlobalOptions",
+      "SettingData",
+      aPropertiesPP);
 
-    void Linux_SambaGlobalPrintingForGlobalExternal::
-     referenceNamesManagedElement( 
-     const char *nsp,
-     const Linux_SambaGlobalPrintingOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalPrintingForGlobalInstanceNameEnumeration& instanceNames){
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalPrintingForGlobalInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalExternal::referenceNamesSettingData( 
+    const char* aNameSpaceP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalPrintingForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.referenceNames
-       (context, op, "Linux_SambaGlobalPrintingOptions",
-        "ManagedElement");
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaGlobalPrintingForGlobalInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.referenceNames(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaGlobalOptions",
+      "SettingData");
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaGlobalPrintingForGlobalInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalExternal::referencesManagedElement( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalPrintingOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalPrintingForGlobalInstanceEnumeration& anInstanceEnumeration){
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+  
+    CmpiEnumeration cmpiEnumeration = m_broker.references(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaGlobalPrintingOptions",
+      "ManagedElement",
+      aPropertiesPP);
+
+    while(cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalPrintingForGlobalInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalExternal::referenceNamesManagedElement( 
+    const char* aNameSpaceP,
+    const Linux_SambaGlobalPrintingOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalPrintingForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+    CmpiEnumeration cmpiEnumeration = m_broker.referenceNames(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaGlobalPrintingOptions",
+      "ManagedElement");
+   
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaGlobalPrintingForGlobalInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
+    }      
+
+  }
      
-    //Associator calls
-
-    void Linux_SambaGlobalPrintingForGlobalExternal::
-     associatorsSettingData( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalPrintingOptionsInstanceEnumeration& instances){
+  //Associator calls
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalExternal::associatorsSettingData( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalPrintingOptionsInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associators
-       (context,op,0,0,0,0,properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaGlobalPrintingOptionsInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associators(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0,
+      aPropertiesPP);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalPrintingOptionsInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
     }
 
-    void Linux_SambaGlobalPrintingForGlobalExternal::
-     associatorNamesSettingData( 
-     const char *nsp,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalPrintingOptionsInstanceNameEnumeration& instanceNames){
+  }
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaGlobalPrintingForGlobalExternal::associatorNamesSettingData( 
+    const char* aNameSpaceP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalPrintingOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associatorNames
-       (context,op,0,0,0,0);
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaGlobalPrintingOptionsInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associatorNames(
+     m_context,
+     cmpiObjectPath,
+     0,
+     0,
+     0,
+     0);
+
+    while(cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaGlobalPrintingOptionsInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
 
-    void Linux_SambaGlobalPrintingForGlobalExternal::
-     associatorsManagedElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalPrintingOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalOptionsInstanceEnumeration& instances){
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalExternal::associatorsManagedElement( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalPrintingOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associators
-       (context,op,0,0,0,0,properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaGlobalOptionsInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associators(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0,
+      aPropertiesPP);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalOptionsInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalExternal::associatorNamesManagedElement( 
+    const char* aNameSpaceP,
+    const Linux_SambaGlobalPrintingOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associatorNames(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaGlobalOptionsInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
 
-    void Linux_SambaGlobalPrintingForGlobalExternal::
-     associatorNamesManagedElement( 
-     const char *nsp,
-     const Linux_SambaGlobalPrintingOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalOptionsInstanceNameEnumeration& instanceNames){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associatorNames
-       (context,op,0,0,0,0);
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaGlobalOptionsInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
-
+  }
       
 }

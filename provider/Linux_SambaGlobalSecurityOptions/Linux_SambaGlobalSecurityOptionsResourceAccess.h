@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaGlobalSecurityOptionsResourceAccess.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalSecurityOptionsResourceAccess.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGlobalSecurityOptionsResourceAccess_h
 #define Linux_SambaGlobalSecurityOptionsResourceAccess_h
 
@@ -27,66 +30,73 @@
 #include "CmpiDateTime.h"
 #include "CmpiBroker.h"
 #include "Linux_SambaGlobalSecurityOptionsDefaultImplementation.h"
-#include "smt_smb_ra_support.h"
-#include "smt_smb_defaultvalues.h"
+
 
 namespace genProvider {
 
   class Linux_SambaGlobalSecurityOptionsResourceAccess:
    public Linux_SambaGlobalSecurityOptionsDefaultImplementation {
-  
-   private:
-    virtual void Linux_SambaGlobalSecurityOptionsResourceAccess::setInstanceNameProperties(const char* nsp,     
-	     Linux_SambaGlobalSecurityOptionsInstanceName& anInstanceName);
-    
-    virtual void Linux_SambaGlobalSecurityOptionsResourceAccess::setInstanceProperties(
-             Linux_SambaGlobalSecurityOptionsManualInstance& aManualInstance);
-    
-	
+  	
     public:
-    /*Linux_SambaGlobalSecurityOptionsResourceAccess();*/    
+    /*
+    Linux_SambaGlobalSecurityOptionsResourceAccess();
+    */    
     virtual ~Linux_SambaGlobalSecurityOptionsResourceAccess() ;
     
     /* intrinsic methods */
+
     virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaGlobalSecurityOptionsInstanceNameEnumeration& instnames);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaGlobalSecurityOptionsInstanceNameEnumeration& anInstanceNameEnumeration);
+
   	
+
     virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaGlobalSecurityOptionsManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+  	  Linux_SambaGlobalSecurityOptionsManualInstanceEnumeration& aManualInstanceEnumeration);
+
   	
+
     virtual Linux_SambaGlobalSecurityOptionsManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalSecurityOptionsInstanceName& instanceName);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalSecurityOptionsInstanceName& anInstanceName);
+
   	
+
     virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalSecurityOptionsManualInstance& newInstance);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalSecurityOptionsManualInstance& aManualInstance);
+
   	
-    /*virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaGlobalSecurityOptionsManualInstance&);*/
+    /*
+    virtual Linux_SambaGlobalSecurityOptionsInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaGlobalSecurityOptionsManualInstance& aManualInstance);
+    */
   	
-    /*virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaGlobalSecurityOptionsInstanceName&);*/
+    /*
+    virtual void deleteInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaGlobalSecurityOptionsInstanceName& anInstanceName);
+    */
 	
     
+    
     /* extrinsic methods */
+    
 	
   };
+  
 }
 #endif
-

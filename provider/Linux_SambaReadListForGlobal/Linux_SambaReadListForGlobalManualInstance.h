@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaReadListForGlobalManualInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaReadListForGlobalManualInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaReadListForGlobalManualInstance_h
 #define Linux_SambaReadListForGlobalManualInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaReadListForGlobalInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaReadListForGlobalManualInstance {
-  public:
-       Linux_SambaReadListForGlobalManualInstance();
-  	
-       Linux_SambaReadListForGlobalManualInstance
-  	    (const Linux_SambaReadListForGlobalManualInstance& original);
-  	   
-       Linux_SambaReadListForGlobalManualInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaReadListForGlobalManualInstance();
        
-       Linux_SambaReadListForGlobalManualInstance& operator=
-  	    (const Linux_SambaReadListForGlobalManualInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaReadListForGlobalManualInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaReadListForGlobalInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaReadListForGlobalInstanceName& val);        
-       const Linux_SambaReadListForGlobalInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaReadListForGlobalManualInstance();
+    Linux_SambaReadListForGlobalManualInstance(
+      const Linux_SambaReadListForGlobalManualInstance& anInstance);
+    Linux_SambaReadListForGlobalManualInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaReadListForGlobalManualInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaReadListForGlobalManualInstance& original);
-       void reset();
+    Linux_SambaReadListForGlobalManualInstance& operator=(
+      const Linux_SambaReadListForGlobalManualInstance& anInstance);
        
-       Linux_SambaReadListForGlobalInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaReadListForGlobalInstanceName& anInstanceName);        
+    const Linux_SambaReadListForGlobalInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaReadListForGlobalManualInstanceEnumerationElement{
-  	Linux_SambaReadListForGlobalManualInstance* m_elementP;
-  	Linux_SambaReadListForGlobalManualInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaReadListForGlobalManualInstanceEnumerationElement();
-  	~Linux_SambaReadListForGlobalManualInstanceEnumerationElement();  	
+  struct Linux_SambaReadListForGlobalManualInstanceEnumerationElement {
+
+    Linux_SambaReadListForGlobalManualInstance* m_elementP;
+    Linux_SambaReadListForGlobalManualInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaReadListForGlobalManualInstanceEnumerationElement();
+    ~Linux_SambaReadListForGlobalManualInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaReadListForGlobalManualInstanceEnumeration {
-  	private:
-  	  Linux_SambaReadListForGlobalManualInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaReadListForGlobalManualInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaReadListForGlobalManualInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaReadListForGlobalManualInstanceEnumeration();
-  	  
-  	  Linux_SambaReadListForGlobalManualInstanceEnumeration(
-  	   const Linux_SambaReadListForGlobalManualInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaReadListForGlobalManualInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaReadListForGlobalManualInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaReadListForGlobalManualInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaReadListForGlobalManualInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaReadListForGlobalManualInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaReadListForGlobalManualInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaReadListForGlobalManualInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaReadListForGlobalManualInstanceEnumeration();
+    Linux_SambaReadListForGlobalManualInstanceEnumeration(
+      const Linux_SambaReadListForGlobalManualInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaReadListForGlobalManualInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaReadListForGlobalManualInstance& getNext();
+    int getSize() const;
+    const Linux_SambaReadListForGlobalManualInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaReadListForGlobalManualInstance& anInstance);
+
+  };
+
+}
+
+#endif

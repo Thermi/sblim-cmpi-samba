@@ -1,203 +1,308 @@
-/**
- *  Linux_SambaGlobalPrintingForGlobalDefaultImplementation.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaGlobalPrintingForGlobalDefaultImplementation.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaGlobalPrintingForGlobalDefaultImplementation.h"
+#include "Linux_SambaGlobalPrintingForGlobalRepositoryInstance.h"
 #include <iostream>
-
-using namespace std;
 
 namespace genProvider {
 
   /* intrinsic methods */
-  void Linux_SambaGlobalPrintingForGlobalDefaultImplementation::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaGlobalPrintingForGlobalInstanceNameEnumeration& instnames){
-   	cout<<"enumInstances not supported for Linux_SambaGlobalPrintingForGlobal"<<endl;
+  //----------------------------------------------------------------------------	
+  void
+  Linux_SambaGlobalPrintingForGlobalDefaultImplementation::enumInstanceNames(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    Linux_SambaGlobalPrintingForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
+
+#ifdef DEBUG
+   	std::cout << "enumInstanceNames not supported for Linux_SambaGlobalPrintingForGlobal" << std::endl;
+#endif   	
+
    	throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "enumInstances not implemented for Linux_SambaGlobalPrintingForGlobal");   
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "enumInstanceEnumeration",
+   	  "Linux_SambaGlobalPrintingForGlobal");   
+
   }
-  	
-  void Linux_SambaGlobalPrintingForGlobalDefaultImplementation::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaGlobalPrintingForGlobalManualInstanceEnumeration& instances){
-    
-    cout<<"Using default enumInstances implementation for Linux_SambaGlobalPrintingForGlobal"<<endl;
-    cout<<"Let}s get the instanceNames"<<endl;
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaGlobalPrintingForGlobalDefaultImplementation::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaGlobalPrintingForGlobalManualInstanceEnumeration& anInstanceEnumeration) {
+
+#ifdef DEBUG
+    std::cout << "Using default enumInstances implementation for Linux_SambaGlobalPrintingForGlobal" << std::endl;
+    std::cout << "Let's get the instanceNames" << std::endl;
+#endif    
+
     Linux_SambaGlobalPrintingForGlobalInstanceNameEnumeration namesEnumeration;
-    enumInstanceNames(ctx, mbp,nsp,namesEnumeration);
-    cout<<"Getting each instance"<<endl;
-    while(namesEnumeration.hasNext()){
-      Linux_SambaGlobalPrintingForGlobalInstanceName name=
-    	  namesEnumeration.getNext();
-    	cout<<"Getting an instance for instanceName"<<endl;
-    	Linux_SambaGlobalPrintingForGlobalManualInstance instance=
-    	  getInstance(ctx, mbp, properties, name);
-    	cout<<"adding instance to enum"<<endl;
-    	instances.addElement(instance);
-    	cout<<"Added!"<<endl;
-    };
+    enumInstanceNames(aContext,aBroker,aNameSpaceP,namesEnumeration);
+
+#ifdef DEBUG
+    std::cout << "Getting each instance" << std::endl;
+#endif    
+    
+    while (namesEnumeration.hasNext()) {
+    
+      Linux_SambaGlobalPrintingForGlobalInstanceName instanceName = namesEnumeration.getNext();
+    
+      Linux_SambaGlobalPrintingForGlobalRepositoryInstance repositoryInstance;
+
+      // try to fetch repository instance
+      try {
+        Linux_SambaGlobalPrintingForGlobalInstanceName repositoryInstanceName(instanceName);
+        repositoryInstanceName.setNamespace("IBMShadow/cimv2");
+        CmpiObjectPath repositoryCmpiObjectPath = repositoryInstanceName.getObjectPath();
+        CmpiBroker cmpiBroker(aBroker);
+        CmpiInstance repositoryCmpiInstance = cmpiBroker.getInstance(
+            aContext,
+            repositoryCmpiObjectPath,
+            aPropertiesPP);
+        Linux_SambaGlobalPrintingForGlobalRepositoryInstance localRepositoryInstance(
+      	  repositoryCmpiInstance,
+          "IBMShadow/cimv2");
+        repositoryInstance = localRepositoryInstance;
+      } catch (const CmpiStatus& rc) { }                             
+    
+#ifdef DEBUG
+    	std::cout << "Getting an instance for instanceName" << std::endl;
+#endif
+    	
+    	Linux_SambaGlobalPrintingForGlobalManualInstance instance = getInstance(
+    	  aContext,
+    	  aBroker,
+    	  aPropertiesPP,
+    	  instanceName);
+
+      // add the static data
+
+
+#ifdef DEBUG
+    	std::cout << "adding instance to enum" << std::endl;
+#endif
+    	
+    	anInstanceEnumeration.addElement(instance);
+
+#ifdef DEBUG
+    	std::cout << "Added!" << std::endl;
+#endif
+    	
+    }
+
   }
-  	
+
+  //----------------------------------------------------------------------------	
   Linux_SambaGlobalPrintingForGlobalManualInstance 
-   Linux_SambaGlobalPrintingForGlobalDefaultImplementation::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaGlobalPrintingForGlobalInstanceName&){
-    cout<<"getInstance not supported for Linux_SambaGlobalPrintingForGlobal"<<endl;
+  Linux_SambaGlobalPrintingForGlobalDefaultImplementation::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalPrintingForGlobalInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+    std::cout << "getInstance not supported for Linux_SambaGlobalPrintingForGlobal" << std::endl;
+#endif
+    	
+
     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "getInstance not implemented for Linux_SambaGlobalPrintingForGlobal");
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "getInstance",
+   	  "Linux_SambaGlobalPrintingForGlobal");
+
   }
   	
-  void Linux_SambaGlobalPrintingForGlobalDefaultImplementation::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaGlobalPrintingForGlobalManualInstance&){
-   	cout<<"setInstance not supported for Linux_SambaGlobalPrintingForGlobal"<<endl;
-     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "setInstance not implemented for Linux_SambaGlobalPrintingForGlobal");
-  }
-  	
-  void Linux_SambaGlobalPrintingForGlobalDefaultImplementation::
-   createInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaGlobalPrintingForGlobalManualInstance&){
-   	cout<<"createInstance not supported for Linux_SambaGlobalPrintingForGlobal"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "createInstance not implemented for Linux_SambaGlobalPrintingForGlobal");
-  }
-  	
-  void Linux_SambaGlobalPrintingForGlobalDefaultImplementation::
-   deleteInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaGlobalPrintingForGlobalInstanceName&){
-   	cout<<"deleteInstance not supported for Linux_SambaGlobalPrintingForGlobal"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "deleteInstance not implemented for Linux_SambaGlobalPrintingForGlobal");
-  }
-	
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaGlobalPrintingForGlobalDefaultImplementation::setInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalPrintingForGlobalManualInstance& aManualInstance) {
   
-    /* Association Interface */
-
-    void Linux_SambaGlobalPrintingForGlobalDefaultImplementation::
-     referencesSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalPrintingForGlobalManualInstanceEnumeration& instances){
-      throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "getSettingDataReferences between Linux_SambaGlobalPrintingOptions and Linux_SambaGlobalOptions not implemented for Linux_SambaGlobalPrintingForGlobal");
-    }
-
-    void Linux_SambaGlobalPrintingForGlobalDefaultImplementation::
-     referencesManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalPrintingOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalPrintingForGlobalManualInstanceEnumeration& instances){
-      throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "getManagedElementReferences between Linux_SambaGlobalPrintingOptions and Linux_SambaGlobalOptions not implemented for Linux_SambaGlobalPrintingForGlobal");
-    }
-
-    void Linux_SambaGlobalPrintingForGlobalDefaultImplementation::
-     associatorsSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalPrintingOptionsInstanceEnumeration& instances){
-      
-      std::cout<<"Linux_SambaGlobalPrintingForGlobal : associatorsLinux_SambaGlobalPrintingOptions() ... returns one instance"<<std::endl;
-      
-      Linux_SambaGlobalPrintingForGlobalManualInstanceEnumeration enumeration;
-      
-      referencesSettingData(ctx, mbp, sourceInst.getNamespace(), 
-       properties, sourceInst, enumeration);
-
-      Linux_SambaGlobalPrintingOptionsExternal external(mbp, ctx);
-
-      while(enumeration.hasNext()) {
-        const Linux_SambaGlobalPrintingForGlobalManualInstance instance =
-	     enumeration.getNext();
-	     
-        const Linux_SambaGlobalPrintingForGlobalInstanceName instanceName = 
-         instance.getInstanceName();
-         
-        const Linux_SambaGlobalPrintingOptionsInstanceName SettingData = 
-         instanceName.getSettingData();
-         
-        Linux_SambaGlobalPrintingOptionsInstance inst = external.getInstance(properties,SettingData);
-        
-        instances.addElement(inst);
-      }
-    }
-
-    void Linux_SambaGlobalPrintingForGlobalDefaultImplementation::
-     associatorsManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalPrintingOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalOptionsInstanceEnumeration& instances){
-     
-      std::cout<<"Linux_SambaGlobalPrintingForGlobal : associatorsLinux_SambaGlobalOptions() ... returns one instance"<<std::endl;
-      
-      Linux_SambaGlobalPrintingForGlobalManualInstanceEnumeration enumeration;
-      
-      referencesManagedElement(ctx, mbp, sourceInst.getNamespace(), 
-       properties, sourceInst, enumeration);
-
-      Linux_SambaGlobalOptionsExternal external(mbp, ctx);
-
-      while(enumeration.hasNext()) {
-        const Linux_SambaGlobalPrintingForGlobalManualInstance instance =
-	     enumeration.getNext();
-	     
-        const Linux_SambaGlobalPrintingForGlobalInstanceName instanceName = 
-         instance.getInstanceName();
-         
-        const Linux_SambaGlobalOptionsInstanceName ManagedElement = 
-         instanceName.getManagedElement();
-         
-        Linux_SambaGlobalOptionsInstance inst = external.getInstance(properties,ManagedElement);
-        
-        instances.addElement(inst);
-      }
-    }
-
+#ifdef DEBUG
+    std::cout << "setInstance not supported for Linux_SambaGlobalPrintingForGlobal" << std::endl;
+#endif
+    	
    
-  /* extrinsic methods */
-	
-}
+    throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "setInstance",
+   	  "Linux_SambaGlobalPrintingForGlobal");
+   	 
+  }
+  	
+  //----------------------------------------------------------------------------	
+  Linux_SambaGlobalPrintingForGlobalInstanceName  
+  Linux_SambaGlobalPrintingForGlobalDefaultImplementation::createInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalPrintingForGlobalManualInstance& aManualInstance) {
 
+#ifdef DEBUG
+   	std::cout << "createInstance not supported for Linux_SambaGlobalPrintingForGlobal" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+   	 CmpiErrorFormater::METHOD_NOT_FOUND,
+   	 "createInstance",
+   	 "Linux_SambaGlobalPrintingForGlobal");
+
+  }
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaGlobalPrintingForGlobalDefaultImplementation::deleteInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalPrintingForGlobalInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+   	std::cout << "deleteInstance not supported for Linux_SambaGlobalPrintingForGlobal" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "deleteInstance",
+      "Linux_SambaGlobalPrintingForGlobal");
+
+  }
+
+  
+  // Association Interface
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalDefaultImplementation::referencesSettingData( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstance,
+    Linux_SambaGlobalPrintingForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "References(SettingData)",
+      "Linux_SambaGlobalPrintingForGlobal");
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalDefaultImplementation::referencesManagedElement( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalPrintingOptionsInstanceName& aSourceInstance,
+    Linux_SambaGlobalPrintingForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "References(ManagedElement)",
+      "Linux_SambaGlobalPrintingForGlobal");
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalDefaultImplementation::associatorsSettingData(
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstance,
+    Linux_SambaGlobalPrintingOptionsInstanceEnumeration& anInstanceEnumeration) {
+      
+#ifdef DEBUG
+    std::cout<<"Linux_SambaGlobalPrintingForGlobal : associatorsLinux_SambaGlobalPrintingOptions() ... returns one instance"<<std::endl;
+#endif    
+      
+    Linux_SambaGlobalPrintingForGlobalManualInstanceEnumeration manualInstanceEnumeration;
+      
+    referencesSettingData(
+      aContext,
+      aBroker,
+      aSourceInstance.getNamespace(), 
+      aPropertiesPP,
+      aSourceInstance,
+      manualInstanceEnumeration);
+
+    Linux_SambaGlobalPrintingOptionsExternal external(aBroker,aContext);
+
+    while (manualInstanceEnumeration.hasNext()) {
+      const Linux_SambaGlobalPrintingForGlobalManualInstance manualInstance = manualInstanceEnumeration.getNext();
+      const Linux_SambaGlobalPrintingForGlobalInstanceName instanceName = manualInstance.getInstanceName();
+      const Linux_SambaGlobalPrintingOptionsInstanceName SettingData = instanceName.getSettingData();
+      Linux_SambaGlobalPrintingOptionsInstance instance = external.getInstance(aPropertiesPP,SettingData);
+      anInstanceEnumeration.addElement(instance);
+    }
+  
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingForGlobalDefaultImplementation::associatorsManagedElement( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalPrintingOptionsInstanceName& aSourceInstance,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
+     
+#ifdef DEBUG
+    std::cout << "Linux_SambaGlobalPrintingForGlobal : associatorsLinux_SambaGlobalOptions() ... returns one instance" << std::endl;
+#endif    
+      
+    Linux_SambaGlobalPrintingForGlobalManualInstanceEnumeration manualInstanceEnumeration;
+      
+    referencesManagedElement(
+      aContext,
+      aBroker,
+      aSourceInstance.getNamespace(), 
+      aPropertiesPP,
+      aSourceInstance,
+      manualInstanceEnumeration);
+
+    Linux_SambaGlobalOptionsExternal external(aBroker,aContext);
+
+    while(manualInstanceEnumeration.hasNext()) {
+      const Linux_SambaGlobalPrintingForGlobalManualInstance manualInstance = manualInstanceEnumeration.getNext();
+      const Linux_SambaGlobalPrintingForGlobalInstanceName instanceName = manualInstance.getInstanceName();
+      const Linux_SambaGlobalOptionsInstanceName ManagedElement = instanceName.getManagedElement();
+      Linux_SambaGlobalOptionsInstance instance = external.getInstance(aPropertiesPP,ManagedElement);
+      anInstanceEnumeration.addElement(instance);
+    }
+
+  }
+
+  /* extrinsic methods */
+  
+
+}

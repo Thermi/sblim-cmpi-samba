@@ -1,203 +1,308 @@
-/**
- *  Linux_SambaShareProtocolForShareDefaultImplementation.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaShareProtocolForShareDefaultImplementation.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaShareProtocolForShareDefaultImplementation.h"
+#include "Linux_SambaShareProtocolForShareRepositoryInstance.h"
 #include <iostream>
-
-using namespace std;
 
 namespace genProvider {
 
   /* intrinsic methods */
-  void Linux_SambaShareProtocolForShareDefaultImplementation::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaShareProtocolForShareInstanceNameEnumeration& instnames){
-   	cout<<"enumInstances not supported for Linux_SambaShareProtocolForShare"<<endl;
+  //----------------------------------------------------------------------------	
+  void
+  Linux_SambaShareProtocolForShareDefaultImplementation::enumInstanceNames(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    Linux_SambaShareProtocolForShareInstanceNameEnumeration& anInstanceNameEnumeration) {
+
+#ifdef DEBUG
+   	std::cout << "enumInstanceNames not supported for Linux_SambaShareProtocolForShare" << std::endl;
+#endif   	
+
    	throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "enumInstances not implemented for Linux_SambaShareProtocolForShare");   
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "enumInstanceEnumeration",
+   	  "Linux_SambaShareProtocolForShare");   
+
   }
-  	
-  void Linux_SambaShareProtocolForShareDefaultImplementation::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaShareProtocolForShareManualInstanceEnumeration& instances){
-    
-    cout<<"Using default enumInstances implementation for Linux_SambaShareProtocolForShare"<<endl;
-    cout<<"Let}s get the instanceNames"<<endl;
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaShareProtocolForShareDefaultImplementation::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaShareProtocolForShareManualInstanceEnumeration& anInstanceEnumeration) {
+
+#ifdef DEBUG
+    std::cout << "Using default enumInstances implementation for Linux_SambaShareProtocolForShare" << std::endl;
+    std::cout << "Let's get the instanceNames" << std::endl;
+#endif    
+
     Linux_SambaShareProtocolForShareInstanceNameEnumeration namesEnumeration;
-    enumInstanceNames(ctx, mbp,nsp,namesEnumeration);
-    cout<<"Getting each instance"<<endl;
-    while(namesEnumeration.hasNext()){
-      Linux_SambaShareProtocolForShareInstanceName name=
-    	  namesEnumeration.getNext();
-    	cout<<"Getting an instance for instanceName"<<endl;
-    	Linux_SambaShareProtocolForShareManualInstance instance=
-    	  getInstance(ctx, mbp, properties, name);
-    	cout<<"adding instance to enum"<<endl;
-    	instances.addElement(instance);
-    	cout<<"Added!"<<endl;
-    };
+    enumInstanceNames(aContext,aBroker,aNameSpaceP,namesEnumeration);
+
+#ifdef DEBUG
+    std::cout << "Getting each instance" << std::endl;
+#endif    
+    
+    while (namesEnumeration.hasNext()) {
+    
+      Linux_SambaShareProtocolForShareInstanceName instanceName = namesEnumeration.getNext();
+    
+      Linux_SambaShareProtocolForShareRepositoryInstance repositoryInstance;
+
+      // try to fetch repository instance
+      try {
+        Linux_SambaShareProtocolForShareInstanceName repositoryInstanceName(instanceName);
+        repositoryInstanceName.setNamespace("IBMShadow/cimv2");
+        CmpiObjectPath repositoryCmpiObjectPath = repositoryInstanceName.getObjectPath();
+        CmpiBroker cmpiBroker(aBroker);
+        CmpiInstance repositoryCmpiInstance = cmpiBroker.getInstance(
+            aContext,
+            repositoryCmpiObjectPath,
+            aPropertiesPP);
+        Linux_SambaShareProtocolForShareRepositoryInstance localRepositoryInstance(
+      	  repositoryCmpiInstance,
+          "IBMShadow/cimv2");
+        repositoryInstance = localRepositoryInstance;
+      } catch (const CmpiStatus& rc) { }                             
+    
+#ifdef DEBUG
+    	std::cout << "Getting an instance for instanceName" << std::endl;
+#endif
+    	
+    	Linux_SambaShareProtocolForShareManualInstance instance = getInstance(
+    	  aContext,
+    	  aBroker,
+    	  aPropertiesPP,
+    	  instanceName);
+
+      // add the static data
+
+
+#ifdef DEBUG
+    	std::cout << "adding instance to enum" << std::endl;
+#endif
+    	
+    	anInstanceEnumeration.addElement(instance);
+
+#ifdef DEBUG
+    	std::cout << "Added!" << std::endl;
+#endif
+    	
+    }
+
   }
-  	
+
+  //----------------------------------------------------------------------------	
   Linux_SambaShareProtocolForShareManualInstance 
-   Linux_SambaShareProtocolForShareDefaultImplementation::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareProtocolForShareInstanceName&){
-    cout<<"getInstance not supported for Linux_SambaShareProtocolForShare"<<endl;
+  Linux_SambaShareProtocolForShareDefaultImplementation::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaShareProtocolForShareInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+    std::cout << "getInstance not supported for Linux_SambaShareProtocolForShare" << std::endl;
+#endif
+    	
+
     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "getInstance not implemented for Linux_SambaShareProtocolForShare");
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "getInstance",
+   	  "Linux_SambaShareProtocolForShare");
+
   }
   	
-  void Linux_SambaShareProtocolForShareDefaultImplementation::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareProtocolForShareManualInstance&){
-   	cout<<"setInstance not supported for Linux_SambaShareProtocolForShare"<<endl;
-     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "setInstance not implemented for Linux_SambaShareProtocolForShare");
-  }
-  	
-  void Linux_SambaShareProtocolForShareDefaultImplementation::
-   createInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareProtocolForShareManualInstance&){
-   	cout<<"createInstance not supported for Linux_SambaShareProtocolForShare"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "createInstance not implemented for Linux_SambaShareProtocolForShare");
-  }
-  	
-  void Linux_SambaShareProtocolForShareDefaultImplementation::
-   deleteInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareProtocolForShareInstanceName&){
-   	cout<<"deleteInstance not supported for Linux_SambaShareProtocolForShare"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "deleteInstance not implemented for Linux_SambaShareProtocolForShare");
-  }
-	
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaShareProtocolForShareDefaultImplementation::setInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaShareProtocolForShareManualInstance& aManualInstance) {
   
-    /* Association Interface */
-
-    void Linux_SambaShareProtocolForShareDefaultImplementation::
-     referencesManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareProtocolOptionsInstanceName& sourceInst,
-     Linux_SambaShareProtocolForShareManualInstanceEnumeration& instances){
-      throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "getManagedElementReferences between Linux_SambaShareOptions and Linux_SambaShareProtocolOptions not implemented for Linux_SambaShareProtocolForShare");
-    }
-
-    void Linux_SambaShareProtocolForShareDefaultImplementation::
-     referencesSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaShareProtocolForShareManualInstanceEnumeration& instances){
-      throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "getSettingDataReferences between Linux_SambaShareOptions and Linux_SambaShareProtocolOptions not implemented for Linux_SambaShareProtocolForShare");
-    }
-
-    void Linux_SambaShareProtocolForShareDefaultImplementation::
-     associatorsManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareProtocolOptionsInstanceName& sourceInst,
-     Linux_SambaShareOptionsInstanceEnumeration& instances){
-      
-      std::cout<<"Linux_SambaShareProtocolForShare : associatorsLinux_SambaShareOptions() ... returns one instance"<<std::endl;
-      
-      Linux_SambaShareProtocolForShareManualInstanceEnumeration enumeration;
-      
-      referencesManagedElement(ctx, mbp, sourceInst.getNamespace(), 
-       properties, sourceInst, enumeration);
-
-      Linux_SambaShareOptionsExternal external(mbp, ctx);
-
-      while(enumeration.hasNext()) {
-        const Linux_SambaShareProtocolForShareManualInstance instance =
-	     enumeration.getNext();
-	     
-        const Linux_SambaShareProtocolForShareInstanceName instanceName = 
-         instance.getInstanceName();
-         
-        const Linux_SambaShareOptionsInstanceName ManagedElement = 
-         instanceName.getManagedElement();
-         
-        Linux_SambaShareOptionsInstance inst = external.getInstance(properties,ManagedElement);
-        
-        instances.addElement(inst);
-      }
-    }
-
-    void Linux_SambaShareProtocolForShareDefaultImplementation::
-     associatorsSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaShareProtocolOptionsInstanceEnumeration& instances){
-     
-      std::cout<<"Linux_SambaShareProtocolForShare : associatorsLinux_SambaShareProtocolOptions() ... returns one instance"<<std::endl;
-      
-      Linux_SambaShareProtocolForShareManualInstanceEnumeration enumeration;
-      
-      referencesSettingData(ctx, mbp, sourceInst.getNamespace(), 
-       properties, sourceInst, enumeration);
-
-      Linux_SambaShareProtocolOptionsExternal external(mbp, ctx);
-
-      while(enumeration.hasNext()) {
-        const Linux_SambaShareProtocolForShareManualInstance instance =
-	     enumeration.getNext();
-	     
-        const Linux_SambaShareProtocolForShareInstanceName instanceName = 
-         instance.getInstanceName();
-         
-        const Linux_SambaShareProtocolOptionsInstanceName SettingData = 
-         instanceName.getSettingData();
-         
-        Linux_SambaShareProtocolOptionsInstance inst = external.getInstance(properties,SettingData);
-        
-        instances.addElement(inst);
-      }
-    }
-
+#ifdef DEBUG
+    std::cout << "setInstance not supported for Linux_SambaShareProtocolForShare" << std::endl;
+#endif
+    	
    
-  /* extrinsic methods */
-	
-}
+    throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "setInstance",
+   	  "Linux_SambaShareProtocolForShare");
+   	 
+  }
+  	
+  //----------------------------------------------------------------------------	
+  Linux_SambaShareProtocolForShareInstanceName  
+  Linux_SambaShareProtocolForShareDefaultImplementation::createInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareProtocolForShareManualInstance& aManualInstance) {
 
+#ifdef DEBUG
+   	std::cout << "createInstance not supported for Linux_SambaShareProtocolForShare" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+   	 CmpiErrorFormater::METHOD_NOT_FOUND,
+   	 "createInstance",
+   	 "Linux_SambaShareProtocolForShare");
+
+  }
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaShareProtocolForShareDefaultImplementation::deleteInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareProtocolForShareInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+   	std::cout << "deleteInstance not supported for Linux_SambaShareProtocolForShare" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "deleteInstance",
+      "Linux_SambaShareProtocolForShare");
+
+  }
+
+  
+  // Association Interface
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolForShareDefaultImplementation::referencesManagedElement( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareProtocolOptionsInstanceName& aSourceInstance,
+    Linux_SambaShareProtocolForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "References(ManagedElement)",
+      "Linux_SambaShareProtocolForShare");
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolForShareDefaultImplementation::referencesSettingData( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstance,
+    Linux_SambaShareProtocolForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "References(SettingData)",
+      "Linux_SambaShareProtocolForShare");
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolForShareDefaultImplementation::associatorsManagedElement(
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareProtocolOptionsInstanceName& aSourceInstance,
+    Linux_SambaShareOptionsInstanceEnumeration& anInstanceEnumeration) {
+      
+#ifdef DEBUG
+    std::cout<<"Linux_SambaShareProtocolForShare : associatorsLinux_SambaShareOptions() ... returns one instance"<<std::endl;
+#endif    
+      
+    Linux_SambaShareProtocolForShareManualInstanceEnumeration manualInstanceEnumeration;
+      
+    referencesManagedElement(
+      aContext,
+      aBroker,
+      aSourceInstance.getNamespace(), 
+      aPropertiesPP,
+      aSourceInstance,
+      manualInstanceEnumeration);
+
+    Linux_SambaShareOptionsExternal external(aBroker,aContext);
+
+    while (manualInstanceEnumeration.hasNext()) {
+      const Linux_SambaShareProtocolForShareManualInstance manualInstance = manualInstanceEnumeration.getNext();
+      const Linux_SambaShareProtocolForShareInstanceName instanceName = manualInstance.getInstanceName();
+      const Linux_SambaShareOptionsInstanceName ManagedElement = instanceName.getManagedElement();
+      Linux_SambaShareOptionsInstance instance = external.getInstance(aPropertiesPP,ManagedElement);
+      anInstanceEnumeration.addElement(instance);
+    }
+  
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolForShareDefaultImplementation::associatorsSettingData( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstance,
+    Linux_SambaShareProtocolOptionsInstanceEnumeration& anInstanceEnumeration) {
+     
+#ifdef DEBUG
+    std::cout << "Linux_SambaShareProtocolForShare : associatorsLinux_SambaShareProtocolOptions() ... returns one instance" << std::endl;
+#endif    
+      
+    Linux_SambaShareProtocolForShareManualInstanceEnumeration manualInstanceEnumeration;
+      
+    referencesSettingData(
+      aContext,
+      aBroker,
+      aSourceInstance.getNamespace(), 
+      aPropertiesPP,
+      aSourceInstance,
+      manualInstanceEnumeration);
+
+    Linux_SambaShareProtocolOptionsExternal external(aBroker,aContext);
+
+    while(manualInstanceEnumeration.hasNext()) {
+      const Linux_SambaShareProtocolForShareManualInstance manualInstance = manualInstanceEnumeration.getNext();
+      const Linux_SambaShareProtocolForShareInstanceName instanceName = manualInstance.getInstanceName();
+      const Linux_SambaShareProtocolOptionsInstanceName SettingData = instanceName.getSettingData();
+      Linux_SambaShareProtocolOptionsInstance instance = external.getInstance(aPropertiesPP,SettingData);
+      anInstanceEnumeration.addElement(instance);
+    }
+
+  }
+
+  /* extrinsic methods */
+  
+
+}

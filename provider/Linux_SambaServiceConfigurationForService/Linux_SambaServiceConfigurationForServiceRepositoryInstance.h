@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaServiceConfigurationForServiceRepositoryInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaServiceConfigurationForServiceRepositoryInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaServiceConfigurationForServiceRepositoryInstance_h
 #define Linux_SambaServiceConfigurationForServiceRepositoryInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaServiceConfigurationForServiceInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaServiceConfigurationForServiceRepositoryInstance {
-  public:
-       Linux_SambaServiceConfigurationForServiceRepositoryInstance();
-  	
-       Linux_SambaServiceConfigurationForServiceRepositoryInstance
-  	    (const Linux_SambaServiceConfigurationForServiceRepositoryInstance& original);
-  	   
-       Linux_SambaServiceConfigurationForServiceRepositoryInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaServiceConfigurationForServiceRepositoryInstance();
        
-       Linux_SambaServiceConfigurationForServiceRepositoryInstance& operator=
-  	    (const Linux_SambaServiceConfigurationForServiceRepositoryInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaServiceConfigurationForServiceRepositoryInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaServiceConfigurationForServiceInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaServiceConfigurationForServiceInstanceName& val);        
-       const Linux_SambaServiceConfigurationForServiceInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaServiceConfigurationForServiceRepositoryInstance();
+    Linux_SambaServiceConfigurationForServiceRepositoryInstance(
+      const Linux_SambaServiceConfigurationForServiceRepositoryInstance& anInstance);
+    Linux_SambaServiceConfigurationForServiceRepositoryInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaServiceConfigurationForServiceRepositoryInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaServiceConfigurationForServiceRepositoryInstance& original);
-       void reset();
+    Linux_SambaServiceConfigurationForServiceRepositoryInstance& operator=(
+      const Linux_SambaServiceConfigurationForServiceRepositoryInstance& anInstance);
        
-       Linux_SambaServiceConfigurationForServiceInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaServiceConfigurationForServiceInstanceName& anInstanceName);        
+    const Linux_SambaServiceConfigurationForServiceInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement{
-  	Linux_SambaServiceConfigurationForServiceRepositoryInstance* m_elementP;
-  	Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement();
-  	~Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement();  	
+  struct Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement {
+
+    Linux_SambaServiceConfigurationForServiceRepositoryInstance* m_elementP;
+    Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement();
+    ~Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumeration {
-  	private:
-  	  Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumeration();
-  	  
-  	  Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumeration(
-  	   const Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaServiceConfigurationForServiceRepositoryInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaServiceConfigurationForServiceRepositoryInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaServiceConfigurationForServiceRepositoryInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumeration();
+    Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumeration(
+      const Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaServiceConfigurationForServiceRepositoryInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaServiceConfigurationForServiceRepositoryInstance& getNext();
+    int getSize() const;
+    const Linux_SambaServiceConfigurationForServiceRepositoryInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaServiceConfigurationForServiceRepositoryInstance& anInstance);
+
+  };
+
+}
+
+#endif

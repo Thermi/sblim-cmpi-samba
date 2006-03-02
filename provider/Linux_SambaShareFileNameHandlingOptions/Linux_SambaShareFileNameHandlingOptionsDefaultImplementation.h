@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaShareFileNameHandlingOptionsDefaultImplementation.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareFileNameHandlingOptionsDefaultImplementation.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaShareFileNameHandlingOptionsDefaultImplementation_h
 #define Linux_SambaShareFileNameHandlingOptionsDefaultImplementation_h
 
@@ -28,6 +31,7 @@
 #include "CmpiBroker.h"
 #include "Linux_SambaShareFileNameHandlingOptionsInterface.h"
 
+
 namespace genProvider {
 
   class Linux_SambaShareFileNameHandlingOptionsDefaultImplementation:
@@ -37,45 +41,59 @@ namespace genProvider {
     virtual ~Linux_SambaShareFileNameHandlingOptionsDefaultImplementation() { };
     
     /* intrinsic methods */
+    
     virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaShareFileNameHandlingOptionsInstanceNameEnumeration& instnames);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaShareFileNameHandlingOptionsInstanceNameEnumeration& anInstanceNameEnumeration);
+    
   	
+    
     virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaShareFileNameHandlingOptionsManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+  	  Linux_SambaShareFileNameHandlingOptionsManualInstanceEnumeration& aManualInstanceEnumeration);
   	
+  	
+    
     virtual Linux_SambaShareFileNameHandlingOptionsManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaShareFileNameHandlingOptionsInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaShareFileNameHandlingOptionsInstanceName& anInstanceName);
+    
   	
+    
     virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaShareFileNameHandlingOptionsManualInstance&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaShareFileNameHandlingOptionsManualInstance& aManualInstance);
+    
   	
-    virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaShareFileNameHandlingOptionsManualInstance&);
+    
+    virtual Linux_SambaShareFileNameHandlingOptionsInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaShareFileNameHandlingOptionsManualInstance& aManualInstance);
+    
   	
+    
     virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaShareFileNameHandlingOptionsInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaShareFileNameHandlingOptionsInstanceName& anInstanceName);
+    
 	
     
+    
     /* extrinsic methods */
+    
 	
   };
+  
 }
 #endif
-

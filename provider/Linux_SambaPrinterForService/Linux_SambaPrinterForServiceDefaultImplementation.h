@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaPrinterForServiceDefaultImplementation.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterForServiceDefaultImplementation.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaPrinterForServiceDefaultImplementation_h
 #define Linux_SambaPrinterForServiceDefaultImplementation_h
 
@@ -32,6 +35,7 @@
 #include "Linux_SambaServiceExternal.h"
 #include "Linux_SambaPrinterForServiceInterface.h"
 
+
 namespace genProvider {
 
   class Linux_SambaPrinterForServiceDefaultImplementation:
@@ -41,80 +45,102 @@ namespace genProvider {
     virtual ~Linux_SambaPrinterForServiceDefaultImplementation() { };
     
     /* intrinsic methods */
+    
     virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaPrinterForServiceInstanceNameEnumeration& instnames);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaPrinterForServiceInstanceNameEnumeration& anInstanceNameEnumeration);
+    
   	
+    
     virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaPrinterForServiceManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+  	  Linux_SambaPrinterForServiceManualInstanceEnumeration& aManualInstanceEnumeration);
   	
+  	
+    
     virtual Linux_SambaPrinterForServiceManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaPrinterForServiceInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterForServiceInstanceName& anInstanceName);
+    
   	
+    
     virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaPrinterForServiceManualInstance&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterForServiceManualInstance& aManualInstance);
+    
   	
-    virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaPrinterForServiceManualInstance&);
+    
+    virtual Linux_SambaPrinterForServiceInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaPrinterForServiceManualInstance& aManualInstance);
+    
   	
+    
     virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaPrinterForServiceInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaPrinterForServiceInstanceName& anInstanceName);
+    
 	
     
     /* Association Interface */
 
+    
     virtual void referencesSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaPrinterForServiceManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaServiceInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterForServiceManualInstanceEnumeration& aManualInstanceEnumeration);
+    
 
+    
     virtual void referencesManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaPrinterForServiceManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterForServiceManualInstanceEnumeration& aManualInstanceEnumeration);
+    
 
+    
     virtual void associatorsSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaPrinterOptionsInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaServiceInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterOptionsInstanceEnumeration& anInstanceEnumeration);
+    
 
+    
     virtual void associatorsManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaServiceInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaServiceInstanceEnumeration& anInstanceEnumeration);
+    
 
    
+    
     /* extrinsic methods */
+    
 	
   };
+  
 }
 #endif
-

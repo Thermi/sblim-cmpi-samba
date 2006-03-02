@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaValidUsersForShareDefaultImplementation.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaValidUsersForShareDefaultImplementation.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaValidUsersForShareDefaultImplementation_h
 #define Linux_SambaValidUsersForShareDefaultImplementation_h
 
@@ -32,6 +35,7 @@
 #include "Linux_SambaShareOptionsExternal.h"
 #include "Linux_SambaValidUsersForShareInterface.h"
 
+
 namespace genProvider {
 
   class Linux_SambaValidUsersForShareDefaultImplementation:
@@ -41,80 +45,102 @@ namespace genProvider {
     virtual ~Linux_SambaValidUsersForShareDefaultImplementation() { };
     
     /* intrinsic methods */
+    
     virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaValidUsersForShareInstanceNameEnumeration& instnames);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaValidUsersForShareInstanceNameEnumeration& anInstanceNameEnumeration);
+    
   	
+    
     virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaValidUsersForShareManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+  	  Linux_SambaValidUsersForShareManualInstanceEnumeration& aManualInstanceEnumeration);
   	
+  	
+    
     virtual Linux_SambaValidUsersForShareManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaValidUsersForShareInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaValidUsersForShareInstanceName& anInstanceName);
+    
   	
+    
     virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaValidUsersForShareManualInstance&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaValidUsersForShareManualInstance& aManualInstance);
+    
   	
-    virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaValidUsersForShareManualInstance&);
+    
+    virtual Linux_SambaValidUsersForShareInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaValidUsersForShareManualInstance& aManualInstance);
+    
   	
+    
     virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaValidUsersForShareInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaValidUsersForShareInstanceName& anInstanceName);
+    
 	
     
     /* Association Interface */
 
+    
     virtual void referencesPartComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaValidUsersForShareManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaValidUsersForShareManualInstanceEnumeration& aManualInstanceEnumeration);
+    
 
+    
     virtual void referencesGroupComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaValidUsersForShareManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaUserInstanceName& aSourceInstanceName,
+      Linux_SambaValidUsersForShareManualInstanceEnumeration& aManualInstanceEnumeration);
+    
 
+    
     virtual void associatorsPartComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaUserInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaUserInstanceEnumeration& anInstanceEnumeration);
+    
 
+    
     virtual void associatorsGroupComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaShareOptionsInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaUserInstanceName& aSourceInstanceName,
+      Linux_SambaShareOptionsInstanceEnumeration& anInstanceEnumeration);
+    
 
    
+    
     /* extrinsic methods */
+    
 	
   };
+  
 }
 #endif
-

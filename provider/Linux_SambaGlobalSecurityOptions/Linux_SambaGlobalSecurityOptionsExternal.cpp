@@ -1,92 +1,121 @@
-/**
- *  Linux_SambaGlobalSecurityOptionsExternal.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaGlobalSecurityOptionsExternal.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaGlobalSecurityOptionsExternal.h"
 
-namespace genProvider{
+namespace genProvider {
 	
+	//----------------------------------------------------------------------------
   Linux_SambaGlobalSecurityOptionsExternal::Linux_SambaGlobalSecurityOptionsExternal(
-   const CmpiBroker& brkr, const CmpiContext& ctx ) 
-   : broker(brkr), context(ctx) {};
+    const CmpiBroker& aBroker,
+    const CmpiContext& aContext ) 
+    : m_broker(aBroker),
+    m_context(aContext) { }
    
-  Linux_SambaGlobalSecurityOptionsExternal::
-   ~Linux_SambaGlobalSecurityOptionsExternal(){};
+	//----------------------------------------------------------------------------
+  Linux_SambaGlobalSecurityOptionsExternal::~Linux_SambaGlobalSecurityOptionsExternal() { }
     
-  void Linux_SambaGlobalSecurityOptionsExternal::enumInstanceNames(
-   const char *nsp,
-   Linux_SambaGlobalSecurityOptionsInstanceNameEnumeration& instnames) {
+	//----------------------------------------------------------------------------
+  void 
+  Linux_SambaGlobalSecurityOptionsExternal::enumInstanceNames(
+    const char *aNameSpaceP,
+    Linux_SambaGlobalSecurityOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
 
-    CmpiObjectPath op(nsp,"Linux_SambaGlobalSecurityOptions");
-    CmpiEnumeration en=broker.enumInstanceNames(context,op);
-    while(en.hasNext()) {
-      CmpiObjectPath opi = en.getNext();
-      Linux_SambaGlobalSecurityOptionsInstanceName iname(opi);
-      instnames.addElement(iname);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaGlobalSecurityOptions");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstanceNames(m_context,classObjectPath);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath objectPath = cmpiEnumeration.getNext();
+      Linux_SambaGlobalSecurityOptionsInstanceName instanceName(objectPath);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
-  };
+  
+  }
   	  
-  void Linux_SambaGlobalSecurityOptionsExternal::enumInstances(
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaGlobalSecurityOptionsInstanceEnumeration& instances) {
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalSecurityOptionsExternal::enumInstances(
+    const char *aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaGlobalSecurityOptionsInstanceEnumeration& anInstanceEnumeration) {
    		
-    CmpiObjectPath op(nsp,"Linux_SambaGlobalSecurityOptions");
-    CmpiEnumeration en=broker.enumInstances(context,op,properties);
-    while(en.hasNext()) {
-      CmpiInstance inst = en.getNext();
-      Linux_SambaGlobalSecurityOptionsInstance instance(inst,nsp);
-      instances.addElement(instance);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaGlobalSecurityOptions");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstances(m_context,classObjectPath,aPropertiesPP);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalSecurityOptionsInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
     }
-  };
+  
+  }
   	  
+	//----------------------------------------------------------------------------
   Linux_SambaGlobalSecurityOptionsInstance
-   Linux_SambaGlobalSecurityOptionsExternal::getInstance(
-   const char* *properties,
-   const Linux_SambaGlobalSecurityOptionsInstanceName& instanceName) {
+  Linux_SambaGlobalSecurityOptionsExternal::getInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalSecurityOptionsInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=broker.getInstance(context,op,properties);
-    return Linux_SambaGlobalSecurityOptionsInstance(inst,instanceName.getNamespace());
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    CmpiInstance cmpiInstance = 
+      m_broker.getInstance(m_context,cmpiObjectPath,aPropertiesPP);
+  
+    return Linux_SambaGlobalSecurityOptionsInstance(cmpiInstance,anInstanceName.getNamespace());
+  
   }
       
-  void Linux_SambaGlobalSecurityOptionsExternal::setInstance(
-   const char* *properties,
-   const Linux_SambaGlobalSecurityOptionsInstance& instance){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalSecurityOptionsExternal::setInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalSecurityOptionsInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.setInstance(context,op,inst,properties);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    m_broker.setInstance(m_context,cmpiObjectPath,cmpiInstance,aPropertiesPP);
+  
   }
       
-  void Linux_SambaGlobalSecurityOptionsExternal::createInstance(
-   const Linux_SambaGlobalSecurityOptionsInstance& instance){
+	//----------------------------------------------------------------------------
+  Linux_SambaGlobalSecurityOptionsInstanceName
+  Linux_SambaGlobalSecurityOptionsExternal::createInstance(
+    const Linux_SambaGlobalSecurityOptionsInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.createInstance(context,op,inst);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    return Linux_SambaGlobalSecurityOptionsInstanceName(
+		m_broker.createInstance(m_context,cmpiObjectPath,cmpiInstance));
+
   }
   
-  void Linux_SambaGlobalSecurityOptionsExternal::deleteInstance(
-   const Linux_SambaGlobalSecurityOptionsInstanceName& instanceName){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalSecurityOptionsExternal::deleteInstance(
+    const Linux_SambaGlobalSecurityOptionsInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    broker.deleteInstance(context,op);
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    m_broker.deleteInstance(m_context,cmpiObjectPath);
+  
   }
-    
+  
 }

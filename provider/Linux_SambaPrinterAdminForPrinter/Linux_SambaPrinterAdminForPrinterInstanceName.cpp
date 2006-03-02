@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaPrinterAdminForPrinterInstanceName.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterAdminForPrinterInstanceName.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaPrinterAdminForPrinterInstanceName.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,344 +28,411 @@
 
 namespace genProvider {
 	
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaPrinterAdminForPrinterInstanceName
-  //*********************************************************
-  
-  //empty constructor
-  Linux_SambaPrinterAdminForPrinterInstanceName::
-   Linux_SambaPrinterAdminForPrinterInstanceName(){
+  //---------------------------------------------------------------------------- 
+  // empty constructor
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceName::Linux_SambaPrinterAdminForPrinterInstanceName() {
    	init();  	
-  };
+  }
   
+  //---------------------------------------------------------------------------- 
+  // copy constructor	
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceName::Linux_SambaPrinterAdminForPrinterInstanceName(
+    const Linux_SambaPrinterAdminForPrinterInstanceName& anInstanceName) {
+   	init(anInstanceName);  	
+  }
   
-  //copy constructor	
-  Linux_SambaPrinterAdminForPrinterInstanceName::
-   Linux_SambaPrinterAdminForPrinterInstanceName
-   (const Linux_SambaPrinterAdminForPrinterInstanceName& original){
-   	init(original);  	
-  };
-  
-  
-  //contructor using CmpiObjectPath
-  Linux_SambaPrinterAdminForPrinterInstanceName::
-   Linux_SambaPrinterAdminForPrinterInstanceName (const CmpiObjectPath& path){
+  //---------------------------------------------------------------------------- 
+  // constructor using CmpiObjectPath
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceName::Linux_SambaPrinterAdminForPrinterInstanceName(
+    const CmpiObjectPath& path) {
     
     init();
     
-    m_CIMClassNameP=path.getClassName().charPtr();
+    m_CIMClassNameP = path.getClassName().charPtr();
     
-    CmpiString namespaceOP;
-    namespaceOP=path.getNameSpace();
-    setNamespace(namespaceOP.charPtr(),1);
-    
+    CmpiString namespaceP;
+    namespaceP = path.getNameSpace();
+    setNamespace(namespaceP.charPtr(),1);
+        
     CmpiObjectPath PartComponent = path.getKey("PartComponent");
     setPartComponent(Linux_SambaUserInstanceName(PartComponent));
     
     CmpiObjectPath GroupComponent = path.getKey("GroupComponent");
     setGroupComponent(Linux_SambaPrinterOptionsInstanceName(GroupComponent));
+
     
   }
   
-  
-  //destructor
-  Linux_SambaPrinterAdminForPrinterInstanceName::
-   ~Linux_SambaPrinterAdminForPrinterInstanceName(){
+  //---------------------------------------------------------------------------- 
+  // destructor
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceName::~Linux_SambaPrinterAdminForPrinterInstanceName() {
    	reset();  	  
-  };
-  
-  
-  //copy operator
-  Linux_SambaPrinterAdminForPrinterInstanceName&
-   Linux_SambaPrinterAdminForPrinterInstanceName::operator=
-   (const Linux_SambaPrinterAdminForPrinterInstanceName& original){    
-    init(original);
-   	return *this;    
   }
   
+  //---------------------------------------------------------------------------- 
+  //copy operator
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceName&
+  Linux_SambaPrinterAdminForPrinterInstanceName::operator=(
+    const Linux_SambaPrinterAdminForPrinterInstanceName& anInstanceName) {    
+    
+    init(anInstanceName);
+   	return *this;    
   
+  }
+  
+  //---------------------------------------------------------------------------- 
   //returns the related CmpiObjectPath
-  CmpiObjectPath Linux_SambaPrinterAdminForPrinterInstanceName::
-   getObjectPath() const{
+  //---------------------------------------------------------------------------- 
+  CmpiObjectPath 
+  Linux_SambaPrinterAdminForPrinterInstanceName::getObjectPath() const {
    	
-   	CmpiObjectPath objectPath(m_namespace, m_CIMClassNameP);
+   	CmpiObjectPath objectPath(m_nameSpaceP, m_CIMClassNameP);
+   	  	objectPath.setKey(
+  	  "PartComponent",
+  	  CmpiData(m_PartComponent.getObjectPath()));
+  	objectPath.setKey(
+  	  "GroupComponent",
+  	  CmpiData(m_GroupComponent.getObjectPath()));
 
-  	objectPath.setKey("PartComponent",CmpiData(m_PartComponent.getObjectPath()));
-
-  	objectPath.setKey("GroupComponent",CmpiData(m_GroupComponent.getObjectPath()));
   	
   	return objectPath;
   	
   }
   
-  
-  //adds the related CmpiObjectPath to an existing cmpiInstance
-  void Linux_SambaPrinterAdminForPrinterInstanceName::fillKeys(CmpiInstance& cmpiInstance) const{
+  //---------------------------------------------------------------------------- 
+  // adds the related CmpiObjectPath to an existing cmpiInstance
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaPrinterAdminForPrinterInstanceName::fillKeys(CmpiInstance& cmpiInstance) const {
   	
-
-  	if(isSet.PartComponent){
-  	  cmpiInstance.setProperty("PartComponent",CmpiData(m_PartComponent.getObjectPath()));
+  	if (isSet.PartComponent) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "PartComponent",
+  	    CmpiData(m_PartComponent.getObjectPath()));
   	}
 
-  	if(isSet.GroupComponent){
-  	  cmpiInstance.setProperty("GroupComponent",CmpiData(m_GroupComponent.getObjectPath()));
+  	if (isSet.GroupComponent) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "GroupComponent",
+  	    CmpiData(m_GroupComponent.getObjectPath()));
   	}
+
   }
   
   
-  //NameSpace related methods
-  unsigned int Linux_SambaPrinterAdminForPrinterInstanceName::
-   isNameSpaceSet() const{
-  	return isSet.m_namespace;
+  //---------------------------------------------------------------------------- 
+  // NameSpace related methods
+  //---------------------------------------------------------------------------- 
+  unsigned int 
+  Linux_SambaPrinterAdminForPrinterInstanceName::isNameSpaceSet() const {
+  	return isSet.m_nameSpaceP;
   }
   
-  const char * Linux_SambaPrinterAdminForPrinterInstanceName::
-   getNamespace() const {
-    if(!isSet.m_namespace)
+  //---------------------------------------------------------------------------- 
+  const char* 
+  Linux_SambaPrinterAdminForPrinterInstanceName::getNamespace() const {
+    if ( ! isSet.m_nameSpaceP) {
    	  throw CmpiErrorFormater::getErrorException(
    	   CmpiErrorFormater::NOT_SET,
-   	   "NameSpace not set in Linux_SambaPrinterAdminForPrinter instanceName");
-  	return m_namespace;
+   	   "NameSpace",
+   	   "Linux_SambaPrinterAdminForPrinter");
+   	}
+  	return m_nameSpaceP;
   }
 
-  void Linux_SambaPrinterAdminForPrinterInstanceName::
-   setNamespace(const char* val, int makeCopy){
-    if (isSet.m_namespace) {
-      delete m_namespace;
+  //---------------------------------------------------------------------------- 
+  void
+  Linux_SambaPrinterAdminForPrinterInstanceName::setNamespace(
+    const char* aNameSpaceP,
+    int aCopyFlag) {
+  
+    if (isSet.m_nameSpaceP) {
+      delete m_nameSpaceP;
     }
-    if (makeCopy&&val) {
-      char* tmpval = new char[strlen(val)+1];
-      strcpy(tmpval,val);
-      m_namespace = tmpval;
+    
+    if (aCopyFlag && aNameSpaceP) {
+      char* nameSpaceP = new char[strlen(aNameSpaceP) + 1];
+      strcpy(nameSpaceP,aNameSpaceP);
+      m_nameSpaceP = nameSpaceP;
     } else {
-      m_namespace = val;
+      m_nameSpaceP = aNameSpaceP;
     }
-    isSet.m_namespace=1;
+    
+    isSet.m_nameSpaceP = 1;
   }
-       
-  //PartComponent related methods
-  unsigned int Linux_SambaPrinterAdminForPrinterInstanceName::isPartComponentSet() const{
+         
+  //----------------------------------------------------------------------------
+  // PartComponent related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaPrinterAdminForPrinterInstanceName::isPartComponentSet() const {
     return isSet.PartComponent;
   }
-  void Linux_SambaPrinterAdminForPrinterInstanceName::
-   setPartComponent(const Linux_SambaUserInstanceName& val){
-    m_PartComponent = val;
-    isSet.PartComponent=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaPrinterAdminForPrinterInstanceName::setPartComponent(
+    const Linux_SambaUserInstanceName& aValue) {
+  
+    m_PartComponent = aValue;
+    isSet.PartComponent = 1;
+  
   }       
-  const Linux_SambaUserInstanceName& Linux_SambaPrinterAdminForPrinterInstanceName::
-   getPartComponent() const{
+
+  //----------------------------------------------------------------------------
+  const Linux_SambaUserInstanceName&
+  Linux_SambaPrinterAdminForPrinterInstanceName::getPartComponent() const {
     
-    if(!isSet.PartComponent)
+    if ( ! isSet.PartComponent) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "PartComponent not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "PartComponent",
+        "Linux_SambaPrinterAdminForPrinter");
+   	}
+
+
     return m_PartComponent;
+
   }
        
-  //GroupComponent related methods
-  unsigned int Linux_SambaPrinterAdminForPrinterInstanceName::isGroupComponentSet() const{
+  //----------------------------------------------------------------------------
+  // GroupComponent related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaPrinterAdminForPrinterInstanceName::isGroupComponentSet() const {
     return isSet.GroupComponent;
   }
-  void Linux_SambaPrinterAdminForPrinterInstanceName::
-   setGroupComponent(const Linux_SambaPrinterOptionsInstanceName& val){
-    m_GroupComponent = val;
-    isSet.GroupComponent=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaPrinterAdminForPrinterInstanceName::setGroupComponent(
+    const Linux_SambaPrinterOptionsInstanceName& aValue) {
+  
+    m_GroupComponent = aValue;
+    isSet.GroupComponent = 1;
+  
   }       
-  const Linux_SambaPrinterOptionsInstanceName& Linux_SambaPrinterAdminForPrinterInstanceName::
-   getGroupComponent() const{
+
+  //----------------------------------------------------------------------------
+  const Linux_SambaPrinterOptionsInstanceName&
+  Linux_SambaPrinterAdminForPrinterInstanceName::getGroupComponent() const {
     
-    if(!isSet.GroupComponent)
+    if ( ! isSet.GroupComponent) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "GroupComponent not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "GroupComponent",
+        "Linux_SambaPrinterAdminForPrinter");
+   	}
+
+
     return m_GroupComponent;
+
   }
 
-  
-  //set isSet variables to FALSE
-  void Linux_SambaPrinterAdminForPrinterInstanceName::init(){
+
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaPrinterAdminForPrinterInstanceName::init() {
   	
-  	m_CIMClassNameP="Linux_SambaPrinterAdminForPrinter";
-  	isSet.m_namespace=0;    	
-    isSet.PartComponent=0;   	
-    isSet.GroupComponent=0;
+  	m_CIMClassNameP = "Linux_SambaPrinterAdminForPrinter";
+  	isSet.m_nameSpaceP = 0; 
+  	    isSet.PartComponent = 0;
+    isSet.GroupComponent = 0;
+
+  	
   }
   
-  
+  //---------------------------------------------------------------------------- 
   //copies another instance properties in this
-  void Linux_SambaPrinterAdminForPrinterInstanceName::init
-   (const Linux_SambaPrinterAdminForPrinterInstanceName& original){
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaPrinterAdminForPrinterInstanceName::init(
+    const Linux_SambaPrinterAdminForPrinterInstanceName& anOriginal) {
+   	
    	init();
    	   	
-    m_CIMClassNameP=original.m_CIMClassNameP;
-    if(original.isNameSpaceSet()){
-      setNamespace(original.getNamespace(),1);
-    }   	
-    if(original.isPartComponentSet()){
-      const Linux_SambaUserInstanceName& PartComponentOriginal=original.getPartComponent();
-      setPartComponent(PartComponentOriginal);
-    }   	
-    if(original.isGroupComponentSet()){
-      const Linux_SambaPrinterOptionsInstanceName& GroupComponentOriginal=original.getGroupComponent();
-      setGroupComponent(GroupComponentOriginal);
-    }    
-  }
-  
-  //reset the instanceName data
-  void Linux_SambaPrinterAdminForPrinterInstanceName::reset(){   	
-  	if (isSet.m_namespace)
-  	  delete(m_namespace);  	  
-  };
-  
-  
-  
-  
-  //*********************************************************
-  //Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement::
-   Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement(){
-   	
-  	m_elementP=0;
-  	m_nextP=0;
-  	  
-  };
-  
-  
-  Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement::
-   ~Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement(){
-   	
-  	if (m_elementP!=0)
-  	  delete(m_elementP);
-  	if (m_nextP!=0)
-  	  delete(m_nextP);
-  	  
-  };
-
-  
-  //*********************************************************
-  //Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration
-  //*********************************************************
-  
-  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::
-   Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration(){
-   	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
-  
-  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::
-   Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration(const CmpiArray& arr){
-  	
-  	firstElementP=0;
-    currentElementP=0;
-    endElementP=0;
-    
-    int size = arr.size();
-    for (int i=0; i < size; i++) {
-     addElement(Linux_SambaPrinterAdminForPrinterInstanceName(arr[i]));
+    m_CIMClassNameP = anOriginal.m_CIMClassNameP;
+    if (anOriginal.isNameSpaceSet()){
+      setNamespace(anOriginal.getNamespace(),1);
     }
+       	
+    if (anOriginal.isPartComponentSet()) {
+      const Linux_SambaUserInstanceName& PartComponentOriginal = anOriginal.getPartComponent();
+      setPartComponent(PartComponentOriginal);
+    }
+   	
+    if (anOriginal.isGroupComponentSet()) {
+      const Linux_SambaPrinterOptionsInstanceName& GroupComponentOriginal = anOriginal.getGroupComponent();
+      setGroupComponent(GroupComponentOriginal);
+    }
+    
+  
   }
   
-  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::
-   Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration(
-   const Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration& original){
+  //---------------------------------------------------------------------------- 
+  void
+  Linux_SambaPrinterAdminForPrinterInstanceName::reset() {
+  	if (isSet.m_nameSpaceP) {
+  	  delete(m_nameSpaceP);
+  	}
+  	  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement::Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement() {
+  	m_elementP = 0;
+  	m_nextP = 0; 
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement::~Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement() {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+  	if (m_elementP) {
+  	  delete(m_elementP);
+  	}
+  	if (m_nextP) {
+  	  delete(m_nextP);
+  	}
+  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration() {
+  	 m_firstElementP = 0;
+     m_currentElementP = 0;
+     m_endElementP = 0;
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration(
+    const CmpiArray& aCmpiArray) {
+  	
+  	m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
+    
+    int size = aCmpiArray.size();
+    for (int x=0; x < size; ++x) {
+      addElement(Linux_SambaPrinterAdminForPrinterInstanceName(aCmpiArray[x]));
+    }
+    
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration(
+    const Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration& anInstanceNameEnumeration) {
+   	
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
-  
+    int size = anInstanceNameEnumeration.getSize();
+    for (int x=0; x < size; ++x) {
+      addElement(anInstanceNameEnumeration.getElement(x));
+    }
+
+  }
   	  
-  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::
-   ~Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration(){
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::~Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
-  
-  	  
-  void Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::reset(){
+  }
+
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::reset() {
   	
-  	currentElementP=firstElementP;
-  };
+  	m_currentElementP = m_firstElementP;
   
-  	  
-  bool Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::hasNext() const{
+  }
+
+  //---------------------------------------------------------------------------- 
+  bool 
+  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::hasNext() const {
   	
-  	return (currentElementP!=0);
+  	return (m_currentElementP != 0);
   
-  };
+  }
   
-  int Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::getSize() const{
+  //---------------------------------------------------------------------------- 
+  int
+  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
-  };
   
+  }
+  
+  //---------------------------------------------------------------------------- 
   const Linux_SambaPrinterAdminForPrinterInstanceName&  
-   Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::getElement(int pos) const{
+   Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement* followingP=firstElementP;
+    Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x=0;
+    while (followingP && (x < anIndex) ) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
   
-  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
   const Linux_SambaPrinterAdminForPrinterInstanceName&
-   Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::getNext() {
+  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::getNext() {
    	
-  	 Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+  	 Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement* currentP = m_currentElementP;
+  	 m_currentElementP = m_currentElementP->m_nextP;
   	 
   	 return *(currentP->m_elementP);
-  };
-  	  
-  void Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::addElement
-   (const Linux_SambaPrinterAdminForPrinterInstanceName& elementP){
-   	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaPrinterAdminForPrinterInstanceName(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaPrinterAdminForPrinterInstanceName(elementP);
-  	}
-  };
   
-  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::operator CmpiArray() const{
-  	int size=getSize();
-   	CmpiArray arr=CmpiArray(size,CMPI_instance);
-   	for(int i=0;i<size;i++){
-   	  arr[i]=getElement(i).getObjectPath();
+  }
+  	  
+  //---------------------------------------------------------------------------- 
+  void Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::addElement
+   (const Linux_SambaPrinterAdminForPrinterInstanceName& anElementP){
+   	
+  	if (m_firstElementP==0) {
+  	  m_firstElementP = new Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaPrinterAdminForPrinterInstanceName(anElementP);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaPrinterAdminForPrinterInstanceNameEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP=new Linux_SambaPrinterAdminForPrinterInstanceName(anElementP);
+  	}
+
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaPrinterAdminForPrinterInstanceNameEnumeration::operator CmpiArray() const {
+  	int size = getSize();
+   	CmpiArray cmpiArray = CmpiArray(size,CMPI_instance);
+   	for (int x=0; x < size; ++x) {
+   	  cmpiArray[x]=getElement(x).getObjectPath();
    	}
-   	return arr;
-  };  
+   	return cmpiArray;
+  }
+  
 }
- 

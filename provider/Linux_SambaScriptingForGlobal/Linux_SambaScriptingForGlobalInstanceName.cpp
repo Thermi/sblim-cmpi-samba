@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaScriptingForGlobalInstanceName.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaScriptingForGlobalInstanceName.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaScriptingForGlobalInstanceName.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,344 +28,411 @@
 
 namespace genProvider {
 	
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaScriptingForGlobalInstanceName
-  //*********************************************************
-  
-  //empty constructor
-  Linux_SambaScriptingForGlobalInstanceName::
-   Linux_SambaScriptingForGlobalInstanceName(){
+  //---------------------------------------------------------------------------- 
+  // empty constructor
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceName::Linux_SambaScriptingForGlobalInstanceName() {
    	init();  	
-  };
+  }
   
+  //---------------------------------------------------------------------------- 
+  // copy constructor	
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceName::Linux_SambaScriptingForGlobalInstanceName(
+    const Linux_SambaScriptingForGlobalInstanceName& anInstanceName) {
+   	init(anInstanceName);  	
+  }
   
-  //copy constructor	
-  Linux_SambaScriptingForGlobalInstanceName::
-   Linux_SambaScriptingForGlobalInstanceName
-   (const Linux_SambaScriptingForGlobalInstanceName& original){
-   	init(original);  	
-  };
-  
-  
-  //contructor using CmpiObjectPath
-  Linux_SambaScriptingForGlobalInstanceName::
-   Linux_SambaScriptingForGlobalInstanceName (const CmpiObjectPath& path){
+  //---------------------------------------------------------------------------- 
+  // constructor using CmpiObjectPath
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceName::Linux_SambaScriptingForGlobalInstanceName(
+    const CmpiObjectPath& path) {
     
     init();
     
-    m_CIMClassNameP=path.getClassName().charPtr();
+    m_CIMClassNameP = path.getClassName().charPtr();
     
-    CmpiString namespaceOP;
-    namespaceOP=path.getNameSpace();
-    setNamespace(namespaceOP.charPtr(),1);
-    
+    CmpiString namespaceP;
+    namespaceP = path.getNameSpace();
+    setNamespace(namespaceP.charPtr(),1);
+        
     CmpiObjectPath ManagedElement = path.getKey("ManagedElement");
     setManagedElement(Linux_SambaGlobalOptionsInstanceName(ManagedElement));
     
     CmpiObjectPath SettingData = path.getKey("SettingData");
     setSettingData(Linux_SambaScriptingOptionsInstanceName(SettingData));
+
     
   }
   
-  
-  //destructor
-  Linux_SambaScriptingForGlobalInstanceName::
-   ~Linux_SambaScriptingForGlobalInstanceName(){
+  //---------------------------------------------------------------------------- 
+  // destructor
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceName::~Linux_SambaScriptingForGlobalInstanceName() {
    	reset();  	  
-  };
-  
-  
-  //copy operator
-  Linux_SambaScriptingForGlobalInstanceName&
-   Linux_SambaScriptingForGlobalInstanceName::operator=
-   (const Linux_SambaScriptingForGlobalInstanceName& original){    
-    init(original);
-   	return *this;    
   }
   
+  //---------------------------------------------------------------------------- 
+  //copy operator
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceName&
+  Linux_SambaScriptingForGlobalInstanceName::operator=(
+    const Linux_SambaScriptingForGlobalInstanceName& anInstanceName) {    
+    
+    init(anInstanceName);
+   	return *this;    
   
+  }
+  
+  //---------------------------------------------------------------------------- 
   //returns the related CmpiObjectPath
-  CmpiObjectPath Linux_SambaScriptingForGlobalInstanceName::
-   getObjectPath() const{
+  //---------------------------------------------------------------------------- 
+  CmpiObjectPath 
+  Linux_SambaScriptingForGlobalInstanceName::getObjectPath() const {
    	
-   	CmpiObjectPath objectPath(m_namespace, m_CIMClassNameP);
+   	CmpiObjectPath objectPath(m_nameSpaceP, m_CIMClassNameP);
+   	  	objectPath.setKey(
+  	  "ManagedElement",
+  	  CmpiData(m_ManagedElement.getObjectPath()));
+  	objectPath.setKey(
+  	  "SettingData",
+  	  CmpiData(m_SettingData.getObjectPath()));
 
-  	objectPath.setKey("ManagedElement",CmpiData(m_ManagedElement.getObjectPath()));
-
-  	objectPath.setKey("SettingData",CmpiData(m_SettingData.getObjectPath()));
   	
   	return objectPath;
   	
   }
   
-  
-  //adds the related CmpiObjectPath to an existing cmpiInstance
-  void Linux_SambaScriptingForGlobalInstanceName::fillKeys(CmpiInstance& cmpiInstance) const{
+  //---------------------------------------------------------------------------- 
+  // adds the related CmpiObjectPath to an existing cmpiInstance
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaScriptingForGlobalInstanceName::fillKeys(CmpiInstance& cmpiInstance) const {
   	
-
-  	if(isSet.ManagedElement){
-  	  cmpiInstance.setProperty("ManagedElement",CmpiData(m_ManagedElement.getObjectPath()));
+  	if (isSet.ManagedElement) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "ManagedElement",
+  	    CmpiData(m_ManagedElement.getObjectPath()));
   	}
 
-  	if(isSet.SettingData){
-  	  cmpiInstance.setProperty("SettingData",CmpiData(m_SettingData.getObjectPath()));
+  	if (isSet.SettingData) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "SettingData",
+  	    CmpiData(m_SettingData.getObjectPath()));
   	}
+
   }
   
   
-  //NameSpace related methods
-  unsigned int Linux_SambaScriptingForGlobalInstanceName::
-   isNameSpaceSet() const{
-  	return isSet.m_namespace;
+  //---------------------------------------------------------------------------- 
+  // NameSpace related methods
+  //---------------------------------------------------------------------------- 
+  unsigned int 
+  Linux_SambaScriptingForGlobalInstanceName::isNameSpaceSet() const {
+  	return isSet.m_nameSpaceP;
   }
   
-  const char * Linux_SambaScriptingForGlobalInstanceName::
-   getNamespace() const {
-    if(!isSet.m_namespace)
+  //---------------------------------------------------------------------------- 
+  const char* 
+  Linux_SambaScriptingForGlobalInstanceName::getNamespace() const {
+    if ( ! isSet.m_nameSpaceP) {
    	  throw CmpiErrorFormater::getErrorException(
    	   CmpiErrorFormater::NOT_SET,
-   	   "NameSpace not set in Linux_SambaScriptingForGlobal instanceName");
-  	return m_namespace;
+   	   "NameSpace",
+   	   "Linux_SambaScriptingForGlobal");
+   	}
+  	return m_nameSpaceP;
   }
 
-  void Linux_SambaScriptingForGlobalInstanceName::
-   setNamespace(const char* val, int makeCopy){
-    if (isSet.m_namespace) {
-      delete m_namespace;
+  //---------------------------------------------------------------------------- 
+  void
+  Linux_SambaScriptingForGlobalInstanceName::setNamespace(
+    const char* aNameSpaceP,
+    int aCopyFlag) {
+  
+    if (isSet.m_nameSpaceP) {
+      delete m_nameSpaceP;
     }
-    if (makeCopy&&val) {
-      char* tmpval = new char[strlen(val)+1];
-      strcpy(tmpval,val);
-      m_namespace = tmpval;
+    
+    if (aCopyFlag && aNameSpaceP) {
+      char* nameSpaceP = new char[strlen(aNameSpaceP) + 1];
+      strcpy(nameSpaceP,aNameSpaceP);
+      m_nameSpaceP = nameSpaceP;
     } else {
-      m_namespace = val;
+      m_nameSpaceP = aNameSpaceP;
     }
-    isSet.m_namespace=1;
+    
+    isSet.m_nameSpaceP = 1;
   }
-       
-  //ManagedElement related methods
-  unsigned int Linux_SambaScriptingForGlobalInstanceName::isManagedElementSet() const{
+         
+  //----------------------------------------------------------------------------
+  // ManagedElement related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaScriptingForGlobalInstanceName::isManagedElementSet() const {
     return isSet.ManagedElement;
   }
-  void Linux_SambaScriptingForGlobalInstanceName::
-   setManagedElement(const Linux_SambaGlobalOptionsInstanceName& val){
-    m_ManagedElement = val;
-    isSet.ManagedElement=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaScriptingForGlobalInstanceName::setManagedElement(
+    const Linux_SambaGlobalOptionsInstanceName& aValue) {
+  
+    m_ManagedElement = aValue;
+    isSet.ManagedElement = 1;
+  
   }       
-  const Linux_SambaGlobalOptionsInstanceName& Linux_SambaScriptingForGlobalInstanceName::
-   getManagedElement() const{
+
+  //----------------------------------------------------------------------------
+  const Linux_SambaGlobalOptionsInstanceName&
+  Linux_SambaScriptingForGlobalInstanceName::getManagedElement() const {
     
-    if(!isSet.ManagedElement)
+    if ( ! isSet.ManagedElement) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "ManagedElement not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "ManagedElement",
+        "Linux_SambaScriptingForGlobal");
+   	}
+
+
     return m_ManagedElement;
+
   }
        
-  //SettingData related methods
-  unsigned int Linux_SambaScriptingForGlobalInstanceName::isSettingDataSet() const{
+  //----------------------------------------------------------------------------
+  // SettingData related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaScriptingForGlobalInstanceName::isSettingDataSet() const {
     return isSet.SettingData;
   }
-  void Linux_SambaScriptingForGlobalInstanceName::
-   setSettingData(const Linux_SambaScriptingOptionsInstanceName& val){
-    m_SettingData = val;
-    isSet.SettingData=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaScriptingForGlobalInstanceName::setSettingData(
+    const Linux_SambaScriptingOptionsInstanceName& aValue) {
+  
+    m_SettingData = aValue;
+    isSet.SettingData = 1;
+  
   }       
-  const Linux_SambaScriptingOptionsInstanceName& Linux_SambaScriptingForGlobalInstanceName::
-   getSettingData() const{
+
+  //----------------------------------------------------------------------------
+  const Linux_SambaScriptingOptionsInstanceName&
+  Linux_SambaScriptingForGlobalInstanceName::getSettingData() const {
     
-    if(!isSet.SettingData)
+    if ( ! isSet.SettingData) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "SettingData not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "SettingData",
+        "Linux_SambaScriptingForGlobal");
+   	}
+
+
     return m_SettingData;
+
   }
 
-  
-  //set isSet variables to FALSE
-  void Linux_SambaScriptingForGlobalInstanceName::init(){
+
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaScriptingForGlobalInstanceName::init() {
   	
-  	m_CIMClassNameP="Linux_SambaScriptingForGlobal";
-  	isSet.m_namespace=0;    	
-    isSet.ManagedElement=0;   	
-    isSet.SettingData=0;
+  	m_CIMClassNameP = "Linux_SambaScriptingForGlobal";
+  	isSet.m_nameSpaceP = 0; 
+  	    isSet.ManagedElement = 0;
+    isSet.SettingData = 0;
+
+  	
   }
   
-  
+  //---------------------------------------------------------------------------- 
   //copies another instance properties in this
-  void Linux_SambaScriptingForGlobalInstanceName::init
-   (const Linux_SambaScriptingForGlobalInstanceName& original){
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaScriptingForGlobalInstanceName::init(
+    const Linux_SambaScriptingForGlobalInstanceName& anOriginal) {
+   	
    	init();
    	   	
-    m_CIMClassNameP=original.m_CIMClassNameP;
-    if(original.isNameSpaceSet()){
-      setNamespace(original.getNamespace(),1);
-    }   	
-    if(original.isManagedElementSet()){
-      const Linux_SambaGlobalOptionsInstanceName& ManagedElementOriginal=original.getManagedElement();
-      setManagedElement(ManagedElementOriginal);
-    }   	
-    if(original.isSettingDataSet()){
-      const Linux_SambaScriptingOptionsInstanceName& SettingDataOriginal=original.getSettingData();
-      setSettingData(SettingDataOriginal);
-    }    
-  }
-  
-  //reset the instanceName data
-  void Linux_SambaScriptingForGlobalInstanceName::reset(){   	
-  	if (isSet.m_namespace)
-  	  delete(m_namespace);  	  
-  };
-  
-  
-  
-  
-  //*********************************************************
-  //Linux_SambaScriptingForGlobalInstanceNameEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaScriptingForGlobalInstanceNameEnumerationElement::
-   Linux_SambaScriptingForGlobalInstanceNameEnumerationElement(){
-   	
-  	m_elementP=0;
-  	m_nextP=0;
-  	  
-  };
-  
-  
-  Linux_SambaScriptingForGlobalInstanceNameEnumerationElement::
-   ~Linux_SambaScriptingForGlobalInstanceNameEnumerationElement(){
-   	
-  	if (m_elementP!=0)
-  	  delete(m_elementP);
-  	if (m_nextP!=0)
-  	  delete(m_nextP);
-  	  
-  };
-
-  
-  //*********************************************************
-  //Linux_SambaScriptingForGlobalInstanceNameEnumeration
-  //*********************************************************
-  
-  Linux_SambaScriptingForGlobalInstanceNameEnumeration::
-   Linux_SambaScriptingForGlobalInstanceNameEnumeration(){
-   	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
-  
-  Linux_SambaScriptingForGlobalInstanceNameEnumeration::
-   Linux_SambaScriptingForGlobalInstanceNameEnumeration(const CmpiArray& arr){
-  	
-  	firstElementP=0;
-    currentElementP=0;
-    endElementP=0;
-    
-    int size = arr.size();
-    for (int i=0; i < size; i++) {
-     addElement(Linux_SambaScriptingForGlobalInstanceName(arr[i]));
+    m_CIMClassNameP = anOriginal.m_CIMClassNameP;
+    if (anOriginal.isNameSpaceSet()){
+      setNamespace(anOriginal.getNamespace(),1);
     }
+       	
+    if (anOriginal.isManagedElementSet()) {
+      const Linux_SambaGlobalOptionsInstanceName& ManagedElementOriginal = anOriginal.getManagedElement();
+      setManagedElement(ManagedElementOriginal);
+    }
+   	
+    if (anOriginal.isSettingDataSet()) {
+      const Linux_SambaScriptingOptionsInstanceName& SettingDataOriginal = anOriginal.getSettingData();
+      setSettingData(SettingDataOriginal);
+    }
+    
+  
   }
   
-  Linux_SambaScriptingForGlobalInstanceNameEnumeration::
-   Linux_SambaScriptingForGlobalInstanceNameEnumeration(
-   const Linux_SambaScriptingForGlobalInstanceNameEnumeration& original){
+  //---------------------------------------------------------------------------- 
+  void
+  Linux_SambaScriptingForGlobalInstanceName::reset() {
+  	if (isSet.m_nameSpaceP) {
+  	  delete(m_nameSpaceP);
+  	}
+  	  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceNameEnumerationElement::Linux_SambaScriptingForGlobalInstanceNameEnumerationElement() {
+  	m_elementP = 0;
+  	m_nextP = 0; 
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceNameEnumerationElement::~Linux_SambaScriptingForGlobalInstanceNameEnumerationElement() {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+  	if (m_elementP) {
+  	  delete(m_elementP);
+  	}
+  	if (m_nextP) {
+  	  delete(m_nextP);
+  	}
+  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceNameEnumeration::Linux_SambaScriptingForGlobalInstanceNameEnumeration() {
+  	 m_firstElementP = 0;
+     m_currentElementP = 0;
+     m_endElementP = 0;
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceNameEnumeration::Linux_SambaScriptingForGlobalInstanceNameEnumeration(
+    const CmpiArray& aCmpiArray) {
+  	
+  	m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
+    
+    int size = aCmpiArray.size();
+    for (int x=0; x < size; ++x) {
+      addElement(Linux_SambaScriptingForGlobalInstanceName(aCmpiArray[x]));
+    }
+    
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceNameEnumeration::Linux_SambaScriptingForGlobalInstanceNameEnumeration(
+    const Linux_SambaScriptingForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
+   	
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
-  
+    int size = anInstanceNameEnumeration.getSize();
+    for (int x=0; x < size; ++x) {
+      addElement(anInstanceNameEnumeration.getElement(x));
+    }
+
+  }
   	  
-  Linux_SambaScriptingForGlobalInstanceNameEnumeration::
-   ~Linux_SambaScriptingForGlobalInstanceNameEnumeration(){
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceNameEnumeration::~Linux_SambaScriptingForGlobalInstanceNameEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
-  
-  	  
-  void Linux_SambaScriptingForGlobalInstanceNameEnumeration::reset(){
+  }
+
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaScriptingForGlobalInstanceNameEnumeration::reset() {
   	
-  	currentElementP=firstElementP;
-  };
+  	m_currentElementP = m_firstElementP;
   
-  	  
-  bool Linux_SambaScriptingForGlobalInstanceNameEnumeration::hasNext() const{
+  }
+
+  //---------------------------------------------------------------------------- 
+  bool 
+  Linux_SambaScriptingForGlobalInstanceNameEnumeration::hasNext() const {
   	
-  	return (currentElementP!=0);
+  	return (m_currentElementP != 0);
   
-  };
+  }
   
-  int Linux_SambaScriptingForGlobalInstanceNameEnumeration::getSize() const{
+  //---------------------------------------------------------------------------- 
+  int
+  Linux_SambaScriptingForGlobalInstanceNameEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaScriptingForGlobalInstanceNameEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaScriptingForGlobalInstanceNameEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
-  };
   
+  }
+  
+  //---------------------------------------------------------------------------- 
   const Linux_SambaScriptingForGlobalInstanceName&  
-   Linux_SambaScriptingForGlobalInstanceNameEnumeration::getElement(int pos) const{
+   Linux_SambaScriptingForGlobalInstanceNameEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaScriptingForGlobalInstanceNameEnumerationElement* followingP=firstElementP;
+    Linux_SambaScriptingForGlobalInstanceNameEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x=0;
+    while (followingP && (x < anIndex) ) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
   
-  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
   const Linux_SambaScriptingForGlobalInstanceName&
-   Linux_SambaScriptingForGlobalInstanceNameEnumeration::getNext() {
+  Linux_SambaScriptingForGlobalInstanceNameEnumeration::getNext() {
    	
-  	 Linux_SambaScriptingForGlobalInstanceNameEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+  	 Linux_SambaScriptingForGlobalInstanceNameEnumerationElement* currentP = m_currentElementP;
+  	 m_currentElementP = m_currentElementP->m_nextP;
   	 
   	 return *(currentP->m_elementP);
-  };
-  	  
-  void Linux_SambaScriptingForGlobalInstanceNameEnumeration::addElement
-   (const Linux_SambaScriptingForGlobalInstanceName& elementP){
-   	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaScriptingForGlobalInstanceNameEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaScriptingForGlobalInstanceName(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaScriptingForGlobalInstanceNameEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaScriptingForGlobalInstanceName(elementP);
-  	}
-  };
   
-  Linux_SambaScriptingForGlobalInstanceNameEnumeration::operator CmpiArray() const{
-  	int size=getSize();
-   	CmpiArray arr=CmpiArray(size,CMPI_instance);
-   	for(int i=0;i<size;i++){
-   	  arr[i]=getElement(i).getObjectPath();
+  }
+  	  
+  //---------------------------------------------------------------------------- 
+  void Linux_SambaScriptingForGlobalInstanceNameEnumeration::addElement
+   (const Linux_SambaScriptingForGlobalInstanceName& anElementP){
+   	
+  	if (m_firstElementP==0) {
+  	  m_firstElementP = new Linux_SambaScriptingForGlobalInstanceNameEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaScriptingForGlobalInstanceName(anElementP);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaScriptingForGlobalInstanceNameEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP=new Linux_SambaScriptingForGlobalInstanceName(anElementP);
+  	}
+
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaScriptingForGlobalInstanceNameEnumeration::operator CmpiArray() const {
+  	int size = getSize();
+   	CmpiArray cmpiArray = CmpiArray(size,CMPI_instance);
+   	for (int x=0; x < size; ++x) {
+   	  cmpiArray[x]=getElement(x).getObjectPath();
    	}
-   	return arr;
-  };  
+   	return cmpiArray;
+  }
+  
 }
- 

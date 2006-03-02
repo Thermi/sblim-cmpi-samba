@@ -1,233 +1,321 @@
-/**
- *  Linux_SambaServiceConfigurationForServiceExternal.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaServiceConfigurationForServiceExternal.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaServiceConfigurationForServiceExternal.h"
 
-namespace genProvider{
+namespace genProvider {
 	
+	//----------------------------------------------------------------------------
   Linux_SambaServiceConfigurationForServiceExternal::Linux_SambaServiceConfigurationForServiceExternal(
-   const CmpiBroker& brkr, const CmpiContext& ctx ) 
-   : broker(brkr), context(ctx) {};
+    const CmpiBroker& aBroker,
+    const CmpiContext& aContext ) 
+    : m_broker(aBroker),
+    m_context(aContext) { }
    
-  Linux_SambaServiceConfigurationForServiceExternal::
-   ~Linux_SambaServiceConfigurationForServiceExternal(){};
+	//----------------------------------------------------------------------------
+  Linux_SambaServiceConfigurationForServiceExternal::~Linux_SambaServiceConfigurationForServiceExternal() { }
     
-  void Linux_SambaServiceConfigurationForServiceExternal::enumInstanceNames(
-   const char *nsp,
-   Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& instnames) {
+	//----------------------------------------------------------------------------
+  void 
+  Linux_SambaServiceConfigurationForServiceExternal::enumInstanceNames(
+    const char *aNameSpaceP,
+    Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& anInstanceNameEnumeration) {
 
-    CmpiObjectPath op(nsp,"Linux_SambaServiceConfigurationForService");
-    CmpiEnumeration en=broker.enumInstanceNames(context,op);
-    while(en.hasNext()) {
-      CmpiObjectPath opi = en.getNext();
-      Linux_SambaServiceConfigurationForServiceInstanceName iname(opi);
-      instnames.addElement(iname);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaServiceConfigurationForService");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstanceNames(m_context,classObjectPath);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath objectPath = cmpiEnumeration.getNext();
+      Linux_SambaServiceConfigurationForServiceInstanceName instanceName(objectPath);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
-  };
+  
+  }
   	  
-  void Linux_SambaServiceConfigurationForServiceExternal::enumInstances(
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaServiceConfigurationForServiceInstanceEnumeration& instances) {
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceExternal::enumInstances(
+    const char *aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaServiceConfigurationForServiceInstanceEnumeration& anInstanceEnumeration) {
    		
-    CmpiObjectPath op(nsp,"Linux_SambaServiceConfigurationForService");
-    CmpiEnumeration en=broker.enumInstances(context,op,properties);
-    while(en.hasNext()) {
-      CmpiInstance inst = en.getNext();
-      Linux_SambaServiceConfigurationForServiceInstance instance(inst,nsp);
-      instances.addElement(instance);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaServiceConfigurationForService");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstances(m_context,classObjectPath,aPropertiesPP);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaServiceConfigurationForServiceInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
     }
-  };
+  
+  }
   	  
+	//----------------------------------------------------------------------------
   Linux_SambaServiceConfigurationForServiceInstance
-   Linux_SambaServiceConfigurationForServiceExternal::getInstance(
-   const char* *properties,
-   const Linux_SambaServiceConfigurationForServiceInstanceName& instanceName) {
+  Linux_SambaServiceConfigurationForServiceExternal::getInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaServiceConfigurationForServiceInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=broker.getInstance(context,op,properties);
-    return Linux_SambaServiceConfigurationForServiceInstance(inst,instanceName.getNamespace());
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    CmpiInstance cmpiInstance = 
+      m_broker.getInstance(m_context,cmpiObjectPath,aPropertiesPP);
+  
+    return Linux_SambaServiceConfigurationForServiceInstance(cmpiInstance,anInstanceName.getNamespace());
+  
   }
       
-  void Linux_SambaServiceConfigurationForServiceExternal::setInstance(
-   const char* *properties,
-   const Linux_SambaServiceConfigurationForServiceInstance& instance){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceExternal::setInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaServiceConfigurationForServiceInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.setInstance(context,op,inst,properties);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    m_broker.setInstance(m_context,cmpiObjectPath,cmpiInstance,aPropertiesPP);
+  
   }
       
-  void Linux_SambaServiceConfigurationForServiceExternal::createInstance(
-   const Linux_SambaServiceConfigurationForServiceInstance& instance){
+	//----------------------------------------------------------------------------
+  Linux_SambaServiceConfigurationForServiceInstanceName
+  Linux_SambaServiceConfigurationForServiceExternal::createInstance(
+    const Linux_SambaServiceConfigurationForServiceInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.createInstance(context,op,inst);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    return Linux_SambaServiceConfigurationForServiceInstanceName(
+		m_broker.createInstance(m_context,cmpiObjectPath,cmpiInstance));
+
   }
   
-  void Linux_SambaServiceConfigurationForServiceExternal::deleteInstance(
-   const Linux_SambaServiceConfigurationForServiceInstanceName& instanceName){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceExternal::deleteInstance(
+    const Linux_SambaServiceConfigurationForServiceInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    broker.deleteInstance(context,op);
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    m_broker.deleteInstance(m_context,cmpiObjectPath);
+  
   }
-      
-    //Reference calls
-    
-    void Linux_SambaServiceConfigurationForServiceExternal::
-     referencesConfiguration( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaServiceConfigurationForServiceInstanceEnumeration& instances){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.references
-       (context, op, "Linux_SambaService",
-        "Configuration", properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaServiceConfigurationForServiceInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
-    }
+  // Reference calls
 
-    void Linux_SambaServiceConfigurationForServiceExternal::
-     referenceNamesConfiguration( 
-     const char *nsp,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& instanceNames){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceExternal::referencesConfiguration( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceInstanceName& aSourceInstanceName,
+    Linux_SambaServiceConfigurationForServiceInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.referenceNames
-       (context, op, "Linux_SambaService",
-        "Configuration");
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaServiceConfigurationForServiceInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
 
-    void Linux_SambaServiceConfigurationForServiceExternal::
-     referencesElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceConfigurationInstanceName& sourceInst,
-     Linux_SambaServiceConfigurationForServiceInstanceEnumeration& instances){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.references
-       (context, op, "Linux_SambaServiceConfiguration",
-        "Element", properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaServiceConfigurationForServiceInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
-    }
+    CmpiEnumeration cmpiEnumeration = m_broker.references(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaService",
+      "Configuration",
+      aPropertiesPP);
 
-    void Linux_SambaServiceConfigurationForServiceExternal::
-     referenceNamesElement( 
-     const char *nsp,
-     const Linux_SambaServiceConfigurationInstanceName& sourceInst,
-     Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& instanceNames){
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaServiceConfigurationForServiceInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceExternal::referenceNamesConfiguration( 
+    const char* aNameSpaceP,
+    const Linux_SambaServiceInstanceName& aSourceInstanceName,
+    Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.referenceNames
-       (context, op, "Linux_SambaServiceConfiguration",
-        "Element");
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaServiceConfigurationForServiceInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.referenceNames(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaService",
+      "Configuration");
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaServiceConfigurationForServiceInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceExternal::referencesElement( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceConfigurationInstanceName& aSourceInstanceName,
+    Linux_SambaServiceConfigurationForServiceInstanceEnumeration& anInstanceEnumeration){
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+  
+    CmpiEnumeration cmpiEnumeration = m_broker.references(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaServiceConfiguration",
+      "Element",
+      aPropertiesPP);
+
+    while(cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaServiceConfigurationForServiceInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceExternal::referenceNamesElement( 
+    const char* aNameSpaceP,
+    const Linux_SambaServiceConfigurationInstanceName& aSourceInstanceName,
+    Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+    CmpiEnumeration cmpiEnumeration = m_broker.referenceNames(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaServiceConfiguration",
+      "Element");
+   
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaServiceConfigurationForServiceInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
+    }      
+
+  }
      
-    //Associator calls
-
-    void Linux_SambaServiceConfigurationForServiceExternal::
-     associatorsConfiguration( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaServiceConfigurationInstanceEnumeration& instances){
+  //Associator calls
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceExternal::associatorsConfiguration( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceInstanceName& aSourceInstanceName,
+    Linux_SambaServiceConfigurationInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associators
-       (context,op,0,0,0,0,properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaServiceConfigurationInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associators(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0,
+      aPropertiesPP);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaServiceConfigurationInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
     }
 
-    void Linux_SambaServiceConfigurationForServiceExternal::
-     associatorNamesConfiguration( 
-     const char *nsp,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaServiceConfigurationInstanceNameEnumeration& instanceNames){
+  }
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaServiceConfigurationForServiceExternal::associatorNamesConfiguration( 
+    const char* aNameSpaceP,
+    const Linux_SambaServiceInstanceName& aSourceInstanceName,
+    Linux_SambaServiceConfigurationInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associatorNames
-       (context,op,0,0,0,0);
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaServiceConfigurationInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associatorNames(
+     m_context,
+     cmpiObjectPath,
+     0,
+     0,
+     0,
+     0);
+
+    while(cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaServiceConfigurationInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
 
-    void Linux_SambaServiceConfigurationForServiceExternal::
-     associatorsElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceConfigurationInstanceName& sourceInst,
-     Linux_SambaServiceInstanceEnumeration& instances){
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceExternal::associatorsElement( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceConfigurationInstanceName& aSourceInstanceName,
+    Linux_SambaServiceInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associators
-       (context,op,0,0,0,0,properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaServiceInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associators(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0,
+      aPropertiesPP);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaServiceInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceExternal::associatorNamesElement( 
+    const char* aNameSpaceP,
+    const Linux_SambaServiceConfigurationInstanceName& aSourceInstanceName,
+    Linux_SambaServiceInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associatorNames(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaServiceInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
 
-    void Linux_SambaServiceConfigurationForServiceExternal::
-     associatorNamesElement( 
-     const char *nsp,
-     const Linux_SambaServiceConfigurationInstanceName& sourceInst,
-     Linux_SambaServiceInstanceNameEnumeration& instanceNames){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associatorNames
-       (context,op,0,0,0,0);
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaServiceInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
-
+  }
       
 }

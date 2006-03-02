@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaWriteListForPrinterManualInstance.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaWriteListForPrinterManualInstance.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaWriteListForPrinterManualInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,244 +28,283 @@
 
 namespace genProvider {
 
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaWriteListForPrinterManualInstance
-  //*********************************************************
-
+  //----------------------------------------------------------------------------
   //empty constructor
-  Linux_SambaWriteListForPrinterManualInstance::
-   Linux_SambaWriteListForPrinterManualInstance(){   	
+  Linux_SambaWriteListForPrinterManualInstance::Linux_SambaWriteListForPrinterManualInstance() {   	
    	init();  	   	
-  };
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copy constructor	
-  Linux_SambaWriteListForPrinterManualInstance::
-   Linux_SambaWriteListForPrinterManualInstance
-   (const Linux_SambaWriteListForPrinterManualInstance& original){   	
-   	init(original);  	   	
-  };
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForPrinterManualInstance::Linux_SambaWriteListForPrinterManualInstance(
+    const Linux_SambaWriteListForPrinterManualInstance& anInstance) {   	
+   	init(anInstance);  	   	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //constructor using CmpiInstance
-  Linux_SambaWriteListForPrinterManualInstance::
-   Linux_SambaWriteListForPrinterManualInstance (const CmpiInstance& inst, const char* instanceNamespace){
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForPrinterManualInstance::Linux_SambaWriteListForPrinterManualInstance(
+    const CmpiInstance& aCmpiInstance,
+    const char* anInstanceNamespaceP) {
+
     CmpiData cmpiData;
+
     init(); 
     
-    CmpiObjectPath cop=inst.getObjectPath();
-    cop.setNameSpace(instanceNamespace);
+    CmpiObjectPath cop = aCmpiInstance.getObjectPath();
+    cop.setNameSpace(anInstanceNamespaceP);
     setInstanceName(Linux_SambaWriteListForPrinterInstanceName(cop));
+
     
   }
   
-  
+  //----------------------------------------------------------------------------
   //Destructor
+  //----------------------------------------------------------------------------
   Linux_SambaWriteListForPrinterManualInstance::
    ~Linux_SambaWriteListForPrinterManualInstance(){
    	reset();  	  
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
   //copy operator
+  //----------------------------------------------------------------------------
   Linux_SambaWriteListForPrinterManualInstance&
-   Linux_SambaWriteListForPrinterManualInstance::operator=
-   (const Linux_SambaWriteListForPrinterManualInstance& original){   	
-   	init(original);
+  Linux_SambaWriteListForPrinterManualInstance::operator=(
+    const Linux_SambaWriteListForPrinterManualInstance& anInstance) {   	
+   	
+   	init(anInstance);
    	return *this;
-  };
+  
+  }
   
   
+  //----------------------------------------------------------------------------
   //converts to CmpiInstance
-  CmpiInstance Linux_SambaWriteListForPrinterManualInstance::
-   getCmpiInstance(const char** properties) const{
+  //----------------------------------------------------------------------------
+  CmpiInstance
+  Linux_SambaWriteListForPrinterManualInstance::getCmpiInstance(
+    const char** aPropertiesPP) const {
    	
    	CmpiObjectPath objectPath=getInstanceName().getObjectPath();      
     CmpiInstance cmpiInstance(objectPath);    
     getInstanceName().fillKeys(cmpiInstance);
     
-    if (properties) {
-	  cmpiInstance.setPropertyFilter(properties,0);
+    if (aPropertiesPP) {
+	    cmpiInstance.setPropertyFilter(aPropertiesPP,0);
     }
+
   	
   	return cmpiInstance;
   	
   }
   
-  
-  //InstanceName related methods
-  unsigned int Linux_SambaWriteListForPrinterManualInstance::
-   isInstanceNameSet() const{
+  //----------------------------------------------------------------------------
+  // InstanceName related methods
+  //----------------------------------------------------------------------------
+  unsigned int 
+  Linux_SambaWriteListForPrinterManualInstance::isInstanceNameSet() const {
   	return isSet.instanceName;
   }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaWriteListForPrinterInstanceName&
-    Linux_SambaWriteListForPrinterManualInstance::getInstanceName() const{
+  Linux_SambaWriteListForPrinterManualInstance::getInstanceName() const {
 
-    if(!isSet.instanceName)
+    if( ! isSet.instanceName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "InstanceName not set in Linux_SambaWriteListForPrinter instance");
+        CmpiErrorFormater::NOT_SET,
+        "InstanceName (CIM Key Attributes)",
+        "Linux_SambaWriteListForPrinter");
+   	}
   		
    	return m_instanceName;
+  
   }
 
-  void Linux_SambaWriteListForPrinterManualInstance::setInstanceName(
-   const Linux_SambaWriteListForPrinterInstanceName& val){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaWriteListForPrinterManualInstance::setInstanceName(
+    const Linux_SambaWriteListForPrinterInstanceName& val) {
+
     m_instanceName = val;
-    isSet.instanceName=1;
+    isSet.instanceName = 1;
+
   }
 
-
   
+  //----------------------------------------------------------------------------
   //set isSet attributes to FALSE
-  void Linux_SambaWriteListForPrinterManualInstance::init(){
-   	isSet.instanceName=0;
-   	  	
-  };
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaWriteListForPrinterManualInstance::init() {
+   	isSet.instanceName = 0;
+  	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copies another instance properties in this
-  void Linux_SambaWriteListForPrinterManualInstance::init
-   (const Linux_SambaWriteListForPrinterManualInstance& original){   	
+  //----------------------------------------------------------------------------
+  void 
+  Linux_SambaWriteListForPrinterManualInstance::init(
+    const Linux_SambaWriteListForPrinterManualInstance& anOriginal) {   	
+
    	init();
    	   	
-    if(original.isInstanceNameSet()){
-      setInstanceName(original.getInstanceName());
-    }    
-   }
+    if(anOriginal.isInstanceNameSet()) {
+      setInstanceName(anOriginal.getInstanceName());
+    }
+        
+  }
   
-  
+  //----------------------------------------------------------------------------
   //reset the instance data
-  void Linux_SambaWriteListForPrinterManualInstance::reset(){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaWriteListForPrinterManualInstance::reset() {
    	
-  	  
-  };
+  }
   
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaWriteListForPrinterManualInstanceEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaWriteListForPrinterManualInstanceEnumerationElement::
-   Linux_SambaWriteListForPrinterManualInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForPrinterManualInstanceEnumerationElement::Linux_SambaWriteListForPrinterManualInstanceEnumerationElement() {
    	
-  	m_elementP=0;
-  	m_nextP=0;
+  	m_elementP = 0;
+  	m_nextP = 0;
   	  
-  };
+  }
   
-  
-  Linux_SambaWriteListForPrinterManualInstanceEnumerationElement::
-   ~Linux_SambaWriteListForPrinterManualInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForPrinterManualInstanceEnumerationElement::~Linux_SambaWriteListForPrinterManualInstanceEnumerationElement() {
    	
-  	if (m_elementP!=0)
+  	if (m_elementP) {
   	  delete(m_elementP);
-  	if (m_nextP!=0)
+  	}
+  	
+  	if (m_nextP) {
   	  delete(m_nextP);
+  	}
   	  
-  };
+  }
 
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaWriteListForPrinterManualInstanceNameEnumeration
-  //*********************************************************
-
-  Linux_SambaWriteListForPrinterManualInstanceEnumeration::
-   Linux_SambaWriteListForPrinterManualInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForPrinterManualInstanceEnumeration::Linux_SambaWriteListForPrinterManualInstanceEnumeration() {
    	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   
-  Linux_SambaWriteListForPrinterManualInstanceEnumeration::
-   Linux_SambaWriteListForPrinterManualInstanceEnumeration(
-   const Linux_SambaWriteListForPrinterManualInstanceEnumeration& original){
+  }
+  
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForPrinterManualInstanceEnumeration::Linux_SambaWriteListForPrinterManualInstanceEnumeration(
+    const Linux_SambaWriteListForPrinterManualInstanceEnumeration& anInstanceEnumeration) {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
+    int size = anInstanceEnumeration.getSize();
+    for (int x=0; x < size;++x) {
+      addElement(anInstanceEnumeration.getElement(x));
+    }           
+
+  }
   
-  	  
-  Linux_SambaWriteListForPrinterManualInstanceEnumeration::
-   ~Linux_SambaWriteListForPrinterManualInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForPrinterManualInstanceEnumeration::~Linux_SambaWriteListForPrinterManualInstanceEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
+  }
   
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaWriteListForPrinterManualInstanceEnumeration::reset() {
+  	
+  	m_currentElementP = m_firstElementP;
+  	
+  }
   	  
-  void Linux_SambaWriteListForPrinterManualInstanceEnumeration::reset(){
+  //----------------------------------------------------------------------------
+  bool
+  Linux_SambaWriteListForPrinterManualInstanceEnumeration::hasNext() const {
   	
-  	currentElementP=firstElementP;
-  };
+  	return (m_currentElementP != 0);
   
-  	  
-  bool Linux_SambaWriteListForPrinterManualInstanceEnumeration::hasNext() const{
-  	
-  	return (currentElementP!=0);
+  }
   
-  };
-  
-  int Linux_SambaWriteListForPrinterManualInstanceEnumeration::getSize() const{
+  //----------------------------------------------------------------------------
+  int
+  Linux_SambaWriteListForPrinterManualInstanceEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaWriteListForPrinterManualInstanceEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaWriteListForPrinterManualInstanceEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
     
-  };
+  }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaWriteListForPrinterManualInstance&  
-   Linux_SambaWriteListForPrinterManualInstanceEnumeration::getElement(int pos) const{
+  Linux_SambaWriteListForPrinterManualInstanceEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaWriteListForPrinterManualInstanceEnumerationElement* followingP=firstElementP;
+    Linux_SambaWriteListForPrinterManualInstanceEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x = 0;
+    while (followingP && (x < anIndex)) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
+
+  }
   
-  	  
+  //----------------------------------------------------------------------------
   const Linux_SambaWriteListForPrinterManualInstance&
-   Linux_SambaWriteListForPrinterManualInstanceEnumeration::getNext() {
+  Linux_SambaWriteListForPrinterManualInstanceEnumeration::getNext() {
    	
-  	 Linux_SambaWriteListForPrinterManualInstanceEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+    Linux_SambaWriteListForPrinterManualInstanceEnumerationElement* currentElementP =
+  	  m_currentElementP;
+
+    m_currentElementP = m_currentElementP->m_nextP;
   	 
-  	 return *(currentP->m_elementP);
-  };
+    return *(currentElementP->m_elementP);
+
+  }
   	  
-  void Linux_SambaWriteListForPrinterManualInstanceEnumeration::addElement
-   (const Linux_SambaWriteListForPrinterManualInstance& elementP){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaWriteListForPrinterManualInstanceEnumeration::addElement(
+    const Linux_SambaWriteListForPrinterManualInstance& anInstance) {
    	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaWriteListForPrinterManualInstanceEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaWriteListForPrinterManualInstance(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaWriteListForPrinterManualInstanceEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaWriteListForPrinterManualInstance(elementP);
+  	if (m_firstElementP == 0) {
+  	  m_firstElementP = new Linux_SambaWriteListForPrinterManualInstanceEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaWriteListForPrinterManualInstance(anInstance);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaWriteListForPrinterManualInstanceEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP = new Linux_SambaWriteListForPrinterManualInstance(anInstance);
   	}
-  };  
+
+  }
+  
 }
- 

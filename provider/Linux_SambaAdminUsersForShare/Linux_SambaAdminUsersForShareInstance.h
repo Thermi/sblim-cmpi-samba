@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaAdminUsersForShareInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaAdminUsersForShareInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaAdminUsersForShareInstance_h
 #define Linux_SambaAdminUsersForShareInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaAdminUsersForShareInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaAdminUsersForShareInstance {
-  public:
-       Linux_SambaAdminUsersForShareInstance();
-  	
-       Linux_SambaAdminUsersForShareInstance
-  	    (const Linux_SambaAdminUsersForShareInstance& original);
-  	   
-       Linux_SambaAdminUsersForShareInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaAdminUsersForShareInstance();
        
-       Linux_SambaAdminUsersForShareInstance& operator=
-  	    (const Linux_SambaAdminUsersForShareInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaAdminUsersForShareInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaAdminUsersForShareInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaAdminUsersForShareInstanceName& val);        
-       const Linux_SambaAdminUsersForShareInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaAdminUsersForShareInstance();
+    Linux_SambaAdminUsersForShareInstance(
+      const Linux_SambaAdminUsersForShareInstance& anInstance);
+    Linux_SambaAdminUsersForShareInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaAdminUsersForShareInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaAdminUsersForShareInstance& original);
-       void reset();
+    Linux_SambaAdminUsersForShareInstance& operator=(
+      const Linux_SambaAdminUsersForShareInstance& anInstance);
        
-       Linux_SambaAdminUsersForShareInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaAdminUsersForShareInstanceName& anInstanceName);        
+    const Linux_SambaAdminUsersForShareInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaAdminUsersForShareInstanceEnumerationElement{
-  	Linux_SambaAdminUsersForShareInstance* m_elementP;
-  	Linux_SambaAdminUsersForShareInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaAdminUsersForShareInstanceEnumerationElement();
-  	~Linux_SambaAdminUsersForShareInstanceEnumerationElement();  	
+  struct Linux_SambaAdminUsersForShareInstanceEnumerationElement {
+
+    Linux_SambaAdminUsersForShareInstance* m_elementP;
+    Linux_SambaAdminUsersForShareInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaAdminUsersForShareInstanceEnumerationElement();
+    ~Linux_SambaAdminUsersForShareInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaAdminUsersForShareInstanceEnumeration {
-  	private:
-  	  Linux_SambaAdminUsersForShareInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaAdminUsersForShareInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaAdminUsersForShareInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaAdminUsersForShareInstanceEnumeration();
-  	  
-  	  Linux_SambaAdminUsersForShareInstanceEnumeration(
-  	   const Linux_SambaAdminUsersForShareInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaAdminUsersForShareInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaAdminUsersForShareInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaAdminUsersForShareInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaAdminUsersForShareInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaAdminUsersForShareInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaAdminUsersForShareInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaAdminUsersForShareInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaAdminUsersForShareInstanceEnumeration();
+    Linux_SambaAdminUsersForShareInstanceEnumeration(
+      const Linux_SambaAdminUsersForShareInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaAdminUsersForShareInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaAdminUsersForShareInstance& getNext();
+    int getSize() const;
+    const Linux_SambaAdminUsersForShareInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaAdminUsersForShareInstance& anInstance);
+
+  };
+
+}
+
+#endif

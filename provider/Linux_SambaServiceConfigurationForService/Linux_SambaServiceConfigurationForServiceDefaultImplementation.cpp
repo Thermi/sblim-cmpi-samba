@@ -1,203 +1,308 @@
-/**
- *  Linux_SambaServiceConfigurationForServiceDefaultImplementation.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaServiceConfigurationForServiceDefaultImplementation.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaServiceConfigurationForServiceDefaultImplementation.h"
+#include "Linux_SambaServiceConfigurationForServiceRepositoryInstance.h"
 #include <iostream>
-
-using namespace std;
 
 namespace genProvider {
 
   /* intrinsic methods */
-  void Linux_SambaServiceConfigurationForServiceDefaultImplementation::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& instnames){
-   	cout<<"enumInstances not supported for Linux_SambaServiceConfigurationForService"<<endl;
+  //----------------------------------------------------------------------------	
+  void
+  Linux_SambaServiceConfigurationForServiceDefaultImplementation::enumInstanceNames(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& anInstanceNameEnumeration) {
+
+#ifdef DEBUG
+   	std::cout << "enumInstanceNames not supported for Linux_SambaServiceConfigurationForService" << std::endl;
+#endif   	
+
    	throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "enumInstances not implemented for Linux_SambaServiceConfigurationForService");   
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "enumInstanceEnumeration",
+   	  "Linux_SambaServiceConfigurationForService");   
+
   }
-  	
-  void Linux_SambaServiceConfigurationForServiceDefaultImplementation::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& instances){
-    
-    cout<<"Using default enumInstances implementation for Linux_SambaServiceConfigurationForService"<<endl;
-    cout<<"Let}s get the instanceNames"<<endl;
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaServiceConfigurationForServiceDefaultImplementation::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& anInstanceEnumeration) {
+
+#ifdef DEBUG
+    std::cout << "Using default enumInstances implementation for Linux_SambaServiceConfigurationForService" << std::endl;
+    std::cout << "Let's get the instanceNames" << std::endl;
+#endif    
+
     Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration namesEnumeration;
-    enumInstanceNames(ctx, mbp,nsp,namesEnumeration);
-    cout<<"Getting each instance"<<endl;
-    while(namesEnumeration.hasNext()){
-      Linux_SambaServiceConfigurationForServiceInstanceName name=
-    	  namesEnumeration.getNext();
-    	cout<<"Getting an instance for instanceName"<<endl;
-    	Linux_SambaServiceConfigurationForServiceManualInstance instance=
-    	  getInstance(ctx, mbp, properties, name);
-    	cout<<"adding instance to enum"<<endl;
-    	instances.addElement(instance);
-    	cout<<"Added!"<<endl;
-    };
+    enumInstanceNames(aContext,aBroker,aNameSpaceP,namesEnumeration);
+
+#ifdef DEBUG
+    std::cout << "Getting each instance" << std::endl;
+#endif    
+    
+    while (namesEnumeration.hasNext()) {
+    
+      Linux_SambaServiceConfigurationForServiceInstanceName instanceName = namesEnumeration.getNext();
+    
+      Linux_SambaServiceConfigurationForServiceRepositoryInstance repositoryInstance;
+
+      // try to fetch repository instance
+      try {
+        Linux_SambaServiceConfigurationForServiceInstanceName repositoryInstanceName(instanceName);
+        repositoryInstanceName.setNamespace("IBMShadow/cimv2");
+        CmpiObjectPath repositoryCmpiObjectPath = repositoryInstanceName.getObjectPath();
+        CmpiBroker cmpiBroker(aBroker);
+        CmpiInstance repositoryCmpiInstance = cmpiBroker.getInstance(
+            aContext,
+            repositoryCmpiObjectPath,
+            aPropertiesPP);
+        Linux_SambaServiceConfigurationForServiceRepositoryInstance localRepositoryInstance(
+      	  repositoryCmpiInstance,
+          "IBMShadow/cimv2");
+        repositoryInstance = localRepositoryInstance;
+      } catch (const CmpiStatus& rc) { }                             
+    
+#ifdef DEBUG
+    	std::cout << "Getting an instance for instanceName" << std::endl;
+#endif
+    	
+    	Linux_SambaServiceConfigurationForServiceManualInstance instance = getInstance(
+    	  aContext,
+    	  aBroker,
+    	  aPropertiesPP,
+    	  instanceName);
+
+      // add the static data
+
+
+#ifdef DEBUG
+    	std::cout << "adding instance to enum" << std::endl;
+#endif
+    	
+    	anInstanceEnumeration.addElement(instance);
+
+#ifdef DEBUG
+    	std::cout << "Added!" << std::endl;
+#endif
+    	
+    }
+
   }
-  	
+
+  //----------------------------------------------------------------------------	
   Linux_SambaServiceConfigurationForServiceManualInstance 
-   Linux_SambaServiceConfigurationForServiceDefaultImplementation::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaServiceConfigurationForServiceInstanceName&){
-    cout<<"getInstance not supported for Linux_SambaServiceConfigurationForService"<<endl;
+  Linux_SambaServiceConfigurationForServiceDefaultImplementation::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceConfigurationForServiceInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+    std::cout << "getInstance not supported for Linux_SambaServiceConfigurationForService" << std::endl;
+#endif
+    	
+
     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "getInstance not implemented for Linux_SambaServiceConfigurationForService");
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "getInstance",
+   	  "Linux_SambaServiceConfigurationForService");
+
   }
   	
-  void Linux_SambaServiceConfigurationForServiceDefaultImplementation::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaServiceConfigurationForServiceManualInstance&){
-   	cout<<"setInstance not supported for Linux_SambaServiceConfigurationForService"<<endl;
-     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "setInstance not implemented for Linux_SambaServiceConfigurationForService");
-  }
-  	
-  void Linux_SambaServiceConfigurationForServiceDefaultImplementation::
-   createInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaServiceConfigurationForServiceManualInstance&){
-   	cout<<"createInstance not supported for Linux_SambaServiceConfigurationForService"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "createInstance not implemented for Linux_SambaServiceConfigurationForService");
-  }
-  	
-  void Linux_SambaServiceConfigurationForServiceDefaultImplementation::
-   deleteInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaServiceConfigurationForServiceInstanceName&){
-   	cout<<"deleteInstance not supported for Linux_SambaServiceConfigurationForService"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "deleteInstance not implemented for Linux_SambaServiceConfigurationForService");
-  }
-	
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaServiceConfigurationForServiceDefaultImplementation::setInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceConfigurationForServiceManualInstance& aManualInstance) {
   
-    /* Association Interface */
-
-    void Linux_SambaServiceConfigurationForServiceDefaultImplementation::
-     referencesConfiguration( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& instances){
-      throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "getConfigurationReferences between Linux_SambaServiceConfiguration and Linux_SambaService not implemented for Linux_SambaServiceConfigurationForService");
-    }
-
-    void Linux_SambaServiceConfigurationForServiceDefaultImplementation::
-     referencesElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceConfigurationInstanceName& sourceInst,
-     Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& instances){
-      throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "getElementReferences between Linux_SambaServiceConfiguration and Linux_SambaService not implemented for Linux_SambaServiceConfigurationForService");
-    }
-
-    void Linux_SambaServiceConfigurationForServiceDefaultImplementation::
-     associatorsConfiguration( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaServiceConfigurationInstanceEnumeration& instances){
-      
-      std::cout<<"Linux_SambaServiceConfigurationForService : associatorsLinux_SambaServiceConfiguration() ... returns one instance"<<std::endl;
-      
-      Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration enumeration;
-      
-      referencesConfiguration(ctx, mbp, sourceInst.getNamespace(), 
-       properties, sourceInst, enumeration);
-
-      Linux_SambaServiceConfigurationExternal external(mbp, ctx);
-
-      while(enumeration.hasNext()) {
-        const Linux_SambaServiceConfigurationForServiceManualInstance instance =
-	     enumeration.getNext();
-	     
-        const Linux_SambaServiceConfigurationForServiceInstanceName instanceName = 
-         instance.getInstanceName();
-         
-        const Linux_SambaServiceConfigurationInstanceName Configuration = 
-         instanceName.getConfiguration();
-         
-        Linux_SambaServiceConfigurationInstance inst = external.getInstance(properties,Configuration);
-        
-        instances.addElement(inst);
-      }
-    }
-
-    void Linux_SambaServiceConfigurationForServiceDefaultImplementation::
-     associatorsElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceConfigurationInstanceName& sourceInst,
-     Linux_SambaServiceInstanceEnumeration& instances){
-     
-      std::cout<<"Linux_SambaServiceConfigurationForService : associatorsLinux_SambaService() ... returns one instance"<<std::endl;
-      
-      Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration enumeration;
-      
-      referencesElement(ctx, mbp, sourceInst.getNamespace(), 
-       properties, sourceInst, enumeration);
-
-      Linux_SambaServiceExternal external(mbp, ctx);
-
-      while(enumeration.hasNext()) {
-        const Linux_SambaServiceConfigurationForServiceManualInstance instance =
-	     enumeration.getNext();
-	     
-        const Linux_SambaServiceConfigurationForServiceInstanceName instanceName = 
-         instance.getInstanceName();
-         
-        const Linux_SambaServiceInstanceName Element = 
-         instanceName.getElement();
-         
-        Linux_SambaServiceInstance inst = external.getInstance(properties,Element);
-        
-        instances.addElement(inst);
-      }
-    }
-
+#ifdef DEBUG
+    std::cout << "setInstance not supported for Linux_SambaServiceConfigurationForService" << std::endl;
+#endif
+    	
    
-  /* extrinsic methods */
-	
-}
+    throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "setInstance",
+   	  "Linux_SambaServiceConfigurationForService");
+   	 
+  }
+  	
+  //----------------------------------------------------------------------------	
+  Linux_SambaServiceConfigurationForServiceInstanceName  
+  Linux_SambaServiceConfigurationForServiceDefaultImplementation::createInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaServiceConfigurationForServiceManualInstance& aManualInstance) {
 
+#ifdef DEBUG
+   	std::cout << "createInstance not supported for Linux_SambaServiceConfigurationForService" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+   	 CmpiErrorFormater::METHOD_NOT_FOUND,
+   	 "createInstance",
+   	 "Linux_SambaServiceConfigurationForService");
+
+  }
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaServiceConfigurationForServiceDefaultImplementation::deleteInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaServiceConfigurationForServiceInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+   	std::cout << "deleteInstance not supported for Linux_SambaServiceConfigurationForService" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "deleteInstance",
+      "Linux_SambaServiceConfigurationForService");
+
+  }
+
+  
+  // Association Interface
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceDefaultImplementation::referencesConfiguration( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceInstanceName& aSourceInstance,
+    Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "References(Configuration)",
+      "Linux_SambaServiceConfigurationForService");
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceDefaultImplementation::referencesElement( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceConfigurationInstanceName& aSourceInstance,
+    Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "References(Element)",
+      "Linux_SambaServiceConfigurationForService");
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceDefaultImplementation::associatorsConfiguration(
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceInstanceName& aSourceInstance,
+    Linux_SambaServiceConfigurationInstanceEnumeration& anInstanceEnumeration) {
+      
+#ifdef DEBUG
+    std::cout<<"Linux_SambaServiceConfigurationForService : associatorsLinux_SambaServiceConfiguration() ... returns one instance"<<std::endl;
+#endif    
+      
+    Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration manualInstanceEnumeration;
+      
+    referencesConfiguration(
+      aContext,
+      aBroker,
+      aSourceInstance.getNamespace(), 
+      aPropertiesPP,
+      aSourceInstance,
+      manualInstanceEnumeration);
+
+    Linux_SambaServiceConfigurationExternal external(aBroker,aContext);
+
+    while (manualInstanceEnumeration.hasNext()) {
+      const Linux_SambaServiceConfigurationForServiceManualInstance manualInstance = manualInstanceEnumeration.getNext();
+      const Linux_SambaServiceConfigurationForServiceInstanceName instanceName = manualInstance.getInstanceName();
+      const Linux_SambaServiceConfigurationInstanceName Configuration = instanceName.getConfiguration();
+      Linux_SambaServiceConfigurationInstance instance = external.getInstance(aPropertiesPP,Configuration);
+      anInstanceEnumeration.addElement(instance);
+    }
+  
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceDefaultImplementation::associatorsElement( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceConfigurationInstanceName& aSourceInstance,
+    Linux_SambaServiceInstanceEnumeration& anInstanceEnumeration) {
+     
+#ifdef DEBUG
+    std::cout << "Linux_SambaServiceConfigurationForService : associatorsLinux_SambaService() ... returns one instance" << std::endl;
+#endif    
+      
+    Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration manualInstanceEnumeration;
+      
+    referencesElement(
+      aContext,
+      aBroker,
+      aSourceInstance.getNamespace(), 
+      aPropertiesPP,
+      aSourceInstance,
+      manualInstanceEnumeration);
+
+    Linux_SambaServiceExternal external(aBroker,aContext);
+
+    while(manualInstanceEnumeration.hasNext()) {
+      const Linux_SambaServiceConfigurationForServiceManualInstance manualInstance = manualInstanceEnumeration.getNext();
+      const Linux_SambaServiceConfigurationForServiceInstanceName instanceName = manualInstance.getInstanceName();
+      const Linux_SambaServiceInstanceName Element = instanceName.getElement();
+      Linux_SambaServiceInstance instance = external.getInstance(aPropertiesPP,Element);
+      anInstanceEnumeration.addElement(instance);
+    }
+
+  }
+
+  /* extrinsic methods */
+  
+
+}

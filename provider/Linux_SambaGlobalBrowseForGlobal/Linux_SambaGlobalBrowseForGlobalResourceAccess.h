@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaGlobalBrowseForGlobalResourceAccess.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalBrowseForGlobalResourceAccess.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGlobalBrowseForGlobalResourceAccess_h
 #define Linux_SambaGlobalBrowseForGlobalResourceAccess_h
 
@@ -31,8 +34,6 @@
 #include "Linux_SambaGlobalBrowseOptionsExternal.h"
 #include "Linux_SambaGlobalOptionsExternal.h"
 #include "Linux_SambaGlobalBrowseForGlobalDefaultImplementation.h"
-#include "smt_smb_ra_support.h"
-#include "smt_smb_defaultvalues.h"
 
 
 namespace genProvider {
@@ -41,84 +42,108 @@ namespace genProvider {
    public Linux_SambaGlobalBrowseForGlobalDefaultImplementation {
   	
     public:
-    /*Linux_SambaGlobalBrowseForGlobalResourceAccess();*/    
+    /*
+    Linux_SambaGlobalBrowseForGlobalResourceAccess();
+    */    
     virtual ~Linux_SambaGlobalBrowseForGlobalResourceAccess() ;
     
     /* intrinsic methods */
-    /*virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaGlobalBrowseForGlobalInstanceNameEnumeration& instnames);*/
+    /*
+    virtual void enumInstanceNames(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaGlobalBrowseForGlobalInstanceNameEnumeration& anInstanceNameEnumeration);
+    */
   	
-    /*virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& instances);*/
+    /*
+    virtual void enumInstances(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+  	  Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& aManualInstanceEnumeration);
+  	*/
   	
-    /*virtual Linux_SambaGlobalBrowseForGlobalManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalBrowseForGlobalInstanceName&);*/
+    /*
+    virtual Linux_SambaGlobalBrowseForGlobalManualInstance getInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalBrowseForGlobalInstanceName& anInstanceName);
+    */
   	
-    /*virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalBrowseForGlobalManualInstance&);*/
+    /*
+    virtual void setInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalBrowseForGlobalManualInstance& aManualInstance);
+    */
   	
-    /*virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaGlobalBrowseForGlobalManualInstance&);*/
+    /*
+    virtual Linux_SambaGlobalBrowseForGlobalInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaGlobalBrowseForGlobalManualInstance& aManualInstance);
+    */
   	
-    /*virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaGlobalBrowseForGlobalInstanceName&);*/
+    /*
+    virtual void deleteInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaGlobalBrowseForGlobalInstanceName& anInstanceName);
+    */
 	
     
     /* Association Interface */
 
+
     virtual void referencesSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& aManualInstanceEnumeration);
+
+
 
     virtual void referencesManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalBrowseOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalBrowseOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& aManualInstanceEnumeration);
+
+
 
     virtual void associatorsSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalBrowseOptionsInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaGlobalBrowseOptionsInstanceEnumeration& anInstanceEnumeration);
+
+
 
     virtual void associatorsManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalBrowseOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalOptionsInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalBrowseOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration);
+
 
    
+    
     /* extrinsic methods */
+    
 	
   };
+  
 }
 #endif
-

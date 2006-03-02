@@ -1,106 +1,201 @@
-/**
- *  Linux_SambaShareSecurityOptionsDefaultImplementation.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaShareSecurityOptionsDefaultImplementation.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaShareSecurityOptionsDefaultImplementation.h"
+#include "Linux_SambaShareSecurityOptionsRepositoryInstance.h"
 #include <iostream>
-
-using namespace std;
 
 namespace genProvider {
 
   /* intrinsic methods */
-  void Linux_SambaShareSecurityOptionsDefaultImplementation::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaShareSecurityOptionsInstanceNameEnumeration& instnames){
-   	cout<<"enumInstances not supported for Linux_SambaShareSecurityOptions"<<endl;
-   	throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "enumInstances not implemented for Linux_SambaShareSecurityOptions");   
-  }
-  	
-  void Linux_SambaShareSecurityOptionsDefaultImplementation::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaShareSecurityOptionsManualInstanceEnumeration& instances){
-    
-    cout<<"Using default enumInstances implementation for Linux_SambaShareSecurityOptions"<<endl;
-    cout<<"Let}s get the instanceNames"<<endl;
-    Linux_SambaShareSecurityOptionsInstanceNameEnumeration namesEnumeration;
-    enumInstanceNames(ctx, mbp,nsp,namesEnumeration);
-    cout<<"Getting each instance"<<endl;
-    while(namesEnumeration.hasNext()){
-      Linux_SambaShareSecurityOptionsInstanceName name=
-    	  namesEnumeration.getNext();
-    	cout<<"Getting an instance for instanceName"<<endl;
-    	Linux_SambaShareSecurityOptionsManualInstance instance=
-    	  getInstance(ctx, mbp, properties, name);
-    	cout<<"adding instance to enum"<<endl;
-    	instances.addElement(instance);
-    	cout<<"Added!"<<endl;
-    };
-  }
-  	
-  Linux_SambaShareSecurityOptionsManualInstance 
-   Linux_SambaShareSecurityOptionsDefaultImplementation::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareSecurityOptionsInstanceName&){
-    cout<<"getInstance not supported for Linux_SambaShareSecurityOptions"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "getInstance not implemented for Linux_SambaShareSecurityOptions");
-  }
-  	
-  void Linux_SambaShareSecurityOptionsDefaultImplementation::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareSecurityOptionsManualInstance&){
-   	cout<<"setInstance not supported for Linux_SambaShareSecurityOptions"<<endl;
-     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "setInstance not implemented for Linux_SambaShareSecurityOptions");
-  }
-  	
-  void Linux_SambaShareSecurityOptionsDefaultImplementation::
-   createInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareSecurityOptionsManualInstance&){
-   	cout<<"createInstance not supported for Linux_SambaShareSecurityOptions"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "createInstance not implemented for Linux_SambaShareSecurityOptions");
-  }
-  	
-  void Linux_SambaShareSecurityOptionsDefaultImplementation::
-   deleteInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareSecurityOptionsInstanceName&){
-   	cout<<"deleteInstance not supported for Linux_SambaShareSecurityOptions"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "deleteInstance not implemented for Linux_SambaShareSecurityOptions");
-  }
-	
-  
-  /* extrinsic methods */
-	
-}
+  //----------------------------------------------------------------------------	
+  void
+  Linux_SambaShareSecurityOptionsDefaultImplementation::enumInstanceNames(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    Linux_SambaShareSecurityOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
 
+#ifdef DEBUG
+   	std::cout << "enumInstanceNames not supported for Linux_SambaShareSecurityOptions" << std::endl;
+#endif   	
+
+   	throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "enumInstanceEnumeration",
+   	  "Linux_SambaShareSecurityOptions");   
+
+  }
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaShareSecurityOptionsDefaultImplementation::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaShareSecurityOptionsManualInstanceEnumeration& anInstanceEnumeration) {
+
+#ifdef DEBUG
+    std::cout << "Using default enumInstances implementation for Linux_SambaShareSecurityOptions" << std::endl;
+    std::cout << "Let's get the instanceNames" << std::endl;
+#endif    
+
+    Linux_SambaShareSecurityOptionsInstanceNameEnumeration namesEnumeration;
+    enumInstanceNames(aContext,aBroker,aNameSpaceP,namesEnumeration);
+
+#ifdef DEBUG
+    std::cout << "Getting each instance" << std::endl;
+#endif    
+    
+    while (namesEnumeration.hasNext()) {
+    
+      Linux_SambaShareSecurityOptionsInstanceName instanceName = namesEnumeration.getNext();
+    
+      Linux_SambaShareSecurityOptionsRepositoryInstance repositoryInstance;
+
+      // try to fetch repository instance
+      try {
+        Linux_SambaShareSecurityOptionsInstanceName repositoryInstanceName(instanceName);
+        repositoryInstanceName.setNamespace("IBMShadow/cimv2");
+        CmpiObjectPath repositoryCmpiObjectPath = repositoryInstanceName.getObjectPath();
+        CmpiBroker cmpiBroker(aBroker);
+        CmpiInstance repositoryCmpiInstance = cmpiBroker.getInstance(
+            aContext,
+            repositoryCmpiObjectPath,
+            aPropertiesPP);
+        Linux_SambaShareSecurityOptionsRepositoryInstance localRepositoryInstance(
+      	  repositoryCmpiInstance,
+          "IBMShadow/cimv2");
+        repositoryInstance = localRepositoryInstance;
+      } catch (const CmpiStatus& rc) { }                             
+    
+#ifdef DEBUG
+    	std::cout << "Getting an instance for instanceName" << std::endl;
+#endif
+    	
+    	Linux_SambaShareSecurityOptionsManualInstance instance = getInstance(
+    	  aContext,
+    	  aBroker,
+    	  aPropertiesPP,
+    	  instanceName);
+
+      // add the static data
+
+
+#ifdef DEBUG
+    	std::cout << "adding instance to enum" << std::endl;
+#endif
+    	
+    	anInstanceEnumeration.addElement(instance);
+
+#ifdef DEBUG
+    	std::cout << "Added!" << std::endl;
+#endif
+    	
+    }
+
+  }
+
+  //----------------------------------------------------------------------------	
+  Linux_SambaShareSecurityOptionsManualInstance 
+  Linux_SambaShareSecurityOptionsDefaultImplementation::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaShareSecurityOptionsInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+    std::cout << "getInstance not supported for Linux_SambaShareSecurityOptions" << std::endl;
+#endif
+    	
+
+    throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "getInstance",
+   	  "Linux_SambaShareSecurityOptions");
+
+  }
+  	
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaShareSecurityOptionsDefaultImplementation::setInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaShareSecurityOptionsManualInstance& aManualInstance) {
+  
+#ifdef DEBUG
+    std::cout << "setInstance not supported for Linux_SambaShareSecurityOptions" << std::endl;
+#endif
+    	
+   
+    throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "setInstance",
+   	  "Linux_SambaShareSecurityOptions");
+   	 
+  }
+  	
+  //----------------------------------------------------------------------------	
+  Linux_SambaShareSecurityOptionsInstanceName  
+  Linux_SambaShareSecurityOptionsDefaultImplementation::createInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareSecurityOptionsManualInstance& aManualInstance) {
+
+#ifdef DEBUG
+   	std::cout << "createInstance not supported for Linux_SambaShareSecurityOptions" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+   	 CmpiErrorFormater::METHOD_NOT_FOUND,
+   	 "createInstance",
+   	 "Linux_SambaShareSecurityOptions");
+
+  }
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaShareSecurityOptionsDefaultImplementation::deleteInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareSecurityOptionsInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+   	std::cout << "deleteInstance not supported for Linux_SambaShareSecurityOptions" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "deleteInstance",
+      "Linux_SambaShareSecurityOptions");
+
+  }
+
+  
+
+  /* extrinsic methods */
+  
+
+}

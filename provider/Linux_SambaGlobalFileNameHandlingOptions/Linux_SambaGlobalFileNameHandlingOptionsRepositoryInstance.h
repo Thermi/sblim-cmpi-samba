@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance_h
 #define Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaGlobalFileNameHandlingOptionsInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance {
-  public:
-       Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance();
-  	
-       Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance
-  	    (const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& original);
-  	   
-       Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance();
        
-       Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& operator=
-  	    (const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaGlobalFileNameHandlingOptionsInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& val);        
-       const Linux_SambaGlobalFileNameHandlingOptionsInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance();
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance(
+      const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& anInstance);
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& original);
-       void reset();
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& operator=(
+      const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& anInstance);
        
-       Linux_SambaGlobalFileNameHandlingOptionsInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& anInstanceName);        
+    const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement{
-  	Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance* m_elementP;
-  	Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement();
-  	~Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement();  	
+  struct Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement {
+
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance* m_elementP;
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement();
+    ~Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumeration {
-  	private:
-  	  Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumeration();
-  	  
-  	  Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumeration(
-  	   const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumeration();
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumeration(
+      const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& getNext();
+    int getSize() const;
+    const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& anInstance);
+
+  };
+
+}
+
+#endif

@@ -1,233 +1,321 @@
-/**
- *  Linux_SambaAdminUsersForShareExternal.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaAdminUsersForShareExternal.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaAdminUsersForShareExternal.h"
 
-namespace genProvider{
+namespace genProvider {
 	
+	//----------------------------------------------------------------------------
   Linux_SambaAdminUsersForShareExternal::Linux_SambaAdminUsersForShareExternal(
-   const CmpiBroker& brkr, const CmpiContext& ctx ) 
-   : broker(brkr), context(ctx) {};
+    const CmpiBroker& aBroker,
+    const CmpiContext& aContext ) 
+    : m_broker(aBroker),
+    m_context(aContext) { }
    
-  Linux_SambaAdminUsersForShareExternal::
-   ~Linux_SambaAdminUsersForShareExternal(){};
+	//----------------------------------------------------------------------------
+  Linux_SambaAdminUsersForShareExternal::~Linux_SambaAdminUsersForShareExternal() { }
     
-  void Linux_SambaAdminUsersForShareExternal::enumInstanceNames(
-   const char *nsp,
-   Linux_SambaAdminUsersForShareInstanceNameEnumeration& instnames) {
+	//----------------------------------------------------------------------------
+  void 
+  Linux_SambaAdminUsersForShareExternal::enumInstanceNames(
+    const char *aNameSpaceP,
+    Linux_SambaAdminUsersForShareInstanceNameEnumeration& anInstanceNameEnumeration) {
 
-    CmpiObjectPath op(nsp,"Linux_SambaAdminUsersForShare");
-    CmpiEnumeration en=broker.enumInstanceNames(context,op);
-    while(en.hasNext()) {
-      CmpiObjectPath opi = en.getNext();
-      Linux_SambaAdminUsersForShareInstanceName iname(opi);
-      instnames.addElement(iname);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaAdminUsersForShare");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstanceNames(m_context,classObjectPath);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath objectPath = cmpiEnumeration.getNext();
+      Linux_SambaAdminUsersForShareInstanceName instanceName(objectPath);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
-  };
+  
+  }
   	  
-  void Linux_SambaAdminUsersForShareExternal::enumInstances(
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaAdminUsersForShareInstanceEnumeration& instances) {
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaAdminUsersForShareExternal::enumInstances(
+    const char *aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaAdminUsersForShareInstanceEnumeration& anInstanceEnumeration) {
    		
-    CmpiObjectPath op(nsp,"Linux_SambaAdminUsersForShare");
-    CmpiEnumeration en=broker.enumInstances(context,op,properties);
-    while(en.hasNext()) {
-      CmpiInstance inst = en.getNext();
-      Linux_SambaAdminUsersForShareInstance instance(inst,nsp);
-      instances.addElement(instance);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaAdminUsersForShare");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstances(m_context,classObjectPath,aPropertiesPP);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaAdminUsersForShareInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
     }
-  };
+  
+  }
   	  
+	//----------------------------------------------------------------------------
   Linux_SambaAdminUsersForShareInstance
-   Linux_SambaAdminUsersForShareExternal::getInstance(
-   const char* *properties,
-   const Linux_SambaAdminUsersForShareInstanceName& instanceName) {
+  Linux_SambaAdminUsersForShareExternal::getInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaAdminUsersForShareInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=broker.getInstance(context,op,properties);
-    return Linux_SambaAdminUsersForShareInstance(inst,instanceName.getNamespace());
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    CmpiInstance cmpiInstance = 
+      m_broker.getInstance(m_context,cmpiObjectPath,aPropertiesPP);
+  
+    return Linux_SambaAdminUsersForShareInstance(cmpiInstance,anInstanceName.getNamespace());
+  
   }
       
-  void Linux_SambaAdminUsersForShareExternal::setInstance(
-   const char* *properties,
-   const Linux_SambaAdminUsersForShareInstance& instance){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaAdminUsersForShareExternal::setInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaAdminUsersForShareInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.setInstance(context,op,inst,properties);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    m_broker.setInstance(m_context,cmpiObjectPath,cmpiInstance,aPropertiesPP);
+  
   }
       
-  void Linux_SambaAdminUsersForShareExternal::createInstance(
-   const Linux_SambaAdminUsersForShareInstance& instance){
+	//----------------------------------------------------------------------------
+  Linux_SambaAdminUsersForShareInstanceName
+  Linux_SambaAdminUsersForShareExternal::createInstance(
+    const Linux_SambaAdminUsersForShareInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.createInstance(context,op,inst);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    return Linux_SambaAdminUsersForShareInstanceName(
+		m_broker.createInstance(m_context,cmpiObjectPath,cmpiInstance));
+
   }
   
-  void Linux_SambaAdminUsersForShareExternal::deleteInstance(
-   const Linux_SambaAdminUsersForShareInstanceName& instanceName){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaAdminUsersForShareExternal::deleteInstance(
+    const Linux_SambaAdminUsersForShareInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    broker.deleteInstance(context,op);
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    m_broker.deleteInstance(m_context,cmpiObjectPath);
+  
   }
-      
-    //Reference calls
-    
-    void Linux_SambaAdminUsersForShareExternal::
-     referencesPartComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaAdminUsersForShareInstanceEnumeration& instances){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.references
-       (context, op, "Linux_SambaShareOptions",
-        "PartComponent", properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaAdminUsersForShareInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
-    }
+  // Reference calls
 
-    void Linux_SambaAdminUsersForShareExternal::
-     referenceNamesPartComponent( 
-     const char *nsp,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaAdminUsersForShareInstanceNameEnumeration& instanceNames){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaAdminUsersForShareExternal::referencesPartComponent( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaAdminUsersForShareInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.referenceNames
-       (context, op, "Linux_SambaShareOptions",
-        "PartComponent");
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaAdminUsersForShareInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
 
-    void Linux_SambaAdminUsersForShareExternal::
-     referencesGroupComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaAdminUsersForShareInstanceEnumeration& instances){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.references
-       (context, op, "Linux_SambaUser",
-        "GroupComponent", properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaAdminUsersForShareInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
-    }
+    CmpiEnumeration cmpiEnumeration = m_broker.references(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaShareOptions",
+      "PartComponent",
+      aPropertiesPP);
 
-    void Linux_SambaAdminUsersForShareExternal::
-     referenceNamesGroupComponent( 
-     const char *nsp,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaAdminUsersForShareInstanceNameEnumeration& instanceNames){
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaAdminUsersForShareInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaAdminUsersForShareExternal::referenceNamesPartComponent( 
+    const char* aNameSpaceP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaAdminUsersForShareInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.referenceNames
-       (context, op, "Linux_SambaUser",
-        "GroupComponent");
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaAdminUsersForShareInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.referenceNames(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaShareOptions",
+      "PartComponent");
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaAdminUsersForShareInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaAdminUsersForShareExternal::referencesGroupComponent( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaAdminUsersForShareInstanceEnumeration& anInstanceEnumeration){
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+  
+    CmpiEnumeration cmpiEnumeration = m_broker.references(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaUser",
+      "GroupComponent",
+      aPropertiesPP);
+
+    while(cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaAdminUsersForShareInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaAdminUsersForShareExternal::referenceNamesGroupComponent( 
+    const char* aNameSpaceP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaAdminUsersForShareInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+    CmpiEnumeration cmpiEnumeration = m_broker.referenceNames(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaUser",
+      "GroupComponent");
+   
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaAdminUsersForShareInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
+    }      
+
+  }
      
-    //Associator calls
-
-    void Linux_SambaAdminUsersForShareExternal::
-     associatorsPartComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaUserInstanceEnumeration& instances){
+  //Associator calls
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaAdminUsersForShareExternal::associatorsPartComponent( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associators
-       (context,op,0,0,0,0,properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaUserInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associators(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0,
+      aPropertiesPP);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaUserInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
     }
 
-    void Linux_SambaAdminUsersForShareExternal::
-     associatorNamesPartComponent( 
-     const char *nsp,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaUserInstanceNameEnumeration& instanceNames){
+  }
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaAdminUsersForShareExternal::associatorNamesPartComponent( 
+    const char* aNameSpaceP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaUserInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associatorNames
-       (context,op,0,0,0,0);
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaUserInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associatorNames(
+     m_context,
+     cmpiObjectPath,
+     0,
+     0,
+     0,
+     0);
+
+    while(cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaUserInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
 
-    void Linux_SambaAdminUsersForShareExternal::
-     associatorsGroupComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaShareOptionsInstanceEnumeration& instances){
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaAdminUsersForShareExternal::associatorsGroupComponent( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaShareOptionsInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associators
-       (context,op,0,0,0,0,properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaShareOptionsInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associators(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0,
+      aPropertiesPP);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaShareOptionsInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaAdminUsersForShareExternal::associatorNamesGroupComponent( 
+    const char* aNameSpaceP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaShareOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associatorNames(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaShareOptionsInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
 
-    void Linux_SambaAdminUsersForShareExternal::
-     associatorNamesGroupComponent( 
-     const char *nsp,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaShareOptionsInstanceNameEnumeration& instanceNames){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associatorNames
-       (context,op,0,0,0,0);
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaShareOptionsInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
-
+  }
       
 }

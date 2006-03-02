@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaPrinterSecurityForGlobalInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterSecurityForGlobalInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaPrinterSecurityForGlobalInstance_h
 #define Linux_SambaPrinterSecurityForGlobalInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,91 +33,88 @@
 
 #include "Linux_SambaPrinterSecurityForGlobalInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaPrinterSecurityForGlobalInstance {
-  public:
-       Linux_SambaPrinterSecurityForGlobalInstance();
-  	
-       Linux_SambaPrinterSecurityForGlobalInstance
-  	    (const Linux_SambaPrinterSecurityForGlobalInstance& original);
-  	   
-       Linux_SambaPrinterSecurityForGlobalInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaPrinterSecurityForGlobalInstance();
        
-       Linux_SambaPrinterSecurityForGlobalInstance& operator=
-  	    (const Linux_SambaPrinterSecurityForGlobalInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaPrinterSecurityForGlobalInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaPrinterSecurityForGlobalInstanceName m_instanceName;
+    CMPIUint16 m_IsCurrent;
+    CMPIUint16 m_IsDefault;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaPrinterSecurityForGlobalInstanceName& val);        
-       const Linux_SambaPrinterSecurityForGlobalInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+      unsigned int IsCurrent:1;
+      unsigned int IsDefault:1;
 
-       unsigned int isIsCurrentSet() const;
-       void setIsCurrent(const CMPIUint16 val);
-       const CMPIUint16 getIsCurrent() const;
+    } isSet;
+    
+    public:
+    Linux_SambaPrinterSecurityForGlobalInstance();
+    Linux_SambaPrinterSecurityForGlobalInstance(
+      const Linux_SambaPrinterSecurityForGlobalInstance& anInstance);
+    Linux_SambaPrinterSecurityForGlobalInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaPrinterSecurityForGlobalInstance();
+       
+    Linux_SambaPrinterSecurityForGlobalInstance& operator=(
+      const Linux_SambaPrinterSecurityForGlobalInstance& anInstance);
+       
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaPrinterSecurityForGlobalInstanceName& anInstanceName);        
+    const Linux_SambaPrinterSecurityForGlobalInstanceName& getInstanceName() const;
 
-       unsigned int isIsDefaultSet() const;
-       void setIsDefault(const CMPIUint16 val);
-       const CMPIUint16 getIsDefault() const;
-       
-  private:
-       void init();
-       void init(const Linux_SambaPrinterSecurityForGlobalInstance& original);
-       void reset();
-       
-       Linux_SambaPrinterSecurityForGlobalInstanceName m_instanceName;
-       CMPIUint16 m_IsCurrent;
-       CMPIUint16 m_IsDefault;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-         unsigned int IsCurrent:1;
-         unsigned int IsDefault:1;
-       } isSet;
+    unsigned int isIsCurrentSet() const;
+    void setIsCurrent(const CMPIUint16 aValue);
+    const CMPIUint16 getIsCurrent() const;
+
+    unsigned int isIsDefaultSet() const;
+    void setIsDefault(const CMPIUint16 aValue);
+    const CMPIUint16 getIsDefault() const;
+
+
   };
   
-  
-  struct Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement{
-  	Linux_SambaPrinterSecurityForGlobalInstance* m_elementP;
-  	Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement();
-  	~Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement();  	
+  struct Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement {
+
+    Linux_SambaPrinterSecurityForGlobalInstance* m_elementP;
+    Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement();
+    ~Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaPrinterSecurityForGlobalInstanceEnumeration {
-  	private:
-  	  Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaPrinterSecurityForGlobalInstanceEnumeration();
-  	  
-  	  Linux_SambaPrinterSecurityForGlobalInstanceEnumeration(
-  	   const Linux_SambaPrinterSecurityForGlobalInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaPrinterSecurityForGlobalInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaPrinterSecurityForGlobalInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaPrinterSecurityForGlobalInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaPrinterSecurityForGlobalInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaPrinterSecurityForGlobalInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaPrinterSecurityForGlobalInstanceEnumeration();
+    Linux_SambaPrinterSecurityForGlobalInstanceEnumeration(
+      const Linux_SambaPrinterSecurityForGlobalInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaPrinterSecurityForGlobalInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaPrinterSecurityForGlobalInstance& getNext();
+    int getSize() const;
+    const Linux_SambaPrinterSecurityForGlobalInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaPrinterSecurityForGlobalInstance& anInstance);
+
+  };
+
+}
+
+#endif

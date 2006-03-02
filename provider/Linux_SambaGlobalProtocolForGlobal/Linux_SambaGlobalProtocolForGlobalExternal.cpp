@@ -1,233 +1,321 @@
-/**
- *  Linux_SambaGlobalProtocolForGlobalExternal.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaGlobalProtocolForGlobalExternal.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaGlobalProtocolForGlobalExternal.h"
 
-namespace genProvider{
+namespace genProvider {
 	
+	//----------------------------------------------------------------------------
   Linux_SambaGlobalProtocolForGlobalExternal::Linux_SambaGlobalProtocolForGlobalExternal(
-   const CmpiBroker& brkr, const CmpiContext& ctx ) 
-   : broker(brkr), context(ctx) {};
+    const CmpiBroker& aBroker,
+    const CmpiContext& aContext ) 
+    : m_broker(aBroker),
+    m_context(aContext) { }
    
-  Linux_SambaGlobalProtocolForGlobalExternal::
-   ~Linux_SambaGlobalProtocolForGlobalExternal(){};
+	//----------------------------------------------------------------------------
+  Linux_SambaGlobalProtocolForGlobalExternal::~Linux_SambaGlobalProtocolForGlobalExternal() { }
     
-  void Linux_SambaGlobalProtocolForGlobalExternal::enumInstanceNames(
-   const char *nsp,
-   Linux_SambaGlobalProtocolForGlobalInstanceNameEnumeration& instnames) {
+	//----------------------------------------------------------------------------
+  void 
+  Linux_SambaGlobalProtocolForGlobalExternal::enumInstanceNames(
+    const char *aNameSpaceP,
+    Linux_SambaGlobalProtocolForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
 
-    CmpiObjectPath op(nsp,"Linux_SambaGlobalProtocolForGlobal");
-    CmpiEnumeration en=broker.enumInstanceNames(context,op);
-    while(en.hasNext()) {
-      CmpiObjectPath opi = en.getNext();
-      Linux_SambaGlobalProtocolForGlobalInstanceName iname(opi);
-      instnames.addElement(iname);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaGlobalProtocolForGlobal");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstanceNames(m_context,classObjectPath);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath objectPath = cmpiEnumeration.getNext();
+      Linux_SambaGlobalProtocolForGlobalInstanceName instanceName(objectPath);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
-  };
+  
+  }
   	  
-  void Linux_SambaGlobalProtocolForGlobalExternal::enumInstances(
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaGlobalProtocolForGlobalInstanceEnumeration& instances) {
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalProtocolForGlobalExternal::enumInstances(
+    const char *aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaGlobalProtocolForGlobalInstanceEnumeration& anInstanceEnumeration) {
    		
-    CmpiObjectPath op(nsp,"Linux_SambaGlobalProtocolForGlobal");
-    CmpiEnumeration en=broker.enumInstances(context,op,properties);
-    while(en.hasNext()) {
-      CmpiInstance inst = en.getNext();
-      Linux_SambaGlobalProtocolForGlobalInstance instance(inst,nsp);
-      instances.addElement(instance);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaGlobalProtocolForGlobal");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstances(m_context,classObjectPath,aPropertiesPP);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalProtocolForGlobalInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
     }
-  };
+  
+  }
   	  
+	//----------------------------------------------------------------------------
   Linux_SambaGlobalProtocolForGlobalInstance
-   Linux_SambaGlobalProtocolForGlobalExternal::getInstance(
-   const char* *properties,
-   const Linux_SambaGlobalProtocolForGlobalInstanceName& instanceName) {
+  Linux_SambaGlobalProtocolForGlobalExternal::getInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalProtocolForGlobalInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=broker.getInstance(context,op,properties);
-    return Linux_SambaGlobalProtocolForGlobalInstance(inst,instanceName.getNamespace());
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    CmpiInstance cmpiInstance = 
+      m_broker.getInstance(m_context,cmpiObjectPath,aPropertiesPP);
+  
+    return Linux_SambaGlobalProtocolForGlobalInstance(cmpiInstance,anInstanceName.getNamespace());
+  
   }
       
-  void Linux_SambaGlobalProtocolForGlobalExternal::setInstance(
-   const char* *properties,
-   const Linux_SambaGlobalProtocolForGlobalInstance& instance){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalProtocolForGlobalExternal::setInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalProtocolForGlobalInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.setInstance(context,op,inst,properties);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    m_broker.setInstance(m_context,cmpiObjectPath,cmpiInstance,aPropertiesPP);
+  
   }
       
-  void Linux_SambaGlobalProtocolForGlobalExternal::createInstance(
-   const Linux_SambaGlobalProtocolForGlobalInstance& instance){
+	//----------------------------------------------------------------------------
+  Linux_SambaGlobalProtocolForGlobalInstanceName
+  Linux_SambaGlobalProtocolForGlobalExternal::createInstance(
+    const Linux_SambaGlobalProtocolForGlobalInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.createInstance(context,op,inst);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    return Linux_SambaGlobalProtocolForGlobalInstanceName(
+		m_broker.createInstance(m_context,cmpiObjectPath,cmpiInstance));
+
   }
   
-  void Linux_SambaGlobalProtocolForGlobalExternal::deleteInstance(
-   const Linux_SambaGlobalProtocolForGlobalInstanceName& instanceName){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalProtocolForGlobalExternal::deleteInstance(
+    const Linux_SambaGlobalProtocolForGlobalInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    broker.deleteInstance(context,op);
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    m_broker.deleteInstance(m_context,cmpiObjectPath);
+  
   }
-      
-    //Reference calls
-    
-    void Linux_SambaGlobalProtocolForGlobalExternal::
-     referencesSettingData( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalProtocolForGlobalInstanceEnumeration& instances){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.references
-       (context, op, "Linux_SambaGlobalOptions",
-        "SettingData", properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaGlobalProtocolForGlobalInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
-    }
+  // Reference calls
 
-    void Linux_SambaGlobalProtocolForGlobalExternal::
-     referenceNamesSettingData( 
-     const char *nsp,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalProtocolForGlobalInstanceNameEnumeration& instanceNames){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalProtocolForGlobalExternal::referencesSettingData( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalProtocolForGlobalInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.referenceNames
-       (context, op, "Linux_SambaGlobalOptions",
-        "SettingData");
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaGlobalProtocolForGlobalInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
 
-    void Linux_SambaGlobalProtocolForGlobalExternal::
-     referencesManagedElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalProtocolOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalProtocolForGlobalInstanceEnumeration& instances){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.references
-       (context, op, "Linux_SambaGlobalProtocolOptions",
-        "ManagedElement", properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaGlobalProtocolForGlobalInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
-    }
+    CmpiEnumeration cmpiEnumeration = m_broker.references(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaGlobalOptions",
+      "SettingData",
+      aPropertiesPP);
 
-    void Linux_SambaGlobalProtocolForGlobalExternal::
-     referenceNamesManagedElement( 
-     const char *nsp,
-     const Linux_SambaGlobalProtocolOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalProtocolForGlobalInstanceNameEnumeration& instanceNames){
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalProtocolForGlobalInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalProtocolForGlobalExternal::referenceNamesSettingData( 
+    const char* aNameSpaceP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalProtocolForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.referenceNames
-       (context, op, "Linux_SambaGlobalProtocolOptions",
-        "ManagedElement");
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaGlobalProtocolForGlobalInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.referenceNames(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaGlobalOptions",
+      "SettingData");
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaGlobalProtocolForGlobalInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalProtocolForGlobalExternal::referencesManagedElement( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalProtocolOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalProtocolForGlobalInstanceEnumeration& anInstanceEnumeration){
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+  
+    CmpiEnumeration cmpiEnumeration = m_broker.references(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaGlobalProtocolOptions",
+      "ManagedElement",
+      aPropertiesPP);
+
+    while(cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalProtocolForGlobalInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalProtocolForGlobalExternal::referenceNamesManagedElement( 
+    const char* aNameSpaceP,
+    const Linux_SambaGlobalProtocolOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalProtocolForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+    CmpiEnumeration cmpiEnumeration = m_broker.referenceNames(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaGlobalProtocolOptions",
+      "ManagedElement");
+   
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaGlobalProtocolForGlobalInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
+    }      
+
+  }
      
-    //Associator calls
-
-    void Linux_SambaGlobalProtocolForGlobalExternal::
-     associatorsSettingData( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalProtocolOptionsInstanceEnumeration& instances){
+  //Associator calls
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalProtocolForGlobalExternal::associatorsSettingData( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalProtocolOptionsInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associators
-       (context,op,0,0,0,0,properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaGlobalProtocolOptionsInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associators(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0,
+      aPropertiesPP);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalProtocolOptionsInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
     }
 
-    void Linux_SambaGlobalProtocolForGlobalExternal::
-     associatorNamesSettingData( 
-     const char *nsp,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalProtocolOptionsInstanceNameEnumeration& instanceNames){
+  }
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaGlobalProtocolForGlobalExternal::associatorNamesSettingData( 
+    const char* aNameSpaceP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalProtocolOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associatorNames
-       (context,op,0,0,0,0);
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaGlobalProtocolOptionsInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associatorNames(
+     m_context,
+     cmpiObjectPath,
+     0,
+     0,
+     0,
+     0);
+
+    while(cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaGlobalProtocolOptionsInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
 
-    void Linux_SambaGlobalProtocolForGlobalExternal::
-     associatorsManagedElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalProtocolOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalOptionsInstanceEnumeration& instances){
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalProtocolForGlobalExternal::associatorsManagedElement( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalProtocolOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associators
-       (context,op,0,0,0,0,properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaGlobalOptionsInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associators(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0,
+      aPropertiesPP);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalOptionsInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalProtocolForGlobalExternal::associatorNamesManagedElement( 
+    const char* aNameSpaceP,
+    const Linux_SambaGlobalProtocolOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associatorNames(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaGlobalOptionsInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
 
-    void Linux_SambaGlobalProtocolForGlobalExternal::
-     associatorNamesManagedElement( 
-     const char *nsp,
-     const Linux_SambaGlobalProtocolOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalOptionsInstanceNameEnumeration& instanceNames){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associatorNames
-       (context,op,0,0,0,0);
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaGlobalOptionsInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
-
+  }
       
 }

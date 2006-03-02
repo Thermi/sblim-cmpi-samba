@@ -1,181 +1,224 @@
-/**
- *  Linux_SambaServiceConfigurationForServiceResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaServiceConfigurationForServiceResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaServiceConfigurationForServiceResourceAccess.h"
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-    //Linux_SambaServiceConfigurationForServiceResourceAccess::Linux_SambaServiceConfigurationForServiceResourceAccess();
-    Linux_SambaServiceConfigurationForServiceResourceAccess::~Linux_SambaServiceConfigurationForServiceResourceAccess() { };
+  //----------------------------------------------------------------------------
+  //Linux_SambaServiceConfigurationForServiceResourceAccess::Linux_SambaServiceConfigurationForServiceResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaServiceConfigurationForServiceResourceAccess::~Linux_SambaServiceConfigurationForServiceResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    /*
-    void Linux_SambaServiceConfigurationForServiceResourceAccess::enumInstanceNames(
-     const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-     Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& instnames){
+  // intrinsic methods
+  /*
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationForServiceResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      int numInstanceNames=1;
-      for(int i=0;i<numInstanceNames;i++){
+    int instanceNameN = 1;
+    for (int x=0; x < instanceNameN; ++x) {
       
-        //place here the code retrieving your instanceName
+      //place here the code retrieving your instanceName
       
-        Linux_SambaServiceConfigurationForServiceInstanceName instanceName;
-        
-      }      
-    }
-    */
-  	/*
-    void Linux_SambaServiceConfigurationForServiceResourceAccess::enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& instances){};
-  	*/
-  	/*
-    Linux_SambaServiceConfigurationForServiceManualInstance 
-     Linux_SambaServiceConfigurationForServiceResourceAccess::getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaServiceConfigurationForServiceInstanceName&){
-      Linux_SambaServiceConfigurationForServiceManualInstance instance;
+      Linux_SambaServiceConfigurationForServiceInstanceName instanceName;
       
-    }
-  	*/
-  	/*
-    void Linux_SambaServiceConfigurationForServiceResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaServiceConfigurationForServiceManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaServiceConfigurationForServiceResourceAccess::createInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaServiceConfigurationForServiceManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaServiceConfigurationForServiceResourceAccess::deleteInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaServiceConfigurationForServiceInstanceName&){};
+    }      
+  
+  }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaServiceConfigurationForServiceResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     const char** aPropertiesPP,
+  	 Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& aManualInstanceEnumeration) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaServiceConfigurationForServiceManualInstance 
+  Linux_SambaServiceConfigurationForServiceResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceConfigurationForServiceInstanceName& anInstanceName) {
+
+    Linux_SambaServiceConfigurationForServiceManualInstance manualInstance;
+
+  
+  }
+  */
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaServiceConfigurationForServiceResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaServiceConfigurationForServiceManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaServiceConfigurationForServiceInstanceName
+  Linux_SambaServiceConfigurationForServiceResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaServiceConfigurationForServiceManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaServiceConfigurationForServiceResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaServiceConfigurationForServiceInstanceName& anInstanceName) { }
 	*/
-    
-    /* Association Interface */
-    
-    void Linux_SambaServiceConfigurationForServiceResourceAccess::referencesConfiguration( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceInstanceName& sourceInst,
-     Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& instEnum) 
-    {
-      
-      Linux_SambaServiceConfigurationForServiceManualInstance manualInstance;
-      Linux_SambaServiceConfigurationForServiceInstanceName instName;
-      instName.setNamespace(nsp);
-      instName.setElement(sourceInst);
-      
-      Linux_SambaServiceConfigurationInstanceName confInstName;
-      confInstName.setNamespace(nsp);
-      confInstName.setName(DEFAULT_SERVICE_NAME);
-      
-      instName.setConfiguration(confInstName);
+	
 
-      manualInstance.setInstanceName(instName);
-      instEnum.addElement(manualInstance);
-    };
-    
-    
-    void Linux_SambaServiceConfigurationForServiceResourceAccess::referencesElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaServiceConfigurationInstanceName& sourceInst,
-     Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& instEnum) 
-    { 
-      Linux_SambaServiceConfigurationForServiceManualInstance manualInstance;
-      Linux_SambaServiceConfigurationForServiceInstanceName instName;
-      instName.setNamespace(nsp);
-      instName.setConfiguration(sourceInst);
-      
-      Linux_SambaServiceInstanceName elemInstanceName;
-      elemInstanceName.setNamespace(nsp);
-      elemInstanceName.setName(DEFAULT_SERVICE_NAME);
-      elemInstanceName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
-      elemInstanceName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
-      elemInstanceName.setSystemName(DEFAULT_SYSTEM_NAME);
-      
-      instName.setElement(elemInstanceName);
+  // Association Interface
+  //----------------------------------------------------------------------------
 
-      manualInstance.setInstanceName(instName);
-      instEnum.addElement(manualInstance);
-    };
+  void Linux_SambaServiceConfigurationForServiceResourceAccess::referencesConfiguration( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceInstanceName& aSourceInstanceName,
+    Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& aManualInstanceEnumeration) {
     
+    Linux_SambaServiceConfigurationForServiceManualInstance manualInstance;
+    Linux_SambaServiceConfigurationForServiceInstanceName instName;
+    instName.setNamespace(aNameSpaceP);
+    instName.setElement(aSourceInstanceName);
     
+    Linux_SambaServiceConfigurationInstanceName confInstName;
+    confInstName.setNamespace(aNameSpaceP);
+    confInstName.setName(DEFAULT_SERVICE_NAME);
+    
+    instName.setConfiguration(confInstName);
+    
+    manualInstance.setInstanceName(instName);
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void Linux_SambaServiceConfigurationForServiceResourceAccess::referencesElement( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceConfigurationInstanceName& aSourceInstanceName,
+    Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    Linux_SambaServiceConfigurationForServiceManualInstance manualInstance;
+    Linux_SambaServiceConfigurationForServiceInstanceName instName;
+    instName.setNamespace(aNameSpaceP);
+    instName.setConfiguration(aSourceInstanceName);
+    
+    Linux_SambaServiceInstanceName elemInstanceName;
+    elemInstanceName.setNamespace(aNameSpaceP);
+    elemInstanceName.setName(DEFAULT_SERVICE_NAME);
+    elemInstanceName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
+    elemInstanceName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
+    elemInstanceName.setSystemName(DEFAULT_SYSTEM_NAME);
+    
+    instName.setElement(elemInstanceName);
+    
+    manualInstance.setInstanceName(instName);
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaServiceConfigurationForServiceResourceAccess::associatorsConfiguration( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaServiceInstanceName& sourceInst,
-   Linux_SambaServiceConfigurationInstanceEnumeration& instEnum) 
-  { 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceInstanceName& aSourceInstanceName,
+    Linux_SambaServiceConfigurationInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaServiceConfigurationInstance instance;
     
     Linux_SambaServiceConfigurationInstanceName elemInstanceName;
-    elemInstanceName.setNamespace(nsp);
+    elemInstanceName.setNamespace(aNameSpaceP);
     elemInstanceName.setName(DEFAULT_SERVICE_NAME);
     
     instance.setInstanceName(elemInstanceName);
     instance.setConfigurationFile(DEFAULT_CONFIGURATION_FILE);
-
-    instEnum.addElement(instance);
-  };
-  
     
+    anInstanceEnumeration.addElement(instance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaServiceConfigurationForServiceResourceAccess::associatorsElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaServiceConfigurationInstanceName& sourceInst,
-   Linux_SambaServiceInstanceEnumeration& instEnum) 
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceConfigurationInstanceName& aSourceInstanceName,
+    Linux_SambaServiceInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaServiceInstance instance;
     
     Linux_SambaServiceInstanceName elemInstanceName;
-    elemInstanceName.setNamespace(nsp);
+    elemInstanceName.setNamespace(aNameSpaceP);
     elemInstanceName.setName(DEFAULT_SERVICE_NAME);
     elemInstanceName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
     elemInstanceName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
     elemInstanceName.setSystemName(DEFAULT_SYSTEM_NAME);
     
     instance.setInstanceName(elemInstanceName);
-      
-    instEnum.addElement(instance);
-  };
     
-  /* extrinsic methods */
+    anInstanceEnumeration.addElement(instance);
+  }
+
+   
   
+  // extrinsic methods
+
+	
 }
 
 

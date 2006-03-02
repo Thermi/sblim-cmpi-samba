@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaGlobalOptionsInstanceName.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalOptionsInstanceName.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGlobalOptionsInstanceName_h
 #define Linux_SambaGlobalOptionsInstanceName_h
 
@@ -29,58 +32,61 @@
 #include "ArrayConverter.h"
 #include "CmpiErrorFormater.h"
 
+
 namespace genProvider {
 
   class Linux_SambaGlobalOptionsInstanceName {
-  public:
-       Linux_SambaGlobalOptionsInstanceName();
+       
+    private:
+    void init();
+    void init(const Linux_SambaGlobalOptionsInstanceName& anInstanceName);
+    void reset();
+       
+    const char* m_CIMClassNameP;
+    const char* m_nameSpaceP;
+    
+    const char* m_InstanceID;
+    const char* m_Name;
+       
+    struct isSetType{
+      unsigned int m_nameSpaceP:1;
+      unsigned int InstanceID:1;
+      unsigned int Name:1;
+
+    } isSet;
+  
+    public:
+    Linux_SambaGlobalOptionsInstanceName();
   	
-       Linux_SambaGlobalOptionsInstanceName
-  	    (const Linux_SambaGlobalOptionsInstanceName& original);
+    Linux_SambaGlobalOptionsInstanceName(const Linux_SambaGlobalOptionsInstanceName& anInstanceName);
   	   
-       Linux_SambaGlobalOptionsInstanceName
-        (const CmpiObjectPath& path);
+    Linux_SambaGlobalOptionsInstanceName(const CmpiObjectPath& path);
   	 
-       ~Linux_SambaGlobalOptionsInstanceName();
+    ~Linux_SambaGlobalOptionsInstanceName();
        
-       Linux_SambaGlobalOptionsInstanceName& operator=
-  	    (const Linux_SambaGlobalOptionsInstanceName& original);
+    Linux_SambaGlobalOptionsInstanceName& operator=(const Linux_SambaGlobalOptionsInstanceName& anInstanceName);
        
-       CmpiObjectPath getObjectPath() const;
+    CmpiObjectPath getObjectPath() const;
        
-       void fillKeys(CmpiInstance& cmpiInstance) const;
+    void fillKeys(CmpiInstance& cmpiInstance) const;
        
-       unsigned int isNameSpaceSet() const;
-       void setNamespace(const char * val, int makeCopy = 1);
-       const char * getNamespace() const;
+    unsigned int isNameSpaceSet() const;
+    void setNamespace(const char* aNameSpaceP, int aCopyFlag = 1);
+    const char* getNamespace() const;
+    
+    unsigned int isInstanceIDSet() const;
+    void setInstanceID(const char* aValue, int aCopyFlag = 1);
+    const char* getInstanceID() const;
 
-       unsigned int isInstanceIDSet() const;
-       void setInstanceID(const char* val, int makeCopy = 1);
-       const char* getInstanceID() const;
+    unsigned int isNameSet() const;
+    void setName(const char* aValue, int aCopyFlag = 1);
+    const char* getName() const;
 
-       unsigned int isNameSet() const;
-       void setName(const char* val, int makeCopy = 1);
-       const char* getName() const;
-       
-  private:
-       void init();
-       void init(const Linux_SambaGlobalOptionsInstanceName& original);
-       void reset();
-       
-       const char* m_CIMClassNameP;
-       const char* m_namespace;
-       const char* m_InstanceID;
-       const char* m_Name;
-       
-       struct isSetType{
-       	 unsigned int m_namespace:1;
-         unsigned int InstanceID:1;
-         unsigned int Name:1;
-       } isSet;
+
   };
   
-  
-  struct Linux_SambaGlobalOptionsInstanceNameEnumerationElement{
+  //****************************************************************************
+  struct Linux_SambaGlobalOptionsInstanceNameEnumerationElement {
   	Linux_SambaGlobalOptionsInstanceName* m_elementP;
   	Linux_SambaGlobalOptionsInstanceNameEnumerationElement* m_nextP;
   	
@@ -88,38 +94,40 @@ namespace genProvider {
   	~Linux_SambaGlobalOptionsInstanceNameEnumerationElement();  	
   };
   
-
+  //****************************************************************************
   class Linux_SambaGlobalOptionsInstanceNameEnumeration {
+  
   	private:
-  	  Linux_SambaGlobalOptionsInstanceNameEnumerationElement* firstElementP;
-  	  Linux_SambaGlobalOptionsInstanceNameEnumerationElement* currentElementP;
-  	  Linux_SambaGlobalOptionsInstanceNameEnumerationElement* endElementP;
+    Linux_SambaGlobalOptionsInstanceNameEnumerationElement* m_firstElementP;
+  	Linux_SambaGlobalOptionsInstanceNameEnumerationElement* m_currentElementP;
+  	Linux_SambaGlobalOptionsInstanceNameEnumerationElement* m_endElementP;
   	
   	public:
-  	  Linux_SambaGlobalOptionsInstanceNameEnumeration();
+    Linux_SambaGlobalOptionsInstanceNameEnumeration();
   	  
-  	  Linux_SambaGlobalOptionsInstanceNameEnumeration(const CmpiArray& arr);
+    Linux_SambaGlobalOptionsInstanceNameEnumeration(const CmpiArray& arr);
   	  
-  	  Linux_SambaGlobalOptionsInstanceNameEnumeration(
-  	   const Linux_SambaGlobalOptionsInstanceNameEnumeration& original);
+    Linux_SambaGlobalOptionsInstanceNameEnumeration(const Linux_SambaGlobalOptionsInstanceNameEnumeration& anInstanceNameEnumeration);
+  	   
+    ~Linux_SambaGlobalOptionsInstanceNameEnumeration();
   	  
-  	  ~Linux_SambaGlobalOptionsInstanceNameEnumeration();
+    void reset();
   	  
-  	  void reset();
+    bool hasNext() const;
   	  
-  	  bool hasNext() const;
+    const Linux_SambaGlobalOptionsInstanceName& getNext();
   	  
-  	  const Linux_SambaGlobalOptionsInstanceName& getNext();
+    int getSize() const;
   	  
-  	  int getSize() const;
+    const Linux_SambaGlobalOptionsInstanceName& getElement(int anIndex) const;  	  
   	  
-  	  const Linux_SambaGlobalOptionsInstanceName& getElement(int pos) const;  	  
+    //no copy of the element is done
+    void addElement(const Linux_SambaGlobalOptionsInstanceName& anInstanceName);
   	  
-  	  //no copy of the element is done
-  	  void addElement(const Linux_SambaGlobalOptionsInstanceName& elementP);
-  	  
-  	  operator CmpiArray() const;
+    operator CmpiArray() const;
+
   };
+
 }
 #endif
 

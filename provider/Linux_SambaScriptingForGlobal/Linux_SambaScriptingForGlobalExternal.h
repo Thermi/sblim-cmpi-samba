@@ -1,112 +1,121 @@
-/**
- *  Linux_SambaScriptingForGlobalExternal.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaScriptingForGlobalExternal.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaScriptingForGlobalExternal_h
 #define Linux_SambaScriptingForGlobalExternal_h
+
 
 #include "Linux_SambaScriptingForGlobalInstance.h"
 #include "Linux_SambaGlobalOptionsInstance.h"
 #include "Linux_SambaScriptingOptionsInstance.h"
+
 #include "CmpiBroker.h"
 
 namespace genProvider {
 
   class Linux_SambaScriptingForGlobalExternal {
+    
+    private:
+    CmpiBroker m_broker;
+    CmpiContext m_context;
   	
     public:
     Linux_SambaScriptingForGlobalExternal(
-     const CmpiBroker& brkr, const CmpiContext& ctx);
+      const CmpiBroker& aBroker,
+      const CmpiContext& aContext);
     virtual ~Linux_SambaScriptingForGlobalExternal();
     
     virtual void enumInstanceNames(
-     const char *nsp,
-     Linux_SambaScriptingForGlobalInstanceNameEnumeration&);
+      const char *aNameSpaceP,
+      Linux_SambaScriptingForGlobalInstanceNameEnumeration& anInstanceNameEnumeration);
      
     virtual void enumInstances(
-     const char *nsp,
-     const char* *properties,
-     Linux_SambaScriptingForGlobalInstanceEnumeration&);
+      const char *anNameSpaceP,
+      const char** aPropertiesPP,
+      Linux_SambaScriptingForGlobalInstanceEnumeration& anInstanceEnumeration);
      
     virtual Linux_SambaScriptingForGlobalInstance getInstance(
-     const char* *properties,
-     const Linux_SambaScriptingForGlobalInstanceName&);
+      const char** aPropertiesPP,
+      const Linux_SambaScriptingForGlobalInstanceName& anInstanceName);
      
     virtual void setInstance(
-     const char* *properties,
-     const Linux_SambaScriptingForGlobalInstance&);
+      const char** aPropertiesPP,
+      const Linux_SambaScriptingForGlobalInstance& anInstance);
      
-    virtual void createInstance(
-     const Linux_SambaScriptingForGlobalInstance&);
+    virtual Linux_SambaScriptingForGlobalInstanceName createInstance(
+      const Linux_SambaScriptingForGlobalInstance& anInstance);
      
     virtual void deleteInstance(
-     const Linux_SambaScriptingForGlobalInstanceName&);
-    
+      const Linux_SambaScriptingForGlobalInstanceName& anInstanceName);
+
+
     //association calls
-    
+
     void referencesManagedElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaScriptingOptionsInstanceName& sourceInst,
-     Linux_SambaScriptingForGlobalInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaScriptingOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaScriptingForGlobalInstanceEnumeration& anInstanceEnumeration);
 
     void referenceNamesManagedElement( 
-     const char *nsp,
-     const Linux_SambaScriptingOptionsInstanceName& sourceInst,
-     Linux_SambaScriptingForGlobalInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaScriptingOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaScriptingForGlobalInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void referencesSettingData( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaScriptingForGlobalInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaScriptingForGlobalInstanceEnumeration& anInstanceEnumeration);
 
     void referenceNamesSettingData( 
-     const char *nsp,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaScriptingForGlobalInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaScriptingForGlobalInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void associatorsManagedElement( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaScriptingOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalOptionsInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaScriptingOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration);
 
     void associatorNamesManagedElement( 
-     const char *nsp,
-     const Linux_SambaScriptingOptionsInstanceName& sourceInst,
-     Linux_SambaGlobalOptionsInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaScriptingOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaGlobalOptionsInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void associatorsSettingData( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaScriptingOptionsInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaScriptingOptionsInstanceEnumeration& anInstanceEnumeration);
 
     void associatorNamesSettingData( 
-     const char *nsp,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaScriptingOptionsInstanceNameEnumeration& instanceNames);
-
-     
-    private:
-    CmpiBroker  broker;
-    CmpiContext context;
+      const char *aNameSpaceP,
+      const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaScriptingOptionsInstanceNameEnumeration& anInstanceNameEnumeration); 
+  
   };
+
 }
+
 #endif

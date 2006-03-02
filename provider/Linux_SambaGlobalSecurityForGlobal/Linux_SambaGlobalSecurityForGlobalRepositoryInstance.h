@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaGlobalSecurityForGlobalRepositoryInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalSecurityForGlobalRepositoryInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGlobalSecurityForGlobalRepositoryInstance_h
 #define Linux_SambaGlobalSecurityForGlobalRepositoryInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaGlobalSecurityForGlobalInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaGlobalSecurityForGlobalRepositoryInstance {
-  public:
-       Linux_SambaGlobalSecurityForGlobalRepositoryInstance();
-  	
-       Linux_SambaGlobalSecurityForGlobalRepositoryInstance
-  	    (const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& original);
-  	   
-       Linux_SambaGlobalSecurityForGlobalRepositoryInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaGlobalSecurityForGlobalRepositoryInstance();
        
-       Linux_SambaGlobalSecurityForGlobalRepositoryInstance& operator=
-  	    (const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaGlobalSecurityForGlobalInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaGlobalSecurityForGlobalInstanceName& val);        
-       const Linux_SambaGlobalSecurityForGlobalInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstance();
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstance(
+      const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& anInstance);
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaGlobalSecurityForGlobalRepositoryInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& original);
-       void reset();
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstance& operator=(
+      const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& anInstance);
        
-       Linux_SambaGlobalSecurityForGlobalInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaGlobalSecurityForGlobalInstanceName& anInstanceName);        
+    const Linux_SambaGlobalSecurityForGlobalInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement{
-  	Linux_SambaGlobalSecurityForGlobalRepositoryInstance* m_elementP;
-  	Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement();
-  	~Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement();  	
+  struct Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement {
+
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstance* m_elementP;
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement();
+    ~Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration {
-  	private:
-  	  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration();
-  	  
-  	  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration(
-  	   const Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration();
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration(
+      const Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& getNext();
+    int getSize() const;
+    const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& anInstance);
+
+  };
+
+}
+
+#endif

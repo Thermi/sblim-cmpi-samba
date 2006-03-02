@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaShareFileNameHandlingForShareResourceAccess.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareFileNameHandlingForShareResourceAccess.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaShareFileNameHandlingForShareResourceAccess_h
 #define Linux_SambaShareFileNameHandlingForShareResourceAccess_h
 
@@ -31,8 +34,7 @@
 #include "Linux_SambaShareFileNameHandlingOptionsExternal.h"
 #include "Linux_SambaShareOptionsExternal.h"
 #include "Linux_SambaShareFileNameHandlingForShareDefaultImplementation.h"
-#include "smt_smb_ra_support.h"
-#include "smt_smb_defaultvalues.h"
+
 
 namespace genProvider {
 
@@ -40,84 +42,108 @@ namespace genProvider {
    public Linux_SambaShareFileNameHandlingForShareDefaultImplementation {
   	
     public:
-    /*Linux_SambaShareFileNameHandlingForShareResourceAccess();*/    
+    /*
+    Linux_SambaShareFileNameHandlingForShareResourceAccess();
+    */    
     virtual ~Linux_SambaShareFileNameHandlingForShareResourceAccess() ;
     
     /* intrinsic methods */
-    /*virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaShareFileNameHandlingForShareInstanceNameEnumeration& instnames);*/
+    /*
+    virtual void enumInstanceNames(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaShareFileNameHandlingForShareInstanceNameEnumeration& anInstanceNameEnumeration);
+    */
   	
-    /*virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaShareFileNameHandlingForShareManualInstanceEnumeration& instances);*/
+    /*
+    virtual void enumInstances(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+  	  Linux_SambaShareFileNameHandlingForShareManualInstanceEnumeration& aManualInstanceEnumeration);
+  	*/
   	
-    /*virtual Linux_SambaShareFileNameHandlingForShareManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaShareFileNameHandlingForShareInstanceName&);*/
+    /*
+    virtual Linux_SambaShareFileNameHandlingForShareManualInstance getInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaShareFileNameHandlingForShareInstanceName& anInstanceName);
+    */
   	
-    /*virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaShareFileNameHandlingForShareManualInstance&);*/
+    /*
+    virtual void setInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaShareFileNameHandlingForShareManualInstance& aManualInstance);
+    */
   	
-    /*virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaShareFileNameHandlingForShareManualInstance&);*/
+    /*
+    virtual Linux_SambaShareFileNameHandlingForShareInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaShareFileNameHandlingForShareManualInstance& aManualInstance);
+    */
   	
+    /*
     virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaShareFileNameHandlingForShareInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaShareFileNameHandlingForShareInstanceName& anInstanceName);
+    */
 	
     
     /* Association Interface */
 
+
     virtual void referencesSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaShareFileNameHandlingForShareManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaShareFileNameHandlingForShareManualInstanceEnumeration& aManualInstanceEnumeration);
+
+
 
     virtual void referencesManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareFileNameHandlingOptionsInstanceName& sourceInst,
-     Linux_SambaShareFileNameHandlingForShareManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaShareFileNameHandlingOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaShareFileNameHandlingForShareManualInstanceEnumeration& aManualInstanceEnumeration);
+
+
 
     virtual void associatorsSettingData( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareOptionsInstanceName& sourceInst,
-     Linux_SambaShareFileNameHandlingOptionsInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaShareFileNameHandlingOptionsInstanceEnumeration& anInstanceEnumeration);
+
+
 
     virtual void associatorsManagedElement( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaShareFileNameHandlingOptionsInstanceName& sourceInst,
-     Linux_SambaShareOptionsInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaShareFileNameHandlingOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaShareOptionsInstanceEnumeration& anInstanceEnumeration);
+
 
    
+    
     /* extrinsic methods */
+    
 	
   };
+  
 }
 #endif
-

@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaGroupInstanceName.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGroupInstanceName.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGroupInstanceName.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,322 +28,376 @@
 
 namespace genProvider {
 	
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaGroupInstanceName
-  //*********************************************************
-  
-  //empty constructor
-  Linux_SambaGroupInstanceName::
-   Linux_SambaGroupInstanceName(){
+  //---------------------------------------------------------------------------- 
+  // empty constructor
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceName::Linux_SambaGroupInstanceName() {
    	init();  	
-  };
+  }
   
+  //---------------------------------------------------------------------------- 
+  // copy constructor	
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceName::Linux_SambaGroupInstanceName(
+    const Linux_SambaGroupInstanceName& anInstanceName) {
+   	init(anInstanceName);  	
+  }
   
-  //copy constructor	
-  Linux_SambaGroupInstanceName::
-   Linux_SambaGroupInstanceName
-   (const Linux_SambaGroupInstanceName& original){
-   	init(original);  	
-  };
-  
-  
-  //contructor using CmpiObjectPath
-  Linux_SambaGroupInstanceName::
-   Linux_SambaGroupInstanceName (const CmpiObjectPath& path){
+  //---------------------------------------------------------------------------- 
+  // constructor using CmpiObjectPath
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceName::Linux_SambaGroupInstanceName(
+    const CmpiObjectPath& path) {
     
     init();
     
-    m_CIMClassNameP=path.getClassName().charPtr();
+    m_CIMClassNameP = path.getClassName().charPtr();
     
-    CmpiString namespaceOP;
-    namespaceOP=path.getNameSpace();
-    setNamespace(namespaceOP.charPtr(),1);
-    
+    CmpiString namespaceP;
+    namespaceP = path.getNameSpace();
+    setNamespace(namespaceP.charPtr(),1);
+        
     CmpiString SambaGroupName = path.getKey("SambaGroupName");
     setSambaGroupName(SambaGroupName.charPtr());
+
     
   }
   
-  
-  //destructor
-  Linux_SambaGroupInstanceName::
-   ~Linux_SambaGroupInstanceName(){
+  //---------------------------------------------------------------------------- 
+  // destructor
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceName::~Linux_SambaGroupInstanceName() {
    	reset();  	  
-  };
-  
-  
-  //copy operator
-  Linux_SambaGroupInstanceName&
-   Linux_SambaGroupInstanceName::operator=
-   (const Linux_SambaGroupInstanceName& original){    
-    init(original);
-   	return *this;    
   }
   
+  //---------------------------------------------------------------------------- 
+  //copy operator
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceName&
+  Linux_SambaGroupInstanceName::operator=(
+    const Linux_SambaGroupInstanceName& anInstanceName) {    
+    
+    init(anInstanceName);
+   	return *this;    
   
+  }
+  
+  //---------------------------------------------------------------------------- 
   //returns the related CmpiObjectPath
-  CmpiObjectPath Linux_SambaGroupInstanceName::
-   getObjectPath() const{
+  //---------------------------------------------------------------------------- 
+  CmpiObjectPath 
+  Linux_SambaGroupInstanceName::getObjectPath() const {
    	
-   	CmpiObjectPath objectPath(m_namespace, m_CIMClassNameP);
+   	CmpiObjectPath objectPath(m_nameSpaceP, m_CIMClassNameP);
+   	  	objectPath.setKey(
+  	  "SambaGroupName",
+  	  CmpiData(m_SambaGroupName));
 
-  	objectPath.setKey("SambaGroupName",CmpiData(m_SambaGroupName));
   	
   	return objectPath;
   	
   }
   
-  
-  //adds the related CmpiObjectPath to an existing cmpiInstance
-  void Linux_SambaGroupInstanceName::fillKeys(CmpiInstance& cmpiInstance) const{
+  //---------------------------------------------------------------------------- 
+  // adds the related CmpiObjectPath to an existing cmpiInstance
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaGroupInstanceName::fillKeys(CmpiInstance& cmpiInstance) const {
   	
-
-  	if(isSet.SambaGroupName){
-  	  cmpiInstance.setProperty("SambaGroupName",CmpiData(m_SambaGroupName));
+  	if (isSet.SambaGroupName) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "SambaGroupName",
+  	    CmpiData(m_SambaGroupName));
   	}
+
   }
   
   
-  //NameSpace related methods
-  unsigned int Linux_SambaGroupInstanceName::
-   isNameSpaceSet() const{
-  	return isSet.m_namespace;
+  //---------------------------------------------------------------------------- 
+  // NameSpace related methods
+  //---------------------------------------------------------------------------- 
+  unsigned int 
+  Linux_SambaGroupInstanceName::isNameSpaceSet() const {
+  	return isSet.m_nameSpaceP;
   }
   
-  const char * Linux_SambaGroupInstanceName::
-   getNamespace() const {
-    if(!isSet.m_namespace)
+  //---------------------------------------------------------------------------- 
+  const char* 
+  Linux_SambaGroupInstanceName::getNamespace() const {
+    if ( ! isSet.m_nameSpaceP) {
    	  throw CmpiErrorFormater::getErrorException(
    	   CmpiErrorFormater::NOT_SET,
-   	   "NameSpace not set in Linux_SambaGroup instanceName");
-  	return m_namespace;
+   	   "NameSpace",
+   	   "Linux_SambaGroup");
+   	}
+  	return m_nameSpaceP;
   }
 
-  void Linux_SambaGroupInstanceName::
-   setNamespace(const char* val, int makeCopy){
-    if (isSet.m_namespace) {
-      delete m_namespace;
+  //---------------------------------------------------------------------------- 
+  void
+  Linux_SambaGroupInstanceName::setNamespace(
+    const char* aNameSpaceP,
+    int aCopyFlag) {
+  
+    if (isSet.m_nameSpaceP) {
+      delete m_nameSpaceP;
     }
-    if (makeCopy&&val) {
-      char* tmpval = new char[strlen(val)+1];
-      strcpy(tmpval,val);
-      m_namespace = tmpval;
+    
+    if (aCopyFlag && aNameSpaceP) {
+      char* nameSpaceP = new char[strlen(aNameSpaceP) + 1];
+      strcpy(nameSpaceP,aNameSpaceP);
+      m_nameSpaceP = nameSpaceP;
     } else {
-      m_namespace = val;
+      m_nameSpaceP = aNameSpaceP;
     }
-    isSet.m_namespace=1;
+    
+    isSet.m_nameSpaceP = 1;
   }
-       
-  //SambaGroupName related methods
-  unsigned int Linux_SambaGroupInstanceName::isSambaGroupNameSet() const{
+         
+  //----------------------------------------------------------------------------
+  // SambaGroupName related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaGroupInstanceName::isSambaGroupNameSet() const {
     return isSet.SambaGroupName;
   }
-  void  Linux_SambaGroupInstanceName::
-   setSambaGroupName(const char* val, int makeCopy){
-    if (isSet.SambaGroupName) {
-      delete []m_SambaGroupName;
-    }
-    if (makeCopy&&val) {
-      char* tmpval = new char[strlen(val)+1];
-      strcpy(tmpval,val);
-      m_SambaGroupName = tmpval;
-    } else {
-      m_SambaGroupName = val;
-    }
-    isSet.SambaGroupName=1;
-  }       
-  const char* Linux_SambaGroupInstanceName::
-   getSambaGroupName() const{
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGroupInstanceName::setSambaGroupName(
+    const char* aValueP,
+    int aCopyFlag) {
     
-    if(!isSet.SambaGroupName)
+    if (isSet.SambaGroupName) {
+      delete [] m_SambaGroupName;
+    }
+    
+    if (aCopyFlag && aValueP) {
+      char* valueP = new char[strlen(aValueP) + 1];
+      strcpy(valueP,aValueP);
+      m_SambaGroupName = valueP;
+    } else {
+      m_SambaGroupName = aValueP;
+    }
+    
+    isSet.SambaGroupName = 1;
+
+  }       
+
+  //----------------------------------------------------------------------------
+  const char*
+  Linux_SambaGroupInstanceName::getSambaGroupName() const {
+    
+    if ( ! isSet.SambaGroupName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "SambaGroupName not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "SambaGroupName",
+        "Linux_SambaGroup");
+   	}
+
+
     return m_SambaGroupName;
+
   }
 
-  
-  //set isSet variables to FALSE
-  void Linux_SambaGroupInstanceName::init(){
+
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaGroupInstanceName::init() {
   	
-  	m_CIMClassNameP="Linux_SambaGroup";
-  	isSet.m_namespace=0;    	
-    isSet.SambaGroupName=0;
+  	m_CIMClassNameP = "Linux_SambaGroup";
+  	isSet.m_nameSpaceP = 0; 
+  	    isSet.SambaGroupName = 0;
+
+  	
   }
   
-  
+  //---------------------------------------------------------------------------- 
   //copies another instance properties in this
-  void Linux_SambaGroupInstanceName::init
-   (const Linux_SambaGroupInstanceName& original){
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaGroupInstanceName::init(
+    const Linux_SambaGroupInstanceName& anOriginal) {
+   	
    	init();
    	   	
-    m_CIMClassNameP=original.m_CIMClassNameP;
-    if(original.isNameSpaceSet()){
-      setNamespace(original.getNamespace(),1);
-    }   	
-    if(original.isSambaGroupNameSet()){
-      const char* SambaGroupNameOriginal=original.getSambaGroupName();
-      setSambaGroupName(SambaGroupNameOriginal, 1);
-    }    
-  }
-  
-  //reset the instanceName data
-  void Linux_SambaGroupInstanceName::reset(){   	
-  	if (isSet.m_namespace)
-  	  delete(m_namespace);
-
-  	if (isSet.SambaGroupName)
-  	  delete(m_SambaGroupName);  	  
-  };
-  
-  
-  
-  
-  //*********************************************************
-  //Linux_SambaGroupInstanceNameEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaGroupInstanceNameEnumerationElement::
-   Linux_SambaGroupInstanceNameEnumerationElement(){
-   	
-  	m_elementP=0;
-  	m_nextP=0;
-  	  
-  };
-  
-  
-  Linux_SambaGroupInstanceNameEnumerationElement::
-   ~Linux_SambaGroupInstanceNameEnumerationElement(){
-   	
-  	if (m_elementP!=0)
-  	  delete(m_elementP);
-  	if (m_nextP!=0)
-  	  delete(m_nextP);
-  	  
-  };
-
-  
-  //*********************************************************
-  //Linux_SambaGroupInstanceNameEnumeration
-  //*********************************************************
-  
-  Linux_SambaGroupInstanceNameEnumeration::
-   Linux_SambaGroupInstanceNameEnumeration(){
-   	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
-  
-  Linux_SambaGroupInstanceNameEnumeration::
-   Linux_SambaGroupInstanceNameEnumeration(const CmpiArray& arr){
-  	
-  	firstElementP=0;
-    currentElementP=0;
-    endElementP=0;
-    
-    int size = arr.size();
-    for (int i=0; i < size; i++) {
-     addElement(Linux_SambaGroupInstanceName(arr[i]));
+    m_CIMClassNameP = anOriginal.m_CIMClassNameP;
+    if (anOriginal.isNameSpaceSet()){
+      setNamespace(anOriginal.getNamespace(),1);
     }
+       	
+    if (anOriginal.isSambaGroupNameSet()) {
+      const char* SambaGroupNameOriginal = anOriginal.getSambaGroupName();
+      setSambaGroupName(SambaGroupNameOriginal,1);
+    }
+    
+  
   }
   
-  Linux_SambaGroupInstanceNameEnumeration::
-   Linux_SambaGroupInstanceNameEnumeration(
-   const Linux_SambaGroupInstanceNameEnumeration& original){
+  //---------------------------------------------------------------------------- 
+  void
+  Linux_SambaGroupInstanceName::reset() {
+  	if (isSet.m_nameSpaceP) {
+  	  delete(m_nameSpaceP);
+  	}
+  	
+  	if (isSet.SambaGroupName) {
+  	  delete(m_SambaGroupName);
+  	}
+  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceNameEnumerationElement::Linux_SambaGroupInstanceNameEnumerationElement() {
+  	m_elementP = 0;
+  	m_nextP = 0; 
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceNameEnumerationElement::~Linux_SambaGroupInstanceNameEnumerationElement() {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+  	if (m_elementP) {
+  	  delete(m_elementP);
+  	}
+  	if (m_nextP) {
+  	  delete(m_nextP);
+  	}
+  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceNameEnumeration::Linux_SambaGroupInstanceNameEnumeration() {
+  	 m_firstElementP = 0;
+     m_currentElementP = 0;
+     m_endElementP = 0;
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceNameEnumeration::Linux_SambaGroupInstanceNameEnumeration(
+    const CmpiArray& aCmpiArray) {
+  	
+  	m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
+    
+    int size = aCmpiArray.size();
+    for (int x=0; x < size; ++x) {
+      addElement(Linux_SambaGroupInstanceName(aCmpiArray[x]));
+    }
+    
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceNameEnumeration::Linux_SambaGroupInstanceNameEnumeration(
+    const Linux_SambaGroupInstanceNameEnumeration& anInstanceNameEnumeration) {
+   	
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
-  
+    int size = anInstanceNameEnumeration.getSize();
+    for (int x=0; x < size; ++x) {
+      addElement(anInstanceNameEnumeration.getElement(x));
+    }
+
+  }
   	  
-  Linux_SambaGroupInstanceNameEnumeration::
-   ~Linux_SambaGroupInstanceNameEnumeration(){
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceNameEnumeration::~Linux_SambaGroupInstanceNameEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
-  
-  	  
-  void Linux_SambaGroupInstanceNameEnumeration::reset(){
+  }
+
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaGroupInstanceNameEnumeration::reset() {
   	
-  	currentElementP=firstElementP;
-  };
+  	m_currentElementP = m_firstElementP;
   
-  	  
-  bool Linux_SambaGroupInstanceNameEnumeration::hasNext() const{
+  }
+
+  //---------------------------------------------------------------------------- 
+  bool 
+  Linux_SambaGroupInstanceNameEnumeration::hasNext() const {
   	
-  	return (currentElementP!=0);
+  	return (m_currentElementP != 0);
   
-  };
+  }
   
-  int Linux_SambaGroupInstanceNameEnumeration::getSize() const{
+  //---------------------------------------------------------------------------- 
+  int
+  Linux_SambaGroupInstanceNameEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaGroupInstanceNameEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaGroupInstanceNameEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
-  };
   
+  }
+  
+  //---------------------------------------------------------------------------- 
   const Linux_SambaGroupInstanceName&  
-   Linux_SambaGroupInstanceNameEnumeration::getElement(int pos) const{
+   Linux_SambaGroupInstanceNameEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaGroupInstanceNameEnumerationElement* followingP=firstElementP;
+    Linux_SambaGroupInstanceNameEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x=0;
+    while (followingP && (x < anIndex) ) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
   
-  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
   const Linux_SambaGroupInstanceName&
-   Linux_SambaGroupInstanceNameEnumeration::getNext() {
+  Linux_SambaGroupInstanceNameEnumeration::getNext() {
    	
-  	 Linux_SambaGroupInstanceNameEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+  	 Linux_SambaGroupInstanceNameEnumerationElement* currentP = m_currentElementP;
+  	 m_currentElementP = m_currentElementP->m_nextP;
   	 
   	 return *(currentP->m_elementP);
-  };
-  	  
-  void Linux_SambaGroupInstanceNameEnumeration::addElement
-   (const Linux_SambaGroupInstanceName& elementP){
-   	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaGroupInstanceNameEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaGroupInstanceName(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaGroupInstanceNameEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaGroupInstanceName(elementP);
-  	}
-  };
   
-  Linux_SambaGroupInstanceNameEnumeration::operator CmpiArray() const{
-  	int size=getSize();
-   	CmpiArray arr=CmpiArray(size,CMPI_instance);
-   	for(int i=0;i<size;i++){
-   	  arr[i]=getElement(i).getObjectPath();
+  }
+  	  
+  //---------------------------------------------------------------------------- 
+  void Linux_SambaGroupInstanceNameEnumeration::addElement
+   (const Linux_SambaGroupInstanceName& anElementP){
+   	
+  	if (m_firstElementP==0) {
+  	  m_firstElementP = new Linux_SambaGroupInstanceNameEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaGroupInstanceName(anElementP);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaGroupInstanceNameEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP=new Linux_SambaGroupInstanceName(anElementP);
+  	}
+
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaGroupInstanceNameEnumeration::operator CmpiArray() const {
+  	int size = getSize();
+   	CmpiArray cmpiArray = CmpiArray(size,CMPI_instance);
+   	for (int x=0; x < size; ++x) {
+   	  cmpiArray[x]=getElement(x).getObjectPath();
    	}
-   	return arr;
-  };  
+   	return cmpiArray;
+  }
+  
 }
- 

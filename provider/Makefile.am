@@ -45,6 +45,34 @@ EXTRA_DIST =
 # Pre Build requirements need to be compiled prior anything else
 BUILT_SOURCES =
 
+AM_CFLAGS = -Wall
+
+AM_CPPFLAGS = -D_COMPILE_UNIX \
+              -DCMPI_STANDALONE \
+              -I${srcdir}/include \
+              -I$(srcdir)/../resource-access \
+              -I$(srcdir)/CIM_ConcreteJob \
+              -I$(srcdir)/Linux_SambaCommonSecurityOptions \
+              -I$(srcdir)/Linux_SambaGlobalOptions \
+              -I$(srcdir)/Linux_SambaGlobalBrowseOptions \
+              -I$(srcdir)/Linux_SambaGlobalFileNameHandlingOptions \
+              -I$(srcdir)/Linux_SambaGlobalPrintingOptions \
+              -I$(srcdir)/Linux_SambaGlobalProtocolOptions \
+              -I$(srcdir)/Linux_SambaGlobalSecurityOptions \
+              -I$(srcdir)/Linux_SambaPrinterOptions \
+              -I$(srcdir)/Linux_SambaPrinterPrintingOptions \
+              -I$(srcdir)/Linux_SambaPrinterSecurityOptions \
+              -I$(srcdir)/Linux_SambaShareOptions \
+              -I$(srcdir)/Linux_SambaShareFileNameHandlingOptions \
+              -I$(srcdir)/Linux_SambaSharePrinterBrowseOptions \
+              -I$(srcdir)/Linux_SambaSharePrinterBrowseOptions \
+              -I$(srcdir)/Linux_SambaShareProtocolOptions \
+              -I$(srcdir)/Linux_SambaShareSecurityOptions \
+              -I$(srcdir)/Linux_SambaScriptingOptions \
+              -I$(srcdir)/Linux_SambaService \
+              -I${srcdir}/Linux_SambaServiceConfiguration \
+              -I$(srcdir)/Linux_SambaGroup \
+              -I$(srcdir)/Linux_SambaUser
 
 ################################################################################
 #
@@ -67,10 +95,6 @@ libIBM_SmbProviderTooling_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb
 
-libIBM_SmbProviderTooling_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/include 
-
 
 
 ################################################################################
@@ -86,10 +110,6 @@ libLinux_SmbGeneralProviderBasic_la_LIBADD   = \
         -L../resource-access\
         -lRaToolsSmb
         
-libLinux_SmbGeneralProviderBasic_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/include 
-
 
 
 ################################################################################
@@ -184,10 +204,6 @@ libcmpiCIM_ConcreteJob_la_LIBADD = \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic
                                      
-libcmpiCIM_ConcreteJob_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/include
-
 libcmpiCIM_ConcreteJob_la_LDFLAGS = -avoid-version
 
 
@@ -219,6 +235,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaAdminUsersForGlobal/Linux_SambaAdminUsersForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaAdminUsersForGlobal/Linux_SambaAdminUsersForGlobalResourceAccess.h
 
+libcmpiLinux_SambaAdminUsersForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaUser.la
+
 libcmpiLinux_SambaAdminUsersForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -226,13 +246,6 @@ libcmpiLinux_SambaAdminUsersForGlobal_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaUser
-
-libcmpiLinux_SambaAdminUsersForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaGlobalOptions \
-		-I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaAdminUsersForGlobal_la_LDFLAGS = -avoid-version
 
@@ -265,6 +278,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaAdminUsersForShare/Linux_SambaAdminUsersForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaAdminUsersForShare/Linux_SambaAdminUsersForShareResourceAccess.h
 
+libcmpiLinux_SambaAdminUsersForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiLinux_SambaUser.la
+
 libcmpiLinux_SambaAdminUsersForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -272,13 +289,6 @@ libcmpiLinux_SambaAdminUsersForShare_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiLinux_SambaUser
-
-libcmpiLinux_SambaAdminUsersForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaShareOptions \
-		-I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaAdminUsersForShare_la_LDFLAGS = -avoid-version
 
@@ -311,6 +321,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaCommonSecurityForGlobal/Linux_SambaCommonSecurityForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaCommonSecurityForGlobal/Linux_SambaCommonSecurityForGlobalResourceAccess.h
 
+libcmpiLinux_SambaCommonSecurityForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaCommonSecurityOptions.la
+
 libcmpiLinux_SambaCommonSecurityForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -318,13 +332,6 @@ libcmpiLinux_SambaCommonSecurityForGlobal_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaCommonSecurityOptions
-
-libcmpiLinux_SambaCommonSecurityForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaGlobalOptions \
-		-I$(srcdir)/Linux_SambaCommonSecurityOptions 
 
 libcmpiLinux_SambaCommonSecurityForGlobal_la_LDFLAGS = -avoid-version
 
@@ -357,6 +364,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaCommonSecurityForPrinter/Linux_SambaCommonSecurityForPrinterRepositoryInstance.h \
         $(srcdir)/Linux_SambaCommonSecurityForPrinter/Linux_SambaCommonSecurityForPrinterResourceAccess.h
 
+libcmpiLinux_SambaCommonSecurityForPrinter_la_DEPENDENCIES = \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiLinux_SambaCommonSecurityOptions.la
+
 libcmpiLinux_SambaCommonSecurityForPrinter_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -364,13 +375,6 @@ libcmpiLinux_SambaCommonSecurityForPrinter_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiLinux_SambaCommonSecurityOptions
-
-libcmpiLinux_SambaCommonSecurityForPrinter_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaPrinterOptions \
-		-I$(srcdir)/Linux_SambaCommonSecurityOptions 
 
 libcmpiLinux_SambaCommonSecurityForPrinter_la_LDFLAGS = -avoid-version
 
@@ -403,6 +407,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaCommonSecurityForShare/Linux_SambaCommonSecurityForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaCommonSecurityForShare/Linux_SambaCommonSecurityForShareResourceAccess.h
 
+libcmpiLinux_SambaCommonSecurityForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiLinux_SambaCommonSecurityOptions.la
+
 libcmpiLinux_SambaCommonSecurityForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -410,13 +418,6 @@ libcmpiLinux_SambaCommonSecurityForShare_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiLinux_SambaCommonSecurityOptions
-
-libcmpiLinux_SambaCommonSecurityForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaShareOptions \
-		-I$(srcdir)/Linux_SambaCommonSecurityOptions 
 
 libcmpiLinux_SambaCommonSecurityForShare_la_LDFLAGS = -avoid-version
 
@@ -455,11 +456,6 @@ libcmpiLinux_SambaCommonSecurityOptions_la_LIBADD = \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic
 
-libcmpiLinux_SambaCommonSecurityOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include
-
 libcmpiLinux_SambaCommonSecurityOptions_la_LDFLAGS = -avoid-version
 
 
@@ -491,6 +487,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaForceGroupForGlobal/Linux_SambaForceGroupForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaForceGroupForGlobal/Linux_SambaForceGroupForGlobalResourceAccess.h
 
+libcmpiLinux_SambaForceGroupForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaGroup.la
+
 libcmpiLinux_SambaForceGroupForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -498,13 +498,6 @@ libcmpiLinux_SambaForceGroupForGlobal_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaGroup
-
-libcmpiLinux_SambaForceGroupForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaGlobalOptions \
-		-I$(srcdir)/Linux_SambaGroup
 
 libcmpiLinux_SambaForceGroupForGlobal_la_LDFLAGS = -avoid-version
 
@@ -537,6 +530,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaForceGroupForPrinter/Linux_SambaForceGroupForPrinterRepositoryInstance.h \
         $(srcdir)/Linux_SambaForceGroupForPrinter/Linux_SambaForceGroupForPrinterResourceAccess.h
 
+libcmpiLinux_SambaForceGroupForPrinter_la_DEPENDENCIES = \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiLinux_SambaGroup.la
+
 libcmpiLinux_SambaForceGroupForPrinter_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -544,13 +541,6 @@ libcmpiLinux_SambaForceGroupForPrinter_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiLinux_SambaGroup
-
-libcmpiLinux_SambaForceGroupForPrinter_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaPrinterOptions \
-		-I$(srcdir)/Linux_SambaGroup
 
 libcmpiLinux_SambaForceGroupForPrinter_la_LDFLAGS = -avoid-version
 
@@ -583,6 +573,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaForceGroupForShare/Linux_SambaForceGroupForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaForceGroupForShare/Linux_SambaForceGroupForShareResourceAccess.h
 
+libcmpiLinux_SambaForceGroupForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiLinux_SambaGroup.la
+
 libcmpiLinux_SambaForceGroupForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -590,13 +584,6 @@ libcmpiLinux_SambaForceGroupForShare_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiLinux_SambaGroup
-
-libcmpiLinux_SambaForceGroupForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaShareOptions \
-		-I$(srcdir)/Linux_SambaGroup
 
 libcmpiLinux_SambaForceGroupForShare_la_LDFLAGS = -avoid-version
 
@@ -629,6 +616,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaForceUserForGlobal/Linux_SambaForceUserForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaForceUserForGlobal/Linux_SambaForceUserForGlobalResourceAccess.h
 
+libcmpiLinux_SambaForceUserForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaUser.la
+
 libcmpiLinux_SambaForceUserForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -636,13 +627,6 @@ libcmpiLinux_SambaForceUserForGlobal_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaUser
-
-libcmpiLinux_SambaForceUserForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaGlobalOptions \
-		-I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaForceUserForGlobal_la_LDFLAGS = -avoid-version
 
@@ -675,6 +659,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaForceUserForPrinter/Linux_SambaForceUserForPrinterRepositoryInstance.h \
         $(srcdir)/Linux_SambaForceUserForPrinter/Linux_SambaForceUserForPrinterResourceAccess.h
 
+libcmpiLinux_SambaForceUserForPrinter_la_DEPENDENCIES = \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiLinux_SambaUser.la
+
 libcmpiLinux_SambaForceUserForPrinter_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -682,13 +670,6 @@ libcmpiLinux_SambaForceUserForPrinter_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiLinux_SambaUser
-
-libcmpiLinux_SambaForceUserForPrinter_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaPrinterOptions \
-		-I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaForceUserForPrinter_la_LDFLAGS = -avoid-version
 
@@ -721,6 +702,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaForceUserForShare/Linux_SambaForceUserForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaForceUserForShare/Linux_SambaForceUserForShareResourceAccess.h
 
+libcmpiLinux_SambaForceUserForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiLinux_SambaUser.la
+
 libcmpiLinux_SambaForceUserForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -728,13 +713,6 @@ libcmpiLinux_SambaForceUserForShare_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiLinux_SambaUser
-
-libcmpiLinux_SambaForceUserForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaShareOptions \
-		-I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaForceUserForShare_la_LDFLAGS = -avoid-version
 
@@ -767,6 +745,10 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGlobalBrowseForGlobal/Linux_SambaGlobalBrowseForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaGlobalBrowseForGlobal/Linux_SambaGlobalBrowseForGlobalResourceAccess.h
 
+libcmpiLinux_SambaGlobalBrowseForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalBrowseOptions.la \
+        libcmpiLinux_SambaGlobalOptions.la
+
 libcmpiLinux_SambaGlobalBrowseForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -774,13 +756,6 @@ libcmpiLinux_SambaGlobalBrowseForGlobal_la_LIBADD = \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiLinux_SambaGlobalBrowseOptions \
         -lcmpiLinux_SambaGlobalOptions
-
-libcmpiLinux_SambaGlobalBrowseForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/Linux_SambaGlobalBrowseOptions \
-		-I$(srcdir)/Linux_SambaGlobalOptions 
 
 libcmpiLinux_SambaGlobalBrowseForGlobal_la_LDFLAGS = -avoid-version
 
@@ -819,11 +794,6 @@ libcmpiLinux_SambaGlobalBrowseOptions_la_LIBADD = \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic
 
-libcmpiLinux_SambaGlobalBrowseOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include
-
 libcmpiLinux_SambaGlobalBrowseOptions_la_LDFLAGS = -avoid-version
 
 
@@ -855,6 +825,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGlobalFileNameHandlingForGlobal/Linux_SambaGlobalFileNameHandlingForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaGlobalFileNameHandlingForGlobal/Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess.h
 
+libcmpiLinux_SambaGlobalFileNameHandlingForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalFileNameHandlingOptions.la \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGlobalFileNameHandlingForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -863,14 +838,6 @@ libcmpiLinux_SambaGlobalFileNameHandlingForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaGlobalFileNameHandlingOptions \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGlobalFileNameHandlingForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGlobalFileNameHandlingOptions \
-        -I$(srcdir)/Linux_SambaGlobalOptions
 
 libcmpiLinux_SambaGlobalFileNameHandlingForGlobal_la_LDFLAGS = -avoid-version
 
@@ -903,18 +870,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGlobalFileNameHandlingOptions/Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaGlobalFileNameHandlingOptions/Linux_SambaGlobalFileNameHandlingOptionsResourceAccess.h
 
+libcmpiLinux_SambaGlobalFileNameHandlingOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGlobalFileNameHandlingOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGlobalFileNameHandlingOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaGlobalFileNameHandlingOptions_la_LDFLAGS = -avoid-version
 
@@ -947,6 +911,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGlobalForService/Linux_SambaGlobalForServiceRepositoryInstance.h \
         $(srcdir)/Linux_SambaGlobalForService/Linux_SambaGlobalForServiceResourceAccess.h
 
+libcmpiLinux_SambaGlobalForService_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaService.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGlobalForService_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -955,14 +924,6 @@ libcmpiLinux_SambaGlobalForService_la_LIBADD = \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaService \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGlobalForService_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGlobalOptions \
-        -I$(srcdir)/Linux_SambaService
 
 libcmpiLinux_SambaGlobalForService_la_LDFLAGS = -avoid-version
 
@@ -995,18 +956,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGlobalOptions/Linux_SambaGlobalOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaGlobalOptions/Linux_SambaGlobalOptionsResourceAccess.h
 
+libcmpiLinux_SambaGlobalOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGlobalOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGlobalOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaGlobalOptions_la_LDFLAGS = -avoid-version
 
@@ -1039,6 +997,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGlobalPrintingForGlobal/Linux_SambaGlobalPrintingForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaGlobalPrintingForGlobal/Linux_SambaGlobalPrintingForGlobalResourceAccess.h
 
+libcmpiLinux_SambaGlobalPrintingForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaGlobalPrintingOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGlobalPrintingForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1047,14 +1010,6 @@ libcmpiLinux_SambaGlobalPrintingForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaGlobalPrintingOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGlobalPrintingForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGlobalOptions \
-        -I$(srcdir)/Linux_SambaGlobalPrintingOptions
 
 libcmpiLinux_SambaGlobalPrintingForGlobal_la_LDFLAGS = -avoid-version
 
@@ -1087,18 +1042,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGlobalPrintingOptions/Linux_SambaGlobalPrintingOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaGlobalPrintingOptions/Linux_SambaGlobalPrintingOptionsResourceAccess.h
 
+libcmpiLinux_SambaGlobalPrintingOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGlobalPrintingOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGlobalPrintingOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaGlobalPrintingOptions_la_LDFLAGS = -avoid-version
 
@@ -1131,6 +1083,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGlobalProtocolForGlobal/Linux_SambaGlobalProtocolForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaGlobalProtocolForGlobal/Linux_SambaGlobalProtocolForGlobalResourceAccess.h
 
+libcmpiLinux_SambaGlobalProtocolForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaGlobalProtocolOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGlobalProtocolForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1139,14 +1096,6 @@ libcmpiLinux_SambaGlobalProtocolForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaGlobalProtocolOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGlobalProtocolForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGlobalOptions \
-        -I$(srcdir)/Linux_SambaGlobalProtocolOptions
 
 libcmpiLinux_SambaGlobalProtocolForGlobal_la_LDFLAGS = -avoid-version
 
@@ -1179,18 +1128,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGlobalProtocolOptions/Linux_SambaGlobalProtocolOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaGlobalProtocolOptions/Linux_SambaGlobalProtocolOptionsResourceAccess.h
 
+libcmpiLinux_SambaGlobalProtocolOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGlobalProtocolOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGlobalProtocolOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaGlobalProtocolOptions_la_LDFLAGS = -avoid-version
 
@@ -1223,6 +1169,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGlobalSecurityForGlobal/Linux_SambaGlobalSecurityForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaGlobalSecurityForGlobal/Linux_SambaGlobalSecurityForGlobalResourceAccess.h
 
+libcmpiLinux_SambaGlobalSecurityForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaGlobalSecurityOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGlobalSecurityForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1231,14 +1182,6 @@ libcmpiLinux_SambaGlobalSecurityForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaGlobalSecurityOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGlobalSecurityForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGlobalOptions \
-        -I$(srcdir)/Linux_SambaGlobalSecurityOptions
 
 libcmpiLinux_SambaGlobalSecurityForGlobal_la_LDFLAGS = -avoid-version
 
@@ -1271,18 +1214,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGlobalSecurityOptions/Linux_SambaGlobalSecurityOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaGlobalSecurityOptions/Linux_SambaGlobalSecurityOptionsResourceAccess.h
 
+libcmpiLinux_SambaGlobalSecurityOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGlobalSecurityOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGlobalSecurityOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaGlobalSecurityOptions_la_LDFLAGS = -avoid-version
 
@@ -1315,18 +1255,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGroup/Linux_SambaGroupRepositoryInstance.h \
         $(srcdir)/Linux_SambaGroup/Linux_SambaGroupResourceAccess.h
 
+libcmpiLinux_SambaGroup_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGroup_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGroup_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaGroup_la_LDFLAGS = -avoid-version
 
@@ -1359,6 +1296,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGroupForUser/Linux_SambaGroupForUserRepositoryInstance.h \
         $(srcdir)/Linux_SambaGroupForUser/Linux_SambaGroupForUserResourceAccess.h 
 
+libcmpiLinux_SambaGroupForUser_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGroup.la \
+        libcmpiLinux_SambaUser.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGroupForUser_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1367,14 +1309,6 @@ libcmpiLinux_SambaGroupForUser_la_LIBADD = \
         -lcmpiLinux_SambaGroup \
         -lcmpiLinux_SambaUser \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGroupForUser_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGroup \
-        -I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaGroupForUser_la_LDFLAGS = -avoid-version
 
@@ -1407,6 +1341,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaGuestAccountForGlobal/Linux_SambaGuestAccountForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaGuestAccountForGlobal/Linux_SambaGuestAccountForGlobalResourceAccess.h
 
+libcmpiLinux_SambaGuestAccountForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaUser.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaGuestAccountForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1415,14 +1354,6 @@ libcmpiLinux_SambaGuestAccountForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaUser \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaGuestAccountForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGlobalOptions \
-        -I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaGuestAccountForGlobal_la_LDFLAGS = -avoid-version
 
@@ -1455,6 +1386,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaInvalidUsersForGlobal/Linux_SambaInvalidUsersForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaInvalidUsersForGlobal/Linux_SambaInvalidUsersForGlobalResourceAccess.h
 
+libcmpiLinux_SambaInvalidUsersForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaUser.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaInvalidUsersForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1463,14 +1399,6 @@ libcmpiLinux_SambaInvalidUsersForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaUser \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaInvalidUsersForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGlobalOptions \
-        -I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaInvalidUsersForGlobal_la_LDFLAGS = -avoid-version
 
@@ -1503,6 +1431,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaInvalidUsersForPrinter/Linux_SambaInvalidUsersForPrinterRepositoryInstance.h \
         $(srcdir)/Linux_SambaInvalidUsersForPrinter/Linux_SambaInvalidUsersForPrinterResourceAccess.h
 
+libcmpiLinux_SambaInvalidUsersForPrinter_la_DEPENDENCIES = \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiLinux_SambaUser.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaInvalidUsersForPrinter_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1511,14 +1444,6 @@ libcmpiLinux_SambaInvalidUsersForPrinter_la_LIBADD = \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiLinux_SambaUser \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaInvalidUsersForPrinter_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaPrinterOptions \
-        -I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaInvalidUsersForPrinter_la_LDFLAGS = -avoid-version
 
@@ -1551,6 +1476,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaInvalidUsersForShare/Linux_SambaInvalidUsersForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaInvalidUsersForShare/Linux_SambaInvalidUsersForShareResourceAccess.h
 
+libcmpiLinux_SambaInvalidUsersForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiLinux_SambaUser.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaInvalidUsersForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1559,14 +1489,6 @@ libcmpiLinux_SambaInvalidUsersForShare_la_LIBADD = \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiLinux_SambaUser \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaInvalidUsersForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaShareOptions \
-        -I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaInvalidUsersForShare_la_LDFLAGS = -avoid-version
 
@@ -1599,6 +1521,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaPrinterAdminForGlobal/Linux_SambaPrinterAdminForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaPrinterAdminForGlobal/Linux_SambaPrinterAdminForGlobalResourceAccess.h
 
+libcmpiLinux_SambaPrinterAdminForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaUser.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaPrinterAdminForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1607,14 +1534,6 @@ libcmpiLinux_SambaPrinterAdminForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaUser \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaPrinterAdminForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGlobalOptions \
-        -I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaPrinterAdminForGlobal_la_LDFLAGS = -avoid-version
 
@@ -1647,6 +1566,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaPrinterAdminForPrinter/Linux_SambaPrinterAdminForPrinterRepositoryInstance.h \
         $(srcdir)/Linux_SambaPrinterAdminForPrinter/Linux_SambaPrinterAdminForPrinterResourceAccess.h
 
+libcmpiLinux_SambaPrinterAdminForPrinter_la_DEPENDENCIES = \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiLinux_SambaUser.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaPrinterAdminForPrinter_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1655,14 +1579,6 @@ libcmpiLinux_SambaPrinterAdminForPrinter_la_LIBADD = \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiLinux_SambaUser \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaPrinterAdminForPrinter_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaPrinterOptions \
-        -I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaPrinterAdminForPrinter_la_LDFLAGS = -avoid-version
 
@@ -1695,6 +1611,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaPrinterForService/Linux_SambaPrinterForServiceRepositoryInstance.h \
         $(srcdir)/Linux_SambaPrinterForService/Linux_SambaPrinterForServiceResourceAccess.h
 
+libcmpiLinux_SambaPrinterForService_la_DEPENDENCIES = \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiLinux_SambaService.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaPrinterForService_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1703,14 +1624,6 @@ libcmpiLinux_SambaPrinterForService_la_LIBADD = \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiLinux_SambaService \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaPrinterForService_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaPrinterOptions \
-        -I$(srcdir)/Linux_SambaService
 
 libcmpiLinux_SambaPrinterForService_la_LDFLAGS = -avoid-version
 
@@ -1743,18 +1656,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaPrinterOptions/Linux_SambaPrinterOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaPrinterOptions/Linux_SambaPrinterOptionsResourceAccess.h
 
+libcmpiLinux_SambaPrinterOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaPrinterOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaPrinterOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaPrinterOptions_la_LDFLAGS = -avoid-version
 
@@ -1787,6 +1697,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaPrinterPrintingForPrinter/Linux_SambaPrinterPrintingForPrinterRepositoryInstance.h \
         $(srcdir)/Linux_SambaPrinterPrintingForPrinter/Linux_SambaPrinterPrintingForPrinterResourceAccess.h
 
+libcmpiLinux_SambaPrinterPrintingForPrinter_la_DEPENDENCIES = \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiLinux_SambaPrinterPrintingOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaPrinterPrintingForPrinter_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1795,14 +1710,6 @@ libcmpiLinux_SambaPrinterPrintingForPrinter_la_LIBADD = \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiLinux_SambaPrinterPrintingOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaPrinterPrintingForPrinter_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaPrinterOptions \
-        -I$(srcdir)/Linux_SambaPrinterPrintingOptions
 
 libcmpiLinux_SambaPrinterPrintingForPrinter_la_LDFLAGS = -avoid-version
 
@@ -1835,18 +1742,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaPrinterPrintingOptions/Linux_SambaPrinterPrintingOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaPrinterPrintingOptions/Linux_SambaPrinterPrintingOptionsResourceAccess.h
 
+libcmpiLinux_SambaPrinterPrintingOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaPrinterPrintingOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaPrinterPrintingOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaPrinterPrintingOptions_la_LDFLAGS = -avoid-version
 
@@ -1879,6 +1783,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaPrinterSecurityForGlobal/Linux_SambaPrinterSecurityForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaPrinterSecurityForGlobal/Linux_SambaPrinterSecurityForGlobalResourceAccess.h
 
+libcmpiLinux_SambaPrinterSecurityForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaPrinterSecurityOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaPrinterSecurityForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1887,14 +1796,6 @@ libcmpiLinux_SambaPrinterSecurityForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaPrinterSecurityOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaPrinterSecurityForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGlobalOptions \
-        -I$(srcdir)/Linux_SambaPrinterSecurityOptions
 
 libcmpiLinux_SambaPrinterSecurityForGlobal_la_LDFLAGS = -avoid-version
 
@@ -1927,6 +1828,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaPrinterSecurityForPrinter/Linux_SambaPrinterSecurityForPrinterRepositoryInstance.h \
         $(srcdir)/Linux_SambaPrinterSecurityForPrinter/Linux_SambaPrinterSecurityForPrinterResourceAccess.h
 
+libcmpiLinux_SambaPrinterSecurityForPrinter_la_DEPENDENCIES = \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiLinux_SambaPrinterSecurityOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaPrinterSecurityForPrinter_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -1935,14 +1841,6 @@ libcmpiLinux_SambaPrinterSecurityForPrinter_la_LIBADD = \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiLinux_SambaPrinterSecurityOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaPrinterSecurityForPrinter_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaPrinterOptions \
-        -I$(srcdir)/Linux_SambaPrinterSecurityOptions
 
 libcmpiLinux_SambaPrinterSecurityForPrinter_la_LDFLAGS = -avoid-version
 
@@ -1975,18 +1873,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaPrinterSecurityOptions/Linux_SambaPrinterSecurityOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaPrinterSecurityOptions/Linux_SambaPrinterSecurityOptionsResourceAccess.h
 
+libcmpiLinux_SambaPrinterSecurityOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaPrinterSecurityOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaPrinterSecurityOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaPrinterSecurityOptions_la_LDFLAGS = -avoid-version
 
@@ -2019,6 +1914,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaReadListForGlobal/Linux_SambaReadListForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaReadListForGlobal/Linux_SambaReadListForGlobalResourceAccess.h
 
+libcmpiLinux_SambaReadListForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaUser.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaReadListForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2027,14 +1927,6 @@ libcmpiLinux_SambaReadListForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaUser \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaReadListForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGlobalOptions \
-        -I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaReadListForGlobal_la_LDFLAGS = -avoid-version
 
@@ -2067,6 +1959,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaReadListForPrinter/Linux_SambaReadListForPrinterRepositoryInstance.h \
         $(srcdir)/Linux_SambaReadListForPrinter/Linux_SambaReadListForPrinterResourceAccess.h
 
+libcmpiLinux_SambaReadListForPrinter_la_DEPENDENCIES = \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiLinux_SambaUser.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaReadListForPrinter_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2075,14 +1972,6 @@ libcmpiLinux_SambaReadListForPrinter_la_LIBADD = \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiLinux_SambaUser \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaReadListForPrinter_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaPrinterOptions \
-        -I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaReadListForPrinter_la_LDFLAGS = -avoid-version
 
@@ -2115,6 +2004,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaReadListForShare/Linux_SambaReadListForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaReadListForShare/Linux_SambaReadListForShareResourceAccess.h
 
+libcmpiLinux_SambaReadListForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiLinux_SambaUser.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaReadListForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2123,14 +2017,6 @@ libcmpiLinux_SambaReadListForShare_la_LIBADD = \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiLinux_SambaUser \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaReadListForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaShareOptions \
-        -I$(srcdir)/Linux_SambaUser
 
 libcmpiLinux_SambaReadListForShare_la_LDFLAGS = -avoid-version
 
@@ -2163,6 +2049,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaScriptingForGlobal/Linux_SambaScriptingForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaScriptingForGlobal/Linux_SambaScriptingForGlobalResourceAccess.h
 
+libcmpiLinux_SambaScriptingForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaScriptingOptions.la \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaScriptingForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2171,14 +2062,6 @@ libcmpiLinux_SambaScriptingForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaScriptingOptions \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaScriptingForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaScriptingOptions \
-        -I$(srcdir)/Linux_SambaGlobalOptions
 
 libcmpiLinux_SambaScriptingForGlobal_la_LDFLAGS = -avoid-version
 
@@ -2211,18 +2094,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaScriptingOptions/Linux_SambaScriptingOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaScriptingOptions/Linux_SambaScriptingOptionsResourceAccess.h
 
+libcmpiLinux_SambaScriptingOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaScriptingOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaScriptingOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaScriptingOptions_la_LDFLAGS = -avoid-version
 
@@ -2255,18 +2135,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaService/Linux_SambaServiceRepositoryInstance.h \
         $(srcdir)/Linux_SambaService/Linux_SambaServiceResourceAccess.h
 
+libcmpiLinux_SambaService_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaService_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaService_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaService_la_LDFLAGS = -avoid-version
 
@@ -2299,18 +2176,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaServiceConfiguration/Linux_SambaServiceConfigurationRepositoryInstance.h \
         $(srcdir)/Linux_SambaServiceConfiguration/Linux_SambaServiceConfigurationResourceAccess.h
 
+libcmpiLinux_SambaServiceConfiguration_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaServiceConfiguration_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaServiceConfiguration_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaServiceConfiguration_la_LDFLAGS = -avoid-version
 
@@ -2343,6 +2217,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaServiceConfigurationForService/Linux_SambaServiceConfigurationForServiceRepositoryInstance.h \
         $(srcdir)/Linux_SambaServiceConfigurationForService/Linux_SambaServiceConfigurationForServiceResourceAccess.h
 
+libcmpiLinux_SambaServiceConfigurationForService_la_DEPENDENCIES = \
+        libcmpiLinux_SambaServiceConfiguration.la \
+        libcmpiLinux_SambaService.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaServiceConfigurationForService_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2351,14 +2230,6 @@ libcmpiLinux_SambaServiceConfigurationForService_la_LIBADD = \
         -lcmpiLinux_SambaServiceConfiguration \
         -lcmpiLinux_SambaService \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaServiceConfigurationForService_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaServiceConfiguration \
-        -I$(srcdir)/Linux_SambaService
 
 libcmpiLinux_SambaServiceConfigurationForService_la_LDFLAGS = -avoid-version
 
@@ -2391,6 +2262,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaShareFileNameHandlingForShare/Linux_SambaShareFileNameHandlingForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaShareFileNameHandlingForShare/Linux_SambaShareFileNameHandlingForShareResourceAccess.h
 
+libcmpiLinux_SambaShareFileNameHandlingForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaShareFileNameHandlingOptions.la \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaShareFileNameHandlingForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2399,14 +2275,6 @@ libcmpiLinux_SambaShareFileNameHandlingForShare_la_LIBADD = \
         -lcmpiLinux_SambaShareFileNameHandlingOptions \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaShareFileNameHandlingForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaShareFileNameHandlingOptions \
-        -I$(srcdir)/Linux_SambaShareOptions
 
 libcmpiLinux_SambaShareFileNameHandlingForShare_la_LDFLAGS = -avoid-version
 
@@ -2439,18 +2307,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaShareFileNameHandlingOptions/Linux_SambaShareFileNameHandlingOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaShareFileNameHandlingOptions/Linux_SambaShareFileNameHandlingOptionsResourceAccess.h
 
+libcmpiLinux_SambaShareFileNameHandlingOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaShareFileNameHandlingOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaShareFileNameHandlingOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaShareFileNameHandlingOptions_la_LDFLAGS = -avoid-version
 
@@ -2483,6 +2348,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaShareForService/Linux_SambaShareForServiceRepositoryInstance.h \
         $(srcdir)/Linux_SambaShareForService/Linux_SambaShareForServiceResourceAccess.h
 
+libcmpiLinux_SambaShareForService_la_DEPENDENCIES = \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiLinux_SambaService.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaShareForService_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2491,14 +2361,6 @@ libcmpiLinux_SambaShareForService_la_LIBADD = \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiLinux_SambaService \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaShareForService_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaShareOptions \
-        -I$(srcdir)/Linux_SambaService
 
 libcmpiLinux_SambaShareForService_la_LDFLAGS = -avoid-version
 
@@ -2531,18 +2393,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaShareOptions/Linux_SambaShareOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaShareOptions/Linux_SambaShareOptionsResourceAccess.h
 
+libcmpiLinux_SambaShareOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaShareOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaShareOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaShareOptions_la_LDFLAGS = -avoid-version
 
@@ -2575,6 +2434,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaSharePrinterBrowseForPrinter/Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance.h \
         $(srcdir)/Linux_SambaSharePrinterBrowseForPrinter/Linux_SambaSharePrinterBrowseForPrinterResourceAccess.h
 
+libcmpiLinux_SambaSharePrinterBrowseForPrinter_la_DEPENDENCIES = \
+        libcmpiLinux_SambaSharePrinterBrowseOptions.la \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaSharePrinterBrowseForPrinter_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2583,14 +2447,6 @@ libcmpiLinux_SambaSharePrinterBrowseForPrinter_la_LIBADD = \
         -lcmpiLinux_SambaSharePrinterBrowseOptions \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaSharePrinterBrowseForPrinter_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaSharePrinterBrowseOptions \
-        -I$(srcdir)/Linux_SambaPrinterOptions
 
 libcmpiLinux_SambaSharePrinterBrowseForPrinter_la_LDFLAGS = -avoid-version
 
@@ -2623,6 +2479,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaSharePrinterBrowseForShare/Linux_SambaSharePrinterBrowseForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaSharePrinterBrowseForShare/Linux_SambaSharePrinterBrowseForShareResourceAccess.h
 
+libcmpiLinux_SambaSharePrinterBrowseForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiLinux_SambaSharePrinterBrowseOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaSharePrinterBrowseForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2631,14 +2492,6 @@ libcmpiLinux_SambaSharePrinterBrowseForShare_la_LIBADD = \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiLinux_SambaSharePrinterBrowseOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaSharePrinterBrowseForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaShareOptions \
-        -I$(srcdir)/Linux_SambaSharePrinterBrowseOptions
 
 libcmpiLinux_SambaSharePrinterBrowseForShare_la_LDFLAGS = -avoid-version
 
@@ -2671,18 +2524,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaSharePrinterBrowseOptions/Linux_SambaSharePrinterBrowseOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaSharePrinterBrowseOptions/Linux_SambaSharePrinterBrowseOptionsResourceAccess.h
 
+libcmpiLinux_SambaSharePrinterBrowseOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaSharePrinterBrowseOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaSharePrinterBrowseOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaSharePrinterBrowseOptions_la_LDFLAGS = -avoid-version
 
@@ -2715,6 +2565,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaShareProtocolForShare/Linux_SambaShareProtocolForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaShareProtocolForShare/Linux_SambaShareProtocolForShareResourceAccess.h
 
+libcmpiLinux_SambaShareProtocolForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaShareProtocolOptions.la \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaShareProtocolForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2723,14 +2578,6 @@ libcmpiLinux_SambaShareProtocolForShare_la_LIBADD = \
         -lcmpiLinux_SambaShareProtocolOptions \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaShareProtocolForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaShareProtocolOptions \
-        -I$(srcdir)/Linux_SambaShareOptions
 
 libcmpiLinux_SambaShareProtocolForShare_la_LDFLAGS = -avoid-version
 
@@ -2763,18 +2610,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaShareProtocolOptions/Linux_SambaShareProtocolOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaShareProtocolOptions/Linux_SambaShareProtocolOptionsResourceAccess.h
 
+libcmpiLinux_SambaShareProtocolOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaShareProtocolOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaShareProtocolOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaShareProtocolOptions_la_LDFLAGS = -avoid-version
 
@@ -2807,6 +2651,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaShareSecurityForGlobal/Linux_SambaShareSecurityForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaShareSecurityForGlobal/Linux_SambaShareSecurityForGlobalResourceAccess.h
 
+libcmpiLinux_SambaShareSecurityForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiLinux_SambaShareSecurityOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaShareSecurityForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2815,14 +2664,6 @@ libcmpiLinux_SambaShareSecurityForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiLinux_SambaShareSecurityOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaShareSecurityForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaGlobalOptions \
-        -I$(srcdir)/Linux_SambaShareSecurityOptions
 
 libcmpiLinux_SambaShareSecurityForGlobal_la_LDFLAGS = -avoid-version
 
@@ -2855,6 +2696,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaShareSecurityForShare/Linux_SambaShareSecurityForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaShareSecurityForShare/Linux_SambaShareSecurityForShareResourceAccess.h
 
+libcmpiLinux_SambaShareSecurityForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaShareSecurityOptions.la \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaShareSecurityForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2863,14 +2709,6 @@ libcmpiLinux_SambaShareSecurityForShare_la_LIBADD = \
         -lcmpiLinux_SambaShareSecurityOptions \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaShareSecurityForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaShareSecurityOptions \
-        -I$(srcdir)/Linux_SambaShareOptions
 
 libcmpiLinux_SambaShareSecurityForShare_la_LDFLAGS = -avoid-version
 
@@ -2903,18 +2741,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaShareSecurityOptions/Linux_SambaShareSecurityOptionsRepositoryInstance.h \
         $(srcdir)/Linux_SambaShareSecurityOptions/Linux_SambaShareSecurityOptionsResourceAccess.h
 
+libcmpiLinux_SambaShareSecurityOptions_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaShareSecurityOptions_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaShareSecurityOptions_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaShareSecurityOptions_la_LDFLAGS = -avoid-version
 
@@ -2947,18 +2782,15 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaUser/Linux_SambaUserRepositoryInstance.h \
         $(srcdir)/Linux_SambaUser/Linux_SambaUserResourceAccess.h
 
+libcmpiLinux_SambaUser_la_DEPENDENCIES = \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaUser_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
         -lIBM_SmbProviderTooling \
         -lLinux_SmbGeneralProviderBasic \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaUser_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob 
 
 libcmpiLinux_SambaUser_la_LDFLAGS = -avoid-version
 
@@ -2991,6 +2823,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaUsersForService/Linux_SambaUsersForServiceRepositoryInstance.h \
         $(srcdir)/Linux_SambaUsersForService/Linux_SambaUsersForServiceResourceAccess.h
 
+libcmpiLinux_SambaUsersForService_la_DEPENDENCIES = \
+        libcmpiLinux_SambaUser.la \
+        libcmpiLinux_SambaService.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaUsersForService_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -2999,14 +2836,6 @@ libcmpiLinux_SambaUsersForService_la_LIBADD = \
         -lcmpiLinux_SambaUser \
         -lcmpiLinux_SambaService \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaUsersForService_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaUser \
-        -I$(srcdir)/Linux_SambaService
 
 libcmpiLinux_SambaUsersForService_la_LDFLAGS = -avoid-version
 
@@ -3039,6 +2868,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaValidUsersForGlobal/Linux_SambaValidUsersForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaValidUsersForGlobal/Linux_SambaValidUsersForGlobalResourceAccess.h
 
+libcmpiLinux_SambaValidUsersForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaUser.la \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaValidUsersForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -3047,14 +2881,6 @@ libcmpiLinux_SambaValidUsersForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaUser \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaValidUsersForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaUser \
-        -I$(srcdir)/Linux_SambaGlobalOptions
 
 libcmpiLinux_SambaValidUsersForGlobal_la_LDFLAGS = -avoid-version
 
@@ -3087,6 +2913,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaValidUsersForPrinter/Linux_SambaValidUsersForPrinterRepositoryInstance.h \
         $(srcdir)/Linux_SambaValidUsersForPrinter/Linux_SambaValidUsersForPrinterResourceAccess.h
 
+libcmpiLinux_SambaValidUsersForPrinter_la_DEPENDENCIES = \
+        libcmpiLinux_SambaUser.la \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaValidUsersForPrinter_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -3095,14 +2926,6 @@ libcmpiLinux_SambaValidUsersForPrinter_la_LIBADD = \
         -lcmpiLinux_SambaUser \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaValidUsersForPrinter_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaUser \
-        -I$(srcdir)/Linux_SambaPrinterOptions
 
 libcmpiLinux_SambaValidUsersForPrinter_la_LDFLAGS = -avoid-version
 
@@ -3135,6 +2958,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaValidUsersForShare/Linux_SambaValidUsersForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaValidUsersForShare/Linux_SambaValidUsersForShareResourceAccess.h
 
+libcmpiLinux_SambaValidUsersForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaUser.la \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaValidUsersForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -3143,14 +2971,6 @@ libcmpiLinux_SambaValidUsersForShare_la_LIBADD = \
         -lcmpiLinux_SambaUser \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaValidUsersForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaUser \
-        -I$(srcdir)/Linux_SambaShareOptions
 
 libcmpiLinux_SambaValidUsersForShare_la_LDFLAGS = -avoid-version
 
@@ -3183,6 +3003,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaWriteListForGlobal/Linux_SambaWriteListForGlobalRepositoryInstance.h \
         $(srcdir)/Linux_SambaWriteListForGlobal/Linux_SambaWriteListForGlobalResourceAccess.h
 
+libcmpiLinux_SambaWriteListForGlobal_la_DEPENDENCIES = \
+        libcmpiLinux_SambaUser.la \
+        libcmpiLinux_SambaGlobalOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaWriteListForGlobal_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -3191,14 +3016,6 @@ libcmpiLinux_SambaWriteListForGlobal_la_LIBADD = \
         -lcmpiLinux_SambaUser \
         -lcmpiLinux_SambaGlobalOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaWriteListForGlobal_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaUser \
-        -I$(srcdir)/Linux_SambaGlobalOptions
 
 libcmpiLinux_SambaWriteListForGlobal_la_LDFLAGS = -avoid-version
 
@@ -3231,6 +3048,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaWriteListForPrinter/Linux_SambaWriteListForPrinterRepositoryInstance.h \
         $(srcdir)/Linux_SambaWriteListForPrinter/Linux_SambaWriteListForPrinterResourceAccess.h
 
+libcmpiLinux_SambaWriteListForPrinter_la_DEPENDENCIES = \
+        libcmpiLinux_SambaUser.la \
+        libcmpiLinux_SambaPrinterOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaWriteListForPrinter_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -3239,14 +3061,6 @@ libcmpiLinux_SambaWriteListForPrinter_la_LIBADD = \
         -lcmpiLinux_SambaUser \
         -lcmpiLinux_SambaPrinterOptions \
         -lcmpiCIM_ConcreteJob
-
-libcmpiLinux_SambaWriteListForPrinter_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaUser \
-        -I$(srcdir)/Linux_SambaPrinterOptions
 
 libcmpiLinux_SambaWriteListForPrinter_la_LDFLAGS = -avoid-version
 
@@ -3279,6 +3093,11 @@ noinst_HEADERS+= \
         $(srcdir)/Linux_SambaWriteListForShare/Linux_SambaWriteListForShareRepositoryInstance.h \
         $(srcdir)/Linux_SambaWriteListForShare/Linux_SambaWriteListForShareResourceAccess.h
 
+libcmpiLinux_SambaWriteListForShare_la_DEPENDENCIES = \
+        libcmpiLinux_SambaUser.la \
+        libcmpiLinux_SambaShareOptions.la \
+        libcmpiCIM_ConcreteJob.la
+
 libcmpiLinux_SambaWriteListForShare_la_LIBADD = \
         -L../resource-access\
         -lRaToolsSmb \
@@ -3288,14 +3107,5 @@ libcmpiLinux_SambaWriteListForShare_la_LIBADD = \
         -lcmpiLinux_SambaShareOptions \
         -lcmpiCIM_ConcreteJob
 
-libcmpiLinux_SambaWriteListForShare_la_CPPFLAGS = \
-        -D_COMPILE_UNIX -DCMPI_STANDALONE \
-		-I$(srcdir)/../resource-access \
-		-I$(srcdir)/include \
-		-I$(srcdir)/CIM_ConcreteJob \
-        -I$(srcdir)/Linux_SambaUser \
-        -I$(srcdir)/Linux_SambaShareOptions
-
 libcmpiLinux_SambaWriteListForShare_la_LDFLAGS = -avoid-version
-
 

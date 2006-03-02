@@ -17,6 +17,7 @@
  */
 
 #include <string.h>
+#include <stdlib.h>
 
 struct list{
   char *dir;
@@ -32,6 +33,8 @@ static struct list *create_list_elem(char *dir){
   elem->dir = strdup(dir);
   elem->next = NULL;
   elem->prev = NULL;
+
+  return elem;
 }
 
 

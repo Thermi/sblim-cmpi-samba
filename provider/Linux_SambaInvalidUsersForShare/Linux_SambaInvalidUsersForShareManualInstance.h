@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaInvalidUsersForShareManualInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaInvalidUsersForShareManualInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaInvalidUsersForShareManualInstance_h
 #define Linux_SambaInvalidUsersForShareManualInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaInvalidUsersForShareInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaInvalidUsersForShareManualInstance {
-  public:
-       Linux_SambaInvalidUsersForShareManualInstance();
-  	
-       Linux_SambaInvalidUsersForShareManualInstance
-  	    (const Linux_SambaInvalidUsersForShareManualInstance& original);
-  	   
-       Linux_SambaInvalidUsersForShareManualInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaInvalidUsersForShareManualInstance();
        
-       Linux_SambaInvalidUsersForShareManualInstance& operator=
-  	    (const Linux_SambaInvalidUsersForShareManualInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaInvalidUsersForShareManualInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaInvalidUsersForShareInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaInvalidUsersForShareInstanceName& val);        
-       const Linux_SambaInvalidUsersForShareInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaInvalidUsersForShareManualInstance();
+    Linux_SambaInvalidUsersForShareManualInstance(
+      const Linux_SambaInvalidUsersForShareManualInstance& anInstance);
+    Linux_SambaInvalidUsersForShareManualInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaInvalidUsersForShareManualInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaInvalidUsersForShareManualInstance& original);
-       void reset();
+    Linux_SambaInvalidUsersForShareManualInstance& operator=(
+      const Linux_SambaInvalidUsersForShareManualInstance& anInstance);
        
-       Linux_SambaInvalidUsersForShareInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaInvalidUsersForShareInstanceName& anInstanceName);        
+    const Linux_SambaInvalidUsersForShareInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement{
-  	Linux_SambaInvalidUsersForShareManualInstance* m_elementP;
-  	Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement();
-  	~Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement();  	
+  struct Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement {
+
+    Linux_SambaInvalidUsersForShareManualInstance* m_elementP;
+    Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement();
+    ~Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaInvalidUsersForShareManualInstanceEnumeration {
-  	private:
-  	  Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaInvalidUsersForShareManualInstanceEnumeration();
-  	  
-  	  Linux_SambaInvalidUsersForShareManualInstanceEnumeration(
-  	   const Linux_SambaInvalidUsersForShareManualInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaInvalidUsersForShareManualInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaInvalidUsersForShareManualInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaInvalidUsersForShareManualInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaInvalidUsersForShareManualInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaInvalidUsersForShareManualInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaInvalidUsersForShareManualInstanceEnumeration();
+    Linux_SambaInvalidUsersForShareManualInstanceEnumeration(
+      const Linux_SambaInvalidUsersForShareManualInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaInvalidUsersForShareManualInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaInvalidUsersForShareManualInstance& getNext();
+    int getSize() const;
+    const Linux_SambaInvalidUsersForShareManualInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaInvalidUsersForShareManualInstance& anInstance);
+
+  };
+
+}
+
+#endif

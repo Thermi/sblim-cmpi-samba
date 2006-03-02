@@ -23,10 +23,11 @@
 #include <string.h>
 #include <errno.h>
 #include "smt_smb_ra_support.h"
-#include <smt_libra_execscripts.h>
-#include <smt_libra_conf.h>
-#include <smt_libra_rastr.h>
-#include <smt_libra_monitors.h>
+#include "smt_smb_ra_path.h"
+#include <sblim/smt_libra_execscripts.h>
+#include <sblim/smt_libra_conf.h>
+#include <sblim/smt_libra_rastr.h>
+#include <sblim/smt_libra_monitors.h>
 #include <fcntl.h>
 #include <libgen.h>
 #include <limits.h>
@@ -147,8 +148,33 @@ static char **add_string_array(char **array, const char *elem){
 
 
 static char **remove_string_array(char **array, const char *name){
+  int current = 0;
+  int last    = 0;
+  int count   = 0;
 
-  int index, i=0;
+  if (!array) return NULL;
+  if (!name) return array;
+
+  while(array[current]) {
+    if ( !strcmp(array[current],name) ) {
+      free(array[current]);
+      count++;
+    } else {
+      if (last != current) {
+        array[last]=strdup(array[current]);
+      }
+      last++;
+    }
+    current++;
+  }
+  
+  array[++last] = NULL;
+  array = (char**) realloc(array, (current-count)*sizeof(char*));
+
+  return array;
+
+ //------------------------------
+/*  int index, i=0;
 
   while (array && array[i]){
     if ( !strcmp(array[i],name) ) index = i;
@@ -169,7 +195,7 @@ static char **remove_string_array(char **array, const char *name){
   array = (char**) realloc(array,i*sizeof(char*));
 
   return array;
-
+*/
 }
 
 
@@ -215,13 +241,12 @@ static int __check_path(const char *path){
   char *samba_root = __get_option(GLOBAL,ROOT_DIR), *abs_path=NULL;
   char *root_path = NULL;
   int ret = 0;
-  uid_t uid;
-  gid_t gid;
 
   if(samba_root)
     asprintf(&root_path,"%s/%s",samba_root,path);
   else
     asprintf(&root_path,"/%s",path);
+
   abs_path = (char *) limited_canonicalize_path(root_path);
                       
   ret = stat(abs_path,&status);
@@ -356,7 +381,6 @@ static struct smbopt *g_synonyms(int pipefd){
   fclose(fp);
   //close(pipefd);
   return head;
-
 }
 
 
@@ -664,6 +688,7 @@ static void f_usermap_cache(int pipefd){
 }
 
 
+/*
 static void f_groupmap_cache(int pipefd){
 
   struct smbopt *p = (struct smbopt*) groupmap_cache.content;
@@ -678,7 +703,7 @@ static void f_groupmap_cache(int pipefd){
   fclose(fp);
   //close(pipefd);
 }
-
+*/
 
 static int flush_usermap_cache(){
   /* It's easier to use python to put the usermap file back in order */
@@ -989,7 +1014,6 @@ static int init_groupmap_cache(struct smbcache *cache){
   cache->content = (void *) __get_groupmap_list();
   cache->is_dirty = 0;
   
- out:
   free(filename);
   return ret;
 }
@@ -1232,7 +1256,6 @@ static char **__g_samba_users_list(){
     p = p->next;
   }
   
- out:
   free(script);
   return ret;
 }
@@ -1292,7 +1315,6 @@ static char *__g_option(const char *share, const char *opt){
       break;
     }
   
- out:
   pthread_mutex_unlock(&cache->mutex);
   return value;
 }
@@ -1750,12 +1772,15 @@ int set_share_option(const char *share, const char *key, const char *value){
 
   pthread_mutex_lock(&glob_mutex);
 
-  if (ret = __set_option(share,key,value)) goto out;
+  ret = __set_option(share,key,value);
+  if (ret) goto out;
   
   if (!strcasecmp(key,PATH) ){
     c = strchr(value,'%');
     if (c) goto out; /*a variable substitution will occur in runtime. Leave it*/
-    if (ret = __check_path(value) ) goto out;
+
+    ret = __check_path(value);
+    if (ret) goto out;
   }
 
  out:
@@ -1881,7 +1906,6 @@ static int __remove_usermap_reverse(const char *unix_name){
 
   struct smbopt *p, *last = NULL;
   struct smbcache *cache = __get_usermap_cache();
-  int ret = -1;
 
   pthread_mutex_lock(&(cache->mutex));
 
@@ -1970,9 +1994,9 @@ static int __add_usermap(const char *samba_name, const char *unix_name){
   return ret;
 }
 
-
+/*
 static int __create_sys_user(const char *user){
-  /* Creates a user in the system */
+  // Creates a user in the system
 
   char *script = my_script_path("smt_smb_ra_create_sys_user.py");
   int ret;
@@ -1981,7 +2005,7 @@ static int __create_sys_user(const char *user){
   free(script);
   return ret;
 }
-
+*/
 
 static int __create_smb_user(const char *user, const char *password){
   
@@ -2306,7 +2330,6 @@ static char **__get_user_sys_groups(const char *user){
   char **user_sys_groups = (char**) readData1(script,user,
 					      g_single_val_per_line_list);
 
- out:
   free(script);
   return user_sys_groups;
 
@@ -2396,7 +2419,7 @@ int create_samba_group(const char* samba_grp, const char *unix_grp){
 
   char *script = my_script_path("smt_smb_ra_create_samba_group.py");
   char **smb_grps, **unx_grps;
-  char *funix_grp = NULL, *tmp;
+  char *funix_grp = NULL;
   int ret = -EEXIST;
   char create_sys_grp[] = "0"; //Leave this as 0 in order NOT to create new
                                //system groups
@@ -2631,7 +2654,7 @@ int status_server(){
 
   char *configured_service = NULL, *service, *nmb, *dname, *copy;
   struct stat status;
-  int nret = 1, sret, ret;
+  int nret = 1, sret, ret=0;
   
   configured_service = get_conf(smb_conf,SMB_SERVICE);
   
@@ -2654,8 +2677,7 @@ int status_server(){
     goto out;
   }else sret = !execScript1(service,"status"); 
   
-  if (nret*sret==0) ret = 0;
-  else ret = 1;
+  if (nret*sret!=0) ret = 1;
   
  out:
   free(copy);

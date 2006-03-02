@@ -1,113 +1,40 @@
-/**
- *  Linux_SambaGuestAccountForGlobalResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGuestAccountForGlobalResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGuestAccountForGlobalResourceAccess.h"
+
+#include <string>
+#include <list>
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
+#include "smt_smb_array.h"
 
 namespace genProvider {
   
-  //Linux_SambaGuestAccountForGlobalResourceAccess::Linux_SambaGuestAccountForGlobalResourceAccess();
-  Linux_SambaGuestAccountForGlobalResourceAccess::~Linux_SambaGuestAccountForGlobalResourceAccess() { 
-    terminator();
-  };
-    
-    /* intrinsic methods */
-  void Linux_SambaGuestAccountForGlobalResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaGuestAccountForGlobalInstanceNameEnumeration& instnames)
-  {
-    Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
-    globalInstName.setName(DEFAULT_GLOBAL_NAME);
-    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-    
-    
-    char* user = get_global_option("guest account");
-    
-    if(user && validUser(user)){
-      Linux_SambaGuestAccountForGlobalInstanceName assocName;
-      assocName.setNamespace(nsp);
-      assocName.setGroupComponent(globalInstName);
-      
-      Linux_SambaUserInstanceName userInstName;
-      userInstName.setNamespace(nsp);
-      userInstName.setSambaUserName( user );
-      
-      assocName.setPartComponent(userInstName);
-      
-      instnames.addElement(assocName);
-    }
-  };
-  
-  void Linux_SambaGuestAccountForGlobalResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaGuestAccountForGlobalManualInstanceEnumeration& instances)
-  {
-    Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
-    globalInstName.setName(DEFAULT_GLOBAL_NAME);
-    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-    
-    char* user = get_global_option("guest account");
-    
-    if(user && validUser(user)){
-      Linux_SambaGuestAccountForGlobalManualInstance manualInstance;
-      
-      Linux_SambaGuestAccountForGlobalInstanceName instName;
-      instName.setNamespace(nsp);
-      instName.setGroupComponent(globalInstName);
-      
-      Linux_SambaUserInstanceName userInstName;
-      userInstName.setNamespace(nsp);
-      userInstName.setSambaUserName( user );
-      
-      instName.setPartComponent(userInstName);
-      
-      manualInstance.setInstanceName(instName);
-      instances.addElement(manualInstance);
-    }
-  };
-  
-  Linux_SambaGuestAccountForGlobalManualInstance 
-   Linux_SambaGuestAccountForGlobalResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaGuestAccountForGlobalInstanceName& instanceName)
-  {
-    Linux_SambaGuestAccountForGlobalManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
-    return aManualInstance;
-  };
+  //----------------------------------------------------------------------------
+  // manual written methods
 
-  	/*
-    void Linux_SambaGuestAccountForGlobalResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGuestAccountForGlobalManualInstance&){};
-  	*/
-
-  bool Linux_SambaGuestAccountForGlobalResourceAccess::validUser(const char* user)
-  {
+  static bool validUser(const char* user) {
     char ** users = get_samba_users_list();
     if(users){
       for (int i=0; users[i]; i++){
@@ -117,97 +44,223 @@ namespace genProvider {
     }
     return false;
   };
-  	
-  void Linux_SambaGuestAccountForGlobalResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaGuestAccountForGlobalManualInstance& newInstance)
-  {
-    char* user = get_option(newInstance.getInstanceName().getGroupComponent().getName(),"guest account");
-    if(user && validUser(user))
-      set_global_option("guest account",user);
-  } 
+
+  //----------------------------------------------------------------------------
+
   
-  void Linux_SambaGuestAccountForGlobalResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaGuestAccountForGlobalInstanceName& instanceName)
-  {
-    set_global_option("guest account",NULL);
+  //----------------------------------------------------------------------------
+  //Linux_SambaGuestAccountForGlobalResourceAccess::Linux_SambaGuestAccountForGlobalResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaGuestAccountForGlobalResourceAccess::~Linux_SambaGuestAccountForGlobalResourceAccess() {
+    terminator();
   }
-  
-    /* Association Interface */
     
-  void Linux_SambaGuestAccountForGlobalResourceAccess::referencesPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaGuestAccountForGlobalManualInstanceEnumeration& instEnum)
-  {
-    char* user = get_option(sourceInst.getName(),"guest account");
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGuestAccountForGlobalResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaGuestAccountForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    Linux_SambaGlobalOptionsInstanceName globalInstName;
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(DEFAULT_GLOBAL_NAME);
+    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+    
+    
+    char* user = get_global_option("guest account");
+    
+    if(user && validUser(user)){
+      Linux_SambaGuestAccountForGlobalInstanceName assocName;
+      assocName.setNamespace(aNameSpaceP);
+      assocName.setGroupComponent(globalInstName);
+      
+      Linux_SambaUserInstanceName userInstName;
+      userInstName.setNamespace(aNameSpaceP);
+      userInstName.setSambaUserName( user );
+      
+      assocName.setPartComponent(userInstName);
+      
+      anInstanceNameEnumeration.addElement(assocName);
+    }
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaGuestAccountForGlobalResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaGuestAccountForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    Linux_SambaGlobalOptionsInstanceName globalInstName;
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(DEFAULT_GLOBAL_NAME);
+    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+    
+    char* user = get_global_option("guest account");
+    
     if(user && validUser(user)){
       Linux_SambaGuestAccountForGlobalManualInstance manualInstance;
       
       Linux_SambaGuestAccountForGlobalInstanceName instName;
-      instName.setNamespace(nsp);
-      instName.setGroupComponent(sourceInst);
+      instName.setNamespace(aNameSpaceP);
+      instName.setGroupComponent(globalInstName);
       
       Linux_SambaUserInstanceName userInstName;
-      userInstName.setNamespace(nsp);
+      userInstName.setNamespace(aNameSpaceP);
       userInstName.setSambaUserName( user );
       
       instName.setPartComponent(userInstName);
       
       manualInstance.setInstanceName(instName);
-      instEnum.addElement(manualInstance);
+      aManualInstanceEnumeration.addElement(manualInstance);
     }
-  };
+  }
+
   
+  //----------------------------------------------------------------------------
+
+  Linux_SambaGuestAccountForGlobalManualInstance 
+  Linux_SambaGuestAccountForGlobalResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaGuestAccountForGlobalInstanceName& anInstanceName) {
+
+    Linux_SambaGuestAccountForGlobalManualInstance aManualInstance;
+    aManualInstance.setInstanceName(anInstanceName);
+    return aManualInstance;
+  }
+
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGuestAccountForGlobalResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaGuestAccountForGlobalManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+
+  Linux_SambaGuestAccountForGlobalInstanceName
+  Linux_SambaGuestAccountForGlobalResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGuestAccountForGlobalManualInstance& aManualInstance) {
+    
+    char* user = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"guest account");
+    if(user && validUser(user))
+      set_global_option("guest account",user);
+    
+    return aManualInstance.getInstanceName();
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaGuestAccountForGlobalResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGuestAccountForGlobalInstanceName& anInstanceName) {
+    
+    set_global_option("guest account",NULL);
+  }
+
+	
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
+  void Linux_SambaGuestAccountForGlobalResourceAccess::referencesPartComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGuestAccountForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    char* user = get_option(aSourceInstanceName.getName(),"guest account");
+    
+    if(user && validUser(user)){
+      Linux_SambaGuestAccountForGlobalManualInstance manualInstance;
+      
+      Linux_SambaGuestAccountForGlobalInstanceName instName;
+      instName.setNamespace(aNameSpaceP);
+      instName.setGroupComponent(aSourceInstanceName);
+      
+      Linux_SambaUserInstanceName userInstName;
+      userInstName.setNamespace(aNameSpaceP);
+      userInstName.setSambaUserName( user );
+      
+      instName.setPartComponent(userInstName);
+      
+      manualInstance.setInstanceName(instName);
+      aManualInstanceEnumeration.addElement(manualInstance);
+    }
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGuestAccountForGlobalResourceAccess::referencesGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaUserInstanceName& sourceInst,
-   Linux_SambaGuestAccountForGlobalManualInstanceEnumeration& instEnum)
-  {
-    if(validUser(sourceInst.getSambaUserName())){
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaGuestAccountForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    if(validUser(aSourceInstanceName.getSambaUserName())){
       char * user = get_global_option("guest account");
-      if(!strcmp(user,sourceInst.getSambaUserName())){
+      if(!strcmp(user,aSourceInstanceName.getSambaUserName())){
 	Linux_SambaGuestAccountForGlobalManualInstance manualInstance;
 	
 	Linux_SambaGuestAccountForGlobalInstanceName instName;
-	instName.setNamespace(nsp);
-	instName.setPartComponent(sourceInst);
-	
+	instName.setNamespace(aNameSpaceP);
+	instName.setPartComponent(aSourceInstanceName);
 	
 	Linux_SambaGlobalOptionsInstanceName globalInstName;
-	globalInstName.setNamespace(nsp);
+	globalInstName.setNamespace(aNameSpaceP);
 	globalInstName.setName(DEFAULT_GLOBAL_NAME);
 	globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	
 	instName.setGroupComponent(globalInstName);
 	
 	manualInstance.setInstanceName(instName);
-	instEnum.addElement(manualInstance);
+	aManualInstanceEnumeration.addElement(manualInstance);
       }
     }
-  };
+  }
   
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGuestAccountForGlobalResourceAccess::associatorsPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaUserInstanceEnumeration& instEnum)
-  { 
-    char* user = get_option(sourceInst.getName(),"guest account");
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
+    
+    char* user = get_option(aSourceInstanceName.getName(),"guest account");
+    
     if(user && validUser(user)){
       Linux_SambaUserInstance instance;
       
       Linux_SambaUserInstanceName userInstName;
-      userInstName.setNamespace(nsp);
+      userInstName.setNamespace(aNameSpaceP);
       userInstName.setSambaUserName( user );
       
       instance.setInstanceName(userInstName);
@@ -217,25 +270,28 @@ namespace genProvider {
       if ( option )
 	instance.setSystemUserName( option );
       
-      instEnum.addElement(instance);
+      anInstanceEnumeration.addElement(instance);
     }
-  };
-    
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGuestAccountForGlobalResourceAccess::associatorsGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaUserInstanceName& sourceInst,
-   Linux_SambaGlobalOptionsInstanceEnumeration& instEnum)
-  {
-    if(validUser(sourceInst.getSambaUserName())){
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
+    if(validUser(aSourceInstanceName.getSambaUserName())){
       char * user = get_global_option("guest account");
-      if(!strcmp(user,sourceInst.getSambaUserName())){
+      if(!strcmp(user,aSourceInstanceName.getSambaUserName())){
 	Linux_SambaGlobalOptionsInstance instance;
 	
 	Linux_SambaGlobalOptionsInstanceName globalInstName;
-	globalInstName.setNamespace(nsp);
+	globalInstName.setNamespace(aNameSpaceP);
 	globalInstName.setName(DEFAULT_GLOBAL_NAME);
 	globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	
@@ -269,14 +325,15 @@ namespace genProvider {
 	if ( option )
 	  instance.setWorkgroup( option );
     	
-	
-	instEnum.addElement(instance);
+	anInstanceEnumeration.addElement(instance);
       }
     }
-  };
-  
+  }
 
-    /* extrinsic methods */
+   
+  
+  // extrinsic methods
+
 	
 }
 

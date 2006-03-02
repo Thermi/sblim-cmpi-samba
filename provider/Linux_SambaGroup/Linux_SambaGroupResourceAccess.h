@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaGroupResourceAccess.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGroupResourceAccess.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGroupResourceAccess_h
 #define Linux_SambaGroupResourceAccess_h
 
@@ -27,71 +30,80 @@
 #include "CmpiDateTime.h"
 #include "CmpiBroker.h"
 #include "Linux_SambaGroupDefaultImplementation.h"
-#include "smt_smb_ra_support.h"
-#include "smt_smb_defaultvalues.h"
 
-#include <errno.h>
 
 namespace genProvider {
 
   class Linux_SambaGroupResourceAccess:
    public Linux_SambaGroupDefaultImplementation {
   	
-   private:
-    void Linux_SambaGroupResourceAccess::setInstanceNameProperties(const char* nsp,
-     char *instanceName,
-     Linux_SambaGroupInstanceName& anInstanceName);
-    
-   public:
-    /*Linux_SambaGroupResourceAccess();*/    
+    public:
+    /*
+    Linux_SambaGroupResourceAccess();
+    */    
     virtual ~Linux_SambaGroupResourceAccess() ;
     
     /* intrinsic methods */
+
     virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaGroupInstanceNameEnumeration& instnames);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaGroupInstanceNameEnumeration& anInstanceNameEnumeration);
+
   	
+
     virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaGroupManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+  	  Linux_SambaGroupManualInstanceEnumeration& aManualInstanceEnumeration);
+
   	
-    
+
     virtual Linux_SambaGroupManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGroupInstanceName&);
-    
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaGroupInstanceName& anInstanceName);
+
+  	
     /*
     virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGroupManualInstance&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaGroupManualInstance& aManualInstance);
     */
-    virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaGroupManualInstance&);
   	
+
+    virtual Linux_SambaGroupInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaGroupManualInstance& aManualInstance);
+
+  	
+
     virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaGroupInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaGroupInstanceName& anInstanceName);
+
 	
     
+    
     /* extrinsic methods */
+    
 
     virtual char* getAllSystemGroups(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaGroupInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaGroupInstanceName& anInstanceName);
+
+
 	
   };
+  
 }
 #endif
-

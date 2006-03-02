@@ -1,147 +1,187 @@
-/**
- *  Linux_SambaPrinterSecurityForGlobalResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterSecurityForGlobalResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaPrinterSecurityForGlobalResourceAccess.h"
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-    //Linux_SambaPrinterSecurityForGlobalResourceAccess::Linux_SambaPrinterSecurityForGlobalResourceAccess();
-    Linux_SambaPrinterSecurityForGlobalResourceAccess::~Linux_SambaPrinterSecurityForGlobalResourceAccess() { };
+  //----------------------------------------------------------------------------
+  //Linux_SambaPrinterSecurityForGlobalResourceAccess::Linux_SambaPrinterSecurityForGlobalResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterSecurityForGlobalResourceAccess::~Linux_SambaPrinterSecurityForGlobalResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    /*
-    void Linux_SambaPrinterSecurityForGlobalResourceAccess::enumInstanceNames(
-     const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-     Linux_SambaPrinterSecurityForGlobalInstanceNameEnumeration& instnames){
+  // intrinsic methods
+  /*
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterSecurityForGlobalResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaPrinterSecurityForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      int numInstanceNames=1;
-      for(int i=0;i<numInstanceNames;i++){
+    int instanceNameN = 1;
+    for (int x=0; x < instanceNameN; ++x) {
       
-        //place here the code retrieving your instanceName
+      //place here the code retrieving your instanceName
       
-        Linux_SambaPrinterSecurityForGlobalInstanceName instanceName;
-        
-      }      
-    }
-    */
-  	/*
-    void Linux_SambaPrinterSecurityForGlobalResourceAccess::enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaPrinterSecurityForGlobalManualInstanceEnumeration& instances){};
-  	*/
-  	/*
-    Linux_SambaPrinterSecurityForGlobalManualInstance 
-     Linux_SambaPrinterSecurityForGlobalResourceAccess::getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaPrinterSecurityForGlobalInstanceName&){
-      Linux_SambaPrinterSecurityForGlobalManualInstance instance;
+      Linux_SambaPrinterSecurityForGlobalInstanceName instanceName;
       
-    }
-  	*/
-  	/*
-    void Linux_SambaPrinterSecurityForGlobalResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaPrinterSecurityForGlobalManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaPrinterSecurityForGlobalResourceAccess::createInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaPrinterSecurityForGlobalManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaPrinterSecurityForGlobalResourceAccess::deleteInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaPrinterSecurityForGlobalInstanceName&){};
+    }      
+  
+  }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaPrinterSecurityForGlobalResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     const char** aPropertiesPP,
+  	 Linux_SambaPrinterSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaPrinterSecurityForGlobalManualInstance 
+  Linux_SambaPrinterSecurityForGlobalResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaPrinterSecurityForGlobalInstanceName& anInstanceName) {
+
+    Linux_SambaPrinterSecurityForGlobalManualInstance manualInstance;
+
+  
+  }
+  */
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaPrinterSecurityForGlobalResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaPrinterSecurityForGlobalManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaPrinterSecurityForGlobalInstanceName
+  Linux_SambaPrinterSecurityForGlobalResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaPrinterSecurityForGlobalManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaPrinterSecurityForGlobalResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaPrinterSecurityForGlobalInstanceName& anInstanceName) { }
 	*/
-    
-    /* Association Interface */
-    
+	
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
   void Linux_SambaPrinterSecurityForGlobalResourceAccess::referencesSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaPrinterSecurityForGlobalManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaPrinterSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaPrinterSecurityForGlobalManualInstance manualInstance;
     
     Linux_SambaPrinterSecurityForGlobalInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setManagedElement(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setManagedElement(aSourceInstanceName);
     
     Linux_SambaPrinterSecurityOptionsInstanceName secInstName;
-    secInstName.setNamespace(nsp);
+    secInstName.setNamespace(aNameSpaceP);
     secInstName.setName(DEFAULT_GLOBAL_NAME);
     secInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instName.setSettingData(secInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-    
-  };
-    
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaPrinterSecurityForGlobalResourceAccess::referencesManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaPrinterSecurityOptionsInstanceName& sourceInst,
-   Linux_SambaPrinterSecurityForGlobalManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaPrinterSecurityOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaPrinterSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaPrinterSecurityForGlobalManualInstance manualInstance;
     
     Linux_SambaPrinterSecurityForGlobalInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setSettingData(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setSettingData(aSourceInstanceName);
     
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
+    globalInstName.setNamespace(aNameSpaceP);
     globalInstName.setName(DEFAULT_GLOBAL_NAME);
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instName.setManagedElement(globalInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
-    
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaPrinterSecurityForGlobalResourceAccess::associatorsSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaPrinterSecurityOptionsInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaPrinterSecurityOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaPrinterSecurityOptionsInstance instance;
     
     Linux_SambaPrinterSecurityOptionsInstanceName secInstName;
-    secInstName.setNamespace(nsp);
+    secInstName.setNamespace(aNameSpaceP);
     secInstName.setName(DEFAULT_GLOBAL_NAME);
     secInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
@@ -149,21 +189,24 @@ namespace genProvider {
     
     // Linux_SambaPrinterSecurityOptions don't have any attribute
     
-    instEnum.addElement(instance);
-  };
-    
+    anInstanceEnumeration.addElement(instance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaPrinterSecurityForGlobalResourceAccess::associatorsManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaPrinterSecurityOptionsInstanceName& sourceInst,
-   Linux_SambaGlobalOptionsInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaPrinterSecurityOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaGlobalOptionsInstance instance;
     
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
+    globalInstName.setNamespace(aNameSpaceP);
     globalInstName.setName(DEFAULT_GLOBAL_NAME);
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
@@ -198,10 +241,13 @@ namespace genProvider {
       instance.setWorkgroup( option );
     	
     
-    instEnum.addElement(instance);
-  };
+    anInstanceEnumeration.addElement(instance);
+  }
 
-    /* extrinsic methods */
+   
+  
+  // extrinsic methods
+
 	
 }
 

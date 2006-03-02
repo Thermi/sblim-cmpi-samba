@@ -1,41 +1,56 @@
-/**
- *  Linux_SambaGlobalForServiceResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalForServiceResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGlobalForServiceResourceAccess.h"
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-    //Linux_SambaGlobalForServiceResourceAccess::Linux_SambaGlobalForServiceResourceAccess();
-    Linux_SambaGlobalForServiceResourceAccess::~Linux_SambaGlobalForServiceResourceAccess() { };
+  //----------------------------------------------------------------------------
+  //Linux_SambaGlobalForServiceResourceAccess::Linux_SambaGlobalForServiceResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalForServiceResourceAccess::~Linux_SambaGlobalForServiceResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    
-  void Linux_SambaGlobalForServiceResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaGlobalForServiceInstanceNameEnumeration& instnames)
-  {
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalForServiceResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaGlobalForServiceInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
     Linux_SambaGlobalForServiceInstanceName instName;
-    instName.setNamespace(nsp);
+    instName.setNamespace(aNameSpaceP);
 
 
     Linux_SambaServiceInstanceName elemInstanceName;
-    elemInstanceName.setNamespace(nsp);
+    elemInstanceName.setNamespace(aNameSpaceP);
     elemInstanceName.setName(DEFAULT_SERVICE_NAME);
     elemInstanceName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
     elemInstanceName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
@@ -44,31 +59,34 @@ namespace genProvider {
     instName.setManagedElement(elemInstanceName);
     
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
+    globalInstName.setNamespace(aNameSpaceP);
     globalInstName.setName(DEFAULT_GLOBAL_NAME);
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	
     instName.setSettingData(globalInstName);
     
-    instnames.addElement(instName);
-  };
+    anInstanceNameEnumeration.addElement(instName);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaGlobalForServiceResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     const char** aPropertiesPP,
+  	 Linux_SambaGlobalForServiceManualInstanceEnumeration& aManualInstanceEnumeration) {
     
-  	
-  void Linux_SambaGlobalForServiceResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaGlobalForServiceManualInstanceEnumeration& instances)
-  {
     Linux_SambaGlobalForServiceManualInstance manualInstance;
     
     Linux_SambaGlobalForServiceInstanceName instName;
-    instName.setNamespace(nsp);
+    instName.setNamespace(aNameSpaceP);
 
 
     Linux_SambaServiceInstanceName elemInstanceName;
-    elemInstanceName.setNamespace(nsp);
+    elemInstanceName.setNamespace(aNameSpaceP);
     elemInstanceName.setName(DEFAULT_SERVICE_NAME);
     elemInstanceName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
     elemInstanceName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
@@ -76,91 +94,107 @@ namespace genProvider {
     instName.setManagedElement(elemInstanceName);
     
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
+    globalInstName.setNamespace(aNameSpaceP);
     globalInstName.setName(DEFAULT_GLOBAL_NAME);
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     instName.setSettingData(globalInstName);
     
     manualInstance.setInstanceName(instName);
-    instances.addElement(manualInstance);
-  };
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
   
-  	
+  //----------------------------------------------------------------------------
+
   Linux_SambaGlobalForServiceManualInstance 
-   Linux_SambaGlobalForServiceResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaGlobalForServiceInstanceName& instanceName)
-  {
+  Linux_SambaGlobalForServiceResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalForServiceInstanceName& anInstanceName) {
+
     Linux_SambaGlobalForServiceManualInstance instance;
-    instance.setInstanceName(instanceName);
+    instance.setInstanceName(anInstanceName);
+    
     return instance;
   }
-  	
-  	
-  void Linux_SambaGlobalForServiceResourceAccess::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaGlobalForServiceManualInstance&){};
+
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGlobalForServiceResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaGlobalForServiceManualInstance& aManualInstance) { }
+  */
   
-  	
-  void Linux_SambaGlobalForServiceResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaGlobalForServiceManualInstance&){};
-  	
-  	
-  void Linux_SambaGlobalForServiceResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaGlobalForServiceInstanceName&){};
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaGlobalForServiceInstanceName
+  Linux_SambaGlobalForServiceResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalForServiceManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGlobalForServiceResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalForServiceInstanceName& anInstanceName) { }
+	*/
 	
-    
-    /* Association Interface */
-  
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGlobalForServiceResourceAccess::referencesSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaServiceInstanceName& sourceInst,
-   Linux_SambaGlobalForServiceManualInstanceEnumeration& instEnum) 
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalForServiceManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaGlobalForServiceManualInstance manualInstance;
     
     Linux_SambaGlobalForServiceInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setManagedElement(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setManagedElement(aSourceInstanceName);
     
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
+    globalInstName.setNamespace(aNameSpaceP);
     globalInstName.setName(DEFAULT_GLOBAL_NAME);
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-	
+    
     instName.setSettingData(globalInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-    
-  };
-    
-    
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGlobalForServiceResourceAccess::referencesManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaGlobalForServiceManualInstanceEnumeration& instEnum) 
-  { 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalForServiceManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaGlobalForServiceManualInstance manualInstance;
     
     Linux_SambaGlobalForServiceInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setSettingData(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setSettingData(aSourceInstanceName);
     
     Linux_SambaServiceInstanceName elemInstanceName;
-    elemInstanceName.setNamespace(nsp);
+    elemInstanceName.setNamespace(aNameSpaceP);
     elemInstanceName.setName(DEFAULT_SERVICE_NAME);
     elemInstanceName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
     elemInstanceName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
@@ -169,22 +203,24 @@ namespace genProvider {
     instName.setManagedElement(elemInstanceName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
-    
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
   
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGlobalForServiceResourceAccess::associatorsSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaServiceInstanceName& sourceInst,
-   Linux_SambaGlobalOptionsInstanceEnumeration& instEnum) 
-  { 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaGlobalOptionsInstance instance;
     
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
+    globalInstName.setNamespace(aNameSpaceP);
     globalInstName.setName(DEFAULT_GLOBAL_NAME);
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 
@@ -218,23 +254,24 @@ namespace genProvider {
     if ( option )
       instance.setWorkgroup( option );
     
-    instEnum.addElement(instance);
-    
-  };
+    anInstanceEnumeration.addElement(instance);
+  }
+
   
-    
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGlobalForServiceResourceAccess::associatorsManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaServiceInstanceEnumeration& instEnum) 
-  { 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaServiceInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaServiceInstance instance;
     
     Linux_SambaServiceInstanceName elemInstanceName;
-    elemInstanceName.setNamespace(nsp);
+    elemInstanceName.setNamespace(aNameSpaceP);
     elemInstanceName.setName(DEFAULT_SERVICE_NAME);
     elemInstanceName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
     elemInstanceName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
@@ -242,11 +279,13 @@ namespace genProvider {
     
     instance.setInstanceName(elemInstanceName);
     
-    instEnum.addElement(instance);
-  };
-  
+    anInstanceEnumeration.addElement(instance);
+  }
 
-    /* extrinsic methods */
+   
+  
+  // extrinsic methods
+
 	
 }
 

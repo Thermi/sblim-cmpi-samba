@@ -1,31 +1,37 @@
-/**
- *  Linux_SambaPrinterPrintingOptionsFactory.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaPrinterPrintingOptionsFactory.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaPrinterPrintingOptionsFactory.h"
 #include "Linux_SambaPrinterPrintingOptionsResourceAccess.h"
 
-namespace genProvider{
+namespace genProvider {
 	
 	Linux_SambaPrinterPrintingOptionsInterface* 
-	  Linux_SambaPrinterPrintingOptionsFactory::getImplementation(){
+  Linux_SambaPrinterPrintingOptionsFactory::getImplementation(){
 	  	
-	  	return (new Linux_SambaPrinterPrintingOptionsResourceAccess());
-	  };
+	  return (new Linux_SambaPrinterPrintingOptionsResourceAccess());
+  
+  }
+
 }
  

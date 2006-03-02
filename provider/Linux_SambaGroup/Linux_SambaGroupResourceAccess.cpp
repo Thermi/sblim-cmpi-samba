@@ -1,63 +1,89 @@
-/**
- *  Linux_SambaGroupResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGroupResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGroupResourceAccess.h"
+
+#include <errno.h>
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-  void Linux_SambaGroupResourceAccess::setInstanceNameProperties(const char* nsp,
-   char *instanceName,
-   Linux_SambaGroupInstanceName& anInstanceName)
-  {
-    anInstanceName.setNamespace(nsp);
+  //----------------------------------------------------------------------------
+  // manual written methods
+  
+  static void setInstanceNameProperties(
+      const char* aNameSpaceP,
+      char *instanceName, 
+      Linux_SambaGroupInstanceName& anInstanceName) {
+    
+    anInstanceName.setNamespace(aNameSpaceP);
     anInstanceName.setSambaGroupName(instanceName);
   };
 
+  //----------------------------------------------------------------------------
+
+
+  //----------------------------------------------------------------------------
   //Linux_SambaGroupResourceAccess::Linux_SambaGroupResourceAccess();
-  Linux_SambaGroupResourceAccess::~Linux_SambaGroupResourceAccess() { 
+
+  //----------------------------------------------------------------------------
+  Linux_SambaGroupResourceAccess::~Linux_SambaGroupResourceAccess() {
     terminator();
-  };
+  }
     
-  /* intrinsic methods */
-    
-  void Linux_SambaGroupResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaGroupInstanceNameEnumeration& instnames)
-  {
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGroupResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaGroupInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
     char ** groups = get_samba_groups_list();
     
     if(groups){
       for (int i=0; groups[i]; i++){
 	Linux_SambaGroupInstanceName instanceName;
-	setInstanceNameProperties(nsp,groups[i],instanceName);
-	instnames.addElement(instanceName); 
+	setInstanceNameProperties(aNameSpaceP,groups[i],instanceName);
+	anInstanceNameEnumeration.addElement(instanceName); 
       }
     }
-  };
-     	
-  void Linux_SambaGroupResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaGroupManualInstanceEnumeration& instances)
-  {
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaGroupResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaGroupManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     char ** groups = get_samba_groups_list();
     
     if(groups){
@@ -65,7 +91,7 @@ namespace genProvider {
 	Linux_SambaGroupManualInstance aManualInstance;
 	Linux_SambaGroupInstanceName instanceName;
 	
-	setInstanceNameProperties(nsp,groups[i],instanceName);
+	setInstanceNameProperties(aNameSpaceP,groups[i],instanceName);
 	aManualInstance.setInstanceName(instanceName);
 	
 	char* option;
@@ -73,75 +99,94 @@ namespace genProvider {
 	if ( option )
 	  aManualInstance.setSystemGroupName( option );
 	
-	instances.addElement(aManualInstance);
+	aManualInstanceEnumeration.addElement(aManualInstance);
       }
     }
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
+
   Linux_SambaGroupManualInstance 
-   Linux_SambaGroupResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaGroupInstanceName& instanceName)
-  {
+  Linux_SambaGroupResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaGroupInstanceName& anInstanceName) {
+    
     Linux_SambaGroupManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
+    aManualInstance.setInstanceName(anInstanceName);
     
     char* option;
-    option = get_unix_group_name(instanceName.getSambaGroupName());
+    option = get_unix_group_name(anInstanceName.getSambaGroupName());
     if ( option )
       aManualInstance.setSystemGroupName( option );
     
-    return aManualInstance;  
-  };
-  
-  /*
-  void Linux_SambaGroupResourceAccess::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaGroupManualInstance& newInstance)
-   {};
-  */
+    return aManualInstance;
+  }
 
-  	
-  void Linux_SambaGroupResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaGroupManualInstance& newInstance)
-  {
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGroupResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaGroupManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  
+  Linux_SambaGroupInstanceName
+  Linux_SambaGroupResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGroupManualInstance& aManualInstance) {
+    
     int ret;
-    if(ret = create_samba_group(newInstance.getInstanceName().getSambaGroupName(), newInstance.getSystemGroupName())){
+    if(ret = create_samba_group(aManualInstance.getInstanceName().getSambaGroupName(), aManualInstance.getSystemGroupName())){
       if (ret==-EEXIST)
 	throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exists!");
       else
 	throw CmpiStatus(CMPI_RC_ERR_FAILED,"Instance could not be added!");
     }
-  };
+    
+    return aManualInstance.getInstanceName();
+  }
   
-  void Linux_SambaGroupResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaGroupInstanceName& instanceName)
-  {
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaGroupResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGroupInstanceName& anInstanceName) {
+    
     int ret;
-    if(ret = delete_samba_group(instanceName.getSambaGroupName())){
+    if(ret = delete_samba_group(anInstanceName.getSambaGroupName())){
       if(ret == -ENOENT)
 	throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!"); 
       else
 	throw CmpiStatus(CMPI_RC_ERR_FAILED,"Instance could not be deleted!");
     }
-  };	
+  }
+
+	
+
   
-    /* extrinsic methods */
-    
+  // extrinsic methods
+
+
   char* Linux_SambaGroupResourceAccess::getAllSystemGroups(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaGroupInstanceName&) 
-  { 
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGroupInstanceName& anInstanceName) {
+    
     char ** groups = get_system_groups_list();
     char *  ret = NULL;
     int len = 0;
+    
     if(groups){
       for (int i=0; groups[i]; i++)
 	len = len + strlen(groups[i]) + 4;
@@ -156,8 +201,9 @@ namespace genProvider {
       }
     }
     return ret;
-  };
-    
+  }
+  
+
 	
 }
 

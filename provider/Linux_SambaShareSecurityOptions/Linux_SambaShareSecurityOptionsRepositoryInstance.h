@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaShareSecurityOptionsRepositoryInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareSecurityOptionsRepositoryInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaShareSecurityOptionsRepositoryInstance_h
 #define Linux_SambaShareSecurityOptionsRepositoryInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaShareSecurityOptionsInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaShareSecurityOptionsRepositoryInstance {
-  public:
-       Linux_SambaShareSecurityOptionsRepositoryInstance();
-  	
-       Linux_SambaShareSecurityOptionsRepositoryInstance
-  	    (const Linux_SambaShareSecurityOptionsRepositoryInstance& original);
-  	   
-       Linux_SambaShareSecurityOptionsRepositoryInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaShareSecurityOptionsRepositoryInstance();
        
-       Linux_SambaShareSecurityOptionsRepositoryInstance& operator=
-  	    (const Linux_SambaShareSecurityOptionsRepositoryInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaShareSecurityOptionsRepositoryInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaShareSecurityOptionsInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaShareSecurityOptionsInstanceName& val);        
-       const Linux_SambaShareSecurityOptionsInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaShareSecurityOptionsRepositoryInstance();
+    Linux_SambaShareSecurityOptionsRepositoryInstance(
+      const Linux_SambaShareSecurityOptionsRepositoryInstance& anInstance);
+    Linux_SambaShareSecurityOptionsRepositoryInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaShareSecurityOptionsRepositoryInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaShareSecurityOptionsRepositoryInstance& original);
-       void reset();
+    Linux_SambaShareSecurityOptionsRepositoryInstance& operator=(
+      const Linux_SambaShareSecurityOptionsRepositoryInstance& anInstance);
        
-       Linux_SambaShareSecurityOptionsInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaShareSecurityOptionsInstanceName& anInstanceName);        
+    const Linux_SambaShareSecurityOptionsInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement{
-  	Linux_SambaShareSecurityOptionsRepositoryInstance* m_elementP;
-  	Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement();
-  	~Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement();  	
+  struct Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement {
+
+    Linux_SambaShareSecurityOptionsRepositoryInstance* m_elementP;
+    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement();
+    ~Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration {
-  	private:
-  	  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration();
-  	  
-  	  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration(
-  	   const Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaShareSecurityOptionsRepositoryInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaShareSecurityOptionsRepositoryInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaShareSecurityOptionsRepositoryInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration();
+    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration(
+      const Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaShareSecurityOptionsRepositoryInstance& getNext();
+    int getSize() const;
+    const Linux_SambaShareSecurityOptionsRepositoryInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaShareSecurityOptionsRepositoryInstance& anInstance);
+
+  };
+
+}
+
+#endif

@@ -1,148 +1,187 @@
-/**
- *  Linux_SambaCommonSecurityForGlobalResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaCommonSecurityForGlobalResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaCommonSecurityForGlobalResourceAccess.h"
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-    //Linux_SambaCommonSecurityForGlobalResourceAccess::Linux_SambaCommonSecurityForGlobalResourceAccess();
-    Linux_SambaCommonSecurityForGlobalResourceAccess::~Linux_SambaCommonSecurityForGlobalResourceAccess() { 
-      terminator();
-    };
+  //----------------------------------------------------------------------------
+  //Linux_SambaCommonSecurityForGlobalResourceAccess::Linux_SambaCommonSecurityForGlobalResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaCommonSecurityForGlobalResourceAccess::~Linux_SambaCommonSecurityForGlobalResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    /*
-    void Linux_SambaCommonSecurityForGlobalResourceAccess::enumInstanceNames(
-     const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-     Linux_SambaCommonSecurityForGlobalInstanceNameEnumeration& instnames){
+  // intrinsic methods
+  /*
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaCommonSecurityForGlobalResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaCommonSecurityForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      int numInstanceNames=1;
-      for(int i=0;i<numInstanceNames;i++){
+    int instanceNameN = 1;
+    for (int x=0; x < instanceNameN; ++x) {
       
-        //place here the code retrieving your instanceName
+      //place here the code retrieving your instanceName
       
-        Linux_SambaCommonSecurityForGlobalInstanceName instanceName;
-        
-      }      
-    }
-    */
-  	/*
-    void Linux_SambaCommonSecurityForGlobalResourceAccess::enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration& instances){};
-  	*/
-  	/*
-    Linux_SambaCommonSecurityForGlobalManualInstance 
-     Linux_SambaCommonSecurityForGlobalResourceAccess::getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaCommonSecurityForGlobalInstanceName&){
-      Linux_SambaCommonSecurityForGlobalManualInstance instance;
+      Linux_SambaCommonSecurityForGlobalInstanceName instanceName;
       
-    }
-  	*/
-  	/*
-    void Linux_SambaCommonSecurityForGlobalResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaCommonSecurityForGlobalManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaCommonSecurityForGlobalResourceAccess::createInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaCommonSecurityForGlobalManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaCommonSecurityForGlobalResourceAccess::deleteInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaCommonSecurityForGlobalInstanceName&){};
+    }      
+  
+  }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaCommonSecurityForGlobalResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     const char** aPropertiesPP,
+  	 Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaCommonSecurityForGlobalManualInstance 
+  Linux_SambaCommonSecurityForGlobalResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaCommonSecurityForGlobalInstanceName& anInstanceName) {
+
+    Linux_SambaCommonSecurityForGlobalManualInstance manualInstance;
+
+  
+  }
+  */
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaCommonSecurityForGlobalResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaCommonSecurityForGlobalManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaCommonSecurityForGlobalInstanceName
+  Linux_SambaCommonSecurityForGlobalResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaCommonSecurityForGlobalManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaCommonSecurityForGlobalResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaCommonSecurityForGlobalInstanceName& anInstanceName) { }
 	*/
-    
-  /* Association Interface */
-    
+	
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
   void Linux_SambaCommonSecurityForGlobalResourceAccess::referencesSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaCommonSecurityForGlobalManualInstance manualInstance;
     
     Linux_SambaCommonSecurityForGlobalInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setManagedElement(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setManagedElement(aSourceInstanceName);
     
     Linux_SambaCommonSecurityOptionsInstanceName secInstName;
-    secInstName.setNamespace(nsp);
+    secInstName.setNamespace(aNameSpaceP);
     secInstName.setName(DEFAULT_GLOBAL_NAME);
     secInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instName.setSettingData(secInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
-    
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaCommonSecurityForGlobalResourceAccess::referencesManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaCommonSecurityOptionsInstanceName& sourceInst,
-   Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaCommonSecurityOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaCommonSecurityForGlobalManualInstance manualInstance;
     
     Linux_SambaCommonSecurityForGlobalInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setSettingData(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setSettingData(aSourceInstanceName);
     
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
+    globalInstName.setNamespace(aNameSpaceP);
     globalInstName.setName(DEFAULT_GLOBAL_NAME);
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instName.setManagedElement(globalInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
-    
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaCommonSecurityForGlobalResourceAccess::associatorsSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaCommonSecurityOptionsInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaCommonSecurityOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaCommonSecurityOptionsInstance instance;
     
     Linux_SambaCommonSecurityOptionsInstanceName secInstName;
-    secInstName.setNamespace(nsp);
+    secInstName.setNamespace(aNameSpaceP);
     secInstName.setName(DEFAULT_GLOBAL_NAME);
     secInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
@@ -178,21 +217,24 @@ namespace genProvider {
       else
 	instance.setReadOnly( false );
     
-    instEnum.addElement(instance);
-  };
+    anInstanceEnumeration.addElement(instance);
+  }
+
   
+  //----------------------------------------------------------------------------
+
   void Linux_SambaCommonSecurityForGlobalResourceAccess::associatorsManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaCommonSecurityOptionsInstanceName& sourceInst,
-   Linux_SambaGlobalOptionsInstanceEnumeration& instEnum)
-  {
-    Linux_SambaGlobalOptionsInstance instance;
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaCommonSecurityOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
     
+    Linux_SambaGlobalOptionsInstance instance;
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
+
+    globalInstName.setNamespace(aNameSpaceP);
     globalInstName.setName(DEFAULT_GLOBAL_NAME);
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
@@ -226,10 +268,13 @@ namespace genProvider {
     if ( option )
       instance.setWorkgroup( option );
     	
-    instEnum.addElement(instance);
-  };
+    anInstanceEnumeration.addElement(instance);
+  }
 
-    /* extrinsic methods */
+   
+  
+  // extrinsic methods
+
 	
 }
 

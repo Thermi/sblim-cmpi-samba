@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaForceGroupForGlobalRepositoryExternal.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaForceGroupForGlobalRepositoryExternal.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaForceGroupForGlobalRepositoryExternal_h
 #define Linux_SambaForceGroupForGlobalRepositoryExternal_h
 
@@ -27,38 +30,40 @@
 namespace genProvider {
 
   class Linux_SambaForceGroupForGlobalRepositoryExternal {
+     
+    private:
+    CmpiBroker  m_broker;
+    CmpiContext m_context;
+    const static char *s_shadowNameSpaceP;
   	
     public:
     Linux_SambaForceGroupForGlobalRepositoryExternal(
-     const CmpiBroker& brkr,
-     const CmpiContext& ctx);
+      const CmpiBroker& aBroker,
+      const CmpiContext& aContext);
     virtual ~Linux_SambaForceGroupForGlobalRepositoryExternal();
     
     virtual void enumInstanceNames(
-     Linux_SambaForceGroupForGlobalInstanceNameEnumeration&);
+      Linux_SambaForceGroupForGlobalInstanceNameEnumeration& anInstanceNameEnumeration);
      
     virtual void enumInstances(
-     const char* *properties,
-     Linux_SambaForceGroupForGlobalRepositoryInstanceEnumeration&);
+      const char** aPropertiesPP,
+      Linux_SambaForceGroupForGlobalRepositoryInstanceEnumeration& aRepositoryInstanceEnumeration);
      
     virtual Linux_SambaForceGroupForGlobalRepositoryInstance getInstance(
-     const char* *properties,
-     const Linux_SambaForceGroupForGlobalInstanceName&);
+      const char** aPropertiesPP,
+      const Linux_SambaForceGroupForGlobalInstanceName& anInstanceName);
      
     virtual void setInstance(
-     const char* *properties,
-     const Linux_SambaForceGroupForGlobalRepositoryInstance&);
+      const char** aPropertiesPP,
+      const Linux_SambaForceGroupForGlobalRepositoryInstance& aRepositoryInstance);
      
-    virtual void createInstance(
-     const Linux_SambaForceGroupForGlobalRepositoryInstance&);
+    virtual Linux_SambaForceGroupForGlobalInstanceName createInstance(
+      const Linux_SambaForceGroupForGlobalRepositoryInstance& aRepositoryInstance);
      
     virtual void deleteInstance(
-     const Linux_SambaForceGroupForGlobalInstanceName&);
-     
-    private:
-    CmpiBroker  broker;
-    CmpiContext context;
-    const static char *nsp;
+      const Linux_SambaForceGroupForGlobalInstanceName& anInstanceName);
+  
   };
+
 }
 #endif

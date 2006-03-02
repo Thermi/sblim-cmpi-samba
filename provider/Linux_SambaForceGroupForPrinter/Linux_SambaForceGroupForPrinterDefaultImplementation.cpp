@@ -1,203 +1,308 @@
-/**
- *  Linux_SambaForceGroupForPrinterDefaultImplementation.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaForceGroupForPrinterDefaultImplementation.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaForceGroupForPrinterDefaultImplementation.h"
+#include "Linux_SambaForceGroupForPrinterRepositoryInstance.h"
 #include <iostream>
-
-using namespace std;
 
 namespace genProvider {
 
   /* intrinsic methods */
-  void Linux_SambaForceGroupForPrinterDefaultImplementation::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaForceGroupForPrinterInstanceNameEnumeration& instnames){
-   	cout<<"enumInstances not supported for Linux_SambaForceGroupForPrinter"<<endl;
+  //----------------------------------------------------------------------------	
+  void
+  Linux_SambaForceGroupForPrinterDefaultImplementation::enumInstanceNames(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    Linux_SambaForceGroupForPrinterInstanceNameEnumeration& anInstanceNameEnumeration) {
+
+#ifdef DEBUG
+   	std::cout << "enumInstanceNames not supported for Linux_SambaForceGroupForPrinter" << std::endl;
+#endif   	
+
    	throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "enumInstances not implemented for Linux_SambaForceGroupForPrinter");   
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "enumInstanceEnumeration",
+   	  "Linux_SambaForceGroupForPrinter");   
+
   }
-  	
-  void Linux_SambaForceGroupForPrinterDefaultImplementation::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaForceGroupForPrinterManualInstanceEnumeration& instances){
-    
-    cout<<"Using default enumInstances implementation for Linux_SambaForceGroupForPrinter"<<endl;
-    cout<<"Let}s get the instanceNames"<<endl;
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaForceGroupForPrinterDefaultImplementation::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaForceGroupForPrinterManualInstanceEnumeration& anInstanceEnumeration) {
+
+#ifdef DEBUG
+    std::cout << "Using default enumInstances implementation for Linux_SambaForceGroupForPrinter" << std::endl;
+    std::cout << "Let's get the instanceNames" << std::endl;
+#endif    
+
     Linux_SambaForceGroupForPrinterInstanceNameEnumeration namesEnumeration;
-    enumInstanceNames(ctx, mbp,nsp,namesEnumeration);
-    cout<<"Getting each instance"<<endl;
-    while(namesEnumeration.hasNext()){
-      Linux_SambaForceGroupForPrinterInstanceName name=
-    	  namesEnumeration.getNext();
-    	cout<<"Getting an instance for instanceName"<<endl;
-    	Linux_SambaForceGroupForPrinterManualInstance instance=
-    	  getInstance(ctx, mbp, properties, name);
-    	cout<<"adding instance to enum"<<endl;
-    	instances.addElement(instance);
-    	cout<<"Added!"<<endl;
-    };
+    enumInstanceNames(aContext,aBroker,aNameSpaceP,namesEnumeration);
+
+#ifdef DEBUG
+    std::cout << "Getting each instance" << std::endl;
+#endif    
+    
+    while (namesEnumeration.hasNext()) {
+    
+      Linux_SambaForceGroupForPrinterInstanceName instanceName = namesEnumeration.getNext();
+    
+      Linux_SambaForceGroupForPrinterRepositoryInstance repositoryInstance;
+
+      // try to fetch repository instance
+      try {
+        Linux_SambaForceGroupForPrinterInstanceName repositoryInstanceName(instanceName);
+        repositoryInstanceName.setNamespace("IBMShadow/cimv2");
+        CmpiObjectPath repositoryCmpiObjectPath = repositoryInstanceName.getObjectPath();
+        CmpiBroker cmpiBroker(aBroker);
+        CmpiInstance repositoryCmpiInstance = cmpiBroker.getInstance(
+            aContext,
+            repositoryCmpiObjectPath,
+            aPropertiesPP);
+        Linux_SambaForceGroupForPrinterRepositoryInstance localRepositoryInstance(
+      	  repositoryCmpiInstance,
+          "IBMShadow/cimv2");
+        repositoryInstance = localRepositoryInstance;
+      } catch (const CmpiStatus& rc) { }                             
+    
+#ifdef DEBUG
+    	std::cout << "Getting an instance for instanceName" << std::endl;
+#endif
+    	
+    	Linux_SambaForceGroupForPrinterManualInstance instance = getInstance(
+    	  aContext,
+    	  aBroker,
+    	  aPropertiesPP,
+    	  instanceName);
+
+      // add the static data
+
+
+#ifdef DEBUG
+    	std::cout << "adding instance to enum" << std::endl;
+#endif
+    	
+    	anInstanceEnumeration.addElement(instance);
+
+#ifdef DEBUG
+    	std::cout << "Added!" << std::endl;
+#endif
+    	
+    }
+
   }
-  	
+
+  //----------------------------------------------------------------------------	
   Linux_SambaForceGroupForPrinterManualInstance 
-   Linux_SambaForceGroupForPrinterDefaultImplementation::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaForceGroupForPrinterInstanceName&){
-    cout<<"getInstance not supported for Linux_SambaForceGroupForPrinter"<<endl;
+  Linux_SambaForceGroupForPrinterDefaultImplementation::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaForceGroupForPrinterInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+    std::cout << "getInstance not supported for Linux_SambaForceGroupForPrinter" << std::endl;
+#endif
+    	
+
     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "getInstance not implemented for Linux_SambaForceGroupForPrinter");
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "getInstance",
+   	  "Linux_SambaForceGroupForPrinter");
+
   }
   	
-  void Linux_SambaForceGroupForPrinterDefaultImplementation::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaForceGroupForPrinterManualInstance&){
-   	cout<<"setInstance not supported for Linux_SambaForceGroupForPrinter"<<endl;
-     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "setInstance not implemented for Linux_SambaForceGroupForPrinter");
-  }
-  	
-  void Linux_SambaForceGroupForPrinterDefaultImplementation::
-   createInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaForceGroupForPrinterManualInstance&){
-   	cout<<"createInstance not supported for Linux_SambaForceGroupForPrinter"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "createInstance not implemented for Linux_SambaForceGroupForPrinter");
-  }
-  	
-  void Linux_SambaForceGroupForPrinterDefaultImplementation::
-   deleteInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaForceGroupForPrinterInstanceName&){
-   	cout<<"deleteInstance not supported for Linux_SambaForceGroupForPrinter"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "deleteInstance not implemented for Linux_SambaForceGroupForPrinter");
-  }
-	
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaForceGroupForPrinterDefaultImplementation::setInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaForceGroupForPrinterManualInstance& aManualInstance) {
   
-    /* Association Interface */
-
-    void Linux_SambaForceGroupForPrinterDefaultImplementation::
-     referencesGroupComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGroupInstanceName& sourceInst,
-     Linux_SambaForceGroupForPrinterManualInstanceEnumeration& instances){
-      throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "getGroupComponentReferences between Linux_SambaPrinterOptions and Linux_SambaGroup not implemented for Linux_SambaForceGroupForPrinter");
-    }
-
-    void Linux_SambaForceGroupForPrinterDefaultImplementation::
-     referencesPartComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaForceGroupForPrinterManualInstanceEnumeration& instances){
-      throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "getPartComponentReferences between Linux_SambaPrinterOptions and Linux_SambaGroup not implemented for Linux_SambaForceGroupForPrinter");
-    }
-
-    void Linux_SambaForceGroupForPrinterDefaultImplementation::
-     associatorsGroupComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGroupInstanceName& sourceInst,
-     Linux_SambaPrinterOptionsInstanceEnumeration& instances){
-      
-      std::cout<<"Linux_SambaForceGroupForPrinter : associatorsLinux_SambaPrinterOptions() ... returns one instance"<<std::endl;
-      
-      Linux_SambaForceGroupForPrinterManualInstanceEnumeration enumeration;
-      
-      referencesGroupComponent(ctx, mbp, sourceInst.getNamespace(), 
-       properties, sourceInst, enumeration);
-
-      Linux_SambaPrinterOptionsExternal external(mbp, ctx);
-
-      while(enumeration.hasNext()) {
-        const Linux_SambaForceGroupForPrinterManualInstance instance =
-	     enumeration.getNext();
-	     
-        const Linux_SambaForceGroupForPrinterInstanceName instanceName = 
-         instance.getInstanceName();
-         
-        const Linux_SambaPrinterOptionsInstanceName GroupComponent = 
-         instanceName.getGroupComponent();
-         
-        Linux_SambaPrinterOptionsInstance inst = external.getInstance(properties,GroupComponent);
-        
-        instances.addElement(inst);
-      }
-    }
-
-    void Linux_SambaForceGroupForPrinterDefaultImplementation::
-     associatorsPartComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaGroupInstanceEnumeration& instances){
-     
-      std::cout<<"Linux_SambaForceGroupForPrinter : associatorsLinux_SambaGroup() ... returns one instance"<<std::endl;
-      
-      Linux_SambaForceGroupForPrinterManualInstanceEnumeration enumeration;
-      
-      referencesPartComponent(ctx, mbp, sourceInst.getNamespace(), 
-       properties, sourceInst, enumeration);
-
-      Linux_SambaGroupExternal external(mbp, ctx);
-
-      while(enumeration.hasNext()) {
-        const Linux_SambaForceGroupForPrinterManualInstance instance =
-	     enumeration.getNext();
-	     
-        const Linux_SambaForceGroupForPrinterInstanceName instanceName = 
-         instance.getInstanceName();
-         
-        const Linux_SambaGroupInstanceName PartComponent = 
-         instanceName.getPartComponent();
-         
-        Linux_SambaGroupInstance inst = external.getInstance(properties,PartComponent);
-        
-        instances.addElement(inst);
-      }
-    }
-
+#ifdef DEBUG
+    std::cout << "setInstance not supported for Linux_SambaForceGroupForPrinter" << std::endl;
+#endif
+    	
    
-  /* extrinsic methods */
-	
-}
+    throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "setInstance",
+   	  "Linux_SambaForceGroupForPrinter");
+   	 
+  }
+  	
+  //----------------------------------------------------------------------------	
+  Linux_SambaForceGroupForPrinterInstanceName  
+  Linux_SambaForceGroupForPrinterDefaultImplementation::createInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaForceGroupForPrinterManualInstance& aManualInstance) {
 
+#ifdef DEBUG
+   	std::cout << "createInstance not supported for Linux_SambaForceGroupForPrinter" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+   	 CmpiErrorFormater::METHOD_NOT_FOUND,
+   	 "createInstance",
+   	 "Linux_SambaForceGroupForPrinter");
+
+  }
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaForceGroupForPrinterDefaultImplementation::deleteInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaForceGroupForPrinterInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+   	std::cout << "deleteInstance not supported for Linux_SambaForceGroupForPrinter" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "deleteInstance",
+      "Linux_SambaForceGroupForPrinter");
+
+  }
+
+  
+  // Association Interface
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceGroupForPrinterDefaultImplementation::referencesGroupComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGroupInstanceName& aSourceInstance,
+    Linux_SambaForceGroupForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "References(GroupComponent)",
+      "Linux_SambaForceGroupForPrinter");
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceGroupForPrinterDefaultImplementation::referencesPartComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaPrinterOptionsInstanceName& aSourceInstance,
+    Linux_SambaForceGroupForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "References(PartComponent)",
+      "Linux_SambaForceGroupForPrinter");
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceGroupForPrinterDefaultImplementation::associatorsGroupComponent(
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGroupInstanceName& aSourceInstance,
+    Linux_SambaPrinterOptionsInstanceEnumeration& anInstanceEnumeration) {
+      
+#ifdef DEBUG
+    std::cout<<"Linux_SambaForceGroupForPrinter : associatorsLinux_SambaPrinterOptions() ... returns one instance"<<std::endl;
+#endif    
+      
+    Linux_SambaForceGroupForPrinterManualInstanceEnumeration manualInstanceEnumeration;
+      
+    referencesGroupComponent(
+      aContext,
+      aBroker,
+      aSourceInstance.getNamespace(), 
+      aPropertiesPP,
+      aSourceInstance,
+      manualInstanceEnumeration);
+
+    Linux_SambaPrinterOptionsExternal external(aBroker,aContext);
+
+    while (manualInstanceEnumeration.hasNext()) {
+      const Linux_SambaForceGroupForPrinterManualInstance manualInstance = manualInstanceEnumeration.getNext();
+      const Linux_SambaForceGroupForPrinterInstanceName instanceName = manualInstance.getInstanceName();
+      const Linux_SambaPrinterOptionsInstanceName GroupComponent = instanceName.getGroupComponent();
+      Linux_SambaPrinterOptionsInstance instance = external.getInstance(aPropertiesPP,GroupComponent);
+      anInstanceEnumeration.addElement(instance);
+    }
+  
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceGroupForPrinterDefaultImplementation::associatorsPartComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaPrinterOptionsInstanceName& aSourceInstance,
+    Linux_SambaGroupInstanceEnumeration& anInstanceEnumeration) {
+     
+#ifdef DEBUG
+    std::cout << "Linux_SambaForceGroupForPrinter : associatorsLinux_SambaGroup() ... returns one instance" << std::endl;
+#endif    
+      
+    Linux_SambaForceGroupForPrinterManualInstanceEnumeration manualInstanceEnumeration;
+      
+    referencesPartComponent(
+      aContext,
+      aBroker,
+      aSourceInstance.getNamespace(), 
+      aPropertiesPP,
+      aSourceInstance,
+      manualInstanceEnumeration);
+
+    Linux_SambaGroupExternal external(aBroker,aContext);
+
+    while(manualInstanceEnumeration.hasNext()) {
+      const Linux_SambaForceGroupForPrinterManualInstance manualInstance = manualInstanceEnumeration.getNext();
+      const Linux_SambaForceGroupForPrinterInstanceName instanceName = manualInstance.getInstanceName();
+      const Linux_SambaGroupInstanceName PartComponent = instanceName.getPartComponent();
+      Linux_SambaGroupInstance instance = external.getInstance(aPropertiesPP,PartComponent);
+      anInstanceEnumeration.addElement(instance);
+    }
+
+  }
+
+  /* extrinsic methods */
+  
+
+}

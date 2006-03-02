@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaGlobalBrowseForGlobalInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalBrowseForGlobalInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGlobalBrowseForGlobalInstance_h
 #define Linux_SambaGlobalBrowseForGlobalInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,91 +33,88 @@
 
 #include "Linux_SambaGlobalBrowseForGlobalInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaGlobalBrowseForGlobalInstance {
-  public:
-       Linux_SambaGlobalBrowseForGlobalInstance();
-  	
-       Linux_SambaGlobalBrowseForGlobalInstance
-  	    (const Linux_SambaGlobalBrowseForGlobalInstance& original);
-  	   
-       Linux_SambaGlobalBrowseForGlobalInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaGlobalBrowseForGlobalInstance();
        
-       Linux_SambaGlobalBrowseForGlobalInstance& operator=
-  	    (const Linux_SambaGlobalBrowseForGlobalInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaGlobalBrowseForGlobalInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaGlobalBrowseForGlobalInstanceName m_instanceName;
+    CMPIUint16 m_IsCurrent;
+    CMPIUint16 m_IsDefault;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaGlobalBrowseForGlobalInstanceName& val);        
-       const Linux_SambaGlobalBrowseForGlobalInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+      unsigned int IsCurrent:1;
+      unsigned int IsDefault:1;
 
-       unsigned int isIsCurrentSet() const;
-       void setIsCurrent(const CMPIUint16 val);
-       const CMPIUint16 getIsCurrent() const;
+    } isSet;
+    
+    public:
+    Linux_SambaGlobalBrowseForGlobalInstance();
+    Linux_SambaGlobalBrowseForGlobalInstance(
+      const Linux_SambaGlobalBrowseForGlobalInstance& anInstance);
+    Linux_SambaGlobalBrowseForGlobalInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaGlobalBrowseForGlobalInstance();
+       
+    Linux_SambaGlobalBrowseForGlobalInstance& operator=(
+      const Linux_SambaGlobalBrowseForGlobalInstance& anInstance);
+       
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaGlobalBrowseForGlobalInstanceName& anInstanceName);        
+    const Linux_SambaGlobalBrowseForGlobalInstanceName& getInstanceName() const;
 
-       unsigned int isIsDefaultSet() const;
-       void setIsDefault(const CMPIUint16 val);
-       const CMPIUint16 getIsDefault() const;
-       
-  private:
-       void init();
-       void init(const Linux_SambaGlobalBrowseForGlobalInstance& original);
-       void reset();
-       
-       Linux_SambaGlobalBrowseForGlobalInstanceName m_instanceName;
-       CMPIUint16 m_IsCurrent;
-       CMPIUint16 m_IsDefault;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-         unsigned int IsCurrent:1;
-         unsigned int IsDefault:1;
-       } isSet;
+    unsigned int isIsCurrentSet() const;
+    void setIsCurrent(const CMPIUint16 aValue);
+    const CMPIUint16 getIsCurrent() const;
+
+    unsigned int isIsDefaultSet() const;
+    void setIsDefault(const CMPIUint16 aValue);
+    const CMPIUint16 getIsDefault() const;
+
+
   };
   
-  
-  struct Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement{
-  	Linux_SambaGlobalBrowseForGlobalInstance* m_elementP;
-  	Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement();
-  	~Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement();  	
+  struct Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement {
+
+    Linux_SambaGlobalBrowseForGlobalInstance* m_elementP;
+    Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement();
+    ~Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaGlobalBrowseForGlobalInstanceEnumeration {
-  	private:
-  	  Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaGlobalBrowseForGlobalInstanceEnumeration();
-  	  
-  	  Linux_SambaGlobalBrowseForGlobalInstanceEnumeration(
-  	   const Linux_SambaGlobalBrowseForGlobalInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaGlobalBrowseForGlobalInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaGlobalBrowseForGlobalInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaGlobalBrowseForGlobalInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaGlobalBrowseForGlobalInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaGlobalBrowseForGlobalInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaGlobalBrowseForGlobalInstanceEnumeration();
+    Linux_SambaGlobalBrowseForGlobalInstanceEnumeration(
+      const Linux_SambaGlobalBrowseForGlobalInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaGlobalBrowseForGlobalInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaGlobalBrowseForGlobalInstance& getNext();
+    int getSize() const;
+    const Linux_SambaGlobalBrowseForGlobalInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaGlobalBrowseForGlobalInstance& anInstance);
+
+  };
+
+}
+
+#endif

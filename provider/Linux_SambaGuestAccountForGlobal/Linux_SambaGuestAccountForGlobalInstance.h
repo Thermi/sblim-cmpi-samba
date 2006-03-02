@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaGuestAccountForGlobalInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGuestAccountForGlobalInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGuestAccountForGlobalInstance_h
 #define Linux_SambaGuestAccountForGlobalInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaGuestAccountForGlobalInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaGuestAccountForGlobalInstance {
-  public:
-       Linux_SambaGuestAccountForGlobalInstance();
-  	
-       Linux_SambaGuestAccountForGlobalInstance
-  	    (const Linux_SambaGuestAccountForGlobalInstance& original);
-  	   
-       Linux_SambaGuestAccountForGlobalInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaGuestAccountForGlobalInstance();
        
-       Linux_SambaGuestAccountForGlobalInstance& operator=
-  	    (const Linux_SambaGuestAccountForGlobalInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaGuestAccountForGlobalInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaGuestAccountForGlobalInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaGuestAccountForGlobalInstanceName& val);        
-       const Linux_SambaGuestAccountForGlobalInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaGuestAccountForGlobalInstance();
+    Linux_SambaGuestAccountForGlobalInstance(
+      const Linux_SambaGuestAccountForGlobalInstance& anInstance);
+    Linux_SambaGuestAccountForGlobalInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaGuestAccountForGlobalInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaGuestAccountForGlobalInstance& original);
-       void reset();
+    Linux_SambaGuestAccountForGlobalInstance& operator=(
+      const Linux_SambaGuestAccountForGlobalInstance& anInstance);
        
-       Linux_SambaGuestAccountForGlobalInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaGuestAccountForGlobalInstanceName& anInstanceName);        
+    const Linux_SambaGuestAccountForGlobalInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaGuestAccountForGlobalInstanceEnumerationElement{
-  	Linux_SambaGuestAccountForGlobalInstance* m_elementP;
-  	Linux_SambaGuestAccountForGlobalInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaGuestAccountForGlobalInstanceEnumerationElement();
-  	~Linux_SambaGuestAccountForGlobalInstanceEnumerationElement();  	
+  struct Linux_SambaGuestAccountForGlobalInstanceEnumerationElement {
+
+    Linux_SambaGuestAccountForGlobalInstance* m_elementP;
+    Linux_SambaGuestAccountForGlobalInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaGuestAccountForGlobalInstanceEnumerationElement();
+    ~Linux_SambaGuestAccountForGlobalInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaGuestAccountForGlobalInstanceEnumeration {
-  	private:
-  	  Linux_SambaGuestAccountForGlobalInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaGuestAccountForGlobalInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaGuestAccountForGlobalInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaGuestAccountForGlobalInstanceEnumeration();
-  	  
-  	  Linux_SambaGuestAccountForGlobalInstanceEnumeration(
-  	   const Linux_SambaGuestAccountForGlobalInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaGuestAccountForGlobalInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaGuestAccountForGlobalInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaGuestAccountForGlobalInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaGuestAccountForGlobalInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaGuestAccountForGlobalInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaGuestAccountForGlobalInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaGuestAccountForGlobalInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaGuestAccountForGlobalInstanceEnumeration();
+    Linux_SambaGuestAccountForGlobalInstanceEnumeration(
+      const Linux_SambaGuestAccountForGlobalInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaGuestAccountForGlobalInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaGuestAccountForGlobalInstance& getNext();
+    int getSize() const;
+    const Linux_SambaGuestAccountForGlobalInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaGuestAccountForGlobalInstance& anInstance);
+
+  };
+
+}
+
+#endif

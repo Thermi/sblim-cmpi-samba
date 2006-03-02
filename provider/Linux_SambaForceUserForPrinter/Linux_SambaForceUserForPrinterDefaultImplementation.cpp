@@ -1,203 +1,308 @@
-/**
- *  Linux_SambaForceUserForPrinterDefaultImplementation.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaForceUserForPrinterDefaultImplementation.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaForceUserForPrinterDefaultImplementation.h"
+#include "Linux_SambaForceUserForPrinterRepositoryInstance.h"
 #include <iostream>
-
-using namespace std;
 
 namespace genProvider {
 
   /* intrinsic methods */
-  void Linux_SambaForceUserForPrinterDefaultImplementation::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaForceUserForPrinterInstanceNameEnumeration& instnames){
-   	cout<<"enumInstances not supported for Linux_SambaForceUserForPrinter"<<endl;
+  //----------------------------------------------------------------------------	
+  void
+  Linux_SambaForceUserForPrinterDefaultImplementation::enumInstanceNames(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    Linux_SambaForceUserForPrinterInstanceNameEnumeration& anInstanceNameEnumeration) {
+
+#ifdef DEBUG
+   	std::cout << "enumInstanceNames not supported for Linux_SambaForceUserForPrinter" << std::endl;
+#endif   	
+
    	throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "enumInstances not implemented for Linux_SambaForceUserForPrinter");   
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "enumInstanceEnumeration",
+   	  "Linux_SambaForceUserForPrinter");   
+
   }
-  	
-  void Linux_SambaForceUserForPrinterDefaultImplementation::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaForceUserForPrinterManualInstanceEnumeration& instances){
-    
-    cout<<"Using default enumInstances implementation for Linux_SambaForceUserForPrinter"<<endl;
-    cout<<"Let}s get the instanceNames"<<endl;
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaForceUserForPrinterDefaultImplementation::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaForceUserForPrinterManualInstanceEnumeration& anInstanceEnumeration) {
+
+#ifdef DEBUG
+    std::cout << "Using default enumInstances implementation for Linux_SambaForceUserForPrinter" << std::endl;
+    std::cout << "Let's get the instanceNames" << std::endl;
+#endif    
+
     Linux_SambaForceUserForPrinterInstanceNameEnumeration namesEnumeration;
-    enumInstanceNames(ctx, mbp,nsp,namesEnumeration);
-    cout<<"Getting each instance"<<endl;
-    while(namesEnumeration.hasNext()){
-      Linux_SambaForceUserForPrinterInstanceName name=
-    	  namesEnumeration.getNext();
-    	cout<<"Getting an instance for instanceName"<<endl;
-    	Linux_SambaForceUserForPrinterManualInstance instance=
-    	  getInstance(ctx, mbp, properties, name);
-    	cout<<"adding instance to enum"<<endl;
-    	instances.addElement(instance);
-    	cout<<"Added!"<<endl;
-    };
+    enumInstanceNames(aContext,aBroker,aNameSpaceP,namesEnumeration);
+
+#ifdef DEBUG
+    std::cout << "Getting each instance" << std::endl;
+#endif    
+    
+    while (namesEnumeration.hasNext()) {
+    
+      Linux_SambaForceUserForPrinterInstanceName instanceName = namesEnumeration.getNext();
+    
+      Linux_SambaForceUserForPrinterRepositoryInstance repositoryInstance;
+
+      // try to fetch repository instance
+      try {
+        Linux_SambaForceUserForPrinterInstanceName repositoryInstanceName(instanceName);
+        repositoryInstanceName.setNamespace("IBMShadow/cimv2");
+        CmpiObjectPath repositoryCmpiObjectPath = repositoryInstanceName.getObjectPath();
+        CmpiBroker cmpiBroker(aBroker);
+        CmpiInstance repositoryCmpiInstance = cmpiBroker.getInstance(
+            aContext,
+            repositoryCmpiObjectPath,
+            aPropertiesPP);
+        Linux_SambaForceUserForPrinterRepositoryInstance localRepositoryInstance(
+      	  repositoryCmpiInstance,
+          "IBMShadow/cimv2");
+        repositoryInstance = localRepositoryInstance;
+      } catch (const CmpiStatus& rc) { }                             
+    
+#ifdef DEBUG
+    	std::cout << "Getting an instance for instanceName" << std::endl;
+#endif
+    	
+    	Linux_SambaForceUserForPrinterManualInstance instance = getInstance(
+    	  aContext,
+    	  aBroker,
+    	  aPropertiesPP,
+    	  instanceName);
+
+      // add the static data
+
+
+#ifdef DEBUG
+    	std::cout << "adding instance to enum" << std::endl;
+#endif
+    	
+    	anInstanceEnumeration.addElement(instance);
+
+#ifdef DEBUG
+    	std::cout << "Added!" << std::endl;
+#endif
+    	
+    }
+
   }
-  	
+
+  //----------------------------------------------------------------------------	
   Linux_SambaForceUserForPrinterManualInstance 
-   Linux_SambaForceUserForPrinterDefaultImplementation::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaForceUserForPrinterInstanceName&){
-    cout<<"getInstance not supported for Linux_SambaForceUserForPrinter"<<endl;
+  Linux_SambaForceUserForPrinterDefaultImplementation::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaForceUserForPrinterInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+    std::cout << "getInstance not supported for Linux_SambaForceUserForPrinter" << std::endl;
+#endif
+    	
+
     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "getInstance not implemented for Linux_SambaForceUserForPrinter");
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "getInstance",
+   	  "Linux_SambaForceUserForPrinter");
+
   }
   	
-  void Linux_SambaForceUserForPrinterDefaultImplementation::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaForceUserForPrinterManualInstance&){
-   	cout<<"setInstance not supported for Linux_SambaForceUserForPrinter"<<endl;
-     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "setInstance not implemented for Linux_SambaForceUserForPrinter");
-  }
-  	
-  void Linux_SambaForceUserForPrinterDefaultImplementation::
-   createInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaForceUserForPrinterManualInstance&){
-   	cout<<"createInstance not supported for Linux_SambaForceUserForPrinter"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "createInstance not implemented for Linux_SambaForceUserForPrinter");
-  }
-  	
-  void Linux_SambaForceUserForPrinterDefaultImplementation::
-   deleteInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaForceUserForPrinterInstanceName&){
-   	cout<<"deleteInstance not supported for Linux_SambaForceUserForPrinter"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "deleteInstance not implemented for Linux_SambaForceUserForPrinter");
-  }
-	
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaForceUserForPrinterDefaultImplementation::setInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaForceUserForPrinterManualInstance& aManualInstance) {
   
-    /* Association Interface */
-
-    void Linux_SambaForceUserForPrinterDefaultImplementation::
-     referencesPartComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaForceUserForPrinterManualInstanceEnumeration& instances){
-      throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "getPartComponentReferences between Linux_SambaUser and Linux_SambaPrinterOptions not implemented for Linux_SambaForceUserForPrinter");
-    }
-
-    void Linux_SambaForceUserForPrinterDefaultImplementation::
-     referencesGroupComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaForceUserForPrinterManualInstanceEnumeration& instances){
-      throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "getGroupComponentReferences between Linux_SambaUser and Linux_SambaPrinterOptions not implemented for Linux_SambaForceUserForPrinter");
-    }
-
-    void Linux_SambaForceUserForPrinterDefaultImplementation::
-     associatorsPartComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaUserInstanceEnumeration& instances){
-      
-      std::cout<<"Linux_SambaForceUserForPrinter : associatorsLinux_SambaUser() ... returns one instance"<<std::endl;
-      
-      Linux_SambaForceUserForPrinterManualInstanceEnumeration enumeration;
-      
-      referencesPartComponent(ctx, mbp, sourceInst.getNamespace(), 
-       properties, sourceInst, enumeration);
-
-      Linux_SambaUserExternal external(mbp, ctx);
-
-      while(enumeration.hasNext()) {
-        const Linux_SambaForceUserForPrinterManualInstance instance =
-	     enumeration.getNext();
-	     
-        const Linux_SambaForceUserForPrinterInstanceName instanceName = 
-         instance.getInstanceName();
-         
-        const Linux_SambaUserInstanceName PartComponent = 
-         instanceName.getPartComponent();
-         
-        Linux_SambaUserInstance inst = external.getInstance(properties,PartComponent);
-        
-        instances.addElement(inst);
-      }
-    }
-
-    void Linux_SambaForceUserForPrinterDefaultImplementation::
-     associatorsGroupComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaPrinterOptionsInstanceEnumeration& instances){
-     
-      std::cout<<"Linux_SambaForceUserForPrinter : associatorsLinux_SambaPrinterOptions() ... returns one instance"<<std::endl;
-      
-      Linux_SambaForceUserForPrinterManualInstanceEnumeration enumeration;
-      
-      referencesGroupComponent(ctx, mbp, sourceInst.getNamespace(), 
-       properties, sourceInst, enumeration);
-
-      Linux_SambaPrinterOptionsExternal external(mbp, ctx);
-
-      while(enumeration.hasNext()) {
-        const Linux_SambaForceUserForPrinterManualInstance instance =
-	     enumeration.getNext();
-	     
-        const Linux_SambaForceUserForPrinterInstanceName instanceName = 
-         instance.getInstanceName();
-         
-        const Linux_SambaPrinterOptionsInstanceName GroupComponent = 
-         instanceName.getGroupComponent();
-         
-        Linux_SambaPrinterOptionsInstance inst = external.getInstance(properties,GroupComponent);
-        
-        instances.addElement(inst);
-      }
-    }
-
+#ifdef DEBUG
+    std::cout << "setInstance not supported for Linux_SambaForceUserForPrinter" << std::endl;
+#endif
+    	
    
-  /* extrinsic methods */
-	
-}
+    throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "setInstance",
+   	  "Linux_SambaForceUserForPrinter");
+   	 
+  }
+  	
+  //----------------------------------------------------------------------------	
+  Linux_SambaForceUserForPrinterInstanceName  
+  Linux_SambaForceUserForPrinterDefaultImplementation::createInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaForceUserForPrinterManualInstance& aManualInstance) {
 
+#ifdef DEBUG
+   	std::cout << "createInstance not supported for Linux_SambaForceUserForPrinter" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+   	 CmpiErrorFormater::METHOD_NOT_FOUND,
+   	 "createInstance",
+   	 "Linux_SambaForceUserForPrinter");
+
+  }
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaForceUserForPrinterDefaultImplementation::deleteInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaForceUserForPrinterInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+   	std::cout << "deleteInstance not supported for Linux_SambaForceUserForPrinter" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "deleteInstance",
+      "Linux_SambaForceUserForPrinter");
+
+  }
+
+  
+  // Association Interface
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForPrinterDefaultImplementation::referencesPartComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaPrinterOptionsInstanceName& aSourceInstance,
+    Linux_SambaForceUserForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "References(PartComponent)",
+      "Linux_SambaForceUserForPrinter");
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForPrinterDefaultImplementation::referencesGroupComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstance,
+    Linux_SambaForceUserForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "References(GroupComponent)",
+      "Linux_SambaForceUserForPrinter");
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForPrinterDefaultImplementation::associatorsPartComponent(
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaPrinterOptionsInstanceName& aSourceInstance,
+    Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
+      
+#ifdef DEBUG
+    std::cout<<"Linux_SambaForceUserForPrinter : associatorsLinux_SambaUser() ... returns one instance"<<std::endl;
+#endif    
+      
+    Linux_SambaForceUserForPrinterManualInstanceEnumeration manualInstanceEnumeration;
+      
+    referencesPartComponent(
+      aContext,
+      aBroker,
+      aSourceInstance.getNamespace(), 
+      aPropertiesPP,
+      aSourceInstance,
+      manualInstanceEnumeration);
+
+    Linux_SambaUserExternal external(aBroker,aContext);
+
+    while (manualInstanceEnumeration.hasNext()) {
+      const Linux_SambaForceUserForPrinterManualInstance manualInstance = manualInstanceEnumeration.getNext();
+      const Linux_SambaForceUserForPrinterInstanceName instanceName = manualInstance.getInstanceName();
+      const Linux_SambaUserInstanceName PartComponent = instanceName.getPartComponent();
+      Linux_SambaUserInstance instance = external.getInstance(aPropertiesPP,PartComponent);
+      anInstanceEnumeration.addElement(instance);
+    }
+  
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForPrinterDefaultImplementation::associatorsGroupComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstance,
+    Linux_SambaPrinterOptionsInstanceEnumeration& anInstanceEnumeration) {
+     
+#ifdef DEBUG
+    std::cout << "Linux_SambaForceUserForPrinter : associatorsLinux_SambaPrinterOptions() ... returns one instance" << std::endl;
+#endif    
+      
+    Linux_SambaForceUserForPrinterManualInstanceEnumeration manualInstanceEnumeration;
+      
+    referencesGroupComponent(
+      aContext,
+      aBroker,
+      aSourceInstance.getNamespace(), 
+      aPropertiesPP,
+      aSourceInstance,
+      manualInstanceEnumeration);
+
+    Linux_SambaPrinterOptionsExternal external(aBroker,aContext);
+
+    while(manualInstanceEnumeration.hasNext()) {
+      const Linux_SambaForceUserForPrinterManualInstance manualInstance = manualInstanceEnumeration.getNext();
+      const Linux_SambaForceUserForPrinterInstanceName instanceName = manualInstance.getInstanceName();
+      const Linux_SambaPrinterOptionsInstanceName GroupComponent = instanceName.getGroupComponent();
+      Linux_SambaPrinterOptionsInstance instance = external.getInstance(aPropertiesPP,GroupComponent);
+      anInstanceEnumeration.addElement(instance);
+    }
+
+  }
+
+  /* extrinsic methods */
+  
+
+}

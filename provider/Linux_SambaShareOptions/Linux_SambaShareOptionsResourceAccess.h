@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaShareOptionsResourceAccess.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareOptionsResourceAccess.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaShareOptionsResourceAccess_h
 #define Linux_SambaShareOptionsResourceAccess_h
 
@@ -27,70 +30,73 @@
 #include "CmpiDateTime.h"
 #include "CmpiBroker.h"
 #include "Linux_SambaShareOptionsDefaultImplementation.h"
-#include "smt_smb_ra_support.h"
-#include "smt_smb_defaultvalues.h"
+
 
 namespace genProvider {
 
   class Linux_SambaShareOptionsResourceAccess:
    public Linux_SambaShareOptionsDefaultImplementation {
   	
-   private:
-    void Linux_SambaShareOptionsResourceAccess::setInstanceNameProperties(const char* nsp,
-     char *instanceName,
-     Linux_SambaShareOptionsInstanceName& anInstanceName);
-
-    void Linux_SambaShareOptionsResourceAccess::setInstanceProperties(
-     Linux_SambaShareOptionsManualInstance& aManualInstance); 
-  
-    void Linux_SambaShareOptionsResourceAccess::setRAProperties(
-     Linux_SambaShareOptionsManualInstance newInstance); 
-  
-
     public:
-    /*Linux_SambaShareOptionsResourceAccess();*/    
+    /*
+    Linux_SambaShareOptionsResourceAccess();
+    */    
     virtual ~Linux_SambaShareOptionsResourceAccess() ;
     
     /* intrinsic methods */
+
     virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaShareOptionsInstanceNameEnumeration& instnames);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaShareOptionsInstanceNameEnumeration& anInstanceNameEnumeration);
+
   	
+
     virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaShareOptionsManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+  	  Linux_SambaShareOptionsManualInstanceEnumeration& aManualInstanceEnumeration);
+
   	
+
     virtual Linux_SambaShareOptionsManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaShareOptionsInstanceName& instanceName);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaShareOptionsInstanceName& anInstanceName);
+
   	
+
     virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaShareOptionsManualInstance& newInstance);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaShareOptionsManualInstance& aManualInstance);
+
   	
-    virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaShareOptionsManualInstance& newInstance);
+
+    virtual Linux_SambaShareOptionsInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaShareOptionsManualInstance& aManualInstance);
+
   	
+
     virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaShareOptionsInstanceName& instanceName);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaShareOptionsInstanceName& anInstanceName);
+
 	
     
+    
     /* extrinsic methods */
+    
 	
   };
+  
 }
 #endif
-

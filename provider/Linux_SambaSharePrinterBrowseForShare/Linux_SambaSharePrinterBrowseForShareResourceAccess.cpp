@@ -1,205 +1,252 @@
-/**
- *  Linux_SambaSharePrinterBrowseForShareResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaSharePrinterBrowseForShareResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaSharePrinterBrowseForShareResourceAccess.h"
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-    //Linux_SambaSharePrinterBrowseForShareResourceAccess::Linux_SambaSharePrinterBrowseForShareResourceAccess();
-    Linux_SambaSharePrinterBrowseForShareResourceAccess::~Linux_SambaSharePrinterBrowseForShareResourceAccess() { };
+  //----------------------------------------------------------------------------
+  //Linux_SambaSharePrinterBrowseForShareResourceAccess::Linux_SambaSharePrinterBrowseForShareResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaSharePrinterBrowseForShareResourceAccess::~Linux_SambaSharePrinterBrowseForShareResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    /*
-    void Linux_SambaSharePrinterBrowseForShareResourceAccess::enumInstanceNames(
-     const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-     Linux_SambaSharePrinterBrowseForShareInstanceNameEnumeration& instnames){
+  // intrinsic methods
+  /*
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaSharePrinterBrowseForShareResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaSharePrinterBrowseForShareInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      int numInstanceNames=1;
-      for(int i=0;i<numInstanceNames;i++){
+    int instanceNameN = 1;
+    for (int x=0; x < instanceNameN; ++x) {
       
-        //place here the code retrieving your instanceName
+      //place here the code retrieving your instanceName
       
-        Linux_SambaSharePrinterBrowseForShareInstanceName instanceName;
-        
-      }      
-    }
-    */
-  	/*
-    void Linux_SambaSharePrinterBrowseForShareResourceAccess::enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaSharePrinterBrowseForShareManualInstanceEnumeration& instances){};
-  	*/
-  	/*
-    Linux_SambaSharePrinterBrowseForShareManualInstance 
-     Linux_SambaSharePrinterBrowseForShareResourceAccess::getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaSharePrinterBrowseForShareInstanceName&){
-      Linux_SambaSharePrinterBrowseForShareManualInstance instance;
+      Linux_SambaSharePrinterBrowseForShareInstanceName instanceName;
       
-    }
-  	*/
-  	/*
-    void Linux_SambaSharePrinterBrowseForShareResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaSharePrinterBrowseForShareManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaSharePrinterBrowseForShareResourceAccess::createInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaSharePrinterBrowseForShareManualInstance&){};
-  	*/
-  	
-    void Linux_SambaSharePrinterBrowseForShareResourceAccess::deleteInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaSharePrinterBrowseForShareInstanceName&){};
-	
-    
-    /* Association Interface */
+    }      
   
+  }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaSharePrinterBrowseForShareResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     const char** aPropertiesPP,
+  	 Linux_SambaSharePrinterBrowseForShareManualInstanceEnumeration& aManualInstanceEnumeration) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaSharePrinterBrowseForShareManualInstance 
+  Linux_SambaSharePrinterBrowseForShareResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaSharePrinterBrowseForShareInstanceName& anInstanceName) {
+
+    Linux_SambaSharePrinterBrowseForShareManualInstance manualInstance;
+
+  
+  }
+  */
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaSharePrinterBrowseForShareResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaSharePrinterBrowseForShareManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaSharePrinterBrowseForShareInstanceName
+  Linux_SambaSharePrinterBrowseForShareResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaSharePrinterBrowseForShareManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaSharePrinterBrowseForShareResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaSharePrinterBrowseForShareInstanceName& anInstanceName) { }
+	*/
+	
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
   void Linux_SambaSharePrinterBrowseForShareResourceAccess::referencesSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaShareOptionsInstanceName& sourceInst,
-   Linux_SambaSharePrinterBrowseForShareManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaSharePrinterBrowseForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaSharePrinterBrowseForShareManualInstance manualInstance;
     
     Linux_SambaSharePrinterBrowseForShareInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setManagedElement(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setManagedElement(aSourceInstanceName);
     
     Linux_SambaSharePrinterBrowseOptionsInstanceName browseInstName;
-    browseInstName.setNamespace(nsp);
-    browseInstName.setName(sourceInst.getName());
+    browseInstName.setNamespace(aNameSpaceP);
+    browseInstName.setName(aSourceInstanceName.getName());
     browseInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instName.setSettingData(browseInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
 
   void Linux_SambaSharePrinterBrowseForShareResourceAccess::referencesManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaSharePrinterBrowseOptionsInstanceName& sourceInst,
-   Linux_SambaSharePrinterBrowseForShareManualInstanceEnumeration& instEnum) 
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaSharePrinterBrowseOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaSharePrinterBrowseForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaSharePrinterBrowseForShareManualInstance manualInstance;
     
     Linux_SambaSharePrinterBrowseForShareInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setSettingData(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setSettingData(aSourceInstanceName);
     
     Linux_SambaShareOptionsInstanceName shareInstName;
-    shareInstName.setNamespace(nsp);
-    shareInstName.setName(sourceInst.getName());
+    shareInstName.setNamespace(aNameSpaceP);
+    shareInstName.setName(aSourceInstanceName.getName());
     shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instName.setManagedElement(shareInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
   
+  //----------------------------------------------------------------------------
+
   void Linux_SambaSharePrinterBrowseForShareResourceAccess::associatorsSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaShareOptionsInstanceName& sourceInst,
-   Linux_SambaSharePrinterBrowseOptionsInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaSharePrinterBrowseOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaSharePrinterBrowseOptionsInstance instance;
     
     Linux_SambaSharePrinterBrowseOptionsInstanceName browseInstName;
-    browseInstName.setNamespace(nsp);
-    browseInstName.setName(sourceInst.getName());
+    browseInstName.setNamespace(aNameSpaceP);
+    browseInstName.setName(aSourceInstanceName.getName());
     browseInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instance.setInstanceName(browseInstName);
     char *option;
-    option = get_option(sourceInst.getName(),BROWSEABLE);	
+    option = get_option(aSourceInstanceName.getName(),BROWSEABLE);	
     if ( option )
       if(strcasecmp(option,YES) == 0)
 	instance.setBrowsable( true );
       else
 	instance.setBrowsable( false );
       
-    instEnum.addElement(instance);
-  };
+    anInstanceEnumeration.addElement(instance);
+  }
+
+  
+  //----------------------------------------------------------------------------
 
   void Linux_SambaSharePrinterBrowseForShareResourceAccess::associatorsManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaSharePrinterBrowseOptionsInstanceName& sourceInst,
-   Linux_SambaShareOptionsInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaSharePrinterBrowseOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaShareOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaShareOptionsInstance instance;
     
     Linux_SambaShareOptionsInstanceName shareInstName;
-    shareInstName.setNamespace(nsp);
-    shareInstName.setName(sourceInst.getName());
+    shareInstName.setNamespace(aNameSpaceP);
+    shareInstName.setName(aSourceInstanceName.getName());
     shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instance.setInstanceName(shareInstName);
     char *option;
     
-    option = get_option(sourceInst.getName(),AVAILABLE);	
+    option = get_option(aSourceInstanceName.getName(),AVAILABLE);	
     if ( option )
       if(strcasecmp(option,YES) == 0)
 	instance.setAvailable( true );
       else
 	instance.setAvailable( false );
     
-    option = get_option(sourceInst.getName(),COMMENT);
+    option = get_option(aSourceInstanceName.getName(),COMMENT);
     if ( option )
       instance.setComment(option);
     
-    option = get_option(sourceInst.getName(),PATH);
+    option = get_option(aSourceInstanceName.getName(),PATH);
     if ( option )
       instance.setPath(option);
     
-    option = get_option(sourceInst.getName(),PRINTABLE);	
+    option = get_option(aSourceInstanceName.getName(),PRINTABLE);	
     if ( option )
       if(strcasecmp(option,YES) == 0)
 	instance.setPrintable( true );
       else
 	instance.setPrintable( false );
     
-    instEnum.addElement(instance);
-  };
+    anInstanceEnumeration.addElement(instance);
+  }
 
-    /* extrinsic methods */
+   
+  
+  // extrinsic methods
+
 	
 }
 

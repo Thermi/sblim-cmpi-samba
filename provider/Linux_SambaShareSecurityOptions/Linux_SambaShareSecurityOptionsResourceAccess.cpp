@@ -1,39 +1,58 @@
-/**
- *  Linux_SambaShareSecurityOptionsResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareSecurityOptionsResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaShareSecurityOptionsResourceAccess.h"
 
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-  void Linux_SambaShareSecurityOptionsResourceAccess::setInstanceNameProperties(const char* nsp,
-   char *instanceName,
-   Linux_SambaShareSecurityOptionsInstanceName& anInstanceName)
-  {
-    anInstanceName.setNamespace(nsp);
+  
+  //----------------------------------------------------------------------------
+  // manual written methods
+
+
+
+  //----------------------------------------------------------------------------
+
+  static void setInstanceNameProperties(
+      const char* aNameSpaceP, 
+      char *instanceName, 
+      Linux_SambaShareSecurityOptionsInstanceName& anInstanceName) {
+
+    anInstanceName.setNamespace(aNameSpaceP);
     anInstanceName.setName(instanceName);
     anInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
   };
   
-  void Linux_SambaShareSecurityOptionsResourceAccess::setInstanceProperties(
-   Linux_SambaShareSecurityOptionsManualInstance& aManualInstance, bool global)
-  {
+
+  //----------------------------------------------------------------------------
+
+
+  static void setInstanceProperties(
+      Linux_SambaShareSecurityOptionsManualInstance& aManualInstance, 
+      bool global) {
+    
     char *option;
     if(global){
       option = get_global_option(CREATE_MASK);	
@@ -49,7 +68,6 @@ namespace genProvider {
 	aManualInstance.setDirectorySecurityMask( atoi(option) );
       
     }else{
-      
       option = get_option(aManualInstance.getInstanceName().getName(),CREATE_MASK);	
       if ( option )
 	aManualInstance.setCreateMask( atoi(option) );
@@ -62,175 +80,212 @@ namespace genProvider {
       if ( option )
 	aManualInstance.setDirectorySecurityMask( atoi(option) );
     }
-  }; 
+  };
+
   
-  void Linux_SambaShareSecurityOptionsResourceAccess::setRAProperties(
-   Linux_SambaShareSecurityOptionsManualInstance newInstance, bool global)
-  {
+  //----------------------------------------------------------------------------
+
+
+  static void setRAProperties(
+      Linux_SambaShareSecurityOptionsManualInstance aManualInstance,
+      bool global) {
+    
     if(global){
-      if ( newInstance.isCreateMaskSet()){
+      if ( aManualInstance.isCreateMaskSet()){
 	char *option = (char *) malloc( 5*sizeof(char) );
-	sprintf(option,"%04d",newInstance.getCreateMask());
+	sprintf(option,"%04d",aManualInstance.getCreateMask());
 	set_global_option(CREATE_MASK, option);
 	free(option);
       }
       
-      if ( newInstance.isDirectoryMaskSet()){
+      if ( aManualInstance.isDirectoryMaskSet()){
 	char *option = (char *) malloc( 5*sizeof(char) );
-	sprintf(option,"%04d",newInstance.getDirectoryMask());
+	sprintf(option,"%04d",aManualInstance.getDirectoryMask());
 	set_global_option(DIRECTORY_MASK, option);
 	free(option);
       }
       
-      if ( newInstance.isDirectorySecurityMaskSet()){
+      if ( aManualInstance.isDirectorySecurityMaskSet()){
 	char *option = (char *) malloc( 5*sizeof(char) );
-	sprintf(option,"%04d",newInstance.getDirectorySecurityMask());
+	sprintf(option,"%04d",aManualInstance.getDirectorySecurityMask());
 	set_global_option(DIRECTORY_SECURITY_MASK, option);
 	free(option);
       }
-    }
-    else{
-      if ( newInstance.isCreateMaskSet()){
+    } else{
+      if ( aManualInstance.isCreateMaskSet()){
 	char *option = (char *) malloc( 5*sizeof(char) );
-	sprintf(option,"%04d",newInstance.getCreateMask());
-	set_share_option(newInstance.getInstanceName().getName(),CREATE_MASK, option);
+	sprintf(option,"%04d",aManualInstance.getCreateMask());
+	set_share_option(aManualInstance.getInstanceName().getName(),CREATE_MASK, option);
 	free(option);
       }
       
-      if ( newInstance.isDirectoryMaskSet()){
+      if ( aManualInstance.isDirectoryMaskSet()){
 	char *option = (char *) malloc( 5*sizeof(char) );
-	sprintf(option,"%04d",newInstance.getDirectoryMask());
-	set_share_option(newInstance.getInstanceName().getName(),DIRECTORY_MASK, option);
+	sprintf(option,"%04d",aManualInstance.getDirectoryMask());
+	set_share_option(aManualInstance.getInstanceName().getName(),DIRECTORY_MASK, option);
 	free(option);
       }
       
-      if ( newInstance.isDirectorySecurityMaskSet()){
+      if ( aManualInstance.isDirectorySecurityMaskSet()){
 	char *option = (char *) malloc( 5*sizeof(char) );
-	sprintf(option,"%04d",newInstance.getDirectorySecurityMask());
-	set_share_option(newInstance.getInstanceName().getName(),DIRECTORY_SECURITY_MASK, option);
+	sprintf(option,"%04d",aManualInstance.getDirectorySecurityMask());
+	set_share_option(aManualInstance.getInstanceName().getName(),DIRECTORY_SECURITY_MASK, option);
       }
     }
   };
 
 
-    //Linux_SambaShareSecurityOptionsResourceAccess::Linux_SambaShareSecurityOptionsResourceAccess();
-    Linux_SambaShareSecurityOptionsResourceAccess::~Linux_SambaShareSecurityOptionsResourceAccess() { 
-      terminator();
-    };
+  //----------------------------------------------------------------------------
+  //Linux_SambaShareSecurityOptionsResourceAccess::Linux_SambaShareSecurityOptionsResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaShareSecurityOptionsResourceAccess::~Linux_SambaShareSecurityOptionsResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    
-  void Linux_SambaShareSecurityOptionsResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaShareSecurityOptionsInstanceNameEnumeration& instnames)
-  { 
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareSecurityOptionsResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaShareSecurityOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
     Linux_SambaShareSecurityOptionsInstanceName instanceName;
-    setInstanceNameProperties(nsp,DEFAULT_GLOBAL_NAME,instanceName);
-    instnames.addElement(instanceName);
+    setInstanceNameProperties(aNameSpaceP,DEFAULT_GLOBAL_NAME,instanceName);
+    anInstanceNameEnumeration.addElement(instanceName);
     
     char ** shares = get_shares_list();
     
     if(shares){
       for (int i=0; shares[i]; i++){
 	Linux_SambaShareSecurityOptionsInstanceName instanceName;
-	setInstanceNameProperties(nsp,shares[i],instanceName);
-	instnames.addElement(instanceName); 
+	setInstanceNameProperties(aNameSpaceP,shares[i],instanceName);
+	anInstanceNameEnumeration.addElement(instanceName); 
       }
     }
-  };
+  }
 
-  void Linux_SambaShareSecurityOptionsResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaShareSecurityOptionsManualInstanceEnumeration& instances)
-  {
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaShareSecurityOptionsResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaShareSecurityOptionsManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaShareSecurityOptionsManualInstance aManualInstance;
     Linux_SambaShareSecurityOptionsInstanceName instanceName;
     
-    setInstanceNameProperties(nsp,DEFAULT_GLOBAL_NAME,instanceName);
+    setInstanceNameProperties(aNameSpaceP,DEFAULT_GLOBAL_NAME,instanceName);
     aManualInstance.setInstanceName(instanceName);
     
     setInstanceProperties(aManualInstance, true);
     
-    instances.addElement(aManualInstance);
-
+    aManualInstanceEnumeration.addElement(aManualInstance);
+    
     char ** shares = get_shares_list();
-
+    
     if(shares){
       for (int i=0; shares[i]; i++){
-	setInstanceNameProperties(nsp,shares[i],instanceName);
+	setInstanceNameProperties(aNameSpaceP,shares[i],instanceName);
 	aManualInstance.setInstanceName(instanceName);
 	
 	setInstanceProperties(aManualInstance, false);
 	
-	instances.addElement(aManualInstance);
+	aManualInstanceEnumeration.addElement(aManualInstance);
       }
     }
-  };
-  	
-    
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   Linux_SambaShareSecurityOptionsManualInstance 
-   Linux_SambaShareSecurityOptionsResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareSecurityOptionsInstanceName& instanceName)
-  {
+  Linux_SambaShareSecurityOptionsResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaShareSecurityOptionsInstanceName& anInstanceName) {
+
     Linux_SambaShareSecurityOptionsManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
+    aManualInstance.setInstanceName(anInstanceName);
     
-    if(!strcasecmp(DEFAULT_GLOBAL_NAME,instanceName.getName()))
+    if(!strcasecmp(DEFAULT_GLOBAL_NAME,anInstanceName.getName()))
       setInstanceProperties(aManualInstance,true);
     else
       setInstanceProperties(aManualInstance,false);
+    
     return aManualInstance;  
-  };
-  
-  	
-  void Linux_SambaShareSecurityOptionsResourceAccess::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareSecurityOptionsManualInstance& newInstance)
-  {
-    if(!strcasecmp(DEFAULT_GLOBAL_NAME,newInstance.getInstanceName().getName()))
-      setRAProperties(newInstance,true);
+  }
+
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaShareSecurityOptionsResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaShareSecurityOptionsManualInstance& aManualInstance) {
+    
+    if(!strcasecmp(DEFAULT_GLOBAL_NAME,aManualInstance.getInstanceName().getName()))
+      setRAProperties(aManualInstance,true);
     else
-      setRAProperties(newInstance,false);
-  };
-  	
-  void Linux_SambaShareSecurityOptionsResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareSecurityOptionsManualInstance& newInstance)
-    {
-      if(!strcasecmp(DEFAULT_GLOBAL_NAME,newInstance.getInstanceName().getName()))
-	setRAProperties(newInstance,true);
-      else
-	setRAProperties(newInstance,false);
-    };
+      setRAProperties(aManualInstance,false);
+  }
+
   
-  void Linux_SambaShareSecurityOptionsResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareSecurityOptionsInstanceName& instanceName)
-    {
-      if(!strcasecmp(DEFAULT_GLOBAL_NAME,instanceName.getName())){
-	set_global_option(CREATE_MASK,NULL);
-	set_global_option(DIRECTORY_MASK,NULL);
-	set_global_option(DIRECTORY_SECURITY_MASK,NULL);
-      }
-      else{
-	if(service_exists(instanceName.getName())){
-	  set_share_option(instanceName.getName(),CREATE_MASK,NULL);
-	  set_share_option(instanceName.getName(),DIRECTORY_MASK,NULL);
-	  set_share_option(instanceName.getName(),DIRECTORY_SECURITY_MASK,NULL);
-	}else
-	  throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Instance doesn't exist!");
-      }
-    };
+  //----------------------------------------------------------------------------
+
+  Linux_SambaShareSecurityOptionsInstanceName
+  Linux_SambaShareSecurityOptionsResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareSecurityOptionsManualInstance& aManualInstance) {
+    
+    if(!strcasecmp(DEFAULT_GLOBAL_NAME,aManualInstance.getInstanceName().getName()))
+      setRAProperties(aManualInstance,true);
+    else
+      setRAProperties(aManualInstance,false);
+    
+    return aManualInstance.getInstanceName();
+  }
+
   
-  /* extrinsic methods */
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaShareSecurityOptionsResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareSecurityOptionsInstanceName& anInstanceName) {
+    
+    if(!strcasecmp(DEFAULT_GLOBAL_NAME,anInstanceName.getName())){
+      set_global_option(CREATE_MASK,NULL);
+      set_global_option(DIRECTORY_MASK,NULL);
+      set_global_option(DIRECTORY_SECURITY_MASK,NULL);
+
+    } else{
+      if(service_exists(anInstanceName.getName())){
+	set_share_option(anInstanceName.getName(),CREATE_MASK,NULL);
+	set_share_option(anInstanceName.getName(),DIRECTORY_MASK,NULL);
+	set_share_option(anInstanceName.getName(),DIRECTORY_SECURITY_MASK,NULL);
+
+      }else
+	throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Instance doesn't exist!");
+    }
+  }
+
+	
+
+  
+  // extrinsic methods
+
 	
 }
 

@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaGlobalProtocolOptionsInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalProtocolOptionsInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGlobalProtocolOptionsInstance_h
 #define Linux_SambaGlobalProtocolOptionsInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,115 +33,112 @@
 
 #include "Linux_SambaGlobalProtocolOptionsInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaGlobalProtocolOptionsInstance {
-  public:
-       Linux_SambaGlobalProtocolOptionsInstance();
-  	
-       Linux_SambaGlobalProtocolOptionsInstance
-  	    (const Linux_SambaGlobalProtocolOptionsInstance& original);
-  	   
-       Linux_SambaGlobalProtocolOptionsInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaGlobalProtocolOptionsInstance();
        
-       Linux_SambaGlobalProtocolOptionsInstance& operator=
-  	    (const Linux_SambaGlobalProtocolOptionsInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaGlobalProtocolOptionsInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaGlobalProtocolOptionsInstanceName m_instanceName;
+    CMPIUint8 m_AclCompatibility;
+    const char* m_Caption;
+    const char* m_Description;
+    CMPIBoolean m_EASupport;
+    const char* m_ElementName;
+    CMPIBoolean m_NTACLSupport;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaGlobalProtocolOptionsInstanceName& val);        
-       const Linux_SambaGlobalProtocolOptionsInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+      unsigned int AclCompatibility:1;
+      unsigned int Caption:1;
+      unsigned int Description:1;
+      unsigned int EASupport:1;
+      unsigned int ElementName:1;
+      unsigned int NTACLSupport:1;
 
-       unsigned int isAclCompatibilitySet() const;
-       void setAclCompatibility(const CMPIUint8 val);
-       const CMPIUint8 getAclCompatibility() const;
-
-       unsigned int isCaptionSet() const;
-       void setCaption(const char* val, int makeCopy = 1);
-       const char* getCaption() const;
-
-       unsigned int isDescriptionSet() const;
-       void setDescription(const char* val, int makeCopy = 1);
-       const char* getDescription() const;
-
-       unsigned int isEASupportSet() const;
-       void setEASupport(const CMPIBoolean val);
-       const CMPIBoolean getEASupport() const;
-
-       unsigned int isElementNameSet() const;
-       void setElementName(const char* val, int makeCopy = 1);
-       const char* getElementName() const;
-
-       unsigned int isNTACLSupportSet() const;
-       void setNTACLSupport(const CMPIBoolean val);
-       const CMPIBoolean getNTACLSupport() const;
+    } isSet;
+    
+    public:
+    Linux_SambaGlobalProtocolOptionsInstance();
+    Linux_SambaGlobalProtocolOptionsInstance(
+      const Linux_SambaGlobalProtocolOptionsInstance& anInstance);
+    Linux_SambaGlobalProtocolOptionsInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaGlobalProtocolOptionsInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaGlobalProtocolOptionsInstance& original);
-       void reset();
+    Linux_SambaGlobalProtocolOptionsInstance& operator=(
+      const Linux_SambaGlobalProtocolOptionsInstance& anInstance);
        
-       Linux_SambaGlobalProtocolOptionsInstanceName m_instanceName;
-       CMPIUint8 m_AclCompatibility;
-       const char* m_Caption;
-       const char* m_Description;
-       CMPIBoolean m_EASupport;
-       const char* m_ElementName;
-       CMPIBoolean m_NTACLSupport;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-         unsigned int AclCompatibility:1;
-         unsigned int Caption:1;
-         unsigned int Description:1;
-         unsigned int EASupport:1;
-         unsigned int ElementName:1;
-         unsigned int NTACLSupport:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaGlobalProtocolOptionsInstanceName& anInstanceName);        
+    const Linux_SambaGlobalProtocolOptionsInstanceName& getInstanceName() const;
+
+    unsigned int isAclCompatibilitySet() const;
+    void setAclCompatibility(const CMPIUint8 aValue);
+    const CMPIUint8 getAclCompatibility() const;
+
+    unsigned int isCaptionSet() const;
+    void setCaption(const char* aValue, int aCopyFlag = 1);
+    const char* getCaption() const;
+
+    unsigned int isDescriptionSet() const;
+    void setDescription(const char* aValue, int aCopyFlag = 1);
+    const char* getDescription() const;
+
+    unsigned int isEASupportSet() const;
+    void setEASupport(const CMPIBoolean aValue);
+    const CMPIBoolean getEASupport() const;
+
+    unsigned int isElementNameSet() const;
+    void setElementName(const char* aValue, int aCopyFlag = 1);
+    const char* getElementName() const;
+
+    unsigned int isNTACLSupportSet() const;
+    void setNTACLSupport(const CMPIBoolean aValue);
+    const CMPIBoolean getNTACLSupport() const;
+
+
   };
   
-  
-  struct Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement{
-  	Linux_SambaGlobalProtocolOptionsInstance* m_elementP;
-  	Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement();
-  	~Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement();  	
+  struct Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement {
+
+    Linux_SambaGlobalProtocolOptionsInstance* m_elementP;
+    Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement();
+    ~Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaGlobalProtocolOptionsInstanceEnumeration {
-  	private:
-  	  Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaGlobalProtocolOptionsInstanceEnumeration();
-  	  
-  	  Linux_SambaGlobalProtocolOptionsInstanceEnumeration(
-  	   const Linux_SambaGlobalProtocolOptionsInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaGlobalProtocolOptionsInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaGlobalProtocolOptionsInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaGlobalProtocolOptionsInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaGlobalProtocolOptionsInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaGlobalProtocolOptionsInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaGlobalProtocolOptionsInstanceEnumeration();
+    Linux_SambaGlobalProtocolOptionsInstanceEnumeration(
+      const Linux_SambaGlobalProtocolOptionsInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaGlobalProtocolOptionsInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaGlobalProtocolOptionsInstance& getNext();
+    int getSize() const;
+    const Linux_SambaGlobalProtocolOptionsInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaGlobalProtocolOptionsInstance& anInstance);
+
+  };
+
+}
+
+#endif

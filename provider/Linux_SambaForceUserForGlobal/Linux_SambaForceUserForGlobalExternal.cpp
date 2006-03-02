@@ -1,233 +1,321 @@
-/**
- *  Linux_SambaForceUserForGlobalExternal.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaForceUserForGlobalExternal.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaForceUserForGlobalExternal.h"
 
-namespace genProvider{
+namespace genProvider {
 	
+	//----------------------------------------------------------------------------
   Linux_SambaForceUserForGlobalExternal::Linux_SambaForceUserForGlobalExternal(
-   const CmpiBroker& brkr, const CmpiContext& ctx ) 
-   : broker(brkr), context(ctx) {};
+    const CmpiBroker& aBroker,
+    const CmpiContext& aContext ) 
+    : m_broker(aBroker),
+    m_context(aContext) { }
    
-  Linux_SambaForceUserForGlobalExternal::
-   ~Linux_SambaForceUserForGlobalExternal(){};
+	//----------------------------------------------------------------------------
+  Linux_SambaForceUserForGlobalExternal::~Linux_SambaForceUserForGlobalExternal() { }
     
-  void Linux_SambaForceUserForGlobalExternal::enumInstanceNames(
-   const char *nsp,
-   Linux_SambaForceUserForGlobalInstanceNameEnumeration& instnames) {
+	//----------------------------------------------------------------------------
+  void 
+  Linux_SambaForceUserForGlobalExternal::enumInstanceNames(
+    const char *aNameSpaceP,
+    Linux_SambaForceUserForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
 
-    CmpiObjectPath op(nsp,"Linux_SambaForceUserForGlobal");
-    CmpiEnumeration en=broker.enumInstanceNames(context,op);
-    while(en.hasNext()) {
-      CmpiObjectPath opi = en.getNext();
-      Linux_SambaForceUserForGlobalInstanceName iname(opi);
-      instnames.addElement(iname);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaForceUserForGlobal");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstanceNames(m_context,classObjectPath);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath objectPath = cmpiEnumeration.getNext();
+      Linux_SambaForceUserForGlobalInstanceName instanceName(objectPath);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
-  };
+  
+  }
   	  
-  void Linux_SambaForceUserForGlobalExternal::enumInstances(
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaForceUserForGlobalInstanceEnumeration& instances) {
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForGlobalExternal::enumInstances(
+    const char *aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaForceUserForGlobalInstanceEnumeration& anInstanceEnumeration) {
    		
-    CmpiObjectPath op(nsp,"Linux_SambaForceUserForGlobal");
-    CmpiEnumeration en=broker.enumInstances(context,op,properties);
-    while(en.hasNext()) {
-      CmpiInstance inst = en.getNext();
-      Linux_SambaForceUserForGlobalInstance instance(inst,nsp);
-      instances.addElement(instance);
+    CmpiObjectPath classObjectPath(aNameSpaceP,"Linux_SambaForceUserForGlobal");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstances(m_context,classObjectPath,aPropertiesPP);
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaForceUserForGlobalInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
     }
-  };
+  
+  }
   	  
+	//----------------------------------------------------------------------------
   Linux_SambaForceUserForGlobalInstance
-   Linux_SambaForceUserForGlobalExternal::getInstance(
-   const char* *properties,
-   const Linux_SambaForceUserForGlobalInstanceName& instanceName) {
+  Linux_SambaForceUserForGlobalExternal::getInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaForceUserForGlobalInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=broker.getInstance(context,op,properties);
-    return Linux_SambaForceUserForGlobalInstance(inst,instanceName.getNamespace());
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    CmpiInstance cmpiInstance = 
+      m_broker.getInstance(m_context,cmpiObjectPath,aPropertiesPP);
+  
+    return Linux_SambaForceUserForGlobalInstance(cmpiInstance,anInstanceName.getNamespace());
+  
   }
       
-  void Linux_SambaForceUserForGlobalExternal::setInstance(
-   const char* *properties,
-   const Linux_SambaForceUserForGlobalInstance& instance){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForGlobalExternal::setInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaForceUserForGlobalInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.setInstance(context,op,inst,properties);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    m_broker.setInstance(m_context,cmpiObjectPath,cmpiInstance,aPropertiesPP);
+  
   }
       
-  void Linux_SambaForceUserForGlobalExternal::createInstance(
-   const Linux_SambaForceUserForGlobalInstance& instance){
+	//----------------------------------------------------------------------------
+  Linux_SambaForceUserForGlobalInstanceName
+  Linux_SambaForceUserForGlobalExternal::createInstance(
+    const Linux_SambaForceUserForGlobalInstance& anInstance) {
   
-    CmpiObjectPath op=instance.getInstanceName().getObjectPath();
-    CmpiInstance inst=instance.getCmpiInstance();
-    broker.createInstance(context,op,inst);
+    CmpiObjectPath cmpiObjectPath = anInstance.getInstanceName().getObjectPath();
+    CmpiInstance cmpiInstance = anInstance.getCmpiInstance();
+    return Linux_SambaForceUserForGlobalInstanceName(
+		m_broker.createInstance(m_context,cmpiObjectPath,cmpiInstance));
+
   }
   
-  void Linux_SambaForceUserForGlobalExternal::deleteInstance(
-   const Linux_SambaForceUserForGlobalInstanceName& instanceName){
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForGlobalExternal::deleteInstance(
+    const Linux_SambaForceUserForGlobalInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    broker.deleteInstance(context,op);
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    m_broker.deleteInstance(m_context,cmpiObjectPath);
+  
   }
-      
-    //Reference calls
-    
-    void Linux_SambaForceUserForGlobalExternal::
-     referencesPartComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaForceUserForGlobalInstanceEnumeration& instances){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.references
-       (context, op, "Linux_SambaGlobalOptions",
-        "PartComponent", properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaForceUserForGlobalInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
-    }
+  // Reference calls
 
-    void Linux_SambaForceUserForGlobalExternal::
-     referenceNamesPartComponent( 
-     const char *nsp,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaForceUserForGlobalInstanceNameEnumeration& instanceNames){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForGlobalExternal::referencesPartComponent( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaForceUserForGlobalInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.referenceNames
-       (context, op, "Linux_SambaGlobalOptions",
-        "PartComponent");
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaForceUserForGlobalInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
 
-    void Linux_SambaForceUserForGlobalExternal::
-     referencesGroupComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaForceUserForGlobalInstanceEnumeration& instances){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.references
-       (context, op, "Linux_SambaUser",
-        "GroupComponent", properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaForceUserForGlobalInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
-    }
+    CmpiEnumeration cmpiEnumeration = m_broker.references(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaGlobalOptions",
+      "PartComponent",
+      aPropertiesPP);
 
-    void Linux_SambaForceUserForGlobalExternal::
-     referenceNamesGroupComponent( 
-     const char *nsp,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaForceUserForGlobalInstanceNameEnumeration& instanceNames){
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaForceUserForGlobalInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForGlobalExternal::referenceNamesPartComponent( 
+    const char* aNameSpaceP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaForceUserForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.referenceNames
-       (context, op, "Linux_SambaUser",
-        "GroupComponent");
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaForceUserForGlobalInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.referenceNames(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaGlobalOptions",
+      "PartComponent");
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaForceUserForGlobalInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForGlobalExternal::referencesGroupComponent( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaForceUserForGlobalInstanceEnumeration& anInstanceEnumeration){
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+  
+    CmpiEnumeration cmpiEnumeration = m_broker.references(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaUser",
+      "GroupComponent",
+      aPropertiesPP);
+
+    while(cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaForceUserForGlobalInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForGlobalExternal::referenceNamesGroupComponent( 
+    const char* aNameSpaceP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaForceUserForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+    CmpiEnumeration cmpiEnumeration = m_broker.referenceNames(
+      m_context,
+      cmpiObjectPath,
+      "Linux_SambaUser",
+      "GroupComponent");
+   
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaForceUserForGlobalInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
+    }      
+
+  }
      
-    //Associator calls
-
-    void Linux_SambaForceUserForGlobalExternal::
-     associatorsPartComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaUserInstanceEnumeration& instances){
+  //Associator calls
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForGlobalExternal::associatorsPartComponent( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associators
-       (context,op,0,0,0,0,properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaUserInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associators(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0,
+      aPropertiesPP);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaUserInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
     }
 
-    void Linux_SambaForceUserForGlobalExternal::
-     associatorNamesPartComponent( 
-     const char *nsp,
-     const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-     Linux_SambaUserInstanceNameEnumeration& instanceNames){
+  }
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaForceUserForGlobalExternal::associatorNamesPartComponent( 
+    const char* aNameSpaceP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaUserInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associatorNames
-       (context,op,0,0,0,0);
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaUserInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associatorNames(
+     m_context,
+     cmpiObjectPath,
+     0,
+     0,
+     0,
+     0);
+
+    while(cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaUserInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
 
-    void Linux_SambaForceUserForGlobalExternal::
-     associatorsGroupComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaGlobalOptionsInstanceEnumeration& instances){
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForGlobalExternal::associatorsGroupComponent( 
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
       
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associators
-       (context,op,0,0,0,0,properties);
-      while(en.hasNext()) {
-        CmpiInstance inst = en.getNext();
-        Linux_SambaGlobalOptionsInstance instance(inst,nsp);
-        instances.addElement(instance);
-      }      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associators(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0,
+      aPropertiesPP);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalOptionsInstance instance(cmpiInstance,aNameSpaceP);
+      anInstanceEnumeration.addElement(instance);
+    }      
+
+  }
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceUserForGlobalExternal::associatorNamesGroupComponent( 
+    const char* aNameSpaceP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    CmpiObjectPath cmpiObjectPath = aSourceInstanceName.getObjectPath();
+
+    CmpiEnumeration cmpiEnumeration = m_broker.associatorNames(
+      m_context,
+      cmpiObjectPath,
+      0,
+      0,
+      0,
+      0);
+
+    while (cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiInstanceName = cmpiEnumeration.getNext();
+      Linux_SambaGlobalOptionsInstanceName instanceName(cmpiInstanceName);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
 
-    void Linux_SambaForceUserForGlobalExternal::
-     associatorNamesGroupComponent( 
-     const char *nsp,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaGlobalOptionsInstanceNameEnumeration& instanceNames){
-      
-      CmpiObjectPath op=sourceInst.getObjectPath();
-      CmpiEnumeration en=broker.associatorNames
-       (context,op,0,0,0,0);
-      while(en.hasNext()) {
-        CmpiObjectPath instName = en.getNext();
-        Linux_SambaGlobalOptionsInstanceName instanceName(instName);
-        instanceNames.addElement(instanceName);
-      }      
-    }
-
+  }
       
 }

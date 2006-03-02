@@ -1,41 +1,55 @@
-/**
- *  Linux_SambaShareProtocolOptionsResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareProtocolOptionsResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaShareProtocolOptionsResourceAccess.h"
 
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-  void Linux_SambaShareProtocolOptionsResourceAccess::setInstanceNameProperties(const char* nsp,
-   char *instanceName,
-   Linux_SambaShareProtocolOptionsInstanceName& anInstanceName)
-  {
-    anInstanceName.setNamespace(nsp);
+  
+  //----------------------------------------------------------------------------
+  // manual written methods
+  
+  static void setInstanceNameProperties(
+      const char* aNameSpaceP, 
+      char *instanceName, 
+      Linux_SambaShareProtocolOptionsInstanceName& anInstanceName) {
+    
+    anInstanceName.setNamespace(aNameSpaceP);
     anInstanceName.setName(instanceName);
     anInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
   };
+
   
-  void Linux_SambaShareProtocolOptionsResourceAccess::setInstanceProperties(
-   Linux_SambaShareProtocolOptionsManualInstance& aManualInstance)
-  {
+  //----------------------------------------------------------------------------
+
+  
+  static void setInstanceProperties(
+      Linux_SambaShareProtocolOptionsManualInstance& aManualInstance) {
+    
     char *option;
-   
+    
     option = get_option(aManualInstance.getInstanceName().getName(),ACL_COMPATIBILITY);	
     if ( option )
       if(strcasecmp(option,"Auto") == 0)
@@ -46,7 +60,6 @@ namespace genProvider {
 	else 
 	  if(strcasecmp(option,"win2k") == 0)
 	    aManualInstance.setAclCompatibility( 2 );
-    
     
     option = get_option(aManualInstance.getInstanceName().getName(),EA_SUPPORT);
     if( option )
@@ -61,133 +74,169 @@ namespace genProvider {
 	aManualInstance.setNTACLSupport( true );
       else
 	aManualInstance.setNTACLSupport( false );
-
   }; 
   
-  void Linux_SambaShareProtocolOptionsResourceAccess::setRAProperties(
-   Linux_SambaShareProtocolOptionsManualInstance newInstance)
-  {
-    if ( newInstance.isAclCompatibilitySet())
-      {
-	switch(newInstance.getAclCompatibility())
-	  {
-	  case 0:
-	    set_share_option(newInstance.getInstanceName().getName(),ACL_COMPATIBILITY, "Auto");
-	    break;
-	  case 1:
-	    set_share_option(newInstance.getInstanceName().getName(),ACL_COMPATIBILITY, "winnt");
-	    break;
-	  case 2:
-	    set_share_option(newInstance.getInstanceName().getName(),ACL_COMPATIBILITY, "win2k");
-	    break;
-	  }
-      }
     
-    if ( newInstance.isEASupportSet())
-      if(newInstance.getEASupport())
-	set_share_option(newInstance.getInstanceName().getName(),EA_SUPPORT,YES);
-      else
-	set_share_option(newInstance.getInstanceName().getName(),EA_SUPPORT,NO);
+  //----------------------------------------------------------------------------
 
-    if ( newInstance.isNTACLSupportSet())
-      if(newInstance.getNTACLSupport())
-	set_share_option(newInstance.getInstanceName().getName(),NT_ACL_SUPPORT,YES);
-      else
-	set_share_option(newInstance.getInstanceName().getName(),NT_ACL_SUPPORT,NO);
+  
+  static void setRAProperties(
+      Linux_SambaShareProtocolOptionsManualInstance aManualInstance) {
     
+    if ( aManualInstance.isAclCompatibilitySet()) {
+      switch(aManualInstance.getAclCompatibility()) {
+      case 0:
+	set_share_option(aManualInstance.getInstanceName().getName(),ACL_COMPATIBILITY, "Auto");
+	break;
+      case 1:
+	set_share_option(aManualInstance.getInstanceName().getName(),ACL_COMPATIBILITY, "winnt");
+	break;
+      case 2:
+	set_share_option(aManualInstance.getInstanceName().getName(),ACL_COMPATIBILITY, "win2k");
+	break;
+      }
+    }
+    
+    if ( aManualInstance.isEASupportSet())
+      if(aManualInstance.getEASupport())
+	set_share_option(aManualInstance.getInstanceName().getName(),EA_SUPPORT,YES);
+      else
+	set_share_option(aManualInstance.getInstanceName().getName(),EA_SUPPORT,NO);
+    
+    if ( aManualInstance.isNTACLSupportSet())
+      if(aManualInstance.getNTACLSupport())
+	set_share_option(aManualInstance.getInstanceName().getName(),NT_ACL_SUPPORT,YES);
+      else
+	set_share_option(aManualInstance.getInstanceName().getName(),NT_ACL_SUPPORT,NO);
   };
 
+  //----------------------------------------------------------------------------
+  
+  
+  //----------------------------------------------------------------------------
+  //Linux_SambaShareProtocolOptionsResourceAccess::Linux_SambaShareProtocolOptionsResourceAccess();
 
-    //Linux_SambaShareProtocolOptionsResourceAccess::Linux_SambaShareProtocolOptionsResourceAccess();
-    Linux_SambaShareProtocolOptionsResourceAccess::~Linux_SambaShareProtocolOptionsResourceAccess() { };
+  //----------------------------------------------------------------------------
+  Linux_SambaShareProtocolOptionsResourceAccess::~Linux_SambaShareProtocolOptionsResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    
-  void Linux_SambaShareProtocolOptionsResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaShareProtocolOptionsInstanceNameEnumeration& instnames)
-  { 
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolOptionsResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaShareProtocolOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
     char ** shares = get_shares_list();
     
     if(shares){
       for (int i=0; shares[i]; i++){
 	Linux_SambaShareProtocolOptionsInstanceName instanceName;
-	setInstanceNameProperties(nsp,shares[i],instanceName);
-	instnames.addElement(instanceName); 
+	setInstanceNameProperties(aNameSpaceP,shares[i],instanceName);
+	anInstanceNameEnumeration.addElement(instanceName); 
       }
     }
-  };
+  }
 
-  void Linux_SambaShareProtocolOptionsResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaShareProtocolOptionsManualInstanceEnumeration& instances)
-  {
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaShareProtocolOptionsResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaShareProtocolOptionsManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     char ** shares = get_shares_list();
-
+    
     if(shares){
       for (int i=0; shares[i]; i++){
 	Linux_SambaShareProtocolOptionsManualInstance aManualInstance;
 	Linux_SambaShareProtocolOptionsInstanceName instanceName;
 	
-	setInstanceNameProperties(nsp,shares[i],instanceName);
+	setInstanceNameProperties(aNameSpaceP,shares[i],instanceName);
 	aManualInstance.setInstanceName(instanceName);
 	
 	setInstanceProperties(aManualInstance);
 	
-	instances.addElement(aManualInstance);
+	aManualInstanceEnumeration.addElement(aManualInstance);
       }
     }
-  };
-  	
-    
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   Linux_SambaShareProtocolOptionsManualInstance 
-   Linux_SambaShareProtocolOptionsResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareProtocolOptionsInstanceName& instanceName)
-  {
+  Linux_SambaShareProtocolOptionsResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaShareProtocolOptionsInstanceName& anInstanceName) {
+
     Linux_SambaShareProtocolOptionsManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
+    aManualInstance.setInstanceName(anInstanceName);
     
     setInstanceProperties(aManualInstance);
     
-    return aManualInstance;  
-  };
+    return aManualInstance;
+  }
+
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaShareProtocolOptionsResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaShareProtocolOptionsManualInstance& aManualInstance) {
+    
+    setRAProperties(aManualInstance);
+  }
+
   
-  	
-  void Linux_SambaShareProtocolOptionsResourceAccess::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareProtocolOptionsManualInstance& newInstance)
-  {
-    setRAProperties(newInstance);
-  };
-  	
-  void Linux_SambaShareProtocolOptionsResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareProtocolOptionsManualInstance& newInstance)
-  {
-    setRAProperties(newInstance);
-  };
-  	
-  void Linux_SambaShareProtocolOptionsResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareProtocolOptionsInstanceName& instanceName)
-  {
-    if(service_exists(instanceName.getName())){
-      set_share_option(instanceName.getName(),ACL_COMPATIBILITY,NULL);
-      set_share_option(instanceName.getName(),EA_SUPPORT,NULL);
-      set_share_option(instanceName.getName(),NT_ACL_SUPPORT,NULL);
+  //----------------------------------------------------------------------------
+
+  Linux_SambaShareProtocolOptionsInstanceName
+  Linux_SambaShareProtocolOptionsResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareProtocolOptionsManualInstance& aManualInstance) {
+    
+    setRAProperties(aManualInstance);
+    
+    return aManualInstance.getInstanceName();
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaShareProtocolOptionsResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareProtocolOptionsInstanceName& anInstanceName) {
+    
+    if(service_exists(anInstanceName.getName())){
+      set_share_option(anInstanceName.getName(),ACL_COMPATIBILITY,NULL);
+      set_share_option(anInstanceName.getName(),EA_SUPPORT,NULL);
+      set_share_option(anInstanceName.getName(),NT_ACL_SUPPORT,NULL);
+      
     }else
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Instance doesn't exist!");
-  };
+  }
+
+	
+
   
-  /* extrinsic methods */
+  // extrinsic methods
+
 	
 }
 

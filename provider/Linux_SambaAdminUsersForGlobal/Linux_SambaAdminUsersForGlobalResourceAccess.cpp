@@ -1,304 +1,361 @@
-/**
- *  Linux_SambaAdminUsersForGlobalResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaAdminUsersForGlobalResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaAdminUsersForGlobalResourceAccess.h"
 
+#include <string>
+#include <list>
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
+#include "smt_smb_array.h"
+
 namespace genProvider {
-  
-  //Linux_SambaAdminUsersForGlobalResourceAccess::Linux_SambaAdminUsersForGlobalResourceAccess();
-  Linux_SambaAdminUsersForGlobalResourceAccess::~Linux_SambaAdminUsersForGlobalResourceAccess() { 
-    terminator();
-  };
-    
-    /* intrinsic methods */
-  void Linux_SambaAdminUsersForGlobalResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaAdminUsersForGlobalInstanceNameEnumeration& instnames)
-  {
-    Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
-    globalInstName.setName(DEFAULT_GLOBAL_NAME);
-    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-    
-    
-    char* user_list = get_global_option("admin users");
-    
-    if(user_list){
-      SambaArray array = SambaArray(user_list);
-      SambaArrayConstIterator iter;
-      
-      for ( iter = array.begin(); iter != array.end(); ++iter)
-	{
-	  if(validUser((*iter).c_str())){
-	    Linux_SambaAdminUsersForGlobalInstanceName assocName;
-	    assocName.setNamespace(nsp);
-	    assocName.setGroupComponent(globalInstName);
-	    
-	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
-	    userInstName.setSambaUserName( (*iter).c_str() );
-	    
-	    assocName.setPartComponent(userInstName);
-	    
-	    instnames.addElement(assocName);
-	  }
-	}
-    }
-  };
-  
-  void Linux_SambaAdminUsersForGlobalResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaAdminUsersForGlobalManualInstanceEnumeration& instances)
-  {
-    Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
-    globalInstName.setName(DEFAULT_GLOBAL_NAME);
-    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-    
-    char* user_list = get_global_option("admin users");
-    
-    if(user_list){
-      SambaArray array = SambaArray(user_list);
-      SambaArrayConstIterator iter;
-      
-      for ( iter = array.begin(); iter != array.end(); ++iter)
-	{
-	  if(validUser((*iter).c_str())){
-	    Linux_SambaAdminUsersForGlobalManualInstance manualInstance;
-	    
-	    Linux_SambaAdminUsersForGlobalInstanceName instName;
-	    instName.setNamespace(nsp);
-	    instName.setGroupComponent(globalInstName);
-	    
-	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
-	    userInstName.setSambaUserName( (*iter).c_str() );
-	    
-	    instName.setPartComponent(userInstName);
-	    
-	    manualInstance.setInstanceName(instName);
-	    instances.addElement(manualInstance);
-	  }
-	}
-    }
-  };
-  	
-  Linux_SambaAdminUsersForGlobalManualInstance 
-   Linux_SambaAdminUsersForGlobalResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaAdminUsersForGlobalInstanceName& instanceName)
-  {
-    Linux_SambaAdminUsersForGlobalManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
-    return aManualInstance;
-  };
-  	/*
-    void Linux_SambaAdminUsersForGlobalResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaAdminUsersForGlobalManualInstance&){};
-  	*/
-  	
- 
-  bool Linux_SambaAdminUsersForGlobalResourceAccess::validUser(const char* user)
-  {
+
+  //----------------------------------------------------------------------------
+  // manual written methods
+
+  static bool validUser(const char* user) {
     char ** users = get_samba_users_list();
-    if(users){
-      for (int i=0; users[i]; i++){
+    if(users) {
+      for (int i=0; users[i]; i++) {
 	if(!strcmp(users[i],user))
 	  return true;
       }
     }
+    
     return false;
   };
 
-  void Linux_SambaAdminUsersForGlobalResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaAdminUsersForGlobalManualInstance& newInstance)
-  {
-    SambaArray array = SambaArray();
-    char* user_list = get_option(newInstance.getInstanceName().getGroupComponent().getName(),"admin users");
-    if(user_list)
-      array.populate(user_list);
-    
-      if(!validUser(newInstance.getInstanceName().getPartComponent().getSambaUserName())){
-      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Invalid User!");
-    }else{
-      if(!array.isPresent(string( newInstance.getInstanceName().getPartComponent().getSambaUserName() ))) {
-	array.add( string( newInstance.getInstanceName().getPartComponent().getSambaUserName() ) );
-	
-	set_global_option("admin users",array.toString().c_str());
-      } 
-    }
-  };
-  
-  void Linux_SambaAdminUsersForGlobalResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaAdminUsersForGlobalInstanceName& instanceName)
-  {
-    SambaArray array = SambaArray();
-    char* user_list = get_option(instanceName.getGroupComponent().getName(),"admin users");
-    if(user_list)
-      array.populate(user_list);
-    
-    if(array.size() > 1){
-      array.remove( string( instanceName.getPartComponent().getSambaUserName() )); 
-      set_global_option("admin users",array.toString().c_str());
-    }
-    else
-      set_global_option("admin users",NULL);
+  //----------------------------------------------------------------------------
+
+  //----------------------------------------------------------------------------
+  //Linux_SambaAdminUsersForGlobalResourceAccess::Linux_SambaAdminUsersForGlobalResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaAdminUsersForGlobalResourceAccess::~Linux_SambaAdminUsersForGlobalResourceAccess() {
+    terminator();
   }
-  
-    /* Association Interface */
     
-  void Linux_SambaAdminUsersForGlobalResourceAccess::referencesPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaAdminUsersForGlobalManualInstanceEnumeration& instEnum)
-  {
-    char* user_list = get_option(sourceInst.getName(),"admin users");
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaAdminUsersForGlobalResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaAdminUsersForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    Linux_SambaGlobalOptionsInstanceName globalInstName;
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(DEFAULT_GLOBAL_NAME);
+    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+    
+    
+    char* user_list = get_global_option("admin users");
     
     if(user_list){
       SambaArray array = SambaArray(user_list);
       SambaArrayConstIterator iter;
       
-      for ( iter = array.begin(); iter != array.end(); ++iter)
-	{
-	  if(validUser((*iter).c_str())){
-	    Linux_SambaAdminUsersForGlobalManualInstance manualInstance;
-	    
-	    Linux_SambaAdminUsersForGlobalInstanceName instName;
-	    instName.setNamespace(nsp);
-	    instName.setGroupComponent(sourceInst);
-	    
-	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
-	    userInstName.setSambaUserName( (*iter).c_str() );
-	    
-	    instName.setPartComponent(userInstName);
-	    
-	    manualInstance.setInstanceName(instName);
-	    instEnum.addElement(manualInstance);
-	  }
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+	if(validUser((*iter).c_str())){
+	  Linux_SambaAdminUsersForGlobalInstanceName assocName;
+	  assocName.setNamespace(aNameSpaceP);
+	  assocName.setGroupComponent(globalInstName);
+	  
+	  Linux_SambaUserInstanceName userInstName;
+	  userInstName.setNamespace(aNameSpaceP);
+	  userInstName.setSambaUserName( (*iter).c_str() );
+	  
+	  assocName.setPartComponent(userInstName);
+	  
+	  anInstanceNameEnumeration.addElement(assocName);
 	}
+      }
     }
-  };
+  }
   
-  void Linux_SambaAdminUsersForGlobalResourceAccess::referencesGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaUserInstanceName& sourceInst,
-   Linux_SambaAdminUsersForGlobalManualInstanceEnumeration& instEnum)
-  {
-    if(validUser(sourceInst.getSambaUserName())){
-      char * user_list = get_global_option("admin users");
-      if(user_list){
-	SambaArray array = SambaArray(user_list);
-	SambaArrayConstIterator iter;
-	
-	if(array.isPresent(sourceInst.getSambaUserName())){
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaAdminUsersForGlobalResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaAdminUsersForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    Linux_SambaGlobalOptionsInstanceName globalInstName;
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(DEFAULT_GLOBAL_NAME);
+    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+    
+    char* user_list = get_global_option("admin users");
+    
+    if(user_list){
+      SambaArray array = SambaArray(user_list);
+      SambaArrayConstIterator iter;
+      
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+	if(validUser((*iter).c_str())){
 	  Linux_SambaAdminUsersForGlobalManualInstance manualInstance;
 	  
 	  Linux_SambaAdminUsersForGlobalInstanceName instName;
-	  instName.setNamespace(nsp);
-	  instName.setPartComponent(sourceInst);
+	  instName.setNamespace(aNameSpaceP);
+	  instName.setGroupComponent(globalInstName);
+	  
+	  Linux_SambaUserInstanceName userInstName;
+	  userInstName.setNamespace(aNameSpaceP);
+	  userInstName.setSambaUserName( (*iter).c_str() );
+	  
+	  instName.setPartComponent(userInstName);
+	  
+	  manualInstance.setInstanceName(instName);
+	  aManualInstanceEnumeration.addElement(manualInstance);
+	}
+      }
+    }
+  }
+  
+  
+  //----------------------------------------------------------------------------
+
+  Linux_SambaAdminUsersForGlobalManualInstance 
+  Linux_SambaAdminUsersForGlobalResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaAdminUsersForGlobalInstanceName& anInstanceName) {
+
+    Linux_SambaAdminUsersForGlobalManualInstance aManualInstance;
+    aManualInstance.setInstanceName(anInstanceName);
+    
+    return aManualInstance;
+  }
+
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaAdminUsersForGlobalResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaAdminUsersForGlobalManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+
+  Linux_SambaAdminUsersForGlobalInstanceName
+  Linux_SambaAdminUsersForGlobalResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaAdminUsersForGlobalManualInstance& aManualInstance) { 
+    
+    SambaArray array = SambaArray();
+    char* user_list = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"admin users");
+
+    if(user_list)
+      array.populate(user_list);
+    
+    if(!validUser(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())){
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Invalid User!");
+
+    } else {
+      if(!array.isPresent(string( aManualInstance.getInstanceName().getPartComponent().getSambaUserName() ))) {
+	array.add( string( aManualInstance.getInstanceName().getPartComponent().getSambaUserName() ) );
+	
+	set_global_option("admin users",array.toString().c_str());
+      }
+    }
+
+    return aManualInstance.getInstanceName();
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaAdminUsersForGlobalResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaAdminUsersForGlobalInstanceName& anInstanceName) {
+    
+    SambaArray array = SambaArray();
+    char* user_list = get_option(anInstanceName.getGroupComponent().getName(),"admin users");
+    
+    if(user_list)
+      array.populate(user_list);
+    
+    if(array.size() > 1) {
+      array.remove( string( anInstanceName.getPartComponent().getSambaUserName() )); 
+      set_global_option("admin users",array.toString().c_str());
+
+    } else {
+      set_global_option("admin users",NULL);
+    }
+  }
+
+	
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
+  void Linux_SambaAdminUsersForGlobalResourceAccess::referencesPartComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaAdminUsersForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    char* user_list = get_option(aSourceInstanceName.getName(),"admin users");
+    
+    if(user_list){
+      SambaArray array = SambaArray(user_list);
+      SambaArrayConstIterator iter;
+      
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+	if(validUser((*iter).c_str())){
+	  Linux_SambaAdminUsersForGlobalManualInstance manualInstance;
+	  
+	  Linux_SambaAdminUsersForGlobalInstanceName instName;
+	  instName.setNamespace(aNameSpaceP);
+	  instName.setGroupComponent(aSourceInstanceName);
+	  
+	  Linux_SambaUserInstanceName userInstName;
+	  userInstName.setNamespace(aNameSpaceP);
+	  userInstName.setSambaUserName( (*iter).c_str() );
+	  
+	  instName.setPartComponent(userInstName);
+	  
+	  manualInstance.setInstanceName(instName);
+	  aManualInstanceEnumeration.addElement(manualInstance);
+	}
+      }
+    }
+  }
+  
+  
+  //----------------------------------------------------------------------------
+
+  void Linux_SambaAdminUsersForGlobalResourceAccess::referencesGroupComponent( 
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaAdminUsersForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    if(validUser(aSourceInstanceName.getSambaUserName())) {
+      char * user_list = get_global_option("admin users");
+      if(user_list) {
+	SambaArray array = SambaArray(user_list);
+	SambaArrayConstIterator iter;
+	
+	if(array.isPresent(aSourceInstanceName.getSambaUserName())) {
+	  Linux_SambaAdminUsersForGlobalManualInstance manualInstance;
+	  
+	  Linux_SambaAdminUsersForGlobalInstanceName instName;
+	  instName.setNamespace(aNameSpaceP);
+	  instName.setPartComponent(aSourceInstanceName);
 	  
 	  
 	  Linux_SambaGlobalOptionsInstanceName globalInstName;
-	  globalInstName.setNamespace(nsp);
+	  globalInstName.setNamespace(aNameSpaceP);
 	  globalInstName.setName(DEFAULT_GLOBAL_NAME);
 	  globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	  
 	  instName.setGroupComponent(globalInstName);
 	  
 	  manualInstance.setInstanceName(instName);
-	  instEnum.addElement(manualInstance);
+	  aManualInstanceEnumeration.addElement(manualInstance);
 	}
       }
     }
-  };
+  }
+
   
+  //----------------------------------------------------------------------------
+
   void Linux_SambaAdminUsersForGlobalResourceAccess::associatorsPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaUserInstanceEnumeration& instEnum)
-  { 
-    char* user_list = get_option(sourceInst.getName(),"admin users");
-    if(user_list){
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) { 
+    
+    char* user_list = get_option(aSourceInstanceName.getName(),"admin users");
+    
+    if(user_list) {
       SambaArray array = SambaArray(user_list);
       SambaArrayConstIterator iter;
       
-      for ( iter = array.begin(); iter != array.end(); ++iter)
-	{
-	  if(validUser((*iter).c_str())){
-	    Linux_SambaUserInstance instance;
-	    
-	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
-	    userInstName.setSambaUserName( (*iter).c_str() );
-	    
-	    instance.setInstanceName(userInstName);
-	    char *option;
-	    
-	    option = get_user_unix_name((*iter).c_str() );
-	    if ( option )
-	      instance.setSystemUserName( option );
-	    
-	    instEnum.addElement(instance);
-	  }
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+	if(validUser((*iter).c_str())){
+	  Linux_SambaUserInstance instance;
+	  
+	  Linux_SambaUserInstanceName userInstName;
+	  userInstName.setNamespace(aNameSpaceP);
+	  userInstName.setSambaUserName( (*iter).c_str() );
+	  
+	  instance.setInstanceName(userInstName);
+	  char *option;
+	  
+	  option = get_user_unix_name((*iter).c_str() );
+	  if ( option )
+	    instance.setSystemUserName( option );
+	  
+	  anInstanceEnumeration.addElement(instance);
 	}
+      }
     }
-  };
-    
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaAdminUsersForGlobalResourceAccess::associatorsGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaUserInstanceName& sourceInst,
-   Linux_SambaGlobalOptionsInstanceEnumeration& instEnum)
-  {
-    if(validUser(sourceInst.getSambaUserName())){
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
+    if(validUser(aSourceInstanceName.getSambaUserName())) {
       char * user_list = get_global_option("admin users");
-      if(user_list){
+      if(user_list) {
 	SambaArray array = SambaArray(user_list);
 	SambaArrayConstIterator iter;
 	
-	if(array.isPresent(sourceInst.getSambaUserName())){
+	if(array.isPresent(aSourceInstanceName.getSambaUserName())) {
 	  Linux_SambaGlobalOptionsInstance instance;
 	  
 	  Linux_SambaGlobalOptionsInstanceName globalInstName;
-	  globalInstName.setNamespace(nsp);
+	  globalInstName.setNamespace(aNameSpaceP);
 	  globalInstName.setName(DEFAULT_GLOBAL_NAME);
 	  globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	  
@@ -332,15 +389,16 @@ namespace genProvider {
 	  if ( option )
 	    instance.setWorkgroup( option );
 	  
-	  
-	  instEnum.addElement(instance);
+	  anInstanceEnumeration.addElement(instance);
 	}
       }
     }
-  };
+  }
   
+   
+  
+  // extrinsic methods
 
-    /* extrinsic methods */
 	
 }
 

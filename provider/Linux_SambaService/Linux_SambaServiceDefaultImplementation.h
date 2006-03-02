@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaServiceDefaultImplementation.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaServiceDefaultImplementation.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaServiceDefaultImplementation_h
 #define Linux_SambaServiceDefaultImplementation_h
 
@@ -29,6 +32,7 @@
 #include "CIM_ConcreteJobInstanceName.h"
 #include "Linux_SambaServiceInterface.h"
 
+
 namespace genProvider {
 
   class Linux_SambaServiceDefaultImplementation:
@@ -38,62 +42,85 @@ namespace genProvider {
     virtual ~Linux_SambaServiceDefaultImplementation() { };
     
     /* intrinsic methods */
+    
     virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaServiceInstanceNameEnumeration& instnames);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaServiceInstanceNameEnumeration& anInstanceNameEnumeration);
+    
   	
+    
     virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaServiceManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+  	  Linux_SambaServiceManualInstanceEnumeration& aManualInstanceEnumeration);
   	
+  	
+    
     virtual Linux_SambaServiceManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaServiceInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaServiceInstanceName& anInstanceName);
+    
   	
+    
     virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaServiceManualInstance&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaServiceManualInstance& aManualInstance);
+    
   	
-    virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaServiceManualInstance&);
+    
+    virtual Linux_SambaServiceInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaServiceManualInstance& aManualInstance);
+    
   	
+    
     virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaServiceInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaServiceInstanceName& anInstanceName);
+    
 	
     
+    
     /* extrinsic methods */
-
+    
+    
     virtual CMPIUint32 RequestStateChange(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaServiceInstanceName&,
-      const CMPIUint16 &RequestedState,
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaServiceInstanceName& anInstanceName,
+      const CMPIUint16& RequestedState,
       int isRequestedStatePresent,
-      CIM_ConcreteJobInstanceName &Job,
-      const CmpiDateTime &TimeoutPeriod,
+      CIM_ConcreteJobInstanceName& Job,
+      const CmpiDateTime& TimeoutPeriod,
       int isTimeoutPeriodPresent);
+    
 
+    
     virtual CMPIUint32 StartService(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaServiceInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaServiceInstanceName& anInstanceName);
+    
 
+    
     virtual CMPIUint32 StopService(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaServiceInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaServiceInstanceName& anInstanceName);
+    
+
 	
   };
+  
 }
 #endif
-

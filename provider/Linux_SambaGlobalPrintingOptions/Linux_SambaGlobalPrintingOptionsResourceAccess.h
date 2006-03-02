@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaGlobalPrintingOptionsResourceAccess.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalPrintingOptionsResourceAccess.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGlobalPrintingOptionsResourceAccess_h
 #define Linux_SambaGlobalPrintingOptionsResourceAccess_h
 
@@ -27,66 +30,73 @@
 #include "CmpiDateTime.h"
 #include "CmpiBroker.h"
 #include "Linux_SambaGlobalPrintingOptionsDefaultImplementation.h"
-#include "smt_smb_ra_support.h"
-#include "smt_smb_defaultvalues.h"
+
 
 namespace genProvider {
 
   class Linux_SambaGlobalPrintingOptionsResourceAccess:
    public Linux_SambaGlobalPrintingOptionsDefaultImplementation {
   	
-   private:
-    
-    void Linux_SambaGlobalPrintingOptionsResourceAccess::setInstanceNameProperties(const char* nsp,     
-     Linux_SambaGlobalPrintingOptionsInstanceName& anInstanceName);
-
-    void Linux_SambaGlobalPrintingOptionsResourceAccess::setInstanceProperties(
-     Linux_SambaGlobalPrintingOptionsManualInstance& aManualInstance);
-
     public:
-    /*Linux_SambaGlobalPrintingOptionsResourceAccess();*/    
+    /*
+    Linux_SambaGlobalPrintingOptionsResourceAccess();
+    */    
     virtual ~Linux_SambaGlobalPrintingOptionsResourceAccess() ;
     
     /* intrinsic methods */
+
     virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaGlobalPrintingOptionsInstanceNameEnumeration& instnames);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaGlobalPrintingOptionsInstanceNameEnumeration& anInstanceNameEnumeration);
+
   	
+
     virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaGlobalPrintingOptionsManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      Linux_SambaGlobalPrintingOptionsManualInstanceEnumeration& aManualInstanceEnumeration);
+
   	
+
     virtual Linux_SambaGlobalPrintingOptionsManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalPrintingOptionsInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalPrintingOptionsInstanceName& anInstanceName);
+
   	
+
     virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalPrintingOptionsManualInstance&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaGlobalPrintingOptionsManualInstance& aManualInstance);
+
   	
-    /*virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaGlobalPrintingOptionsManualInstance&);*/
+    /*
+    virtual Linux_SambaGlobalPrintingOptionsInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaGlobalPrintingOptionsManualInstance& aManualInstance);
+    */
   	
-    /*virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaGlobalPrintingOptionsInstanceName&);*/
+    /*
+    virtual void deleteInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaGlobalPrintingOptionsInstanceName& anInstanceName);
+    */
 	
     
+    
     /* extrinsic methods */
+    
 	
   };
+  
 }
 #endif
-

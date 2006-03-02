@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaForceUserForPrinterRepositoryInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaForceUserForPrinterRepositoryInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaForceUserForPrinterRepositoryInstance_h
 #define Linux_SambaForceUserForPrinterRepositoryInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaForceUserForPrinterInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaForceUserForPrinterRepositoryInstance {
-  public:
-       Linux_SambaForceUserForPrinterRepositoryInstance();
-  	
-       Linux_SambaForceUserForPrinterRepositoryInstance
-  	    (const Linux_SambaForceUserForPrinterRepositoryInstance& original);
-  	   
-       Linux_SambaForceUserForPrinterRepositoryInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaForceUserForPrinterRepositoryInstance();
        
-       Linux_SambaForceUserForPrinterRepositoryInstance& operator=
-  	    (const Linux_SambaForceUserForPrinterRepositoryInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaForceUserForPrinterRepositoryInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaForceUserForPrinterInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaForceUserForPrinterInstanceName& val);        
-       const Linux_SambaForceUserForPrinterInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaForceUserForPrinterRepositoryInstance();
+    Linux_SambaForceUserForPrinterRepositoryInstance(
+      const Linux_SambaForceUserForPrinterRepositoryInstance& anInstance);
+    Linux_SambaForceUserForPrinterRepositoryInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaForceUserForPrinterRepositoryInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaForceUserForPrinterRepositoryInstance& original);
-       void reset();
+    Linux_SambaForceUserForPrinterRepositoryInstance& operator=(
+      const Linux_SambaForceUserForPrinterRepositoryInstance& anInstance);
        
-       Linux_SambaForceUserForPrinterInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaForceUserForPrinterInstanceName& anInstanceName);        
+    const Linux_SambaForceUserForPrinterInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement{
-  	Linux_SambaForceUserForPrinterRepositoryInstance* m_elementP;
-  	Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement();
-  	~Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement();  	
+  struct Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement {
+
+    Linux_SambaForceUserForPrinterRepositoryInstance* m_elementP;
+    Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement();
+    ~Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaForceUserForPrinterRepositoryInstanceEnumeration {
-  	private:
-  	  Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaForceUserForPrinterRepositoryInstanceEnumeration();
-  	  
-  	  Linux_SambaForceUserForPrinterRepositoryInstanceEnumeration(
-  	   const Linux_SambaForceUserForPrinterRepositoryInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaForceUserForPrinterRepositoryInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaForceUserForPrinterRepositoryInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaForceUserForPrinterRepositoryInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaForceUserForPrinterRepositoryInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaForceUserForPrinterRepositoryInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaForceUserForPrinterRepositoryInstanceEnumeration();
+    Linux_SambaForceUserForPrinterRepositoryInstanceEnumeration(
+      const Linux_SambaForceUserForPrinterRepositoryInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaForceUserForPrinterRepositoryInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaForceUserForPrinterRepositoryInstance& getNext();
+    int getSize() const;
+    const Linux_SambaForceUserForPrinterRepositoryInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaForceUserForPrinterRepositoryInstance& anInstance);
+
+  };
+
+}
+
+#endif

@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaGroupForUserRepositoryInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGroupForUserRepositoryInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGroupForUserRepositoryInstance_h
 #define Linux_SambaGroupForUserRepositoryInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaGroupForUserInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaGroupForUserRepositoryInstance {
-  public:
-       Linux_SambaGroupForUserRepositoryInstance();
-  	
-       Linux_SambaGroupForUserRepositoryInstance
-  	    (const Linux_SambaGroupForUserRepositoryInstance& original);
-  	   
-       Linux_SambaGroupForUserRepositoryInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaGroupForUserRepositoryInstance();
        
-       Linux_SambaGroupForUserRepositoryInstance& operator=
-  	    (const Linux_SambaGroupForUserRepositoryInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaGroupForUserRepositoryInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaGroupForUserInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaGroupForUserInstanceName& val);        
-       const Linux_SambaGroupForUserInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaGroupForUserRepositoryInstance();
+    Linux_SambaGroupForUserRepositoryInstance(
+      const Linux_SambaGroupForUserRepositoryInstance& anInstance);
+    Linux_SambaGroupForUserRepositoryInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaGroupForUserRepositoryInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaGroupForUserRepositoryInstance& original);
-       void reset();
+    Linux_SambaGroupForUserRepositoryInstance& operator=(
+      const Linux_SambaGroupForUserRepositoryInstance& anInstance);
        
-       Linux_SambaGroupForUserInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaGroupForUserInstanceName& anInstanceName);        
+    const Linux_SambaGroupForUserInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaGroupForUserRepositoryInstanceEnumerationElement{
-  	Linux_SambaGroupForUserRepositoryInstance* m_elementP;
-  	Linux_SambaGroupForUserRepositoryInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaGroupForUserRepositoryInstanceEnumerationElement();
-  	~Linux_SambaGroupForUserRepositoryInstanceEnumerationElement();  	
+  struct Linux_SambaGroupForUserRepositoryInstanceEnumerationElement {
+
+    Linux_SambaGroupForUserRepositoryInstance* m_elementP;
+    Linux_SambaGroupForUserRepositoryInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaGroupForUserRepositoryInstanceEnumerationElement();
+    ~Linux_SambaGroupForUserRepositoryInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaGroupForUserRepositoryInstanceEnumeration {
-  	private:
-  	  Linux_SambaGroupForUserRepositoryInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaGroupForUserRepositoryInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaGroupForUserRepositoryInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaGroupForUserRepositoryInstanceEnumeration();
-  	  
-  	  Linux_SambaGroupForUserRepositoryInstanceEnumeration(
-  	   const Linux_SambaGroupForUserRepositoryInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaGroupForUserRepositoryInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaGroupForUserRepositoryInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaGroupForUserRepositoryInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaGroupForUserRepositoryInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaGroupForUserRepositoryInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaGroupForUserRepositoryInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaGroupForUserRepositoryInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaGroupForUserRepositoryInstanceEnumeration();
+    Linux_SambaGroupForUserRepositoryInstanceEnumeration(
+      const Linux_SambaGroupForUserRepositoryInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaGroupForUserRepositoryInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaGroupForUserRepositoryInstance& getNext();
+    int getSize() const;
+    const Linux_SambaGroupForUserRepositoryInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaGroupForUserRepositoryInstance& anInstance);
+
+  };
+
+}
+
+#endif

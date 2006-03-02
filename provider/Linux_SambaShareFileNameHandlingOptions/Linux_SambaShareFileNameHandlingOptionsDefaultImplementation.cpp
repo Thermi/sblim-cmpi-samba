@@ -1,106 +1,201 @@
-/**
- *  Linux_SambaShareFileNameHandlingOptionsDefaultImplementation.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaShareFileNameHandlingOptionsDefaultImplementation.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaShareFileNameHandlingOptionsDefaultImplementation.h"
+#include "Linux_SambaShareFileNameHandlingOptionsRepositoryInstance.h"
 #include <iostream>
-
-using namespace std;
 
 namespace genProvider {
 
   /* intrinsic methods */
-  void Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaShareFileNameHandlingOptionsInstanceNameEnumeration& instnames){
-   	cout<<"enumInstances not supported for Linux_SambaShareFileNameHandlingOptions"<<endl;
-   	throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "enumInstances not implemented for Linux_SambaShareFileNameHandlingOptions");   
-  }
-  	
-  void Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaShareFileNameHandlingOptionsManualInstanceEnumeration& instances){
-    
-    cout<<"Using default enumInstances implementation for Linux_SambaShareFileNameHandlingOptions"<<endl;
-    cout<<"Let}s get the instanceNames"<<endl;
-    Linux_SambaShareFileNameHandlingOptionsInstanceNameEnumeration namesEnumeration;
-    enumInstanceNames(ctx, mbp,nsp,namesEnumeration);
-    cout<<"Getting each instance"<<endl;
-    while(namesEnumeration.hasNext()){
-      Linux_SambaShareFileNameHandlingOptionsInstanceName name=
-    	  namesEnumeration.getNext();
-    	cout<<"Getting an instance for instanceName"<<endl;
-    	Linux_SambaShareFileNameHandlingOptionsManualInstance instance=
-    	  getInstance(ctx, mbp, properties, name);
-    	cout<<"adding instance to enum"<<endl;
-    	instances.addElement(instance);
-    	cout<<"Added!"<<endl;
-    };
-  }
-  	
-  Linux_SambaShareFileNameHandlingOptionsManualInstance 
-   Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareFileNameHandlingOptionsInstanceName&){
-    cout<<"getInstance not supported for Linux_SambaShareFileNameHandlingOptions"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "getInstance not implemented for Linux_SambaShareFileNameHandlingOptions");
-  }
-  	
-  void Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaShareFileNameHandlingOptionsManualInstance&){
-   	cout<<"setInstance not supported for Linux_SambaShareFileNameHandlingOptions"<<endl;
-     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "setInstance not implemented for Linux_SambaShareFileNameHandlingOptions");
-  }
-  	
-  void Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::
-   createInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareFileNameHandlingOptionsManualInstance&){
-   	cout<<"createInstance not supported for Linux_SambaShareFileNameHandlingOptions"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "createInstance not implemented for Linux_SambaShareFileNameHandlingOptions");
-  }
-  	
-  void Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::
-   deleteInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaShareFileNameHandlingOptionsInstanceName&){
-   	cout<<"deleteInstance not supported for Linux_SambaShareFileNameHandlingOptions"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "deleteInstance not implemented for Linux_SambaShareFileNameHandlingOptions");
-  }
-	
-  
-  /* extrinsic methods */
-	
-}
+  //----------------------------------------------------------------------------	
+  void
+  Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::enumInstanceNames(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    Linux_SambaShareFileNameHandlingOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
 
+#ifdef DEBUG
+   	std::cout << "enumInstanceNames not supported for Linux_SambaShareFileNameHandlingOptions" << std::endl;
+#endif   	
+
+   	throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "enumInstanceEnumeration",
+   	  "Linux_SambaShareFileNameHandlingOptions");   
+
+  }
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaShareFileNameHandlingOptionsManualInstanceEnumeration& anInstanceEnumeration) {
+
+#ifdef DEBUG
+    std::cout << "Using default enumInstances implementation for Linux_SambaShareFileNameHandlingOptions" << std::endl;
+    std::cout << "Let's get the instanceNames" << std::endl;
+#endif    
+
+    Linux_SambaShareFileNameHandlingOptionsInstanceNameEnumeration namesEnumeration;
+    enumInstanceNames(aContext,aBroker,aNameSpaceP,namesEnumeration);
+
+#ifdef DEBUG
+    std::cout << "Getting each instance" << std::endl;
+#endif    
+    
+    while (namesEnumeration.hasNext()) {
+    
+      Linux_SambaShareFileNameHandlingOptionsInstanceName instanceName = namesEnumeration.getNext();
+    
+      Linux_SambaShareFileNameHandlingOptionsRepositoryInstance repositoryInstance;
+
+      // try to fetch repository instance
+      try {
+        Linux_SambaShareFileNameHandlingOptionsInstanceName repositoryInstanceName(instanceName);
+        repositoryInstanceName.setNamespace("IBMShadow/cimv2");
+        CmpiObjectPath repositoryCmpiObjectPath = repositoryInstanceName.getObjectPath();
+        CmpiBroker cmpiBroker(aBroker);
+        CmpiInstance repositoryCmpiInstance = cmpiBroker.getInstance(
+            aContext,
+            repositoryCmpiObjectPath,
+            aPropertiesPP);
+        Linux_SambaShareFileNameHandlingOptionsRepositoryInstance localRepositoryInstance(
+      	  repositoryCmpiInstance,
+          "IBMShadow/cimv2");
+        repositoryInstance = localRepositoryInstance;
+      } catch (const CmpiStatus& rc) { }                             
+    
+#ifdef DEBUG
+    	std::cout << "Getting an instance for instanceName" << std::endl;
+#endif
+    	
+    	Linux_SambaShareFileNameHandlingOptionsManualInstance instance = getInstance(
+    	  aContext,
+    	  aBroker,
+    	  aPropertiesPP,
+    	  instanceName);
+
+      // add the static data
+
+
+#ifdef DEBUG
+    	std::cout << "adding instance to enum" << std::endl;
+#endif
+    	
+    	anInstanceEnumeration.addElement(instance);
+
+#ifdef DEBUG
+    	std::cout << "Added!" << std::endl;
+#endif
+    	
+    }
+
+  }
+
+  //----------------------------------------------------------------------------	
+  Linux_SambaShareFileNameHandlingOptionsManualInstance 
+  Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaShareFileNameHandlingOptionsInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+    std::cout << "getInstance not supported for Linux_SambaShareFileNameHandlingOptions" << std::endl;
+#endif
+    	
+
+    throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "getInstance",
+   	  "Linux_SambaShareFileNameHandlingOptions");
+
+  }
+  	
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::setInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaShareFileNameHandlingOptionsManualInstance& aManualInstance) {
+  
+#ifdef DEBUG
+    std::cout << "setInstance not supported for Linux_SambaShareFileNameHandlingOptions" << std::endl;
+#endif
+    	
+   
+    throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "setInstance",
+   	  "Linux_SambaShareFileNameHandlingOptions");
+   	 
+  }
+  	
+  //----------------------------------------------------------------------------	
+  Linux_SambaShareFileNameHandlingOptionsInstanceName  
+  Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::createInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareFileNameHandlingOptionsManualInstance& aManualInstance) {
+
+#ifdef DEBUG
+   	std::cout << "createInstance not supported for Linux_SambaShareFileNameHandlingOptions" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+   	 CmpiErrorFormater::METHOD_NOT_FOUND,
+   	 "createInstance",
+   	 "Linux_SambaShareFileNameHandlingOptions");
+
+  }
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaShareFileNameHandlingOptionsDefaultImplementation::deleteInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareFileNameHandlingOptionsInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+   	std::cout << "deleteInstance not supported for Linux_SambaShareFileNameHandlingOptions" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "deleteInstance",
+      "Linux_SambaShareFileNameHandlingOptions");
+
+  }
+
+  
+
+  /* extrinsic methods */
+  
+
+}

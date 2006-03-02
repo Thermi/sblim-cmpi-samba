@@ -1,106 +1,133 @@
-/**
- *  Linux_SambaUserRepositoryExternal.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaUserRepositoryExternal.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaUserRepositoryExternal.h"
 
-namespace genProvider{
+namespace genProvider {
 	
+	//----------------------------------------------------------------------------
   Linux_SambaUserRepositoryExternal::Linux_SambaUserRepositoryExternal(
-   const CmpiBroker& brkr, const CmpiContext& ctx ) 
-   : broker(brkr), context(ctx) {};
+    const CmpiBroker& aBroker,
+    const CmpiContext& aContext) 
+    : m_broker(aBroker),
+    m_context(aContext) { }
   
-  const char * Linux_SambaUserRepositoryExternal::
-   nsp="IBMShadow/cimv2";
+	//----------------------------------------------------------------------------
+  const char* Linux_SambaUserRepositoryExternal::s_shadowNameSpaceP = "IBMShadow/cimv2";
    
-  Linux_SambaUserRepositoryExternal::
-   ~Linux_SambaUserRepositoryExternal(){};
+	//----------------------------------------------------------------------------
+  Linux_SambaUserRepositoryExternal::~Linux_SambaUserRepositoryExternal() { }
     
-  void Linux_SambaUserRepositoryExternal::enumInstanceNames(
-   Linux_SambaUserInstanceNameEnumeration& instnames) {
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaUserRepositoryExternal::enumInstanceNames(
+    Linux_SambaUserInstanceNameEnumeration& anInstanceNameEnumeration) {
 
-    CmpiObjectPath op(nsp,"Linux_SambaUser");
-    CmpiEnumeration en=broker.enumInstanceNames(context,op);
-    while(en.hasNext()) {
-      CmpiObjectPath opi = en.getNext();
-      Linux_SambaUserInstanceName iname(opi);
-      instnames.addElement(iname);
+    CmpiObjectPath cmpiClassObjectPath(s_shadowNameSpaceP,"Linux_SambaUser");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstanceNames(m_context,cmpiClassObjectPath);
+    while(cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiObjectPath = cmpiEnumeration.getNext();
+      Linux_SambaUserInstanceName instanceName(cmpiObjectPath);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
-  };
+  }
   	  
-  void Linux_SambaUserRepositoryExternal::enumInstances(
-   const char* *properties,
-   Linux_SambaUserRepositoryInstanceEnumeration& instances) {
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaUserRepositoryExternal::enumInstances(
+    const char** aPropertiesPP,
+    Linux_SambaUserRepositoryInstanceEnumeration& aRepositoryInstanceEnumeration) {
    		
-    CmpiObjectPath op(nsp,"Linux_SambaUser");
-    CmpiEnumeration en=broker.enumInstances(context,op,properties);
-    while(en.hasNext()) {
-      CmpiInstance inst = en.getNext();
-      Linux_SambaUserRepositoryInstance instance(inst,nsp);
-      instances.addElement(instance);
+    CmpiObjectPath cmpiClassObjectPath(s_shadowNameSpaceP,"Linux_SambaUser");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstances(m_context,cmpiClassObjectPath,aPropertiesPP);
+    while(cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaUserRepositoryInstance repositoryInstance(cmpiInstance,s_shadowNameSpaceP);
+      aRepositoryInstanceEnumeration.addElement(repositoryInstance);
     }
-  };
+  
+  }
   	  
+  //----------------------------------------------------------------------------
   Linux_SambaUserRepositoryInstance
-   Linux_SambaUserRepositoryExternal::getInstance(
-   const char* *properties,
-   const Linux_SambaUserInstanceName& instanceName) {
+  Linux_SambaUserRepositoryExternal::getInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    op.setNameSpace(nsp);
-    CmpiInstance inst=broker.getInstance(context,op,properties);
-    return Linux_SambaUserRepositoryInstance(inst,nsp);
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    cmpiObjectPath.setNameSpace(s_shadowNameSpaceP);
+    CmpiInstance cmpiInstance = 
+      m_broker.getInstance(m_context,cmpiObjectPath,aPropertiesPP);
+    return Linux_SambaUserRepositoryInstance(cmpiInstance,s_shadowNameSpaceP);
+
   }
       
-  void Linux_SambaUserRepositoryExternal::setInstance(
-   const char* *properties,
-   const Linux_SambaUserRepositoryInstance& instance){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaUserRepositoryExternal::setInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaUserRepositoryInstance& aRepositoryInstance) {
   
     //make a copy of the given instance and set it to the right nameSpace
-    Linux_SambaUserInstanceName instanceName(instance.getInstanceName());
-    instanceName.setNamespace(nsp,1);
-    Linux_SambaUserRepositoryInstance copiedInstance(instance);
-    copiedInstance.setInstanceName(instanceName);
+    Linux_SambaUserInstanceName instanceName(aRepositoryInstance.getInstanceName());
+    instanceName.setNamespace(s_shadowNameSpaceP,1);
+    Linux_SambaUserRepositoryInstance copiedRepositoryInstance(aRepositoryInstance);
+    copiedRepositoryInstance.setInstanceName(instanceName);
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=copiedInstance.getCmpiInstance();
-    broker.setInstance(context,op,inst,properties);
+    CmpiObjectPath cmpiObjectPath = instanceName.getObjectPath();
+    CmpiInstance cmpiInstance = copiedRepositoryInstance.getCmpiInstance();
+    m_broker.setInstance(m_context,cmpiObjectPath,cmpiInstance,aPropertiesPP);
+  
   }
       
-  void Linux_SambaUserRepositoryExternal::createInstance(
-   const Linux_SambaUserRepositoryInstance& instance){
+  //----------------------------------------------------------------------------
+  Linux_SambaUserInstanceName
+  Linux_SambaUserRepositoryExternal::createInstance(
+    const Linux_SambaUserRepositoryInstance& aRepositoryInstance) {
   
     //make a copy of the given instance and set it to the right nameSpace
-    Linux_SambaUserInstanceName instanceName(instance.getInstanceName());
-    instanceName.setNamespace(nsp,1);
-    Linux_SambaUserRepositoryInstance copiedInstance(instance);
-    copiedInstance.setInstanceName(instanceName);
+    Linux_SambaUserInstanceName instanceName(aRepositoryInstance.getInstanceName());
+    instanceName.setNamespace(s_shadowNameSpaceP,1);
+    Linux_SambaUserRepositoryInstance copiedRepositoryInstance(aRepositoryInstance);
+    copiedRepositoryInstance.setInstanceName(instanceName);
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=copiedInstance.getCmpiInstance();
-    broker.createInstance(context,op,inst);
+    CmpiObjectPath cmpiObjectPath = instanceName.getObjectPath();
+    CmpiInstance cmpiInstance = copiedRepositoryInstance.getCmpiInstance();
+    return Linux_SambaUserInstanceName(
+		m_broker.createInstance(m_context,cmpiObjectPath,cmpiInstance));
+  
   }
   
-  void Linux_SambaUserRepositoryExternal::deleteInstance(
-   const Linux_SambaUserInstanceName& instanceName){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaUserRepositoryExternal::deleteInstance(
+    const Linux_SambaUserInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    op.setNameSpace(nsp);
-    broker.deleteInstance(context,op);
-  }  
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    cmpiObjectPath.setNameSpace(s_shadowNameSpaceP);
+    m_broker.deleteInstance(m_context,cmpiObjectPath);
+  
+  }
+    
 }

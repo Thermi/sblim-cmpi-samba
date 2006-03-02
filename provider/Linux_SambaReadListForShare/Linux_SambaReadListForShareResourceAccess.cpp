@@ -1,141 +1,41 @@
-/**
- *  Linux_SambaReadListForShareResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaReadListForShareResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaReadListForShareResourceAccess.h"
+
+#include <string>
+#include <list>
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
+#include "smt_smb_array.h"
 
 namespace genProvider {
   
-    //Linux_SambaReadListForShareResourceAccess::Linux_SambaReadListForShareResourceAccess();
-    Linux_SambaReadListForShareResourceAccess::~Linux_SambaReadListForShareResourceAccess() { 
-      terminator();
-    };
   
-   /* intrinsic methods */
-  void Linux_SambaReadListForShareResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaReadListForShareInstanceNameEnumeration& instnames)
-  {
-    char ** shares = get_shares_list();
-    if(shares){
-      for (int i=0; shares[i]; i++){
-	
-	Linux_SambaShareOptionsInstanceName shareInstName;
-	shareInstName.setNamespace(nsp);
-	shareInstName.setName(shares[i]);
-	shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-	
-	
-	char* user_list = get_option(shares[i],"read list");
-	
-	if(user_list){
-	  SambaArray array = SambaArray(user_list);
-	  SambaArrayConstIterator iter;
-	  
-	  for ( iter = array.begin(); iter != array.end(); ++iter)
-	    {
-	      if(validUser((*iter).c_str())){
-		Linux_SambaReadListForShareInstanceName assocName;
-		assocName.setNamespace(nsp);
-		assocName.setGroupComponent(shareInstName);
-		
-		Linux_SambaUserInstanceName userInstName;
-		userInstName.setNamespace(nsp);
-		userInstName.setSambaUserName( (*iter).c_str() );
-		
-		assocName.setPartComponent(userInstName);
-		
-		instnames.addElement(assocName);
-	      }
-	    }
-	}
-      }
-    }
-  };
+  //----------------------------------------------------------------------------
+  // manual written methods
   
-  void Linux_SambaReadListForShareResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaReadListForShareManualInstanceEnumeration& instances)
-  {
-    char ** shares = get_shares_list();
-    if(shares){
-      for (int i=0; shares[i]; i++){
-	
-	Linux_SambaShareOptionsInstanceName shareInstName;
-	shareInstName.setNamespace(nsp);
-	shareInstName.setName(shares[i]);
-	shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-
-	char* user_list = get_option(shares[i],"read list");
-	
-	if(user_list){
-	  SambaArray array = SambaArray(user_list);
-	  SambaArrayConstIterator iter;
-	  
-	  for ( iter = array.begin(); iter != array.end(); ++iter)
-	    {
-	      if(validUser((*iter).c_str())){
-		Linux_SambaReadListForShareManualInstance manualInstance;
-		
-		Linux_SambaReadListForShareInstanceName instName;
-		instName.setNamespace(nsp);
-		instName.setGroupComponent(shareInstName);
-		
-		Linux_SambaUserInstanceName userInstName;
-		userInstName.setNamespace(nsp);
-		userInstName.setSambaUserName( (*iter).c_str() );
-		
-		instName.setPartComponent(userInstName);
-		
-		manualInstance.setInstanceName(instName);
-		instances.addElement(manualInstance);
-	      }
-	    }
-	}
-	
-      }      
-    }
-  };
-  	
-  Linux_SambaReadListForShareManualInstance 
-   Linux_SambaReadListForShareResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaReadListForShareInstanceName& instanceName)
-  {
-    Linux_SambaReadListForShareManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
-    return aManualInstance;
-  };
-  	/*
-    void Linux_SambaReadListForShareResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaReadListForShareManualInstance&){};
-  	*/
-  	
-  bool Linux_SambaReadListForShareResourceAccess::validUser(const char* user)
-  {
+  static bool validUser(const char* user) {
     char ** users = get_samba_users_list();
     if(users){
       for (int i=0; users[i]; i++){
@@ -143,94 +43,245 @@ namespace genProvider {
 	  return true;
       }
     }
+    
     return false;
   };
+  
+
+  //----------------------------------------------------------------------------
+
+
+  //----------------------------------------------------------------------------
+  //Linux_SambaReadListForShareResourceAccess::Linux_SambaReadListForShareResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaReadListForShareResourceAccess::~Linux_SambaReadListForShareResourceAccess() {
+    terminator();
+  }
+    
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaReadListForShareResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaReadListForShareInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    char ** shares = get_shares_list();
+    if(shares){
+      for (int i=0; shares[i]; i++){
+	
+	Linux_SambaShareOptionsInstanceName shareInstName;
+	shareInstName.setNamespace(aNameSpaceP);
+	shareInstName.setName(shares[i]);
+	shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+	
+	char* user_list = get_option(shares[i],"read list");
+	
+	if(user_list){
+	  SambaArray array = SambaArray(user_list);
+	  SambaArrayConstIterator iter;
+	  
+	  for ( iter = array.begin(); iter != array.end(); ++iter) {
+	    if(validUser((*iter).c_str())){
+	      Linux_SambaReadListForShareInstanceName assocName;
+	      assocName.setNamespace(aNameSpaceP);
+	      assocName.setGroupComponent(shareInstName);
+	      
+	      Linux_SambaUserInstanceName userInstName;
+	      userInstName.setNamespace(aNameSpaceP);
+	      userInstName.setSambaUserName( (*iter).c_str() );
+	      
+	      assocName.setPartComponent(userInstName);
+	      
+	      anInstanceNameEnumeration.addElement(assocName);
+	    }
+	  }
+	}
+      }
+    }
+  }
 
   
-  void Linux_SambaReadListForShareResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaReadListForShareManualInstance& newInstance)
-  {
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaReadListForShareResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaReadListForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    char ** shares = get_shares_list();
+    if(shares){
+      for (int i=0; shares[i]; i++){
+	
+	Linux_SambaShareOptionsInstanceName shareInstName;
+	shareInstName.setNamespace(aNameSpaceP);
+	shareInstName.setName(shares[i]);
+	shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+	
+	char* user_list = get_option(shares[i],"read list");
+	
+	if(user_list){
+	  SambaArray array = SambaArray(user_list);
+	  SambaArrayConstIterator iter;
+	  
+	  for ( iter = array.begin(); iter != array.end(); ++iter) {
+	    if(validUser((*iter).c_str())){
+	      Linux_SambaReadListForShareManualInstance manualInstance;
+	      
+	      Linux_SambaReadListForShareInstanceName instName;
+	      instName.setNamespace(aNameSpaceP);
+	      instName.setGroupComponent(shareInstName);
+	      
+	      Linux_SambaUserInstanceName userInstName;
+	      userInstName.setNamespace(aNameSpaceP);
+	      userInstName.setSambaUserName( (*iter).c_str() );
+	      
+	      instName.setPartComponent(userInstName);
+	      
+	      manualInstance.setInstanceName(instName);
+	      aManualInstanceEnumeration.addElement(manualInstance);
+	    }
+	  }
+	}
+      }      
+    }
+  }
+  
+  
+  //----------------------------------------------------------------------------
+
+  Linux_SambaReadListForShareManualInstance 
+  Linux_SambaReadListForShareResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaReadListForShareInstanceName& anInstanceName) {
+
+    Linux_SambaReadListForShareManualInstance aManualInstance;
+    aManualInstance.setInstanceName(anInstanceName);
+    
+    return aManualInstance;
+  }
+
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaReadListForShareResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaReadListForShareManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+
+  Linux_SambaReadListForShareInstanceName
+  Linux_SambaReadListForShareResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaReadListForShareManualInstance& aManualInstance) {
+    
     SambaArray array = SambaArray();
-    char* user_list = get_option(newInstance.getInstanceName().getGroupComponent().getName(),"read list");
+    char* user_list = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"read list");
+    
     if(user_list)
       array.populate(user_list);
     
-    if(!validUser(newInstance.getInstanceName().getPartComponent().getSambaUserName())){
+    if(!validUser(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())){
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Invalid User!");
+      
     }else{
-      if(!array.isPresent(string( newInstance.getInstanceName().getPartComponent().getSambaUserName() ))){	
-	array.add( string( newInstance.getInstanceName().getPartComponent().getSambaUserName() ) );
+      if(!array.isPresent(string( aManualInstance.getInstanceName().getPartComponent().getSambaUserName() ))){	
+	array.add( string( aManualInstance.getInstanceName().getPartComponent().getSambaUserName() ) );
 	
-	set_share_option(newInstance.getInstanceName().getGroupComponent().getName(),"read list",array.toString().c_str());
+	set_share_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"read list",array.toString().c_str());
       }
-    } 	
-  };
-  	
-  void Linux_SambaReadListForShareResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaReadListForShareInstanceName& instanceName)
-  {
+    }
+    
+    return aManualInstance.getInstanceName();
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaReadListForShareResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaReadListForShareInstanceName& anInstanceName) {
+    
     SambaArray array = SambaArray();
-    char* user_list = get_option(instanceName.getGroupComponent().getName(),"read list");
+    char* user_list = get_option(anInstanceName.getGroupComponent().getName(),"read list");
+    
     if(user_list)
       array.populate(user_list);
     
     if(array.size() > 1){
-      array.remove( string( instanceName.getPartComponent().getSambaUserName() ));
-      set_share_option(instanceName.getGroupComponent().getName(),"read list",array.toString().c_str());
-    }
-    else
-      set_share_option(instanceName.getGroupComponent().getName(),"read list",NULL);
-  }	
-    
-    /* Association Interface */
-    
-  void Linux_SambaReadListForShareResourceAccess::referencesPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaShareOptionsInstanceName& sourceInst,
-   Linux_SambaReadListForShareManualInstanceEnumeration& instEnum)
-  {
-    char* user_list = get_option(sourceInst.getName(),"read list");
+      array.remove( string( anInstanceName.getPartComponent().getSambaUserName() ));
+      set_share_option(anInstanceName.getGroupComponent().getName(),"read list",array.toString().c_str());
+      
+    } else
+      set_share_option(anInstanceName.getGroupComponent().getName(),"read list",NULL);
+  }
 
+	
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
+  void Linux_SambaReadListForShareResourceAccess::referencesPartComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaReadListForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    char* user_list = get_option(aSourceInstanceName.getName(),"read list");
+    
     if(user_list){
       SambaArray array = SambaArray(user_list);
       SambaArrayConstIterator iter;
       
-      for ( iter = array.begin(); iter != array.end(); ++iter)
-	{
-	  if(validUser((*iter).c_str())){
-	    Linux_SambaReadListForShareManualInstance manualInstance;
-	    
-	    Linux_SambaReadListForShareInstanceName instName;
-	    instName.setNamespace(nsp);
-	    instName.setGroupComponent(sourceInst);
-	    
-	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
-	    userInstName.setSambaUserName( (*iter).c_str() );
-	    
-	    instName.setPartComponent(userInstName);
-	    
-	    manualInstance.setInstanceName(instName);
-	    instEnum.addElement(manualInstance);
-	  }
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+	if(validUser((*iter).c_str())){
+	  Linux_SambaReadListForShareManualInstance manualInstance;
+	  
+	  Linux_SambaReadListForShareInstanceName instName;
+	  instName.setNamespace(aNameSpaceP);
+	  instName.setGroupComponent(aSourceInstanceName);
+	  
+	  Linux_SambaUserInstanceName userInstName;
+	  userInstName.setNamespace(aNameSpaceP);
+	  userInstName.setSambaUserName( (*iter).c_str() );
+	  
+	  instName.setPartComponent(userInstName);
+	  
+	  manualInstance.setInstanceName(instName);
+	  aManualInstanceEnumeration.addElement(manualInstance);
 	}
+      }
     }
-  };
-    
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaReadListForShareResourceAccess::referencesGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaUserInstanceName& sourceInst,
-   Linux_SambaReadListForShareManualInstanceEnumeration& instEnum)
-  {
-    if(validUser(sourceInst.getSambaUserName())){
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaReadListForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    if(validUser(aSourceInstanceName.getSambaUserName())){
       char ** shares = get_shares_list();
       if(shares){
 	for (int i=0; shares[i]; i++){
@@ -239,125 +290,132 @@ namespace genProvider {
 	    SambaArray array = SambaArray(user_list);
 	    SambaArrayConstIterator iter;
 	    
-	    if(array.isPresent( string( sourceInst.getSambaUserName()))){
+	    if(array.isPresent( string( aSourceInstanceName.getSambaUserName()))){
 	      Linux_SambaReadListForShareManualInstance manualInstance;
 	      
 	      Linux_SambaReadListForShareInstanceName instName;
-	      instName.setNamespace(nsp);
-	      instName.setPartComponent(sourceInst);
-	      
+	      instName.setNamespace(aNameSpaceP);
+	      instName.setPartComponent(aSourceInstanceName);
 	      
 	      Linux_SambaShareOptionsInstanceName shareInstName;
-	      shareInstName.setNamespace(nsp);
+	      shareInstName.setNamespace(aNameSpaceP);
 	      shareInstName.setName(shares[i]);
 	      shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	      
 	      instName.setGroupComponent(shareInstName);
 	      
 	      manualInstance.setInstanceName(instName);
-	      instEnum.addElement(manualInstance);
+	      aManualInstanceEnumeration.addElement(manualInstance);
 	    }
 	  }
 	}
       }
     }
-  };
-    
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaReadListForShareResourceAccess::associatorsPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaShareOptionsInstanceName& sourceInst,
-   Linux_SambaUserInstanceEnumeration& instEnum)
-  { 
-    char* user_list = get_option(sourceInst.getName(),"read list");
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
+    
+    char* user_list = get_option(aSourceInstanceName.getName(),"read list");
+    
     if(user_list){
       SambaArray array = SambaArray(user_list);
       SambaArrayConstIterator iter;
       
-      for ( iter = array.begin(); iter != array.end(); ++iter)
-	{
-	  if(validUser((*iter).c_str())){
-	    Linux_SambaUserInstance instance;
-	    
-	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
-	    userInstName.setSambaUserName( (*iter).c_str()  );
-	    
-	    instance.setInstanceName(userInstName);
-	    char *option;
-	    
-	    option = get_user_unix_name( (*iter).c_str() );
-	    if ( option )
-	      instance.setSystemUserName( option );
-	    
-	    instEnum.addElement(instance);
-	  }
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+	if(validUser((*iter).c_str())){
+	  Linux_SambaUserInstance instance;
+	  
+	  Linux_SambaUserInstanceName userInstName;
+	  userInstName.setNamespace(aNameSpaceP);
+	  userInstName.setSambaUserName( (*iter).c_str()  );
+	  
+	  instance.setInstanceName(userInstName);
+	  char *option;
+	  
+	  option = get_user_unix_name( (*iter).c_str() );
+	  if ( option )
+	    instance.setSystemUserName( option );
+	  
+	  anInstanceEnumeration.addElement(instance);
 	}
+      }
     }
-  };
-    
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaReadListForShareResourceAccess::associatorsGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaUserInstanceName& sourceInst,
-   Linux_SambaShareOptionsInstanceEnumeration& instEnum)
-  {
-    if(validUser(sourceInst.getSambaUserName())){
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaShareOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
+    if(validUser(aSourceInstanceName.getSambaUserName())){
       char ** shares = get_shares_list();
       if(shares){
 	for (int i=0; shares[i]; i++){
 	  char* user_list = get_option(shares[i],"read list");
 	  if(user_list){
 	    SambaArray array = SambaArray(user_list);
-	    if(array.isPresent( string( sourceInst.getSambaUserName())))
-	      {
-		Linux_SambaShareOptionsInstance instance;
-		
-		Linux_SambaShareOptionsInstanceName shareInstName;
-		shareInstName.setNamespace(nsp);
-		shareInstName.setName(shares[i]);
-		shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-		
-		instance.setInstanceName(shareInstName);
-		
-		char *option;
-		
-		option = get_option(shares[i],"available");	
-		if ( option )
-		  if(strcasecmp(option,"yes") == 0)
-		    instance.setAvailable( true );
-		  else
-		    instance.setAvailable( false );
-		
-		option = get_option(shares[i],"comment");
-		if ( option )
-		  instance.setComment(option);
-		
-		option = get_option(shares[i],"path");
-		if ( option )
-		  instance.setPath(option);
-		
-		option = get_option(shares[i],"printable");	
-		if ( option )
-		  if(strcasecmp(option,"yes") == 0)
-		    instance.setPrintable( true );
-		  else
-		    instance.setPrintable( false );
-		
+	    if(array.isPresent( string( aSourceInstanceName.getSambaUserName()))) {
+	      Linux_SambaShareOptionsInstance instance;
 	      
-		instEnum.addElement(instance);
-	      }
+	      Linux_SambaShareOptionsInstanceName shareInstName;
+	      shareInstName.setNamespace(aNameSpaceP);
+	      shareInstName.setName(shares[i]);
+	      shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+	      
+	      instance.setInstanceName(shareInstName);
+	      
+	      char *option;
+	      
+	      option = get_option(shares[i],"available");	
+	      if ( option )
+		if(strcasecmp(option,"yes") == 0)
+		  instance.setAvailable( true );
+		else
+		  instance.setAvailable( false );
+	      
+	      option = get_option(shares[i],"comment");
+	      if ( option )
+		instance.setComment(option);
+	      
+	      option = get_option(shares[i],"path");
+	      if ( option )
+		instance.setPath(option);
+	      
+	      option = get_option(shares[i],"printable");	
+	      if ( option )
+		if(strcasecmp(option,"yes") == 0)
+		  instance.setPrintable( true );
+		else
+		  instance.setPrintable( false );
+	      
+	      
+	      anInstanceEnumeration.addElement(instance);
+	    }
 	  }
 	}
       }
     }
-  };
+  }
+
+   
   
-    /* extrinsic methods */
+  // extrinsic methods
+
 	
 }
 

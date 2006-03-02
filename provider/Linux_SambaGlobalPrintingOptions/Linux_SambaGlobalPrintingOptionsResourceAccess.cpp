@@ -1,70 +1,83 @@
-/**
- *  Linux_SambaGlobalPrintingOptionsResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalPrintingOptionsResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGlobalPrintingOptionsResourceAccess.h"
 
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
+
 namespace genProvider {
-  
-   void Linux_SambaGlobalPrintingOptionsResourceAccess::setInstanceNameProperties(const char* nsp,     
-    Linux_SambaGlobalPrintingOptionsInstanceName& anInstanceName)
-  {
-    anInstanceName.setNamespace(nsp);
+
+  //----------------------------------------------------------------------------
+  // manual written methods
+
+  static void setInstanceNameProperties(
+      const char* aNameSpaceP, 
+      Linux_SambaGlobalPrintingOptionsInstanceName& anInstanceName) {
+    
+    anInstanceName.setNamespace(aNameSpaceP);
     anInstanceName.setName(DEFAULT_GLOBAL_NAME);
     anInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
   }
 
-  void Linux_SambaGlobalPrintingOptionsResourceAccess::setInstanceProperties(
-   Linux_SambaGlobalPrintingOptionsManualInstance& aManualInstance)
-  {
+
+  //----------------------------------------------------------------------------
+
+
+  static void setInstanceProperties(
+      Linux_SambaGlobalPrintingOptionsManualInstance& aManualInstance) {
     char *option;
     
     option = get_global_option(CUPS_OPTIONS);	
     if ( option )
       aManualInstance.setCupsOptions( option );
-
+    
     option = get_global_option(DEFAULT_DEVMODE);	
     if ( option )
       if(strcasecmp(option,YES) == 0)
 	aManualInstance.setDefaultDevMode( true );
       else
 	aManualInstance.setDefaultDevMode( false );
-
+    
     option = get_global_option(MAX_PRINT_JOBS);	
     if ( option )
       aManualInstance.setMaxPrintjobs( atoi(option) );
-
+    
     option = get_global_option(MAX_REPORTED_PRINT_JOBS);	
     if ( option )
       aManualInstance.setMaxReportedPrintjobs( atoi(option) );
-
+    
     option = get_global_option(PRINT_COMMAND);	
     if ( option )
       aManualInstance.setPrintCommand( option );
-
+    
     option = get_global_option(PRINTCAP_CACHE_TIME);	
     if ( option )
       aManualInstance.setPrintcapCacheTime( atoi(option) );
-
+    
     option = get_global_option(PRINTER_NAME);	
     if ( option )
       aManualInstance.setSystemPrinterName( option );
-
+    
     option = get_global_option(USE_CLIENT_DRIVER);	
     if ( option )
       if(strcasecmp(option,YES) == 0)
@@ -73,120 +86,148 @@ namespace genProvider {
 	aManualInstance.setUseClientDriver( false );
   };
 
+  //----------------------------------------------------------------------------
+
+  
+  //----------------------------------------------------------------------------
   //Linux_SambaGlobalPrintingOptionsResourceAccess::Linux_SambaGlobalPrintingOptionsResourceAccess();
-  Linux_SambaGlobalPrintingOptionsResourceAccess::~Linux_SambaGlobalPrintingOptionsResourceAccess() { };
-  
-    /* intrinsic methods */
+
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalPrintingOptionsResourceAccess::~Linux_SambaGlobalPrintingOptionsResourceAccess() {
+    terminator();
+  }
     
-  void Linux_SambaGlobalPrintingOptionsResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaGlobalPrintingOptionsInstanceNameEnumeration& instnames)
-  {
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalPrintingOptionsResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaGlobalPrintingOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
+   
     Linux_SambaGlobalPrintingOptionsInstanceName instanceName;
-    setInstanceNameProperties(nsp,instanceName);
-    instnames.addElement(instanceName); 
-  };
-      
+    setInstanceNameProperties(aNameSpaceP,instanceName);
+    anInstanceNameEnumeration.addElement(instanceName); 
+  }
   
-  void Linux_SambaGlobalPrintingOptionsResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaGlobalPrintingOptionsManualInstanceEnumeration& instances)
-  {
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaGlobalPrintingOptionsResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaGlobalPrintingOptionsManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaGlobalPrintingOptionsManualInstance aManualInstance;
     Linux_SambaGlobalPrintingOptionsInstanceName instanceName;
     
-    setInstanceNameProperties(nsp,instanceName);
+    setInstanceNameProperties(aNameSpaceP,instanceName);
     aManualInstance.setInstanceName(instanceName);
 
     setInstanceProperties(aManualInstance);
     
-    instances.addElement(aManualInstance);
-  };
-  	
+    aManualInstanceEnumeration.addElement(aManualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
 
   Linux_SambaGlobalPrintingOptionsManualInstance 
-   Linux_SambaGlobalPrintingOptionsResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaGlobalPrintingOptionsInstanceName& instanceName)
-  {
+  Linux_SambaGlobalPrintingOptionsResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalPrintingOptionsInstanceName& anInstanceName) {
+
     Linux_SambaGlobalPrintingOptionsManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
+    aManualInstance.setInstanceName(anInstanceName);
     
     setInstanceProperties(aManualInstance);
-
-    return aManualInstance;      
-  };
-
-  void Linux_SambaGlobalPrintingOptionsResourceAccess::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaGlobalPrintingOptionsManualInstance& newInstance)
-  {  
-    if ( newInstance.isCupsOptionsSet() )
-      set_global_option(CUPS_OPTIONS,newInstance.getCupsOptions());
     
-    if ( newInstance.isDefaultDevModeSet() )
-      if(newInstance.getDefaultDevMode())  
+    return aManualInstance;
+  }
+
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaGlobalPrintingOptionsResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaGlobalPrintingOptionsManualInstance& aManualInstance) {
+    
+    if ( aManualInstance.isCupsOptionsSet() )
+      set_global_option(CUPS_OPTIONS,aManualInstance.getCupsOptions());
+    
+    if ( aManualInstance.isDefaultDevModeSet() )
+      if(aManualInstance.getDefaultDevMode())  
 	set_global_option(DEFAULT_DEVMODE,YES);
       else
 	set_global_option(DEFAULT_DEVMODE,NO);
     
     
-    if ( newInstance.isMaxPrintjobsSet()){
+    if ( aManualInstance.isMaxPrintjobsSet()){
       char *option = (char *) malloc( 5*sizeof(char) );
-      sprintf(option,"%d",(int)newInstance.getMaxPrintjobs());
+      sprintf(option,"%d",(int)aManualInstance.getMaxPrintjobs());
       set_global_option(MAX_PRINT_JOBS, option);
       free(option);
     }
     
-    if ( newInstance.isMaxReportedPrintjobsSet()){
+    if ( aManualInstance.isMaxReportedPrintjobsSet()){
       char *option = (char *) malloc( 5*sizeof(char) );
-      sprintf(option,"%d",(int)newInstance.getMaxReportedPrintjobs());
+      sprintf(option,"%d",(int)aManualInstance.getMaxReportedPrintjobs());
       set_global_option(MAX_REPORTED_PRINT_JOBS, option);
       free(option);
     }
     
-    if ( newInstance.isPrintCommandSet() )
-      set_global_option(PRINT_COMMAND,newInstance.getPrintCommand()); 
+    if ( aManualInstance.isPrintCommandSet() )
+      set_global_option(PRINT_COMMAND,aManualInstance.getPrintCommand()); 
     
-    if ( newInstance.isPrintcapCacheTimeSet()){
+    if ( aManualInstance.isPrintcapCacheTimeSet()){
       char *option = (char *) malloc( 5*sizeof(char) );
-      sprintf(option,"%d",(int)newInstance.getPrintcapCacheTime());
+      sprintf(option,"%d",(int)aManualInstance.getPrintcapCacheTime());
       set_global_option(PRINTCAP_CACHE_TIME, option);
       free(option);
     }
     
-    if ( newInstance.isSystemPrinterNameSet() )
-      set_global_option(PRINTER_NAME,newInstance.getSystemPrinterName());
+    if ( aManualInstance.isSystemPrinterNameSet() )
+      set_global_option(PRINTER_NAME,aManualInstance.getSystemPrinterName());
     
-    if ( newInstance.isUseClientDriverSet() )
-      {
-	if(newInstance.getUseClientDriver())  
-	  set_global_option(USE_CLIENT_DRIVER,YES);
-	else
-	  set_global_option(USE_CLIENT_DRIVER,NO);
-      }
-  };
-  
+    if ( aManualInstance.isUseClientDriverSet() ) {
+      if(aManualInstance.getUseClientDriver())  
+	set_global_option(USE_CLIENT_DRIVER,YES);
+      else
+	set_global_option(USE_CLIENT_DRIVER,NO);
+    }
+  }
 
-  	/*
-    void Linux_SambaGlobalPrintingOptionsResourceAccess::createInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaGlobalPrintingOptionsManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaGlobalPrintingOptionsResourceAccess::deleteInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaGlobalPrintingOptionsInstanceName&){};
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaGlobalPrintingOptionsInstanceName
+  Linux_SambaGlobalPrintingOptionsResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalPrintingOptionsManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGlobalPrintingOptionsResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalPrintingOptionsInstanceName& anInstanceName) { }
 	*/
-    
-    /* extrinsic methods */
+	
+
+  
+  // extrinsic methods
+
 	
 }
 

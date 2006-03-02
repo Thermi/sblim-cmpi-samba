@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaReadListForPrinterInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaReadListForPrinterInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaReadListForPrinterInstance_h
 #define Linux_SambaReadListForPrinterInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaReadListForPrinterInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaReadListForPrinterInstance {
-  public:
-       Linux_SambaReadListForPrinterInstance();
-  	
-       Linux_SambaReadListForPrinterInstance
-  	    (const Linux_SambaReadListForPrinterInstance& original);
-  	   
-       Linux_SambaReadListForPrinterInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaReadListForPrinterInstance();
        
-       Linux_SambaReadListForPrinterInstance& operator=
-  	    (const Linux_SambaReadListForPrinterInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaReadListForPrinterInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaReadListForPrinterInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaReadListForPrinterInstanceName& val);        
-       const Linux_SambaReadListForPrinterInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaReadListForPrinterInstance();
+    Linux_SambaReadListForPrinterInstance(
+      const Linux_SambaReadListForPrinterInstance& anInstance);
+    Linux_SambaReadListForPrinterInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaReadListForPrinterInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaReadListForPrinterInstance& original);
-       void reset();
+    Linux_SambaReadListForPrinterInstance& operator=(
+      const Linux_SambaReadListForPrinterInstance& anInstance);
        
-       Linux_SambaReadListForPrinterInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaReadListForPrinterInstanceName& anInstanceName);        
+    const Linux_SambaReadListForPrinterInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaReadListForPrinterInstanceEnumerationElement{
-  	Linux_SambaReadListForPrinterInstance* m_elementP;
-  	Linux_SambaReadListForPrinterInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaReadListForPrinterInstanceEnumerationElement();
-  	~Linux_SambaReadListForPrinterInstanceEnumerationElement();  	
+  struct Linux_SambaReadListForPrinterInstanceEnumerationElement {
+
+    Linux_SambaReadListForPrinterInstance* m_elementP;
+    Linux_SambaReadListForPrinterInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaReadListForPrinterInstanceEnumerationElement();
+    ~Linux_SambaReadListForPrinterInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaReadListForPrinterInstanceEnumeration {
-  	private:
-  	  Linux_SambaReadListForPrinterInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaReadListForPrinterInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaReadListForPrinterInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaReadListForPrinterInstanceEnumeration();
-  	  
-  	  Linux_SambaReadListForPrinterInstanceEnumeration(
-  	   const Linux_SambaReadListForPrinterInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaReadListForPrinterInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaReadListForPrinterInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaReadListForPrinterInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaReadListForPrinterInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaReadListForPrinterInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaReadListForPrinterInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaReadListForPrinterInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaReadListForPrinterInstanceEnumeration();
+    Linux_SambaReadListForPrinterInstanceEnumeration(
+      const Linux_SambaReadListForPrinterInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaReadListForPrinterInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaReadListForPrinterInstance& getNext();
+    int getSize() const;
+    const Linux_SambaReadListForPrinterInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaReadListForPrinterInstance& anInstance);
+
+  };
+
+}
+
+#endif

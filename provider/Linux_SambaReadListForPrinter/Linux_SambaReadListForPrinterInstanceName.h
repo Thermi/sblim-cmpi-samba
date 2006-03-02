@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaReadListForPrinterInstanceName.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaReadListForPrinterInstanceName.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaReadListForPrinterInstanceName_h
 #define Linux_SambaReadListForPrinterInstanceName_h
 
@@ -31,58 +34,61 @@
 #include "Linux_SambaUserInstanceName.h"
 #include "Linux_SambaPrinterOptionsInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaReadListForPrinterInstanceName {
-  public:
-       Linux_SambaReadListForPrinterInstanceName();
+       
+    private:
+    void init();
+    void init(const Linux_SambaReadListForPrinterInstanceName& anInstanceName);
+    void reset();
+       
+    const char* m_CIMClassNameP;
+    const char* m_nameSpaceP;
+    
+    Linux_SambaUserInstanceName m_PartComponent;
+    Linux_SambaPrinterOptionsInstanceName m_GroupComponent;
+       
+    struct isSetType{
+      unsigned int m_nameSpaceP:1;
+      unsigned int PartComponent:1;
+      unsigned int GroupComponent:1;
+
+    } isSet;
+  
+    public:
+    Linux_SambaReadListForPrinterInstanceName();
   	
-       Linux_SambaReadListForPrinterInstanceName
-  	    (const Linux_SambaReadListForPrinterInstanceName& original);
+    Linux_SambaReadListForPrinterInstanceName(const Linux_SambaReadListForPrinterInstanceName& anInstanceName);
   	   
-       Linux_SambaReadListForPrinterInstanceName
-        (const CmpiObjectPath& path);
+    Linux_SambaReadListForPrinterInstanceName(const CmpiObjectPath& path);
   	 
-       ~Linux_SambaReadListForPrinterInstanceName();
+    ~Linux_SambaReadListForPrinterInstanceName();
        
-       Linux_SambaReadListForPrinterInstanceName& operator=
-  	    (const Linux_SambaReadListForPrinterInstanceName& original);
+    Linux_SambaReadListForPrinterInstanceName& operator=(const Linux_SambaReadListForPrinterInstanceName& anInstanceName);
        
-       CmpiObjectPath getObjectPath() const;
+    CmpiObjectPath getObjectPath() const;
        
-       void fillKeys(CmpiInstance& cmpiInstance) const;
+    void fillKeys(CmpiInstance& cmpiInstance) const;
        
-       unsigned int isNameSpaceSet() const;
-       void setNamespace(const char * val, int makeCopy = 1);
-       const char * getNamespace() const;
+    unsigned int isNameSpaceSet() const;
+    void setNamespace(const char* aNameSpaceP, int aCopyFlag = 1);
+    const char* getNamespace() const;
+    
+    unsigned int isPartComponentSet() const;
+    void setPartComponent(const Linux_SambaUserInstanceName& aValue);
+    const Linux_SambaUserInstanceName& getPartComponent() const;
 
-       unsigned int isPartComponentSet() const;
-       void setPartComponent(const Linux_SambaUserInstanceName& val);
-       const Linux_SambaUserInstanceName& getPartComponent() const;
+    unsigned int isGroupComponentSet() const;
+    void setGroupComponent(const Linux_SambaPrinterOptionsInstanceName& aValue);
+    const Linux_SambaPrinterOptionsInstanceName& getGroupComponent() const;
 
-       unsigned int isGroupComponentSet() const;
-       void setGroupComponent(const Linux_SambaPrinterOptionsInstanceName& val);
-       const Linux_SambaPrinterOptionsInstanceName& getGroupComponent() const;
-       
-  private:
-       void init();
-       void init(const Linux_SambaReadListForPrinterInstanceName& original);
-       void reset();
-       
-       const char* m_CIMClassNameP;
-       const char* m_namespace;
-       Linux_SambaUserInstanceName m_PartComponent;
-       Linux_SambaPrinterOptionsInstanceName m_GroupComponent;
-       
-       struct isSetType{
-       	 unsigned int m_namespace:1;
-         unsigned int PartComponent:1;
-         unsigned int GroupComponent:1;
-       } isSet;
+
   };
   
-  
-  struct Linux_SambaReadListForPrinterInstanceNameEnumerationElement{
+  //****************************************************************************
+  struct Linux_SambaReadListForPrinterInstanceNameEnumerationElement {
   	Linux_SambaReadListForPrinterInstanceName* m_elementP;
   	Linux_SambaReadListForPrinterInstanceNameEnumerationElement* m_nextP;
   	
@@ -90,38 +96,40 @@ namespace genProvider {
   	~Linux_SambaReadListForPrinterInstanceNameEnumerationElement();  	
   };
   
-
+  //****************************************************************************
   class Linux_SambaReadListForPrinterInstanceNameEnumeration {
+  
   	private:
-  	  Linux_SambaReadListForPrinterInstanceNameEnumerationElement* firstElementP;
-  	  Linux_SambaReadListForPrinterInstanceNameEnumerationElement* currentElementP;
-  	  Linux_SambaReadListForPrinterInstanceNameEnumerationElement* endElementP;
+    Linux_SambaReadListForPrinterInstanceNameEnumerationElement* m_firstElementP;
+  	Linux_SambaReadListForPrinterInstanceNameEnumerationElement* m_currentElementP;
+  	Linux_SambaReadListForPrinterInstanceNameEnumerationElement* m_endElementP;
   	
   	public:
-  	  Linux_SambaReadListForPrinterInstanceNameEnumeration();
+    Linux_SambaReadListForPrinterInstanceNameEnumeration();
   	  
-  	  Linux_SambaReadListForPrinterInstanceNameEnumeration(const CmpiArray& arr);
+    Linux_SambaReadListForPrinterInstanceNameEnumeration(const CmpiArray& arr);
   	  
-  	  Linux_SambaReadListForPrinterInstanceNameEnumeration(
-  	   const Linux_SambaReadListForPrinterInstanceNameEnumeration& original);
+    Linux_SambaReadListForPrinterInstanceNameEnumeration(const Linux_SambaReadListForPrinterInstanceNameEnumeration& anInstanceNameEnumeration);
+  	   
+    ~Linux_SambaReadListForPrinterInstanceNameEnumeration();
   	  
-  	  ~Linux_SambaReadListForPrinterInstanceNameEnumeration();
+    void reset();
   	  
-  	  void reset();
+    bool hasNext() const;
   	  
-  	  bool hasNext() const;
+    const Linux_SambaReadListForPrinterInstanceName& getNext();
   	  
-  	  const Linux_SambaReadListForPrinterInstanceName& getNext();
+    int getSize() const;
   	  
-  	  int getSize() const;
+    const Linux_SambaReadListForPrinterInstanceName& getElement(int anIndex) const;  	  
   	  
-  	  const Linux_SambaReadListForPrinterInstanceName& getElement(int pos) const;  	  
+    //no copy of the element is done
+    void addElement(const Linux_SambaReadListForPrinterInstanceName& anInstanceName);
   	  
-  	  //no copy of the element is done
-  	  void addElement(const Linux_SambaReadListForPrinterInstanceName& elementP);
-  	  
-  	  operator CmpiArray() const;
+    operator CmpiArray() const;
+
   };
+
 }
 #endif
 

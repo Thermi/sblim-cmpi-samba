@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaPrinterPrintingForPrinterRepositoryInstance.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterPrintingForPrinterRepositoryInstance.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaPrinterPrintingForPrinterRepositoryInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,244 +28,283 @@
 
 namespace genProvider {
 
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaPrinterPrintingForPrinterRepositoryInstance
-  //*********************************************************
-
+  //----------------------------------------------------------------------------
   //empty constructor
-  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::
-   Linux_SambaPrinterPrintingForPrinterRepositoryInstance(){   	
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::Linux_SambaPrinterPrintingForPrinterRepositoryInstance() {   	
    	init();  	   	
-  };
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copy constructor	
-  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::
-   Linux_SambaPrinterPrintingForPrinterRepositoryInstance
-   (const Linux_SambaPrinterPrintingForPrinterRepositoryInstance& original){   	
-   	init(original);  	   	
-  };
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::Linux_SambaPrinterPrintingForPrinterRepositoryInstance(
+    const Linux_SambaPrinterPrintingForPrinterRepositoryInstance& anInstance) {   	
+   	init(anInstance);  	   	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //constructor using CmpiInstance
-  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::
-   Linux_SambaPrinterPrintingForPrinterRepositoryInstance (const CmpiInstance& inst, const char* instanceNamespace){
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::Linux_SambaPrinterPrintingForPrinterRepositoryInstance(
+    const CmpiInstance& aCmpiInstance,
+    const char* anInstanceNamespaceP) {
+
     CmpiData cmpiData;
+
     init(); 
     
-    CmpiObjectPath cop=inst.getObjectPath();
-    cop.setNameSpace(instanceNamespace);
+    CmpiObjectPath cop = aCmpiInstance.getObjectPath();
+    cop.setNameSpace(anInstanceNamespaceP);
     setInstanceName(Linux_SambaPrinterPrintingForPrinterInstanceName(cop));
+
     
   }
   
-  
+  //----------------------------------------------------------------------------
   //Destructor
+  //----------------------------------------------------------------------------
   Linux_SambaPrinterPrintingForPrinterRepositoryInstance::
    ~Linux_SambaPrinterPrintingForPrinterRepositoryInstance(){
    	reset();  	  
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
   //copy operator
+  //----------------------------------------------------------------------------
   Linux_SambaPrinterPrintingForPrinterRepositoryInstance&
-   Linux_SambaPrinterPrintingForPrinterRepositoryInstance::operator=
-   (const Linux_SambaPrinterPrintingForPrinterRepositoryInstance& original){   	
-   	init(original);
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::operator=(
+    const Linux_SambaPrinterPrintingForPrinterRepositoryInstance& anInstance) {   	
+   	
+   	init(anInstance);
    	return *this;
-  };
+  
+  }
   
   
+  //----------------------------------------------------------------------------
   //converts to CmpiInstance
-  CmpiInstance Linux_SambaPrinterPrintingForPrinterRepositoryInstance::
-   getCmpiInstance(const char** properties) const{
+  //----------------------------------------------------------------------------
+  CmpiInstance
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::getCmpiInstance(
+    const char** aPropertiesPP) const {
    	
    	CmpiObjectPath objectPath=getInstanceName().getObjectPath();      
     CmpiInstance cmpiInstance(objectPath);    
     getInstanceName().fillKeys(cmpiInstance);
     
-    if (properties) {
-	  cmpiInstance.setPropertyFilter(properties,0);
+    if (aPropertiesPP) {
+	    cmpiInstance.setPropertyFilter(aPropertiesPP,0);
     }
+
   	
   	return cmpiInstance;
   	
   }
   
-  
-  //InstanceName related methods
-  unsigned int Linux_SambaPrinterPrintingForPrinterRepositoryInstance::
-   isInstanceNameSet() const{
+  //----------------------------------------------------------------------------
+  // InstanceName related methods
+  //----------------------------------------------------------------------------
+  unsigned int 
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::isInstanceNameSet() const {
   	return isSet.instanceName;
   }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaPrinterPrintingForPrinterInstanceName&
-    Linux_SambaPrinterPrintingForPrinterRepositoryInstance::getInstanceName() const{
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::getInstanceName() const {
 
-    if(!isSet.instanceName)
+    if( ! isSet.instanceName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "InstanceName not set in Linux_SambaPrinterPrintingForPrinter instance");
+        CmpiErrorFormater::NOT_SET,
+        "InstanceName (CIM Key Attributes)",
+        "Linux_SambaPrinterPrintingForPrinter");
+   	}
   		
    	return m_instanceName;
+  
   }
 
-  void Linux_SambaPrinterPrintingForPrinterRepositoryInstance::setInstanceName(
-   const Linux_SambaPrinterPrintingForPrinterInstanceName& val){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::setInstanceName(
+    const Linux_SambaPrinterPrintingForPrinterInstanceName& val) {
+
     m_instanceName = val;
-    isSet.instanceName=1;
+    isSet.instanceName = 1;
+
   }
 
-
   
+  //----------------------------------------------------------------------------
   //set isSet attributes to FALSE
-  void Linux_SambaPrinterPrintingForPrinterRepositoryInstance::init(){
-   	isSet.instanceName=0;
-   	  	
-  };
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::init() {
+   	isSet.instanceName = 0;
+  	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copies another instance properties in this
-  void Linux_SambaPrinterPrintingForPrinterRepositoryInstance::init
-   (const Linux_SambaPrinterPrintingForPrinterRepositoryInstance& original){   	
+  //----------------------------------------------------------------------------
+  void 
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::init(
+    const Linux_SambaPrinterPrintingForPrinterRepositoryInstance& anOriginal) {   	
+
    	init();
    	   	
-    if(original.isInstanceNameSet()){
-      setInstanceName(original.getInstanceName());
-    }    
-   }
+    if(anOriginal.isInstanceNameSet()) {
+      setInstanceName(anOriginal.getInstanceName());
+    }
+        
+  }
   
-  
+  //----------------------------------------------------------------------------
   //reset the instance data
-  void Linux_SambaPrinterPrintingForPrinterRepositoryInstance::reset(){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstance::reset() {
    	
-  	  
-  };
+  }
   
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement::
-   Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement::Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement() {
    	
-  	m_elementP=0;
-  	m_nextP=0;
+  	m_elementP = 0;
+  	m_nextP = 0;
   	  
-  };
+  }
   
-  
-  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement::
-   ~Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement::~Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement() {
    	
-  	if (m_elementP!=0)
+  	if (m_elementP) {
   	  delete(m_elementP);
-  	if (m_nextP!=0)
+  	}
+  	
+  	if (m_nextP) {
   	  delete(m_nextP);
+  	}
   	  
-  };
+  }
 
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaPrinterPrintingForPrinterRepositoryInstanceNameEnumeration
-  //*********************************************************
-
-  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::
-   Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration() {
    	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   
-  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::
-   Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration(
-   const Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration& original){
+  }
+  
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration(
+    const Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration& anInstanceEnumeration) {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
+    int size = anInstanceEnumeration.getSize();
+    for (int x=0; x < size;++x) {
+      addElement(anInstanceEnumeration.getElement(x));
+    }           
+
+  }
   
-  	  
-  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::
-   ~Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::~Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
+  }
   
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::reset() {
+  	
+  	m_currentElementP = m_firstElementP;
+  	
+  }
   	  
-  void Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::reset(){
+  //----------------------------------------------------------------------------
+  bool
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::hasNext() const {
   	
-  	currentElementP=firstElementP;
-  };
+  	return (m_currentElementP != 0);
   
-  	  
-  bool Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::hasNext() const{
-  	
-  	return (currentElementP!=0);
+  }
   
-  };
-  
-  int Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::getSize() const{
+  //----------------------------------------------------------------------------
+  int
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
     
-  };
+  }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaPrinterPrintingForPrinterRepositoryInstance&  
-   Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::getElement(int pos) const{
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement* followingP=firstElementP;
+    Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x = 0;
+    while (followingP && (x < anIndex)) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
+
+  }
   
-  	  
+  //----------------------------------------------------------------------------
   const Linux_SambaPrinterPrintingForPrinterRepositoryInstance&
-   Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::getNext() {
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::getNext() {
    	
-  	 Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+    Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement* currentElementP =
+  	  m_currentElementP;
+
+    m_currentElementP = m_currentElementP->m_nextP;
   	 
-  	 return *(currentP->m_elementP);
-  };
+    return *(currentElementP->m_elementP);
+
+  }
   	  
-  void Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::addElement
-   (const Linux_SambaPrinterPrintingForPrinterRepositoryInstance& elementP){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumeration::addElement(
+    const Linux_SambaPrinterPrintingForPrinterRepositoryInstance& anInstance) {
    	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaPrinterPrintingForPrinterRepositoryInstance(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaPrinterPrintingForPrinterRepositoryInstance(elementP);
+  	if (m_firstElementP == 0) {
+  	  m_firstElementP = new Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaPrinterPrintingForPrinterRepositoryInstance(anInstance);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaPrinterPrintingForPrinterRepositoryInstanceEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP = new Linux_SambaPrinterPrintingForPrinterRepositoryInstance(anInstance);
   	}
-  };  
+
+  }
+  
 }
- 

@@ -1,70 +1,87 @@
-/**
- *  Linux_SambaPrinterForServiceResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterForServiceResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaPrinterForServiceResourceAccess.h"
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-    //Linux_SambaPrinterForServiceResourceAccess::Linux_SambaPrinterForServiceResourceAccess();
-    Linux_SambaPrinterForServiceResourceAccess::~Linux_SambaPrinterForServiceResourceAccess() { };
+  //----------------------------------------------------------------------------
+  //Linux_SambaPrinterForServiceResourceAccess::Linux_SambaPrinterForServiceResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterForServiceResourceAccess::~Linux_SambaPrinterForServiceResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    
-  void Linux_SambaPrinterForServiceResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaPrinterForServiceInstanceNameEnumeration& instnames)
-  {
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterForServiceResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaPrinterForServiceInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
     char ** printers = get_samba_printers_list();
     
     if(printers){
       for (int i=0; printers[i]; i++){
 	Linux_SambaPrinterForServiceInstanceName instName;
-	instName.setNamespace(nsp);
+	instName.setNamespace(aNameSpaceP);
 
 	Linux_SambaServiceInstanceName elemInstanceName;
-	elemInstanceName.setNamespace(nsp);
+	elemInstanceName.setNamespace(aNameSpaceP);
 	elemInstanceName.setName(DEFAULT_SERVICE_NAME);
 	elemInstanceName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
 	elemInstanceName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
 	elemInstanceName.setSystemName(DEFAULT_SYSTEM_NAME);
         instName.setManagedElement(elemInstanceName);
 	
-	
 	Linux_SambaPrinterOptionsInstanceName printerInstName;
-	printerInstName.setNamespace(nsp);
+	printerInstName.setNamespace(aNameSpaceP);
 	printerInstName.setName(printers[i]);
 	printerInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	instName.setSettingData(printerInstName);
 	
-	instnames.addElement(instName);
+	anInstanceNameEnumeration.addElement(instName);
       }
     }
-  };
+  }
+  
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaPrinterForServiceResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaPrinterForServiceManualInstanceEnumeration& aManualInstanceEnumeration) {
     
-  	
-  void Linux_SambaPrinterForServiceResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaPrinterForServiceManualInstanceEnumeration& instances)
-  {
     char ** printers = get_samba_printers_list();
     
     if(printers){
@@ -72,10 +89,10 @@ namespace genProvider {
 	Linux_SambaPrinterForServiceManualInstance manualInstance;
 	
 	Linux_SambaPrinterForServiceInstanceName instName;
-	instName.setNamespace(nsp);
+	instName.setNamespace(aNameSpaceP);
 
 	Linux_SambaServiceInstanceName elemInstanceName;
-	elemInstanceName.setNamespace(nsp);
+	elemInstanceName.setNamespace(aNameSpaceP);
 	elemInstanceName.setName(DEFAULT_SERVICE_NAME);
 	elemInstanceName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
 	elemInstanceName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
@@ -84,55 +101,73 @@ namespace genProvider {
 	
 	
 	Linux_SambaPrinterOptionsInstanceName printerInstName;
-	printerInstName.setNamespace(nsp);
+	printerInstName.setNamespace(aNameSpaceP);
 	printerInstName.setName(printers[i]);
 	printerInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	instName.setSettingData(printerInstName);
 	
 	manualInstance.setInstanceName(instName);
-	instances.addElement(manualInstance);
+	aManualInstanceEnumeration.addElement(manualInstance);
       }
     }
-  };
+  }
+
   
+  //----------------------------------------------------------------------------
+
   Linux_SambaPrinterForServiceManualInstance 
-   Linux_SambaPrinterForServiceResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaPrinterForServiceInstanceName& instanceName)
-  {
-    Linux_SambaPrinterForServiceManualInstance instance;
-    instance.setInstanceName(instanceName);
-    return instance;
-  };
+  Linux_SambaPrinterForServiceResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaPrinterForServiceInstanceName& anInstanceName) {
 
-  void Linux_SambaPrinterForServiceResourceAccess::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaPrinterForServiceManualInstance&){};
+    Linux_SambaPrinterForServiceManualInstance instance;
+    instance.setInstanceName(anInstanceName);
+    
+    return instance;
+  }
+
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaPrinterForServiceResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaPrinterForServiceManualInstance& aManualInstance) { }
+  */
   
-  	
-  void Linux_SambaPrinterForServiceResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaPrinterForServiceManualInstance&){};
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaPrinterForServiceInstanceName
+  Linux_SambaPrinterForServiceResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaPrinterForServiceManualInstance& aManualInstance) { }
+  */
   
-  void Linux_SambaPrinterForServiceResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaPrinterForServiceInstanceName&){};
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaPrinterForServiceResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaPrinterForServiceInstanceName& anInstanceName) { }
+	*/
 	
-    
-    /* Association Interface */
-    
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
   void Linux_SambaPrinterForServiceResourceAccess::referencesSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaServiceInstanceName& sourceInst,
-   Linux_SambaPrinterForServiceManualInstanceEnumeration& instEnum) 
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceInstanceName& aSourceInstanceName,
+    Linux_SambaPrinterForServiceManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     char ** printers = get_samba_printers_list();
     
     if(printers){
@@ -140,39 +175,41 @@ namespace genProvider {
 	Linux_SambaPrinterForServiceManualInstance manualInstance;
 	
 	Linux_SambaPrinterForServiceInstanceName instName;
-	instName.setNamespace(nsp);
-	instName.setManagedElement(sourceInst);
+	instName.setNamespace(aNameSpaceP);
+	instName.setManagedElement(aSourceInstanceName);
 	
 	Linux_SambaPrinterOptionsInstanceName printerInstName;
-	printerInstName.setNamespace(nsp);
+	printerInstName.setNamespace(aNameSpaceP);
 	printerInstName.setName(printers[i]);
 	printerInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	
 	instName.setSettingData(printerInstName);
 	
 	manualInstance.setInstanceName(instName);
-	instEnum.addElement(manualInstance);
+	aManualInstanceEnumeration.addElement(manualInstance);
       }
     }
-  };
+  }
+
   
-    
+  //----------------------------------------------------------------------------
+
   void Linux_SambaPrinterForServiceResourceAccess::referencesManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-   Linux_SambaPrinterForServiceManualInstanceEnumeration& instEnum)
-  { 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaPrinterForServiceManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaPrinterForServiceManualInstance manualInstance;
     
     Linux_SambaPrinterForServiceInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setSettingData(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setSettingData(aSourceInstanceName);
     
     Linux_SambaServiceInstanceName elemInstanceName;
-    elemInstanceName.setNamespace(nsp);
+    elemInstanceName.setNamespace(aNameSpaceP);
     elemInstanceName.setName(DEFAULT_SERVICE_NAME);
     elemInstanceName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
     elemInstanceName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
@@ -181,18 +218,20 @@ namespace genProvider {
     instName.setManagedElement(elemInstanceName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
   
-  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaPrinterForServiceResourceAccess::associatorsSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaServiceInstanceName& sourceInst,
-   Linux_SambaPrinterOptionsInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceInstanceName& aSourceInstanceName,
+    Linux_SambaPrinterOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     char ** printers = get_samba_printers_list();
     
     if(printers){
@@ -200,10 +239,10 @@ namespace genProvider {
 	Linux_SambaPrinterOptionsInstance instance;
 	
 	Linux_SambaPrinterOptionsInstanceName shareInstName;
-	shareInstName.setNamespace(nsp);
+	shareInstName.setNamespace(aNameSpaceP);
 	shareInstName.setName(printers[i]);
 	shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-
+	
 	instance.setInstanceName(shareInstName);
 	char *option;
 	
@@ -217,7 +256,7 @@ namespace genProvider {
 	option = get_option(printers[i],COMMENT);	
 	if ( option )
 	  instance.setComment( option );
-
+	
 	option = get_option(printers[i],PRINTABLE);	
 	if ( option )
 	  if(strcasecmp(option,"yes") == 0)
@@ -233,24 +272,26 @@ namespace genProvider {
 	if ( option )
 	  instance.setSystemPrinterName( option );
 	
-	instEnum.addElement(instance);
+	anInstanceEnumeration.addElement(instance);
       }
     }
-  };
+  }
 
+  
+  //----------------------------------------------------------------------------
 
   void Linux_SambaPrinterForServiceResourceAccess::associatorsManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-   Linux_SambaServiceInstanceEnumeration& instEnum) 
-  { 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaServiceInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaServiceInstance instance;
     
     Linux_SambaServiceInstanceName elemInstanceName;
-    elemInstanceName.setNamespace(nsp);
+    elemInstanceName.setNamespace(aNameSpaceP);
     elemInstanceName.setName(DEFAULT_SERVICE_NAME);
     elemInstanceName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
     elemInstanceName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
@@ -258,10 +299,13 @@ namespace genProvider {
     
     instance.setInstanceName(elemInstanceName);
     
-    instEnum.addElement(instance);
-  };
+    anInstanceEnumeration.addElement(instance);
+  }
 
-    /* extrinsic methods */
+   
+  
+  // extrinsic methods
+
 	
 }
 

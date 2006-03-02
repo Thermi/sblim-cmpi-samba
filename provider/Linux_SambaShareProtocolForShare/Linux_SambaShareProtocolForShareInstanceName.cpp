@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaShareProtocolForShareInstanceName.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareProtocolForShareInstanceName.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaShareProtocolForShareInstanceName.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,344 +28,411 @@
 
 namespace genProvider {
 	
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaShareProtocolForShareInstanceName
-  //*********************************************************
-  
-  //empty constructor
-  Linux_SambaShareProtocolForShareInstanceName::
-   Linux_SambaShareProtocolForShareInstanceName(){
+  //---------------------------------------------------------------------------- 
+  // empty constructor
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceName::Linux_SambaShareProtocolForShareInstanceName() {
    	init();  	
-  };
+  }
   
+  //---------------------------------------------------------------------------- 
+  // copy constructor	
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceName::Linux_SambaShareProtocolForShareInstanceName(
+    const Linux_SambaShareProtocolForShareInstanceName& anInstanceName) {
+   	init(anInstanceName);  	
+  }
   
-  //copy constructor	
-  Linux_SambaShareProtocolForShareInstanceName::
-   Linux_SambaShareProtocolForShareInstanceName
-   (const Linux_SambaShareProtocolForShareInstanceName& original){
-   	init(original);  	
-  };
-  
-  
-  //contructor using CmpiObjectPath
-  Linux_SambaShareProtocolForShareInstanceName::
-   Linux_SambaShareProtocolForShareInstanceName (const CmpiObjectPath& path){
+  //---------------------------------------------------------------------------- 
+  // constructor using CmpiObjectPath
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceName::Linux_SambaShareProtocolForShareInstanceName(
+    const CmpiObjectPath& path) {
     
     init();
     
-    m_CIMClassNameP=path.getClassName().charPtr();
+    m_CIMClassNameP = path.getClassName().charPtr();
     
-    CmpiString namespaceOP;
-    namespaceOP=path.getNameSpace();
-    setNamespace(namespaceOP.charPtr(),1);
-    
+    CmpiString namespaceP;
+    namespaceP = path.getNameSpace();
+    setNamespace(namespaceP.charPtr(),1);
+        
     CmpiObjectPath ManagedElement = path.getKey("ManagedElement");
     setManagedElement(Linux_SambaShareOptionsInstanceName(ManagedElement));
     
     CmpiObjectPath SettingData = path.getKey("SettingData");
     setSettingData(Linux_SambaShareProtocolOptionsInstanceName(SettingData));
+
     
   }
   
-  
-  //destructor
-  Linux_SambaShareProtocolForShareInstanceName::
-   ~Linux_SambaShareProtocolForShareInstanceName(){
+  //---------------------------------------------------------------------------- 
+  // destructor
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceName::~Linux_SambaShareProtocolForShareInstanceName() {
    	reset();  	  
-  };
-  
-  
-  //copy operator
-  Linux_SambaShareProtocolForShareInstanceName&
-   Linux_SambaShareProtocolForShareInstanceName::operator=
-   (const Linux_SambaShareProtocolForShareInstanceName& original){    
-    init(original);
-   	return *this;    
   }
   
+  //---------------------------------------------------------------------------- 
+  //copy operator
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceName&
+  Linux_SambaShareProtocolForShareInstanceName::operator=(
+    const Linux_SambaShareProtocolForShareInstanceName& anInstanceName) {    
+    
+    init(anInstanceName);
+   	return *this;    
   
+  }
+  
+  //---------------------------------------------------------------------------- 
   //returns the related CmpiObjectPath
-  CmpiObjectPath Linux_SambaShareProtocolForShareInstanceName::
-   getObjectPath() const{
+  //---------------------------------------------------------------------------- 
+  CmpiObjectPath 
+  Linux_SambaShareProtocolForShareInstanceName::getObjectPath() const {
    	
-   	CmpiObjectPath objectPath(m_namespace, m_CIMClassNameP);
+   	CmpiObjectPath objectPath(m_nameSpaceP, m_CIMClassNameP);
+   	  	objectPath.setKey(
+  	  "ManagedElement",
+  	  CmpiData(m_ManagedElement.getObjectPath()));
+  	objectPath.setKey(
+  	  "SettingData",
+  	  CmpiData(m_SettingData.getObjectPath()));
 
-  	objectPath.setKey("ManagedElement",CmpiData(m_ManagedElement.getObjectPath()));
-
-  	objectPath.setKey("SettingData",CmpiData(m_SettingData.getObjectPath()));
   	
   	return objectPath;
   	
   }
   
-  
-  //adds the related CmpiObjectPath to an existing cmpiInstance
-  void Linux_SambaShareProtocolForShareInstanceName::fillKeys(CmpiInstance& cmpiInstance) const{
+  //---------------------------------------------------------------------------- 
+  // adds the related CmpiObjectPath to an existing cmpiInstance
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaShareProtocolForShareInstanceName::fillKeys(CmpiInstance& cmpiInstance) const {
   	
-
-  	if(isSet.ManagedElement){
-  	  cmpiInstance.setProperty("ManagedElement",CmpiData(m_ManagedElement.getObjectPath()));
+  	if (isSet.ManagedElement) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "ManagedElement",
+  	    CmpiData(m_ManagedElement.getObjectPath()));
   	}
 
-  	if(isSet.SettingData){
-  	  cmpiInstance.setProperty("SettingData",CmpiData(m_SettingData.getObjectPath()));
+  	if (isSet.SettingData) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "SettingData",
+  	    CmpiData(m_SettingData.getObjectPath()));
   	}
+
   }
   
   
-  //NameSpace related methods
-  unsigned int Linux_SambaShareProtocolForShareInstanceName::
-   isNameSpaceSet() const{
-  	return isSet.m_namespace;
+  //---------------------------------------------------------------------------- 
+  // NameSpace related methods
+  //---------------------------------------------------------------------------- 
+  unsigned int 
+  Linux_SambaShareProtocolForShareInstanceName::isNameSpaceSet() const {
+  	return isSet.m_nameSpaceP;
   }
   
-  const char * Linux_SambaShareProtocolForShareInstanceName::
-   getNamespace() const {
-    if(!isSet.m_namespace)
+  //---------------------------------------------------------------------------- 
+  const char* 
+  Linux_SambaShareProtocolForShareInstanceName::getNamespace() const {
+    if ( ! isSet.m_nameSpaceP) {
    	  throw CmpiErrorFormater::getErrorException(
    	   CmpiErrorFormater::NOT_SET,
-   	   "NameSpace not set in Linux_SambaShareProtocolForShare instanceName");
-  	return m_namespace;
+   	   "NameSpace",
+   	   "Linux_SambaShareProtocolForShare");
+   	}
+  	return m_nameSpaceP;
   }
 
-  void Linux_SambaShareProtocolForShareInstanceName::
-   setNamespace(const char* val, int makeCopy){
-    if (isSet.m_namespace) {
-      delete m_namespace;
+  //---------------------------------------------------------------------------- 
+  void
+  Linux_SambaShareProtocolForShareInstanceName::setNamespace(
+    const char* aNameSpaceP,
+    int aCopyFlag) {
+  
+    if (isSet.m_nameSpaceP) {
+      delete m_nameSpaceP;
     }
-    if (makeCopy&&val) {
-      char* tmpval = new char[strlen(val)+1];
-      strcpy(tmpval,val);
-      m_namespace = tmpval;
+    
+    if (aCopyFlag && aNameSpaceP) {
+      char* nameSpaceP = new char[strlen(aNameSpaceP) + 1];
+      strcpy(nameSpaceP,aNameSpaceP);
+      m_nameSpaceP = nameSpaceP;
     } else {
-      m_namespace = val;
+      m_nameSpaceP = aNameSpaceP;
     }
-    isSet.m_namespace=1;
+    
+    isSet.m_nameSpaceP = 1;
   }
-       
-  //ManagedElement related methods
-  unsigned int Linux_SambaShareProtocolForShareInstanceName::isManagedElementSet() const{
+         
+  //----------------------------------------------------------------------------
+  // ManagedElement related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaShareProtocolForShareInstanceName::isManagedElementSet() const {
     return isSet.ManagedElement;
   }
-  void Linux_SambaShareProtocolForShareInstanceName::
-   setManagedElement(const Linux_SambaShareOptionsInstanceName& val){
-    m_ManagedElement = val;
-    isSet.ManagedElement=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaShareProtocolForShareInstanceName::setManagedElement(
+    const Linux_SambaShareOptionsInstanceName& aValue) {
+  
+    m_ManagedElement = aValue;
+    isSet.ManagedElement = 1;
+  
   }       
-  const Linux_SambaShareOptionsInstanceName& Linux_SambaShareProtocolForShareInstanceName::
-   getManagedElement() const{
+
+  //----------------------------------------------------------------------------
+  const Linux_SambaShareOptionsInstanceName&
+  Linux_SambaShareProtocolForShareInstanceName::getManagedElement() const {
     
-    if(!isSet.ManagedElement)
+    if ( ! isSet.ManagedElement) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "ManagedElement not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "ManagedElement",
+        "Linux_SambaShareProtocolForShare");
+   	}
+
+
     return m_ManagedElement;
+
   }
        
-  //SettingData related methods
-  unsigned int Linux_SambaShareProtocolForShareInstanceName::isSettingDataSet() const{
+  //----------------------------------------------------------------------------
+  // SettingData related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaShareProtocolForShareInstanceName::isSettingDataSet() const {
     return isSet.SettingData;
   }
-  void Linux_SambaShareProtocolForShareInstanceName::
-   setSettingData(const Linux_SambaShareProtocolOptionsInstanceName& val){
-    m_SettingData = val;
-    isSet.SettingData=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaShareProtocolForShareInstanceName::setSettingData(
+    const Linux_SambaShareProtocolOptionsInstanceName& aValue) {
+  
+    m_SettingData = aValue;
+    isSet.SettingData = 1;
+  
   }       
-  const Linux_SambaShareProtocolOptionsInstanceName& Linux_SambaShareProtocolForShareInstanceName::
-   getSettingData() const{
+
+  //----------------------------------------------------------------------------
+  const Linux_SambaShareProtocolOptionsInstanceName&
+  Linux_SambaShareProtocolForShareInstanceName::getSettingData() const {
     
-    if(!isSet.SettingData)
+    if ( ! isSet.SettingData) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "SettingData not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "SettingData",
+        "Linux_SambaShareProtocolForShare");
+   	}
+
+
     return m_SettingData;
+
   }
 
-  
-  //set isSet variables to FALSE
-  void Linux_SambaShareProtocolForShareInstanceName::init(){
+
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaShareProtocolForShareInstanceName::init() {
   	
-  	m_CIMClassNameP="Linux_SambaShareProtocolForShare";
-  	isSet.m_namespace=0;    	
-    isSet.ManagedElement=0;   	
-    isSet.SettingData=0;
+  	m_CIMClassNameP = "Linux_SambaShareProtocolForShare";
+  	isSet.m_nameSpaceP = 0; 
+  	    isSet.ManagedElement = 0;
+    isSet.SettingData = 0;
+
+  	
   }
   
-  
+  //---------------------------------------------------------------------------- 
   //copies another instance properties in this
-  void Linux_SambaShareProtocolForShareInstanceName::init
-   (const Linux_SambaShareProtocolForShareInstanceName& original){
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaShareProtocolForShareInstanceName::init(
+    const Linux_SambaShareProtocolForShareInstanceName& anOriginal) {
+   	
    	init();
    	   	
-    m_CIMClassNameP=original.m_CIMClassNameP;
-    if(original.isNameSpaceSet()){
-      setNamespace(original.getNamespace(),1);
-    }   	
-    if(original.isManagedElementSet()){
-      const Linux_SambaShareOptionsInstanceName& ManagedElementOriginal=original.getManagedElement();
-      setManagedElement(ManagedElementOriginal);
-    }   	
-    if(original.isSettingDataSet()){
-      const Linux_SambaShareProtocolOptionsInstanceName& SettingDataOriginal=original.getSettingData();
-      setSettingData(SettingDataOriginal);
-    }    
-  }
-  
-  //reset the instanceName data
-  void Linux_SambaShareProtocolForShareInstanceName::reset(){   	
-  	if (isSet.m_namespace)
-  	  delete(m_namespace);  	  
-  };
-  
-  
-  
-  
-  //*********************************************************
-  //Linux_SambaShareProtocolForShareInstanceNameEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaShareProtocolForShareInstanceNameEnumerationElement::
-   Linux_SambaShareProtocolForShareInstanceNameEnumerationElement(){
-   	
-  	m_elementP=0;
-  	m_nextP=0;
-  	  
-  };
-  
-  
-  Linux_SambaShareProtocolForShareInstanceNameEnumerationElement::
-   ~Linux_SambaShareProtocolForShareInstanceNameEnumerationElement(){
-   	
-  	if (m_elementP!=0)
-  	  delete(m_elementP);
-  	if (m_nextP!=0)
-  	  delete(m_nextP);
-  	  
-  };
-
-  
-  //*********************************************************
-  //Linux_SambaShareProtocolForShareInstanceNameEnumeration
-  //*********************************************************
-  
-  Linux_SambaShareProtocolForShareInstanceNameEnumeration::
-   Linux_SambaShareProtocolForShareInstanceNameEnumeration(){
-   	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
-  
-  Linux_SambaShareProtocolForShareInstanceNameEnumeration::
-   Linux_SambaShareProtocolForShareInstanceNameEnumeration(const CmpiArray& arr){
-  	
-  	firstElementP=0;
-    currentElementP=0;
-    endElementP=0;
-    
-    int size = arr.size();
-    for (int i=0; i < size; i++) {
-     addElement(Linux_SambaShareProtocolForShareInstanceName(arr[i]));
+    m_CIMClassNameP = anOriginal.m_CIMClassNameP;
+    if (anOriginal.isNameSpaceSet()){
+      setNamespace(anOriginal.getNamespace(),1);
     }
+       	
+    if (anOriginal.isManagedElementSet()) {
+      const Linux_SambaShareOptionsInstanceName& ManagedElementOriginal = anOriginal.getManagedElement();
+      setManagedElement(ManagedElementOriginal);
+    }
+   	
+    if (anOriginal.isSettingDataSet()) {
+      const Linux_SambaShareProtocolOptionsInstanceName& SettingDataOriginal = anOriginal.getSettingData();
+      setSettingData(SettingDataOriginal);
+    }
+    
+  
   }
   
-  Linux_SambaShareProtocolForShareInstanceNameEnumeration::
-   Linux_SambaShareProtocolForShareInstanceNameEnumeration(
-   const Linux_SambaShareProtocolForShareInstanceNameEnumeration& original){
+  //---------------------------------------------------------------------------- 
+  void
+  Linux_SambaShareProtocolForShareInstanceName::reset() {
+  	if (isSet.m_nameSpaceP) {
+  	  delete(m_nameSpaceP);
+  	}
+  	  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceNameEnumerationElement::Linux_SambaShareProtocolForShareInstanceNameEnumerationElement() {
+  	m_elementP = 0;
+  	m_nextP = 0; 
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceNameEnumerationElement::~Linux_SambaShareProtocolForShareInstanceNameEnumerationElement() {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+  	if (m_elementP) {
+  	  delete(m_elementP);
+  	}
+  	if (m_nextP) {
+  	  delete(m_nextP);
+  	}
+  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceNameEnumeration::Linux_SambaShareProtocolForShareInstanceNameEnumeration() {
+  	 m_firstElementP = 0;
+     m_currentElementP = 0;
+     m_endElementP = 0;
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceNameEnumeration::Linux_SambaShareProtocolForShareInstanceNameEnumeration(
+    const CmpiArray& aCmpiArray) {
+  	
+  	m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
+    
+    int size = aCmpiArray.size();
+    for (int x=0; x < size; ++x) {
+      addElement(Linux_SambaShareProtocolForShareInstanceName(aCmpiArray[x]));
+    }
+    
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceNameEnumeration::Linux_SambaShareProtocolForShareInstanceNameEnumeration(
+    const Linux_SambaShareProtocolForShareInstanceNameEnumeration& anInstanceNameEnumeration) {
+   	
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
-  
+    int size = anInstanceNameEnumeration.getSize();
+    for (int x=0; x < size; ++x) {
+      addElement(anInstanceNameEnumeration.getElement(x));
+    }
+
+  }
   	  
-  Linux_SambaShareProtocolForShareInstanceNameEnumeration::
-   ~Linux_SambaShareProtocolForShareInstanceNameEnumeration(){
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceNameEnumeration::~Linux_SambaShareProtocolForShareInstanceNameEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
-  
-  	  
-  void Linux_SambaShareProtocolForShareInstanceNameEnumeration::reset(){
+  }
+
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaShareProtocolForShareInstanceNameEnumeration::reset() {
   	
-  	currentElementP=firstElementP;
-  };
+  	m_currentElementP = m_firstElementP;
   
-  	  
-  bool Linux_SambaShareProtocolForShareInstanceNameEnumeration::hasNext() const{
+  }
+
+  //---------------------------------------------------------------------------- 
+  bool 
+  Linux_SambaShareProtocolForShareInstanceNameEnumeration::hasNext() const {
   	
-  	return (currentElementP!=0);
+  	return (m_currentElementP != 0);
   
-  };
+  }
   
-  int Linux_SambaShareProtocolForShareInstanceNameEnumeration::getSize() const{
+  //---------------------------------------------------------------------------- 
+  int
+  Linux_SambaShareProtocolForShareInstanceNameEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaShareProtocolForShareInstanceNameEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaShareProtocolForShareInstanceNameEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
-  };
   
+  }
+  
+  //---------------------------------------------------------------------------- 
   const Linux_SambaShareProtocolForShareInstanceName&  
-   Linux_SambaShareProtocolForShareInstanceNameEnumeration::getElement(int pos) const{
+   Linux_SambaShareProtocolForShareInstanceNameEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaShareProtocolForShareInstanceNameEnumerationElement* followingP=firstElementP;
+    Linux_SambaShareProtocolForShareInstanceNameEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x=0;
+    while (followingP && (x < anIndex) ) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
   
-  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
   const Linux_SambaShareProtocolForShareInstanceName&
-   Linux_SambaShareProtocolForShareInstanceNameEnumeration::getNext() {
+  Linux_SambaShareProtocolForShareInstanceNameEnumeration::getNext() {
    	
-  	 Linux_SambaShareProtocolForShareInstanceNameEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+  	 Linux_SambaShareProtocolForShareInstanceNameEnumerationElement* currentP = m_currentElementP;
+  	 m_currentElementP = m_currentElementP->m_nextP;
   	 
   	 return *(currentP->m_elementP);
-  };
-  	  
-  void Linux_SambaShareProtocolForShareInstanceNameEnumeration::addElement
-   (const Linux_SambaShareProtocolForShareInstanceName& elementP){
-   	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaShareProtocolForShareInstanceNameEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaShareProtocolForShareInstanceName(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaShareProtocolForShareInstanceNameEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaShareProtocolForShareInstanceName(elementP);
-  	}
-  };
   
-  Linux_SambaShareProtocolForShareInstanceNameEnumeration::operator CmpiArray() const{
-  	int size=getSize();
-   	CmpiArray arr=CmpiArray(size,CMPI_instance);
-   	for(int i=0;i<size;i++){
-   	  arr[i]=getElement(i).getObjectPath();
+  }
+  	  
+  //---------------------------------------------------------------------------- 
+  void Linux_SambaShareProtocolForShareInstanceNameEnumeration::addElement
+   (const Linux_SambaShareProtocolForShareInstanceName& anElementP){
+   	
+  	if (m_firstElementP==0) {
+  	  m_firstElementP = new Linux_SambaShareProtocolForShareInstanceNameEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaShareProtocolForShareInstanceName(anElementP);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaShareProtocolForShareInstanceNameEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP=new Linux_SambaShareProtocolForShareInstanceName(anElementP);
+  	}
+
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaShareProtocolForShareInstanceNameEnumeration::operator CmpiArray() const {
+  	int size = getSize();
+   	CmpiArray cmpiArray = CmpiArray(size,CMPI_instance);
+   	for (int x=0; x < size; ++x) {
+   	  cmpiArray[x]=getElement(x).getObjectPath();
    	}
-   	return arr;
-  };  
+   	return cmpiArray;
+  }
+  
 }
- 

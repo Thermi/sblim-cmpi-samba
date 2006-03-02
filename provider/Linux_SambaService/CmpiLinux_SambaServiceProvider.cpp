@@ -1,415 +1,528 @@
-/**
- *  CmpiLinux_SambaServiceProvider.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// CmpiLinux_SambaServiceProvider.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "CmpiLinux_SambaServiceProvider.h"
 #include "ArrayConverter.h"
 #include "Linux_SambaServiceManualInstance.h"
 #include "Linux_SambaServiceRepositoryInstance.h"
 
+
 #include <iostream>
 #include <strings.h>
 
-using namespace std;
-
 namespace genProvider {
 
-  CmpiLinux_SambaServiceProvider::
-   CmpiLinux_SambaServiceProvider (
-   const CmpiBroker &mbp, const CmpiContext& ctx):
-    CmpiBaseMI(mbp, ctx), CmpiInstanceMI(mbp,ctx),
-    CmpiMethodMI(mbp,ctx), cppBroker(mbp) {
+  //----------------------------------------------------------------------------
+  CmpiLinux_SambaServiceProvider::CmpiLinux_SambaServiceProvider(
+    const CmpiBroker& aBroker, 
+    const CmpiContext& aContext)
+    : CmpiBaseMI(aBroker,aContext), 
+    CmpiInstanceMI(aBroker,aContext),
+    CmpiMethodMI(aBroker,aContext),
+    m_cmpiBroker(aBroker) {
       
-      interfaceP=Linux_SambaServiceFactory::getImplementation();           
-      cout<<"Provider was constructed"<<endl;
-  };
-    
-        
-  const char * CmpiLinux_SambaServiceProvider::
-   shadowNameSpaceP="IBMShadow/cimv2";
-        
-  CmpiLinux_SambaServiceProvider::
-   ~CmpiLinux_SambaServiceProvider(){
-	  delete interfaceP;
-  };
+    m_interfaceP = Linux_SambaServiceFactory::getImplementation();           
+
+#ifdef DEBUG 
+    std::cout << "Provider was constructed" << std::endl;
+#endif    
   
-  int CmpiLinux_SambaServiceProvider::isUnloadable() const{
+  }
+        
+  //----------------------------------------------------------------------------
+  CmpiLinux_SambaServiceProvider::~CmpiLinux_SambaServiceProvider() {
+    delete m_interfaceP;
+  }
+  
+  //----------------------------------------------------------------------------
+  int 
+  CmpiLinux_SambaServiceProvider::isUnloadable() const {
     return 0;
   }
 	
-  /* -----------------------------------------------------------------------*/
-  /*                       Adding shadow properties                         */
-  /* -----------------------------------------------------------------------*/
-
-  void CmpiLinux_SambaServiceProvider::completeInstance(
-   const Linux_SambaServiceInstanceName& instanceName,
-   CmpiInstance& target, const CmpiContext& ctx){
+  //----------------------------------------------------------------------------
+  void 
+  CmpiLinux_SambaServiceProvider::completeInstance(
+    const Linux_SambaServiceInstanceName& anInstanceName,
+    CmpiInstance& anInstance, 
+    const CmpiContext& aContext) {
 	  	
-    Linux_SambaServiceInstanceName shadowInstanceName(instanceName);
-    shadowInstanceName.setNamespace(shadowNameSpaceP);
-    CmpiObjectPath cmpiObjectPath=shadowInstanceName.getObjectPath();
+    Linux_SambaServiceInstanceName shadowInstanceName(anInstanceName);
+    shadowInstanceName.setNamespace("IBMShadow/cimv2");
+    CmpiObjectPath cmpiObjectPath = shadowInstanceName.getObjectPath();
 	  
-    try{
-      const char* propertiesP=0;
-      CmpiInstance shadowInstance=cppBroker.getInstance (
-       ctx, cmpiObjectPath,&propertiesP);
-      copyShadowData(&shadowInstance,&target);
-    }catch(const CmpiStatus& rc){};                             
-  };
+    try {
+      const char* propertiesP = 0;
+      CmpiInstance shadowInstance = m_cmpiBroker.getInstance(
+        aContext, 
+        cmpiObjectPath,
+        &propertiesP);
+      copyShadowData(&shadowInstance,&anInstance);
+    } catch (const CmpiStatus& rc) {}                             
+  
+  }
 	
-	
-  void CmpiLinux_SambaServiceProvider::copyShadowData (
-   const CmpiInstance* source, CmpiInstance* target){
-    
-	  
-  };
-    
-  /* -----------------------------------------------------------------------*/
-  /*                       Extracting shadow instance                         */
-  /* -----------------------------------------------------------------------*/
+  //----------------------------------------------------------------------------
+  void 
+  CmpiLinux_SambaServiceProvider::copyShadowData(
+    const CmpiInstance* aSourceInstanceP, 
+    CmpiInstance* aTargetInstanceP) {
 
-  CmpiInstance* CmpiLinux_SambaServiceProvider::
-   getShadowInstance (const CmpiInstance& original,
-   const Linux_SambaServiceInstanceName& instanceName){
-     
-    Linux_SambaServiceInstanceName shadowInstanceName(instanceName);
-    shadowInstanceName.setNamespace(shadowNameSpaceP);
-    CmpiObjectPath cmpiObjectPath=shadowInstanceName.getObjectPath();
+    if (aSourceInstanceP && aTargetInstanceP) {
       
-    CmpiInstance* targetP=new CmpiInstance(cmpiObjectPath);
-      
-    copyShadowData(&original,targetP);
-      
-    if(targetP->getPropertyCount()==0)
-      return 0;
-    else
-      return targetP;
+    }
+
   }
 
-  /* -----------------------------------------------------------------------*/
-  /*                          House keeping                              */
-  /* -----------------------------------------------------------------------*/
+  //----------------------------------------------------------------------------
+  CmpiInstance* 
+  CmpiLinux_SambaServiceProvider::getShadowInstance(
+    const CmpiInstance& anInstance,
+    const Linux_SambaServiceInstanceName& anInstanceName) {
+     
+    Linux_SambaServiceInstanceName shadowInstanceName(anInstanceName);
+    shadowInstanceName.setNamespace("IBMShadow/cimv2");
+    CmpiObjectPath cmpiObjectPath = shadowInstanceName.getObjectPath();
+      
+    CmpiInstance* targetP = new CmpiInstance(cmpiObjectPath);
+      
+    if (targetP) {
+      copyShadowData(&anInstance,targetP);
+      if (0 == targetP->getPropertyCount()) {
+        delete targetP;
+        targetP = 0;
+      }
+    }
+  
+    return targetP;
+  
+  }
 
-  void CmpiLinux_SambaServiceProvider::removeDanglingShadowInstances (
-   const Linux_SambaServiceInstanceNameEnumeration& dinInsNames){
+  //----------------------------------------------------------------------------
+  void
+  CmpiLinux_SambaServiceProvider::removeDanglingShadowInstances (
+   const Linux_SambaServiceInstanceNameEnumeration& anInstanceNameEnumerations) {
 	
-    //TODO: enumerate shadow instance names and remove those not included
-	// in dinInsNames
+    // TODO: enumerate shadow instance names and remove those not included
+	  // in anInstanceNameEnumeration
 	
-  };	 	
+  }
 	
-  /* -----------------------------------------------------------------------*/
-  /*                          Provider Factory                              */
-  /* -----------------------------------------------------------------------*/
-
+  //----------------------------------------------------------------------------
+  //                          Provider Factory
+  //----------------------------------------------------------------------------
   CMProviderBase(CmpiLinux_SambaServiceProvider);
 
   CMInstanceMIFactory(
-   CmpiLinux_SambaServiceProvider, CmpiLinux_SambaServiceProvider);
+    CmpiLinux_SambaServiceProvider, 
+    CmpiLinux_SambaServiceProvider);
 
   CMMethodMIFactory(
-   CmpiLinux_SambaServiceProvider, CmpiLinux_SambaServiceProvider);
+    CmpiLinux_SambaServiceProvider, 
+    CmpiLinux_SambaServiceProvider);
+	
+	
+  //----------------------------------------------------------------------------
+  //                      Instance Provider Interface
+  //----------------------------------------------------------------------------
 
-	
-	
-  /* -----------------------------------------------------------------------*/
-  /*                      Instance Provider Interface                       */
-  /* -----------------------------------------------------------------------*/
-
-  //enumInstanceNames
-	
-  CmpiStatus CmpiLinux_SambaServiceProvider::enumInstanceNames (
-   const CmpiContext& ctx, CmpiResult& rslt,
-   const CmpiObjectPath& cop){
+  //----------------------------------------------------------------------------
+  CmpiStatus 
+  CmpiLinux_SambaServiceProvider::enumInstanceNames(
+    const CmpiContext& aContext, 
+    CmpiResult& aResult,
+    const CmpiObjectPath& aCop) {
       
-    cout<<"enumerating instanceNames"<<endl;
-    CmpiString nameSpace=cop.getNameSpace();
-    const char* nameSpaceP=nameSpace.charPtr();
+#ifdef DEBUG 
+    std::cout << "enumerating instanceNames" << std::endl;
+#endif
+
+    CmpiString nameSpace = aCop.getNameSpace();
+    const char* nameSpaceP = nameSpace.charPtr();
 
     Linux_SambaServiceInstanceNameEnumeration enumeration;
-    interfaceP->enumInstanceNames(ctx, cppBroker, nameSpaceP, enumeration);
+    m_interfaceP->enumInstanceNames(
+      aContext,
+      m_cmpiBroker,
+      nameSpaceP,
+      enumeration);
                    
-    while ( enumeration.hasNext() ){
-      const Linux_SambaServiceInstanceName& instanceName=
-      enumeration.getNext();
-        
-      CmpiObjectPath objectPath=instanceName.getObjectPath();
-        
-      rslt.returnData(objectPath);
+    while (enumeration.hasNext() ){
+      const Linux_SambaServiceInstanceName& instanceName = enumeration.getNext();
+      CmpiObjectPath objectPath = instanceName.getObjectPath();
+      aResult.returnData(objectPath);
     }
       
-    //we make housekeeping
+    // we make housekeeping
     removeDanglingShadowInstances(enumeration);
       
-    rslt.returnDone();
+    aResult.returnDone();
     return CmpiStatus(CMPI_RC_OK);
-  };
+
+  }
+
+  //----------------------------------------------------------------------------
+  CmpiStatus 
+  CmpiLinux_SambaServiceProvider::enumInstances(
+    const CmpiContext& aContext,
+    CmpiResult& aResult,
+    const CmpiObjectPath& aCop, 
+    const char** aPropertiesPP) {
      
-     
-  //enumInstances
-     
-  CmpiStatus CmpiLinux_SambaServiceProvider::enumInstances (
-   const CmpiContext& ctx, CmpiResult& rslt,
-   const CmpiObjectPath& cop, const char* *properties){
-     
-    cout<<"enumerating instances"<<endl;
-    CmpiString nameSpace=cop.getNameSpace();
-    const char* nameSpaceP=nameSpace.charPtr();
+#ifdef DEBUG 
+    std::cout << "enumerating instances" << std::endl;
+#endif
+
+    CmpiString nameSpace = aCop.getNameSpace();
+    const char* nameSpaceP = nameSpace.charPtr();
       
     Linux_SambaServiceManualInstanceEnumeration enumeration;
-    interfaceP->enumInstances(ctx, cppBroker, nameSpaceP, properties, enumeration);
+    m_interfaceP->enumInstances(
+      aContext, 
+      m_cmpiBroker, 
+      nameSpaceP, 
+      aPropertiesPP,
+      enumeration);
+
+#ifdef DEBUG 
+    std::cout << "enumerated" << std::endl;
+#endif
       
-    cout<<"enumerated"<<endl;
-      
-    while ( enumeration.hasNext() ){
+    while (enumeration.hasNext()) {
+   	  const Linux_SambaServiceManualInstance& instance = enumeration.getNext();
       	
-   	  const Linux_SambaServiceManualInstance& instance=
-       enumeration.getNext();
+#ifdef DEBUG 
+      std::cout << "enumerating getNext" << std::endl;
+#endif
       	
-      cout<<"enumerating getNext"<<endl;
-      	
-      CmpiInstance cmpiInstance=instance.getCmpiInstance(properties);
-      cout<<"transformed"<<endl;
+      CmpiInstance cmpiInstance = instance.getCmpiInstance(aPropertiesPP);
+
+#ifdef DEBUG 
+      std::cout << "transformed" << std::endl;
+#endif
       	
       //add the static data
-      completeInstance(instance.getInstanceName(),cmpiInstance,ctx);
+      // MJ: No, this is done in the implementation (or DefaultImplementation)
+      // completeInstance(instance.getInstanceName(),cmpiInstance,aContext);
       	
-      rslt.returnData(cmpiInstance);
+      aResult.returnData(cmpiInstance);
+    
     }
       
-    rslt.returnDone();
+    aResult.returnDone();
     return CmpiStatus(CMPI_RC_OK);
-  };
+  
+  }
     
-    
-  //getInstance
-    
-  CmpiStatus CmpiLinux_SambaServiceProvider::getInstance (
-   const CmpiContext& ctx, CmpiResult& rslt,
-   const CmpiObjectPath& cop, const char* *properties){
+  //----------------------------------------------------------------------------
+  CmpiStatus 
+  CmpiLinux_SambaServiceProvider::getInstance (
+    const CmpiContext& aContext, 
+    CmpiResult& aResult,
+    const CmpiObjectPath& aCop,
+    const char** aPropertiesPP) {
      	
-    //covert to instanceName
-    Linux_SambaServiceInstanceName instanceName(cop);
+    // convert to instanceName
+    Linux_SambaServiceInstanceName instanceName(aCop);
+    
+    CmpiInstance* repositoryCmpiInstanceP = 0;
+    
+    // try to fetch repository instance
+    try {
+      Linux_SambaServiceInstanceName repositoryInstanceName(instanceName);
+      repositoryInstanceName.setNamespace("IBMShadow/cimv2");
+      CmpiObjectPath repositoryCmpiObjectPath = repositoryInstanceName.getObjectPath();
+      repositoryCmpiInstanceP = new CmpiInstance(
+        m_cmpiBroker.getInstance(
+          aContext, 
+          repositoryCmpiObjectPath,
+          aPropertiesPP));
+    } catch (const CmpiStatus& rc) { }                             
       
-    //get instance for instanceName
+    // get instance for instanceName
     Linux_SambaServiceManualInstance instance;
-    instance=interfaceP->getInstance(ctx, cppBroker, properties, instanceName);
+    instance = m_interfaceP->getInstance(
+      aContext,
+      m_cmpiBroker,
+      aPropertiesPP,
+      instanceName);
       
-    //we convert the instance in a cmpiInstance
-    CmpiInstance cmpiInstance=instance.getCmpiInstance(properties);
+    // convert the instance in a cmpiInstance
+    CmpiInstance cmpiInstance = instance.getCmpiInstance(aPropertiesPP);
       
-    //add the static data
-    completeInstance(instance.getInstanceName(), cmpiInstance, ctx);
+    // add the static data 
+    copyShadowData(repositoryCmpiInstanceP,&cmpiInstance);
       
-    rslt.returnData(cmpiInstance);
-      
-    rslt.returnDone();
+    if (repositoryCmpiInstanceP) {
+      delete repositoryCmpiInstanceP;
+    }
+
+    aResult.returnData(cmpiInstance);
+    aResult.returnDone();
     return CmpiStatus(CMPI_RC_OK);
-  };
+
+  }
     
-    
-  CmpiStatus CmpiLinux_SambaServiceProvider::createInstance (
-   const CmpiContext& ctx, CmpiResult& rslt,
-   const CmpiObjectPath& cop,const CmpiInstance& inst){
+  //----------------------------------------------------------------------------
+  CmpiStatus 
+  CmpiLinux_SambaServiceProvider::createInstance (
+    const CmpiContext& aContext,
+    CmpiResult& aResult,
+    const CmpiObjectPath& aCop,
+    const CmpiInstance& aCmpiInstance) {
    	
-   	Linux_SambaServiceManualInstance instance (
-     inst,cop.getNameSpace().charPtr());
+   	Linux_SambaServiceManualInstance manualInstance(
+      aCmpiInstance,
+      aCop.getNameSpace().charPtr());
     
     //REPOSITORY DATA    
-  //   CmpiInstance* backupShadowInstance=0;
-//    	CmpiInstance shadowInstance=
-//      Linux_SambaServiceRepositoryInstance(inst,shadowNameSpaceP)
-//      .getCmpiInstance(0);     
-     
-//    	//We keep a backup of the existing data for recovering previous
-//    	//state if the resource access raise an exception
-//    	CmpiObjectPath shadowOp=shadowInstance.getObjectPath();
-//     try{
-//    	  backupShadowInstance=new CmpiInstance(
-//    	   cppBroker.getInstance (ctx, shadowOp,0));
-//    	  //if the shadow instance exist we delete it
-//    	  cppBroker.deleteInstance(ctx, shadowOp);   	    
-//    	}catch(CmpiStatus& rc){};   	
-    
-//     cppBroker.createInstance(ctx, shadowOp,shadowInstance);     
-         	
-    
-    //RESOURCE ACCESS DATA   
-    try{
-      interfaceP->createInstance(ctx, cppBroker, instance);
-    }catch(CmpiStatus& rc){
-      //If something went wrong we recover the previous state
- //      cppBroker.deleteInstance(ctx, shadowOp);
-//       if(backupShadowInstance){
-//         cppBroker.createInstance(ctx, shadowOp,*backupShadowInstance);
-//       }
+//    CmpiInstance* backupShadowInstanceP = 0;
+//   	CmpiInstance shadowInstance = 
+//   	  Linux_SambaServiceRepositoryInstance(aCmpiInstance,"IBMShadow/cimv2").getCmpiInstance(0);     
+//     
+//   	//We keep a backup of the existing data for recovering previous
+//   	//state if the resource access raise an exception
+//   	CmpiObjectPath shadowOp = shadowInstance.getObjectPath();
+//    try {
+//   	  backupShadowInstanceP = new CmpiInstance(
+//        m_cmpiBroker.getInstance(aContext,shadowOp,0));
+//   	  //if the shadow instance exist we delete it
+//   	  m_cmpiBroker.deleteInstance(aContext,shadowOp);   	    
+//   	} catch (CmpiStatus& rc) {}   	
+//    m_cmpiBroker.createInstance(aContext,shadowOp,shadowInstance);     
+//    
+//    // resource access data (manual instance)   
+    try { 
+        aResult.returnData(m_interfaceP->createInstance(aContext, m_cmpiBroker, manualInstance).
+			getObjectPath());
+    } catch (CmpiStatus& rc) {
+//      //If something went wrong we recover the previous state
+//      m_cmpiBroker.deleteInstance(aContext,shadowOp);
+//      if (backupShadowInstanceP) {
+//        m_cmpiBroker.createInstance(aContext,shadowOp,*backupShadowInstanceP);
+//      }
       throw rc;
     }
     
-//     if(backupShadowInstance)
-//       delete(backupShadowInstance);
+//    if (backupShadowInstanceP) {
+//      delete(backupShadowInstanceP);
+//    }
     
-    rslt.returnData( instance.getInstanceName().getObjectPath() );
-
-    rslt.returnDone();
+    aResult.returnDone();
     return CmpiStatus(CMPI_RC_OK);
-  };
+  
+  }
     
-    
-  CmpiStatus CmpiLinux_SambaServiceProvider::setInstance (
-   const CmpiContext& ctx, CmpiResult& rslt,
-   const CmpiObjectPath& cop, const CmpiInstance& inst,
-   const char* *properties){
+  //----------------------------------------------------------------------------
+  CmpiStatus 
+  CmpiLinux_SambaServiceProvider::setInstance (
+    const CmpiContext& aContext,
+    CmpiResult& aResult,
+    const CmpiObjectPath& aCop,
+    const CmpiInstance& aCmpiInstance,
+    const char** aPropertiesPP) {
    	
-   	Linux_SambaServiceManualInstance instance (
-     inst,cop.getNameSpace().charPtr());
+   	Linux_SambaServiceManualInstance manualInstance(
+      aCmpiInstance,
+      aCop.getNameSpace().charPtr());
     
     //REPOSITORY DATA    
- //    CmpiInstance* backupShadowInstance=0;
-//     CmpiInstance shadowInstance=
-//      Linux_SambaServiceRepositoryInstance(inst,shadowNameSpaceP)
-//      .getCmpiInstance(0);     
-     
-//    	//We keep a backup of the existing data for recovering previous
-//    	//state if the resource access raise an exception
-//    	CmpiObjectPath shadowOp=shadowInstance.getObjectPath();
-//     try{
-//    	  backupShadowInstance=new CmpiInstance(
-//    	   cppBroker.getInstance (ctx, shadowOp,0));
-//    	}catch(CmpiStatus& rc){};   	
+//    CmpiInstance* backupShadowInstanceP = 0;
+//    CmpiInstance shadowInstance =
+//      Linux_SambaServiceRepositoryInstance(aCmpiInstance,"IBMShadow/cimv2").getCmpiInstance(0);     
+//     
+//   	//We keep a backup of the existing data for recovering previous
+//   	//state if the resource access raise an exception
+//   	CmpiObjectPath shadowOp = shadowInstance.getObjectPath();
+//    try {
+//   	  backupShadowInstanceP = new CmpiInstance(
+//   	   m_cmpiBroker.getInstance(aContext,shadowOp,0));
+//   	} catch (CmpiStatus& rc) {}   	
+//    
+//    //if the instance existed before we delete it
+//    //(setInstance is buggy in Pegasus)
+//    if (backupShadowInstanceP) {
+//      m_cmpiBroker.setInstance(aContext,shadowOp,shadowInstance,aPropertiesPP);
+//    } else {
+//      m_cmpiBroker.createInstance(aContext,shadowOp,shadowInstance);
+//    }
     
-//     //if the instance existed before we delete it
-//     //(setInstance is buggy in Pegasus)
-//     if(backupShadowInstance)
-//       cppBroker.setInstance(ctx, shadowOp,shadowInstance,properties);
-//     else
-//       cppBroker.createInstance(ctx, shadowOp,shadowInstance);      
-    
-    
-    //RESOURCE ACCESS DATA   
-    try{
-      interfaceP->setInstance(ctx, cppBroker, properties, instance);
-    }catch(CmpiStatus& rc){
+    // resource access data (manual instance)   
+    try {
+      m_interfaceP->setInstance(aContext,m_cmpiBroker,aPropertiesPP,manualInstance);
+    } catch (CmpiStatus& rc) {
       //If something went wrong we recover the previous state
-//       cppBroker.deleteInstance(ctx, shadowOp);
-//       if(backupShadowInstance){
-//         cppBroker.createInstance(ctx, shadowOp,*backupShadowInstance);
-//       }
+//      m_cmpiBroker.deleteInstance(aContext,shadowOp);
+//      if (backupShadowInstanceP) {
+//        m_cmpiBroker.createInstance(aContext,shadowOp,*backupShadowInstanceP);
+//      }
       throw rc;
-    };
+    }
       
- //    if(backupShadowInstance)
-//       delete(backupShadowInstance);
+//    if (backupShadowInstanceP) {
+//      delete backupShadowInstanceP;
+//    }
         
-    rslt.returnDone();
+    aResult.returnDone();
     return CmpiStatus(CMPI_RC_OK);
-  };
     
+  }
     
-  CmpiStatus CmpiLinux_SambaServiceProvider::deleteInstance (
-   const CmpiContext& ctx, CmpiResult& rslt,
-   const CmpiObjectPath& cop){
+  //----------------------------------------------------------------------------
+  CmpiStatus
+  CmpiLinux_SambaServiceProvider::deleteInstance(
+    const CmpiContext& aContext,
+    CmpiResult& aResult,
+    const CmpiObjectPath& aCop) {
       
-    Linux_SambaServiceInstanceName instanceName=
-     Linux_SambaServiceInstanceName(cop);
-    interfaceP->deleteInstance(ctx, cppBroker, instanceName);
+    Linux_SambaServiceInstanceName instanceName = Linux_SambaServiceInstanceName(aCop);
+    m_interfaceP->deleteInstance(aContext,m_cmpiBroker,instanceName);
 
-    instanceName.setNamespace(shadowNameSpaceP);
-    CmpiObjectPath op=instanceName.getObjectPath();
+    instanceName.setNamespace("IBMShadow/cimv2");
+    CmpiObjectPath op = instanceName.getObjectPath();
       
-    try{  //The instance could not have static data
-      cppBroker.deleteInstance(ctx, op);
-    }catch(CmpiStatus& rc){};
+    try { // The instance could not have static data
+      m_cmpiBroker.deleteInstance(aContext,op);
+    } catch (CmpiStatus& rc) {}
       
-    rslt.returnDone();
+    aResult.returnDone();
     return CmpiStatus(CMPI_RC_OK);
-  };
+  
+  }
     
-    
-  CmpiStatus CmpiLinux_SambaServiceProvider::invokeMethod (
-   const CmpiContext& ctx, CmpiResult& rslt,
-   const CmpiObjectPath& ref, const char* methodName,
-   const CmpiArgs& in, CmpiArgs& out){
+  //----------------------------------------------------------------------------
+  CmpiStatus
+  CmpiLinux_SambaServiceProvider::invokeMethod(
+    const CmpiContext& aContext,
+    CmpiResult& aResult,
+    const CmpiObjectPath& aCop,
+    const char* aMethodNameP,
+    const CmpiArgs& in,
+    CmpiArgs& out) {
      	
-    Linux_SambaServiceInstanceName instanceName=
-     Linux_SambaServiceInstanceName(ref);
+    Linux_SambaServiceInstanceName instanceName = Linux_SambaServiceInstanceName(aCop);
      
-    if (strcasecmp(methodName,"RequestStateChange")==0){
-        cout<<"executing method RequestStateChange"<<endl;
+    if (0 == strcasecmp(aMethodNameP,"RequestStateChange")) {
+
+#ifdef DEBUG
+      std::cout << "executing method RequestStateChange" << std::endl;
+#endif      
+
+      int isRequestedStatePresent = 0;
+      CMPIUint16 RequestedState;
+      try {
+        CmpiData RequestedStateCmpiData = in.getArg("RequestedState");
+        isRequestedStatePresent = ! RequestedStateCmpiData.isNullValue();
+        if (isRequestedStatePresent) {
+           RequestedState = RequestedStateCmpiData;
+
+        }
+      } catch (const CmpiStatus& rc) {
+        // parameter not present
         
-        int isRequestedStatePresent=0;
-        CMPIUint16 RequestedState;
-        try{
-        CmpiData RequestedStateCmpiData=in.getArg("RequestedState");
-        isRequestedStatePresent=!RequestedStateCmpiData.isNullValue();
-         RequestedState=RequestedStateCmpiData;
-        }catch(const CmpiStatus& rc){
-        //parameter not present
-          
-        };CIM_ConcreteJobInstanceName Job;
+      }
+
+      CIM_ConcreteJobInstanceName Job;
+
+      int isTimeoutPeriodPresent = 0;
+      CmpiDateTime TimeoutPeriod;
+      try {
+        CmpiData TimeoutPeriodCmpiData = in.getArg("TimeoutPeriod");
+        isTimeoutPeriodPresent = ! TimeoutPeriodCmpiData.isNullValue();
+        if (isTimeoutPeriodPresent) {
+           TimeoutPeriod = TimeoutPeriodCmpiData;
+
+        }
+      } catch (const CmpiStatus& rc) {
+        // parameter not present
         
-        int isTimeoutPeriodPresent=0;
-        CmpiDateTime TimeoutPeriod;
-        try{
-        CmpiData TimeoutPeriodCmpiData=in.getArg("TimeoutPeriod");
-        isTimeoutPeriodPresent=!TimeoutPeriodCmpiData.isNullValue();
-         TimeoutPeriod=TimeoutPeriodCmpiData;
-        }catch(const CmpiStatus& rc){
-        //parameter not present
-          
-        };        
-        rslt.returnData(CmpiData(interfaceP->RequestStateChange(
-         ctx,
-         cppBroker,
-         instanceName,
-         RequestedState,
-         isRequestedStatePresent,
-         Job,
-         TimeoutPeriod,
-         isTimeoutPeriodPresent)));
-        out.setArg("Job", CmpiData(Job.getObjectPath()));
-        cout<<"end of method RequestStateChange"<<endl;     
-      }else if (strcasecmp(methodName,"StartService")==0){
-        cout<<"executing method StartService"<<endl;
-                
-        rslt.returnData(CmpiData(interfaceP->StartService(
-         ctx,
-         cppBroker,
-         instanceName)));
-        cout<<"end of method StartService"<<endl;     
-      }else if (strcasecmp(methodName,"StopService")==0){
-        cout<<"executing method StopService"<<endl;
-                
-        rslt.returnData(CmpiData(interfaceP->StopService(
-         ctx,
-         cppBroker,
-         instanceName)));
-        cout<<"end of method StopService"<<endl;     
-      }else {
-     rslt.returnDone();
+      }
+        
+      aResult.returnData(CmpiData(m_interfaceP->RequestStateChange(
+        aContext,
+        m_cmpiBroker,
+        instanceName,
+        RequestedState,
+        isRequestedStatePresent,
+        Job,
+        TimeoutPeriod,
+        isTimeoutPeriodPresent)));
+
+      out.setArg("Job",CmpiData(Job.getObjectPath()));
+
+
+#ifdef DEBUG
+      std::cout << "end of method RequestStateChange" << std::endl;
+#endif      
+           
+    } else if (0 == strcasecmp(aMethodNameP,"StartService")) {
+
+#ifdef DEBUG
+      std::cout << "executing method StartService" << std::endl;
+#endif      
+        
+      aResult.returnData(CmpiData(m_interfaceP->StartService(
+        aContext,
+        m_cmpiBroker,
+        instanceName)));
+
+
+
+#ifdef DEBUG
+      std::cout << "end of method StartService" << std::endl;
+#endif      
+           
+    } else if (0 == strcasecmp(aMethodNameP,"StopService")) {
+
+#ifdef DEBUG
+      std::cout << "executing method StopService" << std::endl;
+#endif      
+        
+      aResult.returnData(CmpiData(m_interfaceP->StopService(
+        aContext,
+        m_cmpiBroker,
+        instanceName)));
+
+
+
+#ifdef DEBUG
+      std::cout << "end of method StopService" << std::endl;
+#endif      
+           
+    } else  {
+
+      aResult.returnDone();
       return CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::METHOD_NOT_FOUND,
-   	   "Method not available");
+        CmpiErrorFormater::METHOD_NOT_FOUND,
+        aMethodNameP,
+        "Linux_SambaService");
+
     }
       
-    rslt.returnDone();
+    aResult.returnDone();
     return CmpiStatus(CMPI_RC_OK);      
-  };
+
+  }
+
  
 }	
 

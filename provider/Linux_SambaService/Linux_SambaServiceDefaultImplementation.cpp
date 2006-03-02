@@ -1,138 +1,260 @@
-/**
- *  Linux_SambaServiceDefaultImplementation.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaServiceDefaultImplementation.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaServiceDefaultImplementation.h"
+#include "Linux_SambaServiceRepositoryInstance.h"
 #include <iostream>
-
-using namespace std;
 
 namespace genProvider {
 
   /* intrinsic methods */
-  void Linux_SambaServiceDefaultImplementation::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaServiceInstanceNameEnumeration& instnames){
-   	cout<<"enumInstances not supported for Linux_SambaService"<<endl;
+  //----------------------------------------------------------------------------	
+  void
+  Linux_SambaServiceDefaultImplementation::enumInstanceNames(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    Linux_SambaServiceInstanceNameEnumeration& anInstanceNameEnumeration) {
+
+#ifdef DEBUG
+   	std::cout << "enumInstanceNames not supported for Linux_SambaService" << std::endl;
+#endif   	
+
    	throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "enumInstances not implemented for Linux_SambaService");   
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "enumInstanceEnumeration",
+   	  "Linux_SambaService");   
+
   }
-  	
-  void Linux_SambaServiceDefaultImplementation::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaServiceManualInstanceEnumeration& instances){
-    
-    cout<<"Using default enumInstances implementation for Linux_SambaService"<<endl;
-    cout<<"Let}s get the instanceNames"<<endl;
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaServiceDefaultImplementation::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaServiceManualInstanceEnumeration& anInstanceEnumeration) {
+
+#ifdef DEBUG
+    std::cout << "Using default enumInstances implementation for Linux_SambaService" << std::endl;
+    std::cout << "Let's get the instanceNames" << std::endl;
+#endif    
+
     Linux_SambaServiceInstanceNameEnumeration namesEnumeration;
-    enumInstanceNames(ctx, mbp,nsp,namesEnumeration);
-    cout<<"Getting each instance"<<endl;
-    while(namesEnumeration.hasNext()){
-      Linux_SambaServiceInstanceName name=
-    	  namesEnumeration.getNext();
-    	cout<<"Getting an instance for instanceName"<<endl;
-    	Linux_SambaServiceManualInstance instance=
-    	  getInstance(ctx, mbp, properties, name);
-    	cout<<"adding instance to enum"<<endl;
-    	instances.addElement(instance);
-    	cout<<"Added!"<<endl;
-    };
+    enumInstanceNames(aContext,aBroker,aNameSpaceP,namesEnumeration);
+
+#ifdef DEBUG
+    std::cout << "Getting each instance" << std::endl;
+#endif    
+    
+    while (namesEnumeration.hasNext()) {
+    
+      Linux_SambaServiceInstanceName instanceName = namesEnumeration.getNext();
+    
+      Linux_SambaServiceRepositoryInstance repositoryInstance;
+
+      // try to fetch repository instance
+      try {
+        Linux_SambaServiceInstanceName repositoryInstanceName(instanceName);
+        repositoryInstanceName.setNamespace("IBMShadow/cimv2");
+        CmpiObjectPath repositoryCmpiObjectPath = repositoryInstanceName.getObjectPath();
+        CmpiBroker cmpiBroker(aBroker);
+        CmpiInstance repositoryCmpiInstance = cmpiBroker.getInstance(
+            aContext,
+            repositoryCmpiObjectPath,
+            aPropertiesPP);
+        Linux_SambaServiceRepositoryInstance localRepositoryInstance(
+      	  repositoryCmpiInstance,
+          "IBMShadow/cimv2");
+        repositoryInstance = localRepositoryInstance;
+      } catch (const CmpiStatus& rc) { }                             
+    
+#ifdef DEBUG
+    	std::cout << "Getting an instance for instanceName" << std::endl;
+#endif
+    	
+    	Linux_SambaServiceManualInstance instance = getInstance(
+    	  aContext,
+    	  aBroker,
+    	  aPropertiesPP,
+    	  instanceName);
+
+      // add the static data
+
+
+#ifdef DEBUG
+    	std::cout << "adding instance to enum" << std::endl;
+#endif
+    	
+    	anInstanceEnumeration.addElement(instance);
+
+#ifdef DEBUG
+    	std::cout << "Added!" << std::endl;
+#endif
+    	
+    }
+
   }
-  	
+
+  //----------------------------------------------------------------------------	
   Linux_SambaServiceManualInstance 
-   Linux_SambaServiceDefaultImplementation::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaServiceInstanceName&){
-    cout<<"getInstance not supported for Linux_SambaService"<<endl;
+  Linux_SambaServiceDefaultImplementation::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+    std::cout << "getInstance not supported for Linux_SambaService" << std::endl;
+#endif
+    	
+
     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "getInstance not implemented for Linux_SambaService");
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "getInstance",
+   	  "Linux_SambaService");
+
   }
   	
-  void Linux_SambaServiceDefaultImplementation::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaServiceManualInstance&){
-   	cout<<"setInstance not supported for Linux_SambaService"<<endl;
-     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "setInstance not implemented for Linux_SambaService");
-  }
-  	
-  void Linux_SambaServiceDefaultImplementation::
-   createInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaServiceManualInstance&){
-   	cout<<"createInstance not supported for Linux_SambaService"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "createInstance not implemented for Linux_SambaService");
-  }
-  	
-  void Linux_SambaServiceDefaultImplementation::
-   deleteInstance(const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaServiceInstanceName&){
-   	cout<<"deleteInstance not supported for Linux_SambaService"<<endl;
-    throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::NOT_IMPLEMENTED,
-   	 "deleteInstance not implemented for Linux_SambaService");
-  }
-	
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaServiceDefaultImplementation::setInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaServiceManualInstance& aManualInstance) {
   
+#ifdef DEBUG
+    std::cout << "setInstance not supported for Linux_SambaService" << std::endl;
+#endif
+    	
+   
+    throw CmpiErrorFormater::getErrorException(
+   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  "setInstance",
+   	  "Linux_SambaService");
+   	 
+  }
+  	
+  //----------------------------------------------------------------------------	
+  Linux_SambaServiceInstanceName  
+  Linux_SambaServiceDefaultImplementation::createInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaServiceManualInstance& aManualInstance) {
+
+#ifdef DEBUG
+   	std::cout << "createInstance not supported for Linux_SambaService" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+   	 CmpiErrorFormater::METHOD_NOT_FOUND,
+   	 "createInstance",
+   	 "Linux_SambaService");
+
+  }
+
+  //----------------------------------------------------------------------------	
+  void 
+  Linux_SambaServiceDefaultImplementation::deleteInstance(
+    const CmpiContext& aContext, 
+    const CmpiBroker& aBroker,
+    const Linux_SambaServiceInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+   	std::cout << "deleteInstance not supported for Linux_SambaService" << std::endl;
+#endif
+
+    throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "deleteInstance",
+      "Linux_SambaService");
+
+  }
+
+  
+
   /* extrinsic methods */
-
-    CMPIUint32 Linux_SambaServiceDefaultImplementation::RequestStateChange(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaServiceInstanceName&,
-      const CMPIUint16 &RequestedState,
+  
+  //----------------------------------------------------------------------------  
+  CMPIUint32
+  Linux_SambaServiceDefaultImplementation::RequestStateChange(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaServiceInstanceName& anInstanceName,
+      const CMPIUint16& RequestedState,
       int isRequestedStatePresent,
-      CIM_ConcreteJobInstanceName &Job,
-      const CmpiDateTime &TimeoutPeriod,
-      int isTimeoutPeriodPresent){
-      cout<<"RequestStateChange() not supported in Linux_SambaService"<<endl;
-   	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "RequestStateChange() not implemented in Linux_SambaService");
-    };
+      CIM_ConcreteJobInstanceName& Job,
+      const CmpiDateTime& TimeoutPeriod,
+      int isTimeoutPeriodPresent) {
 
-    CMPIUint32 Linux_SambaServiceDefaultImplementation::StartService(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaServiceInstanceName&){
-      cout<<"StartService() not supported in Linux_SambaService"<<endl;
-   	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "StartService() not implemented in Linux_SambaService");
-    };
+#ifdef DEBUG
+    std::cout << "RequestStateChange() not supported in Linux_SambaService" << std::endl;
+#endif    
+    
+ 	  throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "RequestStateChange",
+      "Linux_SambaService");
+      
+  }
 
-    CMPIUint32 Linux_SambaServiceDefaultImplementation::StopService(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaServiceInstanceName&){
-      cout<<"StopService() not supported in Linux_SambaService"<<endl;
-   	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_IMPLEMENTED,
-   	   "StopService() not implemented in Linux_SambaService");
-    };
-	
+  //----------------------------------------------------------------------------  
+  CMPIUint32
+  Linux_SambaServiceDefaultImplementation::StartService(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaServiceInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+    std::cout << "StartService() not supported in Linux_SambaService" << std::endl;
+#endif    
+    
+ 	  throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "StartService",
+      "Linux_SambaService");
+      
+  }
+
+  //----------------------------------------------------------------------------  
+  CMPIUint32
+  Linux_SambaServiceDefaultImplementation::StopService(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaServiceInstanceName& anInstanceName) {
+
+#ifdef DEBUG
+    std::cout << "StopService() not supported in Linux_SambaService" << std::endl;
+#endif    
+    
+ 	  throw CmpiErrorFormater::getErrorException(
+      CmpiErrorFormater::METHOD_NOT_FOUND,
+      "StopService",
+      "Linux_SambaService");
+      
+  }
+
+
 }
-

@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaPrinterSecurityOptionsInterface.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterSecurityOptionsInterface.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaPrinterSecurityOptionsInterface_h
 #define Linux_SambaPrinterSecurityOptionsInterface_h
 
@@ -27,6 +30,7 @@
 #include "CmpiDateTime.h"
 #include "CmpiBroker.h"
 
+
 namespace genProvider {
 
   class Linux_SambaPrinterSecurityOptionsInterface {
@@ -35,45 +39,59 @@ namespace genProvider {
     virtual ~Linux_SambaPrinterSecurityOptionsInterface() { };
     
     /* intrinsic methods */
+    
     virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaPrinterSecurityOptionsInstanceNameEnumeration& instnames) = 0;
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaPrinterSecurityOptionsInstanceNameEnumeration& anInstanceNameEnumeration) = 0;
+    
   	
+    
     virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaPrinterSecurityOptionsManualInstanceEnumeration& instances) = 0;
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+  	  Linux_SambaPrinterSecurityOptionsManualInstanceEnumeration& aManualInstanceEnumeration) = 0;
   	
+  	
+    
     virtual Linux_SambaPrinterSecurityOptionsManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaPrinterSecurityOptionsInstanceName&) = 0;
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterSecurityOptionsInstanceName& anInstanceName) = 0;
+    
   	
+    
     virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaPrinterSecurityOptionsManualInstance&) = 0;
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterSecurityOptionsManualInstance& aManualInstance) = 0;
+    
   	
-    virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaPrinterSecurityOptionsManualInstance&) = 0;
+    
+    virtual Linux_SambaPrinterSecurityOptionsInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaPrinterSecurityOptionsManualInstance& aManualInstance) = 0;
+    
   	
+    
     virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaPrinterSecurityOptionsInstanceName&) = 0;
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaPrinterSecurityOptionsInstanceName& anInstanceName) = 0;
+    
 	
     
+    
     /* extrinsic methods */
+    
 	
   };
+  
 }
 #endif
-

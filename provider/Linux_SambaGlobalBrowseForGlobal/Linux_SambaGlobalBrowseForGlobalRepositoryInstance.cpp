@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaGlobalBrowseForGlobalRepositoryInstance.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalBrowseForGlobalRepositoryInstance.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGlobalBrowseForGlobalRepositoryInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,244 +28,283 @@
 
 namespace genProvider {
 
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaGlobalBrowseForGlobalRepositoryInstance
-  //*********************************************************
-
+  //----------------------------------------------------------------------------
   //empty constructor
-  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::
-   Linux_SambaGlobalBrowseForGlobalRepositoryInstance(){   	
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::Linux_SambaGlobalBrowseForGlobalRepositoryInstance() {   	
    	init();  	   	
-  };
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copy constructor	
-  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::
-   Linux_SambaGlobalBrowseForGlobalRepositoryInstance
-   (const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& original){   	
-   	init(original);  	   	
-  };
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::Linux_SambaGlobalBrowseForGlobalRepositoryInstance(
+    const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& anInstance) {   	
+   	init(anInstance);  	   	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //constructor using CmpiInstance
-  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::
-   Linux_SambaGlobalBrowseForGlobalRepositoryInstance (const CmpiInstance& inst, const char* instanceNamespace){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::Linux_SambaGlobalBrowseForGlobalRepositoryInstance(
+    const CmpiInstance& aCmpiInstance,
+    const char* anInstanceNamespaceP) {
+
     CmpiData cmpiData;
+
     init(); 
     
-    CmpiObjectPath cop=inst.getObjectPath();
-    cop.setNameSpace(instanceNamespace);
+    CmpiObjectPath cop = aCmpiInstance.getObjectPath();
+    cop.setNameSpace(anInstanceNamespaceP);
     setInstanceName(Linux_SambaGlobalBrowseForGlobalInstanceName(cop));
+
     
   }
   
-  
+  //----------------------------------------------------------------------------
   //Destructor
+  //----------------------------------------------------------------------------
   Linux_SambaGlobalBrowseForGlobalRepositoryInstance::
    ~Linux_SambaGlobalBrowseForGlobalRepositoryInstance(){
    	reset();  	  
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
   //copy operator
+  //----------------------------------------------------------------------------
   Linux_SambaGlobalBrowseForGlobalRepositoryInstance&
-   Linux_SambaGlobalBrowseForGlobalRepositoryInstance::operator=
-   (const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& original){   	
-   	init(original);
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::operator=(
+    const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& anInstance) {   	
+   	
+   	init(anInstance);
    	return *this;
-  };
+  
+  }
   
   
+  //----------------------------------------------------------------------------
   //converts to CmpiInstance
-  CmpiInstance Linux_SambaGlobalBrowseForGlobalRepositoryInstance::
-   getCmpiInstance(const char** properties) const{
+  //----------------------------------------------------------------------------
+  CmpiInstance
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::getCmpiInstance(
+    const char** aPropertiesPP) const {
    	
    	CmpiObjectPath objectPath=getInstanceName().getObjectPath();      
     CmpiInstance cmpiInstance(objectPath);    
     getInstanceName().fillKeys(cmpiInstance);
     
-    if (properties) {
-	  cmpiInstance.setPropertyFilter(properties,0);
+    if (aPropertiesPP) {
+	    cmpiInstance.setPropertyFilter(aPropertiesPP,0);
     }
+
   	
   	return cmpiInstance;
   	
   }
   
-  
-  //InstanceName related methods
-  unsigned int Linux_SambaGlobalBrowseForGlobalRepositoryInstance::
-   isInstanceNameSet() const{
+  //----------------------------------------------------------------------------
+  // InstanceName related methods
+  //----------------------------------------------------------------------------
+  unsigned int 
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::isInstanceNameSet() const {
   	return isSet.instanceName;
   }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaGlobalBrowseForGlobalInstanceName&
-    Linux_SambaGlobalBrowseForGlobalRepositoryInstance::getInstanceName() const{
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::getInstanceName() const {
 
-    if(!isSet.instanceName)
+    if( ! isSet.instanceName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "InstanceName not set in Linux_SambaGlobalBrowseForGlobal instance");
+        CmpiErrorFormater::NOT_SET,
+        "InstanceName (CIM Key Attributes)",
+        "Linux_SambaGlobalBrowseForGlobal");
+   	}
   		
    	return m_instanceName;
+  
   }
 
-  void Linux_SambaGlobalBrowseForGlobalRepositoryInstance::setInstanceName(
-   const Linux_SambaGlobalBrowseForGlobalInstanceName& val){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::setInstanceName(
+    const Linux_SambaGlobalBrowseForGlobalInstanceName& val) {
+
     m_instanceName = val;
-    isSet.instanceName=1;
+    isSet.instanceName = 1;
+
   }
 
-
   
+  //----------------------------------------------------------------------------
   //set isSet attributes to FALSE
-  void Linux_SambaGlobalBrowseForGlobalRepositoryInstance::init(){
-   	isSet.instanceName=0;
-   	  	
-  };
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::init() {
+   	isSet.instanceName = 0;
+  	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copies another instance properties in this
-  void Linux_SambaGlobalBrowseForGlobalRepositoryInstance::init
-   (const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& original){   	
+  //----------------------------------------------------------------------------
+  void 
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::init(
+    const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& anOriginal) {   	
+
    	init();
    	   	
-    if(original.isInstanceNameSet()){
-      setInstanceName(original.getInstanceName());
-    }    
-   }
+    if(anOriginal.isInstanceNameSet()) {
+      setInstanceName(anOriginal.getInstanceName());
+    }
+        
+  }
   
-  
+  //----------------------------------------------------------------------------
   //reset the instance data
-  void Linux_SambaGlobalBrowseForGlobalRepositoryInstance::reset(){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstance::reset() {
    	
-  	  
-  };
+  }
   
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement::
-   Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement::Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement() {
    	
-  	m_elementP=0;
-  	m_nextP=0;
+  	m_elementP = 0;
+  	m_nextP = 0;
   	  
-  };
+  }
   
-  
-  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement::
-   ~Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement::~Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement() {
    	
-  	if (m_elementP!=0)
+  	if (m_elementP) {
   	  delete(m_elementP);
-  	if (m_nextP!=0)
+  	}
+  	
+  	if (m_nextP) {
   	  delete(m_nextP);
+  	}
   	  
-  };
+  }
 
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaGlobalBrowseForGlobalRepositoryInstanceNameEnumeration
-  //*********************************************************
-
-  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::
-   Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration() {
    	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   
-  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::
-   Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration(
-   const Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration& original){
+  }
+  
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration(
+    const Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration& anInstanceEnumeration) {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
+    int size = anInstanceEnumeration.getSize();
+    for (int x=0; x < size;++x) {
+      addElement(anInstanceEnumeration.getElement(x));
+    }           
+
+  }
   
-  	  
-  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::
-   ~Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::~Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
+  }
   
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::reset() {
+  	
+  	m_currentElementP = m_firstElementP;
+  	
+  }
   	  
-  void Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::reset(){
+  //----------------------------------------------------------------------------
+  bool
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::hasNext() const {
   	
-  	currentElementP=firstElementP;
-  };
+  	return (m_currentElementP != 0);
   
-  	  
-  bool Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::hasNext() const{
-  	
-  	return (currentElementP!=0);
+  }
   
-  };
-  
-  int Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::getSize() const{
+  //----------------------------------------------------------------------------
+  int
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
     
-  };
+  }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaGlobalBrowseForGlobalRepositoryInstance&  
-   Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::getElement(int pos) const{
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement* followingP=firstElementP;
+    Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x = 0;
+    while (followingP && (x < anIndex)) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
+
+  }
   
-  	  
+  //----------------------------------------------------------------------------
   const Linux_SambaGlobalBrowseForGlobalRepositoryInstance&
-   Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::getNext() {
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::getNext() {
    	
-  	 Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+    Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement* currentElementP =
+  	  m_currentElementP;
+
+    m_currentElementP = m_currentElementP->m_nextP;
   	 
-  	 return *(currentP->m_elementP);
-  };
+    return *(currentElementP->m_elementP);
+
+  }
   	  
-  void Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::addElement
-   (const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& elementP){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration::addElement(
+    const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& anInstance) {
    	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaGlobalBrowseForGlobalRepositoryInstance(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaGlobalBrowseForGlobalRepositoryInstance(elementP);
+  	if (m_firstElementP == 0) {
+  	  m_firstElementP = new Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaGlobalBrowseForGlobalRepositoryInstance(anInstance);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP = new Linux_SambaGlobalBrowseForGlobalRepositoryInstance(anInstance);
   	}
-  };  
+
+  }
+  
 }
- 

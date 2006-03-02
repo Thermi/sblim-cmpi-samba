@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaShareSecurityOptionsRepositoryInstance.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareSecurityOptionsRepositoryInstance.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaShareSecurityOptionsRepositoryInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,244 +28,283 @@
 
 namespace genProvider {
 
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaShareSecurityOptionsRepositoryInstance
-  //*********************************************************
-
+  //----------------------------------------------------------------------------
   //empty constructor
-  Linux_SambaShareSecurityOptionsRepositoryInstance::
-   Linux_SambaShareSecurityOptionsRepositoryInstance(){   	
+  Linux_SambaShareSecurityOptionsRepositoryInstance::Linux_SambaShareSecurityOptionsRepositoryInstance() {   	
    	init();  	   	
-  };
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copy constructor	
-  Linux_SambaShareSecurityOptionsRepositoryInstance::
-   Linux_SambaShareSecurityOptionsRepositoryInstance
-   (const Linux_SambaShareSecurityOptionsRepositoryInstance& original){   	
-   	init(original);  	   	
-  };
+  //----------------------------------------------------------------------------
+  Linux_SambaShareSecurityOptionsRepositoryInstance::Linux_SambaShareSecurityOptionsRepositoryInstance(
+    const Linux_SambaShareSecurityOptionsRepositoryInstance& anInstance) {   	
+   	init(anInstance);  	   	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //constructor using CmpiInstance
-  Linux_SambaShareSecurityOptionsRepositoryInstance::
-   Linux_SambaShareSecurityOptionsRepositoryInstance (const CmpiInstance& inst, const char* instanceNamespace){
+  //----------------------------------------------------------------------------
+  Linux_SambaShareSecurityOptionsRepositoryInstance::Linux_SambaShareSecurityOptionsRepositoryInstance(
+    const CmpiInstance& aCmpiInstance,
+    const char* anInstanceNamespaceP) {
+
     CmpiData cmpiData;
+
     init(); 
     
-    CmpiObjectPath cop=inst.getObjectPath();
-    cop.setNameSpace(instanceNamespace);
+    CmpiObjectPath cop = aCmpiInstance.getObjectPath();
+    cop.setNameSpace(anInstanceNamespaceP);
     setInstanceName(Linux_SambaShareSecurityOptionsInstanceName(cop));
+
     
   }
   
-  
+  //----------------------------------------------------------------------------
   //Destructor
+  //----------------------------------------------------------------------------
   Linux_SambaShareSecurityOptionsRepositoryInstance::
    ~Linux_SambaShareSecurityOptionsRepositoryInstance(){
    	reset();  	  
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
   //copy operator
+  //----------------------------------------------------------------------------
   Linux_SambaShareSecurityOptionsRepositoryInstance&
-   Linux_SambaShareSecurityOptionsRepositoryInstance::operator=
-   (const Linux_SambaShareSecurityOptionsRepositoryInstance& original){   	
-   	init(original);
+  Linux_SambaShareSecurityOptionsRepositoryInstance::operator=(
+    const Linux_SambaShareSecurityOptionsRepositoryInstance& anInstance) {   	
+   	
+   	init(anInstance);
    	return *this;
-  };
+  
+  }
   
   
+  //----------------------------------------------------------------------------
   //converts to CmpiInstance
-  CmpiInstance Linux_SambaShareSecurityOptionsRepositoryInstance::
-   getCmpiInstance(const char** properties) const{
+  //----------------------------------------------------------------------------
+  CmpiInstance
+  Linux_SambaShareSecurityOptionsRepositoryInstance::getCmpiInstance(
+    const char** aPropertiesPP) const {
    	
    	CmpiObjectPath objectPath=getInstanceName().getObjectPath();      
     CmpiInstance cmpiInstance(objectPath);    
     getInstanceName().fillKeys(cmpiInstance);
     
-    if (properties) {
-	  cmpiInstance.setPropertyFilter(properties,0);
+    if (aPropertiesPP) {
+	    cmpiInstance.setPropertyFilter(aPropertiesPP,0);
     }
+
   	
   	return cmpiInstance;
   	
   }
   
-  
-  //InstanceName related methods
-  unsigned int Linux_SambaShareSecurityOptionsRepositoryInstance::
-   isInstanceNameSet() const{
+  //----------------------------------------------------------------------------
+  // InstanceName related methods
+  //----------------------------------------------------------------------------
+  unsigned int 
+  Linux_SambaShareSecurityOptionsRepositoryInstance::isInstanceNameSet() const {
   	return isSet.instanceName;
   }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaShareSecurityOptionsInstanceName&
-    Linux_SambaShareSecurityOptionsRepositoryInstance::getInstanceName() const{
+  Linux_SambaShareSecurityOptionsRepositoryInstance::getInstanceName() const {
 
-    if(!isSet.instanceName)
+    if( ! isSet.instanceName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "InstanceName not set in Linux_SambaShareSecurityOptions instance");
+        CmpiErrorFormater::NOT_SET,
+        "InstanceName (CIM Key Attributes)",
+        "Linux_SambaShareSecurityOptions");
+   	}
   		
    	return m_instanceName;
+  
   }
 
-  void Linux_SambaShareSecurityOptionsRepositoryInstance::setInstanceName(
-   const Linux_SambaShareSecurityOptionsInstanceName& val){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareSecurityOptionsRepositoryInstance::setInstanceName(
+    const Linux_SambaShareSecurityOptionsInstanceName& val) {
+
     m_instanceName = val;
-    isSet.instanceName=1;
+    isSet.instanceName = 1;
+
   }
 
-
   
+  //----------------------------------------------------------------------------
   //set isSet attributes to FALSE
-  void Linux_SambaShareSecurityOptionsRepositoryInstance::init(){
-   	isSet.instanceName=0;
-   	  	
-  };
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareSecurityOptionsRepositoryInstance::init() {
+   	isSet.instanceName = 0;
+  	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copies another instance properties in this
-  void Linux_SambaShareSecurityOptionsRepositoryInstance::init
-   (const Linux_SambaShareSecurityOptionsRepositoryInstance& original){   	
+  //----------------------------------------------------------------------------
+  void 
+  Linux_SambaShareSecurityOptionsRepositoryInstance::init(
+    const Linux_SambaShareSecurityOptionsRepositoryInstance& anOriginal) {   	
+
    	init();
    	   	
-    if(original.isInstanceNameSet()){
-      setInstanceName(original.getInstanceName());
-    }    
-   }
+    if(anOriginal.isInstanceNameSet()) {
+      setInstanceName(anOriginal.getInstanceName());
+    }
+        
+  }
   
-  
+  //----------------------------------------------------------------------------
   //reset the instance data
-  void Linux_SambaShareSecurityOptionsRepositoryInstance::reset(){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareSecurityOptionsRepositoryInstance::reset() {
    	
-  	  
-  };
+  }
   
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement::
-   Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement::Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement() {
    	
-  	m_elementP=0;
-  	m_nextP=0;
+  	m_elementP = 0;
+  	m_nextP = 0;
   	  
-  };
+  }
   
-  
-  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement::
-   ~Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement::~Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement() {
    	
-  	if (m_elementP!=0)
+  	if (m_elementP) {
   	  delete(m_elementP);
-  	if (m_nextP!=0)
+  	}
+  	
+  	if (m_nextP) {
   	  delete(m_nextP);
+  	}
   	  
-  };
+  }
 
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaShareSecurityOptionsRepositoryInstanceNameEnumeration
-  //*********************************************************
-
-  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::
-   Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration() {
    	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   
-  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::
-   Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration(
-   const Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration& original){
+  }
+  
+  //----------------------------------------------------------------------------
+  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration(
+    const Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration& anInstanceEnumeration) {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
+    int size = anInstanceEnumeration.getSize();
+    for (int x=0; x < size;++x) {
+      addElement(anInstanceEnumeration.getElement(x));
+    }           
+
+  }
   
-  	  
-  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::
-   ~Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::~Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
+  }
   
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::reset() {
+  	
+  	m_currentElementP = m_firstElementP;
+  	
+  }
   	  
-  void Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::reset(){
+  //----------------------------------------------------------------------------
+  bool
+  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::hasNext() const {
   	
-  	currentElementP=firstElementP;
-  };
+  	return (m_currentElementP != 0);
   
-  	  
-  bool Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::hasNext() const{
-  	
-  	return (currentElementP!=0);
+  }
   
-  };
-  
-  int Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::getSize() const{
+  //----------------------------------------------------------------------------
+  int
+  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
     
-  };
+  }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaShareSecurityOptionsRepositoryInstance&  
-   Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::getElement(int pos) const{
+  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* followingP=firstElementP;
+    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x = 0;
+    while (followingP && (x < anIndex)) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
+
+  }
   
-  	  
+  //----------------------------------------------------------------------------
   const Linux_SambaShareSecurityOptionsRepositoryInstance&
-   Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::getNext() {
+  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::getNext() {
    	
-  	 Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+    Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement* currentElementP =
+  	  m_currentElementP;
+
+    m_currentElementP = m_currentElementP->m_nextP;
   	 
-  	 return *(currentP->m_elementP);
-  };
+    return *(currentElementP->m_elementP);
+
+  }
   	  
-  void Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::addElement
-   (const Linux_SambaShareSecurityOptionsRepositoryInstance& elementP){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareSecurityOptionsRepositoryInstanceEnumeration::addElement(
+    const Linux_SambaShareSecurityOptionsRepositoryInstance& anInstance) {
    	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaShareSecurityOptionsRepositoryInstance(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaShareSecurityOptionsRepositoryInstance(elementP);
+  	if (m_firstElementP == 0) {
+  	  m_firstElementP = new Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaShareSecurityOptionsRepositoryInstance(anInstance);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaShareSecurityOptionsRepositoryInstanceEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP = new Linux_SambaShareSecurityOptionsRepositoryInstance(anInstance);
   	}
-  };  
+
+  }
+  
 }
- 

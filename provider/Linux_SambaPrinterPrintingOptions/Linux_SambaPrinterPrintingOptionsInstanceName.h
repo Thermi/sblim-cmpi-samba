@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaPrinterPrintingOptionsInstanceName.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterPrintingOptionsInstanceName.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaPrinterPrintingOptionsInstanceName_h
 #define Linux_SambaPrinterPrintingOptionsInstanceName_h
 
@@ -29,58 +32,61 @@
 #include "ArrayConverter.h"
 #include "CmpiErrorFormater.h"
 
+
 namespace genProvider {
 
   class Linux_SambaPrinterPrintingOptionsInstanceName {
-  public:
-       Linux_SambaPrinterPrintingOptionsInstanceName();
+       
+    private:
+    void init();
+    void init(const Linux_SambaPrinterPrintingOptionsInstanceName& anInstanceName);
+    void reset();
+       
+    const char* m_CIMClassNameP;
+    const char* m_nameSpaceP;
+    
+    const char* m_InstanceID;
+    const char* m_Name;
+       
+    struct isSetType{
+      unsigned int m_nameSpaceP:1;
+      unsigned int InstanceID:1;
+      unsigned int Name:1;
+
+    } isSet;
+  
+    public:
+    Linux_SambaPrinterPrintingOptionsInstanceName();
   	
-       Linux_SambaPrinterPrintingOptionsInstanceName
-  	    (const Linux_SambaPrinterPrintingOptionsInstanceName& original);
+    Linux_SambaPrinterPrintingOptionsInstanceName(const Linux_SambaPrinterPrintingOptionsInstanceName& anInstanceName);
   	   
-       Linux_SambaPrinterPrintingOptionsInstanceName
-        (const CmpiObjectPath& path);
+    Linux_SambaPrinterPrintingOptionsInstanceName(const CmpiObjectPath& path);
   	 
-       ~Linux_SambaPrinterPrintingOptionsInstanceName();
+    ~Linux_SambaPrinterPrintingOptionsInstanceName();
        
-       Linux_SambaPrinterPrintingOptionsInstanceName& operator=
-  	    (const Linux_SambaPrinterPrintingOptionsInstanceName& original);
+    Linux_SambaPrinterPrintingOptionsInstanceName& operator=(const Linux_SambaPrinterPrintingOptionsInstanceName& anInstanceName);
        
-       CmpiObjectPath getObjectPath() const;
+    CmpiObjectPath getObjectPath() const;
        
-       void fillKeys(CmpiInstance& cmpiInstance) const;
+    void fillKeys(CmpiInstance& cmpiInstance) const;
        
-       unsigned int isNameSpaceSet() const;
-       void setNamespace(const char * val, int makeCopy = 1);
-       const char * getNamespace() const;
+    unsigned int isNameSpaceSet() const;
+    void setNamespace(const char* aNameSpaceP, int aCopyFlag = 1);
+    const char* getNamespace() const;
+    
+    unsigned int isInstanceIDSet() const;
+    void setInstanceID(const char* aValue, int aCopyFlag = 1);
+    const char* getInstanceID() const;
 
-       unsigned int isInstanceIDSet() const;
-       void setInstanceID(const char* val, int makeCopy = 1);
-       const char* getInstanceID() const;
+    unsigned int isNameSet() const;
+    void setName(const char* aValue, int aCopyFlag = 1);
+    const char* getName() const;
 
-       unsigned int isNameSet() const;
-       void setName(const char* val, int makeCopy = 1);
-       const char* getName() const;
-       
-  private:
-       void init();
-       void init(const Linux_SambaPrinterPrintingOptionsInstanceName& original);
-       void reset();
-       
-       const char* m_CIMClassNameP;
-       const char* m_namespace;
-       const char* m_InstanceID;
-       const char* m_Name;
-       
-       struct isSetType{
-       	 unsigned int m_namespace:1;
-         unsigned int InstanceID:1;
-         unsigned int Name:1;
-       } isSet;
+
   };
   
-  
-  struct Linux_SambaPrinterPrintingOptionsInstanceNameEnumerationElement{
+  //****************************************************************************
+  struct Linux_SambaPrinterPrintingOptionsInstanceNameEnumerationElement {
   	Linux_SambaPrinterPrintingOptionsInstanceName* m_elementP;
   	Linux_SambaPrinterPrintingOptionsInstanceNameEnumerationElement* m_nextP;
   	
@@ -88,38 +94,40 @@ namespace genProvider {
   	~Linux_SambaPrinterPrintingOptionsInstanceNameEnumerationElement();  	
   };
   
-
+  //****************************************************************************
   class Linux_SambaPrinterPrintingOptionsInstanceNameEnumeration {
+  
   	private:
-  	  Linux_SambaPrinterPrintingOptionsInstanceNameEnumerationElement* firstElementP;
-  	  Linux_SambaPrinterPrintingOptionsInstanceNameEnumerationElement* currentElementP;
-  	  Linux_SambaPrinterPrintingOptionsInstanceNameEnumerationElement* endElementP;
+    Linux_SambaPrinterPrintingOptionsInstanceNameEnumerationElement* m_firstElementP;
+  	Linux_SambaPrinterPrintingOptionsInstanceNameEnumerationElement* m_currentElementP;
+  	Linux_SambaPrinterPrintingOptionsInstanceNameEnumerationElement* m_endElementP;
   	
   	public:
-  	  Linux_SambaPrinterPrintingOptionsInstanceNameEnumeration();
+    Linux_SambaPrinterPrintingOptionsInstanceNameEnumeration();
   	  
-  	  Linux_SambaPrinterPrintingOptionsInstanceNameEnumeration(const CmpiArray& arr);
+    Linux_SambaPrinterPrintingOptionsInstanceNameEnumeration(const CmpiArray& arr);
   	  
-  	  Linux_SambaPrinterPrintingOptionsInstanceNameEnumeration(
-  	   const Linux_SambaPrinterPrintingOptionsInstanceNameEnumeration& original);
+    Linux_SambaPrinterPrintingOptionsInstanceNameEnumeration(const Linux_SambaPrinterPrintingOptionsInstanceNameEnumeration& anInstanceNameEnumeration);
+  	   
+    ~Linux_SambaPrinterPrintingOptionsInstanceNameEnumeration();
   	  
-  	  ~Linux_SambaPrinterPrintingOptionsInstanceNameEnumeration();
+    void reset();
   	  
-  	  void reset();
+    bool hasNext() const;
   	  
-  	  bool hasNext() const;
+    const Linux_SambaPrinterPrintingOptionsInstanceName& getNext();
   	  
-  	  const Linux_SambaPrinterPrintingOptionsInstanceName& getNext();
+    int getSize() const;
   	  
-  	  int getSize() const;
+    const Linux_SambaPrinterPrintingOptionsInstanceName& getElement(int anIndex) const;  	  
   	  
-  	  const Linux_SambaPrinterPrintingOptionsInstanceName& getElement(int pos) const;  	  
+    //no copy of the element is done
+    void addElement(const Linux_SambaPrinterPrintingOptionsInstanceName& anInstanceName);
   	  
-  	  //no copy of the element is done
-  	  void addElement(const Linux_SambaPrinterPrintingOptionsInstanceName& elementP);
-  	  
-  	  operator CmpiArray() const;
+    operator CmpiArray() const;
+
   };
+
 }
 #endif
 

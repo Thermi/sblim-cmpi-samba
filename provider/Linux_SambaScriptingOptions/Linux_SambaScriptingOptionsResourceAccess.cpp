@@ -1,43 +1,54 @@
-/**
- *  Linux_SambaScriptingOptionsResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaScriptingOptionsResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaScriptingOptionsResourceAccess.h"
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-  void Linux_SambaScriptingOptionsResourceAccess::setInstanceNameProperties(const char* nsp,     
-    Linux_SambaScriptingOptionsInstanceName& anInstanceName)
-  {
-    anInstanceName.setNamespace(nsp);
+  
+  //----------------------------------------------------------------------------
+  // manual written methods
+  
+  static void setInstanceNameProperties(
+      const char* aNameSpaceP, 
+      Linux_SambaScriptingOptionsInstanceName& anInstanceName) {
+    
+    anInstanceName.setNamespace(aNameSpaceP);
     anInstanceName.setName(DEFAULT_GLOBAL_NAME);
     anInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
   }
 
-  void Linux_SambaScriptingOptionsResourceAccess::setInstanceProperties(
-   Linux_SambaScriptingOptionsManualInstance& aManualInstance)
-  {
+  static void setInstanceProperties(
+      Linux_SambaScriptingOptionsManualInstance& aManualInstance) {
+    
     char *option;
-
+    
     option = get_global_option(ADD_GROUP_SCRIPT);	
     if ( option )
       aManualInstance.setaddGroupScript(option);
-
+    
     option = get_global_option(ADD_PRINTER_COMMAND);	
     if ( option )
       aManualInstance.setaddPrinterCommand(option);
@@ -67,104 +78,131 @@ namespace genProvider {
       aManualInstance.setdeleteUserfromGroupScript(option);
   }
   
-    //Linux_SambaScriptingOptionsResourceAccess::Linux_SambaScriptingOptionsResourceAccess();
-    Linux_SambaScriptingOptionsResourceAccess::~Linux_SambaScriptingOptionsResourceAccess() { 
-      terminator();
-    };
-    
-    /* intrinsic methods */
-    
-  void Linux_SambaScriptingOptionsResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaScriptingOptionsInstanceNameEnumeration& instnames)
-  {
-    Linux_SambaScriptingOptionsInstanceName instanceName;
-    setInstanceNameProperties(nsp,instanceName);
-    instnames.addElement(instanceName); 
-  };
+  //----------------------------------------------------------------------------
+
   
+  
+  //----------------------------------------------------------------------------
+  //Linux_SambaScriptingOptionsResourceAccess::Linux_SambaScriptingOptionsResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaScriptingOptionsResourceAccess::~Linux_SambaScriptingOptionsResourceAccess() {
+    terminator();
+  }
     
-  void Linux_SambaScriptingOptionsResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaScriptingOptionsManualInstanceEnumeration& instances)
-  {
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaScriptingOptionsResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaScriptingOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    Linux_SambaScriptingOptionsInstanceName instanceName;
+    setInstanceNameProperties(aNameSpaceP,instanceName);
+    
+    anInstanceNameEnumeration.addElement(instanceName); 
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaScriptingOptionsResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaScriptingOptionsManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaScriptingOptionsManualInstance aManualInstance;
     Linux_SambaScriptingOptionsInstanceName instanceName;
     
-    setInstanceNameProperties(nsp,instanceName);
+    setInstanceNameProperties(aNameSpaceP,instanceName);
     aManualInstance.setInstanceName(instanceName);
-
+    
     setInstanceProperties(aManualInstance);
     
-    instances.addElement(aManualInstance);
-  };
-  	
+    aManualInstanceEnumeration.addElement(aManualInstance);
+  }
+
   
+  //----------------------------------------------------------------------------
+
   Linux_SambaScriptingOptionsManualInstance 
   Linux_SambaScriptingOptionsResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaScriptingOptionsInstanceName& instanceName)
-  {
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaScriptingOptionsInstanceName& anInstanceName) {
+
     Linux_SambaScriptingOptionsManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
+    aManualInstance.setInstanceName(anInstanceName);
     
     setInstanceProperties(aManualInstance);
     
-    return aManualInstance;  
-  };
-  
-  
-  void Linux_SambaScriptingOptionsResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaScriptingOptionsManualInstance& newInstance)
-  {
+    return aManualInstance;
+  }
 
-    if (newInstance.isaddGroupScriptSet())
-      set_global_option(ADD_GROUP_SCRIPT,newInstance.getaddGroupScript());	
+  //----------------------------------------------------------------------------
 
-    if ( newInstance.isaddPrinterCommandSet())
-      set_global_option(ADD_PRINTER_COMMAND, newInstance.getaddPrinterCommand());	
-   
-    if (newInstance.isaddShareCommandSet())    
-      set_global_option(ADD_SHARE_COMMAND,newInstance.getaddShareCommand());	
-
-    if (newInstance.isaddUserScriptSet())
-      set_global_option(ADD_USER_SCRIPT,newInstance.getaddUserScript());	
+  void
+  Linux_SambaScriptingOptionsResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaScriptingOptionsManualInstance& aManualInstance) {
+    
+    if (aManualInstance.isaddGroupScriptSet())
+      set_global_option(ADD_GROUP_SCRIPT,aManualInstance.getaddGroupScript());	
+    
+    if ( aManualInstance.isaddPrinterCommandSet())
+      set_global_option(ADD_PRINTER_COMMAND, aManualInstance.getaddPrinterCommand());	
+    
+    if (aManualInstance.isaddShareCommandSet())    
+      set_global_option(ADD_SHARE_COMMAND,aManualInstance.getaddShareCommand());	
+    
+    if (aManualInstance.isaddUserScriptSet())
+      set_global_option(ADD_USER_SCRIPT,aManualInstance.getaddUserScript());	
    	
-    if (newInstance.isaddUsertoGroupScriptSet())
-      set_global_option(ADD_USER_TO_GROUP_SCRIPT,newInstance.getaddUsertoGroupScript());
-
-    if (newInstance.isdeleteGrouprScriptSet())
-      set_global_option(DELETE_GROUP_SCRIPT,newInstance.getdeleteGrouprScript());	
+    if (aManualInstance.isaddUsertoGroupScriptSet())
+      set_global_option(ADD_USER_TO_GROUP_SCRIPT,aManualInstance.getaddUsertoGroupScript());
     
-    if(newInstance.isdeleteUserScriptSet())
-      set_global_option(DELETE_USER_SCRIPT,newInstance.getdeleteUserScript());	
+    if (aManualInstance.isdeleteGrouprScriptSet())
+      set_global_option(DELETE_GROUP_SCRIPT,aManualInstance.getdeleteGrouprScript());	
     
-    if(newInstance.isdeleteUserfromGroupScriptSet())
-      set_global_option(DELETE_USER_FROM_GROUP_SCRIPT,newInstance.getdeleteUserfromGroupScript());	
+    if(aManualInstance.isdeleteUserScriptSet())
+      set_global_option(DELETE_USER_SCRIPT,aManualInstance.getdeleteUserScript());	
+    
+    if(aManualInstance.isdeleteUserfromGroupScriptSet())
+      set_global_option(DELETE_USER_FROM_GROUP_SCRIPT,aManualInstance.getdeleteUserfromGroupScript());
+  }
 
-  };
   
-  	
-  	/*
-    void Linux_SambaScriptingOptionsResourceAccess::createInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaScriptingOptionsManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaScriptingOptionsResourceAccess::deleteInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaScriptingOptionsInstanceName&){};
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaScriptingOptionsInstanceName
+  Linux_SambaScriptingOptionsResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaScriptingOptionsManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaScriptingOptionsResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaScriptingOptionsInstanceName& anInstanceName) { }
 	*/
-    
-    /* extrinsic methods */
+	
+
+  
+  // extrinsic methods
+
 	
 }
 

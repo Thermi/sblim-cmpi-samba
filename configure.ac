@@ -38,7 +38,7 @@ CHECK_PROVIDERDIR
 # Check for CIM Server (defined in acinclude.m4)
 CHECK_CIMSERVER
 
-# Check for tools-libra header files
+# Check for tools-libra header files (defined in acinclude.m4)
 CHECK_SBLIM_LIBRA
 
 # Checks for libraries.

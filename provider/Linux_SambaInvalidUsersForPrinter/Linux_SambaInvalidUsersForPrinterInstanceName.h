@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaInvalidUsersForPrinterInstanceName.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaInvalidUsersForPrinterInstanceName.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaInvalidUsersForPrinterInstanceName_h
 #define Linux_SambaInvalidUsersForPrinterInstanceName_h
 
@@ -31,58 +34,61 @@
 #include "Linux_SambaUserInstanceName.h"
 #include "Linux_SambaPrinterOptionsInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaInvalidUsersForPrinterInstanceName {
-  public:
-       Linux_SambaInvalidUsersForPrinterInstanceName();
+       
+    private:
+    void init();
+    void init(const Linux_SambaInvalidUsersForPrinterInstanceName& anInstanceName);
+    void reset();
+       
+    const char* m_CIMClassNameP;
+    const char* m_nameSpaceP;
+    
+    Linux_SambaUserInstanceName m_PartComponent;
+    Linux_SambaPrinterOptionsInstanceName m_GroupComponent;
+       
+    struct isSetType{
+      unsigned int m_nameSpaceP:1;
+      unsigned int PartComponent:1;
+      unsigned int GroupComponent:1;
+
+    } isSet;
+  
+    public:
+    Linux_SambaInvalidUsersForPrinterInstanceName();
   	
-       Linux_SambaInvalidUsersForPrinterInstanceName
-  	    (const Linux_SambaInvalidUsersForPrinterInstanceName& original);
+    Linux_SambaInvalidUsersForPrinterInstanceName(const Linux_SambaInvalidUsersForPrinterInstanceName& anInstanceName);
   	   
-       Linux_SambaInvalidUsersForPrinterInstanceName
-        (const CmpiObjectPath& path);
+    Linux_SambaInvalidUsersForPrinterInstanceName(const CmpiObjectPath& path);
   	 
-       ~Linux_SambaInvalidUsersForPrinterInstanceName();
+    ~Linux_SambaInvalidUsersForPrinterInstanceName();
        
-       Linux_SambaInvalidUsersForPrinterInstanceName& operator=
-  	    (const Linux_SambaInvalidUsersForPrinterInstanceName& original);
+    Linux_SambaInvalidUsersForPrinterInstanceName& operator=(const Linux_SambaInvalidUsersForPrinterInstanceName& anInstanceName);
        
-       CmpiObjectPath getObjectPath() const;
+    CmpiObjectPath getObjectPath() const;
        
-       void fillKeys(CmpiInstance& cmpiInstance) const;
+    void fillKeys(CmpiInstance& cmpiInstance) const;
        
-       unsigned int isNameSpaceSet() const;
-       void setNamespace(const char * val, int makeCopy = 1);
-       const char * getNamespace() const;
+    unsigned int isNameSpaceSet() const;
+    void setNamespace(const char* aNameSpaceP, int aCopyFlag = 1);
+    const char* getNamespace() const;
+    
+    unsigned int isPartComponentSet() const;
+    void setPartComponent(const Linux_SambaUserInstanceName& aValue);
+    const Linux_SambaUserInstanceName& getPartComponent() const;
 
-       unsigned int isPartComponentSet() const;
-       void setPartComponent(const Linux_SambaUserInstanceName& val);
-       const Linux_SambaUserInstanceName& getPartComponent() const;
+    unsigned int isGroupComponentSet() const;
+    void setGroupComponent(const Linux_SambaPrinterOptionsInstanceName& aValue);
+    const Linux_SambaPrinterOptionsInstanceName& getGroupComponent() const;
 
-       unsigned int isGroupComponentSet() const;
-       void setGroupComponent(const Linux_SambaPrinterOptionsInstanceName& val);
-       const Linux_SambaPrinterOptionsInstanceName& getGroupComponent() const;
-       
-  private:
-       void init();
-       void init(const Linux_SambaInvalidUsersForPrinterInstanceName& original);
-       void reset();
-       
-       const char* m_CIMClassNameP;
-       const char* m_namespace;
-       Linux_SambaUserInstanceName m_PartComponent;
-       Linux_SambaPrinterOptionsInstanceName m_GroupComponent;
-       
-       struct isSetType{
-       	 unsigned int m_namespace:1;
-         unsigned int PartComponent:1;
-         unsigned int GroupComponent:1;
-       } isSet;
+
   };
   
-  
-  struct Linux_SambaInvalidUsersForPrinterInstanceNameEnumerationElement{
+  //****************************************************************************
+  struct Linux_SambaInvalidUsersForPrinterInstanceNameEnumerationElement {
   	Linux_SambaInvalidUsersForPrinterInstanceName* m_elementP;
   	Linux_SambaInvalidUsersForPrinterInstanceNameEnumerationElement* m_nextP;
   	
@@ -90,38 +96,40 @@ namespace genProvider {
   	~Linux_SambaInvalidUsersForPrinterInstanceNameEnumerationElement();  	
   };
   
-
+  //****************************************************************************
   class Linux_SambaInvalidUsersForPrinterInstanceNameEnumeration {
+  
   	private:
-  	  Linux_SambaInvalidUsersForPrinterInstanceNameEnumerationElement* firstElementP;
-  	  Linux_SambaInvalidUsersForPrinterInstanceNameEnumerationElement* currentElementP;
-  	  Linux_SambaInvalidUsersForPrinterInstanceNameEnumerationElement* endElementP;
+    Linux_SambaInvalidUsersForPrinterInstanceNameEnumerationElement* m_firstElementP;
+  	Linux_SambaInvalidUsersForPrinterInstanceNameEnumerationElement* m_currentElementP;
+  	Linux_SambaInvalidUsersForPrinterInstanceNameEnumerationElement* m_endElementP;
   	
   	public:
-  	  Linux_SambaInvalidUsersForPrinterInstanceNameEnumeration();
+    Linux_SambaInvalidUsersForPrinterInstanceNameEnumeration();
   	  
-  	  Linux_SambaInvalidUsersForPrinterInstanceNameEnumeration(const CmpiArray& arr);
+    Linux_SambaInvalidUsersForPrinterInstanceNameEnumeration(const CmpiArray& arr);
   	  
-  	  Linux_SambaInvalidUsersForPrinterInstanceNameEnumeration(
-  	   const Linux_SambaInvalidUsersForPrinterInstanceNameEnumeration& original);
+    Linux_SambaInvalidUsersForPrinterInstanceNameEnumeration(const Linux_SambaInvalidUsersForPrinterInstanceNameEnumeration& anInstanceNameEnumeration);
+  	   
+    ~Linux_SambaInvalidUsersForPrinterInstanceNameEnumeration();
   	  
-  	  ~Linux_SambaInvalidUsersForPrinterInstanceNameEnumeration();
+    void reset();
   	  
-  	  void reset();
+    bool hasNext() const;
   	  
-  	  bool hasNext() const;
+    const Linux_SambaInvalidUsersForPrinterInstanceName& getNext();
   	  
-  	  const Linux_SambaInvalidUsersForPrinterInstanceName& getNext();
+    int getSize() const;
   	  
-  	  int getSize() const;
+    const Linux_SambaInvalidUsersForPrinterInstanceName& getElement(int anIndex) const;  	  
   	  
-  	  const Linux_SambaInvalidUsersForPrinterInstanceName& getElement(int pos) const;  	  
+    //no copy of the element is done
+    void addElement(const Linux_SambaInvalidUsersForPrinterInstanceName& anInstanceName);
   	  
-  	  //no copy of the element is done
-  	  void addElement(const Linux_SambaInvalidUsersForPrinterInstanceName& elementP);
-  	  
-  	  operator CmpiArray() const;
+    operator CmpiArray() const;
+
   };
+
 }
 #endif
 

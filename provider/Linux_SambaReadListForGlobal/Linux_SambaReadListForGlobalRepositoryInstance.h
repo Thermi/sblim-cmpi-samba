@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaReadListForGlobalRepositoryInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaReadListForGlobalRepositoryInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaReadListForGlobalRepositoryInstance_h
 #define Linux_SambaReadListForGlobalRepositoryInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaReadListForGlobalInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaReadListForGlobalRepositoryInstance {
-  public:
-       Linux_SambaReadListForGlobalRepositoryInstance();
-  	
-       Linux_SambaReadListForGlobalRepositoryInstance
-  	    (const Linux_SambaReadListForGlobalRepositoryInstance& original);
-  	   
-       Linux_SambaReadListForGlobalRepositoryInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaReadListForGlobalRepositoryInstance();
        
-       Linux_SambaReadListForGlobalRepositoryInstance& operator=
-  	    (const Linux_SambaReadListForGlobalRepositoryInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaReadListForGlobalRepositoryInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaReadListForGlobalInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaReadListForGlobalInstanceName& val);        
-       const Linux_SambaReadListForGlobalInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaReadListForGlobalRepositoryInstance();
+    Linux_SambaReadListForGlobalRepositoryInstance(
+      const Linux_SambaReadListForGlobalRepositoryInstance& anInstance);
+    Linux_SambaReadListForGlobalRepositoryInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaReadListForGlobalRepositoryInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaReadListForGlobalRepositoryInstance& original);
-       void reset();
+    Linux_SambaReadListForGlobalRepositoryInstance& operator=(
+      const Linux_SambaReadListForGlobalRepositoryInstance& anInstance);
        
-       Linux_SambaReadListForGlobalInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaReadListForGlobalInstanceName& anInstanceName);        
+    const Linux_SambaReadListForGlobalInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement{
-  	Linux_SambaReadListForGlobalRepositoryInstance* m_elementP;
-  	Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement();
-  	~Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement();  	
+  struct Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement {
+
+    Linux_SambaReadListForGlobalRepositoryInstance* m_elementP;
+    Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement();
+    ~Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaReadListForGlobalRepositoryInstanceEnumeration {
-  	private:
-  	  Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaReadListForGlobalRepositoryInstanceEnumeration();
-  	  
-  	  Linux_SambaReadListForGlobalRepositoryInstanceEnumeration(
-  	   const Linux_SambaReadListForGlobalRepositoryInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaReadListForGlobalRepositoryInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaReadListForGlobalRepositoryInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaReadListForGlobalRepositoryInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaReadListForGlobalRepositoryInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaReadListForGlobalRepositoryInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaReadListForGlobalRepositoryInstanceEnumeration();
+    Linux_SambaReadListForGlobalRepositoryInstanceEnumeration(
+      const Linux_SambaReadListForGlobalRepositoryInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaReadListForGlobalRepositoryInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaReadListForGlobalRepositoryInstance& getNext();
+    int getSize() const;
+    const Linux_SambaReadListForGlobalRepositoryInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaReadListForGlobalRepositoryInstance& anInstance);
+
+  };
+
+}
+
+#endif

@@ -1,147 +1,188 @@
-/**
- *  Linux_SambaGlobalBrowseForGlobalResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalBrowseForGlobalResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGlobalBrowseForGlobalResourceAccess.h"
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-    //Linux_SambaGlobalBrowseForGlobalResourceAccess::Linux_SambaGlobalBrowseForGlobalResourceAccess();
-    Linux_SambaGlobalBrowseForGlobalResourceAccess::~Linux_SambaGlobalBrowseForGlobalResourceAccess() { };
+  //----------------------------------------------------------------------------
+  //Linux_SambaGlobalBrowseForGlobalResourceAccess::Linux_SambaGlobalBrowseForGlobalResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseForGlobalResourceAccess::~Linux_SambaGlobalBrowseForGlobalResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    /*
-    void Linux_SambaGlobalBrowseForGlobalResourceAccess::enumInstanceNames(
-     const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-     Linux_SambaGlobalBrowseForGlobalInstanceNameEnumeration& instnames){
+  // intrinsic methods
+  /*
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseForGlobalResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaGlobalBrowseForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      int numInstanceNames=1;
-      for(int i=0;i<numInstanceNames;i++){
+    int instanceNameN = 1;
+    for (int x=0; x < instanceNameN; ++x) {
       
-        //place here the code retrieving your instanceName
+      //place here the code retrieving your instanceName
       
-        Linux_SambaGlobalBrowseForGlobalInstanceName instanceName;
-        
-      }      
-    }
-    */
-  	/*
-    void Linux_SambaGlobalBrowseForGlobalResourceAccess::enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& instances){};
-  	*/
-  	/*
-    Linux_SambaGlobalBrowseForGlobalManualInstance 
-     Linux_SambaGlobalBrowseForGlobalResourceAccess::getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalBrowseForGlobalInstanceName&){
-      Linux_SambaGlobalBrowseForGlobalManualInstance instance;
+      Linux_SambaGlobalBrowseForGlobalInstanceName instanceName;
       
-    }
-  	*/
-  	/*
-    void Linux_SambaGlobalBrowseForGlobalResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalBrowseForGlobalManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaGlobalBrowseForGlobalResourceAccess::createInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaGlobalBrowseForGlobalManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaGlobalBrowseForGlobalResourceAccess::deleteInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaGlobalBrowseForGlobalInstanceName&){};
+    }      
+  
+  }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGlobalBrowseForGlobalResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     const char** aPropertiesPP,
+  	 Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaGlobalBrowseForGlobalManualInstance 
+  Linux_SambaGlobalBrowseForGlobalResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalBrowseForGlobalInstanceName& anInstanceName) {
+
+    Linux_SambaGlobalBrowseForGlobalManualInstance manualInstance;
+
+  
+  }
+  */
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGlobalBrowseForGlobalResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaGlobalBrowseForGlobalManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaGlobalBrowseForGlobalInstanceName
+  Linux_SambaGlobalBrowseForGlobalResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalBrowseForGlobalManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGlobalBrowseForGlobalResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalBrowseForGlobalInstanceName& anInstanceName) { }
 	*/
-    
-    /* Association Interface */
-    
+	
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGlobalBrowseForGlobalResourceAccess::referencesSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaGlobalBrowseForGlobalManualInstance manualInstance;
     
     Linux_SambaGlobalBrowseForGlobalInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setManagedElement(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setManagedElement(aSourceInstanceName);
     
     Linux_SambaGlobalBrowseOptionsInstanceName secInstName;
-    secInstName.setNamespace(nsp);
-    secInstName.setName(sourceInst.getName());
+    secInstName.setNamespace(aNameSpaceP);
+    secInstName.setName(aSourceInstanceName.getName());
     secInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	
     instName.setSettingData(secInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
-    
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGlobalBrowseForGlobalResourceAccess::referencesManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalBrowseOptionsInstanceName& sourceInst,
-   Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalBrowseOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalBrowseForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaGlobalBrowseForGlobalManualInstance manualInstance;
     
     Linux_SambaGlobalBrowseForGlobalInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setSettingData(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setSettingData(aSourceInstanceName);
     
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
-    globalInstName.setName(sourceInst.getName());
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(aSourceInstanceName.getName());
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instName.setManagedElement(globalInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
-    
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGlobalBrowseForGlobalResourceAccess::associatorsSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaGlobalBrowseOptionsInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalBrowseOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaGlobalBrowseOptionsInstance instance;
     
     Linux_SambaGlobalBrowseOptionsInstanceName secInstName;
-    secInstName.setNamespace(nsp);
-    secInstName.setName(sourceInst.getName());
+    secInstName.setNamespace(aNameSpaceP);
+    secInstName.setName(aSourceInstanceName.getName());
     secInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instance.setInstanceName(secInstName);
@@ -164,22 +205,25 @@ namespace genProvider {
 	else
 	  instance.setDomainMaster( 2 );
     
-    instEnum.addElement(instance);
-  };
+    anInstanceEnumeration.addElement(instance);
+  }
+
+  
+  //----------------------------------------------------------------------------
 
   void Linux_SambaGlobalBrowseForGlobalResourceAccess::associatorsManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalBrowseOptionsInstanceName& sourceInst,
-   Linux_SambaGlobalOptionsInstanceEnumeration& instEnum) 
-  {
-    Linux_SambaGlobalOptionsInstance instance;
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalBrowseOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
+        Linux_SambaGlobalOptionsInstance instance;
     
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
-    globalInstName.setName(sourceInst.getName());
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(aSourceInstanceName.getName());
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instance.setInstanceName(globalInstName);
@@ -213,10 +257,13 @@ namespace genProvider {
       instance.setWorkgroup( option );
     	
     
-    instEnum.addElement(instance);
-  };
+    anInstanceEnumeration.addElement(instance);
+  }
 
-    /* extrinsic methods */
+   
+  
+  // extrinsic methods
+
 	
 }
 

@@ -1,106 +1,133 @@
-/**
- *  Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal.h"
 
-namespace genProvider{
+namespace genProvider {
 	
+	//----------------------------------------------------------------------------
   Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal(
-   const CmpiBroker& brkr, const CmpiContext& ctx ) 
-   : broker(brkr), context(ctx) {};
+    const CmpiBroker& aBroker,
+    const CmpiContext& aContext) 
+    : m_broker(aBroker),
+    m_context(aContext) { }
   
-  const char * Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::
-   nsp="IBMShadow/cimv2";
+	//----------------------------------------------------------------------------
+  const char* Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::s_shadowNameSpaceP = "IBMShadow/cimv2";
    
-  Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::
-   ~Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal(){};
+	//----------------------------------------------------------------------------
+  Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::~Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal() { }
     
-  void Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::enumInstanceNames(
-   Linux_SambaGlobalFileNameHandlingOptionsInstanceNameEnumeration& instnames) {
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::enumInstanceNames(
+    Linux_SambaGlobalFileNameHandlingOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
 
-    CmpiObjectPath op(nsp,"Linux_SambaGlobalFileNameHandlingOptions");
-    CmpiEnumeration en=broker.enumInstanceNames(context,op);
-    while(en.hasNext()) {
-      CmpiObjectPath opi = en.getNext();
-      Linux_SambaGlobalFileNameHandlingOptionsInstanceName iname(opi);
-      instnames.addElement(iname);
+    CmpiObjectPath cmpiClassObjectPath(s_shadowNameSpaceP,"Linux_SambaGlobalFileNameHandlingOptions");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstanceNames(m_context,cmpiClassObjectPath);
+    while(cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiObjectPath = cmpiEnumeration.getNext();
+      Linux_SambaGlobalFileNameHandlingOptionsInstanceName instanceName(cmpiObjectPath);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
-  };
+  }
   	  
-  void Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::enumInstances(
-   const char* *properties,
-   Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumeration& instances) {
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::enumInstances(
+    const char** aPropertiesPP,
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstanceEnumeration& aRepositoryInstanceEnumeration) {
    		
-    CmpiObjectPath op(nsp,"Linux_SambaGlobalFileNameHandlingOptions");
-    CmpiEnumeration en=broker.enumInstances(context,op,properties);
-    while(en.hasNext()) {
-      CmpiInstance inst = en.getNext();
-      Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance instance(inst,nsp);
-      instances.addElement(instance);
+    CmpiObjectPath cmpiClassObjectPath(s_shadowNameSpaceP,"Linux_SambaGlobalFileNameHandlingOptions");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstances(m_context,cmpiClassObjectPath,aPropertiesPP);
+    while(cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance repositoryInstance(cmpiInstance,s_shadowNameSpaceP);
+      aRepositoryInstanceEnumeration.addElement(repositoryInstance);
     }
-  };
+  
+  }
   	  
+  //----------------------------------------------------------------------------
   Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance
-   Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::getInstance(
-   const char* *properties,
-   const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& instanceName) {
+  Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::getInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    op.setNameSpace(nsp);
-    CmpiInstance inst=broker.getInstance(context,op,properties);
-    return Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance(inst,nsp);
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    cmpiObjectPath.setNameSpace(s_shadowNameSpaceP);
+    CmpiInstance cmpiInstance = 
+      m_broker.getInstance(m_context,cmpiObjectPath,aPropertiesPP);
+    return Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance(cmpiInstance,s_shadowNameSpaceP);
+
   }
       
-  void Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::setInstance(
-   const char* *properties,
-   const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& instance){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::setInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& aRepositoryInstance) {
   
     //make a copy of the given instance and set it to the right nameSpace
-    Linux_SambaGlobalFileNameHandlingOptionsInstanceName instanceName(instance.getInstanceName());
-    instanceName.setNamespace(nsp,1);
-    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance copiedInstance(instance);
-    copiedInstance.setInstanceName(instanceName);
+    Linux_SambaGlobalFileNameHandlingOptionsInstanceName instanceName(aRepositoryInstance.getInstanceName());
+    instanceName.setNamespace(s_shadowNameSpaceP,1);
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance copiedRepositoryInstance(aRepositoryInstance);
+    copiedRepositoryInstance.setInstanceName(instanceName);
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=copiedInstance.getCmpiInstance();
-    broker.setInstance(context,op,inst,properties);
+    CmpiObjectPath cmpiObjectPath = instanceName.getObjectPath();
+    CmpiInstance cmpiInstance = copiedRepositoryInstance.getCmpiInstance();
+    m_broker.setInstance(m_context,cmpiObjectPath,cmpiInstance,aPropertiesPP);
+  
   }
       
-  void Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::createInstance(
-   const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& instance){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalFileNameHandlingOptionsInstanceName
+  Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::createInstance(
+    const Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance& aRepositoryInstance) {
   
     //make a copy of the given instance and set it to the right nameSpace
-    Linux_SambaGlobalFileNameHandlingOptionsInstanceName instanceName(instance.getInstanceName());
-    instanceName.setNamespace(nsp,1);
-    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance copiedInstance(instance);
-    copiedInstance.setInstanceName(instanceName);
+    Linux_SambaGlobalFileNameHandlingOptionsInstanceName instanceName(aRepositoryInstance.getInstanceName());
+    instanceName.setNamespace(s_shadowNameSpaceP,1);
+    Linux_SambaGlobalFileNameHandlingOptionsRepositoryInstance copiedRepositoryInstance(aRepositoryInstance);
+    copiedRepositoryInstance.setInstanceName(instanceName);
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=copiedInstance.getCmpiInstance();
-    broker.createInstance(context,op,inst);
+    CmpiObjectPath cmpiObjectPath = instanceName.getObjectPath();
+    CmpiInstance cmpiInstance = copiedRepositoryInstance.getCmpiInstance();
+    return Linux_SambaGlobalFileNameHandlingOptionsInstanceName(
+		m_broker.createInstance(m_context,cmpiObjectPath,cmpiInstance));
+  
   }
   
-  void Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::deleteInstance(
-   const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& instanceName){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalFileNameHandlingOptionsRepositoryExternal::deleteInstance(
+    const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    op.setNameSpace(nsp);
-    broker.deleteInstance(context,op);
-  }  
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    cmpiObjectPath.setNameSpace(s_shadowNameSpaceP);
+    m_broker.deleteInstance(m_context,cmpiObjectPath);
+  
+  }
+    
 }

@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance_h
 #define Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaSharePrinterBrowseForPrinterInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance {
-  public:
-       Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance();
-  	
-       Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance
-  	    (const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& original);
-  	   
-       Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance();
        
-       Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& operator=
-  	    (const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaSharePrinterBrowseForPrinterInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaSharePrinterBrowseForPrinterInstanceName& val);        
-       const Linux_SambaSharePrinterBrowseForPrinterInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance();
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance(
+      const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& anInstance);
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& original);
-       void reset();
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& operator=(
+      const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& anInstance);
        
-       Linux_SambaSharePrinterBrowseForPrinterInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaSharePrinterBrowseForPrinterInstanceName& anInstanceName);        
+    const Linux_SambaSharePrinterBrowseForPrinterInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement{
-  	Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance* m_elementP;
-  	Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement();
-  	~Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement();  	
+  struct Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement {
+
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance* m_elementP;
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement();
+    ~Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumeration {
-  	private:
-  	  Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumeration();
-  	  
-  	  Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumeration(
-  	   const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumeration();
+    Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumeration(
+      const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaSharePrinterBrowseForPrinterRepositoryInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& getNext();
+    int getSize() const;
+    const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaSharePrinterBrowseForPrinterRepositoryInstance& anInstance);
+
+  };
+
+}
+
+#endif

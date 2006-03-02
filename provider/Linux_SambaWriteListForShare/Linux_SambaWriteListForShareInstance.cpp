@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaWriteListForShareInstance.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaWriteListForShareInstance.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaWriteListForShareInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,244 +28,283 @@
 
 namespace genProvider {
 
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaWriteListForShareInstance
-  //*********************************************************
-
+  //----------------------------------------------------------------------------
   //empty constructor
-  Linux_SambaWriteListForShareInstance::
-   Linux_SambaWriteListForShareInstance(){   	
+  Linux_SambaWriteListForShareInstance::Linux_SambaWriteListForShareInstance() {   	
    	init();  	   	
-  };
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copy constructor	
-  Linux_SambaWriteListForShareInstance::
-   Linux_SambaWriteListForShareInstance
-   (const Linux_SambaWriteListForShareInstance& original){   	
-   	init(original);  	   	
-  };
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForShareInstance::Linux_SambaWriteListForShareInstance(
+    const Linux_SambaWriteListForShareInstance& anInstance) {   	
+   	init(anInstance);  	   	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //constructor using CmpiInstance
-  Linux_SambaWriteListForShareInstance::
-   Linux_SambaWriteListForShareInstance (const CmpiInstance& inst, const char* instanceNamespace){
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForShareInstance::Linux_SambaWriteListForShareInstance(
+    const CmpiInstance& aCmpiInstance,
+    const char* anInstanceNamespaceP) {
+
     CmpiData cmpiData;
+
     init(); 
     
-    CmpiObjectPath cop=inst.getObjectPath();
-    cop.setNameSpace(instanceNamespace);
+    CmpiObjectPath cop = aCmpiInstance.getObjectPath();
+    cop.setNameSpace(anInstanceNamespaceP);
     setInstanceName(Linux_SambaWriteListForShareInstanceName(cop));
+
     
   }
   
-  
+  //----------------------------------------------------------------------------
   //Destructor
+  //----------------------------------------------------------------------------
   Linux_SambaWriteListForShareInstance::
    ~Linux_SambaWriteListForShareInstance(){
    	reset();  	  
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
   //copy operator
+  //----------------------------------------------------------------------------
   Linux_SambaWriteListForShareInstance&
-   Linux_SambaWriteListForShareInstance::operator=
-   (const Linux_SambaWriteListForShareInstance& original){   	
-   	init(original);
+  Linux_SambaWriteListForShareInstance::operator=(
+    const Linux_SambaWriteListForShareInstance& anInstance) {   	
+   	
+   	init(anInstance);
    	return *this;
-  };
+  
+  }
   
   
+  //----------------------------------------------------------------------------
   //converts to CmpiInstance
-  CmpiInstance Linux_SambaWriteListForShareInstance::
-   getCmpiInstance(const char** properties) const{
+  //----------------------------------------------------------------------------
+  CmpiInstance
+  Linux_SambaWriteListForShareInstance::getCmpiInstance(
+    const char** aPropertiesPP) const {
    	
    	CmpiObjectPath objectPath=getInstanceName().getObjectPath();      
     CmpiInstance cmpiInstance(objectPath);    
     getInstanceName().fillKeys(cmpiInstance);
     
-    if (properties) {
-	  cmpiInstance.setPropertyFilter(properties,0);
+    if (aPropertiesPP) {
+	    cmpiInstance.setPropertyFilter(aPropertiesPP,0);
     }
+
   	
   	return cmpiInstance;
   	
   }
   
-  
-  //InstanceName related methods
-  unsigned int Linux_SambaWriteListForShareInstance::
-   isInstanceNameSet() const{
+  //----------------------------------------------------------------------------
+  // InstanceName related methods
+  //----------------------------------------------------------------------------
+  unsigned int 
+  Linux_SambaWriteListForShareInstance::isInstanceNameSet() const {
   	return isSet.instanceName;
   }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaWriteListForShareInstanceName&
-    Linux_SambaWriteListForShareInstance::getInstanceName() const{
+  Linux_SambaWriteListForShareInstance::getInstanceName() const {
 
-    if(!isSet.instanceName)
+    if( ! isSet.instanceName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "InstanceName not set in Linux_SambaWriteListForShare instance");
+        CmpiErrorFormater::NOT_SET,
+        "InstanceName (CIM Key Attributes)",
+        "Linux_SambaWriteListForShare");
+   	}
   		
    	return m_instanceName;
+  
   }
 
-  void Linux_SambaWriteListForShareInstance::setInstanceName(
-   const Linux_SambaWriteListForShareInstanceName& val){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaWriteListForShareInstance::setInstanceName(
+    const Linux_SambaWriteListForShareInstanceName& val) {
+
     m_instanceName = val;
-    isSet.instanceName=1;
+    isSet.instanceName = 1;
+
   }
 
-
   
+  //----------------------------------------------------------------------------
   //set isSet attributes to FALSE
-  void Linux_SambaWriteListForShareInstance::init(){
-   	isSet.instanceName=0;
-   	  	
-  };
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaWriteListForShareInstance::init() {
+   	isSet.instanceName = 0;
+  	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copies another instance properties in this
-  void Linux_SambaWriteListForShareInstance::init
-   (const Linux_SambaWriteListForShareInstance& original){   	
+  //----------------------------------------------------------------------------
+  void 
+  Linux_SambaWriteListForShareInstance::init(
+    const Linux_SambaWriteListForShareInstance& anOriginal) {   	
+
    	init();
    	   	
-    if(original.isInstanceNameSet()){
-      setInstanceName(original.getInstanceName());
-    }    
-   }
+    if(anOriginal.isInstanceNameSet()) {
+      setInstanceName(anOriginal.getInstanceName());
+    }
+        
+  }
   
-  
+  //----------------------------------------------------------------------------
   //reset the instance data
-  void Linux_SambaWriteListForShareInstance::reset(){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaWriteListForShareInstance::reset() {
    	
-  	  
-  };
+  }
   
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaWriteListForShareInstanceEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaWriteListForShareInstanceEnumerationElement::
-   Linux_SambaWriteListForShareInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForShareInstanceEnumerationElement::Linux_SambaWriteListForShareInstanceEnumerationElement() {
    	
-  	m_elementP=0;
-  	m_nextP=0;
+  	m_elementP = 0;
+  	m_nextP = 0;
   	  
-  };
+  }
   
-  
-  Linux_SambaWriteListForShareInstanceEnumerationElement::
-   ~Linux_SambaWriteListForShareInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForShareInstanceEnumerationElement::~Linux_SambaWriteListForShareInstanceEnumerationElement() {
    	
-  	if (m_elementP!=0)
+  	if (m_elementP) {
   	  delete(m_elementP);
-  	if (m_nextP!=0)
+  	}
+  	
+  	if (m_nextP) {
   	  delete(m_nextP);
+  	}
   	  
-  };
+  }
 
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaWriteListForShareInstanceNameEnumeration
-  //*********************************************************
-
-  Linux_SambaWriteListForShareInstanceEnumeration::
-   Linux_SambaWriteListForShareInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForShareInstanceEnumeration::Linux_SambaWriteListForShareInstanceEnumeration() {
    	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   
-  Linux_SambaWriteListForShareInstanceEnumeration::
-   Linux_SambaWriteListForShareInstanceEnumeration(
-   const Linux_SambaWriteListForShareInstanceEnumeration& original){
+  }
+  
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForShareInstanceEnumeration::Linux_SambaWriteListForShareInstanceEnumeration(
+    const Linux_SambaWriteListForShareInstanceEnumeration& anInstanceEnumeration) {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
+    int size = anInstanceEnumeration.getSize();
+    for (int x=0; x < size;++x) {
+      addElement(anInstanceEnumeration.getElement(x));
+    }           
+
+  }
   
-  	  
-  Linux_SambaWriteListForShareInstanceEnumeration::
-   ~Linux_SambaWriteListForShareInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaWriteListForShareInstanceEnumeration::~Linux_SambaWriteListForShareInstanceEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
+  }
   
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaWriteListForShareInstanceEnumeration::reset() {
+  	
+  	m_currentElementP = m_firstElementP;
+  	
+  }
   	  
-  void Linux_SambaWriteListForShareInstanceEnumeration::reset(){
+  //----------------------------------------------------------------------------
+  bool
+  Linux_SambaWriteListForShareInstanceEnumeration::hasNext() const {
   	
-  	currentElementP=firstElementP;
-  };
+  	return (m_currentElementP != 0);
   
-  	  
-  bool Linux_SambaWriteListForShareInstanceEnumeration::hasNext() const{
-  	
-  	return (currentElementP!=0);
+  }
   
-  };
-  
-  int Linux_SambaWriteListForShareInstanceEnumeration::getSize() const{
+  //----------------------------------------------------------------------------
+  int
+  Linux_SambaWriteListForShareInstanceEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaWriteListForShareInstanceEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaWriteListForShareInstanceEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
     
-  };
+  }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaWriteListForShareInstance&  
-   Linux_SambaWriteListForShareInstanceEnumeration::getElement(int pos) const{
+  Linux_SambaWriteListForShareInstanceEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaWriteListForShareInstanceEnumerationElement* followingP=firstElementP;
+    Linux_SambaWriteListForShareInstanceEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x = 0;
+    while (followingP && (x < anIndex)) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
+
+  }
   
-  	  
+  //----------------------------------------------------------------------------
   const Linux_SambaWriteListForShareInstance&
-   Linux_SambaWriteListForShareInstanceEnumeration::getNext() {
+  Linux_SambaWriteListForShareInstanceEnumeration::getNext() {
    	
-  	 Linux_SambaWriteListForShareInstanceEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+    Linux_SambaWriteListForShareInstanceEnumerationElement* currentElementP =
+  	  m_currentElementP;
+
+    m_currentElementP = m_currentElementP->m_nextP;
   	 
-  	 return *(currentP->m_elementP);
-  };
+    return *(currentElementP->m_elementP);
+
+  }
   	  
-  void Linux_SambaWriteListForShareInstanceEnumeration::addElement
-   (const Linux_SambaWriteListForShareInstance& elementP){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaWriteListForShareInstanceEnumeration::addElement(
+    const Linux_SambaWriteListForShareInstance& anInstance) {
    	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaWriteListForShareInstanceEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaWriteListForShareInstance(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaWriteListForShareInstanceEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaWriteListForShareInstance(elementP);
+  	if (m_firstElementP == 0) {
+  	  m_firstElementP = new Linux_SambaWriteListForShareInstanceEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaWriteListForShareInstance(anInstance);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaWriteListForShareInstanceEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP = new Linux_SambaWriteListForShareInstance(anInstance);
   	}
-  };  
+
+  }
+  
 }
- 

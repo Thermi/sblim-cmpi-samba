@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaGlobalSecurityForGlobalRepositoryInstance.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalSecurityForGlobalRepositoryInstance.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGlobalSecurityForGlobalRepositoryInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,244 +28,283 @@
 
 namespace genProvider {
 
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaGlobalSecurityForGlobalRepositoryInstance
-  //*********************************************************
-
+  //----------------------------------------------------------------------------
   //empty constructor
-  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::
-   Linux_SambaGlobalSecurityForGlobalRepositoryInstance(){   	
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::Linux_SambaGlobalSecurityForGlobalRepositoryInstance() {   	
    	init();  	   	
-  };
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copy constructor	
-  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::
-   Linux_SambaGlobalSecurityForGlobalRepositoryInstance
-   (const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& original){   	
-   	init(original);  	   	
-  };
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::Linux_SambaGlobalSecurityForGlobalRepositoryInstance(
+    const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& anInstance) {   	
+   	init(anInstance);  	   	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //constructor using CmpiInstance
-  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::
-   Linux_SambaGlobalSecurityForGlobalRepositoryInstance (const CmpiInstance& inst, const char* instanceNamespace){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::Linux_SambaGlobalSecurityForGlobalRepositoryInstance(
+    const CmpiInstance& aCmpiInstance,
+    const char* anInstanceNamespaceP) {
+
     CmpiData cmpiData;
+
     init(); 
     
-    CmpiObjectPath cop=inst.getObjectPath();
-    cop.setNameSpace(instanceNamespace);
+    CmpiObjectPath cop = aCmpiInstance.getObjectPath();
+    cop.setNameSpace(anInstanceNamespaceP);
     setInstanceName(Linux_SambaGlobalSecurityForGlobalInstanceName(cop));
+
     
   }
   
-  
+  //----------------------------------------------------------------------------
   //Destructor
+  //----------------------------------------------------------------------------
   Linux_SambaGlobalSecurityForGlobalRepositoryInstance::
    ~Linux_SambaGlobalSecurityForGlobalRepositoryInstance(){
    	reset();  	  
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
   //copy operator
+  //----------------------------------------------------------------------------
   Linux_SambaGlobalSecurityForGlobalRepositoryInstance&
-   Linux_SambaGlobalSecurityForGlobalRepositoryInstance::operator=
-   (const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& original){   	
-   	init(original);
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::operator=(
+    const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& anInstance) {   	
+   	
+   	init(anInstance);
    	return *this;
-  };
+  
+  }
   
   
+  //----------------------------------------------------------------------------
   //converts to CmpiInstance
-  CmpiInstance Linux_SambaGlobalSecurityForGlobalRepositoryInstance::
-   getCmpiInstance(const char** properties) const{
+  //----------------------------------------------------------------------------
+  CmpiInstance
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::getCmpiInstance(
+    const char** aPropertiesPP) const {
    	
    	CmpiObjectPath objectPath=getInstanceName().getObjectPath();      
     CmpiInstance cmpiInstance(objectPath);    
     getInstanceName().fillKeys(cmpiInstance);
     
-    if (properties) {
-	  cmpiInstance.setPropertyFilter(properties,0);
+    if (aPropertiesPP) {
+	    cmpiInstance.setPropertyFilter(aPropertiesPP,0);
     }
+
   	
   	return cmpiInstance;
   	
   }
   
-  
-  //InstanceName related methods
-  unsigned int Linux_SambaGlobalSecurityForGlobalRepositoryInstance::
-   isInstanceNameSet() const{
+  //----------------------------------------------------------------------------
+  // InstanceName related methods
+  //----------------------------------------------------------------------------
+  unsigned int 
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::isInstanceNameSet() const {
   	return isSet.instanceName;
   }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaGlobalSecurityForGlobalInstanceName&
-    Linux_SambaGlobalSecurityForGlobalRepositoryInstance::getInstanceName() const{
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::getInstanceName() const {
 
-    if(!isSet.instanceName)
+    if( ! isSet.instanceName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "InstanceName not set in Linux_SambaGlobalSecurityForGlobal instance");
+        CmpiErrorFormater::NOT_SET,
+        "InstanceName (CIM Key Attributes)",
+        "Linux_SambaGlobalSecurityForGlobal");
+   	}
   		
    	return m_instanceName;
+  
   }
 
-  void Linux_SambaGlobalSecurityForGlobalRepositoryInstance::setInstanceName(
-   const Linux_SambaGlobalSecurityForGlobalInstanceName& val){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::setInstanceName(
+    const Linux_SambaGlobalSecurityForGlobalInstanceName& val) {
+
     m_instanceName = val;
-    isSet.instanceName=1;
+    isSet.instanceName = 1;
+
   }
 
-
   
+  //----------------------------------------------------------------------------
   //set isSet attributes to FALSE
-  void Linux_SambaGlobalSecurityForGlobalRepositoryInstance::init(){
-   	isSet.instanceName=0;
-   	  	
-  };
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::init() {
+   	isSet.instanceName = 0;
+  	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copies another instance properties in this
-  void Linux_SambaGlobalSecurityForGlobalRepositoryInstance::init
-   (const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& original){   	
+  //----------------------------------------------------------------------------
+  void 
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::init(
+    const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& anOriginal) {   	
+
    	init();
    	   	
-    if(original.isInstanceNameSet()){
-      setInstanceName(original.getInstanceName());
-    }    
-   }
+    if(anOriginal.isInstanceNameSet()) {
+      setInstanceName(anOriginal.getInstanceName());
+    }
+        
+  }
   
-  
+  //----------------------------------------------------------------------------
   //reset the instance data
-  void Linux_SambaGlobalSecurityForGlobalRepositoryInstance::reset(){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstance::reset() {
    	
-  	  
-  };
+  }
   
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement::
-   Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement::Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement() {
    	
-  	m_elementP=0;
-  	m_nextP=0;
+  	m_elementP = 0;
+  	m_nextP = 0;
   	  
-  };
+  }
   
-  
-  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement::
-   ~Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement::~Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement() {
    	
-  	if (m_elementP!=0)
+  	if (m_elementP) {
   	  delete(m_elementP);
-  	if (m_nextP!=0)
+  	}
+  	
+  	if (m_nextP) {
   	  delete(m_nextP);
+  	}
   	  
-  };
+  }
 
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaGlobalSecurityForGlobalRepositoryInstanceNameEnumeration
-  //*********************************************************
-
-  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::
-   Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration() {
    	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   
-  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::
-   Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration(
-   const Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration& original){
+  }
+  
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration(
+    const Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration& anInstanceEnumeration) {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
+    int size = anInstanceEnumeration.getSize();
+    for (int x=0; x < size;++x) {
+      addElement(anInstanceEnumeration.getElement(x));
+    }           
+
+  }
   
-  	  
-  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::
-   ~Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::~Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
+  }
   
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::reset() {
+  	
+  	m_currentElementP = m_firstElementP;
+  	
+  }
   	  
-  void Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::reset(){
+  //----------------------------------------------------------------------------
+  bool
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::hasNext() const {
   	
-  	currentElementP=firstElementP;
-  };
+  	return (m_currentElementP != 0);
   
-  	  
-  bool Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::hasNext() const{
-  	
-  	return (currentElementP!=0);
+  }
   
-  };
-  
-  int Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::getSize() const{
+  //----------------------------------------------------------------------------
+  int
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
     
-  };
+  }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaGlobalSecurityForGlobalRepositoryInstance&  
-   Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::getElement(int pos) const{
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* followingP=firstElementP;
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x = 0;
+    while (followingP && (x < anIndex)) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
+
+  }
   
-  	  
+  //----------------------------------------------------------------------------
   const Linux_SambaGlobalSecurityForGlobalRepositoryInstance&
-   Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::getNext() {
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::getNext() {
    	
-  	 Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+    Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement* currentElementP =
+  	  m_currentElementP;
+
+    m_currentElementP = m_currentElementP->m_nextP;
   	 
-  	 return *(currentP->m_elementP);
-  };
+    return *(currentElementP->m_elementP);
+
+  }
   	  
-  void Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::addElement
-   (const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& elementP){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumeration::addElement(
+    const Linux_SambaGlobalSecurityForGlobalRepositoryInstance& anInstance) {
    	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaGlobalSecurityForGlobalRepositoryInstance(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaGlobalSecurityForGlobalRepositoryInstance(elementP);
+  	if (m_firstElementP == 0) {
+  	  m_firstElementP = new Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaGlobalSecurityForGlobalRepositoryInstance(anInstance);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaGlobalSecurityForGlobalRepositoryInstanceEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP = new Linux_SambaGlobalSecurityForGlobalRepositoryInstance(anInstance);
   	}
-  };  
+
+  }
+  
 }
- 

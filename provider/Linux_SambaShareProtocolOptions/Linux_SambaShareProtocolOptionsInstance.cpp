@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaShareProtocolOptionsInstance.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareProtocolOptionsInstance.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaShareProtocolOptionsInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,490 +28,646 @@
 
 namespace genProvider {
 
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaShareProtocolOptionsInstance
-  //*********************************************************
-
+  //----------------------------------------------------------------------------
   //empty constructor
-  Linux_SambaShareProtocolOptionsInstance::
-   Linux_SambaShareProtocolOptionsInstance(){   	
+  Linux_SambaShareProtocolOptionsInstance::Linux_SambaShareProtocolOptionsInstance() {   	
    	init();  	   	
-  };
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copy constructor	
-  Linux_SambaShareProtocolOptionsInstance::
-   Linux_SambaShareProtocolOptionsInstance
-   (const Linux_SambaShareProtocolOptionsInstance& original){   	
-   	init(original);  	   	
-  };
+  //----------------------------------------------------------------------------
+  Linux_SambaShareProtocolOptionsInstance::Linux_SambaShareProtocolOptionsInstance(
+    const Linux_SambaShareProtocolOptionsInstance& anInstance) {   	
+   	init(anInstance);  	   	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //constructor using CmpiInstance
-  Linux_SambaShareProtocolOptionsInstance::
-   Linux_SambaShareProtocolOptionsInstance (const CmpiInstance& inst, const char* instanceNamespace){
+  //----------------------------------------------------------------------------
+  Linux_SambaShareProtocolOptionsInstance::Linux_SambaShareProtocolOptionsInstance(
+    const CmpiInstance& aCmpiInstance,
+    const char* anInstanceNamespaceP) {
+
     CmpiData cmpiData;
+
     init(); 
     
-    CmpiObjectPath cop=inst.getObjectPath();
-    cop.setNameSpace(instanceNamespace);
+    CmpiObjectPath cop = aCmpiInstance.getObjectPath();
+    cop.setNameSpace(anInstanceNamespaceP);
     setInstanceName(Linux_SambaShareProtocolOptionsInstanceName(cop));
-    
-    cmpiData = inst.getProperty("AclCompatibility");
-    if(!cmpiData.isNullValue()){
+
+    cmpiData = aCmpiInstance.getProperty("AclCompatibility");
+    if ( ! cmpiData.isNullValue()){
       CMPIUint8 AclCompatibility = cmpiData;
       setAclCompatibility(AclCompatibility);
     }
-    
-    cmpiData = inst.getProperty("Caption");
-    if(!cmpiData.isNullValue()){
+
+    cmpiData = aCmpiInstance.getProperty("Caption");
+    if ( ! cmpiData.isNullValue()){
       CmpiString Caption = cmpiData;
       setCaption(Caption.charPtr());
     }
-    
-    cmpiData = inst.getProperty("Description");
-    if(!cmpiData.isNullValue()){
+
+    cmpiData = aCmpiInstance.getProperty("Description");
+    if ( ! cmpiData.isNullValue()){
       CmpiString Description = cmpiData;
       setDescription(Description.charPtr());
     }
-    
-    cmpiData = inst.getProperty("EASupport");
-    if(!cmpiData.isNullValue()){
+
+    cmpiData = aCmpiInstance.getProperty("EASupport");
+    if ( ! cmpiData.isNullValue()){
       CMPIBoolean EASupport = cmpiData;
       setEASupport(EASupport);
     }
-    
-    cmpiData = inst.getProperty("ElementName");
-    if(!cmpiData.isNullValue()){
+
+    cmpiData = aCmpiInstance.getProperty("ElementName");
+    if ( ! cmpiData.isNullValue()){
       CmpiString ElementName = cmpiData;
       setElementName(ElementName.charPtr());
     }
-    
-    cmpiData = inst.getProperty("NTACLSupport");
-    if(!cmpiData.isNullValue()){
+
+    cmpiData = aCmpiInstance.getProperty("NTACLSupport");
+    if ( ! cmpiData.isNullValue()){
       CMPIBoolean NTACLSupport = cmpiData;
       setNTACLSupport(NTACLSupport);
     }
+
     
   }
   
-  
+  //----------------------------------------------------------------------------
   //Destructor
+  //----------------------------------------------------------------------------
   Linux_SambaShareProtocolOptionsInstance::
    ~Linux_SambaShareProtocolOptionsInstance(){
    	reset();  	  
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
   //copy operator
+  //----------------------------------------------------------------------------
   Linux_SambaShareProtocolOptionsInstance&
-   Linux_SambaShareProtocolOptionsInstance::operator=
-   (const Linux_SambaShareProtocolOptionsInstance& original){   	
-   	init(original);
+  Linux_SambaShareProtocolOptionsInstance::operator=(
+    const Linux_SambaShareProtocolOptionsInstance& anInstance) {   	
+   	
+   	init(anInstance);
    	return *this;
-  };
+  
+  }
   
   
+  //----------------------------------------------------------------------------
   //converts to CmpiInstance
-  CmpiInstance Linux_SambaShareProtocolOptionsInstance::
-   getCmpiInstance(const char** properties) const{
+  //----------------------------------------------------------------------------
+  CmpiInstance
+  Linux_SambaShareProtocolOptionsInstance::getCmpiInstance(
+    const char** aPropertiesPP) const {
    	
    	CmpiObjectPath objectPath=getInstanceName().getObjectPath();      
     CmpiInstance cmpiInstance(objectPath);    
     getInstanceName().fillKeys(cmpiInstance);
     
-    if (properties) {
-	  cmpiInstance.setPropertyFilter(properties,0);
+    if (aPropertiesPP) {
+	    cmpiInstance.setPropertyFilter(aPropertiesPP,0);
     }
 
-  	if(isSet.AclCompatibility){
-  	  cmpiInstance.setProperty("AclCompatibility",CmpiData(m_AclCompatibility));
+  	if (isSet.AclCompatibility) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "AclCompatibility",
+  	    CmpiData(m_AclCompatibility));
   	}
 
-  	if(isSet.Caption){
-  	  cmpiInstance.setProperty("Caption",CmpiData(m_Caption));
+  	if (isSet.Caption) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "Caption",
+  	    CmpiData(m_Caption));
   	}
 
-  	if(isSet.Description){
-  	  cmpiInstance.setProperty("Description",CmpiData(m_Description));
+  	if (isSet.Description) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "Description",
+  	    CmpiData(m_Description));
   	}
 
-  	if(isSet.EASupport){
-  	  cmpiInstance.setProperty("EASupport",CmpiBooleanData(m_EASupport));
+  	if (isSet.EASupport) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "EASupport",
+  	    CmpiBooleanData(m_EASupport));
   	}
 
-  	if(isSet.ElementName){
-  	  cmpiInstance.setProperty("ElementName",CmpiData(m_ElementName));
+  	if (isSet.ElementName) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "ElementName",
+  	    CmpiData(m_ElementName));
   	}
 
-  	if(isSet.NTACLSupport){
-  	  cmpiInstance.setProperty("NTACLSupport",CmpiBooleanData(m_NTACLSupport));
+  	if (isSet.NTACLSupport) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "NTACLSupport",
+  	    CmpiBooleanData(m_NTACLSupport));
   	}
+
   	
   	return cmpiInstance;
   	
   }
   
-  
-  //InstanceName related methods
-  unsigned int Linux_SambaShareProtocolOptionsInstance::
-   isInstanceNameSet() const{
+  //----------------------------------------------------------------------------
+  // InstanceName related methods
+  //----------------------------------------------------------------------------
+  unsigned int 
+  Linux_SambaShareProtocolOptionsInstance::isInstanceNameSet() const {
   	return isSet.instanceName;
   }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaShareProtocolOptionsInstanceName&
-    Linux_SambaShareProtocolOptionsInstance::getInstanceName() const{
+  Linux_SambaShareProtocolOptionsInstance::getInstanceName() const {
 
-    if(!isSet.instanceName)
+    if( ! isSet.instanceName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "InstanceName not set in Linux_SambaShareProtocolOptions instance");
+        CmpiErrorFormater::NOT_SET,
+        "InstanceName (CIM Key Attributes)",
+        "Linux_SambaShareProtocolOptions");
+   	}
   		
    	return m_instanceName;
+  
   }
 
-  void Linux_SambaShareProtocolOptionsInstance::setInstanceName(
-   const Linux_SambaShareProtocolOptionsInstanceName& val){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolOptionsInstance::setInstanceName(
+    const Linux_SambaShareProtocolOptionsInstanceName& val) {
+
     m_instanceName = val;
-    isSet.instanceName=1;
+    isSet.instanceName = 1;
+
   }
        
-  //AclCompatibility related methods
-  unsigned int Linux_SambaShareProtocolOptionsInstance::isAclCompatibilitySet() const{
+  //----------------------------------------------------------------------------
+  // AclCompatibility related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaShareProtocolOptionsInstance::isAclCompatibilitySet() const {
     return isSet.AclCompatibility;
   }
-  void Linux_SambaShareProtocolOptionsInstance::
-   setAclCompatibility(const CMPIUint8 val){
-    m_AclCompatibility = val;
-    isSet.AclCompatibility=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaShareProtocolOptionsInstance::setAclCompatibility(
+    const CMPIUint8 aValue) {
+  
+    m_AclCompatibility = aValue;
+    isSet.AclCompatibility = 1;
+  
   }       
-  const CMPIUint8 Linux_SambaShareProtocolOptionsInstance::
-   getAclCompatibility() const{
+
+  //----------------------------------------------------------------------------
+  const CMPIUint8
+  Linux_SambaShareProtocolOptionsInstance::getAclCompatibility() const {
     
-    if(!isSet.AclCompatibility)
+    if ( ! isSet.AclCompatibility) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "AclCompatibility not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "AclCompatibility",
+        "Linux_SambaShareProtocolOptions");
+   	}
+
+
     return m_AclCompatibility;
+
   }
        
-  //Caption related methods
-  unsigned int Linux_SambaShareProtocolOptionsInstance::isCaptionSet() const{
+  //----------------------------------------------------------------------------
+  // Caption related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaShareProtocolOptionsInstance::isCaptionSet() const {
     return isSet.Caption;
   }
-  void  Linux_SambaShareProtocolOptionsInstance::
-   setCaption(const char* val, int makeCopy){
-    if (isSet.Caption) {
-      delete []m_Caption;
-    }
-    if (makeCopy&&val) {
-      char* tmpval = new char[strlen(val)+1];
-      strcpy(tmpval,val);
-      m_Caption = tmpval;
-    } else {
-      m_Caption = val;
-    }
-    isSet.Caption=1;
-  }       
-  const char* Linux_SambaShareProtocolOptionsInstance::
-   getCaption() const{
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolOptionsInstance::setCaption(
+    const char* aValueP,
+    int aCopyFlag) {
     
-    if(!isSet.Caption)
+    if (isSet.Caption) {
+      delete [] m_Caption;
+    }
+    
+    if (aCopyFlag && aValueP) {
+      char* valueP = new char[strlen(aValueP) + 1];
+      strcpy(valueP,aValueP);
+      m_Caption = valueP;
+    } else {
+      m_Caption = aValueP;
+    }
+    
+    isSet.Caption = 1;
+
+  }       
+
+  //----------------------------------------------------------------------------
+  const char*
+  Linux_SambaShareProtocolOptionsInstance::getCaption() const {
+    
+    if ( ! isSet.Caption) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "Caption not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "Caption",
+        "Linux_SambaShareProtocolOptions");
+   	}
+
+
     return m_Caption;
+
   }
        
-  //Description related methods
-  unsigned int Linux_SambaShareProtocolOptionsInstance::isDescriptionSet() const{
+  //----------------------------------------------------------------------------
+  // Description related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaShareProtocolOptionsInstance::isDescriptionSet() const {
     return isSet.Description;
   }
-  void  Linux_SambaShareProtocolOptionsInstance::
-   setDescription(const char* val, int makeCopy){
-    if (isSet.Description) {
-      delete []m_Description;
-    }
-    if (makeCopy&&val) {
-      char* tmpval = new char[strlen(val)+1];
-      strcpy(tmpval,val);
-      m_Description = tmpval;
-    } else {
-      m_Description = val;
-    }
-    isSet.Description=1;
-  }       
-  const char* Linux_SambaShareProtocolOptionsInstance::
-   getDescription() const{
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolOptionsInstance::setDescription(
+    const char* aValueP,
+    int aCopyFlag) {
     
-    if(!isSet.Description)
+    if (isSet.Description) {
+      delete [] m_Description;
+    }
+    
+    if (aCopyFlag && aValueP) {
+      char* valueP = new char[strlen(aValueP) + 1];
+      strcpy(valueP,aValueP);
+      m_Description = valueP;
+    } else {
+      m_Description = aValueP;
+    }
+    
+    isSet.Description = 1;
+
+  }       
+
+  //----------------------------------------------------------------------------
+  const char*
+  Linux_SambaShareProtocolOptionsInstance::getDescription() const {
+    
+    if ( ! isSet.Description) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "Description not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "Description",
+        "Linux_SambaShareProtocolOptions");
+   	}
+
+
     return m_Description;
+
   }
        
-  //EASupport related methods
-  unsigned int Linux_SambaShareProtocolOptionsInstance::isEASupportSet() const{
+  //----------------------------------------------------------------------------
+  // EASupport related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaShareProtocolOptionsInstance::isEASupportSet() const {
     return isSet.EASupport;
   }
-  void Linux_SambaShareProtocolOptionsInstance::
-   setEASupport(const CMPIBoolean val){
-    m_EASupport = val;
-    isSet.EASupport=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaShareProtocolOptionsInstance::setEASupport(
+    const CMPIBoolean aValue) {
+  
+    m_EASupport = aValue;
+    isSet.EASupport = 1;
+  
   }       
-  const CMPIBoolean Linux_SambaShareProtocolOptionsInstance::
-   getEASupport() const{
+
+  //----------------------------------------------------------------------------
+  const CMPIBoolean
+  Linux_SambaShareProtocolOptionsInstance::getEASupport() const {
     
-    if(!isSet.EASupport)
+    if ( ! isSet.EASupport) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "EASupport not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "EASupport",
+        "Linux_SambaShareProtocolOptions");
+   	}
+
+
     return m_EASupport;
+
   }
        
-  //ElementName related methods
-  unsigned int Linux_SambaShareProtocolOptionsInstance::isElementNameSet() const{
+  //----------------------------------------------------------------------------
+  // ElementName related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaShareProtocolOptionsInstance::isElementNameSet() const {
     return isSet.ElementName;
   }
-  void  Linux_SambaShareProtocolOptionsInstance::
-   setElementName(const char* val, int makeCopy){
-    if (isSet.ElementName) {
-      delete []m_ElementName;
-    }
-    if (makeCopy&&val) {
-      char* tmpval = new char[strlen(val)+1];
-      strcpy(tmpval,val);
-      m_ElementName = tmpval;
-    } else {
-      m_ElementName = val;
-    }
-    isSet.ElementName=1;
-  }       
-  const char* Linux_SambaShareProtocolOptionsInstance::
-   getElementName() const{
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolOptionsInstance::setElementName(
+    const char* aValueP,
+    int aCopyFlag) {
     
-    if(!isSet.ElementName)
+    if (isSet.ElementName) {
+      delete [] m_ElementName;
+    }
+    
+    if (aCopyFlag && aValueP) {
+      char* valueP = new char[strlen(aValueP) + 1];
+      strcpy(valueP,aValueP);
+      m_ElementName = valueP;
+    } else {
+      m_ElementName = aValueP;
+    }
+    
+    isSet.ElementName = 1;
+
+  }       
+
+  //----------------------------------------------------------------------------
+  const char*
+  Linux_SambaShareProtocolOptionsInstance::getElementName() const {
+    
+    if ( ! isSet.ElementName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "ElementName not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "ElementName",
+        "Linux_SambaShareProtocolOptions");
+   	}
+
+
     return m_ElementName;
+
   }
        
-  //NTACLSupport related methods
-  unsigned int Linux_SambaShareProtocolOptionsInstance::isNTACLSupportSet() const{
+  //----------------------------------------------------------------------------
+  // NTACLSupport related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaShareProtocolOptionsInstance::isNTACLSupportSet() const {
     return isSet.NTACLSupport;
   }
-  void Linux_SambaShareProtocolOptionsInstance::
-   setNTACLSupport(const CMPIBoolean val){
-    m_NTACLSupport = val;
-    isSet.NTACLSupport=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaShareProtocolOptionsInstance::setNTACLSupport(
+    const CMPIBoolean aValue) {
+  
+    m_NTACLSupport = aValue;
+    isSet.NTACLSupport = 1;
+  
   }       
-  const CMPIBoolean Linux_SambaShareProtocolOptionsInstance::
-   getNTACLSupport() const{
+
+  //----------------------------------------------------------------------------
+  const CMPIBoolean
+  Linux_SambaShareProtocolOptionsInstance::getNTACLSupport() const {
     
-    if(!isSet.NTACLSupport)
+    if ( ! isSet.NTACLSupport) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "NTACLSupport not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "NTACLSupport",
+        "Linux_SambaShareProtocolOptions");
+   	}
+
+
     return m_NTACLSupport;
+
   }
 
-
   
+  //----------------------------------------------------------------------------
   //set isSet attributes to FALSE
-  void Linux_SambaShareProtocolOptionsInstance::init(){
-   	isSet.instanceName=0;
-   	   	
-    isSet.AclCompatibility=0;   	
-    isSet.Caption=0;   	
-    isSet.Description=0;   	
-    isSet.EASupport=0;   	
-    isSet.ElementName=0;   	
-    isSet.NTACLSupport=0;  	
-  };
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolOptionsInstance::init() {
+   	isSet.instanceName = 0;
+    isSet.AclCompatibility = 0;
+    isSet.Caption = 0;
+    isSet.Description = 0;
+    isSet.EASupport = 0;
+    isSet.ElementName = 0;
+    isSet.NTACLSupport = 0;
+  	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copies another instance properties in this
-  void Linux_SambaShareProtocolOptionsInstance::init
-   (const Linux_SambaShareProtocolOptionsInstance& original){   	
+  //----------------------------------------------------------------------------
+  void 
+  Linux_SambaShareProtocolOptionsInstance::init(
+    const Linux_SambaShareProtocolOptionsInstance& anOriginal) {   	
+
    	init();
    	   	
-    if(original.isInstanceNameSet()){
-      setInstanceName(original.getInstanceName());
-    }   	
-    if(original.isAclCompatibilitySet()){
-      const CMPIUint8 AclCompatibilityOriginal=original.getAclCompatibility();
+    if(anOriginal.isInstanceNameSet()) {
+      setInstanceName(anOriginal.getInstanceName());
+    }
+       	
+    if (anOriginal.isAclCompatibilitySet()) {
+      const CMPIUint8 AclCompatibilityOriginal = anOriginal.getAclCompatibility();
       setAclCompatibility(AclCompatibilityOriginal);
-    }   	
-    if(original.isCaptionSet()){
-      const char* CaptionOriginal=original.getCaption();
-      setCaption(CaptionOriginal, 1);
-    }   	
-    if(original.isDescriptionSet()){
-      const char* DescriptionOriginal=original.getDescription();
-      setDescription(DescriptionOriginal, 1);
-    }   	
-    if(original.isEASupportSet()){
-      const CMPIBoolean EASupportOriginal=original.getEASupport();
+    }
+   	
+    if (anOriginal.isCaptionSet()) {
+      const char* CaptionOriginal = anOriginal.getCaption();
+      setCaption(CaptionOriginal,1);
+    }
+   	
+    if (anOriginal.isDescriptionSet()) {
+      const char* DescriptionOriginal = anOriginal.getDescription();
+      setDescription(DescriptionOriginal,1);
+    }
+   	
+    if (anOriginal.isEASupportSet()) {
+      const CMPIBoolean EASupportOriginal = anOriginal.getEASupport();
       setEASupport(EASupportOriginal);
-    }   	
-    if(original.isElementNameSet()){
-      const char* ElementNameOriginal=original.getElementName();
-      setElementName(ElementNameOriginal, 1);
-    }   	
-    if(original.isNTACLSupportSet()){
-      const CMPIBoolean NTACLSupportOriginal=original.getNTACLSupport();
+    }
+   	
+    if (anOriginal.isElementNameSet()) {
+      const char* ElementNameOriginal = anOriginal.getElementName();
+      setElementName(ElementNameOriginal,1);
+    }
+   	
+    if (anOriginal.isNTACLSupportSet()) {
+      const CMPIBoolean NTACLSupportOriginal = anOriginal.getNTACLSupport();
       setNTACLSupport(NTACLSupportOriginal);
-    }    
-   }
+    }
+    
+  }
   
-  
+  //----------------------------------------------------------------------------
   //reset the instance data
-  void Linux_SambaShareProtocolOptionsInstance::reset(){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolOptionsInstance::reset() {
    	
-
-  	if (isSet.Caption)
+  	if (isSet.Caption) {
   	  delete(m_Caption);
+  	}
 
-  	if (isSet.Description)
+  	if (isSet.Description) {
   	  delete(m_Description);
+  	}
 
-  	if (isSet.ElementName)
+  	if (isSet.ElementName) {
   	  delete(m_ElementName);
-  	  
-  };
+  	}
+
+  }
   
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaShareProtocolOptionsInstanceEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaShareProtocolOptionsInstanceEnumerationElement::
-   Linux_SambaShareProtocolOptionsInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaShareProtocolOptionsInstanceEnumerationElement::Linux_SambaShareProtocolOptionsInstanceEnumerationElement() {
    	
-  	m_elementP=0;
-  	m_nextP=0;
+  	m_elementP = 0;
+  	m_nextP = 0;
   	  
-  };
+  }
   
-  
-  Linux_SambaShareProtocolOptionsInstanceEnumerationElement::
-   ~Linux_SambaShareProtocolOptionsInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaShareProtocolOptionsInstanceEnumerationElement::~Linux_SambaShareProtocolOptionsInstanceEnumerationElement() {
    	
-  	if (m_elementP!=0)
+  	if (m_elementP) {
   	  delete(m_elementP);
-  	if (m_nextP!=0)
+  	}
+  	
+  	if (m_nextP) {
   	  delete(m_nextP);
+  	}
   	  
-  };
+  }
 
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaShareProtocolOptionsInstanceNameEnumeration
-  //*********************************************************
-
-  Linux_SambaShareProtocolOptionsInstanceEnumeration::
-   Linux_SambaShareProtocolOptionsInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaShareProtocolOptionsInstanceEnumeration::Linux_SambaShareProtocolOptionsInstanceEnumeration() {
    	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   
-  Linux_SambaShareProtocolOptionsInstanceEnumeration::
-   Linux_SambaShareProtocolOptionsInstanceEnumeration(
-   const Linux_SambaShareProtocolOptionsInstanceEnumeration& original){
+  }
+  
+  //----------------------------------------------------------------------------
+  Linux_SambaShareProtocolOptionsInstanceEnumeration::Linux_SambaShareProtocolOptionsInstanceEnumeration(
+    const Linux_SambaShareProtocolOptionsInstanceEnumeration& anInstanceEnumeration) {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
+    int size = anInstanceEnumeration.getSize();
+    for (int x=0; x < size;++x) {
+      addElement(anInstanceEnumeration.getElement(x));
+    }           
+
+  }
   
-  	  
-  Linux_SambaShareProtocolOptionsInstanceEnumeration::
-   ~Linux_SambaShareProtocolOptionsInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaShareProtocolOptionsInstanceEnumeration::~Linux_SambaShareProtocolOptionsInstanceEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
+  }
   
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolOptionsInstanceEnumeration::reset() {
+  	
+  	m_currentElementP = m_firstElementP;
+  	
+  }
   	  
-  void Linux_SambaShareProtocolOptionsInstanceEnumeration::reset(){
+  //----------------------------------------------------------------------------
+  bool
+  Linux_SambaShareProtocolOptionsInstanceEnumeration::hasNext() const {
   	
-  	currentElementP=firstElementP;
-  };
+  	return (m_currentElementP != 0);
   
-  	  
-  bool Linux_SambaShareProtocolOptionsInstanceEnumeration::hasNext() const{
-  	
-  	return (currentElementP!=0);
+  }
   
-  };
-  
-  int Linux_SambaShareProtocolOptionsInstanceEnumeration::getSize() const{
+  //----------------------------------------------------------------------------
+  int
+  Linux_SambaShareProtocolOptionsInstanceEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaShareProtocolOptionsInstanceEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaShareProtocolOptionsInstanceEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
     
-  };
+  }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaShareProtocolOptionsInstance&  
-   Linux_SambaShareProtocolOptionsInstanceEnumeration::getElement(int pos) const{
+  Linux_SambaShareProtocolOptionsInstanceEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaShareProtocolOptionsInstanceEnumerationElement* followingP=firstElementP;
+    Linux_SambaShareProtocolOptionsInstanceEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x = 0;
+    while (followingP && (x < anIndex)) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
+
+  }
   
-  	  
+  //----------------------------------------------------------------------------
   const Linux_SambaShareProtocolOptionsInstance&
-   Linux_SambaShareProtocolOptionsInstanceEnumeration::getNext() {
+  Linux_SambaShareProtocolOptionsInstanceEnumeration::getNext() {
    	
-  	 Linux_SambaShareProtocolOptionsInstanceEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+    Linux_SambaShareProtocolOptionsInstanceEnumerationElement* currentElementP =
+  	  m_currentElementP;
+
+    m_currentElementP = m_currentElementP->m_nextP;
   	 
-  	 return *(currentP->m_elementP);
-  };
+    return *(currentElementP->m_elementP);
+
+  }
   	  
-  void Linux_SambaShareProtocolOptionsInstanceEnumeration::addElement
-   (const Linux_SambaShareProtocolOptionsInstance& elementP){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareProtocolOptionsInstanceEnumeration::addElement(
+    const Linux_SambaShareProtocolOptionsInstance& anInstance) {
    	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaShareProtocolOptionsInstanceEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaShareProtocolOptionsInstance(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaShareProtocolOptionsInstanceEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaShareProtocolOptionsInstance(elementP);
+  	if (m_firstElementP == 0) {
+  	  m_firstElementP = new Linux_SambaShareProtocolOptionsInstanceEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaShareProtocolOptionsInstance(anInstance);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaShareProtocolOptionsInstanceEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP = new Linux_SambaShareProtocolOptionsInstance(anInstance);
   	}
-  };  
+
+  }
+  
 }
- 

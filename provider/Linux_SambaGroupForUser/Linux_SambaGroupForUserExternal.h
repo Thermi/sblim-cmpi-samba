@@ -1,112 +1,121 @@
-/**
- *  Linux_SambaGroupForUserExternal.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGroupForUserExternal.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaGroupForUserExternal_h
 #define Linux_SambaGroupForUserExternal_h
+
 
 #include "Linux_SambaGroupForUserInstance.h"
 #include "Linux_SambaGroupInstance.h"
 #include "Linux_SambaUserInstance.h"
+
 #include "CmpiBroker.h"
 
 namespace genProvider {
 
   class Linux_SambaGroupForUserExternal {
+    
+    private:
+    CmpiBroker m_broker;
+    CmpiContext m_context;
   	
     public:
     Linux_SambaGroupForUserExternal(
-     const CmpiBroker& brkr, const CmpiContext& ctx);
+      const CmpiBroker& aBroker,
+      const CmpiContext& aContext);
     virtual ~Linux_SambaGroupForUserExternal();
     
     virtual void enumInstanceNames(
-     const char *nsp,
-     Linux_SambaGroupForUserInstanceNameEnumeration&);
+      const char *aNameSpaceP,
+      Linux_SambaGroupForUserInstanceNameEnumeration& anInstanceNameEnumeration);
      
     virtual void enumInstances(
-     const char *nsp,
-     const char* *properties,
-     Linux_SambaGroupForUserInstanceEnumeration&);
+      const char *anNameSpaceP,
+      const char** aPropertiesPP,
+      Linux_SambaGroupForUserInstanceEnumeration& anInstanceEnumeration);
      
     virtual Linux_SambaGroupForUserInstance getInstance(
-     const char* *properties,
-     const Linux_SambaGroupForUserInstanceName&);
+      const char** aPropertiesPP,
+      const Linux_SambaGroupForUserInstanceName& anInstanceName);
      
     virtual void setInstance(
-     const char* *properties,
-     const Linux_SambaGroupForUserInstance&);
+      const char** aPropertiesPP,
+      const Linux_SambaGroupForUserInstance& anInstance);
      
-    virtual void createInstance(
-     const Linux_SambaGroupForUserInstance&);
+    virtual Linux_SambaGroupForUserInstanceName createInstance(
+      const Linux_SambaGroupForUserInstance& anInstance);
      
     virtual void deleteInstance(
-     const Linux_SambaGroupForUserInstanceName&);
-    
+      const Linux_SambaGroupForUserInstanceName& anInstanceName);
+
+
     //association calls
-    
+
     void referencesGroupComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaGroupForUserInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaUserInstanceName& aSourceInstanceName,
+      Linux_SambaGroupForUserInstanceEnumeration& anInstanceEnumeration);
 
     void referenceNamesGroupComponent( 
-     const char *nsp,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaGroupForUserInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaUserInstanceName& aSourceInstanceName,
+      Linux_SambaGroupForUserInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void referencesPartComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGroupInstanceName& sourceInst,
-     Linux_SambaGroupForUserInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGroupInstanceName& aSourceInstanceName,
+      Linux_SambaGroupForUserInstanceEnumeration& anInstanceEnumeration);
 
     void referenceNamesPartComponent( 
-     const char *nsp,
-     const Linux_SambaGroupInstanceName& sourceInst,
-     Linux_SambaGroupForUserInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaGroupInstanceName& aSourceInstanceName,
+      Linux_SambaGroupForUserInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void associatorsGroupComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaGroupInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaUserInstanceName& aSourceInstanceName,
+      Linux_SambaGroupInstanceEnumeration& anInstanceEnumeration);
 
     void associatorNamesGroupComponent( 
-     const char *nsp,
-     const Linux_SambaUserInstanceName& sourceInst,
-     Linux_SambaGroupInstanceNameEnumeration& instanceNames);
+      const char *aNameSpaceP,
+      const Linux_SambaUserInstanceName& aSourceInstanceName,
+      Linux_SambaGroupInstanceNameEnumeration& anInstanceNameEnumeration);
 
     void associatorsPartComponent( 
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGroupInstanceName& sourceInst,
-     Linux_SambaUserInstanceEnumeration& instances);
+      const char *aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGroupInstanceName& aSourceInstanceName,
+      Linux_SambaUserInstanceEnumeration& anInstanceEnumeration);
 
     void associatorNamesPartComponent( 
-     const char *nsp,
-     const Linux_SambaGroupInstanceName& sourceInst,
-     Linux_SambaUserInstanceNameEnumeration& instanceNames);
-
-     
-    private:
-    CmpiBroker  broker;
-    CmpiContext context;
+      const char *aNameSpaceP,
+      const Linux_SambaGroupInstanceName& aSourceInstanceName,
+      Linux_SambaUserInstanceNameEnumeration& anInstanceNameEnumeration); 
+  
   };
+
 }
+
 #endif

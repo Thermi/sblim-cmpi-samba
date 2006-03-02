@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaGlobalBrowseOptionsManualInstance.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalBrowseOptionsManualInstance.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGlobalBrowseOptionsManualInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,314 +28,387 @@
 
 namespace genProvider {
 
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaGlobalBrowseOptionsManualInstance
-  //*********************************************************
-
+  //----------------------------------------------------------------------------
   //empty constructor
-  Linux_SambaGlobalBrowseOptionsManualInstance::
-   Linux_SambaGlobalBrowseOptionsManualInstance(){   	
+  Linux_SambaGlobalBrowseOptionsManualInstance::Linux_SambaGlobalBrowseOptionsManualInstance() {   	
    	init();  	   	
-  };
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copy constructor	
-  Linux_SambaGlobalBrowseOptionsManualInstance::
-   Linux_SambaGlobalBrowseOptionsManualInstance
-   (const Linux_SambaGlobalBrowseOptionsManualInstance& original){   	
-   	init(original);  	   	
-  };
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseOptionsManualInstance::Linux_SambaGlobalBrowseOptionsManualInstance(
+    const Linux_SambaGlobalBrowseOptionsManualInstance& anInstance) {   	
+   	init(anInstance);  	   	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //constructor using CmpiInstance
-  Linux_SambaGlobalBrowseOptionsManualInstance::
-   Linux_SambaGlobalBrowseOptionsManualInstance (const CmpiInstance& inst, const char* instanceNamespace){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseOptionsManualInstance::Linux_SambaGlobalBrowseOptionsManualInstance(
+    const CmpiInstance& aCmpiInstance,
+    const char* anInstanceNamespaceP) {
+
     CmpiData cmpiData;
+
     init(); 
     
-    CmpiObjectPath cop=inst.getObjectPath();
-    cop.setNameSpace(instanceNamespace);
+    CmpiObjectPath cop = aCmpiInstance.getObjectPath();
+    cop.setNameSpace(anInstanceNamespaceP);
     setInstanceName(Linux_SambaGlobalBrowseOptionsInstanceName(cop));
-    
-    cmpiData = inst.getProperty("Browsable");
-    if(!cmpiData.isNullValue()){
+
+    cmpiData = aCmpiInstance.getProperty("Browsable");
+    if ( ! cmpiData.isNullValue()){
       CMPIBoolean Browsable = cmpiData;
       setBrowsable(Browsable);
     }
-    
-    cmpiData = inst.getProperty("DomainMaster");
-    if(!cmpiData.isNullValue()){
+
+    cmpiData = aCmpiInstance.getProperty("DomainMaster");
+    if ( ! cmpiData.isNullValue()){
       CMPIUint16 DomainMaster = cmpiData;
       setDomainMaster(DomainMaster);
     }
+
     
   }
   
-  
+  //----------------------------------------------------------------------------
   //Destructor
+  //----------------------------------------------------------------------------
   Linux_SambaGlobalBrowseOptionsManualInstance::
    ~Linux_SambaGlobalBrowseOptionsManualInstance(){
    	reset();  	  
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
   //copy operator
+  //----------------------------------------------------------------------------
   Linux_SambaGlobalBrowseOptionsManualInstance&
-   Linux_SambaGlobalBrowseOptionsManualInstance::operator=
-   (const Linux_SambaGlobalBrowseOptionsManualInstance& original){   	
-   	init(original);
+  Linux_SambaGlobalBrowseOptionsManualInstance::operator=(
+    const Linux_SambaGlobalBrowseOptionsManualInstance& anInstance) {   	
+   	
+   	init(anInstance);
    	return *this;
-  };
+  
+  }
   
   
+  //----------------------------------------------------------------------------
   //converts to CmpiInstance
-  CmpiInstance Linux_SambaGlobalBrowseOptionsManualInstance::
-   getCmpiInstance(const char** properties) const{
+  //----------------------------------------------------------------------------
+  CmpiInstance
+  Linux_SambaGlobalBrowseOptionsManualInstance::getCmpiInstance(
+    const char** aPropertiesPP) const {
    	
    	CmpiObjectPath objectPath=getInstanceName().getObjectPath();      
     CmpiInstance cmpiInstance(objectPath);    
     getInstanceName().fillKeys(cmpiInstance);
     
-    if (properties) {
-	  cmpiInstance.setPropertyFilter(properties,0);
+    if (aPropertiesPP) {
+	    cmpiInstance.setPropertyFilter(aPropertiesPP,0);
     }
 
-  	if(isSet.Browsable){
-  	  cmpiInstance.setProperty("Browsable",CmpiBooleanData(m_Browsable));
+  	if (isSet.Browsable) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "Browsable",
+  	    CmpiBooleanData(m_Browsable));
   	}
 
-  	if(isSet.DomainMaster){
-  	  cmpiInstance.setProperty("DomainMaster",CmpiData(m_DomainMaster));
+  	if (isSet.DomainMaster) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "DomainMaster",
+  	    CmpiData(m_DomainMaster));
   	}
+
   	
   	return cmpiInstance;
   	
   }
   
-  
-  //InstanceName related methods
-  unsigned int Linux_SambaGlobalBrowseOptionsManualInstance::
-   isInstanceNameSet() const{
+  //----------------------------------------------------------------------------
+  // InstanceName related methods
+  //----------------------------------------------------------------------------
+  unsigned int 
+  Linux_SambaGlobalBrowseOptionsManualInstance::isInstanceNameSet() const {
   	return isSet.instanceName;
   }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaGlobalBrowseOptionsInstanceName&
-    Linux_SambaGlobalBrowseOptionsManualInstance::getInstanceName() const{
+  Linux_SambaGlobalBrowseOptionsManualInstance::getInstanceName() const {
 
-    if(!isSet.instanceName)
+    if( ! isSet.instanceName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "InstanceName not set in Linux_SambaGlobalBrowseOptions instance");
+        CmpiErrorFormater::NOT_SET,
+        "InstanceName (CIM Key Attributes)",
+        "Linux_SambaGlobalBrowseOptions");
+   	}
   		
    	return m_instanceName;
+  
   }
 
-  void Linux_SambaGlobalBrowseOptionsManualInstance::setInstanceName(
-   const Linux_SambaGlobalBrowseOptionsInstanceName& val){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseOptionsManualInstance::setInstanceName(
+    const Linux_SambaGlobalBrowseOptionsInstanceName& val) {
+
     m_instanceName = val;
-    isSet.instanceName=1;
+    isSet.instanceName = 1;
+
   }
        
-  //Browsable related methods
-  unsigned int Linux_SambaGlobalBrowseOptionsManualInstance::isBrowsableSet() const{
+  //----------------------------------------------------------------------------
+  // Browsable related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaGlobalBrowseOptionsManualInstance::isBrowsableSet() const {
     return isSet.Browsable;
   }
-  void Linux_SambaGlobalBrowseOptionsManualInstance::
-   setBrowsable(const CMPIBoolean val){
-    m_Browsable = val;
-    isSet.Browsable=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaGlobalBrowseOptionsManualInstance::setBrowsable(
+    const CMPIBoolean aValue) {
+  
+    m_Browsable = aValue;
+    isSet.Browsable = 1;
+  
   }       
-  const CMPIBoolean Linux_SambaGlobalBrowseOptionsManualInstance::
-   getBrowsable() const{
+
+  //----------------------------------------------------------------------------
+  const CMPIBoolean
+  Linux_SambaGlobalBrowseOptionsManualInstance::getBrowsable() const {
     
-    if(!isSet.Browsable)
+    if ( ! isSet.Browsable) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "Browsable not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "Browsable",
+        "Linux_SambaGlobalBrowseOptions");
+   	}
+
+
     return m_Browsable;
+
   }
        
-  //DomainMaster related methods
-  unsigned int Linux_SambaGlobalBrowseOptionsManualInstance::isDomainMasterSet() const{
+  //----------------------------------------------------------------------------
+  // DomainMaster related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaGlobalBrowseOptionsManualInstance::isDomainMasterSet() const {
     return isSet.DomainMaster;
   }
-  void Linux_SambaGlobalBrowseOptionsManualInstance::
-   setDomainMaster(const CMPIUint16 val){
-    m_DomainMaster = val;
-    isSet.DomainMaster=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaGlobalBrowseOptionsManualInstance::setDomainMaster(
+    const CMPIUint16 aValue) {
+  
+    m_DomainMaster = aValue;
+    isSet.DomainMaster = 1;
+  
   }       
-  const CMPIUint16 Linux_SambaGlobalBrowseOptionsManualInstance::
-   getDomainMaster() const{
+
+  //----------------------------------------------------------------------------
+  const CMPIUint16
+  Linux_SambaGlobalBrowseOptionsManualInstance::getDomainMaster() const {
     
-    if(!isSet.DomainMaster)
+    if ( ! isSet.DomainMaster) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "DomainMaster not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "DomainMaster",
+        "Linux_SambaGlobalBrowseOptions");
+   	}
+
+
     return m_DomainMaster;
+
   }
 
-
   
+  //----------------------------------------------------------------------------
   //set isSet attributes to FALSE
-  void Linux_SambaGlobalBrowseOptionsManualInstance::init(){
-   	isSet.instanceName=0;
-   	   	
-    isSet.Browsable=0;   	
-    isSet.DomainMaster=0;  	
-  };
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseOptionsManualInstance::init() {
+   	isSet.instanceName = 0;
+    isSet.Browsable = 0;
+    isSet.DomainMaster = 0;
+  	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copies another instance properties in this
-  void Linux_SambaGlobalBrowseOptionsManualInstance::init
-   (const Linux_SambaGlobalBrowseOptionsManualInstance& original){   	
+  //----------------------------------------------------------------------------
+  void 
+  Linux_SambaGlobalBrowseOptionsManualInstance::init(
+    const Linux_SambaGlobalBrowseOptionsManualInstance& anOriginal) {   	
+
    	init();
    	   	
-    if(original.isInstanceNameSet()){
-      setInstanceName(original.getInstanceName());
-    }   	
-    if(original.isBrowsableSet()){
-      const CMPIBoolean BrowsableOriginal=original.getBrowsable();
+    if(anOriginal.isInstanceNameSet()) {
+      setInstanceName(anOriginal.getInstanceName());
+    }
+       	
+    if (anOriginal.isBrowsableSet()) {
+      const CMPIBoolean BrowsableOriginal = anOriginal.getBrowsable();
       setBrowsable(BrowsableOriginal);
-    }   	
-    if(original.isDomainMasterSet()){
-      const CMPIUint16 DomainMasterOriginal=original.getDomainMaster();
+    }
+   	
+    if (anOriginal.isDomainMasterSet()) {
+      const CMPIUint16 DomainMasterOriginal = anOriginal.getDomainMaster();
       setDomainMaster(DomainMasterOriginal);
-    }    
-   }
+    }
+    
+  }
   
-  
+  //----------------------------------------------------------------------------
   //reset the instance data
-  void Linux_SambaGlobalBrowseOptionsManualInstance::reset(){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseOptionsManualInstance::reset() {
    	
-  	  
-  };
+  }
   
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement::
-   Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement::Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement() {
    	
-  	m_elementP=0;
-  	m_nextP=0;
+  	m_elementP = 0;
+  	m_nextP = 0;
   	  
-  };
+  }
   
-  
-  Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement::
-   ~Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement::~Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement() {
    	
-  	if (m_elementP!=0)
+  	if (m_elementP) {
   	  delete(m_elementP);
-  	if (m_nextP!=0)
+  	}
+  	
+  	if (m_nextP) {
   	  delete(m_nextP);
+  	}
   	  
-  };
+  }
 
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaGlobalBrowseOptionsManualInstanceNameEnumeration
-  //*********************************************************
-
-  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::
-   Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration() {
    	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   
-  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::
-   Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration(
-   const Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration& original){
+  }
+  
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration(
+    const Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration& anInstanceEnumeration) {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
+    int size = anInstanceEnumeration.getSize();
+    for (int x=0; x < size;++x) {
+      addElement(anInstanceEnumeration.getElement(x));
+    }           
+
+  }
   
-  	  
-  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::
-   ~Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::~Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
+  }
   
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::reset() {
+  	
+  	m_currentElementP = m_firstElementP;
+  	
+  }
   	  
-  void Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::reset(){
+  //----------------------------------------------------------------------------
+  bool
+  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::hasNext() const {
   	
-  	currentElementP=firstElementP;
-  };
+  	return (m_currentElementP != 0);
   
-  	  
-  bool Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::hasNext() const{
-  	
-  	return (currentElementP!=0);
+  }
   
-  };
-  
-  int Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::getSize() const{
+  //----------------------------------------------------------------------------
+  int
+  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
     
-  };
+  }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaGlobalBrowseOptionsManualInstance&  
-   Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::getElement(int pos) const{
+  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement* followingP=firstElementP;
+    Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x = 0;
+    while (followingP && (x < anIndex)) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
+
+  }
   
-  	  
+  //----------------------------------------------------------------------------
   const Linux_SambaGlobalBrowseOptionsManualInstance&
-   Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::getNext() {
+  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::getNext() {
    	
-  	 Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+    Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement* currentElementP =
+  	  m_currentElementP;
+
+    m_currentElementP = m_currentElementP->m_nextP;
   	 
-  	 return *(currentP->m_elementP);
-  };
+    return *(currentElementP->m_elementP);
+
+  }
   	  
-  void Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::addElement
-   (const Linux_SambaGlobalBrowseOptionsManualInstance& elementP){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseOptionsManualInstanceEnumeration::addElement(
+    const Linux_SambaGlobalBrowseOptionsManualInstance& anInstance) {
    	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaGlobalBrowseOptionsManualInstance(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaGlobalBrowseOptionsManualInstance(elementP);
+  	if (m_firstElementP == 0) {
+  	  m_firstElementP = new Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaGlobalBrowseOptionsManualInstance(anInstance);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaGlobalBrowseOptionsManualInstanceEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP = new Linux_SambaGlobalBrowseOptionsManualInstance(anInstance);
   	}
-  };  
+
+  }
+  
 }
- 

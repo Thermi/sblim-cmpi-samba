@@ -1,81 +1,99 @@
-/**
- *  Linux_SambaGroupForUserResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGroupForUserResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGroupForUserResourceAccess.h"
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-    //Linux_SambaGroupForUserResourceAccess::Linux_SambaGroupForUserResourceAccess();
-    Linux_SambaGroupForUserResourceAccess::~Linux_SambaGroupForUserResourceAccess() {
-      terminator();
-   };
+  //----------------------------------------------------------------------------
+  //Linux_SambaGroupForUserResourceAccess::Linux_SambaGroupForUserResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaGroupForUserResourceAccess::~Linux_SambaGroupForUserResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    
-  void Linux_SambaGroupForUserResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaGroupForUserInstanceNameEnumeration& instnames)
-  { 
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGroupForUserResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaGroupForUserInstanceNameEnumeration& anInstanceNameEnumeration) {
+
     int k;
     char ** get_users = get_samba_users_list();
-    if(get_users){
+    if(get_users) {
       char ** users = (char **)malloc(sizeof(char *));
-      for(k=0; get_users[k];k++){
+      for(k=0; get_users[k];k++) {
 	users = (char **)realloc(users,(k+2)*sizeof(char *));
 	users[k] = strdup(get_users[k]);
       }
+
       users[k] = NULL;
       for(int i=0; users[i];i++){
 	char ** groups = get_user_groups(users[i]);
 	if(groups){
 	  for(int j=0; groups[j];j++){    
 	    Linux_SambaGroupForUserInstanceName instName;
-	    instName.setNamespace(nsp);
-
+	    instName.setNamespace(aNameSpaceP);
+	    
 	    Linux_SambaGroupInstanceName groupInstName;
-	    groupInstName.setNamespace(nsp);
+	    groupInstName.setNamespace(aNameSpaceP);
 	    groupInstName.setSambaGroupName( groups[j] );
 	    instName.setGroupComponent( groupInstName );
 	    
 	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
+	    userInstName.setNamespace(aNameSpaceP);
 	    userInstName.setSambaUserName( users[i] );
 	    instName.setPartComponent(userInstName);
 	    
-	    instnames.addElement(instName);
+	    anInstanceNameEnumeration.addElement(instName);
 	  }
 	}
 	free(users[i]);
       }
     }
-  };
+  }
   
   
-  void Linux_SambaGroupForUserResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaGroupForUserManualInstanceEnumeration& instances)
-  { 
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaGroupForUserResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaGroupForUserManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     int k;
     char ** get_users = get_samba_users_list();
+    
     if(get_users){
       char ** users = (char **)malloc(sizeof(char *));
       for(k=0; get_users[k];k++){
@@ -90,109 +108,131 @@ namespace genProvider {
 	    Linux_SambaGroupForUserManualInstance manualInstance;
 	    
 	    Linux_SambaGroupForUserInstanceName instName;
-	    instName.setNamespace(nsp);
-
+	    instName.setNamespace(aNameSpaceP);
+	    
 	    Linux_SambaGroupInstanceName groupInstName;
-	    groupInstName.setNamespace(nsp);
+	    groupInstName.setNamespace(aNameSpaceP);
 	    groupInstName.setSambaGroupName( groups[j] );
 	    instName.setGroupComponent( groupInstName );
 	    
 	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
+	    userInstName.setNamespace(aNameSpaceP);
 	    userInstName.setSambaUserName( users[i] );
 	    
 	    instName.setPartComponent(userInstName);
 	    
 	    manualInstance.setInstanceName(instName);
-	    instances.addElement(manualInstance);
+	    aManualInstanceEnumeration.addElement(manualInstance);
 	  }
 	}
 	free(users[i]);
       }
     }
-  };
+  }
+
   
-  
+  //----------------------------------------------------------------------------
+
   Linux_SambaGroupForUserManualInstance 
-   Linux_SambaGroupForUserResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaGroupForUserInstanceName& instanceName){
+  Linux_SambaGroupForUserResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaGroupForUserInstanceName& anInstanceName) {
+
     Linux_SambaGroupForUserManualInstance instance;
-    instance.setInstanceName(instanceName);
+    instance.setInstanceName(anInstanceName);
     return instance;
   }
+
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGroupForUserResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaGroupForUserManualInstance& aManualInstance) { }
+  */
   
-  	
-  void Linux_SambaGroupForUserResourceAccess::setInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaGroupForUserManualInstance&){};
-  	
-  	
-  void Linux_SambaGroupForUserResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaGroupForUserManualInstance& newInstance)
-  {
-    if(add_user_to_group(newInstance.getInstanceName().getPartComponent().getSambaUserName(), newInstance.getInstanceName().getGroupComponent().getSambaGroupName()))
+  //----------------------------------------------------------------------------
+
+  Linux_SambaGroupForUserInstanceName
+  Linux_SambaGroupForUserResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGroupForUserManualInstance& aManualInstance) {
+    
+    if(add_user_to_group(aManualInstance.getInstanceName().getPartComponent().getSambaUserName(), aManualInstance.getInstanceName().getGroupComponent().getSambaGroupName()))
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Instance could not be created!");
-  };
+    
+    return aManualInstance.getInstanceName();
+  }
+
   
-  
-  void Linux_SambaGroupForUserResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaGroupForUserInstanceName& instanceName)
-  {
-    if(remove_user_from_group(instanceName.getPartComponent().getSambaUserName(), instanceName.getGroupComponent().getSambaGroupName()))
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaGroupForUserResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGroupForUserInstanceName& anInstanceName) {
+    
+    if(remove_user_from_group(anInstanceName.getPartComponent().getSambaUserName(), anInstanceName.getGroupComponent().getSambaGroupName()))
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Instance could not be deleted!");
-  };
-  
-    
-    /* Association Interface */
-    
+  }
+
+	
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGroupForUserResourceAccess::referencesGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaUserInstanceName& sourceInst,
-   Linux_SambaGroupForUserManualInstanceEnumeration& instEnum)
-  {
-    char ** groups = get_user_groups(sourceInst.getSambaUserName());
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaGroupForUserManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    char ** groups = get_user_groups(aSourceInstanceName.getSambaUserName());
+    
     if(groups){
       for(int j=0; groups[j];j++){
 	
 	Linux_SambaGroupForUserManualInstance manualInstance;
 	
 	Linux_SambaGroupForUserInstanceName instName;
-	instName.setNamespace(nsp);
+	instName.setNamespace(aNameSpaceP);
 	
-	instName.setPartComponent(sourceInst);
+	instName.setPartComponent(aSourceInstanceName);
 	
 	Linux_SambaGroupInstanceName groupInstName;
-	groupInstName.setNamespace(nsp);
+	groupInstName.setNamespace(aNameSpaceP);
 	groupInstName.setSambaGroupName( groups[j] );
 	
 	instName.setGroupComponent(groupInstName);
 	
 	manualInstance.setInstanceName(instName);
-	instEnum.addElement(manualInstance);
+	aManualInstanceEnumeration.addElement(manualInstance);
       }
     }
-  };
-   
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGroupForUserResourceAccess::referencesPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGroupInstanceName& sourceInst,
-   Linux_SambaGroupForUserManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGroupInstanceName& aSourceInstanceName,
+    Linux_SambaGroupForUserManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     int k;
     char ** get_users = get_samba_users_list();
+    
     if(get_users){
       char ** users = (char **)malloc(sizeof(char *));
       for(k=0; get_users[k];k++){
@@ -204,70 +244,78 @@ namespace genProvider {
 	char ** groups = get_user_groups(users[i]);
 	if(groups){
 	  for(int j=0; groups[j];j++){    
-	    if(!strcmp(groups[j],sourceInst.getSambaGroupName())){
+	    if(!strcmp(groups[j],aSourceInstanceName.getSambaGroupName())){
 	      
 	      Linux_SambaGroupForUserManualInstance manualInstance;
 	      
 	      Linux_SambaGroupForUserInstanceName instName;
-	      instName.setNamespace(nsp);
-	      instName.setGroupComponent(sourceInst);
+	      instName.setNamespace(aNameSpaceP);
+	      instName.setGroupComponent(aSourceInstanceName);
 	      
 	      Linux_SambaUserInstanceName userInstName;
-	      userInstName.setNamespace(nsp);
+	      userInstName.setNamespace(aNameSpaceP);
 	      userInstName.setSambaUserName( users[i] );
 	      
 	      instName.setPartComponent(userInstName);
 	      
 	      manualInstance.setInstanceName(instName);
-	      instEnum.addElement(manualInstance);
+	      aManualInstanceEnumeration.addElement(manualInstance);
 	    }
 	  }
 	}
 	free(users[i]);
       }
     }
-  };
+  }
+
   
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGroupForUserResourceAccess::associatorsGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaUserInstanceName& sourceInst,
-   Linux_SambaGroupInstanceEnumeration& instEnum)
-  { 
-    char ** groups = get_user_groups(sourceInst.getSambaUserName());
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaGroupInstanceEnumeration& anInstanceEnumeration) {
+    
+    char ** groups = get_user_groups(aSourceInstanceName.getSambaUserName());
+    
     if(groups){
       for(int j=0; groups[j];j++){
 	
 	Linux_SambaGroupInstance instance;
 	
 	Linux_SambaGroupInstanceName groupInstName;
-	groupInstName.setNamespace(nsp);
+	groupInstName.setNamespace(aNameSpaceP);
 	groupInstName.setSambaGroupName( groups[j] );
 	
 	instance.setInstanceName(groupInstName);
 	char* option;
-      
+	
 	option = get_unix_group_name( groups[j] );
 	if ( option )
 	  instance.setSystemGroupName( option );
 	
-	instEnum.addElement(instance);
+	anInstanceEnumeration.addElement(instance);
       }
     }
-  };
+  }
+
   
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGroupForUserResourceAccess::associatorsPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGroupInstanceName& sourceInst,
-   Linux_SambaUserInstanceEnumeration& instEnum)
-  { 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGroupInstanceName& aSourceInstanceName,
+    Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
+    
     int k;
     char ** get_users = get_samba_users_list();
+    
     if(get_users){
       char ** users = (char **)malloc(sizeof(char *));
       for(k=0; get_users[k];k++){
@@ -282,12 +330,12 @@ namespace genProvider {
 	if(groups){
 	  for(int j=0; groups[j];j++){
 	    
-	    if(!strcmp(groups[j],sourceInst.getSambaGroupName())){
+	    if(!strcmp(groups[j],aSourceInstanceName.getSambaGroupName())){
 	      
 	      Linux_SambaUserInstance instance;
 	      
 	      Linux_SambaUserInstanceName userInstName;
-	      userInstName.setNamespace(nsp);
+	      userInstName.setNamespace(aNameSpaceP);
 	      userInstName.setSambaUserName( users[i] );
 	      
 	      instance.setInstanceName(userInstName);
@@ -297,15 +345,18 @@ namespace genProvider {
 	      if ( option )
 		instance.setSystemUserName( option );
 	      
-	      instEnum.addElement(instance);
+	      anInstanceEnumeration.addElement(instance);
 	    }
 	  }
 	}
       }
     }
-  };
-    
-    /* extrinsic methods */
+  }
+
+   
+  
+  // extrinsic methods
+
 	
 }
 

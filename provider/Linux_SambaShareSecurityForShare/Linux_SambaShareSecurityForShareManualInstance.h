@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaShareSecurityForShareManualInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareSecurityForShareManualInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaShareSecurityForShareManualInstance_h
 #define Linux_SambaShareSecurityForShareManualInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaShareSecurityForShareInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaShareSecurityForShareManualInstance {
-  public:
-       Linux_SambaShareSecurityForShareManualInstance();
-  	
-       Linux_SambaShareSecurityForShareManualInstance
-  	    (const Linux_SambaShareSecurityForShareManualInstance& original);
-  	   
-       Linux_SambaShareSecurityForShareManualInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaShareSecurityForShareManualInstance();
        
-       Linux_SambaShareSecurityForShareManualInstance& operator=
-  	    (const Linux_SambaShareSecurityForShareManualInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaShareSecurityForShareManualInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaShareSecurityForShareInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaShareSecurityForShareInstanceName& val);        
-       const Linux_SambaShareSecurityForShareInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaShareSecurityForShareManualInstance();
+    Linux_SambaShareSecurityForShareManualInstance(
+      const Linux_SambaShareSecurityForShareManualInstance& anInstance);
+    Linux_SambaShareSecurityForShareManualInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaShareSecurityForShareManualInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaShareSecurityForShareManualInstance& original);
-       void reset();
+    Linux_SambaShareSecurityForShareManualInstance& operator=(
+      const Linux_SambaShareSecurityForShareManualInstance& anInstance);
        
-       Linux_SambaShareSecurityForShareInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaShareSecurityForShareInstanceName& anInstanceName);        
+    const Linux_SambaShareSecurityForShareInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaShareSecurityForShareManualInstanceEnumerationElement{
-  	Linux_SambaShareSecurityForShareManualInstance* m_elementP;
-  	Linux_SambaShareSecurityForShareManualInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaShareSecurityForShareManualInstanceEnumerationElement();
-  	~Linux_SambaShareSecurityForShareManualInstanceEnumerationElement();  	
+  struct Linux_SambaShareSecurityForShareManualInstanceEnumerationElement {
+
+    Linux_SambaShareSecurityForShareManualInstance* m_elementP;
+    Linux_SambaShareSecurityForShareManualInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaShareSecurityForShareManualInstanceEnumerationElement();
+    ~Linux_SambaShareSecurityForShareManualInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaShareSecurityForShareManualInstanceEnumeration {
-  	private:
-  	  Linux_SambaShareSecurityForShareManualInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaShareSecurityForShareManualInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaShareSecurityForShareManualInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaShareSecurityForShareManualInstanceEnumeration();
-  	  
-  	  Linux_SambaShareSecurityForShareManualInstanceEnumeration(
-  	   const Linux_SambaShareSecurityForShareManualInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaShareSecurityForShareManualInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaShareSecurityForShareManualInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaShareSecurityForShareManualInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaShareSecurityForShareManualInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaShareSecurityForShareManualInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaShareSecurityForShareManualInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaShareSecurityForShareManualInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaShareSecurityForShareManualInstanceEnumeration();
+    Linux_SambaShareSecurityForShareManualInstanceEnumeration(
+      const Linux_SambaShareSecurityForShareManualInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaShareSecurityForShareManualInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaShareSecurityForShareManualInstance& getNext();
+    int getSize() const;
+    const Linux_SambaShareSecurityForShareManualInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaShareSecurityForShareManualInstance& anInstance);
+
+  };
+
+}
+
+#endif

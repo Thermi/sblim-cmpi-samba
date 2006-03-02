@@ -1,141 +1,169 @@
-/**
- *  CmpiLinux_SambaPrinterSecurityForGlobalProvider.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// CmpiLinux_SambaPrinterSecurityForGlobalProvider.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef CmpiLinux_SambaPrinterSecurityForGlobalProvider_h
 #define CmpiLinux_SambaPrinterSecurityForGlobalProvider_h
+
+
 
 #include "CmpiInstanceMI.h"
 #include "CmpiMethodMI.h"
 #include "Linux_SambaPrinterSecurityForGlobalFactory.h"
 #include "CmpiAssociationMI.h"
 
- namespace genProvider{
 
-  class CmpiLinux_SambaPrinterSecurityForGlobalProvider : public CmpiInstanceMI,
-   public CmpiMethodMI, public CmpiAssociationMI{	
+namespace genProvider{
+
+  class CmpiLinux_SambaPrinterSecurityForGlobalProvider : 
+    public CmpiInstanceMI,
+    public CmpiMethodMI, public CmpiAssociationMI {	
 	
-	private:
-
-	Linux_SambaPrinterSecurityForGlobalInterface* interfaceP;
-	const static char * shadowNameSpaceP;
-	CmpiBroker cppBroker;
+	  private:
+	  Linux_SambaPrinterSecurityForGlobalInterface* m_interfaceP;
+	  CmpiBroker m_cmpiBroker;
 	    
-    void completeInstance (
-     const Linux_SambaPrinterSecurityForGlobalInstanceName& intanceNameP,
-     CmpiInstance& target, const CmpiContext& ctx);
+	  private:
+
+    void completeInstance(
+      const Linux_SambaPrinterSecurityForGlobalInstanceName& anInstanceNameP,
+      CmpiInstance& aCmpiInstance,
+      const CmpiContext& aContext);
 	
-    void copyShadowData (
-     const CmpiInstance* source, CmpiInstance* target);
+    void copyShadowData(
+      const CmpiInstance* aSourceCmpiInstanceP,
+      CmpiInstance* aTargetCmpiInstanceP);
 	
-    CmpiInstance* getShadowInstance (
-     const CmpiInstance& original,
-     const Linux_SambaPrinterSecurityForGlobalInstanceName& intanceName);
+    CmpiInstance* getShadowInstance(
+      const CmpiInstance& aCmpiInstance,
+      const Linux_SambaPrinterSecurityForGlobalInstanceName& anInstanceName);
 	
     void removeDanglingShadowInstances (
-     const Linux_SambaPrinterSecurityForGlobalInstanceNameEnumeration& dinInsNames);
-
+      const Linux_SambaPrinterSecurityForGlobalInstanceNameEnumeration& anInstanceNameEnumeration);
 	  
-	public:
+	  public:
 
-    CmpiLinux_SambaPrinterSecurityForGlobalProvider (
-     const CmpiBroker &mbp, const CmpiContext& ctx);
+    CmpiLinux_SambaPrinterSecurityForGlobalProvider(
+      const CmpiBroker& aBroker,
+      const CmpiContext& aContext);
 
-    ~CmpiLinux_SambaPrinterSecurityForGlobalProvider ();
+    ~CmpiLinux_SambaPrinterSecurityForGlobalProvider();
 	
     int isUnloadable() const;
 	
     CmpiStatus enumInstanceNames (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop);
+      const CmpiContext& aContext,
+      CmpiResult& aResult,
+      const CmpiObjectPath& aCop);
      
     CmpiStatus enumInstances (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-     const char* *properties);
+      const CmpiContext& aContext,
+      CmpiResult& aResult,
+      const CmpiObjectPath& aCop,
+      const char** aPropertiesPP);
      
     CmpiStatus getInstance (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-     const char* *properties);
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop,
+     const char** aPropertiesPP);
     
     virtual CmpiStatus createInstance (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-     const CmpiInstance& inst);
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop,
+     const CmpiInstance& anInstance);
     
     virtual CmpiStatus setInstance (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-     const CmpiInstance& inst,
-     const char* *properties);
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop,
+     const CmpiInstance& anInstance,
+     const char** aPropertiesPP);
     
     virtual CmpiStatus deleteInstance (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop);
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop);
      
     /*
-    virtual CmpiStatus execQuery (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-     const char* language,
-     const char* query);
+    virtual CmpiStatus execQuery(
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop,
+     const char* aLanguageP,
+     const char* aQueryP);
     */  
       
-    virtual CmpiStatus invokeMethod (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& ref,
-     const char* methodName,
-     const CmpiArgs& in,
-     CmpiArgs& out);
+    virtual CmpiStatus invokeMethod(
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop,
+     const char* aMethodNameP,
+     const CmpiArgs& anInputArgSet,
+     CmpiArgs& anOutputArgSet);
 
-    CmpiStatus associationLogic
-	  (const CmpiContext& ctx, 
-	   CmpiResult& rslt,
-	   const CmpiObjectPath& cop,
-	   const int instances,
-	   const int references,
-       const char** properties=0);
+    CmpiStatus associationLogic(
+      const CmpiContext& aContext, 
+	    CmpiResult& aResult,
+	    const CmpiObjectPath& aCop,
+	    const int instances,
+	    const int references,
+      const char** aPropertiesPP=0);
 	
-	CmpiStatus associators (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-	 const char* assocClass, const char* resultClass,
-     const char* role, const char* resultRole,
-     const char** properties);
+	  CmpiStatus associators (
+      const CmpiContext& aContext,
+      CmpiResult& aResult,
+      const CmpiObjectPath& aCop,
+	    const char* anAssocClassNameP, 
+	    const char* aResultClassNameP,
+      const char* aRoleNameP,
+      const char* aResultRoleNameP,
+      const char** aPropertiesPP);
     
     CmpiStatus associatorNames (
-     const CmpiContext & ctx, CmpiResult & rslt,
-     const CmpiObjectPath & cop,
-     const char* assocClass, const char* resultClass,
-     const char* role, const char* resultRole);
+      const CmpiContext & aContext,
+      CmpiResult & aResult,
+      const CmpiObjectPath& aCop,
+      const char* anAssocClassNameP,
+      const char* aResultClassNameP,
+      const char* aRoleNameP, 
+      const char* aResultRoleNameP);
     
     CmpiStatus references (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-     const char* assocClass, const char* role,
-     const char** properties);
+      const CmpiContext& aContext,
+      CmpiResult& aResult,
+      const CmpiObjectPath& aCop,
+      const char* anAssocClassNameP,
+      const char* aRoleNameP,
+      const char** aPropertiesPP);
     
     CmpiStatus referenceNames (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop, const char* assocClass,
-     const char* role); 
+      const CmpiContext& aContext,
+      CmpiResult& aResult,
+      const CmpiObjectPath& aCop,
+      const char* anAssocClassNameP,
+      const char* aRoleNameP); 
   };
+
 }
 
 #endif

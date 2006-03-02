@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaForceGroupForPrinterResourceAccess.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaForceGroupForPrinterResourceAccess.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaForceGroupForPrinterResourceAccess_h
 #define Linux_SambaForceGroupForPrinterResourceAccess_h
 
@@ -26,106 +29,121 @@
 #include "CmpiInstance.h"
 #include "CmpiDateTime.h"
 #include "CmpiBroker.h"
-#include "Linux_SambaGroupInstance.h"
 #include "Linux_SambaPrinterOptionsInstance.h"
-#include "Linux_SambaGroupExternal.h"
+#include "Linux_SambaGroupInstance.h"
 #include "Linux_SambaPrinterOptionsExternal.h"
+#include "Linux_SambaGroupExternal.h"
 #include "Linux_SambaForceGroupForPrinterDefaultImplementation.h"
 
-#include <string>
-#include <list>
-
-#include "smt_smb_ra_support.h"
-#include "smt_smb_defaultvalues.h"
-#include "smt_smb_array.h"
 
 namespace genProvider {
- 
+
   class Linux_SambaForceGroupForPrinterResourceAccess:
    public Linux_SambaForceGroupForPrinterDefaultImplementation {
-   	  	
-   private:
-    bool Linux_SambaForceGroupForPrinterResourceAccess::validGroup(const char* group);
   	
     public:
-    /*Linux_SambaForceGroupForPrinterResourceAccess();*/    
+    /*
+    Linux_SambaForceGroupForPrinterResourceAccess();
+    */    
     virtual ~Linux_SambaForceGroupForPrinterResourceAccess() ;
     
     /* intrinsic methods */
+
     virtual void enumInstanceNames(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     Linux_SambaForceGroupForPrinterInstanceNameEnumeration& instnames);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      Linux_SambaForceGroupForPrinterInstanceNameEnumeration& anInstanceNameEnumeration);
+
   	
+
     virtual void enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaForceGroupForPrinterManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      Linux_SambaForceGroupForPrinterManualInstanceEnumeration& aManualInstanceEnumeration);
+
   	
+
     virtual Linux_SambaForceGroupForPrinterManualInstance getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaForceGroupForPrinterInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaForceGroupForPrinterInstanceName& anInstanceName);
+
   	
-    /*virtual void setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaForceGroupForPrinterManualInstance&);*/
+    /*
+    virtual void setInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const char** aPropertiesPP,
+      const Linux_SambaForceGroupForPrinterManualInstance& aManualInstance);
+    */
   	
-    virtual void createInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaForceGroupForPrinterManualInstance&);
+
+    virtual Linux_SambaForceGroupForPrinterInstanceName createInstance(
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaForceGroupForPrinterManualInstance& aManualInstance);
+
   	
+
     virtual void deleteInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const Linux_SambaForceGroupForPrinterInstanceName&);
+      const CmpiContext& aContext,
+      const CmpiBroker& aBroker,
+      const Linux_SambaForceGroupForPrinterInstanceName& anInstanceName);
+
 	
     
     /* Association Interface */
 
-    virtual void referencesPartComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaForceGroupForPrinterManualInstanceEnumeration& instances);
 
     virtual void referencesGroupComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGroupInstanceName& sourceInst,
-     Linux_SambaForceGroupForPrinterManualInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGroupInstanceName& aSourceInstanceName,
+      Linux_SambaForceGroupForPrinterManualInstanceEnumeration& aManualInstanceEnumeration);
 
-    virtual void associatorsPartComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaPrinterOptionsInstanceName& sourceInst,
-     Linux_SambaGroupInstanceEnumeration& instances);
+
+
+    virtual void referencesPartComponent( 
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaForceGroupForPrinterManualInstanceEnumeration& aManualInstanceEnumeration);
+
+
 
     virtual void associatorsGroupComponent( 
-     const CmpiContext& ctx,  
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char** properties,
-     const Linux_SambaGroupInstanceName& sourceInst,
-     Linux_SambaPrinterOptionsInstanceEnumeration& instances);
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaGroupInstanceName& aSourceInstanceName,
+      Linux_SambaPrinterOptionsInstanceEnumeration& anInstanceEnumeration);
+
+
+
+    virtual void associatorsPartComponent( 
+      const CmpiContext& aContext,  
+      const CmpiBroker& aBroker,
+      const char* aNameSpaceP,
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
+      Linux_SambaGroupInstanceEnumeration& anInstanceEnumeration);
+
 
    
+    
     /* extrinsic methods */
+    
 	
   };
+  
 }
 #endif
-

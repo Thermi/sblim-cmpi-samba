@@ -1,129 +1,40 @@
-/**
- *  Linux_SambaInvalidUsersForGlobalResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaInvalidUsersForGlobalResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaInvalidUsersForGlobalResourceAccess.h"
+
+#include <string>
+#include <list>
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
+#include "smt_smb_array.h"
 
 namespace genProvider {
   
-  //Linux_SambaInvalidUsersForGlobalResourceAccess::Linux_SambaInvalidUsersForGlobalResourceAccess();
-  Linux_SambaInvalidUsersForGlobalResourceAccess::~Linux_SambaInvalidUsersForGlobalResourceAccess() { 
-    terminator();
-  };
-    
-    /* intrinsic methods */
-  void Linux_SambaInvalidUsersForGlobalResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaInvalidUsersForGlobalInstanceNameEnumeration& instnames)
-  {
-    Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
-    globalInstName.setName(DEFAULT_GLOBAL_NAME);
-    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-    
-    
-    char* user_list = get_global_option("invalid users");
-    
-    if(user_list){
-      SambaArray array = SambaArray(user_list);
-      SambaArrayConstIterator iter;
-      
-      for ( iter = array.begin(); iter != array.end(); ++iter)
-	{
-	  if(validUser((*iter).c_str())){
-	    Linux_SambaInvalidUsersForGlobalInstanceName assocName;
-	    assocName.setNamespace(nsp);
-	    assocName.setGroupComponent(globalInstName);
-	    
-	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
-	    userInstName.setSambaUserName( (*iter).c_str() );
-	    
-	    assocName.setPartComponent(userInstName);
-	    
-	    instnames.addElement(assocName);
-	  }
-	}
-    }
-  };
-  
-  void Linux_SambaInvalidUsersForGlobalResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaInvalidUsersForGlobalManualInstanceEnumeration& instances)
-  {
-    Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
-    globalInstName.setName(DEFAULT_GLOBAL_NAME);
-    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-    
-    char* user_list = get_global_option("invalid users");
-    
-    if(user_list){
-      SambaArray array = SambaArray(user_list);
-      SambaArrayConstIterator iter;
-      
-      for ( iter = array.begin(); iter != array.end(); ++iter)
-	{
-	  if(validUser((*iter).c_str())){
-	    Linux_SambaInvalidUsersForGlobalManualInstance manualInstance;
-	    
-	    Linux_SambaInvalidUsersForGlobalInstanceName instName;
-	    instName.setNamespace(nsp);
-	    instName.setGroupComponent(globalInstName);
-	    
-	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
-	    userInstName.setSambaUserName( (*iter).c_str() );
-	    
-	    instName.setPartComponent(userInstName);
-	    
-	    manualInstance.setInstanceName(instName);
-	    instances.addElement(manualInstance);
-	  }
-	}
-    }
-  };
-  	
-  Linux_SambaInvalidUsersForGlobalManualInstance 
-   Linux_SambaInvalidUsersForGlobalResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaInvalidUsersForGlobalInstanceName& instanceName)
-  {
-    Linux_SambaInvalidUsersForGlobalManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
-    return aManualInstance;
-  };
+  //----------------------------------------------------------------------------
+  // manual written methods
 
-  	/*
-    void Linux_SambaInvalidUsersForGlobalResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaInvalidUsersForGlobalManualInstance&){};
-  	*/
-  
-  bool Linux_SambaInvalidUsersForGlobalResourceAccess::validUser(const char* user)
-  {
+  static bool validUser(const char* user) {
     char ** users = get_samba_users_list();
     if(users){
       for (int i=0; users[i]; i++){
@@ -133,172 +44,313 @@ namespace genProvider {
     }
     return false;
   };
-	
-  void Linux_SambaInvalidUsersForGlobalResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaInvalidUsersForGlobalManualInstance& newInstance)
-  {
-    SambaArray array = SambaArray();
-    char* user_list = get_option(newInstance.getInstanceName().getGroupComponent().getName(),"invalid users");
-    if(user_list)
-      array.populate(user_list);
-    
-     if(!validUser(newInstance.getInstanceName().getPartComponent().getSambaUserName())){
-      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Invalid User!");
-    }else{
-      if(!array.isPresent(string( newInstance.getInstanceName().getPartComponent().getSambaUserName() ))) {
-	array.add( string( newInstance.getInstanceName().getPartComponent().getSambaUserName() ) );
-	
-	set_global_option("invalid users",array.toString().c_str());
-      }
-    }
-  };
   
-  void Linux_SambaInvalidUsersForGlobalResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaInvalidUsersForGlobalInstanceName& instanceName)
-  {
-    SambaArray array = SambaArray();
-    char* user_list = get_option(instanceName.getGroupComponent().getName(),"invalid users");
-    if(user_list)
-      array.populate(user_list);
-    
-    if(array.size() > 1){
-      array.remove( string( instanceName.getPartComponent().getSambaUserName() )); 
-      set_global_option("invalid users",array.toString().c_str());
-    }
-    else
-      set_global_option("invalid users",NULL);
+  //----------------------------------------------------------------------------
+
+  
+  //----------------------------------------------------------------------------
+  //Linux_SambaInvalidUsersForGlobalResourceAccess::Linux_SambaInvalidUsersForGlobalResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaInvalidUsersForGlobalResourceAccess::~Linux_SambaInvalidUsersForGlobalResourceAccess() {
+    terminator();
   }
-  
-    /* Association Interface */
     
-  void Linux_SambaInvalidUsersForGlobalResourceAccess::referencesPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaInvalidUsersForGlobalManualInstanceEnumeration& instEnum)
-  {
-    char* user_list = get_option(sourceInst.getName(),"invalid users");
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaInvalidUsersForGlobalResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaInvalidUsersForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+        Linux_SambaGlobalOptionsInstanceName globalInstName;
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(DEFAULT_GLOBAL_NAME);
+    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+    
+    
+    char* user_list = get_global_option("invalid users");
     
     if(user_list){
       SambaArray array = SambaArray(user_list);
       SambaArrayConstIterator iter;
       
-      for ( iter = array.begin(); iter != array.end(); ++iter)
-	{
-	  if(validUser((*iter).c_str())){
-	    Linux_SambaInvalidUsersForGlobalManualInstance manualInstance;
-	    
-	    Linux_SambaInvalidUsersForGlobalInstanceName instName;
-	    instName.setNamespace(nsp);
-	    instName.setGroupComponent(sourceInst);
-	    
-	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
-	    userInstName.setSambaUserName( (*iter).c_str() );
-	    
-	    instName.setPartComponent(userInstName);
-	    
-	    manualInstance.setInstanceName(instName);
-	    instEnum.addElement(manualInstance);
-	  }
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+	if(validUser((*iter).c_str())){
+	  Linux_SambaInvalidUsersForGlobalInstanceName assocName;
+	  assocName.setNamespace(aNameSpaceP);
+	  assocName.setGroupComponent(globalInstName);
+	  
+	  Linux_SambaUserInstanceName userInstName;
+	  userInstName.setNamespace(aNameSpaceP);
+	  userInstName.setSambaUserName( (*iter).c_str() );
+	  
+	  assocName.setPartComponent(userInstName);
+	  
+	  anInstanceNameEnumeration.addElement(assocName);
 	}
+      }
     }
-  };
+  }
+
   
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaInvalidUsersForGlobalResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaInvalidUsersForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+        Linux_SambaGlobalOptionsInstanceName globalInstName;
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(DEFAULT_GLOBAL_NAME);
+    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+    
+    char* user_list = get_global_option("invalid users");
+    
+    if(user_list){
+      SambaArray array = SambaArray(user_list);
+      SambaArrayConstIterator iter;
+      
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+	if(validUser((*iter).c_str())){
+	  Linux_SambaInvalidUsersForGlobalManualInstance manualInstance;
+	  
+	  Linux_SambaInvalidUsersForGlobalInstanceName instName;
+	  instName.setNamespace(aNameSpaceP);
+	  instName.setGroupComponent(globalInstName);
+	  
+	  Linux_SambaUserInstanceName userInstName;
+	  userInstName.setNamespace(aNameSpaceP);
+	  userInstName.setSambaUserName( (*iter).c_str() );
+	  
+	  instName.setPartComponent(userInstName);
+	  
+	  manualInstance.setInstanceName(instName);
+	  aManualInstanceEnumeration.addElement(manualInstance);
+	}
+      }
+    }
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  Linux_SambaInvalidUsersForGlobalManualInstance 
+  Linux_SambaInvalidUsersForGlobalResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaInvalidUsersForGlobalInstanceName& anInstanceName) {
+
+    Linux_SambaInvalidUsersForGlobalManualInstance aManualInstance;
+    aManualInstance.setInstanceName(anInstanceName);
+    
+    return aManualInstance;
+  }
+
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaInvalidUsersForGlobalResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaInvalidUsersForGlobalManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+
+  Linux_SambaInvalidUsersForGlobalInstanceName
+  Linux_SambaInvalidUsersForGlobalResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaInvalidUsersForGlobalManualInstance& aManualInstance) {
+    
+    SambaArray array = SambaArray();
+    char* user_list = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"invalid users");
+    if(user_list)
+      array.populate(user_list);
+    
+    if(!validUser(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())){
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Invalid User!");
+    }else{
+      if(!array.isPresent(string( aManualInstance.getInstanceName().getPartComponent().getSambaUserName() ))) {
+	array.add( string( aManualInstance.getInstanceName().getPartComponent().getSambaUserName() ) );
+	
+	set_global_option("invalid users",array.toString().c_str());
+      }
+    }
+    
+    return aManualInstance.getInstanceName();
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaInvalidUsersForGlobalResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaInvalidUsersForGlobalInstanceName& anInstanceName) {
+    
+    SambaArray array = SambaArray();
+    char* user_list = get_option(anInstanceName.getGroupComponent().getName(),"invalid users");
+    if(user_list)
+      array.populate(user_list);
+    
+    if(array.size() > 1){
+      array.remove( string( anInstanceName.getPartComponent().getSambaUserName() )); 
+      set_global_option("invalid users",array.toString().c_str());
+
+    } else
+      set_global_option("invalid users",NULL);
+  }
+
+	
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
+  void Linux_SambaInvalidUsersForGlobalResourceAccess::referencesPartComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaInvalidUsersForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    char* user_list = get_option(aSourceInstanceName.getName(),"invalid users");
+    
+    if(user_list){
+      SambaArray array = SambaArray(user_list);
+      SambaArrayConstIterator iter;
+      
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+	if(validUser((*iter).c_str())){
+	  Linux_SambaInvalidUsersForGlobalManualInstance manualInstance;
+	  
+	  Linux_SambaInvalidUsersForGlobalInstanceName instName;
+	  instName.setNamespace(aNameSpaceP);
+	  instName.setGroupComponent(aSourceInstanceName);
+	  
+	  Linux_SambaUserInstanceName userInstName;
+	  userInstName.setNamespace(aNameSpaceP);
+	  userInstName.setSambaUserName( (*iter).c_str() );
+	  
+	  instName.setPartComponent(userInstName);
+	  
+	  manualInstance.setInstanceName(instName);
+	  aManualInstanceEnumeration.addElement(manualInstance);
+	}
+      }
+    }
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaInvalidUsersForGlobalResourceAccess::referencesGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaUserInstanceName& sourceInst,
-   Linux_SambaInvalidUsersForGlobalManualInstanceEnumeration& instEnum)
-  {
-    if(validUser(sourceInst.getSambaUserName())){
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaInvalidUsersForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    if(validUser(aSourceInstanceName.getSambaUserName())){
       char * user_list = get_global_option("invalid users");
       if(user_list){
 	SambaArray array = SambaArray(user_list);
 	SambaArrayConstIterator iter;
 	
-	if(array.isPresent(sourceInst.getSambaUserName())){
+	if(array.isPresent(aSourceInstanceName.getSambaUserName())){
 	  Linux_SambaInvalidUsersForGlobalManualInstance manualInstance;
 	  
 	  Linux_SambaInvalidUsersForGlobalInstanceName instName;
-	  instName.setNamespace(nsp);
-	  instName.setPartComponent(sourceInst);
+	  instName.setNamespace(aNameSpaceP);
+	  instName.setPartComponent(aSourceInstanceName);
 	  
 	  
 	  Linux_SambaGlobalOptionsInstanceName globalInstName;
-	  globalInstName.setNamespace(nsp);
+	  globalInstName.setNamespace(aNameSpaceP);
 	  globalInstName.setName(DEFAULT_GLOBAL_NAME);
 	  globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	  
 	  instName.setGroupComponent(globalInstName);
 	  
 	  manualInstance.setInstanceName(instName);
-	  instEnum.addElement(manualInstance);
+	  aManualInstanceEnumeration.addElement(manualInstance);
 	}
       }
     }
-  };
+  }
+
   
+  //----------------------------------------------------------------------------
+
   void Linux_SambaInvalidUsersForGlobalResourceAccess::associatorsPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaUserInstanceEnumeration& instEnum)
-  { 
-    char* user_list = get_option(sourceInst.getName(),"invalid users");
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
+    
+    char* user_list = get_option(aSourceInstanceName.getName(),"invalid users");
     if(user_list){
       SambaArray array = SambaArray(user_list);
       SambaArrayConstIterator iter;
       
-      for ( iter = array.begin(); iter != array.end(); ++iter)
-	{
-	  if(validUser((*iter).c_str())){
-	    Linux_SambaUserInstance instance;
-	    
-	    Linux_SambaUserInstanceName userInstName;
-	    userInstName.setNamespace(nsp);
-	    userInstName.setSambaUserName( (*iter).c_str() );
-	    
-	    instance.setInstanceName(userInstName);
-	    char *option;
-	    
-	    option = get_user_unix_name((*iter).c_str() );
-	    if ( option )
-	      instance.setSystemUserName( option );
-	    
-	    instEnum.addElement(instance);
-	  }
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+	if(validUser((*iter).c_str())){
+	  Linux_SambaUserInstance instance;
+	  
+	  Linux_SambaUserInstanceName userInstName;
+	  userInstName.setNamespace(aNameSpaceP);
+	  userInstName.setSambaUserName( (*iter).c_str() );
+	  
+	  instance.setInstanceName(userInstName);
+	  char *option;
+	  
+	  option = get_user_unix_name((*iter).c_str() );
+	  if ( option )
+	    instance.setSystemUserName( option );
+	  
+	  anInstanceEnumeration.addElement(instance);
 	}
+      }
     }
-  };
+  }
   
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaInvalidUsersForGlobalResourceAccess::associatorsGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaUserInstanceName& sourceInst,
-   Linux_SambaGlobalOptionsInstanceEnumeration& instEnum)
-  {
-    if(validUser(sourceInst.getSambaUserName())){
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaUserInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
+    if(validUser(aSourceInstanceName.getSambaUserName())){
       char * user_list = get_global_option("invalid users");
       if(user_list){
 	SambaArray array = SambaArray(user_list);
 	SambaArrayConstIterator iter;
 	
-	if(array.isPresent(sourceInst.getSambaUserName())){
+	if(array.isPresent(aSourceInstanceName.getSambaUserName())){
 	  Linux_SambaGlobalOptionsInstance instance;
 	  
 	  Linux_SambaGlobalOptionsInstanceName globalInstName;
-	  globalInstName.setNamespace(nsp);
+	  globalInstName.setNamespace(aNameSpaceP);
 	  globalInstName.setName(DEFAULT_GLOBAL_NAME);
 	  globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	  
@@ -332,15 +384,16 @@ namespace genProvider {
 	  if ( option )
 	    instance.setWorkgroup( option );
 	  
-	  
-	  instEnum.addElement(instance);
+	  anInstanceEnumeration.addElement(instance);
 	}
       }
     }
-  };
-  
+  }
 
-    /* extrinsic methods */
+   
+  
+  // extrinsic methods
+
 	
 }
 

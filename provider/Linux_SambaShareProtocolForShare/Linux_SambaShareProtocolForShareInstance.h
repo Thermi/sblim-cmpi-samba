@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaShareProtocolForShareInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareProtocolForShareInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaShareProtocolForShareInstance_h
 #define Linux_SambaShareProtocolForShareInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,91 +33,88 @@
 
 #include "Linux_SambaShareProtocolForShareInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaShareProtocolForShareInstance {
-  public:
-       Linux_SambaShareProtocolForShareInstance();
-  	
-       Linux_SambaShareProtocolForShareInstance
-  	    (const Linux_SambaShareProtocolForShareInstance& original);
-  	   
-       Linux_SambaShareProtocolForShareInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaShareProtocolForShareInstance();
        
-       Linux_SambaShareProtocolForShareInstance& operator=
-  	    (const Linux_SambaShareProtocolForShareInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaShareProtocolForShareInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaShareProtocolForShareInstanceName m_instanceName;
+    CMPIUint16 m_IsCurrent;
+    CMPIUint16 m_IsDefault;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaShareProtocolForShareInstanceName& val);        
-       const Linux_SambaShareProtocolForShareInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+      unsigned int IsCurrent:1;
+      unsigned int IsDefault:1;
 
-       unsigned int isIsCurrentSet() const;
-       void setIsCurrent(const CMPIUint16 val);
-       const CMPIUint16 getIsCurrent() const;
+    } isSet;
+    
+    public:
+    Linux_SambaShareProtocolForShareInstance();
+    Linux_SambaShareProtocolForShareInstance(
+      const Linux_SambaShareProtocolForShareInstance& anInstance);
+    Linux_SambaShareProtocolForShareInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaShareProtocolForShareInstance();
+       
+    Linux_SambaShareProtocolForShareInstance& operator=(
+      const Linux_SambaShareProtocolForShareInstance& anInstance);
+       
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaShareProtocolForShareInstanceName& anInstanceName);        
+    const Linux_SambaShareProtocolForShareInstanceName& getInstanceName() const;
 
-       unsigned int isIsDefaultSet() const;
-       void setIsDefault(const CMPIUint16 val);
-       const CMPIUint16 getIsDefault() const;
-       
-  private:
-       void init();
-       void init(const Linux_SambaShareProtocolForShareInstance& original);
-       void reset();
-       
-       Linux_SambaShareProtocolForShareInstanceName m_instanceName;
-       CMPIUint16 m_IsCurrent;
-       CMPIUint16 m_IsDefault;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-         unsigned int IsCurrent:1;
-         unsigned int IsDefault:1;
-       } isSet;
+    unsigned int isIsCurrentSet() const;
+    void setIsCurrent(const CMPIUint16 aValue);
+    const CMPIUint16 getIsCurrent() const;
+
+    unsigned int isIsDefaultSet() const;
+    void setIsDefault(const CMPIUint16 aValue);
+    const CMPIUint16 getIsDefault() const;
+
+
   };
   
-  
-  struct Linux_SambaShareProtocolForShareInstanceEnumerationElement{
-  	Linux_SambaShareProtocolForShareInstance* m_elementP;
-  	Linux_SambaShareProtocolForShareInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaShareProtocolForShareInstanceEnumerationElement();
-  	~Linux_SambaShareProtocolForShareInstanceEnumerationElement();  	
+  struct Linux_SambaShareProtocolForShareInstanceEnumerationElement {
+
+    Linux_SambaShareProtocolForShareInstance* m_elementP;
+    Linux_SambaShareProtocolForShareInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaShareProtocolForShareInstanceEnumerationElement();
+    ~Linux_SambaShareProtocolForShareInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaShareProtocolForShareInstanceEnumeration {
-  	private:
-  	  Linux_SambaShareProtocolForShareInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaShareProtocolForShareInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaShareProtocolForShareInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaShareProtocolForShareInstanceEnumeration();
-  	  
-  	  Linux_SambaShareProtocolForShareInstanceEnumeration(
-  	   const Linux_SambaShareProtocolForShareInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaShareProtocolForShareInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaShareProtocolForShareInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaShareProtocolForShareInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaShareProtocolForShareInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaShareProtocolForShareInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaShareProtocolForShareInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaShareProtocolForShareInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaShareProtocolForShareInstanceEnumeration();
+    Linux_SambaShareProtocolForShareInstanceEnumeration(
+      const Linux_SambaShareProtocolForShareInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaShareProtocolForShareInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaShareProtocolForShareInstance& getNext();
+    int getSize() const;
+    const Linux_SambaShareProtocolForShareInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaShareProtocolForShareInstance& anInstance);
+
+  };
+
+}
+
+#endif

@@ -1,106 +1,133 @@
-/**
- *  Linux_SambaGlobalBrowseForGlobalRepositoryExternal.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalBrowseForGlobalRepositoryExternal.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGlobalBrowseForGlobalRepositoryExternal.h"
 
-namespace genProvider{
+namespace genProvider {
 	
+	//----------------------------------------------------------------------------
   Linux_SambaGlobalBrowseForGlobalRepositoryExternal::Linux_SambaGlobalBrowseForGlobalRepositoryExternal(
-   const CmpiBroker& brkr, const CmpiContext& ctx ) 
-   : broker(brkr), context(ctx) {};
+    const CmpiBroker& aBroker,
+    const CmpiContext& aContext) 
+    : m_broker(aBroker),
+    m_context(aContext) { }
   
-  const char * Linux_SambaGlobalBrowseForGlobalRepositoryExternal::
-   nsp="IBMShadow/cimv2";
+	//----------------------------------------------------------------------------
+  const char* Linux_SambaGlobalBrowseForGlobalRepositoryExternal::s_shadowNameSpaceP = "IBMShadow/cimv2";
    
-  Linux_SambaGlobalBrowseForGlobalRepositoryExternal::
-   ~Linux_SambaGlobalBrowseForGlobalRepositoryExternal(){};
+	//----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseForGlobalRepositoryExternal::~Linux_SambaGlobalBrowseForGlobalRepositoryExternal() { }
     
-  void Linux_SambaGlobalBrowseForGlobalRepositoryExternal::enumInstanceNames(
-   Linux_SambaGlobalBrowseForGlobalInstanceNameEnumeration& instnames) {
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseForGlobalRepositoryExternal::enumInstanceNames(
+    Linux_SambaGlobalBrowseForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
 
-    CmpiObjectPath op(nsp,"Linux_SambaGlobalBrowseForGlobal");
-    CmpiEnumeration en=broker.enumInstanceNames(context,op);
-    while(en.hasNext()) {
-      CmpiObjectPath opi = en.getNext();
-      Linux_SambaGlobalBrowseForGlobalInstanceName iname(opi);
-      instnames.addElement(iname);
+    CmpiObjectPath cmpiClassObjectPath(s_shadowNameSpaceP,"Linux_SambaGlobalBrowseForGlobal");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstanceNames(m_context,cmpiClassObjectPath);
+    while(cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiObjectPath = cmpiEnumeration.getNext();
+      Linux_SambaGlobalBrowseForGlobalInstanceName instanceName(cmpiObjectPath);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
-  };
+  }
   	  
-  void Linux_SambaGlobalBrowseForGlobalRepositoryExternal::enumInstances(
-   const char* *properties,
-   Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration& instances) {
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseForGlobalRepositoryExternal::enumInstances(
+    const char** aPropertiesPP,
+    Linux_SambaGlobalBrowseForGlobalRepositoryInstanceEnumeration& aRepositoryInstanceEnumeration) {
    		
-    CmpiObjectPath op(nsp,"Linux_SambaGlobalBrowseForGlobal");
-    CmpiEnumeration en=broker.enumInstances(context,op,properties);
-    while(en.hasNext()) {
-      CmpiInstance inst = en.getNext();
-      Linux_SambaGlobalBrowseForGlobalRepositoryInstance instance(inst,nsp);
-      instances.addElement(instance);
+    CmpiObjectPath cmpiClassObjectPath(s_shadowNameSpaceP,"Linux_SambaGlobalBrowseForGlobal");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstances(m_context,cmpiClassObjectPath,aPropertiesPP);
+    while(cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaGlobalBrowseForGlobalRepositoryInstance repositoryInstance(cmpiInstance,s_shadowNameSpaceP);
+      aRepositoryInstanceEnumeration.addElement(repositoryInstance);
     }
-  };
+  
+  }
   	  
+  //----------------------------------------------------------------------------
   Linux_SambaGlobalBrowseForGlobalRepositoryInstance
-   Linux_SambaGlobalBrowseForGlobalRepositoryExternal::getInstance(
-   const char* *properties,
-   const Linux_SambaGlobalBrowseForGlobalInstanceName& instanceName) {
+  Linux_SambaGlobalBrowseForGlobalRepositoryExternal::getInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalBrowseForGlobalInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    op.setNameSpace(nsp);
-    CmpiInstance inst=broker.getInstance(context,op,properties);
-    return Linux_SambaGlobalBrowseForGlobalRepositoryInstance(inst,nsp);
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    cmpiObjectPath.setNameSpace(s_shadowNameSpaceP);
+    CmpiInstance cmpiInstance = 
+      m_broker.getInstance(m_context,cmpiObjectPath,aPropertiesPP);
+    return Linux_SambaGlobalBrowseForGlobalRepositoryInstance(cmpiInstance,s_shadowNameSpaceP);
+
   }
       
-  void Linux_SambaGlobalBrowseForGlobalRepositoryExternal::setInstance(
-   const char* *properties,
-   const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& instance){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseForGlobalRepositoryExternal::setInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& aRepositoryInstance) {
   
     //make a copy of the given instance and set it to the right nameSpace
-    Linux_SambaGlobalBrowseForGlobalInstanceName instanceName(instance.getInstanceName());
-    instanceName.setNamespace(nsp,1);
-    Linux_SambaGlobalBrowseForGlobalRepositoryInstance copiedInstance(instance);
-    copiedInstance.setInstanceName(instanceName);
+    Linux_SambaGlobalBrowseForGlobalInstanceName instanceName(aRepositoryInstance.getInstanceName());
+    instanceName.setNamespace(s_shadowNameSpaceP,1);
+    Linux_SambaGlobalBrowseForGlobalRepositoryInstance copiedRepositoryInstance(aRepositoryInstance);
+    copiedRepositoryInstance.setInstanceName(instanceName);
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=copiedInstance.getCmpiInstance();
-    broker.setInstance(context,op,inst,properties);
+    CmpiObjectPath cmpiObjectPath = instanceName.getObjectPath();
+    CmpiInstance cmpiInstance = copiedRepositoryInstance.getCmpiInstance();
+    m_broker.setInstance(m_context,cmpiObjectPath,cmpiInstance,aPropertiesPP);
+  
   }
       
-  void Linux_SambaGlobalBrowseForGlobalRepositoryExternal::createInstance(
-   const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& instance){
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalBrowseForGlobalInstanceName
+  Linux_SambaGlobalBrowseForGlobalRepositoryExternal::createInstance(
+    const Linux_SambaGlobalBrowseForGlobalRepositoryInstance& aRepositoryInstance) {
   
     //make a copy of the given instance and set it to the right nameSpace
-    Linux_SambaGlobalBrowseForGlobalInstanceName instanceName(instance.getInstanceName());
-    instanceName.setNamespace(nsp,1);
-    Linux_SambaGlobalBrowseForGlobalRepositoryInstance copiedInstance(instance);
-    copiedInstance.setInstanceName(instanceName);
+    Linux_SambaGlobalBrowseForGlobalInstanceName instanceName(aRepositoryInstance.getInstanceName());
+    instanceName.setNamespace(s_shadowNameSpaceP,1);
+    Linux_SambaGlobalBrowseForGlobalRepositoryInstance copiedRepositoryInstance(aRepositoryInstance);
+    copiedRepositoryInstance.setInstanceName(instanceName);
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=copiedInstance.getCmpiInstance();
-    broker.createInstance(context,op,inst);
+    CmpiObjectPath cmpiObjectPath = instanceName.getObjectPath();
+    CmpiInstance cmpiInstance = copiedRepositoryInstance.getCmpiInstance();
+    return Linux_SambaGlobalBrowseForGlobalInstanceName(
+		m_broker.createInstance(m_context,cmpiObjectPath,cmpiInstance));
+  
   }
   
-  void Linux_SambaGlobalBrowseForGlobalRepositoryExternal::deleteInstance(
-   const Linux_SambaGlobalBrowseForGlobalInstanceName& instanceName){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalBrowseForGlobalRepositoryExternal::deleteInstance(
+    const Linux_SambaGlobalBrowseForGlobalInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    op.setNameSpace(nsp);
-    broker.deleteInstance(context,op);
-  }  
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    cmpiObjectPath.setNameSpace(s_shadowNameSpaceP);
+    m_broker.deleteInstance(m_context,cmpiObjectPath);
+  
+  }
+    
 }

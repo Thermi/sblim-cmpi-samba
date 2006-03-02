@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaUserInstanceName.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaUserInstanceName.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaUserInstanceName.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,322 +28,376 @@
 
 namespace genProvider {
 	
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaUserInstanceName
-  //*********************************************************
-  
-  //empty constructor
-  Linux_SambaUserInstanceName::
-   Linux_SambaUserInstanceName(){
+  //---------------------------------------------------------------------------- 
+  // empty constructor
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceName::Linux_SambaUserInstanceName() {
    	init();  	
-  };
+  }
   
+  //---------------------------------------------------------------------------- 
+  // copy constructor	
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceName::Linux_SambaUserInstanceName(
+    const Linux_SambaUserInstanceName& anInstanceName) {
+   	init(anInstanceName);  	
+  }
   
-  //copy constructor	
-  Linux_SambaUserInstanceName::
-   Linux_SambaUserInstanceName
-   (const Linux_SambaUserInstanceName& original){
-   	init(original);  	
-  };
-  
-  
-  //contructor using CmpiObjectPath
-  Linux_SambaUserInstanceName::
-   Linux_SambaUserInstanceName (const CmpiObjectPath& path){
+  //---------------------------------------------------------------------------- 
+  // constructor using CmpiObjectPath
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceName::Linux_SambaUserInstanceName(
+    const CmpiObjectPath& path) {
     
     init();
     
-    m_CIMClassNameP=path.getClassName().charPtr();
+    m_CIMClassNameP = path.getClassName().charPtr();
     
-    CmpiString namespaceOP;
-    namespaceOP=path.getNameSpace();
-    setNamespace(namespaceOP.charPtr(),1);
-    
+    CmpiString namespaceP;
+    namespaceP = path.getNameSpace();
+    setNamespace(namespaceP.charPtr(),1);
+        
     CmpiString SambaUserName = path.getKey("SambaUserName");
     setSambaUserName(SambaUserName.charPtr());
+
     
   }
   
-  
-  //destructor
-  Linux_SambaUserInstanceName::
-   ~Linux_SambaUserInstanceName(){
+  //---------------------------------------------------------------------------- 
+  // destructor
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceName::~Linux_SambaUserInstanceName() {
    	reset();  	  
-  };
-  
-  
-  //copy operator
-  Linux_SambaUserInstanceName&
-   Linux_SambaUserInstanceName::operator=
-   (const Linux_SambaUserInstanceName& original){    
-    init(original);
-   	return *this;    
   }
   
+  //---------------------------------------------------------------------------- 
+  //copy operator
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceName&
+  Linux_SambaUserInstanceName::operator=(
+    const Linux_SambaUserInstanceName& anInstanceName) {    
+    
+    init(anInstanceName);
+   	return *this;    
   
+  }
+  
+  //---------------------------------------------------------------------------- 
   //returns the related CmpiObjectPath
-  CmpiObjectPath Linux_SambaUserInstanceName::
-   getObjectPath() const{
+  //---------------------------------------------------------------------------- 
+  CmpiObjectPath 
+  Linux_SambaUserInstanceName::getObjectPath() const {
    	
-   	CmpiObjectPath objectPath(m_namespace, m_CIMClassNameP);
+   	CmpiObjectPath objectPath(m_nameSpaceP, m_CIMClassNameP);
+   	  	objectPath.setKey(
+  	  "SambaUserName",
+  	  CmpiData(m_SambaUserName));
 
-  	objectPath.setKey("SambaUserName",CmpiData(m_SambaUserName));
   	
   	return objectPath;
   	
   }
   
-  
-  //adds the related CmpiObjectPath to an existing cmpiInstance
-  void Linux_SambaUserInstanceName::fillKeys(CmpiInstance& cmpiInstance) const{
+  //---------------------------------------------------------------------------- 
+  // adds the related CmpiObjectPath to an existing cmpiInstance
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaUserInstanceName::fillKeys(CmpiInstance& cmpiInstance) const {
   	
-
-  	if(isSet.SambaUserName){
-  	  cmpiInstance.setProperty("SambaUserName",CmpiData(m_SambaUserName));
+  	if (isSet.SambaUserName) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "SambaUserName",
+  	    CmpiData(m_SambaUserName));
   	}
+
   }
   
   
-  //NameSpace related methods
-  unsigned int Linux_SambaUserInstanceName::
-   isNameSpaceSet() const{
-  	return isSet.m_namespace;
+  //---------------------------------------------------------------------------- 
+  // NameSpace related methods
+  //---------------------------------------------------------------------------- 
+  unsigned int 
+  Linux_SambaUserInstanceName::isNameSpaceSet() const {
+  	return isSet.m_nameSpaceP;
   }
   
-  const char * Linux_SambaUserInstanceName::
-   getNamespace() const {
-    if(!isSet.m_namespace)
+  //---------------------------------------------------------------------------- 
+  const char* 
+  Linux_SambaUserInstanceName::getNamespace() const {
+    if ( ! isSet.m_nameSpaceP) {
    	  throw CmpiErrorFormater::getErrorException(
    	   CmpiErrorFormater::NOT_SET,
-   	   "NameSpace not set in Linux_SambaUser instanceName");
-  	return m_namespace;
+   	   "NameSpace",
+   	   "Linux_SambaUser");
+   	}
+  	return m_nameSpaceP;
   }
 
-  void Linux_SambaUserInstanceName::
-   setNamespace(const char* val, int makeCopy){
-    if (isSet.m_namespace) {
-      delete m_namespace;
+  //---------------------------------------------------------------------------- 
+  void
+  Linux_SambaUserInstanceName::setNamespace(
+    const char* aNameSpaceP,
+    int aCopyFlag) {
+  
+    if (isSet.m_nameSpaceP) {
+      delete m_nameSpaceP;
     }
-    if (makeCopy&&val) {
-      char* tmpval = new char[strlen(val)+1];
-      strcpy(tmpval,val);
-      m_namespace = tmpval;
+    
+    if (aCopyFlag && aNameSpaceP) {
+      char* nameSpaceP = new char[strlen(aNameSpaceP) + 1];
+      strcpy(nameSpaceP,aNameSpaceP);
+      m_nameSpaceP = nameSpaceP;
     } else {
-      m_namespace = val;
+      m_nameSpaceP = aNameSpaceP;
     }
-    isSet.m_namespace=1;
+    
+    isSet.m_nameSpaceP = 1;
   }
-       
-  //SambaUserName related methods
-  unsigned int Linux_SambaUserInstanceName::isSambaUserNameSet() const{
+         
+  //----------------------------------------------------------------------------
+  // SambaUserName related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaUserInstanceName::isSambaUserNameSet() const {
     return isSet.SambaUserName;
   }
-  void  Linux_SambaUserInstanceName::
-   setSambaUserName(const char* val, int makeCopy){
-    if (isSet.SambaUserName) {
-      delete []m_SambaUserName;
-    }
-    if (makeCopy&&val) {
-      char* tmpval = new char[strlen(val)+1];
-      strcpy(tmpval,val);
-      m_SambaUserName = tmpval;
-    } else {
-      m_SambaUserName = val;
-    }
-    isSet.SambaUserName=1;
-  }       
-  const char* Linux_SambaUserInstanceName::
-   getSambaUserName() const{
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaUserInstanceName::setSambaUserName(
+    const char* aValueP,
+    int aCopyFlag) {
     
-    if(!isSet.SambaUserName)
+    if (isSet.SambaUserName) {
+      delete [] m_SambaUserName;
+    }
+    
+    if (aCopyFlag && aValueP) {
+      char* valueP = new char[strlen(aValueP) + 1];
+      strcpy(valueP,aValueP);
+      m_SambaUserName = valueP;
+    } else {
+      m_SambaUserName = aValueP;
+    }
+    
+    isSet.SambaUserName = 1;
+
+  }       
+
+  //----------------------------------------------------------------------------
+  const char*
+  Linux_SambaUserInstanceName::getSambaUserName() const {
+    
+    if ( ! isSet.SambaUserName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "SambaUserName not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "SambaUserName",
+        "Linux_SambaUser");
+   	}
+
+
     return m_SambaUserName;
+
   }
 
-  
-  //set isSet variables to FALSE
-  void Linux_SambaUserInstanceName::init(){
+
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaUserInstanceName::init() {
   	
-  	m_CIMClassNameP="Linux_SambaUser";
-  	isSet.m_namespace=0;    	
-    isSet.SambaUserName=0;
+  	m_CIMClassNameP = "Linux_SambaUser";
+  	isSet.m_nameSpaceP = 0; 
+  	    isSet.SambaUserName = 0;
+
+  	
   }
   
-  
+  //---------------------------------------------------------------------------- 
   //copies another instance properties in this
-  void Linux_SambaUserInstanceName::init
-   (const Linux_SambaUserInstanceName& original){
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaUserInstanceName::init(
+    const Linux_SambaUserInstanceName& anOriginal) {
+   	
    	init();
    	   	
-    m_CIMClassNameP=original.m_CIMClassNameP;
-    if(original.isNameSpaceSet()){
-      setNamespace(original.getNamespace(),1);
-    }   	
-    if(original.isSambaUserNameSet()){
-      const char* SambaUserNameOriginal=original.getSambaUserName();
-      setSambaUserName(SambaUserNameOriginal, 1);
-    }    
-  }
-  
-  //reset the instanceName data
-  void Linux_SambaUserInstanceName::reset(){   	
-  	if (isSet.m_namespace)
-  	  delete(m_namespace);
-
-  	if (isSet.SambaUserName)
-  	  delete(m_SambaUserName);  	  
-  };
-  
-  
-  
-  
-  //*********************************************************
-  //Linux_SambaUserInstanceNameEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaUserInstanceNameEnumerationElement::
-   Linux_SambaUserInstanceNameEnumerationElement(){
-   	
-  	m_elementP=0;
-  	m_nextP=0;
-  	  
-  };
-  
-  
-  Linux_SambaUserInstanceNameEnumerationElement::
-   ~Linux_SambaUserInstanceNameEnumerationElement(){
-   	
-  	if (m_elementP!=0)
-  	  delete(m_elementP);
-  	if (m_nextP!=0)
-  	  delete(m_nextP);
-  	  
-  };
-
-  
-  //*********************************************************
-  //Linux_SambaUserInstanceNameEnumeration
-  //*********************************************************
-  
-  Linux_SambaUserInstanceNameEnumeration::
-   Linux_SambaUserInstanceNameEnumeration(){
-   	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
-  
-  Linux_SambaUserInstanceNameEnumeration::
-   Linux_SambaUserInstanceNameEnumeration(const CmpiArray& arr){
-  	
-  	firstElementP=0;
-    currentElementP=0;
-    endElementP=0;
-    
-    int size = arr.size();
-    for (int i=0; i < size; i++) {
-     addElement(Linux_SambaUserInstanceName(arr[i]));
+    m_CIMClassNameP = anOriginal.m_CIMClassNameP;
+    if (anOriginal.isNameSpaceSet()){
+      setNamespace(anOriginal.getNamespace(),1);
     }
+       	
+    if (anOriginal.isSambaUserNameSet()) {
+      const char* SambaUserNameOriginal = anOriginal.getSambaUserName();
+      setSambaUserName(SambaUserNameOriginal,1);
+    }
+    
+  
   }
   
-  Linux_SambaUserInstanceNameEnumeration::
-   Linux_SambaUserInstanceNameEnumeration(
-   const Linux_SambaUserInstanceNameEnumeration& original){
+  //---------------------------------------------------------------------------- 
+  void
+  Linux_SambaUserInstanceName::reset() {
+  	if (isSet.m_nameSpaceP) {
+  	  delete(m_nameSpaceP);
+  	}
+  	
+  	if (isSet.SambaUserName) {
+  	  delete(m_SambaUserName);
+  	}
+  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceNameEnumerationElement::Linux_SambaUserInstanceNameEnumerationElement() {
+  	m_elementP = 0;
+  	m_nextP = 0; 
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceNameEnumerationElement::~Linux_SambaUserInstanceNameEnumerationElement() {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+  	if (m_elementP) {
+  	  delete(m_elementP);
+  	}
+  	if (m_nextP) {
+  	  delete(m_nextP);
+  	}
+  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceNameEnumeration::Linux_SambaUserInstanceNameEnumeration() {
+  	 m_firstElementP = 0;
+     m_currentElementP = 0;
+     m_endElementP = 0;
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceNameEnumeration::Linux_SambaUserInstanceNameEnumeration(
+    const CmpiArray& aCmpiArray) {
+  	
+  	m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
+    
+    int size = aCmpiArray.size();
+    for (int x=0; x < size; ++x) {
+      addElement(Linux_SambaUserInstanceName(aCmpiArray[x]));
+    }
+    
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceNameEnumeration::Linux_SambaUserInstanceNameEnumeration(
+    const Linux_SambaUserInstanceNameEnumeration& anInstanceNameEnumeration) {
+   	
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
-  
+    int size = anInstanceNameEnumeration.getSize();
+    for (int x=0; x < size; ++x) {
+      addElement(anInstanceNameEnumeration.getElement(x));
+    }
+
+  }
   	  
-  Linux_SambaUserInstanceNameEnumeration::
-   ~Linux_SambaUserInstanceNameEnumeration(){
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceNameEnumeration::~Linux_SambaUserInstanceNameEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
-  
-  	  
-  void Linux_SambaUserInstanceNameEnumeration::reset(){
+  }
+
+  //---------------------------------------------------------------------------- 
+  void 
+  Linux_SambaUserInstanceNameEnumeration::reset() {
   	
-  	currentElementP=firstElementP;
-  };
+  	m_currentElementP = m_firstElementP;
   
-  	  
-  bool Linux_SambaUserInstanceNameEnumeration::hasNext() const{
+  }
+
+  //---------------------------------------------------------------------------- 
+  bool 
+  Linux_SambaUserInstanceNameEnumeration::hasNext() const {
   	
-  	return (currentElementP!=0);
+  	return (m_currentElementP != 0);
   
-  };
+  }
   
-  int Linux_SambaUserInstanceNameEnumeration::getSize() const{
+  //---------------------------------------------------------------------------- 
+  int
+  Linux_SambaUserInstanceNameEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaUserInstanceNameEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaUserInstanceNameEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
-  };
   
+  }
+  
+  //---------------------------------------------------------------------------- 
   const Linux_SambaUserInstanceName&  
-   Linux_SambaUserInstanceNameEnumeration::getElement(int pos) const{
+   Linux_SambaUserInstanceNameEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaUserInstanceNameEnumerationElement* followingP=firstElementP;
+    Linux_SambaUserInstanceNameEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x=0;
+    while (followingP && (x < anIndex) ) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
   
-  	  
+  }
+  
+  //---------------------------------------------------------------------------- 
   const Linux_SambaUserInstanceName&
-   Linux_SambaUserInstanceNameEnumeration::getNext() {
+  Linux_SambaUserInstanceNameEnumeration::getNext() {
    	
-  	 Linux_SambaUserInstanceNameEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+  	 Linux_SambaUserInstanceNameEnumerationElement* currentP = m_currentElementP;
+  	 m_currentElementP = m_currentElementP->m_nextP;
   	 
   	 return *(currentP->m_elementP);
-  };
-  	  
-  void Linux_SambaUserInstanceNameEnumeration::addElement
-   (const Linux_SambaUserInstanceName& elementP){
-   	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaUserInstanceNameEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaUserInstanceName(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaUserInstanceNameEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaUserInstanceName(elementP);
-  	}
-  };
   
-  Linux_SambaUserInstanceNameEnumeration::operator CmpiArray() const{
-  	int size=getSize();
-   	CmpiArray arr=CmpiArray(size,CMPI_instance);
-   	for(int i=0;i<size;i++){
-   	  arr[i]=getElement(i).getObjectPath();
+  }
+  	  
+  //---------------------------------------------------------------------------- 
+  void Linux_SambaUserInstanceNameEnumeration::addElement
+   (const Linux_SambaUserInstanceName& anElementP){
+   	
+  	if (m_firstElementP==0) {
+  	  m_firstElementP = new Linux_SambaUserInstanceNameEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaUserInstanceName(anElementP);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaUserInstanceNameEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP=new Linux_SambaUserInstanceName(anElementP);
+  	}
+
+  }
+  
+  //---------------------------------------------------------------------------- 
+  Linux_SambaUserInstanceNameEnumeration::operator CmpiArray() const {
+  	int size = getSize();
+   	CmpiArray cmpiArray = CmpiArray(size,CMPI_instance);
+   	for (int x=0; x < size; ++x) {
+   	  cmpiArray[x]=getElement(x).getObjectPath();
    	}
-   	return arr;
-  };  
+   	return cmpiArray;
+  }
+  
 }
- 

@@ -1,38 +1,51 @@
-/**
- *  Linux_SambaGlobalOptionsResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalOptionsResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGlobalOptionsResourceAccess.h"
 
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-  void Linux_SambaGlobalOptionsResourceAccess::setInstanceNameProperties(const char* nsp,     
-    Linux_SambaGlobalOptionsInstanceName& anInstanceName)
-  {
-    anInstanceName.setNamespace(nsp);
+  //----------------------------------------------------------------------------
+  // manual written methods
+
+  static void setInstanceNameProperties(
+      const char* aNameSpaceP,
+      Linux_SambaGlobalOptionsInstanceName& anInstanceName) {
+    
+    anInstanceName.setNamespace(aNameSpaceP);
     anInstanceName.setName(DEFAULT_GLOBAL_NAME);
     anInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
   }
+
   
-  void Linux_SambaGlobalOptionsResourceAccess::setInstanceProperties(
-   Linux_SambaGlobalOptionsManualInstance& aManualInstance)
-  {
+  //----------------------------------------------------------------------------
+
+
+  static void setInstanceProperties(
+      Linux_SambaGlobalOptionsManualInstance& aManualInstance) {
+
     char *option;
     option = get_global_option(BIND_INTERFACES_ONLY);	
     if ( option )
@@ -40,7 +53,7 @@ namespace genProvider {
 	aManualInstance.setBindInterfacesOnly( true );
       else
 	aManualInstance.setBindInterfacesOnly( false );
-
+    
     option = get_global_option(INTERFACES);	
     if ( option )
       aManualInstance.setInterfaces( option );
@@ -48,7 +61,7 @@ namespace genProvider {
     option = get_global_option(NETBIOS_ALIASES);	
     if ( option )
       aManualInstance.setNetbiosAlias( option );
-
+    
     option = get_global_option(NETBIOS_NAME);	
     if ( option )
       aManualInstance.setNetbiosName( option );
@@ -60,104 +73,129 @@ namespace genProvider {
     option = get_global_option(WORKGROUP);	
     if ( option )
       aManualInstance.setWorkgroup( option );
-    	
-  } 
+  }
+
+  //----------------------------------------------------------------------------
+
   
+  //----------------------------------------------------------------------------
   //Linux_SambaGlobalOptionsResourceAccess::Linux_SambaGlobalOptionsResourceAccess();
-  Linux_SambaGlobalOptionsResourceAccess::~Linux_SambaGlobalOptionsResourceAccess() { };
+
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalOptionsResourceAccess::~Linux_SambaGlobalOptionsResourceAccess() {
+    terminator();
+  }
     
-  /* intrinsic methods */
-    
-  void Linux_SambaGlobalOptionsResourceAccess::enumInstanceNames(
-     const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-     Linux_SambaGlobalOptionsInstanceNameEnumeration& instnames)
-  {
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalOptionsResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaGlobalOptionsInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
     Linux_SambaGlobalOptionsInstanceName instanceName;
-    setInstanceNameProperties(nsp,instanceName);
-    instnames.addElement(instanceName); 
-  };
+    setInstanceNameProperties(aNameSpaceP,instanceName);
+    anInstanceNameEnumeration.addElement(instanceName);
+  }
+
   
-  	
-  void Linux_SambaGlobalOptionsResourceAccess::enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaGlobalOptionsManualInstanceEnumeration& instances)
-  {
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaGlobalOptionsResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaGlobalOptionsManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaGlobalOptionsManualInstance aManualInstance;
     Linux_SambaGlobalOptionsInstanceName instanceName;
     
-    setInstanceNameProperties(nsp,instanceName);
+    setInstanceNameProperties(aNameSpaceP,instanceName);
     aManualInstance.setInstanceName(instanceName);
-
+    
     setInstanceProperties(aManualInstance);
     
-    instances.addElement(aManualInstance);
-  };
+    aManualInstanceEnumeration.addElement(aManualInstance);
+  }
+
   
-  
+  //----------------------------------------------------------------------------
+
   Linux_SambaGlobalOptionsManualInstance 
-     Linux_SambaGlobalOptionsResourceAccess::getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalOptionsInstanceName& instanceName)
-  {
+  Linux_SambaGlobalOptionsResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& anInstanceName) {
+
     Linux_SambaGlobalOptionsManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
+    aManualInstance.setInstanceName(anInstanceName);
     
     setInstanceProperties(aManualInstance);
+    
+    return aManualInstance;
+  }
 
-    return aManualInstance;      
-  };
+  //----------------------------------------------------------------------------
 
+  void
+  Linux_SambaGlobalOptionsResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaGlobalOptionsManualInstance& aManualInstance) {
+    
+    if ( aManualInstance.isBindInterfacesOnlySet() ) {
+      if(aManualInstance.getBindInterfacesOnly())  
+	set_global_option(BIND_INTERFACES_ONLY,YES);
+      else
+	set_global_option(BIND_INTERFACES_ONLY,NO);
+    }
+    
+    if ( aManualInstance.isInterfacesSet() )
+      set_global_option(INTERFACES, aManualInstance.getInterfaces());
+    
+    if ( aManualInstance.isNetbiosAliasSet() )
+      set_global_option(NETBIOS_ALIASES, aManualInstance.getNetbiosAlias());
+    
+    if ( aManualInstance.isNetbiosNameSet() )
+      set_global_option(NETBIOS_NAME, aManualInstance.getNetbiosName());
+    
+    if ( aManualInstance.isServerStringSet() )
+      set_global_option(SERVER_STRING, aManualInstance.getServerString());
+    
+    if ( aManualInstance.isWorkgroupSet() )
+      set_global_option(WORKGROUP, aManualInstance.getWorkgroup());
+  }
 
-  void Linux_SambaGlobalOptionsResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalOptionsManualInstance& newInstance)
-  {
-    
-    if ( newInstance.isBindInterfacesOnlySet() )
-      {
-	if(newInstance.getBindInterfacesOnly())  
-	  set_global_option(BIND_INTERFACES_ONLY,YES);
-	else
-	  set_global_option(BIND_INTERFACES_ONLY,NO);
-      }
-    
-    if ( newInstance.isInterfacesSet() )
-      set_global_option(INTERFACES, newInstance.getInterfaces());
-		 		     
-    if ( newInstance.isNetbiosAliasSet() )
-      set_global_option(NETBIOS_ALIASES, newInstance.getNetbiosAlias());
-    
-    if ( newInstance.isNetbiosNameSet() )
-      set_global_option(NETBIOS_NAME, newInstance.getNetbiosName());
-    
-    if ( newInstance.isServerStringSet() )
-      set_global_option(SERVER_STRING, newInstance.getServerString());
-    
-    if ( newInstance.isWorkgroupSet() )
-      set_global_option(WORKGROUP, newInstance.getWorkgroup());
-    
-    };
-
-
-        /*
-    void Linux_SambaGlobalOptionsResourceAccess::createInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaGlobalOptionsManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaGlobalOptionsResourceAccess::deleteInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaGlobalOptionsInstanceName&){};
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaGlobalOptionsInstanceName
+  Linux_SambaGlobalOptionsResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalOptionsManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGlobalOptionsResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalOptionsInstanceName& anInstanceName) { }
 	*/
-    
-    /* extrinsic methods */
+	
+
+  
+  // extrinsic methods
+
 	
 }
 

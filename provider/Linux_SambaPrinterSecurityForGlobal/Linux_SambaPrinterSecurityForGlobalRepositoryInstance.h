@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaPrinterSecurityForGlobalRepositoryInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterSecurityForGlobalRepositoryInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaPrinterSecurityForGlobalRepositoryInstance_h
 #define Linux_SambaPrinterSecurityForGlobalRepositoryInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaPrinterSecurityForGlobalInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaPrinterSecurityForGlobalRepositoryInstance {
-  public:
-       Linux_SambaPrinterSecurityForGlobalRepositoryInstance();
-  	
-       Linux_SambaPrinterSecurityForGlobalRepositoryInstance
-  	    (const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& original);
-  	   
-       Linux_SambaPrinterSecurityForGlobalRepositoryInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaPrinterSecurityForGlobalRepositoryInstance();
        
-       Linux_SambaPrinterSecurityForGlobalRepositoryInstance& operator=
-  	    (const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaPrinterSecurityForGlobalInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaPrinterSecurityForGlobalInstanceName& val);        
-       const Linux_SambaPrinterSecurityForGlobalInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstance();
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstance(
+      const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& anInstance);
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaPrinterSecurityForGlobalRepositoryInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& original);
-       void reset();
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstance& operator=(
+      const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& anInstance);
        
-       Linux_SambaPrinterSecurityForGlobalInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaPrinterSecurityForGlobalInstanceName& anInstanceName);        
+    const Linux_SambaPrinterSecurityForGlobalInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement{
-  	Linux_SambaPrinterSecurityForGlobalRepositoryInstance* m_elementP;
-  	Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement();
-  	~Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement();  	
+  struct Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement {
+
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstance* m_elementP;
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement();
+    ~Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumeration {
-  	private:
-  	  Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumeration();
-  	  
-  	  Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumeration(
-  	   const Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumeration();
+    Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumeration(
+      const Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaPrinterSecurityForGlobalRepositoryInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& getNext();
+    int getSize() const;
+    const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaPrinterSecurityForGlobalRepositoryInstance& anInstance);
+
+  };
+
+}
+
+#endif

@@ -1,106 +1,133 @@
-/**
- *  Linux_SambaReadListForPrinterRepositoryExternal.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaReadListForPrinterRepositoryExternal.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaReadListForPrinterRepositoryExternal.h"
 
-namespace genProvider{
+namespace genProvider {
 	
+	//----------------------------------------------------------------------------
   Linux_SambaReadListForPrinterRepositoryExternal::Linux_SambaReadListForPrinterRepositoryExternal(
-   const CmpiBroker& brkr, const CmpiContext& ctx ) 
-   : broker(brkr), context(ctx) {};
+    const CmpiBroker& aBroker,
+    const CmpiContext& aContext) 
+    : m_broker(aBroker),
+    m_context(aContext) { }
   
-  const char * Linux_SambaReadListForPrinterRepositoryExternal::
-   nsp="IBMShadow/cimv2";
+	//----------------------------------------------------------------------------
+  const char* Linux_SambaReadListForPrinterRepositoryExternal::s_shadowNameSpaceP = "IBMShadow/cimv2";
    
-  Linux_SambaReadListForPrinterRepositoryExternal::
-   ~Linux_SambaReadListForPrinterRepositoryExternal(){};
+	//----------------------------------------------------------------------------
+  Linux_SambaReadListForPrinterRepositoryExternal::~Linux_SambaReadListForPrinterRepositoryExternal() { }
     
-  void Linux_SambaReadListForPrinterRepositoryExternal::enumInstanceNames(
-   Linux_SambaReadListForPrinterInstanceNameEnumeration& instnames) {
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaReadListForPrinterRepositoryExternal::enumInstanceNames(
+    Linux_SambaReadListForPrinterInstanceNameEnumeration& anInstanceNameEnumeration) {
 
-    CmpiObjectPath op(nsp,"Linux_SambaReadListForPrinter");
-    CmpiEnumeration en=broker.enumInstanceNames(context,op);
-    while(en.hasNext()) {
-      CmpiObjectPath opi = en.getNext();
-      Linux_SambaReadListForPrinterInstanceName iname(opi);
-      instnames.addElement(iname);
+    CmpiObjectPath cmpiClassObjectPath(s_shadowNameSpaceP,"Linux_SambaReadListForPrinter");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstanceNames(m_context,cmpiClassObjectPath);
+    while(cmpiEnumeration.hasNext()) {
+      CmpiObjectPath cmpiObjectPath = cmpiEnumeration.getNext();
+      Linux_SambaReadListForPrinterInstanceName instanceName(cmpiObjectPath);
+      anInstanceNameEnumeration.addElement(instanceName);
     }
-  };
+  }
   	  
-  void Linux_SambaReadListForPrinterRepositoryExternal::enumInstances(
-   const char* *properties,
-   Linux_SambaReadListForPrinterRepositoryInstanceEnumeration& instances) {
+	//----------------------------------------------------------------------------
+  void
+  Linux_SambaReadListForPrinterRepositoryExternal::enumInstances(
+    const char** aPropertiesPP,
+    Linux_SambaReadListForPrinterRepositoryInstanceEnumeration& aRepositoryInstanceEnumeration) {
    		
-    CmpiObjectPath op(nsp,"Linux_SambaReadListForPrinter");
-    CmpiEnumeration en=broker.enumInstances(context,op,properties);
-    while(en.hasNext()) {
-      CmpiInstance inst = en.getNext();
-      Linux_SambaReadListForPrinterRepositoryInstance instance(inst,nsp);
-      instances.addElement(instance);
+    CmpiObjectPath cmpiClassObjectPath(s_shadowNameSpaceP,"Linux_SambaReadListForPrinter");
+    CmpiEnumeration cmpiEnumeration = 
+      m_broker.enumInstances(m_context,cmpiClassObjectPath,aPropertiesPP);
+    while(cmpiEnumeration.hasNext()) {
+      CmpiInstance cmpiInstance = cmpiEnumeration.getNext();
+      Linux_SambaReadListForPrinterRepositoryInstance repositoryInstance(cmpiInstance,s_shadowNameSpaceP);
+      aRepositoryInstanceEnumeration.addElement(repositoryInstance);
     }
-  };
+  
+  }
   	  
+  //----------------------------------------------------------------------------
   Linux_SambaReadListForPrinterRepositoryInstance
-   Linux_SambaReadListForPrinterRepositoryExternal::getInstance(
-   const char* *properties,
-   const Linux_SambaReadListForPrinterInstanceName& instanceName) {
+  Linux_SambaReadListForPrinterRepositoryExternal::getInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaReadListForPrinterInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    op.setNameSpace(nsp);
-    CmpiInstance inst=broker.getInstance(context,op,properties);
-    return Linux_SambaReadListForPrinterRepositoryInstance(inst,nsp);
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    cmpiObjectPath.setNameSpace(s_shadowNameSpaceP);
+    CmpiInstance cmpiInstance = 
+      m_broker.getInstance(m_context,cmpiObjectPath,aPropertiesPP);
+    return Linux_SambaReadListForPrinterRepositoryInstance(cmpiInstance,s_shadowNameSpaceP);
+
   }
       
-  void Linux_SambaReadListForPrinterRepositoryExternal::setInstance(
-   const char* *properties,
-   const Linux_SambaReadListForPrinterRepositoryInstance& instance){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaReadListForPrinterRepositoryExternal::setInstance(
+    const char** aPropertiesPP,
+    const Linux_SambaReadListForPrinterRepositoryInstance& aRepositoryInstance) {
   
     //make a copy of the given instance and set it to the right nameSpace
-    Linux_SambaReadListForPrinterInstanceName instanceName(instance.getInstanceName());
-    instanceName.setNamespace(nsp,1);
-    Linux_SambaReadListForPrinterRepositoryInstance copiedInstance(instance);
-    copiedInstance.setInstanceName(instanceName);
+    Linux_SambaReadListForPrinterInstanceName instanceName(aRepositoryInstance.getInstanceName());
+    instanceName.setNamespace(s_shadowNameSpaceP,1);
+    Linux_SambaReadListForPrinterRepositoryInstance copiedRepositoryInstance(aRepositoryInstance);
+    copiedRepositoryInstance.setInstanceName(instanceName);
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=copiedInstance.getCmpiInstance();
-    broker.setInstance(context,op,inst,properties);
+    CmpiObjectPath cmpiObjectPath = instanceName.getObjectPath();
+    CmpiInstance cmpiInstance = copiedRepositoryInstance.getCmpiInstance();
+    m_broker.setInstance(m_context,cmpiObjectPath,cmpiInstance,aPropertiesPP);
+  
   }
       
-  void Linux_SambaReadListForPrinterRepositoryExternal::createInstance(
-   const Linux_SambaReadListForPrinterRepositoryInstance& instance){
+  //----------------------------------------------------------------------------
+  Linux_SambaReadListForPrinterInstanceName
+  Linux_SambaReadListForPrinterRepositoryExternal::createInstance(
+    const Linux_SambaReadListForPrinterRepositoryInstance& aRepositoryInstance) {
   
     //make a copy of the given instance and set it to the right nameSpace
-    Linux_SambaReadListForPrinterInstanceName instanceName(instance.getInstanceName());
-    instanceName.setNamespace(nsp,1);
-    Linux_SambaReadListForPrinterRepositoryInstance copiedInstance(instance);
-    copiedInstance.setInstanceName(instanceName);
+    Linux_SambaReadListForPrinterInstanceName instanceName(aRepositoryInstance.getInstanceName());
+    instanceName.setNamespace(s_shadowNameSpaceP,1);
+    Linux_SambaReadListForPrinterRepositoryInstance copiedRepositoryInstance(aRepositoryInstance);
+    copiedRepositoryInstance.setInstanceName(instanceName);
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    CmpiInstance inst=copiedInstance.getCmpiInstance();
-    broker.createInstance(context,op,inst);
+    CmpiObjectPath cmpiObjectPath = instanceName.getObjectPath();
+    CmpiInstance cmpiInstance = copiedRepositoryInstance.getCmpiInstance();
+    return Linux_SambaReadListForPrinterInstanceName(
+		m_broker.createInstance(m_context,cmpiObjectPath,cmpiInstance));
+  
   }
   
-  void Linux_SambaReadListForPrinterRepositoryExternal::deleteInstance(
-   const Linux_SambaReadListForPrinterInstanceName& instanceName){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaReadListForPrinterRepositoryExternal::deleteInstance(
+    const Linux_SambaReadListForPrinterInstanceName& anInstanceName) {
     
-    CmpiObjectPath op=instanceName.getObjectPath();
-    op.setNameSpace(nsp);
-    broker.deleteInstance(context,op);
-  }  
+    CmpiObjectPath cmpiObjectPath = anInstanceName.getObjectPath();
+    cmpiObjectPath.setNameSpace(s_shadowNameSpaceP);
+    m_broker.deleteInstance(m_context,cmpiObjectPath);
+  
+  }
+    
 }

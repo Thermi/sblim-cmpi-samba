@@ -1,153 +1,192 @@
-/**
- *  Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess.h"
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-    //Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess();
-    Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::~Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess() { 
-      terminator();
-    };
+  //----------------------------------------------------------------------------
+  //Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::~Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    /*
-    void Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::enumInstanceNames(
-     const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-     Linux_SambaGlobalFileNameHandlingForGlobalInstanceNameEnumeration& instnames){
+  // intrinsic methods
+  /*
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaGlobalFileNameHandlingForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      int numInstanceNames=1;
-      for(int i=0;i<numInstanceNames;i++){
+    int instanceNameN = 1;
+    for (int x=0; x < instanceNameN; ++x) {
       
-        //place here the code retrieving your instanceName
+      //place here the code retrieving your instanceName
       
-        Linux_SambaGlobalFileNameHandlingForGlobalInstanceName instanceName;
-        
-      }      
-    }
-    */
-  	/*
-    void Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaGlobalFileNameHandlingForGlobalManualInstanceEnumeration& instances){};
-  	*/
-  	/*
-    Linux_SambaGlobalFileNameHandlingForGlobalManualInstance 
-     Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalFileNameHandlingForGlobalInstanceName&){
-      Linux_SambaGlobalFileNameHandlingForGlobalManualInstance instance;
+      Linux_SambaGlobalFileNameHandlingForGlobalInstanceName instanceName;
       
-    }
-  	*/
-  	/*
-    void Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaGlobalFileNameHandlingForGlobalManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::createInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaGlobalFileNameHandlingForGlobalManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::deleteInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaGlobalFileNameHandlingForGlobalInstanceName&){};
+    }      
+  
+  }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     const char** aPropertiesPP,
+  	 Linux_SambaGlobalFileNameHandlingForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaGlobalFileNameHandlingForGlobalManualInstance 
+  Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalFileNameHandlingForGlobalInstanceName& anInstanceName) {
+
+    Linux_SambaGlobalFileNameHandlingForGlobalManualInstance manualInstance;
+
+  
+  }
+  */
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaGlobalFileNameHandlingForGlobalManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaGlobalFileNameHandlingForGlobalInstanceName
+  Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalFileNameHandlingForGlobalManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaGlobalFileNameHandlingForGlobalInstanceName& anInstanceName) { }
 	*/
-    
-    /* Association Interface */
-    
+	
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::referencesManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& sourceInst,
-   Linux_SambaGlobalFileNameHandlingForGlobalManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalFileNameHandlingForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaGlobalFileNameHandlingForGlobalManualInstance manualInstance;
     
     Linux_SambaGlobalFileNameHandlingForGlobalInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setSettingData(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setSettingData(aSourceInstanceName);
     
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
-    globalInstName.setName(sourceInst.getName());
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(aSourceInstanceName.getName());
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instName.setManagedElement(globalInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
-    
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::referencesSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaGlobalFileNameHandlingForGlobalManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalFileNameHandlingForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaGlobalFileNameHandlingForGlobalManualInstance manualInstance;
     
     Linux_SambaGlobalFileNameHandlingForGlobalInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setManagedElement(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setManagedElement(aSourceInstanceName);
     
     Linux_SambaGlobalFileNameHandlingOptionsInstanceName secInstName;
-    secInstName.setNamespace(nsp);
-    secInstName.setName(sourceInst.getName());
+    secInstName.setNamespace(aNameSpaceP);
+    secInstName.setName(aSourceInstanceName.getName());
     secInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	
     instName.setSettingData(secInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
-    
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::associatorsManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& sourceInst,
-   Linux_SambaGlobalOptionsInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaGlobalOptionsInstance instance;
     
     Linux_SambaGlobalOptionsInstanceName globalInstName;
-    globalInstName.setNamespace(nsp);
-    globalInstName.setName(sourceInst.getName());
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(aSourceInstanceName.getName());
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instance.setInstanceName(globalInstName);
-
+    
     char *option;
     option = get_global_option(BIND_INTERFACES_ONLY);	
     if ( option )
@@ -177,22 +216,25 @@ namespace genProvider {
       instance.setWorkgroup( option );
     	
     
-    instEnum.addElement(instance);
-  };
-    
+    anInstanceEnumeration.addElement(instance);
+  }
+
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::associatorsSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGlobalOptionsInstanceName& sourceInst,
-   Linux_SambaGlobalFileNameHandlingOptionsInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGlobalFileNameHandlingOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaGlobalFileNameHandlingOptionsInstance instance;
     
     Linux_SambaGlobalFileNameHandlingOptionsInstanceName secInstName;
-    secInstName.setNamespace(nsp);
-    secInstName.setName(sourceInst.getName());
+    secInstName.setNamespace(aNameSpaceP);
+    secInstName.setName(aSourceInstanceName.getName());
     secInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instance.setInstanceName(secInstName);
@@ -219,10 +261,13 @@ namespace genProvider {
       else
 	instance.setHideDotFiles( false );
     
-    instEnum.addElement(instance);
-  }; 
+    anInstanceEnumeration.addElement(instance);
+  }
+  
+   
+  
+  // extrinsic methods
 
-    /* extrinsic methods */
 	
 }
 

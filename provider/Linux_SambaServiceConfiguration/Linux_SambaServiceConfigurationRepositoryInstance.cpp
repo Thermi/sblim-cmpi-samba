@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaServiceConfigurationRepositoryInstance.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaServiceConfigurationRepositoryInstance.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaServiceConfigurationRepositoryInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,244 +28,283 @@
 
 namespace genProvider {
 
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaServiceConfigurationRepositoryInstance
-  //*********************************************************
-
+  //----------------------------------------------------------------------------
   //empty constructor
-  Linux_SambaServiceConfigurationRepositoryInstance::
-   Linux_SambaServiceConfigurationRepositoryInstance(){   	
+  Linux_SambaServiceConfigurationRepositoryInstance::Linux_SambaServiceConfigurationRepositoryInstance() {   	
    	init();  	   	
-  };
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copy constructor	
-  Linux_SambaServiceConfigurationRepositoryInstance::
-   Linux_SambaServiceConfigurationRepositoryInstance
-   (const Linux_SambaServiceConfigurationRepositoryInstance& original){   	
-   	init(original);  	   	
-  };
+  //----------------------------------------------------------------------------
+  Linux_SambaServiceConfigurationRepositoryInstance::Linux_SambaServiceConfigurationRepositoryInstance(
+    const Linux_SambaServiceConfigurationRepositoryInstance& anInstance) {   	
+   	init(anInstance);  	   	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //constructor using CmpiInstance
-  Linux_SambaServiceConfigurationRepositoryInstance::
-   Linux_SambaServiceConfigurationRepositoryInstance (const CmpiInstance& inst, const char* instanceNamespace){
+  //----------------------------------------------------------------------------
+  Linux_SambaServiceConfigurationRepositoryInstance::Linux_SambaServiceConfigurationRepositoryInstance(
+    const CmpiInstance& aCmpiInstance,
+    const char* anInstanceNamespaceP) {
+
     CmpiData cmpiData;
+
     init(); 
     
-    CmpiObjectPath cop=inst.getObjectPath();
-    cop.setNameSpace(instanceNamespace);
+    CmpiObjectPath cop = aCmpiInstance.getObjectPath();
+    cop.setNameSpace(anInstanceNamespaceP);
     setInstanceName(Linux_SambaServiceConfigurationInstanceName(cop));
+
     
   }
   
-  
+  //----------------------------------------------------------------------------
   //Destructor
+  //----------------------------------------------------------------------------
   Linux_SambaServiceConfigurationRepositoryInstance::
    ~Linux_SambaServiceConfigurationRepositoryInstance(){
    	reset();  	  
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
   //copy operator
+  //----------------------------------------------------------------------------
   Linux_SambaServiceConfigurationRepositoryInstance&
-   Linux_SambaServiceConfigurationRepositoryInstance::operator=
-   (const Linux_SambaServiceConfigurationRepositoryInstance& original){   	
-   	init(original);
+  Linux_SambaServiceConfigurationRepositoryInstance::operator=(
+    const Linux_SambaServiceConfigurationRepositoryInstance& anInstance) {   	
+   	
+   	init(anInstance);
    	return *this;
-  };
+  
+  }
   
   
+  //----------------------------------------------------------------------------
   //converts to CmpiInstance
-  CmpiInstance Linux_SambaServiceConfigurationRepositoryInstance::
-   getCmpiInstance(const char** properties) const{
+  //----------------------------------------------------------------------------
+  CmpiInstance
+  Linux_SambaServiceConfigurationRepositoryInstance::getCmpiInstance(
+    const char** aPropertiesPP) const {
    	
    	CmpiObjectPath objectPath=getInstanceName().getObjectPath();      
     CmpiInstance cmpiInstance(objectPath);    
     getInstanceName().fillKeys(cmpiInstance);
     
-    if (properties) {
-	  cmpiInstance.setPropertyFilter(properties,0);
+    if (aPropertiesPP) {
+	    cmpiInstance.setPropertyFilter(aPropertiesPP,0);
     }
+
   	
   	return cmpiInstance;
   	
   }
   
-  
-  //InstanceName related methods
-  unsigned int Linux_SambaServiceConfigurationRepositoryInstance::
-   isInstanceNameSet() const{
+  //----------------------------------------------------------------------------
+  // InstanceName related methods
+  //----------------------------------------------------------------------------
+  unsigned int 
+  Linux_SambaServiceConfigurationRepositoryInstance::isInstanceNameSet() const {
   	return isSet.instanceName;
   }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaServiceConfigurationInstanceName&
-    Linux_SambaServiceConfigurationRepositoryInstance::getInstanceName() const{
+  Linux_SambaServiceConfigurationRepositoryInstance::getInstanceName() const {
 
-    if(!isSet.instanceName)
+    if( ! isSet.instanceName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "InstanceName not set in Linux_SambaServiceConfiguration instance");
+        CmpiErrorFormater::NOT_SET,
+        "InstanceName (CIM Key Attributes)",
+        "Linux_SambaServiceConfiguration");
+   	}
   		
    	return m_instanceName;
+  
   }
 
-  void Linux_SambaServiceConfigurationRepositoryInstance::setInstanceName(
-   const Linux_SambaServiceConfigurationInstanceName& val){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationRepositoryInstance::setInstanceName(
+    const Linux_SambaServiceConfigurationInstanceName& val) {
+
     m_instanceName = val;
-    isSet.instanceName=1;
+    isSet.instanceName = 1;
+
   }
 
-
   
+  //----------------------------------------------------------------------------
   //set isSet attributes to FALSE
-  void Linux_SambaServiceConfigurationRepositoryInstance::init(){
-   	isSet.instanceName=0;
-   	  	
-  };
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationRepositoryInstance::init() {
+   	isSet.instanceName = 0;
+  	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copies another instance properties in this
-  void Linux_SambaServiceConfigurationRepositoryInstance::init
-   (const Linux_SambaServiceConfigurationRepositoryInstance& original){   	
+  //----------------------------------------------------------------------------
+  void 
+  Linux_SambaServiceConfigurationRepositoryInstance::init(
+    const Linux_SambaServiceConfigurationRepositoryInstance& anOriginal) {   	
+
    	init();
    	   	
-    if(original.isInstanceNameSet()){
-      setInstanceName(original.getInstanceName());
-    }    
-   }
+    if(anOriginal.isInstanceNameSet()) {
+      setInstanceName(anOriginal.getInstanceName());
+    }
+        
+  }
   
-  
+  //----------------------------------------------------------------------------
   //reset the instance data
-  void Linux_SambaServiceConfigurationRepositoryInstance::reset(){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationRepositoryInstance::reset() {
    	
-  	  
-  };
+  }
   
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement::
-   Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement::Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement() {
    	
-  	m_elementP=0;
-  	m_nextP=0;
+  	m_elementP = 0;
+  	m_nextP = 0;
   	  
-  };
+  }
   
-  
-  Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement::
-   ~Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement::~Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement() {
    	
-  	if (m_elementP!=0)
+  	if (m_elementP) {
   	  delete(m_elementP);
-  	if (m_nextP!=0)
+  	}
+  	
+  	if (m_nextP) {
   	  delete(m_nextP);
+  	}
   	  
-  };
+  }
 
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaServiceConfigurationRepositoryInstanceNameEnumeration
-  //*********************************************************
-
-  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::
-   Linux_SambaServiceConfigurationRepositoryInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::Linux_SambaServiceConfigurationRepositoryInstanceEnumeration() {
    	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   
-  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::
-   Linux_SambaServiceConfigurationRepositoryInstanceEnumeration(
-   const Linux_SambaServiceConfigurationRepositoryInstanceEnumeration& original){
+  }
+  
+  //----------------------------------------------------------------------------
+  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::Linux_SambaServiceConfigurationRepositoryInstanceEnumeration(
+    const Linux_SambaServiceConfigurationRepositoryInstanceEnumeration& anInstanceEnumeration) {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
+    int size = anInstanceEnumeration.getSize();
+    for (int x=0; x < size;++x) {
+      addElement(anInstanceEnumeration.getElement(x));
+    }           
+
+  }
   
-  	  
-  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::
-   ~Linux_SambaServiceConfigurationRepositoryInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::~Linux_SambaServiceConfigurationRepositoryInstanceEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
+  }
   
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::reset() {
+  	
+  	m_currentElementP = m_firstElementP;
+  	
+  }
   	  
-  void Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::reset(){
+  //----------------------------------------------------------------------------
+  bool
+  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::hasNext() const {
   	
-  	currentElementP=firstElementP;
-  };
+  	return (m_currentElementP != 0);
   
-  	  
-  bool Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::hasNext() const{
-  	
-  	return (currentElementP!=0);
+  }
   
-  };
-  
-  int Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::getSize() const{
+  //----------------------------------------------------------------------------
+  int
+  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
     
-  };
+  }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaServiceConfigurationRepositoryInstance&  
-   Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::getElement(int pos) const{
+  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement* followingP=firstElementP;
+    Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x = 0;
+    while (followingP && (x < anIndex)) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
+
+  }
   
-  	  
+  //----------------------------------------------------------------------------
   const Linux_SambaServiceConfigurationRepositoryInstance&
-   Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::getNext() {
+  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::getNext() {
    	
-  	 Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+    Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement* currentElementP =
+  	  m_currentElementP;
+
+    m_currentElementP = m_currentElementP->m_nextP;
   	 
-  	 return *(currentP->m_elementP);
-  };
+    return *(currentElementP->m_elementP);
+
+  }
   	  
-  void Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::addElement
-   (const Linux_SambaServiceConfigurationRepositoryInstance& elementP){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaServiceConfigurationRepositoryInstanceEnumeration::addElement(
+    const Linux_SambaServiceConfigurationRepositoryInstance& anInstance) {
    	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaServiceConfigurationRepositoryInstance(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaServiceConfigurationRepositoryInstance(elementP);
+  	if (m_firstElementP == 0) {
+  	  m_firstElementP = new Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaServiceConfigurationRepositoryInstance(anInstance);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaServiceConfigurationRepositoryInstanceEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP = new Linux_SambaServiceConfigurationRepositoryInstance(anInstance);
   	}
-  };  
+
+  }
+  
 }
- 

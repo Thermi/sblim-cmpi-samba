@@ -1,31 +1,37 @@
-/**
- *  Linux_SambaServiceConfigurationForServiceFactory.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
+// =======================================================================
+// Linux_SambaServiceConfigurationForServiceFactory.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 
 #include "Linux_SambaServiceConfigurationForServiceFactory.h"
 #include "Linux_SambaServiceConfigurationForServiceResourceAccess.h"
 
-namespace genProvider{
+namespace genProvider {
 	
 	Linux_SambaServiceConfigurationForServiceInterface* 
-	  Linux_SambaServiceConfigurationForServiceFactory::getImplementation(){
+  Linux_SambaServiceConfigurationForServiceFactory::getImplementation(){
 	  	
-	  	return (new Linux_SambaServiceConfigurationForServiceResourceAccess());
-	  };
+	  return (new Linux_SambaServiceConfigurationForServiceResourceAccess());
+  
+  }
+
 }
  

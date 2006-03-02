@@ -12,6 +12,8 @@
 # Description:  Automake input file for resource access layer.
 # ==================================================================
 
+AM_CFLAGS = -Wall
+
 # SBLIM Include Directory
 sblimincdir = $(includedir)/sblim
 
@@ -55,7 +57,6 @@ BUILT_SOURCES =
 
 ######################################################################################
 # Automake instructions for 'resource-access' dir
-AM_CPPFLAGS=-DCONFFILE=\"$(sysconfdir)/smt_smb_ra_support.conf\"
 
 #BUILT_SOURCES += \
 #        $(srcdir)/smt_smb_ra_support.conf \
@@ -70,9 +71,7 @@ scripts/smt_smb_ra_get_defaults.sh: scripts/smt_smb_ra_get_defaults.sh.pre
 # Adding new generated files to file list for clean up
 CLEANFILES += \
         smt_smb_ra_support.conf \
-        smt_smb_ra_support.conf.pre \
-        scripts/smt_smb_ra_get_defaults.sh \
-        scripts/smt_smb_ra_get_defaults.sh.pre
+        scripts/smt_smb_ra_get_defaults.sh 
 
 # Files for /etc directory
 sysconf_DATA += \
@@ -89,9 +88,11 @@ libRaToolsSmb_la_SOURCES = \
         smt_smb_ra_support.c \
         smt_smb_ra_data.c \
         smt_smb_ra_path.c \
+        smt_smb_ra_path.h \
         smt_smb_ra_support.h 
+
 libRaToolsSmb_la_CPPFLAGS = \
-        -DUSE_CACHE
+        -DUSE_CACHE -DCONFFILE=\"$(sysconfdir)/smt_smb_ra_support.conf\" -D_GNU_SOURCE
 
 libRaToolsSmb_la_LIBADD = \
         -lpthread
@@ -134,6 +135,7 @@ nodist_pkgdata_SCRIPTS += \
  
 # Installable Header Files
 sbliminc_HEADERS += \
+        smt_smb_ra_path.h \
         smt_smb_ra_support.h
 
 # We must explicity add the list of scripts to the target

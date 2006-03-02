@@ -76,7 +76,7 @@ void SambaArray::splitArrayStr(string text)
   
   int n = text.length();
   string entry;
-  int start, stop, sleft, sright;
+  int start, stop;
   start = text.find_first_not_of(","); 
   
   while ((start >= 0) && (start < n)) {

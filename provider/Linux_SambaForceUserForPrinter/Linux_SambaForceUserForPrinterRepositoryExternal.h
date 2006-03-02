@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaForceUserForPrinterRepositoryExternal.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaForceUserForPrinterRepositoryExternal.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaForceUserForPrinterRepositoryExternal_h
 #define Linux_SambaForceUserForPrinterRepositoryExternal_h
 
@@ -27,38 +30,40 @@
 namespace genProvider {
 
   class Linux_SambaForceUserForPrinterRepositoryExternal {
+     
+    private:
+    CmpiBroker  m_broker;
+    CmpiContext m_context;
+    const static char *s_shadowNameSpaceP;
   	
     public:
     Linux_SambaForceUserForPrinterRepositoryExternal(
-     const CmpiBroker& brkr,
-     const CmpiContext& ctx);
+      const CmpiBroker& aBroker,
+      const CmpiContext& aContext);
     virtual ~Linux_SambaForceUserForPrinterRepositoryExternal();
     
     virtual void enumInstanceNames(
-     Linux_SambaForceUserForPrinterInstanceNameEnumeration&);
+      Linux_SambaForceUserForPrinterInstanceNameEnumeration& anInstanceNameEnumeration);
      
     virtual void enumInstances(
-     const char* *properties,
-     Linux_SambaForceUserForPrinterRepositoryInstanceEnumeration&);
+      const char** aPropertiesPP,
+      Linux_SambaForceUserForPrinterRepositoryInstanceEnumeration& aRepositoryInstanceEnumeration);
      
     virtual Linux_SambaForceUserForPrinterRepositoryInstance getInstance(
-     const char* *properties,
-     const Linux_SambaForceUserForPrinterInstanceName&);
+      const char** aPropertiesPP,
+      const Linux_SambaForceUserForPrinterInstanceName& anInstanceName);
      
     virtual void setInstance(
-     const char* *properties,
-     const Linux_SambaForceUserForPrinterRepositoryInstance&);
+      const char** aPropertiesPP,
+      const Linux_SambaForceUserForPrinterRepositoryInstance& aRepositoryInstance);
      
-    virtual void createInstance(
-     const Linux_SambaForceUserForPrinterRepositoryInstance&);
+    virtual Linux_SambaForceUserForPrinterInstanceName createInstance(
+      const Linux_SambaForceUserForPrinterRepositoryInstance& aRepositoryInstance);
      
     virtual void deleteInstance(
-     const Linux_SambaForceUserForPrinterInstanceName&);
-     
-    private:
-    CmpiBroker  broker;
-    CmpiContext context;
-    const static char *nsp;
+      const Linux_SambaForceUserForPrinterInstanceName& anInstanceName);
+  
   };
+
 }
 #endif

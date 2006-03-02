@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaSharePrinterBrowseForShareInstance.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaSharePrinterBrowseForShareInstance.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaSharePrinterBrowseForShareInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,314 +28,387 @@
 
 namespace genProvider {
 
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaSharePrinterBrowseForShareInstance
-  //*********************************************************
-
+  //----------------------------------------------------------------------------
   //empty constructor
-  Linux_SambaSharePrinterBrowseForShareInstance::
-   Linux_SambaSharePrinterBrowseForShareInstance(){   	
+  Linux_SambaSharePrinterBrowseForShareInstance::Linux_SambaSharePrinterBrowseForShareInstance() {   	
    	init();  	   	
-  };
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copy constructor	
-  Linux_SambaSharePrinterBrowseForShareInstance::
-   Linux_SambaSharePrinterBrowseForShareInstance
-   (const Linux_SambaSharePrinterBrowseForShareInstance& original){   	
-   	init(original);  	   	
-  };
+  //----------------------------------------------------------------------------
+  Linux_SambaSharePrinterBrowseForShareInstance::Linux_SambaSharePrinterBrowseForShareInstance(
+    const Linux_SambaSharePrinterBrowseForShareInstance& anInstance) {   	
+   	init(anInstance);  	   	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //constructor using CmpiInstance
-  Linux_SambaSharePrinterBrowseForShareInstance::
-   Linux_SambaSharePrinterBrowseForShareInstance (const CmpiInstance& inst, const char* instanceNamespace){
+  //----------------------------------------------------------------------------
+  Linux_SambaSharePrinterBrowseForShareInstance::Linux_SambaSharePrinterBrowseForShareInstance(
+    const CmpiInstance& aCmpiInstance,
+    const char* anInstanceNamespaceP) {
+
     CmpiData cmpiData;
+
     init(); 
     
-    CmpiObjectPath cop=inst.getObjectPath();
-    cop.setNameSpace(instanceNamespace);
+    CmpiObjectPath cop = aCmpiInstance.getObjectPath();
+    cop.setNameSpace(anInstanceNamespaceP);
     setInstanceName(Linux_SambaSharePrinterBrowseForShareInstanceName(cop));
-    
-    cmpiData = inst.getProperty("IsCurrent");
-    if(!cmpiData.isNullValue()){
+
+    cmpiData = aCmpiInstance.getProperty("IsCurrent");
+    if ( ! cmpiData.isNullValue()){
       CMPIUint16 IsCurrent = cmpiData;
       setIsCurrent(IsCurrent);
     }
-    
-    cmpiData = inst.getProperty("IsDefault");
-    if(!cmpiData.isNullValue()){
+
+    cmpiData = aCmpiInstance.getProperty("IsDefault");
+    if ( ! cmpiData.isNullValue()){
       CMPIUint16 IsDefault = cmpiData;
       setIsDefault(IsDefault);
     }
+
     
   }
   
-  
+  //----------------------------------------------------------------------------
   //Destructor
+  //----------------------------------------------------------------------------
   Linux_SambaSharePrinterBrowseForShareInstance::
    ~Linux_SambaSharePrinterBrowseForShareInstance(){
    	reset();  	  
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
   //copy operator
+  //----------------------------------------------------------------------------
   Linux_SambaSharePrinterBrowseForShareInstance&
-   Linux_SambaSharePrinterBrowseForShareInstance::operator=
-   (const Linux_SambaSharePrinterBrowseForShareInstance& original){   	
-   	init(original);
+  Linux_SambaSharePrinterBrowseForShareInstance::operator=(
+    const Linux_SambaSharePrinterBrowseForShareInstance& anInstance) {   	
+   	
+   	init(anInstance);
    	return *this;
-  };
+  
+  }
   
   
+  //----------------------------------------------------------------------------
   //converts to CmpiInstance
-  CmpiInstance Linux_SambaSharePrinterBrowseForShareInstance::
-   getCmpiInstance(const char** properties) const{
+  //----------------------------------------------------------------------------
+  CmpiInstance
+  Linux_SambaSharePrinterBrowseForShareInstance::getCmpiInstance(
+    const char** aPropertiesPP) const {
    	
    	CmpiObjectPath objectPath=getInstanceName().getObjectPath();      
     CmpiInstance cmpiInstance(objectPath);    
     getInstanceName().fillKeys(cmpiInstance);
     
-    if (properties) {
-	  cmpiInstance.setPropertyFilter(properties,0);
+    if (aPropertiesPP) {
+	    cmpiInstance.setPropertyFilter(aPropertiesPP,0);
     }
 
-  	if(isSet.IsCurrent){
-  	  cmpiInstance.setProperty("IsCurrent",CmpiData(m_IsCurrent));
+  	if (isSet.IsCurrent) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "IsCurrent",
+  	    CmpiData(m_IsCurrent));
   	}
 
-  	if(isSet.IsDefault){
-  	  cmpiInstance.setProperty("IsDefault",CmpiData(m_IsDefault));
+  	if (isSet.IsDefault) {
+  	  
+  	  cmpiInstance.setProperty(
+  	    "IsDefault",
+  	    CmpiData(m_IsDefault));
   	}
+
   	
   	return cmpiInstance;
   	
   }
   
-  
-  //InstanceName related methods
-  unsigned int Linux_SambaSharePrinterBrowseForShareInstance::
-   isInstanceNameSet() const{
+  //----------------------------------------------------------------------------
+  // InstanceName related methods
+  //----------------------------------------------------------------------------
+  unsigned int 
+  Linux_SambaSharePrinterBrowseForShareInstance::isInstanceNameSet() const {
   	return isSet.instanceName;
   }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaSharePrinterBrowseForShareInstanceName&
-    Linux_SambaSharePrinterBrowseForShareInstance::getInstanceName() const{
+  Linux_SambaSharePrinterBrowseForShareInstance::getInstanceName() const {
 
-    if(!isSet.instanceName)
+    if( ! isSet.instanceName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "InstanceName not set in Linux_SambaSharePrinterBrowseForShare instance");
+        CmpiErrorFormater::NOT_SET,
+        "InstanceName (CIM Key Attributes)",
+        "Linux_SambaSharePrinterBrowseForShare");
+   	}
   		
    	return m_instanceName;
+  
   }
 
-  void Linux_SambaSharePrinterBrowseForShareInstance::setInstanceName(
-   const Linux_SambaSharePrinterBrowseForShareInstanceName& val){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaSharePrinterBrowseForShareInstance::setInstanceName(
+    const Linux_SambaSharePrinterBrowseForShareInstanceName& val) {
+
     m_instanceName = val;
-    isSet.instanceName=1;
+    isSet.instanceName = 1;
+
   }
        
-  //IsCurrent related methods
-  unsigned int Linux_SambaSharePrinterBrowseForShareInstance::isIsCurrentSet() const{
+  //----------------------------------------------------------------------------
+  // IsCurrent related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaSharePrinterBrowseForShareInstance::isIsCurrentSet() const {
     return isSet.IsCurrent;
   }
-  void Linux_SambaSharePrinterBrowseForShareInstance::
-   setIsCurrent(const CMPIUint16 val){
-    m_IsCurrent = val;
-    isSet.IsCurrent=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaSharePrinterBrowseForShareInstance::setIsCurrent(
+    const CMPIUint16 aValue) {
+  
+    m_IsCurrent = aValue;
+    isSet.IsCurrent = 1;
+  
   }       
-  const CMPIUint16 Linux_SambaSharePrinterBrowseForShareInstance::
-   getIsCurrent() const{
+
+  //----------------------------------------------------------------------------
+  const CMPIUint16
+  Linux_SambaSharePrinterBrowseForShareInstance::getIsCurrent() const {
     
-    if(!isSet.IsCurrent)
+    if ( ! isSet.IsCurrent) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "IsCurrent not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "IsCurrent",
+        "Linux_SambaSharePrinterBrowseForShare");
+   	}
+
+
     return m_IsCurrent;
+
   }
        
-  //IsDefault related methods
-  unsigned int Linux_SambaSharePrinterBrowseForShareInstance::isIsDefaultSet() const{
+  //----------------------------------------------------------------------------
+  // IsDefault related methods
+  //----------------------------------------------------------------------------
+  unsigned int
+  Linux_SambaSharePrinterBrowseForShareInstance::isIsDefaultSet() const {
     return isSet.IsDefault;
   }
-  void Linux_SambaSharePrinterBrowseForShareInstance::
-   setIsDefault(const CMPIUint16 val){
-    m_IsDefault = val;
-    isSet.IsDefault=1;
+
+  //----------------------------------------------------------------------------
+  void Linux_SambaSharePrinterBrowseForShareInstance::setIsDefault(
+    const CMPIUint16 aValue) {
+  
+    m_IsDefault = aValue;
+    isSet.IsDefault = 1;
+  
   }       
-  const CMPIUint16 Linux_SambaSharePrinterBrowseForShareInstance::
-   getIsDefault() const{
+
+  //----------------------------------------------------------------------------
+  const CMPIUint16
+  Linux_SambaSharePrinterBrowseForShareInstance::getIsDefault() const {
     
-    if(!isSet.IsDefault)
+    if ( ! isSet.IsDefault) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "IsDefault not set");
-   	   	
+   	    CmpiErrorFormater::NOT_SET,
+        "IsDefault",
+        "Linux_SambaSharePrinterBrowseForShare");
+   	}
+
+
     return m_IsDefault;
+
   }
 
-
   
+  //----------------------------------------------------------------------------
   //set isSet attributes to FALSE
-  void Linux_SambaSharePrinterBrowseForShareInstance::init(){
-   	isSet.instanceName=0;
-   	   	
-    isSet.IsCurrent=0;   	
-    isSet.IsDefault=0;  	
-  };
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaSharePrinterBrowseForShareInstance::init() {
+   	isSet.instanceName = 0;
+    isSet.IsCurrent = 0;
+    isSet.IsDefault = 0;
+  	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copies another instance properties in this
-  void Linux_SambaSharePrinterBrowseForShareInstance::init
-   (const Linux_SambaSharePrinterBrowseForShareInstance& original){   	
+  //----------------------------------------------------------------------------
+  void 
+  Linux_SambaSharePrinterBrowseForShareInstance::init(
+    const Linux_SambaSharePrinterBrowseForShareInstance& anOriginal) {   	
+
    	init();
    	   	
-    if(original.isInstanceNameSet()){
-      setInstanceName(original.getInstanceName());
-    }   	
-    if(original.isIsCurrentSet()){
-      const CMPIUint16 IsCurrentOriginal=original.getIsCurrent();
+    if(anOriginal.isInstanceNameSet()) {
+      setInstanceName(anOriginal.getInstanceName());
+    }
+       	
+    if (anOriginal.isIsCurrentSet()) {
+      const CMPIUint16 IsCurrentOriginal = anOriginal.getIsCurrent();
       setIsCurrent(IsCurrentOriginal);
-    }   	
-    if(original.isIsDefaultSet()){
-      const CMPIUint16 IsDefaultOriginal=original.getIsDefault();
+    }
+   	
+    if (anOriginal.isIsDefaultSet()) {
+      const CMPIUint16 IsDefaultOriginal = anOriginal.getIsDefault();
       setIsDefault(IsDefaultOriginal);
-    }    
-   }
+    }
+    
+  }
   
-  
+  //----------------------------------------------------------------------------
   //reset the instance data
-  void Linux_SambaSharePrinterBrowseForShareInstance::reset(){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaSharePrinterBrowseForShareInstance::reset() {
    	
-  	  
-  };
+  }
   
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement::
-   Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement::Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement() {
    	
-  	m_elementP=0;
-  	m_nextP=0;
+  	m_elementP = 0;
+  	m_nextP = 0;
   	  
-  };
+  }
   
-  
-  Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement::
-   ~Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement::~Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement() {
    	
-  	if (m_elementP!=0)
+  	if (m_elementP) {
   	  delete(m_elementP);
-  	if (m_nextP!=0)
+  	}
+  	
+  	if (m_nextP) {
   	  delete(m_nextP);
+  	}
   	  
-  };
+  }
 
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaSharePrinterBrowseForShareInstanceNameEnumeration
-  //*********************************************************
-
-  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::
-   Linux_SambaSharePrinterBrowseForShareInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::Linux_SambaSharePrinterBrowseForShareInstanceEnumeration() {
    	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   
-  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::
-   Linux_SambaSharePrinterBrowseForShareInstanceEnumeration(
-   const Linux_SambaSharePrinterBrowseForShareInstanceEnumeration& original){
+  }
+  
+  //----------------------------------------------------------------------------
+  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::Linux_SambaSharePrinterBrowseForShareInstanceEnumeration(
+    const Linux_SambaSharePrinterBrowseForShareInstanceEnumeration& anInstanceEnumeration) {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
+    int size = anInstanceEnumeration.getSize();
+    for (int x=0; x < size;++x) {
+      addElement(anInstanceEnumeration.getElement(x));
+    }           
+
+  }
   
-  	  
-  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::
-   ~Linux_SambaSharePrinterBrowseForShareInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::~Linux_SambaSharePrinterBrowseForShareInstanceEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
+  }
   
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::reset() {
+  	
+  	m_currentElementP = m_firstElementP;
+  	
+  }
   	  
-  void Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::reset(){
+  //----------------------------------------------------------------------------
+  bool
+  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::hasNext() const {
   	
-  	currentElementP=firstElementP;
-  };
+  	return (m_currentElementP != 0);
   
-  	  
-  bool Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::hasNext() const{
-  	
-  	return (currentElementP!=0);
+  }
   
-  };
-  
-  int Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::getSize() const{
+  //----------------------------------------------------------------------------
+  int
+  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
     
-  };
+  }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaSharePrinterBrowseForShareInstance&  
-   Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::getElement(int pos) const{
+  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement* followingP=firstElementP;
+    Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x = 0;
+    while (followingP && (x < anIndex)) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
+
+  }
   
-  	  
+  //----------------------------------------------------------------------------
   const Linux_SambaSharePrinterBrowseForShareInstance&
-   Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::getNext() {
+  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::getNext() {
    	
-  	 Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+    Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement* currentElementP =
+  	  m_currentElementP;
+
+    m_currentElementP = m_currentElementP->m_nextP;
   	 
-  	 return *(currentP->m_elementP);
-  };
+    return *(currentElementP->m_elementP);
+
+  }
   	  
-  void Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::addElement
-   (const Linux_SambaSharePrinterBrowseForShareInstance& elementP){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaSharePrinterBrowseForShareInstanceEnumeration::addElement(
+    const Linux_SambaSharePrinterBrowseForShareInstance& anInstance) {
    	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaSharePrinterBrowseForShareInstance(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaSharePrinterBrowseForShareInstance(elementP);
+  	if (m_firstElementP == 0) {
+  	  m_firstElementP = new Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaSharePrinterBrowseForShareInstance(anInstance);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaSharePrinterBrowseForShareInstanceEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP = new Linux_SambaSharePrinterBrowseForShareInstance(anInstance);
   	}
-  };  
+
+  }
+  
 }
- 

@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaPrinterAdminForGlobalInstance.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterAdminForGlobalInstance.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaPrinterAdminForGlobalInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -25,244 +28,283 @@
 
 namespace genProvider {
 
-  //*********************************************************
+  //****************************************************************************
   //Linux_SambaPrinterAdminForGlobalInstance
-  //*********************************************************
-
+  //----------------------------------------------------------------------------
   //empty constructor
-  Linux_SambaPrinterAdminForGlobalInstance::
-   Linux_SambaPrinterAdminForGlobalInstance(){   	
+  Linux_SambaPrinterAdminForGlobalInstance::Linux_SambaPrinterAdminForGlobalInstance() {   	
    	init();  	   	
-  };
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copy constructor	
-  Linux_SambaPrinterAdminForGlobalInstance::
-   Linux_SambaPrinterAdminForGlobalInstance
-   (const Linux_SambaPrinterAdminForGlobalInstance& original){   	
-   	init(original);  	   	
-  };
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterAdminForGlobalInstance::Linux_SambaPrinterAdminForGlobalInstance(
+    const Linux_SambaPrinterAdminForGlobalInstance& anInstance) {   	
+   	init(anInstance);  	   	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //constructor using CmpiInstance
-  Linux_SambaPrinterAdminForGlobalInstance::
-   Linux_SambaPrinterAdminForGlobalInstance (const CmpiInstance& inst, const char* instanceNamespace){
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterAdminForGlobalInstance::Linux_SambaPrinterAdminForGlobalInstance(
+    const CmpiInstance& aCmpiInstance,
+    const char* anInstanceNamespaceP) {
+
     CmpiData cmpiData;
+
     init(); 
     
-    CmpiObjectPath cop=inst.getObjectPath();
-    cop.setNameSpace(instanceNamespace);
+    CmpiObjectPath cop = aCmpiInstance.getObjectPath();
+    cop.setNameSpace(anInstanceNamespaceP);
     setInstanceName(Linux_SambaPrinterAdminForGlobalInstanceName(cop));
+
     
   }
   
-  
+  //----------------------------------------------------------------------------
   //Destructor
+  //----------------------------------------------------------------------------
   Linux_SambaPrinterAdminForGlobalInstance::
    ~Linux_SambaPrinterAdminForGlobalInstance(){
    	reset();  	  
-  };
+  }
   
   
+  //----------------------------------------------------------------------------
   //copy operator
+  //----------------------------------------------------------------------------
   Linux_SambaPrinterAdminForGlobalInstance&
-   Linux_SambaPrinterAdminForGlobalInstance::operator=
-   (const Linux_SambaPrinterAdminForGlobalInstance& original){   	
-   	init(original);
+  Linux_SambaPrinterAdminForGlobalInstance::operator=(
+    const Linux_SambaPrinterAdminForGlobalInstance& anInstance) {   	
+   	
+   	init(anInstance);
    	return *this;
-  };
+  
+  }
   
   
+  //----------------------------------------------------------------------------
   //converts to CmpiInstance
-  CmpiInstance Linux_SambaPrinterAdminForGlobalInstance::
-   getCmpiInstance(const char** properties) const{
+  //----------------------------------------------------------------------------
+  CmpiInstance
+  Linux_SambaPrinterAdminForGlobalInstance::getCmpiInstance(
+    const char** aPropertiesPP) const {
    	
    	CmpiObjectPath objectPath=getInstanceName().getObjectPath();      
     CmpiInstance cmpiInstance(objectPath);    
     getInstanceName().fillKeys(cmpiInstance);
     
-    if (properties) {
-	  cmpiInstance.setPropertyFilter(properties,0);
+    if (aPropertiesPP) {
+	    cmpiInstance.setPropertyFilter(aPropertiesPP,0);
     }
+
   	
   	return cmpiInstance;
   	
   }
   
-  
-  //InstanceName related methods
-  unsigned int Linux_SambaPrinterAdminForGlobalInstance::
-   isInstanceNameSet() const{
+  //----------------------------------------------------------------------------
+  // InstanceName related methods
+  //----------------------------------------------------------------------------
+  unsigned int 
+  Linux_SambaPrinterAdminForGlobalInstance::isInstanceNameSet() const {
   	return isSet.instanceName;
   }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaPrinterAdminForGlobalInstanceName&
-    Linux_SambaPrinterAdminForGlobalInstance::getInstanceName() const{
+  Linux_SambaPrinterAdminForGlobalInstance::getInstanceName() const {
 
-    if(!isSet.instanceName)
+    if( ! isSet.instanceName) {
    	  throw CmpiErrorFormater::getErrorException(
-   	   CmpiErrorFormater::NOT_SET,
-   	   "InstanceName not set in Linux_SambaPrinterAdminForGlobal instance");
+        CmpiErrorFormater::NOT_SET,
+        "InstanceName (CIM Key Attributes)",
+        "Linux_SambaPrinterAdminForGlobal");
+   	}
   		
    	return m_instanceName;
+  
   }
 
-  void Linux_SambaPrinterAdminForGlobalInstance::setInstanceName(
-   const Linux_SambaPrinterAdminForGlobalInstanceName& val){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterAdminForGlobalInstance::setInstanceName(
+    const Linux_SambaPrinterAdminForGlobalInstanceName& val) {
+
     m_instanceName = val;
-    isSet.instanceName=1;
+    isSet.instanceName = 1;
+
   }
 
-
   
+  //----------------------------------------------------------------------------
   //set isSet attributes to FALSE
-  void Linux_SambaPrinterAdminForGlobalInstance::init(){
-   	isSet.instanceName=0;
-   	  	
-  };
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterAdminForGlobalInstance::init() {
+   	isSet.instanceName = 0;
+  	
+  }
   
-  
+  //----------------------------------------------------------------------------
   //copies another instance properties in this
-  void Linux_SambaPrinterAdminForGlobalInstance::init
-   (const Linux_SambaPrinterAdminForGlobalInstance& original){   	
+  //----------------------------------------------------------------------------
+  void 
+  Linux_SambaPrinterAdminForGlobalInstance::init(
+    const Linux_SambaPrinterAdminForGlobalInstance& anOriginal) {   	
+
    	init();
    	   	
-    if(original.isInstanceNameSet()){
-      setInstanceName(original.getInstanceName());
-    }    
-   }
+    if(anOriginal.isInstanceNameSet()) {
+      setInstanceName(anOriginal.getInstanceName());
+    }
+        
+  }
   
-  
+  //----------------------------------------------------------------------------
   //reset the instance data
-  void Linux_SambaPrinterAdminForGlobalInstance::reset(){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterAdminForGlobalInstance::reset() {
    	
-  	  
-  };
+  }
   
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement	
-  //*********************************************************
-  
-  Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement::
-   Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement::Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement() {
    	
-  	m_elementP=0;
-  	m_nextP=0;
+  	m_elementP = 0;
+  	m_nextP = 0;
   	  
-  };
+  }
   
-  
-  Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement::
-   ~Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement(){
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement::~Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement() {
    	
-  	if (m_elementP!=0)
+  	if (m_elementP) {
   	  delete(m_elementP);
-  	if (m_nextP!=0)
+  	}
+  	
+  	if (m_nextP) {
   	  delete(m_nextP);
+  	}
   	  
-  };
+  }
 
-  
-  //*********************************************************
+  //----------------------------------------------------------------------------
   //Linux_SambaPrinterAdminForGlobalInstanceNameEnumeration
-  //*********************************************************
-
-  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::
-   Linux_SambaPrinterAdminForGlobalInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::Linux_SambaPrinterAdminForGlobalInstanceEnumeration() {
    	
-  	 firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
-  };
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   
-  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::
-   Linux_SambaPrinterAdminForGlobalInstanceEnumeration(
-   const Linux_SambaPrinterAdminForGlobalInstanceEnumeration& original){
+  }
+  
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::Linux_SambaPrinterAdminForGlobalInstanceEnumeration(
+    const Linux_SambaPrinterAdminForGlobalInstanceEnumeration& anInstanceEnumeration) {
    	
-     firstElementP=0;
-     currentElementP=0;
-     endElementP=0;
+    m_firstElementP = 0;
+    m_currentElementP = 0;
+    m_endElementP = 0;
   	 
-     int size=original.getSize();
-     for(int i=0;i<size;i++)
-       addElement(original.getElement(i));           
-  };
+    int size = anInstanceEnumeration.getSize();
+    for (int x=0; x < size;++x) {
+      addElement(anInstanceEnumeration.getElement(x));
+    }           
+
+  }
   
-  	  
-  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::
-   ~Linux_SambaPrinterAdminForGlobalInstanceEnumeration(){
+  //----------------------------------------------------------------------------
+  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::~Linux_SambaPrinterAdminForGlobalInstanceEnumeration() {
    	
-  	if (firstElementP!=0)
-  	  delete(firstElementP);
+  	if (m_firstElementP) {
+  	  delete(m_firstElementP);
+  	}
   	  	
-  };
+  }
   
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::reset() {
+  	
+  	m_currentElementP = m_firstElementP;
+  	
+  }
   	  
-  void Linux_SambaPrinterAdminForGlobalInstanceEnumeration::reset(){
+  //----------------------------------------------------------------------------
+  bool
+  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::hasNext() const {
   	
-  	currentElementP=firstElementP;
-  };
+  	return (m_currentElementP != 0);
   
-  	  
-  bool Linux_SambaPrinterAdminForGlobalInstanceEnumeration::hasNext() const{
-  	
-  	return (currentElementP!=0);
+  }
   
-  };
-  
-  int Linux_SambaPrinterAdminForGlobalInstanceEnumeration::getSize() const{
+  //----------------------------------------------------------------------------
+  int
+  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::getSize() const {
   	
-    int size=0;
-    Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement* followingP=firstElementP;
+    int size = 0;
+    Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement* followingP = m_firstElementP;
   	
-  	while(followingP!=0){
-        followingP=followingP->m_nextP;
-        size++;
+  	while (followingP) {
+      followingP = followingP->m_nextP;
+      ++size;
     }
   	
     return size;
     
-  };
+  }
   
+  //----------------------------------------------------------------------------
   const Linux_SambaPrinterAdminForGlobalInstance&  
-   Linux_SambaPrinterAdminForGlobalInstanceEnumeration::getElement(int pos) const{
+  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::getElement(int anIndex) const {
    
-    Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement* followingP=firstElementP;
+    Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement* followingP = m_firstElementP;
    
-    int i=0;
-    while((followingP!=0)&&(i<pos)){
-        followingP=followingP->m_nextP;
-        i++;
+    int x = 0;
+    while (followingP && (x < anIndex)) {
+      followingP = followingP->m_nextP;
+      ++x;
     }
     
     return *(followingP->m_elementP);
-  };
+
+  }
   
-  	  
+  //----------------------------------------------------------------------------
   const Linux_SambaPrinterAdminForGlobalInstance&
-   Linux_SambaPrinterAdminForGlobalInstanceEnumeration::getNext() {
+  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::getNext() {
    	
-  	 Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement* currentP=
-  	  currentElementP;
-  	 currentElementP=currentElementP->m_nextP;
+    Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement* currentElementP =
+  	  m_currentElementP;
+
+    m_currentElementP = m_currentElementP->m_nextP;
   	 
-  	 return *(currentP->m_elementP);
-  };
+    return *(currentElementP->m_elementP);
+
+  }
   	  
-  void Linux_SambaPrinterAdminForGlobalInstanceEnumeration::addElement
-   (const Linux_SambaPrinterAdminForGlobalInstance& elementP){
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaPrinterAdminForGlobalInstanceEnumeration::addElement(
+    const Linux_SambaPrinterAdminForGlobalInstance& anInstance) {
    	
-  	if(firstElementP==0){
-  	  firstElementP=new Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement();
-  	  firstElementP->m_elementP=new Linux_SambaPrinterAdminForGlobalInstance(elementP);
-  	  endElementP=firstElementP;
-  	  currentElementP=firstElementP;
-  	}else{
-  	  endElementP->m_nextP=new Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement();
-  	  endElementP=endElementP->m_nextP;
-  	  endElementP->m_elementP=new Linux_SambaPrinterAdminForGlobalInstance(elementP);
+  	if (m_firstElementP == 0) {
+  	  m_firstElementP = new Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement();
+  	  m_firstElementP->m_elementP = new Linux_SambaPrinterAdminForGlobalInstance(anInstance);
+  	  m_endElementP = m_firstElementP;
+  	  m_currentElementP = m_firstElementP;
+  	} else {
+  	  m_endElementP->m_nextP = new Linux_SambaPrinterAdminForGlobalInstanceEnumerationElement();
+  	  m_endElementP = m_endElementP->m_nextP;
+  	  m_endElementP->m_elementP = new Linux_SambaPrinterAdminForGlobalInstance(anInstance);
   	}
-  };  
+
+  }
+  
 }
- 

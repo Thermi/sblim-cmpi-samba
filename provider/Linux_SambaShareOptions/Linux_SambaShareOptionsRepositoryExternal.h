@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaShareOptionsRepositoryExternal.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareOptionsRepositoryExternal.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaShareOptionsRepositoryExternal_h
 #define Linux_SambaShareOptionsRepositoryExternal_h
 
@@ -27,38 +30,40 @@
 namespace genProvider {
 
   class Linux_SambaShareOptionsRepositoryExternal {
+     
+    private:
+    CmpiBroker  m_broker;
+    CmpiContext m_context;
+    const static char *s_shadowNameSpaceP;
   	
     public:
     Linux_SambaShareOptionsRepositoryExternal(
-     const CmpiBroker& brkr,
-     const CmpiContext& ctx);
+      const CmpiBroker& aBroker,
+      const CmpiContext& aContext);
     virtual ~Linux_SambaShareOptionsRepositoryExternal();
     
     virtual void enumInstanceNames(
-     Linux_SambaShareOptionsInstanceNameEnumeration&);
+      Linux_SambaShareOptionsInstanceNameEnumeration& anInstanceNameEnumeration);
      
     virtual void enumInstances(
-     const char* *properties,
-     Linux_SambaShareOptionsRepositoryInstanceEnumeration&);
+      const char** aPropertiesPP,
+      Linux_SambaShareOptionsRepositoryInstanceEnumeration& aRepositoryInstanceEnumeration);
      
     virtual Linux_SambaShareOptionsRepositoryInstance getInstance(
-     const char* *properties,
-     const Linux_SambaShareOptionsInstanceName&);
+      const char** aPropertiesPP,
+      const Linux_SambaShareOptionsInstanceName& anInstanceName);
      
     virtual void setInstance(
-     const char* *properties,
-     const Linux_SambaShareOptionsRepositoryInstance&);
+      const char** aPropertiesPP,
+      const Linux_SambaShareOptionsRepositoryInstance& aRepositoryInstance);
      
-    virtual void createInstance(
-     const Linux_SambaShareOptionsRepositoryInstance&);
+    virtual Linux_SambaShareOptionsInstanceName createInstance(
+      const Linux_SambaShareOptionsRepositoryInstance& aRepositoryInstance);
      
     virtual void deleteInstance(
-     const Linux_SambaShareOptionsInstanceName&);
-     
-    private:
-    CmpiBroker  broker;
-    CmpiContext context;
-    const static char *nsp;
+      const Linux_SambaShareOptionsInstanceName& anInstanceName);
+  
   };
+
 }
 #endif

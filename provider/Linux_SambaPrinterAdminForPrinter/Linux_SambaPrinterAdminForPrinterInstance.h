@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaPrinterAdminForPrinterInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterAdminForPrinterInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaPrinterAdminForPrinterInstance_h
 #define Linux_SambaPrinterAdminForPrinterInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaPrinterAdminForPrinterInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaPrinterAdminForPrinterInstance {
-  public:
-       Linux_SambaPrinterAdminForPrinterInstance();
-  	
-       Linux_SambaPrinterAdminForPrinterInstance
-  	    (const Linux_SambaPrinterAdminForPrinterInstance& original);
-  	   
-       Linux_SambaPrinterAdminForPrinterInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaPrinterAdminForPrinterInstance();
        
-       Linux_SambaPrinterAdminForPrinterInstance& operator=
-  	    (const Linux_SambaPrinterAdminForPrinterInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaPrinterAdminForPrinterInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaPrinterAdminForPrinterInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaPrinterAdminForPrinterInstanceName& val);        
-       const Linux_SambaPrinterAdminForPrinterInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaPrinterAdminForPrinterInstance();
+    Linux_SambaPrinterAdminForPrinterInstance(
+      const Linux_SambaPrinterAdminForPrinterInstance& anInstance);
+    Linux_SambaPrinterAdminForPrinterInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaPrinterAdminForPrinterInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaPrinterAdminForPrinterInstance& original);
-       void reset();
+    Linux_SambaPrinterAdminForPrinterInstance& operator=(
+      const Linux_SambaPrinterAdminForPrinterInstance& anInstance);
        
-       Linux_SambaPrinterAdminForPrinterInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaPrinterAdminForPrinterInstanceName& anInstanceName);        
+    const Linux_SambaPrinterAdminForPrinterInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement{
-  	Linux_SambaPrinterAdminForPrinterInstance* m_elementP;
-  	Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement();
-  	~Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement();  	
+  struct Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement {
+
+    Linux_SambaPrinterAdminForPrinterInstance* m_elementP;
+    Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement();
+    ~Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaPrinterAdminForPrinterInstanceEnumeration {
-  	private:
-  	  Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaPrinterAdminForPrinterInstanceEnumeration();
-  	  
-  	  Linux_SambaPrinterAdminForPrinterInstanceEnumeration(
-  	   const Linux_SambaPrinterAdminForPrinterInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaPrinterAdminForPrinterInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaPrinterAdminForPrinterInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaPrinterAdminForPrinterInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaPrinterAdminForPrinterInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaPrinterAdminForPrinterInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaPrinterAdminForPrinterInstanceEnumeration();
+    Linux_SambaPrinterAdminForPrinterInstanceEnumeration(
+      const Linux_SambaPrinterAdminForPrinterInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaPrinterAdminForPrinterInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaPrinterAdminForPrinterInstance& getNext();
+    int getSize() const;
+    const Linux_SambaPrinterAdminForPrinterInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaPrinterAdminForPrinterInstance& anInstance);
+
+  };
+
+}
+
+#endif

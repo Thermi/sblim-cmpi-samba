@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaShareSecurityForGlobalManualInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareSecurityForGlobalManualInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaShareSecurityForGlobalManualInstance_h
 #define Linux_SambaShareSecurityForGlobalManualInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaShareSecurityForGlobalInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaShareSecurityForGlobalManualInstance {
-  public:
-       Linux_SambaShareSecurityForGlobalManualInstance();
-  	
-       Linux_SambaShareSecurityForGlobalManualInstance
-  	    (const Linux_SambaShareSecurityForGlobalManualInstance& original);
-  	   
-       Linux_SambaShareSecurityForGlobalManualInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaShareSecurityForGlobalManualInstance();
        
-       Linux_SambaShareSecurityForGlobalManualInstance& operator=
-  	    (const Linux_SambaShareSecurityForGlobalManualInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaShareSecurityForGlobalManualInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaShareSecurityForGlobalInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaShareSecurityForGlobalInstanceName& val);        
-       const Linux_SambaShareSecurityForGlobalInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaShareSecurityForGlobalManualInstance();
+    Linux_SambaShareSecurityForGlobalManualInstance(
+      const Linux_SambaShareSecurityForGlobalManualInstance& anInstance);
+    Linux_SambaShareSecurityForGlobalManualInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaShareSecurityForGlobalManualInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaShareSecurityForGlobalManualInstance& original);
-       void reset();
+    Linux_SambaShareSecurityForGlobalManualInstance& operator=(
+      const Linux_SambaShareSecurityForGlobalManualInstance& anInstance);
        
-       Linux_SambaShareSecurityForGlobalInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaShareSecurityForGlobalInstanceName& anInstanceName);        
+    const Linux_SambaShareSecurityForGlobalInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement{
-  	Linux_SambaShareSecurityForGlobalManualInstance* m_elementP;
-  	Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement();
-  	~Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement();  	
+  struct Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement {
+
+    Linux_SambaShareSecurityForGlobalManualInstance* m_elementP;
+    Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement();
+    ~Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaShareSecurityForGlobalManualInstanceEnumeration {
-  	private:
-  	  Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaShareSecurityForGlobalManualInstanceEnumeration();
-  	  
-  	  Linux_SambaShareSecurityForGlobalManualInstanceEnumeration(
-  	   const Linux_SambaShareSecurityForGlobalManualInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaShareSecurityForGlobalManualInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaShareSecurityForGlobalManualInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaShareSecurityForGlobalManualInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaShareSecurityForGlobalManualInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaShareSecurityForGlobalManualInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaShareSecurityForGlobalManualInstanceEnumeration();
+    Linux_SambaShareSecurityForGlobalManualInstanceEnumeration(
+      const Linux_SambaShareSecurityForGlobalManualInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaShareSecurityForGlobalManualInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaShareSecurityForGlobalManualInstance& getNext();
+    int getSize() const;
+    const Linux_SambaShareSecurityForGlobalManualInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaShareSecurityForGlobalManualInstance& anInstance);
+
+  };
+
+}
+
+#endif

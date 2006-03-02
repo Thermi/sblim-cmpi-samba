@@ -1,214 +1,258 @@
-/**
- *  Linux_SambaShareSecurityForShareResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaShareSecurityForShareResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaShareSecurityForShareResourceAccess.h"
+
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
 
 namespace genProvider {
   
-    //Linux_SambaShareSecurityForShareResourceAccess::Linux_SambaShareSecurityForShareResourceAccess();
-    Linux_SambaShareSecurityForShareResourceAccess::~Linux_SambaShareSecurityForShareResourceAccess() { };
+  //----------------------------------------------------------------------------
+  //Linux_SambaShareSecurityForShareResourceAccess::Linux_SambaShareSecurityForShareResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaShareSecurityForShareResourceAccess::~Linux_SambaShareSecurityForShareResourceAccess() {
+    terminator();
+  }
     
-    /* intrinsic methods */
-    /*
-    void Linux_SambaShareSecurityForShareResourceAccess::enumInstanceNames(
-     const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-     Linux_SambaShareSecurityForShareInstanceNameEnumeration& instnames){
+  // intrinsic methods
+  /*
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaShareSecurityForShareResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaShareSecurityForShareInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-      int numInstanceNames=1;
-      for(int i=0;i<numInstanceNames;i++){
+    int instanceNameN = 1;
+    for (int x=0; x < instanceNameN; ++x) {
       
-        //place here the code retrieving your instanceName
+      //place here the code retrieving your instanceName
       
-        Linux_SambaShareSecurityForShareInstanceName instanceName;
-        
-      }      
-    }
-    */
-  	/*
-    void Linux_SambaShareSecurityForShareResourceAccess::enumInstances(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char *nsp,
-     const char* *properties,
-  	 Linux_SambaShareSecurityForShareManualInstanceEnumeration& instances){};
-  	*/
-  	/*
-    Linux_SambaShareSecurityForShareManualInstance 
-     Linux_SambaShareSecurityForShareResourceAccess::getInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaShareSecurityForShareInstanceName&){
-      Linux_SambaShareSecurityForShareManualInstance instance;
+      Linux_SambaShareSecurityForShareInstanceName instanceName;
       
-    }
-  	*/
-  	/*
-    void Linux_SambaShareSecurityForShareResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaShareSecurityForShareManualInstance&){};
-  	*/
-  	/*
-    void Linux_SambaShareSecurityForShareResourceAccess::createInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaShareSecurityForShareManualInstance&){};
-  	*/
-  	
-    void Linux_SambaShareSecurityForShareResourceAccess::deleteInstance(
-     const CmpiContext& ctx, const CmpiBroker &mbp,
-     const Linux_SambaShareSecurityForShareInstanceName&){};
+    }      
+  
+  }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaShareSecurityForShareResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     const char** aPropertiesPP,
+  	 Linux_SambaShareSecurityForShareManualInstanceEnumeration& aManualInstanceEnumeration) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaShareSecurityForShareManualInstance 
+  Linux_SambaShareSecurityForShareResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaShareSecurityForShareInstanceName& anInstanceName) {
+
+    Linux_SambaShareSecurityForShareManualInstance manualInstance;
+
+  
+  }
+  */
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaShareSecurityForShareResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaShareSecurityForShareManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  Linux_SambaShareSecurityForShareInstanceName
+  Linux_SambaShareSecurityForShareResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareSecurityForShareManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaShareSecurityForShareResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaShareSecurityForShareInstanceName& anInstanceName) { }
+	*/
 	
-    
-    /* Association Interface */
-    
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
   void Linux_SambaShareSecurityForShareResourceAccess::referencesSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaShareOptionsInstanceName& sourceInst,
-   Linux_SambaShareSecurityForShareManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaShareSecurityForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaShareSecurityForShareManualInstance manualInstance;
     
     Linux_SambaShareSecurityForShareInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setManagedElement(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setManagedElement(aSourceInstanceName);
     
     Linux_SambaShareSecurityOptionsInstanceName secInstName;
-    secInstName.setNamespace(nsp);
-    secInstName.setName(sourceInst.getName());
+    secInstName.setNamespace(aNameSpaceP);
+    secInstName.setName(aSourceInstanceName.getName());
     secInstName.setInstanceID(DEFAULT_INSTANCE_ID);
 	
     instName.setSettingData(secInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
-    
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
+
   
+  //----------------------------------------------------------------------------
+
   void Linux_SambaShareSecurityForShareResourceAccess::referencesManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaShareSecurityOptionsInstanceName& sourceInst,
-   Linux_SambaShareSecurityForShareManualInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareSecurityOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaShareSecurityForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
     Linux_SambaShareSecurityForShareManualInstance manualInstance;
     
     Linux_SambaShareSecurityForShareInstanceName instName;
-    instName.setNamespace(nsp);
-    instName.setSettingData(sourceInst);
+    instName.setNamespace(aNameSpaceP);
+    instName.setSettingData(aSourceInstanceName);
     
     Linux_SambaShareOptionsInstanceName shareInstName;
-    shareInstName.setNamespace(nsp);
-    shareInstName.setName(sourceInst.getName());
+    shareInstName.setNamespace(aNameSpaceP);
+    shareInstName.setName(aSourceInstanceName.getName());
     shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instName.setManagedElement(shareInstName);
     
     manualInstance.setInstanceName(instName);
-    instEnum.addElement(manualInstance);
-  };
+    aManualInstanceEnumeration.addElement(manualInstance);
+  }
 
   
+  //----------------------------------------------------------------------------
+
   void Linux_SambaShareSecurityForShareResourceAccess::associatorsSettingData( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaShareOptionsInstanceName& sourceInst,
-   Linux_SambaShareSecurityOptionsInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaShareSecurityOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaShareSecurityOptionsInstance instance;
     
     Linux_SambaShareSecurityOptionsInstanceName secInstName;
-    secInstName.setNamespace(nsp);
-    secInstName.setName(sourceInst.getName());
+    secInstName.setNamespace(aNameSpaceP);
+    secInstName.setName(aSourceInstanceName.getName());
     secInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instance.setInstanceName(secInstName);
     char *option;
     
-    option = get_option(sourceInst.getName(),CREATE_MASK);	
+    option = get_option(aSourceInstanceName.getName(),CREATE_MASK);	
     if ( option )
       instance.setCreateMask( atoi(option) );
-
-    option = get_option(sourceInst.getName(),DIRECTORY_MASK);	
+    
+    option = get_option(aSourceInstanceName.getName(),DIRECTORY_MASK);	
     if ( option )
       instance.setDirectoryMask( atoi(option) );
-
-    option = get_option(sourceInst.getName(),DIRECTORY_SECURITY_MASK);	
+    
+    option = get_option(aSourceInstanceName.getName(),DIRECTORY_SECURITY_MASK);	
     if ( option )
       instance.setDirectorySecurityMask( atoi(option) );
+    
+    anInstanceEnumeration.addElement(instance);
+  }
 
-    instEnum.addElement(instance);
-  };
-    
-    
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaShareSecurityForShareResourceAccess::associatorsManagedElement( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaShareSecurityOptionsInstanceName& sourceInst,
-   Linux_SambaShareOptionsInstanceEnumeration& instEnum)
-  {
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareSecurityOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaShareOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     Linux_SambaShareOptionsInstance instance;
     
     Linux_SambaShareOptionsInstanceName shareInstName;
-    shareInstName.setNamespace(nsp);
-    shareInstName.setName(sourceInst.getName());
+    shareInstName.setNamespace(aNameSpaceP);
+    shareInstName.setName(aSourceInstanceName.getName());
     shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
     instance.setInstanceName(shareInstName);
     char *option;
     
-    option = get_option(sourceInst.getName(),AVAILABLE);	
+    option = get_option(aSourceInstanceName.getName(),AVAILABLE);	
     if ( option )
       if(strcasecmp(option,YES) == 0)
 	instance.setAvailable( true );
       else
 	instance.setAvailable( false );
     
-    option = get_option(sourceInst.getName(),COMMENT);
+    option = get_option(aSourceInstanceName.getName(),COMMENT);
     if ( option )
       instance.setComment(option);
     
-    option = get_option(sourceInst.getName(),PATH);
+    option = get_option(aSourceInstanceName.getName(),PATH);
     if ( option )
       instance.setPath(option);
     
-    option = get_option(sourceInst.getName(),PRINTABLE);	
+    option = get_option(aSourceInstanceName.getName(),PRINTABLE);	
     if ( option )
       if(strcasecmp(option,YES) == 0)
 	instance.setPrintable( true );
       else
 	instance.setPrintable( false );
     
-    instEnum.addElement(instance);
-  };
+    anInstanceEnumeration.addElement(instance);
+  }
+  
+   
+  
+  // extrinsic methods
 
-    /* extrinsic methods */
 	
 }
 

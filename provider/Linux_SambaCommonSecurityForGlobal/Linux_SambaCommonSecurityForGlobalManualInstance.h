@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaCommonSecurityForGlobalManualInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaCommonSecurityForGlobalManualInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaCommonSecurityForGlobalManualInstance_h
 #define Linux_SambaCommonSecurityForGlobalManualInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaCommonSecurityForGlobalInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaCommonSecurityForGlobalManualInstance {
-  public:
-       Linux_SambaCommonSecurityForGlobalManualInstance();
-  	
-       Linux_SambaCommonSecurityForGlobalManualInstance
-  	    (const Linux_SambaCommonSecurityForGlobalManualInstance& original);
-  	   
-       Linux_SambaCommonSecurityForGlobalManualInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaCommonSecurityForGlobalManualInstance();
        
-       Linux_SambaCommonSecurityForGlobalManualInstance& operator=
-  	    (const Linux_SambaCommonSecurityForGlobalManualInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaCommonSecurityForGlobalManualInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaCommonSecurityForGlobalInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaCommonSecurityForGlobalInstanceName& val);        
-       const Linux_SambaCommonSecurityForGlobalInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaCommonSecurityForGlobalManualInstance();
+    Linux_SambaCommonSecurityForGlobalManualInstance(
+      const Linux_SambaCommonSecurityForGlobalManualInstance& anInstance);
+    Linux_SambaCommonSecurityForGlobalManualInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaCommonSecurityForGlobalManualInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaCommonSecurityForGlobalManualInstance& original);
-       void reset();
+    Linux_SambaCommonSecurityForGlobalManualInstance& operator=(
+      const Linux_SambaCommonSecurityForGlobalManualInstance& anInstance);
        
-       Linux_SambaCommonSecurityForGlobalInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaCommonSecurityForGlobalInstanceName& anInstanceName);        
+    const Linux_SambaCommonSecurityForGlobalInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement{
-  	Linux_SambaCommonSecurityForGlobalManualInstance* m_elementP;
-  	Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement();
-  	~Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement();  	
+  struct Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement {
+
+    Linux_SambaCommonSecurityForGlobalManualInstance* m_elementP;
+    Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement();
+    ~Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration {
-  	private:
-  	  Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration();
-  	  
-  	  Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration(
-  	   const Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaCommonSecurityForGlobalManualInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaCommonSecurityForGlobalManualInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaCommonSecurityForGlobalManualInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaCommonSecurityForGlobalManualInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration();
+    Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration(
+      const Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaCommonSecurityForGlobalManualInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaCommonSecurityForGlobalManualInstance& getNext();
+    int getSize() const;
+    const Linux_SambaCommonSecurityForGlobalManualInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaCommonSecurityForGlobalManualInstance& anInstance);
+
+  };
+
+}
+
+#endif

@@ -1,125 +1,40 @@
-/**
- *  Linux_SambaForceGroupForShareResourceAccess.cpp
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaForceGroupForShareResourceAccess.cpp
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #include "Linux_SambaForceGroupForShareResourceAccess.h"
 
-namespace genProvider {
-  
-  //Linux_SambaForceGroupForShareResourceAccess::Linux_SambaForceGroupForShareResourceAccess();
-  Linux_SambaForceGroupForShareResourceAccess::~Linux_SambaForceGroupForShareResourceAccess() { 
-    terminator();
-  };
-    
-    /* intrinsic methods */
-  void Linux_SambaForceGroupForShareResourceAccess::enumInstanceNames(
-   const CmpiContext& ctx, const CmpiBroker &mbp, const char *nsp,
-   Linux_SambaForceGroupForShareInstanceNameEnumeration& instnames)
-  {
-    char ** shares = get_shares_list();
-    if(shares){
-      for (int i=0; shares[i]; i++){
-	
-	Linux_SambaShareOptionsInstanceName shareInstName;
-	shareInstName.setNamespace(nsp);
-	shareInstName.setName(shares[i]);
-	shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-	
-	
-	char* group = get_option(shares[i],"force group");
-	
-	if(group && validGroup(group)){
-	  Linux_SambaForceGroupForShareInstanceName assocName;
-	  assocName.setNamespace(nsp);
-	  assocName.setGroupComponent(shareInstName);
-	  
-	  Linux_SambaGroupInstanceName groupInstName;
-	  groupInstName.setNamespace(nsp);
-	  groupInstName.setSambaGroupName( group );
-	  
-	  assocName.setPartComponent(groupInstName);
-	  
-	  instnames.addElement(assocName);
-	}
-      }
-    }
-  };
-  
-  void Linux_SambaForceGroupForShareResourceAccess::enumInstances(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char* *properties,
-   Linux_SambaForceGroupForShareManualInstanceEnumeration& instances)
-  {
-    char ** shares = get_shares_list();
-    if(shares){
-      for (int i=0; shares[i]; i++){
-	
-	Linux_SambaShareOptionsInstanceName shareInstName;
-	shareInstName.setNamespace(nsp);
-	shareInstName.setName(shares[i]);
-	shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+#include <string>
+#include <list>
 
-	char* group = get_option(shares[i],"force group");
-	
-	if(group && validGroup( group )){
-	  Linux_SambaForceGroupForShareManualInstance manualInstance;
-	  
-	  Linux_SambaForceGroupForShareInstanceName instName;
-	  instName.setNamespace(nsp);
-	  instName.setGroupComponent(shareInstName);
-	  
-	  Linux_SambaGroupInstanceName groupInstName;
-	  groupInstName.setNamespace(nsp);
-	  groupInstName.setSambaGroupName( group );
-		
-	  instName.setPartComponent(groupInstName);
-	  
-	  manualInstance.setInstanceName(instName);
-	  instances.addElement(manualInstance);
-	}
-	
-      }      
-    }
-  };
-  	
-  Linux_SambaForceGroupForShareManualInstance 
-   Linux_SambaForceGroupForShareResourceAccess::getInstance(
-   const CmpiContext& ctx,
-   const CmpiBroker &mbp,
-   const char* *properties,
-   const Linux_SambaForceGroupForShareInstanceName& instanceName)
-  {
-    Linux_SambaForceGroupForShareManualInstance aManualInstance;
-    aManualInstance.setInstanceName(instanceName);
-    return aManualInstance;
-  };
-  	/*
-    void Linux_SambaForceGroupForShareResourceAccess::setInstance(
-     const CmpiContext& ctx,
-     const CmpiBroker &mbp,
-     const char* *properties,
-     const Linux_SambaForceGroupForShareManualInstance&){};
-  	*/
-  
-  bool Linux_SambaForceGroupForShareResourceAccess::validGroup(const char* group)
-  {
+#include "smt_smb_ra_support.h"
+#include "smt_smb_defaultvalues.h"
+#include "smt_smb_array.h"
+
+namespace genProvider {
+
+  //----------------------------------------------------------------------------
+  // manual written methods
+
+  static bool validGroup(const char* group) {
     char ** groups = get_samba_groups_list();
     if(groups){
       for (int i=0; groups[i]; i++){
@@ -129,103 +44,301 @@ namespace genProvider {
     }
     return false;
   };
-	
-  void Linux_SambaForceGroupForShareResourceAccess::createInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaForceGroupForShareManualInstance& newInstance)
-  {
-    char* group = get_option(newInstance.getInstanceName().getGroupComponent().getName(),"force group");
-    if(group && validGroup(group))
-      set_share_option(newInstance.getInstanceName().getGroupComponent().getName(),"force group",group);
-  } 
   
-  void Linux_SambaForceGroupForShareResourceAccess::deleteInstance(
-   const CmpiContext& ctx, const CmpiBroker &mbp,
-   const Linux_SambaForceGroupForShareInstanceName& instanceName)
-  {
-    set_share_option(instanceName.getGroupComponent().getName(),"force group",NULL);
+  //----------------------------------------------------------------------------
+
+
+  //----------------------------------------------------------------------------
+  //Linux_SambaForceGroupForShareResourceAccess::Linux_SambaForceGroupForShareResourceAccess();
+
+  //----------------------------------------------------------------------------
+  Linux_SambaForceGroupForShareResourceAccess::~Linux_SambaForceGroupForShareResourceAccess() {
+    terminator();
+  }
+    
+  // intrinsic methods
+
+  //----------------------------------------------------------------------------
+  void
+  Linux_SambaForceGroupForShareResourceAccess::enumInstanceNames(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char* aNameSpaceP,
+     Linux_SambaForceGroupForShareInstanceNameEnumeration& anInstanceNameEnumeration) {
+      
+    char ** shares = get_shares_list();
+    if(shares){
+      for (int i=0; shares[i]; i++){
+	
+	Linux_SambaShareOptionsInstanceName shareInstName;
+	shareInstName.setNamespace(aNameSpaceP);
+	shareInstName.setName(shares[i]);
+	shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+	
+	char* group = get_option(shares[i],"force group");
+	
+	if(group && validGroup(group)){
+	  Linux_SambaForceGroupForShareInstanceName assocName;
+	  assocName.setNamespace(aNameSpaceP);
+	  assocName.setGroupComponent(shareInstName);
+	  
+	  Linux_SambaGroupInstanceName groupInstName;
+	  groupInstName.setNamespace(aNameSpaceP);
+	  groupInstName.setSambaGroupName( group );
+	  
+	  assocName.setPartComponent(groupInstName);
+	  
+	  anInstanceNameEnumeration.addElement(assocName);
+	}
+      }
+    }
   }
   
-    /* Association Interface */
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaForceGroupForShareResourceAccess::enumInstances(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    Linux_SambaForceGroupForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
     
+    char ** shares = get_shares_list();
+    if(shares){
+      for (int i=0; shares[i]; i++){
+	
+	Linux_SambaShareOptionsInstanceName shareInstName;
+	shareInstName.setNamespace(aNameSpaceP);
+	shareInstName.setName(shares[i]);
+	shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+	
+	char* group = get_option(shares[i],"force group");
+	
+	if(group && validGroup( group )){
+	  Linux_SambaForceGroupForShareManualInstance manualInstance;
+	  
+	  Linux_SambaForceGroupForShareInstanceName instName;
+	  instName.setNamespace(aNameSpaceP);
+	  instName.setGroupComponent(shareInstName);
+	  
+	  Linux_SambaGroupInstanceName groupInstName;
+	  groupInstName.setNamespace(aNameSpaceP);
+	  groupInstName.setSambaGroupName( group );
+	  
+	  instName.setPartComponent(groupInstName);
+	  
+	  manualInstance.setInstanceName(instName);
+	  aManualInstanceEnumeration.addElement(manualInstance);
+	}
+      }      
+    }
+  }
+  
+  
+  //----------------------------------------------------------------------------
+
+  Linux_SambaForceGroupForShareManualInstance 
+  Linux_SambaForceGroupForShareResourceAccess::getInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const char** aPropertiesPP,
+    const Linux_SambaForceGroupForShareInstanceName& anInstanceName) {
+
+    Linux_SambaForceGroupForShareManualInstance aManualInstance;
+    aManualInstance.setInstanceName(anInstanceName);
+
+    return aManualInstance;
+  }
+
+  //----------------------------------------------------------------------------
+  /*
+  void
+  Linux_SambaForceGroupForShareResourceAccess::setInstance(
+     const CmpiContext& aContext,
+     const CmpiBroker& aBroker,
+     const char** aPropertiesPP,
+     const Linux_SambaForceGroupForShareManualInstance& aManualInstance) { }
+  */
+  
+  //----------------------------------------------------------------------------
+
+  Linux_SambaForceGroupForShareInstanceName
+  Linux_SambaForceGroupForShareResourceAccess::createInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaForceGroupForShareManualInstance& aManualInstance) {
+    
+    char* group = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force group");
+    if(group && validGroup(group))
+      set_share_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force group",group);
+    
+    return aManualInstance.getInstanceName();
+  }
+
+  
+  //----------------------------------------------------------------------------
+
+  void
+  Linux_SambaForceGroupForShareResourceAccess::deleteInstance(
+    const CmpiContext& aContext,
+    const CmpiBroker& aBroker,
+    const Linux_SambaForceGroupForShareInstanceName& anInstanceName) {
+    
+    set_share_option(anInstanceName.getGroupComponent().getName(),"force group",NULL);
+  }
+
+	
+
+  // Association Interface
+  //----------------------------------------------------------------------------
+
+  void Linux_SambaForceGroupForShareResourceAccess::referencesGroupComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGroupInstanceName& aSourceInstanceName,
+    Linux_SambaForceGroupForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    char ** shares = get_shares_list();
+    
+    if(shares){
+      for (int i=0; shares[i]; i++){
+	char* group = get_option(shares[i],"force group");
+	
+	if(group && validGroup(group)){
+	  if(!strcmp(group,aSourceInstanceName.getSambaGroupName())){
+	    Linux_SambaForceGroupForShareManualInstance manualInstance;
+	    
+	    Linux_SambaForceGroupForShareInstanceName instName;
+	    instName.setNamespace(aNameSpaceP);
+	    instName.setPartComponent(aSourceInstanceName);
+	    
+	    Linux_SambaShareOptionsInstanceName shareInstName;
+	    shareInstName.setNamespace(aNameSpaceP);
+	    shareInstName.setName(shares[i]);
+	    shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+	    
+	    instName.setGroupComponent(shareInstName);
+	    
+	    manualInstance.setInstanceName(instName);
+	    aManualInstanceEnumeration.addElement(manualInstance);
+	  }
+	}
+      }
+    }
+  }
+  
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaForceGroupForShareResourceAccess::referencesPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaShareOptionsInstanceName& sourceInst,
-   Linux_SambaForceGroupForShareManualInstanceEnumeration& instEnum)
-  {
-    char* group = get_option(sourceInst.getName(),"force group");
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaForceGroupForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+    
+    char* group = get_option(aSourceInstanceName.getName(),"force group");
+    
     if(group && validGroup(group)){
       Linux_SambaForceGroupForShareManualInstance manualInstance;
       
       Linux_SambaForceGroupForShareInstanceName instName;
-      instName.setNamespace(nsp);
-      instName.setGroupComponent(sourceInst);
+      instName.setNamespace(aNameSpaceP);
+      instName.setGroupComponent(aSourceInstanceName);
       
       Linux_SambaGroupInstanceName groupInstName;
-      groupInstName.setNamespace(nsp);
+      groupInstName.setNamespace(aNameSpaceP);
       groupInstName.setSambaGroupName( group );
       
       instName.setPartComponent(groupInstName);
       
       manualInstance.setInstanceName(instName);
-      instEnum.addElement(manualInstance);
+      aManualInstanceEnumeration.addElement(manualInstance);
     }
-  };
+  }
   
-  void Linux_SambaForceGroupForShareResourceAccess::referencesGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGroupInstanceName& sourceInst,
-   Linux_SambaForceGroupForShareManualInstanceEnumeration& instEnum)
-  {
+  
+  //----------------------------------------------------------------------------
+
+  void Linux_SambaForceGroupForShareResourceAccess::associatorsGroupComponent( 
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaGroupInstanceName& aSourceInstanceName,
+    Linux_SambaShareOptionsInstanceEnumeration& anInstanceEnumeration) {
+    
     char ** shares = get_shares_list();
-      if(shares){
-	for (int i=0; shares[i]; i++){
-	  char* group = get_option(shares[i],"force group");
-	  
-	  if(group && validGroup(group)){
-	    if(!strcmp(group,sourceInst.getSambaGroupName())){
-	      Linux_SambaForceGroupForShareManualInstance manualInstance;
-	      
-	      Linux_SambaForceGroupForShareInstanceName instName;
-	      instName.setNamespace(nsp);
-	      instName.setPartComponent(sourceInst);
-	      
-	      
-	      Linux_SambaShareOptionsInstanceName shareInstName;
-	      shareInstName.setNamespace(nsp);
-	      shareInstName.setName(shares[i]);
-	      shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-	      
-	      instName.setGroupComponent(shareInstName);
-	      
-	      manualInstance.setInstanceName(instName);
-	      instEnum.addElement(manualInstance);
-	    }
+    
+    if(shares){
+      for (int i=0; shares[i]; i++){
+	char* group = get_option(shares[i],"force group");
+	if(group && validGroup(group)){
+	  if(!strcmp(group,aSourceInstanceName.getSambaGroupName())){
+	    Linux_SambaShareOptionsInstance instance;
+	    
+	    Linux_SambaShareOptionsInstanceName shareInstName;
+	    shareInstName.setNamespace(aNameSpaceP);
+	    shareInstName.setName(shares[i]);
+	    shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+	    
+	    instance.setInstanceName(shareInstName);
+	    
+	    char *option;
+	    
+	    option = get_option(shares[i],"available");	
+	    if ( option )
+	      if(strcasecmp(option,"yes") == 0)
+		instance.setAvailable( true );
+	      else
+		instance.setAvailable( false );
+	    
+	    option = get_option(shares[i],"comment");
+	    if ( option )
+	      instance.setComment(option);
+	    
+	    option = get_option(shares[i],"path");
+	    if ( option )
+	      instance.setPath(option);
+	    
+	    option = get_option(shares[i],"printable");	
+	    if ( option )
+	      if(strcasecmp(option,"yes") == 0)
+		instance.setPrintable( true );
+	      else
+		instance.setPrintable( false );
+	    
+	    
+	    anInstanceEnumeration.addElement(instance);
+	  }
 	}
       }
     }
-  };
+  }
   
+  
+  //----------------------------------------------------------------------------
+
   void Linux_SambaForceGroupForShareResourceAccess::associatorsPartComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaShareOptionsInstanceName& sourceInst,
-   Linux_SambaGroupInstanceEnumeration& instEnum)
-  { 
-    char* group = get_option(sourceInst.getName(),"force group");
+    const CmpiContext& aContext,  
+    const CmpiBroker& aBroker,
+    const char* aNameSpaceP,
+    const char** aPropertiesPP,
+    const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
+    Linux_SambaGroupInstanceEnumeration& anInstanceEnumeration) {
+    
+    char* group = get_option(aSourceInstanceName.getName(),"force group");
+    
     if(group && validGroup(group)){
       Linux_SambaGroupInstance instance;
       
       Linux_SambaGroupInstanceName groupInstName;
-      groupInstName.setNamespace(nsp);
+      groupInstName.setNamespace(aNameSpaceP);
       groupInstName.setSambaGroupName( group );
       
       instance.setInstanceName(groupInstName);
@@ -235,68 +348,14 @@ namespace genProvider {
       if ( option )
 	instance.setSystemGroupName( option );
       
-      instEnum.addElement(instance);
+      anInstanceEnumeration.addElement(instance);
     }
-  };
-    
-  void Linux_SambaForceGroupForShareResourceAccess::associatorsGroupComponent( 
-   const CmpiContext& ctx,  
-   const CmpiBroker &mbp,
-   const char *nsp,
-   const char** properties,
-   const Linux_SambaGroupInstanceName& sourceInst,
-   Linux_SambaShareOptionsInstanceEnumeration& instEnum)
-  {
-    char ** shares = get_shares_list();
-      if(shares){
-	for (int i=0; shares[i]; i++){
-	  char* group = get_option(shares[i],"force group");
-	  if(group && validGroup(group)){
-	    if(!strcmp(group,sourceInst.getSambaGroupName()))
-	      {
-		Linux_SambaShareOptionsInstance instance;
-		
-		Linux_SambaShareOptionsInstanceName shareInstName;
-		shareInstName.setNamespace(nsp);
-		shareInstName.setName(shares[i]);
-		shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-		
-		instance.setInstanceName(shareInstName);
-		
-		char *option;
-		
-		option = get_option(shares[i],"available");	
-		if ( option )
-		  if(strcasecmp(option,"yes") == 0)
-		    instance.setAvailable( true );
-		  else
-		    instance.setAvailable( false );
-		
-		option = get_option(shares[i],"comment");
-		if ( option )
-		  instance.setComment(option);
-		
-		option = get_option(shares[i],"path");
-		if ( option )
-		  instance.setPath(option);
-		
-		option = get_option(shares[i],"printable");	
-		if ( option )
-		  if(strcasecmp(option,"yes") == 0)
-		    instance.setPrintable( true );
-		  else
-		    instance.setPrintable( false );
-		
-		
-		instEnum.addElement(instance);
-	      }
-	}
-      }
-    }
-  };
+  }
   
+   
+  
+  // extrinsic methods
 
-    /* extrinsic methods */
 	
 }
 

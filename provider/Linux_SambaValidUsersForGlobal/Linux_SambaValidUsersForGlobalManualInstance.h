@@ -1,24 +1,28 @@
-/**
- *  Linux_SambaValidUsersForGlobalManualInstance.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaValidUsersForGlobalManualInstance.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaValidUsersForGlobalManualInstance_h
 #define Linux_SambaValidUsersForGlobalManualInstance_h
+
 
 #include "cmpidt.h"
 #include "CmpiObjectPath.h"
@@ -29,79 +33,76 @@
 
 #include "Linux_SambaValidUsersForGlobalInstanceName.h"
 
+
 namespace genProvider {
 
   class Linux_SambaValidUsersForGlobalManualInstance {
-  public:
-       Linux_SambaValidUsersForGlobalManualInstance();
-  	
-       Linux_SambaValidUsersForGlobalManualInstance
-  	    (const Linux_SambaValidUsersForGlobalManualInstance& original);
-  	   
-       Linux_SambaValidUsersForGlobalManualInstance
-        (const CmpiInstance& inst, const char* instanceNamespace);
-  	 
-       ~Linux_SambaValidUsersForGlobalManualInstance();
        
-       Linux_SambaValidUsersForGlobalManualInstance& operator=
-  	    (const Linux_SambaValidUsersForGlobalManualInstance& original);
+    private:
+    void init();
+    void init(const Linux_SambaValidUsersForGlobalManualInstance& anInstance);
+    void reset();
        
-       CmpiInstance getCmpiInstance(const char** properties=0) const;
+    Linux_SambaValidUsersForGlobalInstanceName m_instanceName;
        
-       unsigned int isInstanceNameSet() const;
-       void setInstanceName(
-        const Linux_SambaValidUsersForGlobalInstanceName& val);        
-       const Linux_SambaValidUsersForGlobalInstanceName&
-        getInstanceName() const;
+    struct isSetType{
+      unsigned int instanceName:1;
+
+    } isSet;
+    
+    public:
+    Linux_SambaValidUsersForGlobalManualInstance();
+    Linux_SambaValidUsersForGlobalManualInstance(
+      const Linux_SambaValidUsersForGlobalManualInstance& anInstance);
+    Linux_SambaValidUsersForGlobalManualInstance(
+      const CmpiInstance& aCmpiInstance, 
+      const char* anInstanceNamespaceP);
+    ~Linux_SambaValidUsersForGlobalManualInstance();
        
-  private:
-       void init();
-       void init(const Linux_SambaValidUsersForGlobalManualInstance& original);
-       void reset();
+    Linux_SambaValidUsersForGlobalManualInstance& operator=(
+      const Linux_SambaValidUsersForGlobalManualInstance& anInstance);
        
-       Linux_SambaValidUsersForGlobalInstanceName m_instanceName;
-       
-       struct isSetType{
-       	 unsigned int instanceName:1;
-       } isSet;
+    CmpiInstance getCmpiInstance(const char** aPropertiesPP = 0) const;
+    unsigned int isInstanceNameSet() const;
+    void setInstanceName(const Linux_SambaValidUsersForGlobalInstanceName& anInstanceName);        
+    const Linux_SambaValidUsersForGlobalInstanceName& getInstanceName() const;
+
+
   };
   
-  
-  struct Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement{
-  	Linux_SambaValidUsersForGlobalManualInstance* m_elementP;
-  	Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement* m_nextP;
-  	
-  	Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement();
-  	~Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement();  	
+  struct Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement {
+
+    Linux_SambaValidUsersForGlobalManualInstance* m_elementP;
+    Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement* m_nextP;
+
+    Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement();
+    ~Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement();  
+
   };
   
 
   class Linux_SambaValidUsersForGlobalManualInstanceEnumeration {
-  	private:
-  	  Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement* firstElementP;
-  	  Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement* currentElementP;
-  	  Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement* endElementP;
-  	
-  	public:
-  	  Linux_SambaValidUsersForGlobalManualInstanceEnumeration();
-  	  
-  	  Linux_SambaValidUsersForGlobalManualInstanceEnumeration(
-  	   const Linux_SambaValidUsersForGlobalManualInstanceEnumeration& original);
-  	  
-  	  ~Linux_SambaValidUsersForGlobalManualInstanceEnumeration();
-  	  
-  	  void reset();
-  	  
-  	  bool hasNext() const;
-  	  
-  	  const Linux_SambaValidUsersForGlobalManualInstance& getNext();
-  	  
-  	  int getSize() const;
-  	  
-  	  const Linux_SambaValidUsersForGlobalManualInstance& getElement(int pos) const;  	  
-  	  
-  	 void addElement(const Linux_SambaValidUsersForGlobalManualInstance& elementP);
-  };
-}
-#endif
 
+    private:
+    Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement* m_firstElementP;
+    Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement* m_currentElementP;
+    Linux_SambaValidUsersForGlobalManualInstanceEnumerationElement* m_endElementP;
+
+    public:
+    Linux_SambaValidUsersForGlobalManualInstanceEnumeration();
+    Linux_SambaValidUsersForGlobalManualInstanceEnumeration(
+      const Linux_SambaValidUsersForGlobalManualInstanceEnumeration& anInstanceEnumeration);
+    ~Linux_SambaValidUsersForGlobalManualInstanceEnumeration();
+
+    void reset();
+    bool hasNext() const;
+    const Linux_SambaValidUsersForGlobalManualInstance& getNext();
+    int getSize() const;
+    const Linux_SambaValidUsersForGlobalManualInstance& getElement(int anIndex) const;  	  
+    void addElement(const Linux_SambaValidUsersForGlobalManualInstance& anInstance);
+
+  };
+
+}
+
+#endif

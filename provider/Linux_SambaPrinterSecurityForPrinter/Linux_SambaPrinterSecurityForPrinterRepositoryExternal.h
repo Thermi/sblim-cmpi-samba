@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaPrinterSecurityForPrinterRepositoryExternal.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaPrinterSecurityForPrinterRepositoryExternal.h
+//     created on Fri, 24 Feb 2006 using ECUTE
+// 
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Rodrigo Ceron    <rceron@br.ibm.com>
+//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//
+// =======================================================================
+//
+// 
 #ifndef Linux_SambaPrinterSecurityForPrinterRepositoryExternal_h
 #define Linux_SambaPrinterSecurityForPrinterRepositoryExternal_h
 
@@ -27,38 +30,40 @@
 namespace genProvider {
 
   class Linux_SambaPrinterSecurityForPrinterRepositoryExternal {
+     
+    private:
+    CmpiBroker  m_broker;
+    CmpiContext m_context;
+    const static char *s_shadowNameSpaceP;
   	
     public:
     Linux_SambaPrinterSecurityForPrinterRepositoryExternal(
-     const CmpiBroker& brkr,
-     const CmpiContext& ctx);
+      const CmpiBroker& aBroker,
+      const CmpiContext& aContext);
     virtual ~Linux_SambaPrinterSecurityForPrinterRepositoryExternal();
     
     virtual void enumInstanceNames(
-     Linux_SambaPrinterSecurityForPrinterInstanceNameEnumeration&);
+      Linux_SambaPrinterSecurityForPrinterInstanceNameEnumeration& anInstanceNameEnumeration);
      
     virtual void enumInstances(
-     const char* *properties,
-     Linux_SambaPrinterSecurityForPrinterRepositoryInstanceEnumeration&);
+      const char** aPropertiesPP,
+      Linux_SambaPrinterSecurityForPrinterRepositoryInstanceEnumeration& aRepositoryInstanceEnumeration);
      
     virtual Linux_SambaPrinterSecurityForPrinterRepositoryInstance getInstance(
-     const char* *properties,
-     const Linux_SambaPrinterSecurityForPrinterInstanceName&);
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterSecurityForPrinterInstanceName& anInstanceName);
      
     virtual void setInstance(
-     const char* *properties,
-     const Linux_SambaPrinterSecurityForPrinterRepositoryInstance&);
+      const char** aPropertiesPP,
+      const Linux_SambaPrinterSecurityForPrinterRepositoryInstance& aRepositoryInstance);
      
-    virtual void createInstance(
-     const Linux_SambaPrinterSecurityForPrinterRepositoryInstance&);
+    virtual Linux_SambaPrinterSecurityForPrinterInstanceName createInstance(
+      const Linux_SambaPrinterSecurityForPrinterRepositoryInstance& aRepositoryInstance);
      
     virtual void deleteInstance(
-     const Linux_SambaPrinterSecurityForPrinterInstanceName&);
-     
-    private:
-    CmpiBroker  broker;
-    CmpiContext context;
-    const static char *nsp;
+      const Linux_SambaPrinterSecurityForPrinterInstanceName& anInstanceName);
+  
   };
+
 }
 #endif
