@@ -185,7 +185,7 @@
         <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_HM9RkdK2Edmfy_IiaGYYaA"/>
       </contents>
     </eAnnotations>
-    <ownedComment xmi:id="_G_igoNK2Edmfy_IiaGYYaA" body=" ===================================================================&#xD;&#xD;&#xA; Title: Core_Collection&#xD;&#xD;&#xA; $State: Exp $&#xD;&#xD;&#xA; $Date: 2006/05/04 09:46:14 $&#xD;&#xD;&#xA; $RCSfile: Linux_Samba-Model.emx,v $&#xD;&#xD;&#xA; $Revision: 1.2 $&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA;#pragma inLine (&quot;Includes/copyright.inc&quot;)&#xD;&#xD;&#xA; Copyright 1998-2005 Distributed Management Task Force, Inc. (DMTF).&#xD;&#xD;&#xA; All rights reserved.&#xD;&#xD;&#xA; DMTF is a not-for-profit association of industry members dedicated&#xD;&#xD;&#xA; to promoting enterprise and systems management and interoperability.&#xD;&#xD;&#xA; DMTF specifications and documents may be reproduced for uses&#xD;&#xD;&#xA; consistent with this purpose by members and non-members,&#xD;&#xD;&#xA; provided that correct attribution is given.&#xD;&#xD;&#xA; As DMTF specifications may be revised from time to time,&#xD;&#xD;&#xA; the particular version and release date should always be noted.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Implementation of certain elements of this standard or proposed&#xD;&#xD;&#xA; standard may be subject to third party patent rights, including&#xD;&#xD;&#xA; provisional patent rights (herein &quot;patent rights&quot;). DMTF makes&#xD;&#xD;&#xA; no representations to users of the standard as to the existence&#xD;&#xD;&#xA; of such rights, and is not responsible to recognize, disclose, or&#xD;&#xD;&#xA; identify any or all such third party patent right, owners or&#xD;&#xD;&#xA; claimants, nor for any incomplete or inaccurate identification or&#xD;&#xD;&#xA; disclosure of such rights, owners or claimants. DMTF shall have no&#xD;&#xD;&#xA; liability to any party, in any manner or circumstance, under any&#xD;&#xD;&#xA; legal theory whatsoever, for failure to recognize, disclose, or&#xD;&#xD;&#xA; identify any such third party patent rights, or for such party's&#xD;&#xD;&#xA; reliance on the standard or incorporation thereof in its product,&#xD;&#xD;&#xA; protocols or testing procedures. DMTF shall have no liability to&#xD;&#xD;&#xA; any party implementing such standard, whether such implementation&#xD;&#xD;&#xA; is foreseeable or not, nor to any patent owner or claimant, and shall&#xD;&#xD;&#xA; have no liability or responsibility for costs or losses incurred if&#xD;&#xD;&#xA; a standard is withdrawn or modified after publication, and shall be&#xD;&#xD;&#xA; indemnified and held harmless by any party implementing the&#xD;&#xD;&#xA; standard from any and all claims of infringement by a patent owner&#xD;&#xD;&#xA; for such implementations.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; For information about patents held by third-parties which have&#xD;&#xD;&#xA; notified the DMTF that, in their opinion, such patent may relate to&#xD;&#xD;&#xA; or impact implementations of DMTF standards, visit&#xD;&#xD;&#xA; http://www.dmtf.org/about/policies/disclosures.php.&#xD;&#xD;&#xA;#pragma inLine&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA; Description: The Core Model defines basic management concepts.&#xD;&#xD;&#xA;              This file defines the concepts and classes in support&#xD;&#xD;&#xA;              of Collections.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA;              The object classes below are listed in an order that&#xD;&#xD;&#xA;              avoids forward references. Required objects, defined&#xD;&#xD;&#xA;              by other working groups, are omitted.&#xD;&#xD;&#xA; ==================================================================&#xD;&#xD;&#xA; Change Log for v2.8 Final&#xD;&#xD;&#xA; CR1210 - Removal of experimental qualifiers for core.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.8 Preliminary&#xD;&#xD;&#xA; 1136 - Add ConcreteCollection&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7&#xD;&#xD;&#xA; CR968 - Remove the Experimental qualifier&#xD;&#xD;&#xA;       - Keep RedundancySet, SparedSet, IsSpare, StorageRedundancySet,&#xD;&#xD;&#xA;         and ExtraCapacitySet experimental for 2.8&#xD;&#xD;&#xA; CR994 - Update description for InstanceID&#xD;&#xD;&#xA; CR1019 - CIM Versioning for 2.8 Preliminary&#xD;&#xD;&#xA; CR1128  - Addition of HostedDependency&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7&#xD;&#xD;&#xA; CR684 - Add SystemSpecificCollection and HostedCollection&#xD;&#xD;&#xA; CR760 - Add OrderedMemberOfCollection&#xD;&#xD;&#xA; ==================================================================&#xD;">
+    <ownedComment xmi:id="_G_igoNK2Edmfy_IiaGYYaA" body=" ===================================================================&#xD;&#xD;&#xA; Title: Core_Collection&#xD;&#xD;&#xA; $State: Exp $&#xD;&#xD;&#xA; $Date: 2006/05/05 08:06:37 $&#xD;&#xD;&#xA; $RCSfile: Linux_Samba-Model.emx,v $&#xD;&#xD;&#xA; $Revision: 1.3 $&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA;#pragma inLine (&quot;Includes/copyright.inc&quot;)&#xD;&#xD;&#xA; Copyright 1998-2005 Distributed Management Task Force, Inc. (DMTF).&#xD;&#xD;&#xA; All rights reserved.&#xD;&#xD;&#xA; DMTF is a not-for-profit association of industry members dedicated&#xD;&#xD;&#xA; to promoting enterprise and systems management and interoperability.&#xD;&#xD;&#xA; DMTF specifications and documents may be reproduced for uses&#xD;&#xD;&#xA; consistent with this purpose by members and non-members,&#xD;&#xD;&#xA; provided that correct attribution is given.&#xD;&#xD;&#xA; As DMTF specifications may be revised from time to time,&#xD;&#xD;&#xA; the particular version and release date should always be noted.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Implementation of certain elements of this standard or proposed&#xD;&#xD;&#xA; standard may be subject to third party patent rights, including&#xD;&#xD;&#xA; provisional patent rights (herein &quot;patent rights&quot;). DMTF makes&#xD;&#xD;&#xA; no representations to users of the standard as to the existence&#xD;&#xD;&#xA; of such rights, and is not responsible to recognize, disclose, or&#xD;&#xD;&#xA; identify any or all such third party patent right, owners or&#xD;&#xD;&#xA; claimants, nor for any incomplete or inaccurate identification or&#xD;&#xD;&#xA; disclosure of such rights, owners or claimants. DMTF shall have no&#xD;&#xD;&#xA; liability to any party, in any manner or circumstance, under any&#xD;&#xD;&#xA; legal theory whatsoever, for failure to recognize, disclose, or&#xD;&#xD;&#xA; identify any such third party patent rights, or for such party's&#xD;&#xD;&#xA; reliance on the standard or incorporation thereof in its product,&#xD;&#xD;&#xA; protocols or testing procedures. DMTF shall have no liability to&#xD;&#xD;&#xA; any party implementing such standard, whether such implementation&#xD;&#xD;&#xA; is foreseeable or not, nor to any patent owner or claimant, and shall&#xD;&#xD;&#xA; have no liability or responsibility for costs or losses incurred if&#xD;&#xD;&#xA; a standard is withdrawn or modified after publication, and shall be&#xD;&#xD;&#xA; indemnified and held harmless by any party implementing the&#xD;&#xD;&#xA; standard from any and all claims of infringement by a patent owner&#xD;&#xD;&#xA; for such implementations.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; For information about patents held by third-parties which have&#xD;&#xD;&#xA; notified the DMTF that, in their opinion, such patent may relate to&#xD;&#xD;&#xA; or impact implementations of DMTF standards, visit&#xD;&#xD;&#xA; http://www.dmtf.org/about/policies/disclosures.php.&#xD;&#xD;&#xA;#pragma inLine&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA; Description: The Core Model defines basic management concepts.&#xD;&#xD;&#xA;              This file defines the concepts and classes in support&#xD;&#xD;&#xA;              of Collections.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA;              The object classes below are listed in an order that&#xD;&#xD;&#xA;              avoids forward references. Required objects, defined&#xD;&#xD;&#xA;              by other working groups, are omitted.&#xD;&#xD;&#xA; ==================================================================&#xD;&#xD;&#xA; Change Log for v2.8 Final&#xD;&#xD;&#xA; CR1210 - Removal of experimental qualifiers for core.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.8 Preliminary&#xD;&#xD;&#xA; 1136 - Add ConcreteCollection&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7&#xD;&#xD;&#xA; CR968 - Remove the Experimental qualifier&#xD;&#xD;&#xA;       - Keep RedundancySet, SparedSet, IsSpare, StorageRedundancySet,&#xD;&#xD;&#xA;         and ExtraCapacitySet experimental for 2.8&#xD;&#xD;&#xA; CR994 - Update description for InstanceID&#xD;&#xD;&#xA; CR1019 - CIM Versioning for 2.8 Preliminary&#xD;&#xD;&#xA; CR1128  - Addition of HostedDependency&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7&#xD;&#xD;&#xA; CR684 - Add SystemSpecificCollection and HostedCollection&#xD;&#xD;&#xA; CR760 - Add OrderedMemberOfCollection&#xD;&#xD;&#xA; ==================================================================&#xD;">
       <eAnnotations xmi:id="_G_jHsNK2Edmfy_IiaGYYaA" source="appliedStereotypes">
         <contents xmi:type="Default_0:Default__Documentation" xmi:id="_G_jHsdK2Edmfy_IiaGYYaA"/>
       </eAnnotations>
@@ -507,7 +507,7 @@
         <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_HOpTodK2Edmfy_IiaGYYaA"/>
       </contents>
     </eAnnotations>
-    <ownedComment xmi:id="_G_myENK2Edmfy_IiaGYYaA" body=" ===================================================================&#xD;&#xD;&#xA; Title: Core_CoreElements&#xD;&#xD;&#xA; $State: Exp $&#xD;&#xD;&#xA; $Date: 2006/05/04 09:46:14 $&#xD;&#xD;&#xA; $RCSfile: Linux_Samba-Model.emx,v $&#xD;&#xD;&#xA; $Revision: 1.2 $&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA;#pragma inLine (&quot;Includes/copyright.inc&quot;)&#xD;&#xD;&#xA; Copyright 1998-2005 Distributed Management Task Force, Inc. (DMTF).&#xD;&#xD;&#xA; All rights reserved.&#xD;&#xD;&#xA; DMTF is a not-for-profit association of industry members dedicated&#xD;&#xD;&#xA; to promoting enterprise and systems management and interoperability.&#xD;&#xD;&#xA; DMTF specifications and documents may be reproduced for uses&#xD;&#xD;&#xA; consistent with this purpose by members and non-members,&#xD;&#xD;&#xA; provided that correct attribution is given.&#xD;&#xD;&#xA; As DMTF specifications may be revised from time to time,&#xD;&#xD;&#xA; the particular version and release date should always be noted.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Implementation of certain elements of this standard or proposed&#xD;&#xD;&#xA; standard may be subject to third party patent rights, including&#xD;&#xD;&#xA; provisional patent rights (herein &quot;patent rights&quot;). DMTF makes&#xD;&#xD;&#xA; no representations to users of the standard as to the existence&#xD;&#xD;&#xA; of such rights, and is not responsible to recognize, disclose, or&#xD;&#xD;&#xA; identify any or all such third party patent right, owners or&#xD;&#xD;&#xA; claimants, nor for any incomplete or inaccurate identification or&#xD;&#xD;&#xA; disclosure of such rights, owners or claimants. DMTF shall have no&#xD;&#xD;&#xA; liability to any party, in any manner or circumstance, under any&#xD;&#xD;&#xA; legal theory whatsoever, for failure to recognize, disclose, or&#xD;&#xD;&#xA; identify any such third party patent rights, or for such party's&#xD;&#xD;&#xA; reliance on the standard or incorporation thereof in its product,&#xD;&#xD;&#xA; protocols or testing procedures. DMTF shall have no liability to&#xD;&#xD;&#xA; any party implementing such standard, whether such implementation&#xD;&#xD;&#xA; is foreseeable or not, nor to any patent owner or claimant, and shall&#xD;&#xD;&#xA; have no liability or responsibility for costs or losses incurred if&#xD;&#xD;&#xA; a standard is withdrawn or modified after publication, and shall be&#xD;&#xD;&#xA; indemnified and held harmless by any party implementing the&#xD;&#xD;&#xA; standard from any and all claims of infringement by a patent owner&#xD;&#xD;&#xA; for such implementations.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; For information about patents held by third-parties which have&#xD;&#xD;&#xA; notified the DMTF that, in their opinion, such patent may relate to&#xD;&#xD;&#xA; or impact implementations of DMTF standards, visit&#xD;&#xD;&#xA; http://www.dmtf.org/about/policies/disclosures.php.&#xD;&#xD;&#xA;#pragma inLine&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA; Description: The Core Model defines basic management concepts.&#xD;&#xD;&#xA;              This file defines the concepts for the top of the CIM&#xD;&#xD;&#xA;              object hierarchies (ManagedElement,&#xD;&#xD;&#xA;              ManagedSystemElement,&#xD;&#xD;&#xA;              LogicalElement, Systems, Services, etc.) and the 'top'&#xD;&#xD;&#xA;              associations (Dependency, Component,&#xD;&#xD;&#xA;              LogicalIdentity, ...).&#xD;&#xD;&#xA; &#xD;&#xD;&#xA;              The object classes below are listed in an order that&#xD;&#xD;&#xA;              avoids forward references. Required objects, defined&#xD;&#xD;&#xA;              by other working groups, are omitted.&#xD;&#xD;&#xA; ==================================================================&#xD;&#xD;&#xA; Change Log for v2.9 Final&#xD;&#xD;&#xA; CR1319 - Add CIM_ConcreteJob.TimeBeforeRemoval&#xD;&#xD;&#xA; CR1282 - Change the description of Job.PercentComplete&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.8 Final&#xD;&#xD;&#xA; CR1181 - Add properties/method to ConcreteJob to support state&#xD;&#xD;&#xA;          and enhance kill support&#xD;&#xD;&#xA; CR1203 - Reserved Range for OperationalStatus&#xD;&#xD;&#xA; CR1210 - Removal of experimental qualifiers for core.&#xD;&#xD;&#xA; CR1223 - Sysdev Omnibus CR - Minor MOF corrections.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.8 Preliminary&#xD;&#xD;&#xA; CR932  - Add power mode status to OperationalStatus.&#xD;&#xD;&#xA;           Move the specific power mode states from availability&#xD;&#xD;&#xA;          to a property between the PowerMgmt service and its ME.&#xD;&#xD;&#xA;          Remove the overlapping properties from Logical Device.&#xD;&#xD;&#xA; CR950  - Add ArrayType to CIM_ManagedSystemElement properties&#xD;&#xD;&#xA; CR1006 - Improve description of ManagedSystemElement&#xD;&#xD;&#xA; CR1026 - Update the InfoFormat enum for RemoteAccessPoint&#xD;&#xD;&#xA; CR1019 - CIM Versioning for 2.8 Preliminary&#xD;&#xD;&#xA; CR1033 - relax key types for Synchronized&#xD;&#xD;&#xA; CR1030 - Update AdminDomain.NameFormat for WWN&#xD;&#xD;&#xA; CR1045 - Add method for requesting a &quot;EnabledState&quot; change in&#xD;&#xD;&#xA;          EnabledLogicalElement class / Deprecate or explain overlap&#xD;&#xD;&#xA;          with LogicalDevice and Service properties and methods&#xD;&#xD;&#xA; CR1052 - Updates to ProtocolEndpoint and its&#xD;&#xD;&#xA;          subclasses to better align with the IF-MIB&#xD;&#xD;&#xA; CR1081 - Promote CIM_Job and ConcreteJob to the Core Model to&#xD;&#xD;&#xA;          avoid forward reference in EnabledLogicalElement's methods&#xD;&#xD;&#xA; CR1092  - Move Service and SAP related classes to their own file&#xD;&#xD;&#xA; CR1127  - Add new enums to RequestedState&#xD;&#xD;&#xA; CR1128  - Addition of HostedDependency&#xD;&#xD;&#xA; CR1135  - Job Recovery Properties and the RecoveryJob association&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7 Final&#xD;&#xD;&#xA; CR961 - Rename EnabledLogicalElement. xxxStatus properties to be&#xD;&#xD;&#xA;         State.&#xD;&#xD;&#xA;       - Update description of xxxState properties to reflect the&#xD;&#xD;&#xA;         expected behavior of the state values.&#xD;&#xD;&#xA;       - Change references to EnabledStatus and RequestedStatus to&#xD;&#xD;&#xA;         EnabledState and RequestedState in the Service.&#xD;&#xD;&#xA;            StartService()&#xD;&#xD;&#xA;            StopService()&#xD;&#xD;&#xA; CR966 - Remove the Terminal qualifier from ConcreteDependency,&#xD;&#xD;&#xA;         ConcreteComponent, and ConcreteIdentity associations and&#xD;&#xD;&#xA;         add text to describe the intent of the original placement&#xD;&#xD;&#xA; CR968 - Remove the Experimental qualifier&#xD;&#xD;&#xA; CR993 - Change property name and description of&#xD;&#xD;&#xA;            ManagedSystemElement.OtherStatusDescription&#xD;&#xD;&#xA; CR1009 - Add ServiceAccessURI class&#xD;&#xD;&#xA; CR1135 - Job Recovery Properties and the RecoveryJob association&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7&#xD;&#xD;&#xA; CR641 - Add ConcreteDependency&#xD;&#xD;&#xA; CR643 - Promote Component to ManagedElement, and add&#xD;&#xD;&#xA;         ConcreteComponent&#xD;&#xD;&#xA; CR660 - Add RemoteServiceAccessPoint and RemotePort&#xD;&#xD;&#xA; CR663 - Update the Description of ActiveConnection and some of&#xD;&#xD;&#xA;         its properties.  Deprecate the properties, TrafficType&#xD;&#xD;&#xA;         and OtherTrafficDescription&#xD;&#xD;&#xA; CR670 - Promote LogicalIdentity to ManagedElement, and add&#xD;&#xD;&#xA;         ConcreteIdentity&#xD;&#xD;&#xA; CR671 - Deprecate ProvidesServiceToElement&#xD;&#xD;&#xA;       - Add ServiceAvailableToElement&#xD;&#xD;&#xA;       - Update description for ServiceServiceDependency&#xD;&#xD;&#xA; CR672 - Update description for SystemComponent to clarify its use&#xD;&#xD;&#xA; CR677 - Add the array property OperationalStatus &amp; OtherStatus&#xD;&#xD;&#xA;         Description, and deprecate the existing Status property of&#xD;&#xD;&#xA;         ManagedSystemElement&#xD;&#xD;&#xA;       - Deprecate StartMode in Service&#xD;&#xD;&#xA; CR717 - Clarify description of System.Roles&#xD;&#xD;&#xA; CR747 - Add the Write Qualifier and update description of System.&#xD;&#xD;&#xA;         Roles&#xD;&#xD;&#xA; CR751 - Promote ActiveConnection from ProtocolEndpoint to&#xD;&#xD;&#xA;         ServiceAccessPoint&#xD;&#xD;&#xA; CR757 - Add EnabledLogicalElement&#xD;&#xD;&#xA;       - Change subclass of System, Service, and ServiceAccessPoint&#xD;&#xD;&#xA;         from LogicalElement to EnabledLogicalElement&#xD;&#xD;&#xA;       - Update the descriptions to Service.StartService() and&#xD;&#xD;&#xA;         Service.StopService() to explain the overlap with&#xD;&#xD;&#xA;         RequestedStatus&#xD;&#xD;&#xA;       - Update the deprecation of Service.StartMode to&#xD;&#xD;&#xA;         EnabledDefault&#xD;&#xD;&#xA; CR758 - Add ElementName to ManagedElement&#xD;&#xD;&#xA; CR764 - Add ServiceAffectsElement&#xD;&#xD;&#xA; CR779 - Extend ManagedSystemElement.OperationalStatus to include&#xD;&#xD;&#xA;         &quot;Completed&quot;&#xD;&#xD;&#xA; CR804 - Update the enumeration for ProtocolEndpoint.ProtocolType&#xD;&#xD;&#xA; CR833 - Extend EnabledLogicalElement.EnabledStatus &amp; .Requested&#xD;&#xD;&#xA;         Status to include &quot;In Test&quot; and &quot;Test&quot; respectively&#xD;&#xD;&#xA; CR834 - Extend ManagedSystemElement.OperationalStatus to include&#xD;&#xD;&#xA;         &quot;Aborted&quot;, &quot;Dormant&quot;, and &quot;Supported Entity in Error&quot;&#xD;&#xD;&#xA; CR844 - Add PrimaryOwnerName and PrimaryOwnerContact to Service;&#xD;&#xD;&#xA;         Add Write qualifier to the same properties in System&#xD;&#xD;&#xA; CR894 - Clarify the description for System.&#xD;&#xD;&#xA; CR898 - Extend MaxLen qualifier on ManagedSystemElement.Name&#xD;&#xD;&#xA;         from 256 to 1024 (to match subclassing requriements)&#xD;&#xD;&#xA; ==================================================================&#xD;">
+    <ownedComment xmi:id="_G_myENK2Edmfy_IiaGYYaA" body=" ===================================================================&#xD;&#xD;&#xA; Title: Core_CoreElements&#xD;&#xD;&#xA; $State: Exp $&#xD;&#xD;&#xA; $Date: 2006/05/05 08:06:37 $&#xD;&#xD;&#xA; $RCSfile: Linux_Samba-Model.emx,v $&#xD;&#xD;&#xA; $Revision: 1.3 $&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA;#pragma inLine (&quot;Includes/copyright.inc&quot;)&#xD;&#xD;&#xA; Copyright 1998-2005 Distributed Management Task Force, Inc. (DMTF).&#xD;&#xD;&#xA; All rights reserved.&#xD;&#xD;&#xA; DMTF is a not-for-profit association of industry members dedicated&#xD;&#xD;&#xA; to promoting enterprise and systems management and interoperability.&#xD;&#xD;&#xA; DMTF specifications and documents may be reproduced for uses&#xD;&#xD;&#xA; consistent with this purpose by members and non-members,&#xD;&#xD;&#xA; provided that correct attribution is given.&#xD;&#xD;&#xA; As DMTF specifications may be revised from time to time,&#xD;&#xD;&#xA; the particular version and release date should always be noted.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Implementation of certain elements of this standard or proposed&#xD;&#xD;&#xA; standard may be subject to third party patent rights, including&#xD;&#xD;&#xA; provisional patent rights (herein &quot;patent rights&quot;). DMTF makes&#xD;&#xD;&#xA; no representations to users of the standard as to the existence&#xD;&#xD;&#xA; of such rights, and is not responsible to recognize, disclose, or&#xD;&#xD;&#xA; identify any or all such third party patent right, owners or&#xD;&#xD;&#xA; claimants, nor for any incomplete or inaccurate identification or&#xD;&#xD;&#xA; disclosure of such rights, owners or claimants. DMTF shall have no&#xD;&#xD;&#xA; liability to any party, in any manner or circumstance, under any&#xD;&#xD;&#xA; legal theory whatsoever, for failure to recognize, disclose, or&#xD;&#xD;&#xA; identify any such third party patent rights, or for such party's&#xD;&#xD;&#xA; reliance on the standard or incorporation thereof in its product,&#xD;&#xD;&#xA; protocols or testing procedures. DMTF shall have no liability to&#xD;&#xD;&#xA; any party implementing such standard, whether such implementation&#xD;&#xD;&#xA; is foreseeable or not, nor to any patent owner or claimant, and shall&#xD;&#xD;&#xA; have no liability or responsibility for costs or losses incurred if&#xD;&#xD;&#xA; a standard is withdrawn or modified after publication, and shall be&#xD;&#xD;&#xA; indemnified and held harmless by any party implementing the&#xD;&#xD;&#xA; standard from any and all claims of infringement by a patent owner&#xD;&#xD;&#xA; for such implementations.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; For information about patents held by third-parties which have&#xD;&#xD;&#xA; notified the DMTF that, in their opinion, such patent may relate to&#xD;&#xD;&#xA; or impact implementations of DMTF standards, visit&#xD;&#xD;&#xA; http://www.dmtf.org/about/policies/disclosures.php.&#xD;&#xD;&#xA;#pragma inLine&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA; Description: The Core Model defines basic management concepts.&#xD;&#xD;&#xA;              This file defines the concepts for the top of the CIM&#xD;&#xD;&#xA;              object hierarchies (ManagedElement,&#xD;&#xD;&#xA;              ManagedSystemElement,&#xD;&#xD;&#xA;              LogicalElement, Systems, Services, etc.) and the 'top'&#xD;&#xD;&#xA;              associations (Dependency, Component,&#xD;&#xD;&#xA;              LogicalIdentity, ...).&#xD;&#xD;&#xA; &#xD;&#xD;&#xA;              The object classes below are listed in an order that&#xD;&#xD;&#xA;              avoids forward references. Required objects, defined&#xD;&#xD;&#xA;              by other working groups, are omitted.&#xD;&#xD;&#xA; ==================================================================&#xD;&#xD;&#xA; Change Log for v2.9 Final&#xD;&#xD;&#xA; CR1319 - Add CIM_ConcreteJob.TimeBeforeRemoval&#xD;&#xD;&#xA; CR1282 - Change the description of Job.PercentComplete&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.8 Final&#xD;&#xD;&#xA; CR1181 - Add properties/method to ConcreteJob to support state&#xD;&#xD;&#xA;          and enhance kill support&#xD;&#xD;&#xA; CR1203 - Reserved Range for OperationalStatus&#xD;&#xD;&#xA; CR1210 - Removal of experimental qualifiers for core.&#xD;&#xD;&#xA; CR1223 - Sysdev Omnibus CR - Minor MOF corrections.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.8 Preliminary&#xD;&#xD;&#xA; CR932  - Add power mode status to OperationalStatus.&#xD;&#xD;&#xA;           Move the specific power mode states from availability&#xD;&#xD;&#xA;          to a property between the PowerMgmt service and its ME.&#xD;&#xD;&#xA;          Remove the overlapping properties from Logical Device.&#xD;&#xD;&#xA; CR950  - Add ArrayType to CIM_ManagedSystemElement properties&#xD;&#xD;&#xA; CR1006 - Improve description of ManagedSystemElement&#xD;&#xD;&#xA; CR1026 - Update the InfoFormat enum for RemoteAccessPoint&#xD;&#xD;&#xA; CR1019 - CIM Versioning for 2.8 Preliminary&#xD;&#xD;&#xA; CR1033 - relax key types for Synchronized&#xD;&#xD;&#xA; CR1030 - Update AdminDomain.NameFormat for WWN&#xD;&#xD;&#xA; CR1045 - Add method for requesting a &quot;EnabledState&quot; change in&#xD;&#xD;&#xA;          EnabledLogicalElement class / Deprecate or explain overlap&#xD;&#xD;&#xA;          with LogicalDevice and Service properties and methods&#xD;&#xD;&#xA; CR1052 - Updates to ProtocolEndpoint and its&#xD;&#xD;&#xA;          subclasses to better align with the IF-MIB&#xD;&#xD;&#xA; CR1081 - Promote CIM_Job and ConcreteJob to the Core Model to&#xD;&#xD;&#xA;          avoid forward reference in EnabledLogicalElement's methods&#xD;&#xD;&#xA; CR1092  - Move Service and SAP related classes to their own file&#xD;&#xD;&#xA; CR1127  - Add new enums to RequestedState&#xD;&#xD;&#xA; CR1128  - Addition of HostedDependency&#xD;&#xD;&#xA; CR1135  - Job Recovery Properties and the RecoveryJob association&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7 Final&#xD;&#xD;&#xA; CR961 - Rename EnabledLogicalElement. xxxStatus properties to be&#xD;&#xD;&#xA;         State.&#xD;&#xD;&#xA;       - Update description of xxxState properties to reflect the&#xD;&#xD;&#xA;         expected behavior of the state values.&#xD;&#xD;&#xA;       - Change references to EnabledStatus and RequestedStatus to&#xD;&#xD;&#xA;         EnabledState and RequestedState in the Service.&#xD;&#xD;&#xA;            StartService()&#xD;&#xD;&#xA;            StopService()&#xD;&#xD;&#xA; CR966 - Remove the Terminal qualifier from ConcreteDependency,&#xD;&#xD;&#xA;         ConcreteComponent, and ConcreteIdentity associations and&#xD;&#xD;&#xA;         add text to describe the intent of the original placement&#xD;&#xD;&#xA; CR968 - Remove the Experimental qualifier&#xD;&#xD;&#xA; CR993 - Change property name and description of&#xD;&#xD;&#xA;            ManagedSystemElement.OtherStatusDescription&#xD;&#xD;&#xA; CR1009 - Add ServiceAccessURI class&#xD;&#xD;&#xA; CR1135 - Job Recovery Properties and the RecoveryJob association&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7&#xD;&#xD;&#xA; CR641 - Add ConcreteDependency&#xD;&#xD;&#xA; CR643 - Promote Component to ManagedElement, and add&#xD;&#xD;&#xA;         ConcreteComponent&#xD;&#xD;&#xA; CR660 - Add RemoteServiceAccessPoint and RemotePort&#xD;&#xD;&#xA; CR663 - Update the Description of ActiveConnection and some of&#xD;&#xD;&#xA;         its properties.  Deprecate the properties, TrafficType&#xD;&#xD;&#xA;         and OtherTrafficDescription&#xD;&#xD;&#xA; CR670 - Promote LogicalIdentity to ManagedElement, and add&#xD;&#xD;&#xA;         ConcreteIdentity&#xD;&#xD;&#xA; CR671 - Deprecate ProvidesServiceToElement&#xD;&#xD;&#xA;       - Add ServiceAvailableToElement&#xD;&#xD;&#xA;       - Update description for ServiceServiceDependency&#xD;&#xD;&#xA; CR672 - Update description for SystemComponent to clarify its use&#xD;&#xD;&#xA; CR677 - Add the array property OperationalStatus &amp; OtherStatus&#xD;&#xD;&#xA;         Description, and deprecate the existing Status property of&#xD;&#xD;&#xA;         ManagedSystemElement&#xD;&#xD;&#xA;       - Deprecate StartMode in Service&#xD;&#xD;&#xA; CR717 - Clarify description of System.Roles&#xD;&#xD;&#xA; CR747 - Add the Write Qualifier and update description of System.&#xD;&#xD;&#xA;         Roles&#xD;&#xD;&#xA; CR751 - Promote ActiveConnection from ProtocolEndpoint to&#xD;&#xD;&#xA;         ServiceAccessPoint&#xD;&#xD;&#xA; CR757 - Add EnabledLogicalElement&#xD;&#xD;&#xA;       - Change subclass of System, Service, and ServiceAccessPoint&#xD;&#xD;&#xA;         from LogicalElement to EnabledLogicalElement&#xD;&#xD;&#xA;       - Update the descriptions to Service.StartService() and&#xD;&#xD;&#xA;         Service.StopService() to explain the overlap with&#xD;&#xD;&#xA;         RequestedStatus&#xD;&#xD;&#xA;       - Update the deprecation of Service.StartMode to&#xD;&#xD;&#xA;         EnabledDefault&#xD;&#xD;&#xA; CR758 - Add ElementName to ManagedElement&#xD;&#xD;&#xA; CR764 - Add ServiceAffectsElement&#xD;&#xD;&#xA; CR779 - Extend ManagedSystemElement.OperationalStatus to include&#xD;&#xD;&#xA;         &quot;Completed&quot;&#xD;&#xD;&#xA; CR804 - Update the enumeration for ProtocolEndpoint.ProtocolType&#xD;&#xD;&#xA; CR833 - Extend EnabledLogicalElement.EnabledStatus &amp; .Requested&#xD;&#xD;&#xA;         Status to include &quot;In Test&quot; and &quot;Test&quot; respectively&#xD;&#xD;&#xA; CR834 - Extend ManagedSystemElement.OperationalStatus to include&#xD;&#xD;&#xA;         &quot;Aborted&quot;, &quot;Dormant&quot;, and &quot;Supported Entity in Error&quot;&#xD;&#xD;&#xA; CR844 - Add PrimaryOwnerName and PrimaryOwnerContact to Service;&#xD;&#xD;&#xA;         Add Write qualifier to the same properties in System&#xD;&#xD;&#xA; CR894 - Clarify the description for System.&#xD;&#xD;&#xA; CR898 - Extend MaxLen qualifier on ManagedSystemElement.Name&#xD;&#xD;&#xA;         from 256 to 1024 (to match subclassing requriements)&#xD;&#xD;&#xA; ==================================================================&#xD;">
       <eAnnotations xmi:id="_G_nZINK2Edmfy_IiaGYYaA" source="appliedStereotypes">
         <contents xmi:type="Default_0:Default__Documentation" xmi:id="_G_nZIdK2Edmfy_IiaGYYaA"/>
       </eAnnotations>
@@ -1977,7 +1977,7 @@
         <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_HRo9QdK2Edmfy_IiaGYYaA"/>
       </contents>
     </eAnnotations>
-    <ownedComment xmi:id="_HETE0NK2Edmfy_IiaGYYaA" body=" ===================================================================&#xD;&#xD;&#xA; Title: Core_Service&#xD;&#xD;&#xA; $State: Exp $&#xD;&#xD;&#xA; $Date: 2006/05/04 09:46:14 $&#xD;&#xD;&#xA; $RCSfile: Linux_Samba-Model.emx,v $&#xD;&#xD;&#xA; $Revision: 1.2 $&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA;#pragma inLine (&quot;Includes/copyright.inc&quot;)&#xD;&#xD;&#xA; Copyright 1998-2005 Distributed Management Task Force, Inc. (DMTF).&#xD;&#xD;&#xA; All rights reserved.&#xD;&#xD;&#xA; DMTF is a not-for-profit association of industry members dedicated&#xD;&#xD;&#xA; to promoting enterprise and systems management and interoperability.&#xD;&#xD;&#xA; DMTF specifications and documents may be reproduced for uses&#xD;&#xD;&#xA; consistent with this purpose by members and non-members,&#xD;&#xD;&#xA; provided that correct attribution is given.&#xD;&#xD;&#xA; As DMTF specifications may be revised from time to time,&#xD;&#xD;&#xA; the particular version and release date should always be noted.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Implementation of certain elements of this standard or proposed&#xD;&#xD;&#xA; standard may be subject to third party patent rights, including&#xD;&#xD;&#xA; provisional patent rights (herein &quot;patent rights&quot;). DMTF makes&#xD;&#xD;&#xA; no representations to users of the standard as to the existence&#xD;&#xD;&#xA; of such rights, and is not responsible to recognize, disclose, or&#xD;&#xD;&#xA; identify any or all such third party patent right, owners or&#xD;&#xD;&#xA; claimants, nor for any incomplete or inaccurate identification or&#xD;&#xD;&#xA; disclosure of such rights, owners or claimants. DMTF shall have no&#xD;&#xD;&#xA; liability to any party, in any manner or circumstance, under any&#xD;&#xD;&#xA; legal theory whatsoever, for failure to recognize, disclose, or&#xD;&#xD;&#xA; identify any such third party patent rights, or for such party's&#xD;&#xD;&#xA; reliance on the standard or incorporation thereof in its product,&#xD;&#xD;&#xA; protocols or testing procedures. DMTF shall have no liability to&#xD;&#xD;&#xA; any party implementing such standard, whether such implementation&#xD;&#xD;&#xA; is foreseeable or not, nor to any patent owner or claimant, and shall&#xD;&#xD;&#xA; have no liability or responsibility for costs or losses incurred if&#xD;&#xD;&#xA; a standard is withdrawn or modified after publication, and shall be&#xD;&#xD;&#xA; indemnified and held harmless by any party implementing the&#xD;&#xD;&#xA; standard from any and all claims of infringement by a patent owner&#xD;&#xD;&#xA; for such implementations.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; For information about patents held by third-parties which have&#xD;&#xD;&#xA; notified the DMTF that, in their opinion, such patent may relate to&#xD;&#xD;&#xA; or impact implementations of DMTF standards, visit&#xD;&#xD;&#xA; http://www.dmtf.org/about/policies/disclosures.php.&#xD;&#xD;&#xA;#pragma inLine&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA; Description: The Core Model defines basic management concepts.&#xD;&#xD;&#xA;              This file defines the concepts for a Help Service&#xD;&#xD;&#xA; &#xD;&#xD;&#xA;              The object classes below are listed in an order that&#xD;&#xD;&#xA;              avoids forward references. Required objects, defined&#xD;&#xD;&#xA;              by other working groups, are omitted.&#xD;&#xD;&#xA; ==================================================================&#xD;&#xD;&#xA; Change Log for v2.8 Final&#xD;&#xD;&#xA; CR1205 - Update ProtocolIFType definitions to match latest&#xD;&#xD;&#xA;          IANAifType-MIB definitions&#xD;&#xD;&#xA; CR1210 - Removal of experimental Qualifiers for core.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.8 Preliminary&#xD;&#xD;&#xA; CR1092  - Move Service and SAP related classes to their own file&#xD;&#xD;&#xA; CR1124 - Add CIM_SAPAvailableForElement&#xD;&#xD;&#xA; CR1128 - Addition of HostedDependency&#xD;&#xD;&#xA; ==================================================================&#xD;">
+    <ownedComment xmi:id="_HETE0NK2Edmfy_IiaGYYaA" body=" ===================================================================&#xD;&#xD;&#xA; Title: Core_Service&#xD;&#xD;&#xA; $State: Exp $&#xD;&#xD;&#xA; $Date: 2006/05/05 08:06:37 $&#xD;&#xD;&#xA; $RCSfile: Linux_Samba-Model.emx,v $&#xD;&#xD;&#xA; $Revision: 1.3 $&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA;#pragma inLine (&quot;Includes/copyright.inc&quot;)&#xD;&#xD;&#xA; Copyright 1998-2005 Distributed Management Task Force, Inc. (DMTF).&#xD;&#xD;&#xA; All rights reserved.&#xD;&#xD;&#xA; DMTF is a not-for-profit association of industry members dedicated&#xD;&#xD;&#xA; to promoting enterprise and systems management and interoperability.&#xD;&#xD;&#xA; DMTF specifications and documents may be reproduced for uses&#xD;&#xD;&#xA; consistent with this purpose by members and non-members,&#xD;&#xD;&#xA; provided that correct attribution is given.&#xD;&#xD;&#xA; As DMTF specifications may be revised from time to time,&#xD;&#xD;&#xA; the particular version and release date should always be noted.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Implementation of certain elements of this standard or proposed&#xD;&#xD;&#xA; standard may be subject to third party patent rights, including&#xD;&#xD;&#xA; provisional patent rights (herein &quot;patent rights&quot;). DMTF makes&#xD;&#xD;&#xA; no representations to users of the standard as to the existence&#xD;&#xD;&#xA; of such rights, and is not responsible to recognize, disclose, or&#xD;&#xD;&#xA; identify any or all such third party patent right, owners or&#xD;&#xD;&#xA; claimants, nor for any incomplete or inaccurate identification or&#xD;&#xD;&#xA; disclosure of such rights, owners or claimants. DMTF shall have no&#xD;&#xD;&#xA; liability to any party, in any manner or circumstance, under any&#xD;&#xD;&#xA; legal theory whatsoever, for failure to recognize, disclose, or&#xD;&#xD;&#xA; identify any such third party patent rights, or for such party's&#xD;&#xD;&#xA; reliance on the standard or incorporation thereof in its product,&#xD;&#xD;&#xA; protocols or testing procedures. DMTF shall have no liability to&#xD;&#xD;&#xA; any party implementing such standard, whether such implementation&#xD;&#xD;&#xA; is foreseeable or not, nor to any patent owner or claimant, and shall&#xD;&#xD;&#xA; have no liability or responsibility for costs or losses incurred if&#xD;&#xD;&#xA; a standard is withdrawn or modified after publication, and shall be&#xD;&#xD;&#xA; indemnified and held harmless by any party implementing the&#xD;&#xD;&#xA; standard from any and all claims of infringement by a patent owner&#xD;&#xD;&#xA; for such implementations.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; For information about patents held by third-parties which have&#xD;&#xD;&#xA; notified the DMTF that, in their opinion, such patent may relate to&#xD;&#xD;&#xA; or impact implementations of DMTF standards, visit&#xD;&#xD;&#xA; http://www.dmtf.org/about/policies/disclosures.php.&#xD;&#xD;&#xA;#pragma inLine&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA; Description: The Core Model defines basic management concepts.&#xD;&#xD;&#xA;              This file defines the concepts for a Help Service&#xD;&#xD;&#xA; &#xD;&#xD;&#xA;              The object classes below are listed in an order that&#xD;&#xD;&#xA;              avoids forward references. Required objects, defined&#xD;&#xD;&#xA;              by other working groups, are omitted.&#xD;&#xD;&#xA; ==================================================================&#xD;&#xD;&#xA; Change Log for v2.8 Final&#xD;&#xD;&#xA; CR1205 - Update ProtocolIFType definitions to match latest&#xD;&#xD;&#xA;          IANAifType-MIB definitions&#xD;&#xD;&#xA; CR1210 - Removal of experimental Qualifiers for core.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.8 Preliminary&#xD;&#xD;&#xA; CR1092  - Move Service and SAP related classes to their own file&#xD;&#xD;&#xA; CR1124 - Add CIM_SAPAvailableForElement&#xD;&#xD;&#xA; CR1128 - Addition of HostedDependency&#xD;&#xD;&#xA; ==================================================================&#xD;">
       <eAnnotations xmi:id="_HETr4NK2Edmfy_IiaGYYaA" source="appliedStereotypes">
         <contents xmi:type="Default_0:Default__Documentation" xmi:id="_HETr4dK2Edmfy_IiaGYYaA"/>
       </eAnnotations>
@@ -3119,7 +3119,7 @@
         <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_HWOiUdK2Edmfy_IiaGYYaA"/>
       </contents>
     </eAnnotations>
-    <ownedComment xmi:id="_HHkbQNK2Edmfy_IiaGYYaA" body=" ===================================================================&#xD;&#xD;&#xA; Title: Core_Settings&#xD;&#xD;&#xA; $State: Exp $&#xD;&#xD;&#xA; $Date: 2006/05/04 09:46:14 $&#xD;&#xD;&#xA; $RCSfile: Linux_Samba-Model.emx,v $&#xD;&#xD;&#xA; $Revision: 1.2 $&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA;#pragma inLine (&quot;Includes/copyright.inc&quot;)&#xD;&#xD;&#xA; Copyright 1998-2005 Distributed Management Task Force, Inc. (DMTF).&#xD;&#xD;&#xA; All rights reserved.&#xD;&#xD;&#xA; DMTF is a not-for-profit association of industry members dedicated&#xD;&#xD;&#xA; to promoting enterprise and systems management and interoperability.&#xD;&#xD;&#xA; DMTF specifications and documents may be reproduced for uses&#xD;&#xD;&#xA; consistent with this purpose by members and non-members,&#xD;&#xD;&#xA; provided that correct attribution is given.&#xD;&#xD;&#xA; As DMTF specifications may be revised from time to time,&#xD;&#xD;&#xA; the particular version and release date should always be noted.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Implementation of certain elements of this standard or proposed&#xD;&#xD;&#xA; standard may be subject to third party patent rights, including&#xD;&#xD;&#xA; provisional patent rights (herein &quot;patent rights&quot;). DMTF makes&#xD;&#xD;&#xA; no representations to users of the standard as to the existence&#xD;&#xD;&#xA; of such rights, and is not responsible to recognize, disclose, or&#xD;&#xD;&#xA; identify any or all such third party patent right, owners or&#xD;&#xD;&#xA; claimants, nor for any incomplete or inaccurate identification or&#xD;&#xD;&#xA; disclosure of such rights, owners or claimants. DMTF shall have no&#xD;&#xD;&#xA; liability to any party, in any manner or circumstance, under any&#xD;&#xD;&#xA; legal theory whatsoever, for failure to recognize, disclose, or&#xD;&#xD;&#xA; identify any such third party patent rights, or for such party's&#xD;&#xD;&#xA; reliance on the standard or incorporation thereof in its product,&#xD;&#xD;&#xA; protocols or testing procedures. DMTF shall have no liability to&#xD;&#xD;&#xA; any party implementing such standard, whether such implementation&#xD;&#xD;&#xA; is foreseeable or not, nor to any patent owner or claimant, and shall&#xD;&#xD;&#xA; have no liability or responsibility for costs or losses incurred if&#xD;&#xD;&#xA; a standard is withdrawn or modified after publication, and shall be&#xD;&#xD;&#xA; indemnified and held harmless by any party implementing the&#xD;&#xD;&#xA; standard from any and all claims of infringement by a patent owner&#xD;&#xD;&#xA; for such implementations.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; For information about patents held by third-parties which have&#xD;&#xD;&#xA; notified the DMTF that, in their opinion, such patent may relate to&#xD;&#xD;&#xA; or impact implementations of DMTF standards, visit&#xD;&#xD;&#xA; http://www.dmtf.org/about/policies/disclosures.php.&#xD;&#xD;&#xA;#pragma inLine&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA; Description: The Core Model defines basic management concepts.&#xD;&#xD;&#xA;              This file defines Settings/SettingData and their&#xD;&#xD;&#xA;              groupings, Profiles and Configurations.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA;              The object classes below are listed in an order that&#xD;&#xD;&#xA;              avoids forward references. Required objects, defined&#xD;&#xD;&#xA;              by other working groups, are omitted.&#xD;&#xD;&#xA; ==================================================================&#xD;&#xD;&#xA; Change Log for v2.8 Final&#xD;&#xD;&#xA; CR1128  - Addition of HostedDependency&#xD;&#xD;&#xA; CR1223 - SysDev Omnibus CR - Minor MOF corrections.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7 Final&#xD;&#xD;&#xA; CR927 - Relax cardinality for the ManagedElement side of&#xD;&#xD;&#xA; ElementProfile&#xD;&#xD;&#xA;       - Update the description of Profile to reflect this change.&#xD;&#xD;&#xA; CR968 - Remove the Experimental qualifier&#xD;&#xD;&#xA; CR994 - Update description of InstanceID&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7&#xD;&#xD;&#xA; CR723 - Introduce SettingData, ScopedSetttingData, ScopedSetting,&#xD;&#xD;&#xA;         and ElementSettingData.&#xD;&#xD;&#xA;       - Clarify the description of Setting to reconcile with&#xD;&#xD;&#xA;         SettingData.&#xD;&#xD;&#xA; CR642 - Add Profile and ElementProfile&#xD;&#xD;&#xA; ==================================================================&#xD;">
+    <ownedComment xmi:id="_HHkbQNK2Edmfy_IiaGYYaA" body=" ===================================================================&#xD;&#xD;&#xA; Title: Core_Settings&#xD;&#xD;&#xA; $State: Exp $&#xD;&#xD;&#xA; $Date: 2006/05/05 08:06:37 $&#xD;&#xD;&#xA; $RCSfile: Linux_Samba-Model.emx,v $&#xD;&#xD;&#xA; $Revision: 1.3 $&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA;#pragma inLine (&quot;Includes/copyright.inc&quot;)&#xD;&#xD;&#xA; Copyright 1998-2005 Distributed Management Task Force, Inc. (DMTF).&#xD;&#xD;&#xA; All rights reserved.&#xD;&#xD;&#xA; DMTF is a not-for-profit association of industry members dedicated&#xD;&#xD;&#xA; to promoting enterprise and systems management and interoperability.&#xD;&#xD;&#xA; DMTF specifications and documents may be reproduced for uses&#xD;&#xD;&#xA; consistent with this purpose by members and non-members,&#xD;&#xD;&#xA; provided that correct attribution is given.&#xD;&#xD;&#xA; As DMTF specifications may be revised from time to time,&#xD;&#xD;&#xA; the particular version and release date should always be noted.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Implementation of certain elements of this standard or proposed&#xD;&#xD;&#xA; standard may be subject to third party patent rights, including&#xD;&#xD;&#xA; provisional patent rights (herein &quot;patent rights&quot;). DMTF makes&#xD;&#xD;&#xA; no representations to users of the standard as to the existence&#xD;&#xD;&#xA; of such rights, and is not responsible to recognize, disclose, or&#xD;&#xD;&#xA; identify any or all such third party patent right, owners or&#xD;&#xD;&#xA; claimants, nor for any incomplete or inaccurate identification or&#xD;&#xD;&#xA; disclosure of such rights, owners or claimants. DMTF shall have no&#xD;&#xD;&#xA; liability to any party, in any manner or circumstance, under any&#xD;&#xD;&#xA; legal theory whatsoever, for failure to recognize, disclose, or&#xD;&#xD;&#xA; identify any such third party patent rights, or for such party's&#xD;&#xD;&#xA; reliance on the standard or incorporation thereof in its product,&#xD;&#xD;&#xA; protocols or testing procedures. DMTF shall have no liability to&#xD;&#xD;&#xA; any party implementing such standard, whether such implementation&#xD;&#xD;&#xA; is foreseeable or not, nor to any patent owner or claimant, and shall&#xD;&#xD;&#xA; have no liability or responsibility for costs or losses incurred if&#xD;&#xD;&#xA; a standard is withdrawn or modified after publication, and shall be&#xD;&#xD;&#xA; indemnified and held harmless by any party implementing the&#xD;&#xD;&#xA; standard from any and all claims of infringement by a patent owner&#xD;&#xD;&#xA; for such implementations.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; For information about patents held by third-parties which have&#xD;&#xD;&#xA; notified the DMTF that, in their opinion, such patent may relate to&#xD;&#xD;&#xA; or impact implementations of DMTF standards, visit&#xD;&#xD;&#xA; http://www.dmtf.org/about/policies/disclosures.php.&#xD;&#xD;&#xA;#pragma inLine&#xD;&#xD;&#xA; ===================================================================&#xD;&#xD;&#xA; Description: The Core Model defines basic management concepts.&#xD;&#xD;&#xA;              This file defines Settings/SettingData and their&#xD;&#xD;&#xA;              groupings, Profiles and Configurations.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA;              The object classes below are listed in an order that&#xD;&#xD;&#xA;              avoids forward references. Required objects, defined&#xD;&#xD;&#xA;              by other working groups, are omitted.&#xD;&#xD;&#xA; ==================================================================&#xD;&#xD;&#xA; Change Log for v2.8 Final&#xD;&#xD;&#xA; CR1128  - Addition of HostedDependency&#xD;&#xD;&#xA; CR1223 - SysDev Omnibus CR - Minor MOF corrections.&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7 Final&#xD;&#xD;&#xA; CR927 - Relax cardinality for the ManagedElement side of&#xD;&#xD;&#xA; ElementProfile&#xD;&#xD;&#xA;       - Update the description of Profile to reflect this change.&#xD;&#xD;&#xA; CR968 - Remove the Experimental qualifier&#xD;&#xD;&#xA; CR994 - Update description of InstanceID&#xD;&#xD;&#xA; &#xD;&#xD;&#xA; Change Log for v2.7&#xD;&#xD;&#xA; CR723 - Introduce SettingData, ScopedSetttingData, ScopedSetting,&#xD;&#xD;&#xA;         and ElementSettingData.&#xD;&#xD;&#xA;       - Clarify the description of Setting to reconcile with&#xD;&#xD;&#xA;         SettingData.&#xD;&#xD;&#xA; CR642 - Add Profile and ElementProfile&#xD;&#xD;&#xA; ==================================================================&#xD;">
       <eAnnotations xmi:id="_HHlCUNK2Edmfy_IiaGYYaA" source="appliedStereotypes">
         <contents xmi:type="Default_0:Default__Documentation" xmi:id="_HHlCUdK2Edmfy_IiaGYYaA"/>
       </eAnnotations>
@@ -7846,7 +7846,7 @@
         </edges>
       </contents>
       <contents xmi:type="notation:Diagram" xmi:id="_o6-kcCBfEdqJor_3U2F5RQ" type="Class" name="DiagramSambaHost">
-        <children xmi:id="_1QfIkCBfEdqJor_3U2F5RQ" sourceEdges="_85XDUNs8Edq_M4cuS_IUkQ _eRIgUNs9Edq_M4cuS_IUkQ _vxTygNs9Edq_M4cuS_IUkQ _-eCFoNs9Edq_M4cuS_IUkQ _x678ANs-Edq_M4cuS_IUkQ" targetEdges="_qE1fQNs6Edq_M4cuS_IUkQ _Z7BRINs8Edq_M4cuS_IUkQ" element="_LQd4kN8SEdmzMeOKh8_tVg">
+        <children xmi:id="_1QfIkCBfEdqJor_3U2F5RQ" targetEdges="_qE1fQNs6Edq_M4cuS_IUkQ _Z7BRINs8Edq_M4cuS_IUkQ _d4MXoNwIEdqvRr7mzPVmDg _VB2zoNwJEdqvRr7mzPVmDg _rth6UNwJEdqvRr7mzPVmDg _9yxL8NwKEdqvRr7mzPVmDg _b05i0NwLEdqvRr7mzPVmDg" element="_LQd4kN8SEdmzMeOKh8_tVg">
           <children xmi:id="_1QfIkyBfEdqJor_3U2F5RQ" type="ImageCompartment" element="_LQd4kN8SEdmzMeOKh8_tVg">
             <layoutConstraint xmi:type="notation:Size" xmi:id="_1QfIlCBfEdqJor_3U2F5RQ" width="1320" height="1320"/>
           </children>
@@ -7888,7 +7888,7 @@
           <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_WLL0Qds6Edq_M4cuS_IUkQ" showStereotype="Label"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WLL0Qts6Edq_M4cuS_IUkQ" x="2226" y="1908"/>
         </children>
-        <children xmi:id="_X8c9kNs6Edq_M4cuS_IUkQ" sourceEdges="_Z7BRINs8Edq_M4cuS_IUkQ" targetEdges="_X8pK0Ns6Edq_M4cuS_IUkQ _85XDUNs8Edq_M4cuS_IUkQ" element="_y35VoNH0EdmCBtKLVhSf1w">
+        <children xmi:id="_X8c9kNs6Edq_M4cuS_IUkQ" sourceEdges="_Z7BRINs8Edq_M4cuS_IUkQ _9yxL8NwKEdqvRr7mzPVmDg" targetEdges="_X8pK0Ns6Edq_M4cuS_IUkQ" element="_y35VoNH0EdmCBtKLVhSf1w">
           <children xmi:id="_X8c9k9s6Edq_M4cuS_IUkQ" type="ImageCompartment" element="_y35VoNH0EdmCBtKLVhSf1w">
             <layoutConstraint xmi:type="notation:Size" xmi:id="_X8c9lNs6Edq_M4cuS_IUkQ" width="1320" height="1320"/>
           </children>
@@ -7909,7 +7909,7 @@
           <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_X8c9kds6Edq_M4cuS_IUkQ" showStereotype="Label"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_X8c9kts6Edq_M4cuS_IUkQ" x="20034" y="318"/>
         </children>
-        <children xmi:id="_aYm28Ns6Edq_M4cuS_IUkQ" targetEdges="_aYzEMNs6Edq_M4cuS_IUkQ _-eCFoNs9Edq_M4cuS_IUkQ _x678ANs-Edq_M4cuS_IUkQ" element="_-D8JwNIUEdmes7W06LZL_w">
+        <children xmi:id="_aYm28Ns6Edq_M4cuS_IUkQ" sourceEdges="_d4MXoNwIEdqvRr7mzPVmDg _b05i0NwLEdqvRr7mzPVmDg" targetEdges="_aYzEMNs6Edq_M4cuS_IUkQ" element="_-D8JwNIUEdmes7W06LZL_w">
           <children xmi:id="_aYm289s6Edq_M4cuS_IUkQ" type="ImageCompartment" element="_-D8JwNIUEdmes7W06LZL_w">
             <layoutConstraint xmi:type="notation:Size" xmi:id="_aYm29Ns6Edq_M4cuS_IUkQ" width="1320" height="1320"/>
           </children>
@@ -7930,7 +7930,7 @@
           <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_aYm28ds6Edq_M4cuS_IUkQ" showStereotype="Label"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_aYm28ts6Edq_M4cuS_IUkQ" x="14310" y="11766"/>
         </children>
-        <children xmi:id="_bp4RkNs6Edq_M4cuS_IUkQ" targetEdges="_bp-YMds6Edq_M4cuS_IUkQ _eRIgUNs9Edq_M4cuS_IUkQ _vxTygNs9Edq_M4cuS_IUkQ" element="_HLiVQNK2Edmfy_IiaGYYaA">
+        <children xmi:id="_bp4RkNs6Edq_M4cuS_IUkQ" sourceEdges="_VB2zoNwJEdqvRr7mzPVmDg _rth6UNwJEdqvRr7mzPVmDg" targetEdges="_bp-YMds6Edq_M4cuS_IUkQ" element="_HLiVQNK2Edmfy_IiaGYYaA">
           <children xmi:id="_bp4Rk9s6Edq_M4cuS_IUkQ" type="ImageCompartment" element="_HLiVQNK2Edmfy_IiaGYYaA">
             <layoutConstraint xmi:type="notation:Size" xmi:id="_bp4RlNs6Edq_M4cuS_IUkQ" width="1320" height="1320"/>
           </children>
@@ -8282,345 +8282,345 @@
               <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_Z7BRU9s8Edq_M4cuS_IUkQ"/>
             </children>
             <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_Z7BRRts8Edq_M4cuS_IUkQ" showStereotype="Label"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Z7BRR9s8Edq_M4cuS_IUkQ" x="-3017" y="-3121" width="6415" height="748"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Z7BRR9s8Edq_M4cuS_IUkQ" x="-3017" y="-3121" width="7007" height="706"/>
           </children>
           <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_Z7BRIds8Edq_M4cuS_IUkQ" showStereotype="Text"/>
           <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Z7BRIts8Edq_M4cuS_IUkQ" points="[-87, 69, 146, -86]$[-167, 155, 66, 0]"/>
         </edges>
-        <edges xmi:id="_85XDUNs8Edq_M4cuS_IUkQ" element="_84-o0Ns8Edq_M4cuS_IUkQ" source="_1QfIkCBfEdqJor_3U2F5RQ" target="_X8c9kNs6Edq_M4cuS_IUkQ">
-          <children xmi:id="_85XDV9s8Edq_M4cuS_IUkQ" type="ToMultiplicityLabel" element="_84-o0ts8Edq_M4cuS_IUkQ">
-            <children xmi:id="_85XDWds8Edq_M4cuS_IUkQ" type="ToMultiplicity" element="_84-o0ts8Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_85XDWNs8Edq_M4cuS_IUkQ" y="318"/>
+        <edges xmi:id="_d4MXoNwIEdqvRr7mzPVmDg" element="_d3nv4NwIEdqvRr7mzPVmDg" source="_aYm28Ns6Edq_M4cuS_IUkQ" target="_1QfIkCBfEdqJor_3U2F5RQ">
+          <children xmi:id="_d4MXp9wIEdqvRr7mzPVmDg" type="ToMultiplicityLabel" element="_d3nv4twIEdqvRr7mzPVmDg">
+            <children xmi:id="_d4MXqdwIEdqvRr7mzPVmDg" type="ToMultiplicity" element="_d3nv4twIEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_d4MXqNwIEdqvRr7mzPVmDg" y="318"/>
           </children>
-          <children xmi:id="_85XDWts8Edq_M4cuS_IUkQ" type="ToRoleLabel" element="_84-o0ts8Edq_M4cuS_IUkQ">
-            <children xmi:id="_85XDXNs8Edq_M4cuS_IUkQ" type="ToRole" element="_84-o0ts8Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_85XDW9s8Edq_M4cuS_IUkQ" y="-317"/>
+          <children xmi:id="_d4MXqtwIEdqvRr7mzPVmDg" type="ToRoleLabel" element="_d3nv4twIEdqvRr7mzPVmDg">
+            <children xmi:id="_d4MXrNwIEdqvRr7mzPVmDg" type="ToRole" element="_d3nv4twIEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_d4MXq9wIEdqvRr7mzPVmDg" y="-317"/>
           </children>
-          <children xmi:id="_85XDXds8Edq_M4cuS_IUkQ" type="FromMultiplicityLabel" element="_84-o0ds8Edq_M4cuS_IUkQ">
-            <children xmi:id="_85XDX9s8Edq_M4cuS_IUkQ" type="FromMultiplicity" element="_84-o0ds8Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_85XDXts8Edq_M4cuS_IUkQ" y="318"/>
+          <children xmi:id="_d4MXrdwIEdqvRr7mzPVmDg" type="FromMultiplicityLabel" element="_d3nv4dwIEdqvRr7mzPVmDg">
+            <children xmi:id="_d4MXr9wIEdqvRr7mzPVmDg" type="FromMultiplicity" element="_d3nv4dwIEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_d4MXrtwIEdqvRr7mzPVmDg" y="318"/>
           </children>
-          <children xmi:id="_85XDYNs8Edq_M4cuS_IUkQ" type="FromRoleLabel" element="_84-o0ds8Edq_M4cuS_IUkQ">
-            <children xmi:id="_85XDYts8Edq_M4cuS_IUkQ" type="FromRole" element="_84-o0ds8Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_85XDYds8Edq_M4cuS_IUkQ" y="-317"/>
+          <children xmi:id="_d4MXsNwIEdqvRr7mzPVmDg" type="FromRoleLabel" element="_d3nv4dwIEdqvRr7mzPVmDg">
+            <children xmi:id="_d4MXstwIEdqvRr7mzPVmDg" type="FromRole" element="_d3nv4dwIEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_d4MXsdwIEdqvRr7mzPVmDg" y="-317"/>
           </children>
-          <children xmi:id="_85XDY9s8Edq_M4cuS_IUkQ" type="ToQualifierLabel" element="_84-o0ts8Edq_M4cuS_IUkQ">
-            <children xmi:id="_85XDZds8Edq_M4cuS_IUkQ" type="QualifierCompartment" element="_84-o0ts8Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_85XDZts8Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_d4MXs9wIEdqvRr7mzPVmDg" type="ToQualifierLabel" element="_d3nv4twIEdqvRr7mzPVmDg">
+            <children xmi:id="_d4MXtdwIEdqvRr7mzPVmDg" type="QualifierCompartment" element="_d3nv4twIEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_d4MXttwIEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_85XDZNs8Edq_M4cuS_IUkQ" y="-148"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_d4MXtNwIEdqvRr7mzPVmDg" y="-148"/>
           </children>
-          <children xmi:id="_85XDZ9s8Edq_M4cuS_IUkQ" type="FromQualifierLabel" element="_84-o0ds8Edq_M4cuS_IUkQ">
-            <children xmi:id="_85XDads8Edq_M4cuS_IUkQ" type="QualifierCompartment" element="_84-o0ds8Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_85XDats8Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_d4MXt9wIEdqvRr7mzPVmDg" type="FromQualifierLabel" element="_d3nv4dwIEdqvRr7mzPVmDg">
+            <children xmi:id="_d4MXudwIEdqvRr7mzPVmDg" type="QualifierCompartment" element="_d3nv4dwIEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_d4MXutwIEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_85XDaNs8Edq_M4cuS_IUkQ" y="-148"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_d4MXuNwIEdqvRr7mzPVmDg" y="-148"/>
           </children>
-          <children xmi:id="_85XDa9s8Edq_M4cuS_IUkQ" type="ToRoleLabel" element="_84-o0ts8Edq_M4cuS_IUkQ">
-            <eAnnotations xmi:id="_85XDbds8Edq_M4cuS_IUkQ" source="ToConstraintLabel"/>
-            <children xmi:id="_85XDbts8Edq_M4cuS_IUkQ" visible="false" type="ToConstraintCompartment" element="_84-o0ts8Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_85XDb9s8Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_d4MXu9wIEdqvRr7mzPVmDg" type="ToRoleLabel" element="_d3nv4twIEdqvRr7mzPVmDg">
+            <eAnnotations xmi:id="_d4MXvdwIEdqvRr7mzPVmDg" source="ToConstraintLabel"/>
+            <children xmi:id="_d4MXvtwIEdqvRr7mzPVmDg" visible="false" type="ToConstraintCompartment" element="_d3nv4twIEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_d4MXv9wIEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_85XDbNs8Edq_M4cuS_IUkQ" y="847"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_d4MXvNwIEdqvRr7mzPVmDg" y="847"/>
           </children>
-          <children xmi:id="_85XDcNs8Edq_M4cuS_IUkQ" type="FromRoleLabel" element="_84-o0ds8Edq_M4cuS_IUkQ">
-            <eAnnotations xmi:id="_85XDcts8Edq_M4cuS_IUkQ" source="FromConstraintLabel"/>
-            <children xmi:id="_85XDc9s8Edq_M4cuS_IUkQ" visible="false" type="FromConstraintCompartment" element="_84-o0ds8Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_85XDdNs8Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_d4MXwNwIEdqvRr7mzPVmDg" type="FromRoleLabel" element="_d3nv4dwIEdqvRr7mzPVmDg">
+            <eAnnotations xmi:id="_d4MXwtwIEdqvRr7mzPVmDg" source="FromConstraintLabel"/>
+            <children xmi:id="_d4MXw9wIEdqvRr7mzPVmDg" visible="false" type="FromConstraintCompartment" element="_d3nv4dwIEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_d4MXxNwIEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_85XDcds8Edq_M4cuS_IUkQ" y="847"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_d4MXwdwIEdqvRr7mzPVmDg" y="847"/>
           </children>
-          <children xmi:id="_85XDdds8Edq_M4cuS_IUkQ" element="_84-o0Ns8Edq_M4cuS_IUkQ">
-            <children xmi:id="_85XDeNs8Edq_M4cuS_IUkQ" type="ImageCompartment" element="_84-o0Ns8Edq_M4cuS_IUkQ">
-              <layoutConstraint xmi:type="notation:Size" xmi:id="_85XDeds8Edq_M4cuS_IUkQ" width="1320" height="1320"/>
+          <children xmi:id="_d4MXxdwIEdqvRr7mzPVmDg" element="_d3nv4NwIEdqvRr7mzPVmDg">
+            <children xmi:id="_d4MXyNwIEdqvRr7mzPVmDg" type="ImageCompartment" element="_d3nv4NwIEdqvRr7mzPVmDg">
+              <layoutConstraint xmi:type="notation:Size" xmi:id="_d4MXydwIEdqvRr7mzPVmDg" width="1320" height="1320"/>
             </children>
-            <children xmi:id="_85XDets8Edq_M4cuS_IUkQ" type="Stereotype" element="_84-o0Ns8Edq_M4cuS_IUkQ"/>
-            <children xmi:id="_85XDe9s8Edq_M4cuS_IUkQ" type="Name" element="_84-o0Ns8Edq_M4cuS_IUkQ"/>
-            <children xmi:id="_85XDfNs8Edq_M4cuS_IUkQ" type="AttributeCompartment" element="_84-o0Ns8Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_85XDfds8Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_d4MXytwIEdqvRr7mzPVmDg" type="Stereotype" element="_d3nv4NwIEdqvRr7mzPVmDg"/>
+            <children xmi:id="_d4MXy9wIEdqvRr7mzPVmDg" type="Name" element="_d3nv4NwIEdqvRr7mzPVmDg"/>
+            <children xmi:id="_d4MXzNwIEdqvRr7mzPVmDg" type="AttributeCompartment" element="_d3nv4NwIEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_d4MXzdwIEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_85XDfts8Edq_M4cuS_IUkQ" type="OperationCompartment" element="_84-o0Ns8Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_85XDf9s8Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_d4MXztwIEdqvRr7mzPVmDg" type="OperationCompartment" element="_d3nv4NwIEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_d4MXz9wIEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_85XDgNs8Edq_M4cuS_IUkQ" visible="false" type="SignalCompartment" element="_84-o0Ns8Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_85XDgds8Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_d4SeQNwIEdqvRr7mzPVmDg" visible="false" type="SignalCompartment" element="_d3nv4NwIEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_d4SeQdwIEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_85XDgts8Edq_M4cuS_IUkQ" visible="false" type="StructureCompartment" element="_84-o0Ns8Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_85XDg9s8Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_d4SeQtwIEdqvRr7mzPVmDg" visible="false" type="StructureCompartment" element="_d3nv4NwIEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_d4SeQ9wIEdqvRr7mzPVmDg"/>
             </children>
-            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_85XDdts8Edq_M4cuS_IUkQ" showStereotype="Label"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_85XDd9s8Edq_M4cuS_IUkQ" x="1918" y="4626" width="6500" height="748"/>
+            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_d4MXxtwIEdqvRr7mzPVmDg" showStereotype="Label"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_d4MXx9wIEdqvRr7mzPVmDg" x="-550" y="4536" width="7430" height="586"/>
           </children>
-          <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_85XDUds8Edq_M4cuS_IUkQ" showStereotype="Text"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_85XDUts8Edq_M4cuS_IUkQ" points="[46, -21, -187, 134]$[235, -86, 2, 69]"/>
+          <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_d4MXodwIEdqvRr7mzPVmDg" showStereotype="Text"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_d4MXotwIEdqvRr7mzPVmDg" points="[5, -78, 47, 242]$[10, -294, 52, 26]"/>
         </edges>
-        <edges xmi:id="_eRIgUNs9Edq_M4cuS_IUkQ" element="_eOLS8Ns9Edq_M4cuS_IUkQ" source="_1QfIkCBfEdqJor_3U2F5RQ" target="_bp4RkNs6Edq_M4cuS_IUkQ">
-          <children xmi:id="_eRIgV9s9Edq_M4cuS_IUkQ" type="ToMultiplicityLabel" element="_eOLS8ts9Edq_M4cuS_IUkQ">
-            <children xmi:id="_eRIgWds9Edq_M4cuS_IUkQ" type="ToMultiplicity" element="_eOLS8ts9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_eRIgWNs9Edq_M4cuS_IUkQ" y="318"/>
+        <edges xmi:id="_VB2zoNwJEdqvRr7mzPVmDg" element="_VBSL4NwJEdqvRr7mzPVmDg" source="_bp4RkNs6Edq_M4cuS_IUkQ" target="_1QfIkCBfEdqJor_3U2F5RQ">
+          <children xmi:id="_VB2zp9wJEdqvRr7mzPVmDg" type="ToMultiplicityLabel" element="_VBSL4twJEdqvRr7mzPVmDg">
+            <children xmi:id="_VB2zqdwJEdqvRr7mzPVmDg" type="ToMultiplicity" element="_VBSL4twJEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_VB2zqNwJEdqvRr7mzPVmDg" y="318"/>
           </children>
-          <children xmi:id="_eRIgWts9Edq_M4cuS_IUkQ" type="ToRoleLabel" element="_eOLS8ts9Edq_M4cuS_IUkQ">
-            <children xmi:id="_eRIgXNs9Edq_M4cuS_IUkQ" type="ToRole" element="_eOLS8ts9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_eRIgW9s9Edq_M4cuS_IUkQ" y="-317"/>
+          <children xmi:id="_VB2zqtwJEdqvRr7mzPVmDg" type="ToRoleLabel" element="_VBSL4twJEdqvRr7mzPVmDg">
+            <children xmi:id="_VB2zrNwJEdqvRr7mzPVmDg" type="ToRole" element="_VBSL4twJEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_VB2zq9wJEdqvRr7mzPVmDg" y="-317"/>
           </children>
-          <children xmi:id="_eRIgXds9Edq_M4cuS_IUkQ" type="FromMultiplicityLabel" element="_eOLS8ds9Edq_M4cuS_IUkQ">
-            <children xmi:id="_eRIgX9s9Edq_M4cuS_IUkQ" type="FromMultiplicity" element="_eOLS8ds9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_eRIgXts9Edq_M4cuS_IUkQ" y="318"/>
+          <children xmi:id="_VB2zrdwJEdqvRr7mzPVmDg" type="FromMultiplicityLabel" element="_VBSL4dwJEdqvRr7mzPVmDg">
+            <children xmi:id="_VB2zr9wJEdqvRr7mzPVmDg" type="FromMultiplicity" element="_VBSL4dwJEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_VB2zrtwJEdqvRr7mzPVmDg" y="318"/>
           </children>
-          <children xmi:id="_eRIgYNs9Edq_M4cuS_IUkQ" type="FromRoleLabel" element="_eOLS8ds9Edq_M4cuS_IUkQ">
-            <children xmi:id="_eRIgYts9Edq_M4cuS_IUkQ" type="FromRole" element="_eOLS8ds9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_eRIgYds9Edq_M4cuS_IUkQ" y="-317"/>
+          <children xmi:id="_VB2zsNwJEdqvRr7mzPVmDg" type="FromRoleLabel" element="_VBSL4dwJEdqvRr7mzPVmDg">
+            <children xmi:id="_VB2zstwJEdqvRr7mzPVmDg" type="FromRole" element="_VBSL4dwJEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_VB2zsdwJEdqvRr7mzPVmDg" y="-317"/>
           </children>
-          <children xmi:id="_eRIgY9s9Edq_M4cuS_IUkQ" type="ToQualifierLabel" element="_eOLS8ts9Edq_M4cuS_IUkQ">
-            <children xmi:id="_eRIgZds9Edq_M4cuS_IUkQ" type="QualifierCompartment" element="_eOLS8ts9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_eRIgZts9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_VB2zs9wJEdqvRr7mzPVmDg" type="ToQualifierLabel" element="_VBSL4twJEdqvRr7mzPVmDg">
+            <children xmi:id="_VB2ztdwJEdqvRr7mzPVmDg" type="QualifierCompartment" element="_VBSL4twJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_VB2zttwJEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_eRIgZNs9Edq_M4cuS_IUkQ" y="-148"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_VB2ztNwJEdqvRr7mzPVmDg" y="-148"/>
           </children>
-          <children xmi:id="_eROm8Ns9Edq_M4cuS_IUkQ" type="FromQualifierLabel" element="_eOLS8ds9Edq_M4cuS_IUkQ">
-            <children xmi:id="_eROm8ts9Edq_M4cuS_IUkQ" type="QualifierCompartment" element="_eOLS8ds9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_eROm89s9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_VB2zt9wJEdqvRr7mzPVmDg" type="FromQualifierLabel" element="_VBSL4dwJEdqvRr7mzPVmDg">
+            <children xmi:id="_VB2zudwJEdqvRr7mzPVmDg" type="QualifierCompartment" element="_VBSL4dwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_VB2zutwJEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_eROm8ds9Edq_M4cuS_IUkQ" y="-148"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_VB2zuNwJEdqvRr7mzPVmDg" y="-148"/>
           </children>
-          <children xmi:id="_eROm9Ns9Edq_M4cuS_IUkQ" type="ToRoleLabel" element="_eOLS8ts9Edq_M4cuS_IUkQ">
-            <eAnnotations xmi:id="_eROm9ts9Edq_M4cuS_IUkQ" source="ToConstraintLabel"/>
-            <children xmi:id="_eROm99s9Edq_M4cuS_IUkQ" visible="false" type="ToConstraintCompartment" element="_eOLS8ts9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_eROm-Ns9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_VB2zu9wJEdqvRr7mzPVmDg" type="ToRoleLabel" element="_VBSL4twJEdqvRr7mzPVmDg">
+            <eAnnotations xmi:id="_VB2zvdwJEdqvRr7mzPVmDg" source="ToConstraintLabel"/>
+            <children xmi:id="_VB2zvtwJEdqvRr7mzPVmDg" visible="false" type="ToConstraintCompartment" element="_VBSL4twJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_VB2zv9wJEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_eROm9ds9Edq_M4cuS_IUkQ" y="847"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_VB2zvNwJEdqvRr7mzPVmDg" y="847"/>
           </children>
-          <children xmi:id="_eROm-ds9Edq_M4cuS_IUkQ" type="FromRoleLabel" element="_eOLS8ds9Edq_M4cuS_IUkQ">
-            <eAnnotations xmi:id="_eROm-9s9Edq_M4cuS_IUkQ" source="FromConstraintLabel"/>
-            <children xmi:id="_eROm_Ns9Edq_M4cuS_IUkQ" visible="false" type="FromConstraintCompartment" element="_eOLS8ds9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_eROm_ds9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_VB2zwNwJEdqvRr7mzPVmDg" type="FromRoleLabel" element="_VBSL4dwJEdqvRr7mzPVmDg">
+            <eAnnotations xmi:id="_VB86QNwJEdqvRr7mzPVmDg" source="FromConstraintLabel"/>
+            <children xmi:id="_VB86QdwJEdqvRr7mzPVmDg" visible="false" type="FromConstraintCompartment" element="_VBSL4dwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_VB86QtwJEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_eROm-ts9Edq_M4cuS_IUkQ" y="847"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_VB2zwdwJEdqvRr7mzPVmDg" y="847"/>
           </children>
-          <children xmi:id="_eROm_ts9Edq_M4cuS_IUkQ" element="_eOLS8Ns9Edq_M4cuS_IUkQ">
-            <children xmi:id="_eROnAds9Edq_M4cuS_IUkQ" type="ImageCompartment" element="_eOLS8Ns9Edq_M4cuS_IUkQ">
-              <layoutConstraint xmi:type="notation:Size" xmi:id="_eROnAts9Edq_M4cuS_IUkQ" width="1320" height="1320"/>
+          <children xmi:id="_VB86Q9wJEdqvRr7mzPVmDg" element="_VBSL4NwJEdqvRr7mzPVmDg">
+            <children xmi:id="_VB86RtwJEdqvRr7mzPVmDg" type="ImageCompartment" element="_VBSL4NwJEdqvRr7mzPVmDg">
+              <layoutConstraint xmi:type="notation:Size" xmi:id="_VB86R9wJEdqvRr7mzPVmDg" width="1320" height="1320"/>
             </children>
-            <children xmi:id="_eROnA9s9Edq_M4cuS_IUkQ" type="Stereotype" element="_eOLS8Ns9Edq_M4cuS_IUkQ"/>
-            <children xmi:id="_eROnBNs9Edq_M4cuS_IUkQ" type="Name" element="_eOLS8Ns9Edq_M4cuS_IUkQ"/>
-            <children xmi:id="_eROnBds9Edq_M4cuS_IUkQ" type="AttributeCompartment" element="_eOLS8Ns9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_eROnBts9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_VB86SNwJEdqvRr7mzPVmDg" type="Stereotype" element="_VBSL4NwJEdqvRr7mzPVmDg"/>
+            <children xmi:id="_VB86SdwJEdqvRr7mzPVmDg" type="Name" element="_VBSL4NwJEdqvRr7mzPVmDg"/>
+            <children xmi:id="_VB86StwJEdqvRr7mzPVmDg" type="AttributeCompartment" element="_VBSL4NwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_VB86S9wJEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_eROnB9s9Edq_M4cuS_IUkQ" type="OperationCompartment" element="_eOLS8Ns9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_eROnCNs9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_VB86TNwJEdqvRr7mzPVmDg" type="OperationCompartment" element="_VBSL4NwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_VB86TdwJEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_eROnCds9Edq_M4cuS_IUkQ" visible="false" type="SignalCompartment" element="_eOLS8Ns9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_eROnCts9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_VB86TtwJEdqvRr7mzPVmDg" visible="false" type="SignalCompartment" element="_VBSL4NwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_VB86T9wJEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_eROnC9s9Edq_M4cuS_IUkQ" visible="false" type="StructureCompartment" element="_eOLS8Ns9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_eROnDNs9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_VB86UNwJEdqvRr7mzPVmDg" visible="false" type="StructureCompartment" element="_VBSL4NwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_VB86UdwJEdqvRr7mzPVmDg"/>
             </children>
-            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_eROm_9s9Edq_M4cuS_IUkQ" showStereotype="Label"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eROnANs9Edq_M4cuS_IUkQ" x="-778" y="-1925" width="6330" height="664"/>
+            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_VB86RNwJEdqvRr7mzPVmDg" showStereotype="Label"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VB86RdwJEdqvRr7mzPVmDg" y="1058" width="7409" height="608"/>
           </children>
-          <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_eRIgUds9Edq_M4cuS_IUkQ" showStereotype="Text"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_eRIgUts9Edq_M4cuS_IUkQ" points="[-65, 22, 368, -118]$[-361, 91, 72, -49]"/>
+          <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_VB2zodwJEdqvRr7mzPVmDg" showStereotype="Text"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_VB2zotwJEdqvRr7mzPVmDg" points="[125, -40, -453, 147]$[500, -157, -78, 30]"/>
         </edges>
-        <edges xmi:id="_vxTygNs9Edq_M4cuS_IUkQ" element="_vxBeoNs9Edq_M4cuS_IUkQ" source="_1QfIkCBfEdqJor_3U2F5RQ" target="_bp4RkNs6Edq_M4cuS_IUkQ">
-          <children xmi:id="_vxTyh9s9Edq_M4cuS_IUkQ" type="ToMultiplicityLabel" element="_vxBeots9Edq_M4cuS_IUkQ">
-            <children xmi:id="_vxTyids9Edq_M4cuS_IUkQ" type="ToMultiplicity" element="_vxBeots9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_vxTyiNs9Edq_M4cuS_IUkQ" y="318"/>
+        <edges xmi:id="_rth6UNwJEdqvRr7mzPVmDg" element="_rs9SkNwJEdqvRr7mzPVmDg" source="_bp4RkNs6Edq_M4cuS_IUkQ" target="_1QfIkCBfEdqJor_3U2F5RQ">
+          <children xmi:id="_rth6V9wJEdqvRr7mzPVmDg" type="ToMultiplicityLabel" element="_rs9SktwJEdqvRr7mzPVmDg">
+            <children xmi:id="_rth6WdwJEdqvRr7mzPVmDg" type="ToMultiplicity" element="_rs9SktwJEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_rth6WNwJEdqvRr7mzPVmDg" y="318"/>
           </children>
-          <children xmi:id="_vxTyits9Edq_M4cuS_IUkQ" type="ToRoleLabel" element="_vxBeots9Edq_M4cuS_IUkQ">
-            <children xmi:id="_vxTyjNs9Edq_M4cuS_IUkQ" type="ToRole" element="_vxBeots9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_vxTyi9s9Edq_M4cuS_IUkQ" y="-317"/>
+          <children xmi:id="_rth6WtwJEdqvRr7mzPVmDg" type="ToRoleLabel" element="_rs9SktwJEdqvRr7mzPVmDg">
+            <children xmi:id="_rth6XNwJEdqvRr7mzPVmDg" type="ToRole" element="_rs9SktwJEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_rth6W9wJEdqvRr7mzPVmDg" y="-317"/>
           </children>
-          <children xmi:id="_vxTyjds9Edq_M4cuS_IUkQ" type="FromMultiplicityLabel" element="_vxBeods9Edq_M4cuS_IUkQ">
-            <children xmi:id="_vxTyj9s9Edq_M4cuS_IUkQ" type="FromMultiplicity" element="_vxBeods9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_vxTyjts9Edq_M4cuS_IUkQ" y="318"/>
+          <children xmi:id="_rth6XdwJEdqvRr7mzPVmDg" type="FromMultiplicityLabel" element="_rs9SkdwJEdqvRr7mzPVmDg">
+            <children xmi:id="_rth6X9wJEdqvRr7mzPVmDg" type="FromMultiplicity" element="_rs9SkdwJEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_rth6XtwJEdqvRr7mzPVmDg" y="318"/>
           </children>
-          <children xmi:id="_vxTykNs9Edq_M4cuS_IUkQ" type="FromRoleLabel" element="_vxBeods9Edq_M4cuS_IUkQ">
-            <children xmi:id="_vxTykts9Edq_M4cuS_IUkQ" type="FromRole" element="_vxBeods9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_vxTykds9Edq_M4cuS_IUkQ" y="-317"/>
+          <children xmi:id="_rth6YNwJEdqvRr7mzPVmDg" type="FromRoleLabel" element="_rs9SkdwJEdqvRr7mzPVmDg">
+            <children xmi:id="_rth6YtwJEdqvRr7mzPVmDg" type="FromRole" element="_rs9SkdwJEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_rth6YdwJEdqvRr7mzPVmDg" y="-317"/>
           </children>
-          <children xmi:id="_vxTyk9s9Edq_M4cuS_IUkQ" type="ToQualifierLabel" element="_vxBeots9Edq_M4cuS_IUkQ">
-            <children xmi:id="_vxTylds9Edq_M4cuS_IUkQ" type="QualifierCompartment" element="_vxBeots9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_vxTylts9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_rth6Y9wJEdqvRr7mzPVmDg" type="ToQualifierLabel" element="_rs9SktwJEdqvRr7mzPVmDg">
+            <children xmi:id="_rth6ZdwJEdqvRr7mzPVmDg" type="QualifierCompartment" element="_rs9SktwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_rth6ZtwJEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_vxTylNs9Edq_M4cuS_IUkQ" y="-148"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_rth6ZNwJEdqvRr7mzPVmDg" y="-148"/>
           </children>
-          <children xmi:id="_vxTyl9s9Edq_M4cuS_IUkQ" type="FromQualifierLabel" element="_vxBeods9Edq_M4cuS_IUkQ">
-            <children xmi:id="_vxTymds9Edq_M4cuS_IUkQ" type="QualifierCompartment" element="_vxBeods9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_vxTymts9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_rth6Z9wJEdqvRr7mzPVmDg" type="FromQualifierLabel" element="_rs9SkdwJEdqvRr7mzPVmDg">
+            <children xmi:id="_rth6adwJEdqvRr7mzPVmDg" type="QualifierCompartment" element="_rs9SkdwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_rth6atwJEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_vxTymNs9Edq_M4cuS_IUkQ" y="-148"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_rth6aNwJEdqvRr7mzPVmDg" y="-148"/>
           </children>
-          <children xmi:id="_vxTym9s9Edq_M4cuS_IUkQ" type="ToRoleLabel" element="_vxBeots9Edq_M4cuS_IUkQ">
-            <eAnnotations xmi:id="_vxTynds9Edq_M4cuS_IUkQ" source="ToConstraintLabel"/>
-            <children xmi:id="_vxZ5INs9Edq_M4cuS_IUkQ" visible="false" type="ToConstraintCompartment" element="_vxBeots9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_vxZ5Ids9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_rth6a9wJEdqvRr7mzPVmDg" type="ToRoleLabel" element="_rs9SktwJEdqvRr7mzPVmDg">
+            <eAnnotations xmi:id="_rth6bdwJEdqvRr7mzPVmDg" source="ToConstraintLabel"/>
+            <children xmi:id="_rth6btwJEdqvRr7mzPVmDg" visible="false" type="ToConstraintCompartment" element="_rs9SktwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_rth6b9wJEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_vxTynNs9Edq_M4cuS_IUkQ" y="847"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_rth6bNwJEdqvRr7mzPVmDg" y="847"/>
           </children>
-          <children xmi:id="_vxZ5Its9Edq_M4cuS_IUkQ" type="FromRoleLabel" element="_vxBeods9Edq_M4cuS_IUkQ">
-            <eAnnotations xmi:id="_vxZ5JNs9Edq_M4cuS_IUkQ" source="FromConstraintLabel"/>
-            <children xmi:id="_vxZ5Jds9Edq_M4cuS_IUkQ" visible="false" type="FromConstraintCompartment" element="_vxBeods9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_vxZ5Jts9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_rth6cNwJEdqvRr7mzPVmDg" type="FromRoleLabel" element="_rs9SkdwJEdqvRr7mzPVmDg">
+            <eAnnotations xmi:id="_rth6ctwJEdqvRr7mzPVmDg" source="FromConstraintLabel"/>
+            <children xmi:id="_rth6c9wJEdqvRr7mzPVmDg" visible="false" type="FromConstraintCompartment" element="_rs9SkdwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_rth6dNwJEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_vxZ5I9s9Edq_M4cuS_IUkQ" y="847"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_rth6cdwJEdqvRr7mzPVmDg" y="847"/>
           </children>
-          <children xmi:id="_vxZ5J9s9Edq_M4cuS_IUkQ" element="_vxBeoNs9Edq_M4cuS_IUkQ">
-            <children xmi:id="_vxZ5Kts9Edq_M4cuS_IUkQ" type="ImageCompartment" element="_vxBeoNs9Edq_M4cuS_IUkQ">
-              <layoutConstraint xmi:type="notation:Size" xmi:id="_vxZ5K9s9Edq_M4cuS_IUkQ" width="1320" height="1320"/>
+          <children xmi:id="_rth6ddwJEdqvRr7mzPVmDg" element="_rs9SkNwJEdqvRr7mzPVmDg">
+            <children xmi:id="_rth6eNwJEdqvRr7mzPVmDg" type="ImageCompartment" element="_rs9SkNwJEdqvRr7mzPVmDg">
+              <layoutConstraint xmi:type="notation:Size" xmi:id="_rth6edwJEdqvRr7mzPVmDg" width="1320" height="1320"/>
             </children>
-            <children xmi:id="_vxZ5LNs9Edq_M4cuS_IUkQ" type="Stereotype" element="_vxBeoNs9Edq_M4cuS_IUkQ"/>
-            <children xmi:id="_vxZ5Lds9Edq_M4cuS_IUkQ" type="Name" element="_vxBeoNs9Edq_M4cuS_IUkQ"/>
-            <children xmi:id="_vxZ5Lts9Edq_M4cuS_IUkQ" type="AttributeCompartment" element="_vxBeoNs9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_vxZ5L9s9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_rth6etwJEdqvRr7mzPVmDg" type="Stereotype" element="_rs9SkNwJEdqvRr7mzPVmDg"/>
+            <children xmi:id="_rth6e9wJEdqvRr7mzPVmDg" type="Name" element="_rs9SkNwJEdqvRr7mzPVmDg"/>
+            <children xmi:id="_rth6fNwJEdqvRr7mzPVmDg" type="AttributeCompartment" element="_rs9SkNwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_rth6fdwJEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_vxZ5MNs9Edq_M4cuS_IUkQ" type="OperationCompartment" element="_vxBeoNs9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_vxZ5Mds9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_rth6ftwJEdqvRr7mzPVmDg" type="OperationCompartment" element="_rs9SkNwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_rth6f9wJEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_vxZ5Mts9Edq_M4cuS_IUkQ" visible="false" type="SignalCompartment" element="_vxBeoNs9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_vxZ5M9s9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_rth6gNwJEdqvRr7mzPVmDg" visible="false" type="SignalCompartment" element="_rs9SkNwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_rth6gdwJEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_vxZ5NNs9Edq_M4cuS_IUkQ" visible="false" type="StructureCompartment" element="_vxBeoNs9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_vxZ5Nds9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_rth6gtwJEdqvRr7mzPVmDg" visible="false" type="StructureCompartment" element="_rs9SkNwJEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_rth6g9wJEdqvRr7mzPVmDg"/>
             </children>
-            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_vxZ5KNs9Edq_M4cuS_IUkQ" showStereotype="Label"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vxZ5Kds9Edq_M4cuS_IUkQ" x="-2366" y="-1530" width="6246" height="720"/>
+            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_rth6dtwJEdqvRr7mzPVmDg" showStereotype="Label"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rth6d9wJEdqvRr7mzPVmDg" x="-83" y="2262" width="7282" height="523"/>
           </children>
-          <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_vxTygds9Edq_M4cuS_IUkQ" showStereotype="Text"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_vxTygts9Edq_M4cuS_IUkQ" points="[-54, 22, 379, -118]$[-339, 139, 94, -1]"/>
+          <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_rth6UdwJEdqvRr7mzPVmDg" showStereotype="Text"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_rth6UtwJEdqvRr7mzPVmDg" points="[125, -39, -453, 148]$[517, -159, -61, 28]"/>
         </edges>
-        <edges xmi:id="_-eCFoNs9Edq_M4cuS_IUkQ" element="_-dprINs9Edq_M4cuS_IUkQ" source="_1QfIkCBfEdqJor_3U2F5RQ" target="_aYm28Ns6Edq_M4cuS_IUkQ">
-          <children xmi:id="_-eCFp9s9Edq_M4cuS_IUkQ" type="ToMultiplicityLabel" element="_-dprIts9Edq_M4cuS_IUkQ">
-            <children xmi:id="_-eCFqds9Edq_M4cuS_IUkQ" type="ToMultiplicity" element="_-dprIts9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_-eCFqNs9Edq_M4cuS_IUkQ" y="318"/>
+        <edges xmi:id="_9yxL8NwKEdqvRr7mzPVmDg" element="_9yMkMNwKEdqvRr7mzPVmDg" source="_X8c9kNs6Edq_M4cuS_IUkQ" target="_1QfIkCBfEdqJor_3U2F5RQ">
+          <children xmi:id="_9yxL99wKEdqvRr7mzPVmDg" type="ToMultiplicityLabel" element="_9yMkMtwKEdqvRr7mzPVmDg">
+            <children xmi:id="_9yxL-dwKEdqvRr7mzPVmDg" type="ToMultiplicity" element="_9yMkMtwKEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_9yxL-NwKEdqvRr7mzPVmDg" y="318"/>
           </children>
-          <children xmi:id="_-eCFqts9Edq_M4cuS_IUkQ" type="ToRoleLabel" element="_-dprIts9Edq_M4cuS_IUkQ">
-            <children xmi:id="_-eCFrNs9Edq_M4cuS_IUkQ" type="ToRole" element="_-dprIts9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_-eCFq9s9Edq_M4cuS_IUkQ" y="-317"/>
+          <children xmi:id="_9yxL-twKEdqvRr7mzPVmDg" type="ToRoleLabel" element="_9yMkMtwKEdqvRr7mzPVmDg">
+            <children xmi:id="_9yxL_NwKEdqvRr7mzPVmDg" type="ToRole" element="_9yMkMtwKEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_9yxL-9wKEdqvRr7mzPVmDg" y="-317"/>
           </children>
-          <children xmi:id="_-eCFrds9Edq_M4cuS_IUkQ" type="FromMultiplicityLabel" element="_-dprIds9Edq_M4cuS_IUkQ">
-            <children xmi:id="_-eCFr9s9Edq_M4cuS_IUkQ" type="FromMultiplicity" element="_-dprIds9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_-eCFrts9Edq_M4cuS_IUkQ" y="318"/>
+          <children xmi:id="_9yxL_dwKEdqvRr7mzPVmDg" type="FromMultiplicityLabel" element="_9yMkMdwKEdqvRr7mzPVmDg">
+            <children xmi:id="_9yxL_9wKEdqvRr7mzPVmDg" type="FromMultiplicity" element="_9yMkMdwKEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_9yxL_twKEdqvRr7mzPVmDg" y="318"/>
           </children>
-          <children xmi:id="_-eCFsNs9Edq_M4cuS_IUkQ" type="FromRoleLabel" element="_-dprIds9Edq_M4cuS_IUkQ">
-            <children xmi:id="_-eCFsts9Edq_M4cuS_IUkQ" type="FromRole" element="_-dprIds9Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_-eCFsds9Edq_M4cuS_IUkQ" y="-317"/>
+          <children xmi:id="_9yxMANwKEdqvRr7mzPVmDg" type="FromRoleLabel" element="_9yMkMdwKEdqvRr7mzPVmDg">
+            <children xmi:id="_9yxMAtwKEdqvRr7mzPVmDg" type="FromRole" element="_9yMkMdwKEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_9yxMAdwKEdqvRr7mzPVmDg" y="-317"/>
           </children>
-          <children xmi:id="_-eCFs9s9Edq_M4cuS_IUkQ" type="ToQualifierLabel" element="_-dprIts9Edq_M4cuS_IUkQ">
-            <children xmi:id="_-eCFtds9Edq_M4cuS_IUkQ" type="QualifierCompartment" element="_-dprIts9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_-eCFtts9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_9yxMA9wKEdqvRr7mzPVmDg" type="ToQualifierLabel" element="_9yMkMtwKEdqvRr7mzPVmDg">
+            <children xmi:id="_9yxMBdwKEdqvRr7mzPVmDg" type="QualifierCompartment" element="_9yMkMtwKEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_9yxMBtwKEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_-eCFtNs9Edq_M4cuS_IUkQ" y="-148"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_9yxMBNwKEdqvRr7mzPVmDg" y="-148"/>
           </children>
-          <children xmi:id="_-eCFt9s9Edq_M4cuS_IUkQ" type="FromQualifierLabel" element="_-dprIds9Edq_M4cuS_IUkQ">
-            <children xmi:id="_-eCFuds9Edq_M4cuS_IUkQ" type="QualifierCompartment" element="_-dprIds9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_-eCFuts9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_9yxMB9wKEdqvRr7mzPVmDg" type="FromQualifierLabel" element="_9yMkMdwKEdqvRr7mzPVmDg">
+            <children xmi:id="_9yxMCdwKEdqvRr7mzPVmDg" type="QualifierCompartment" element="_9yMkMdwKEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_9yxMCtwKEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_-eCFuNs9Edq_M4cuS_IUkQ" y="-148"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_9yxMCNwKEdqvRr7mzPVmDg" y="-148"/>
           </children>
-          <children xmi:id="_-eCFu9s9Edq_M4cuS_IUkQ" type="ToRoleLabel" element="_-dprIts9Edq_M4cuS_IUkQ">
-            <eAnnotations xmi:id="_-eCFvds9Edq_M4cuS_IUkQ" source="ToConstraintLabel"/>
-            <children xmi:id="_-eCFvts9Edq_M4cuS_IUkQ" visible="false" type="ToConstraintCompartment" element="_-dprIts9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_-eCFv9s9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_9y3SkNwKEdqvRr7mzPVmDg" type="ToRoleLabel" element="_9yMkMtwKEdqvRr7mzPVmDg">
+            <eAnnotations xmi:id="_9y3SktwKEdqvRr7mzPVmDg" source="ToConstraintLabel"/>
+            <children xmi:id="_9y3Sk9wKEdqvRr7mzPVmDg" visible="false" type="ToConstraintCompartment" element="_9yMkMtwKEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_9y3SlNwKEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_-eCFvNs9Edq_M4cuS_IUkQ" y="847"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_9y3SkdwKEdqvRr7mzPVmDg" y="847"/>
           </children>
-          <children xmi:id="_-eCFwNs9Edq_M4cuS_IUkQ" type="FromRoleLabel" element="_-dprIds9Edq_M4cuS_IUkQ">
-            <eAnnotations xmi:id="_-eCFwts9Edq_M4cuS_IUkQ" source="FromConstraintLabel"/>
-            <children xmi:id="_-eCFw9s9Edq_M4cuS_IUkQ" visible="false" type="FromConstraintCompartment" element="_-dprIds9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_-eCFxNs9Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_9y3SldwKEdqvRr7mzPVmDg" type="FromRoleLabel" element="_9yMkMdwKEdqvRr7mzPVmDg">
+            <eAnnotations xmi:id="_9y3Sl9wKEdqvRr7mzPVmDg" source="FromConstraintLabel"/>
+            <children xmi:id="_9y3SmNwKEdqvRr7mzPVmDg" visible="false" type="FromConstraintCompartment" element="_9yMkMdwKEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_9y3SmdwKEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_-eCFwds9Edq_M4cuS_IUkQ" y="847"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_9y3SltwKEdqvRr7mzPVmDg" y="847"/>
           </children>
-          <children xmi:id="_-eCFxds9Edq_M4cuS_IUkQ" element="_-dprINs9Edq_M4cuS_IUkQ">
-            <children xmi:id="_-eCFyNs9Edq_M4cuS_IUkQ" type="ImageCompartment" element="_-dprINs9Edq_M4cuS_IUkQ">
-              <layoutConstraint xmi:type="notation:Size" xmi:id="_-eCFyds9Edq_M4cuS_IUkQ" width="1320" height="1320"/>
+          <children xmi:id="_9y3SmtwKEdqvRr7mzPVmDg" element="_9yMkMNwKEdqvRr7mzPVmDg">
+            <children xmi:id="_9y3SndwKEdqvRr7mzPVmDg" type="ImageCompartment" element="_9yMkMNwKEdqvRr7mzPVmDg">
+              <layoutConstraint xmi:type="notation:Size" xmi:id="_9y3SntwKEdqvRr7mzPVmDg" width="1320" height="1320"/>
             </children>
-            <children xmi:id="_-eCFyts9Edq_M4cuS_IUkQ" type="Stereotype" element="_-dprINs9Edq_M4cuS_IUkQ"/>
-            <children xmi:id="_-eCFy9s9Edq_M4cuS_IUkQ" type="Name" element="_-dprINs9Edq_M4cuS_IUkQ"/>
-            <children xmi:id="_-eCFzNs9Edq_M4cuS_IUkQ" type="AttributeCompartment" element="_-dprINs9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_-eCFzds9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_9y3Sn9wKEdqvRr7mzPVmDg" type="Stereotype" element="_9yMkMNwKEdqvRr7mzPVmDg"/>
+            <children xmi:id="_9y3SoNwKEdqvRr7mzPVmDg" type="Name" element="_9yMkMNwKEdqvRr7mzPVmDg"/>
+            <children xmi:id="_9y3SodwKEdqvRr7mzPVmDg" type="AttributeCompartment" element="_9yMkMNwKEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_9y3SotwKEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_-eCFzts9Edq_M4cuS_IUkQ" type="OperationCompartment" element="_-dprINs9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_-eCFz9s9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_9y3So9wKEdqvRr7mzPVmDg" type="OperationCompartment" element="_9yMkMNwKEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_9y3SpNwKEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_-eCF0Ns9Edq_M4cuS_IUkQ" visible="false" type="SignalCompartment" element="_-dprINs9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_-eCF0ds9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_9y3SpdwKEdqvRr7mzPVmDg" visible="false" type="SignalCompartment" element="_9yMkMNwKEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_9y3SptwKEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_-eCF0ts9Edq_M4cuS_IUkQ" visible="false" type="StructureCompartment" element="_-dprINs9Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_-eCF09s9Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_9y3Sp9wKEdqvRr7mzPVmDg" visible="false" type="StructureCompartment" element="_9yMkMNwKEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_9y3SqNwKEdqvRr7mzPVmDg"/>
             </children>
-            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_-eCFxts9Edq_M4cuS_IUkQ" showStereotype="Label"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-eCFx9s9Edq_M4cuS_IUkQ" x="284" y="-4901" width="6521" height="635"/>
+            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_9y3Sm9wKEdqvRr7mzPVmDg" showStereotype="Label"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9y3SnNwKEdqvRr7mzPVmDg" x="-1829" y="-4231" width="7070" height="608"/>
           </children>
-          <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_-eCFods9Edq_M4cuS_IUkQ" showStereotype="Text"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-eCFots9Edq_M4cuS_IUkQ" points="[7, 22, -25, -218]$[95, 181, 63, -59]"/>
+          <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_9yxL8dwKEdqvRr7mzPVmDg" showStereotype="Text"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9yxL8twKEdqvRr7mzPVmDg" points="[-100, 92, 210, -115]$[-223, 207, 87, 0]"/>
         </edges>
-        <edges xmi:id="_x678ANs-Edq_M4cuS_IUkQ" element="_x6poINs-Edq_M4cuS_IUkQ" source="_1QfIkCBfEdqJor_3U2F5RQ" target="_aYm28Ns6Edq_M4cuS_IUkQ">
-          <children xmi:id="_x678B9s-Edq_M4cuS_IUkQ" type="ToMultiplicityLabel" element="_x6poIts-Edq_M4cuS_IUkQ">
-            <children xmi:id="_x678Cds-Edq_M4cuS_IUkQ" type="ToMultiplicity" element="_x6poIts-Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_x678CNs-Edq_M4cuS_IUkQ" y="318"/>
+        <edges xmi:id="_b05i0NwLEdqvRr7mzPVmDg" element="_b0U7ENwLEdqvRr7mzPVmDg" source="_aYm28Ns6Edq_M4cuS_IUkQ" target="_1QfIkCBfEdqJor_3U2F5RQ">
+          <children xmi:id="_b05i19wLEdqvRr7mzPVmDg" type="ToMultiplicityLabel" element="_b0U7EtwLEdqvRr7mzPVmDg">
+            <children xmi:id="_b05i2dwLEdqvRr7mzPVmDg" type="ToMultiplicity" element="_b0U7EtwLEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_b05i2NwLEdqvRr7mzPVmDg" y="318"/>
           </children>
-          <children xmi:id="_x678Cts-Edq_M4cuS_IUkQ" type="ToRoleLabel" element="_x6poIts-Edq_M4cuS_IUkQ">
-            <children xmi:id="_x678DNs-Edq_M4cuS_IUkQ" type="ToRole" element="_x6poIts-Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_x678C9s-Edq_M4cuS_IUkQ" y="-317"/>
+          <children xmi:id="_b05i2twLEdqvRr7mzPVmDg" type="ToRoleLabel" element="_b0U7EtwLEdqvRr7mzPVmDg">
+            <children xmi:id="_b05i3NwLEdqvRr7mzPVmDg" type="ToRole" element="_b0U7EtwLEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_b05i29wLEdqvRr7mzPVmDg" y="-317"/>
           </children>
-          <children xmi:id="_x678Dds-Edq_M4cuS_IUkQ" type="FromMultiplicityLabel" element="_x6poIds-Edq_M4cuS_IUkQ">
-            <children xmi:id="_x678D9s-Edq_M4cuS_IUkQ" type="FromMultiplicity" element="_x6poIds-Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_x678Dts-Edq_M4cuS_IUkQ" y="318"/>
+          <children xmi:id="_b05i3dwLEdqvRr7mzPVmDg" type="FromMultiplicityLabel" element="_b0U7EdwLEdqvRr7mzPVmDg">
+            <children xmi:id="_b05i39wLEdqvRr7mzPVmDg" type="FromMultiplicity" element="_b0U7EdwLEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_b05i3twLEdqvRr7mzPVmDg" y="318"/>
           </children>
-          <children xmi:id="_x678ENs-Edq_M4cuS_IUkQ" type="FromRoleLabel" element="_x6poIds-Edq_M4cuS_IUkQ">
-            <children xmi:id="_x678Ets-Edq_M4cuS_IUkQ" type="FromRole" element="_x6poIds-Edq_M4cuS_IUkQ"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_x678Eds-Edq_M4cuS_IUkQ" y="-317"/>
+          <children xmi:id="_b05i4NwLEdqvRr7mzPVmDg" type="FromRoleLabel" element="_b0U7EdwLEdqvRr7mzPVmDg">
+            <children xmi:id="_b05i4twLEdqvRr7mzPVmDg" type="FromRole" element="_b0U7EdwLEdqvRr7mzPVmDg"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_b05i4dwLEdqvRr7mzPVmDg" y="-317"/>
           </children>
-          <children xmi:id="_x678E9s-Edq_M4cuS_IUkQ" type="ToQualifierLabel" element="_x6poIts-Edq_M4cuS_IUkQ">
-            <children xmi:id="_x678Fds-Edq_M4cuS_IUkQ" type="QualifierCompartment" element="_x6poIts-Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_x678Fts-Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_b05i49wLEdqvRr7mzPVmDg" type="ToQualifierLabel" element="_b0U7EtwLEdqvRr7mzPVmDg">
+            <children xmi:id="_b05i5dwLEdqvRr7mzPVmDg" type="QualifierCompartment" element="_b0U7EtwLEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_b05i5twLEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_x678FNs-Edq_M4cuS_IUkQ" y="-148"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_b05i5NwLEdqvRr7mzPVmDg" y="-148"/>
           </children>
-          <children xmi:id="_x678F9s-Edq_M4cuS_IUkQ" type="FromQualifierLabel" element="_x6poIds-Edq_M4cuS_IUkQ">
-            <children xmi:id="_x678Gds-Edq_M4cuS_IUkQ" type="QualifierCompartment" element="_x6poIds-Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_x678Gts-Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_b05i59wLEdqvRr7mzPVmDg" type="FromQualifierLabel" element="_b0U7EdwLEdqvRr7mzPVmDg">
+            <children xmi:id="_b05i6dwLEdqvRr7mzPVmDg" type="QualifierCompartment" element="_b0U7EdwLEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_b05i6twLEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_x678GNs-Edq_M4cuS_IUkQ" y="-148"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_b05i6NwLEdqvRr7mzPVmDg" y="-148"/>
           </children>
-          <children xmi:id="_x678G9s-Edq_M4cuS_IUkQ" type="ToRoleLabel" element="_x6poIts-Edq_M4cuS_IUkQ">
-            <eAnnotations xmi:id="_x678Hds-Edq_M4cuS_IUkQ" source="ToConstraintLabel"/>
-            <children xmi:id="_x678Hts-Edq_M4cuS_IUkQ" visible="false" type="ToConstraintCompartment" element="_x6poIts-Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_x678H9s-Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_b05i69wLEdqvRr7mzPVmDg" type="ToRoleLabel" element="_b0U7EtwLEdqvRr7mzPVmDg">
+            <eAnnotations xmi:id="_b05i7dwLEdqvRr7mzPVmDg" source="ToConstraintLabel"/>
+            <children xmi:id="_b05i7twLEdqvRr7mzPVmDg" visible="false" type="ToConstraintCompartment" element="_b0U7EtwLEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_b05i79wLEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_x678HNs-Edq_M4cuS_IUkQ" y="847"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_b05i7NwLEdqvRr7mzPVmDg" y="847"/>
           </children>
-          <children xmi:id="_x7CCoNs-Edq_M4cuS_IUkQ" type="FromRoleLabel" element="_x6poIds-Edq_M4cuS_IUkQ">
-            <eAnnotations xmi:id="_x7CCots-Edq_M4cuS_IUkQ" source="FromConstraintLabel"/>
-            <children xmi:id="_x7CCo9s-Edq_M4cuS_IUkQ" visible="false" type="FromConstraintCompartment" element="_x6poIds-Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_x7CCpNs-Edq_M4cuS_IUkQ"/>
+          <children xmi:id="_b05i8NwLEdqvRr7mzPVmDg" type="FromRoleLabel" element="_b0U7EdwLEdqvRr7mzPVmDg">
+            <eAnnotations xmi:id="_b05i8twLEdqvRr7mzPVmDg" source="FromConstraintLabel"/>
+            <children xmi:id="_b05i89wLEdqvRr7mzPVmDg" visible="false" type="FromConstraintCompartment" element="_b0U7EdwLEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_b05i9NwLEdqvRr7mzPVmDg"/>
             </children>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_x7CCods-Edq_M4cuS_IUkQ" y="847"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_b05i8dwLEdqvRr7mzPVmDg" y="847"/>
           </children>
-          <children xmi:id="_x7CCpds-Edq_M4cuS_IUkQ" element="_x6poINs-Edq_M4cuS_IUkQ">
-            <children xmi:id="_x7CCqNs-Edq_M4cuS_IUkQ" type="ImageCompartment" element="_x6poINs-Edq_M4cuS_IUkQ">
-              <layoutConstraint xmi:type="notation:Size" xmi:id="_x7CCqds-Edq_M4cuS_IUkQ" width="1320" height="1320"/>
+          <children xmi:id="_b05i9dwLEdqvRr7mzPVmDg" element="_b0U7ENwLEdqvRr7mzPVmDg">
+            <children xmi:id="_b05i-NwLEdqvRr7mzPVmDg" type="ImageCompartment" element="_b0U7ENwLEdqvRr7mzPVmDg">
+              <layoutConstraint xmi:type="notation:Size" xmi:id="_b05i-dwLEdqvRr7mzPVmDg" width="1320" height="1320"/>
             </children>
-            <children xmi:id="_x7CCqts-Edq_M4cuS_IUkQ" type="Stereotype" element="_x6poINs-Edq_M4cuS_IUkQ"/>
-            <children xmi:id="_x7CCq9s-Edq_M4cuS_IUkQ" type="Name" element="_x6poINs-Edq_M4cuS_IUkQ"/>
-            <children xmi:id="_x7CCrNs-Edq_M4cuS_IUkQ" type="AttributeCompartment" element="_x6poINs-Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_x7CCrds-Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_b05i-twLEdqvRr7mzPVmDg" type="Stereotype" element="_b0U7ENwLEdqvRr7mzPVmDg"/>
+            <children xmi:id="_b05i-9wLEdqvRr7mzPVmDg" type="Name" element="_b0U7ENwLEdqvRr7mzPVmDg"/>
+            <children xmi:id="_b05i_NwLEdqvRr7mzPVmDg" type="AttributeCompartment" element="_b0U7ENwLEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_b05i_dwLEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_x7CCrts-Edq_M4cuS_IUkQ" type="OperationCompartment" element="_x6poINs-Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_x7CCr9s-Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_b05i_twLEdqvRr7mzPVmDg" type="OperationCompartment" element="_b0U7ENwLEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_b05i_9wLEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_x7CCsNs-Edq_M4cuS_IUkQ" visible="false" type="SignalCompartment" element="_x6poINs-Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_x7CCsds-Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_b05jANwLEdqvRr7mzPVmDg" visible="false" type="SignalCompartment" element="_b0U7ENwLEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_b05jAdwLEdqvRr7mzPVmDg"/>
             </children>
-            <children xmi:id="_x7CCsts-Edq_M4cuS_IUkQ" visible="false" type="StructureCompartment" element="_x6poINs-Edq_M4cuS_IUkQ">
-              <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_x7CCs9s-Edq_M4cuS_IUkQ"/>
+            <children xmi:id="_b05jAtwLEdqvRr7mzPVmDg" visible="false" type="StructureCompartment" element="_b0U7ENwLEdqvRr7mzPVmDg">
+              <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_b05jA9wLEdqvRr7mzPVmDg"/>
             </children>
-            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_x7CCpts-Edq_M4cuS_IUkQ" showStereotype="Label"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_x7CCp9s-Edq_M4cuS_IUkQ" x="599" y="-4546" width="6436" height="607"/>
+            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_b05i9twLEdqvRr7mzPVmDg" showStereotype="Label"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_b05i99wLEdqvRr7mzPVmDg" x="-601" y="4214" width="7324" height="671"/>
           </children>
-          <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_x678Ads-Edq_M4cuS_IUkQ" showStereotype="Text"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_x678Ats-Edq_M4cuS_IUkQ" points="[14, 22, -18, -218]$[129, 205, 97, -35]"/>
+          <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_b05i0dwLEdqvRr7mzPVmDg" showStereotype="Text"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_b05i0twLEdqvRr7mzPVmDg" points="[5, -78, 47, 242]$[31, -296, 73, 24]"/>
         </edges>
       </contents>
       <contents xmi:type="notation:Diagram" xmi:id="_RcPoICBqEdqJor_3U2F5RQ" type="Class" name="DiagramSambaGroup">
@@ -11129,96 +11129,96 @@
       </ownedEnd>
       <ownedEnd xmi:id="_Z6o2ots8Edq_M4cuS_IUkQ" name="GroupComponent" visibility="private" type="_y35VoNH0EdmCBtKLVhSf1w" association="_Z6o2oNs8Edq_M4cuS_IUkQ"/>
     </ownedMember>
-    <ownedMember xmi:type="uml:AssociationClass" xmi:id="_84-o0Ns8Edq_M4cuS_IUkQ" name="Linux_SambaDenyHostsForGlobals" memberEnd="_84-o0ds8Edq_M4cuS_IUkQ _84-o0ts8Edq_M4cuS_IUkQ">
-      <eAnnotations xmi:id="_LGqPgNs9Edq_M4cuS_IUkQ" source="appliedStereotypes">
-        <contents xmi:type="CIM_0:CIM__Qualifiers" xmi:id="_LGqPgds9Edq_M4cuS_IUkQ">
+    <ownedMember xmi:type="uml:AssociationClass" xmi:id="_d3nv4NwIEdqvRr7mzPVmDg" name="Linux_SambaAllowHostsForPrinter" memberEnd="_d3nv4dwIEdqvRr7mzPVmDg _d3nv4twIEdqvRr7mzPVmDg">
+      <eAnnotations xmi:id="_paogENwIEdqvRr7mzPVmDg" source="appliedStereotypes">
+        <contents xmi:type="CIM_0:CIM__Qualifiers" xmi:id="_paogEdwIEdqvRr7mzPVmDg">
           <QualifierName>IBM_HasInstances</QualifierName>
           <QualifierName>IBM_HasProvider</QualifierName>
           <QualifierValue>true</QualifierValue>
           <QualifierValue>true</QualifierValue>
         </contents>
       </eAnnotations>
-      <generalization xmi:id="_BZUUkNtKEdq_M4cuS_IUkQ" general="_HPJp8NK2Edmfy_IiaGYYaA"/>
-      <ownedEnd xmi:id="_84-o0ds8Edq_M4cuS_IUkQ" name="GroupComponent" visibility="private" type="_y35VoNH0EdmCBtKLVhSf1w" association="_84-o0Ns8Edq_M4cuS_IUkQ" aggregation="shared"/>
-      <ownedEnd xmi:id="_84-o0ts8Edq_M4cuS_IUkQ" name="PartComponent" visibility="private" type="_LQd4kN8SEdmzMeOKh8_tVg" association="_84-o0Ns8Edq_M4cuS_IUkQ">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HAgScds9Edq_M4cuS_IUkQ" value="-1"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HAgScNs9Edq_M4cuS_IUkQ"/>
+      <generalization xmi:id="_ums8UNwIEdqvRr7mzPVmDg" general="_HPJp8NK2Edmfy_IiaGYYaA"/>
+      <ownedEnd xmi:id="_d3nv4dwIEdqvRr7mzPVmDg" name="PartComponent" visibility="private" type="_LQd4kN8SEdmzMeOKh8_tVg" association="_d3nv4NwIEdqvRr7mzPVmDg" aggregation="shared">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nN3GgdwIEdqvRr7mzPVmDg" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nN3GgNwIEdqvRr7mzPVmDg"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_d3nv4twIEdqvRr7mzPVmDg" name="GroupComponent" visibility="private" type="_-D8JwNIUEdmes7W06LZL_w" association="_d3nv4NwIEdqvRr7mzPVmDg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QW9N8dwNEdqvRr7mzPVmDg" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QW9N8NwNEdqvRr7mzPVmDg"/>
       </ownedEnd>
     </ownedMember>
-    <ownedMember xmi:type="uml:AssociationClass" xmi:id="_eOLS8Ns9Edq_M4cuS_IUkQ" name="Linux_SambaAllowHostsForShare" memberEnd="_eOLS8ds9Edq_M4cuS_IUkQ _eOLS8ts9Edq_M4cuS_IUkQ">
-      <eAnnotations xmi:id="_pPMJUNs9Edq_M4cuS_IUkQ" source="appliedStereotypes">
-        <contents xmi:type="CIM_0:CIM__Qualifiers" xmi:id="_pPMJUds9Edq_M4cuS_IUkQ">
+    <ownedMember xmi:type="uml:AssociationClass" xmi:id="_VBSL4NwJEdqvRr7mzPVmDg" name="Linux_SambaAllowHostsForShare" memberEnd="_VBSL4dwJEdqvRr7mzPVmDg _VBSL4twJEdqvRr7mzPVmDg">
+      <eAnnotations xmi:id="_fE4-0NwJEdqvRr7mzPVmDg" source="appliedStereotypes">
+        <contents xmi:type="CIM_0:CIM__Qualifiers" xmi:id="_fE4-0dwJEdqvRr7mzPVmDg">
           <QualifierName>IBM_HasInstances</QualifierName>
           <QualifierName>IBM_HasProvider</QualifierName>
           <QualifierValue>true</QualifierValue>
           <QualifierValue>true</QualifierValue>
         </contents>
       </eAnnotations>
-      <generalization xmi:id="_Ynq_oNtMEdq_M4cuS_IUkQ" general="_HPJp8NK2Edmfy_IiaGYYaA"/>
-      <ownedEnd xmi:id="_eOLS8ds9Edq_M4cuS_IUkQ" name="GroupComponent" visibility="private" type="_HLiVQNK2Edmfy_IiaGYYaA" association="_eOLS8Ns9Edq_M4cuS_IUkQ" aggregation="shared">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mscfwNs9Edq_M4cuS_IUkQ" value="-1"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_msWZINs9Edq_M4cuS_IUkQ"/>
+      <generalization xmi:id="_nNNJwNwJEdqvRr7mzPVmDg" general="_HPJp8NK2Edmfy_IiaGYYaA"/>
+      <ownedEnd xmi:id="_VBSL4dwJEdqvRr7mzPVmDg" name="PartComponent" visibility="private" type="_LQd4kN8SEdmzMeOKh8_tVg" association="_VBSL4NwJEdqvRr7mzPVmDg" aggregation="shared">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_deIcYdwJEdqvRr7mzPVmDg" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_deIcYNwJEdqvRr7mzPVmDg"/>
       </ownedEnd>
-      <ownedEnd xmi:id="_eOLS8ts9Edq_M4cuS_IUkQ" name="PartComponent" visibility="private" type="_LQd4kN8SEdmzMeOKh8_tVg" association="_eOLS8Ns9Edq_M4cuS_IUkQ">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_l6BkUds9Edq_M4cuS_IUkQ" value="-1"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_l6BkUNs9Edq_M4cuS_IUkQ"/>
+      <ownedEnd xmi:id="_VBSL4twJEdqvRr7mzPVmDg" name="GroupComponent" visibility="private" type="_HLiVQNK2Edmfy_IiaGYYaA" association="_VBSL4NwJEdqvRr7mzPVmDg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_OXFA4dwNEdqvRr7mzPVmDg" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OXFA4NwNEdqvRr7mzPVmDg"/>
       </ownedEnd>
     </ownedMember>
-    <ownedMember xmi:type="uml:AssociationClass" xmi:id="_vxBeoNs9Edq_M4cuS_IUkQ" name="Linux_SambaDenyHostsForShare" memberEnd="_vxBeods9Edq_M4cuS_IUkQ _vxBeots9Edq_M4cuS_IUkQ">
-      <eAnnotations xmi:id="_5AAWsNs9Edq_M4cuS_IUkQ" source="appliedStereotypes">
-        <contents xmi:type="CIM_0:CIM__Qualifiers" xmi:id="_5AAWsds9Edq_M4cuS_IUkQ">
+    <ownedMember xmi:type="uml:AssociationClass" xmi:id="_rs9SkNwJEdqvRr7mzPVmDg" name="Linux_SambaDenyHostsForShare" memberEnd="_rs9SkdwJEdqvRr7mzPVmDg _rs9SktwJEdqvRr7mzPVmDg">
+      <eAnnotations xmi:id="_zYCu8NwJEdqvRr7mzPVmDg" source="appliedStereotypes">
+        <contents xmi:type="CIM_0:CIM__Qualifiers" xmi:id="_zYCu8dwJEdqvRr7mzPVmDg">
           <QualifierName>IBM_HasInstances</QualifierName>
           <QualifierName>IBM_HasProvider</QualifierName>
           <QualifierValue>true</QualifierValue>
           <QualifierValue>true</QualifierValue>
         </contents>
       </eAnnotations>
-      <generalization xmi:id="_im_IcNtMEdq_M4cuS_IUkQ" general="_HPJp8NK2Edmfy_IiaGYYaA"/>
-      <ownedEnd xmi:id="_vxBeods9Edq_M4cuS_IUkQ" name="GroupComponent" visibility="private" type="_HLiVQNK2Edmfy_IiaGYYaA" association="_vxBeoNs9Edq_M4cuS_IUkQ" aggregation="shared">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3QKwwds9Edq_M4cuS_IUkQ" value="-1"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3QKwwNs9Edq_M4cuS_IUkQ"/>
+      <generalization xmi:id="_51ALUNwJEdqvRr7mzPVmDg" general="_HPJp8NK2Edmfy_IiaGYYaA"/>
+      <ownedEnd xmi:id="_rs9SkdwJEdqvRr7mzPVmDg" name="PartComponent" visibility="private" type="_LQd4kN8SEdmzMeOKh8_tVg" association="_rs9SkNwJEdqvRr7mzPVmDg" aggregation="shared">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xWV88dwJEdqvRr7mzPVmDg" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xWV88NwJEdqvRr7mzPVmDg"/>
       </ownedEnd>
-      <ownedEnd xmi:id="_vxBeots9Edq_M4cuS_IUkQ" name="PartComponent" visibility="private" type="_LQd4kN8SEdmzMeOKh8_tVg" association="_vxBeoNs9Edq_M4cuS_IUkQ">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2nY5gNs9Edq_M4cuS_IUkQ" value="-1"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2nSy4Ns9Edq_M4cuS_IUkQ"/>
+      <ownedEnd xmi:id="_rs9SktwJEdqvRr7mzPVmDg" name="GroupComponent" visibility="private" type="_HLiVQNK2Edmfy_IiaGYYaA" association="_rs9SkNwJEdqvRr7mzPVmDg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PORuodwNEdqvRr7mzPVmDg" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_PORuoNwNEdqvRr7mzPVmDg"/>
       </ownedEnd>
     </ownedMember>
-    <ownedMember xmi:type="uml:AssociationClass" xmi:id="_-dprINs9Edq_M4cuS_IUkQ" name="Linux_SambaAllowHostsForPrinter" memberEnd="_-dprIds9Edq_M4cuS_IUkQ _-dprIts9Edq_M4cuS_IUkQ">
-      <eAnnotations xmi:id="_tp49kNs-Edq_M4cuS_IUkQ" source="appliedStereotypes">
-        <contents xmi:type="CIM_0:CIM__Qualifiers" xmi:id="_tp49kds-Edq_M4cuS_IUkQ">
+    <ownedMember xmi:type="uml:AssociationClass" xmi:id="_9yMkMNwKEdqvRr7mzPVmDg" name="Linux_SambaDenyHostsForGlobal" memberEnd="_9yMkMdwKEdqvRr7mzPVmDg _9yMkMtwKEdqvRr7mzPVmDg">
+      <eAnnotations xmi:id="_Fd2oUNwLEdqvRr7mzPVmDg" source="appliedStereotypes">
+        <contents xmi:type="CIM_0:CIM__Qualifiers" xmi:id="_Fd2oUdwLEdqvRr7mzPVmDg">
           <QualifierName>IBM_HasInstances</QualifierName>
           <QualifierName>IBM_HasProvider</QualifierName>
           <QualifierValue>true</QualifierValue>
           <QualifierValue>true</QualifierValue>
         </contents>
       </eAnnotations>
-      <generalization xmi:id="_826OcNtLEdq_M4cuS_IUkQ" general="_HPJp8NK2Edmfy_IiaGYYaA"/>
-      <ownedEnd xmi:id="_-dprIds9Edq_M4cuS_IUkQ" name="GroupComponent" visibility="private" type="_-D8JwNIUEdmes7W06LZL_w" association="_-dprINs9Edq_M4cuS_IUkQ" aggregation="shared">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_roS5Qds-Edq_M4cuS_IUkQ" value="-1"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_roS5QNs-Edq_M4cuS_IUkQ"/>
+      <generalization xmi:id="_MLuOgNwLEdqvRr7mzPVmDg" general="_HPJp8NK2Edmfy_IiaGYYaA"/>
+      <ownedEnd xmi:id="_9yMkMdwKEdqvRr7mzPVmDg" name="PartComponent" visibility="private" type="_LQd4kN8SEdmzMeOKh8_tVg" association="_9yMkMNwKEdqvRr7mzPVmDg" aggregation="shared">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ED5LwdwLEdqvRr7mzPVmDg" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ED5LwNwLEdqvRr7mzPVmDg"/>
       </ownedEnd>
-      <ownedEnd xmi:id="_-dprIts9Edq_M4cuS_IUkQ" name="PartComponent" visibility="private" type="_LQd4kN8SEdmzMeOKh8_tVg" association="_-dprINs9Edq_M4cuS_IUkQ">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rAqRgds-Edq_M4cuS_IUkQ" value="-1"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rAqRgNs-Edq_M4cuS_IUkQ"/>
-      </ownedEnd>
+      <ownedEnd xmi:id="_9yMkMtwKEdqvRr7mzPVmDg" name="GroupComponent" visibility="private" type="_y35VoNH0EdmCBtKLVhSf1w" association="_9yMkMNwKEdqvRr7mzPVmDg"/>
     </ownedMember>
-    <ownedMember xmi:type="uml:AssociationClass" xmi:id="_x6poINs-Edq_M4cuS_IUkQ" name="Linux_SambaDenyHostsForPrinter" memberEnd="_x6poIds-Edq_M4cuS_IUkQ _x6poIts-Edq_M4cuS_IUkQ">
-      <eAnnotations xmi:id="_66WuENs-Edq_M4cuS_IUkQ" source="appliedStereotypes">
-        <contents xmi:type="CIM_0:CIM__Qualifiers" xmi:id="_66WuEds-Edq_M4cuS_IUkQ">
+    <ownedMember xmi:type="uml:AssociationClass" xmi:id="_b0U7ENwLEdqvRr7mzPVmDg" name="Linux_SambaDenyHostsForPrinter" memberEnd="_b0U7EdwLEdqvRr7mzPVmDg _b0U7EtwLEdqvRr7mzPVmDg">
+      <eAnnotations xmi:id="_izwyYNwLEdqvRr7mzPVmDg" source="appliedStereotypes">
+        <contents xmi:type="CIM_0:CIM__Qualifiers" xmi:id="_izwyYdwLEdqvRr7mzPVmDg">
           <QualifierName>IBM_HasInstances</QualifierName>
           <QualifierName>IBM_HasProvider</QualifierName>
           <QualifierValue>true</QualifierValue>
           <QualifierValue>true</QualifierValue>
         </contents>
       </eAnnotations>
-      <generalization xmi:id="_O5d08NtMEdq_M4cuS_IUkQ" general="_HPJp8NK2Edmfy_IiaGYYaA"/>
-      <ownedEnd xmi:id="_x6poIds-Edq_M4cuS_IUkQ" name="GroupComponent" visibility="private" type="_-D8JwNIUEdmes7W06LZL_w" association="_x6poINs-Edq_M4cuS_IUkQ" aggregation="shared">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5e9HEds-Edq_M4cuS_IUkQ" value="-1"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5e9HENs-Edq_M4cuS_IUkQ"/>
+      <generalization xmi:id="_m4-UQNwLEdqvRr7mzPVmDg" general="_HPJp8NK2Edmfy_IiaGYYaA"/>
+      <ownedEnd xmi:id="_b0U7EdwLEdqvRr7mzPVmDg" name="PartComponent" visibility="private" type="_LQd4kN8SEdmzMeOKh8_tVg" association="_b0U7ENwLEdqvRr7mzPVmDg" aggregation="shared">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hkZcQdwLEdqvRr7mzPVmDg" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hkZcQNwLEdqvRr7mzPVmDg"/>
       </ownedEnd>
-      <ownedEnd xmi:id="_x6poIts-Edq_M4cuS_IUkQ" name="PartComponent" visibility="private" type="_LQd4kN8SEdmzMeOKh8_tVg" association="_x6poINs-Edq_M4cuS_IUkQ">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5BiyUds-Edq_M4cuS_IUkQ" value="-1"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5BiyUNs-Edq_M4cuS_IUkQ"/>
+      <ownedEnd xmi:id="_b0U7EtwLEdqvRr7mzPVmDg" name="GroupComponent" visibility="private" type="_-D8JwNIUEdmes7W06LZL_w" association="_b0U7ENwLEdqvRr7mzPVmDg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RAONYdwNEdqvRr7mzPVmDg" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_RAONYNwNEdqvRr7mzPVmDg"/>
       </ownedEnd>
     </ownedMember>
   </ownedMember>
