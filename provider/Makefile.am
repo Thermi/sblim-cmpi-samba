@@ -36,18 +36,11 @@ lib_LTLIBRARIES =
 # providerdir defines where provider libraries will be installed (@PROVIDERDIR@ is set by the configure script).
 providerdir = @PROVIDERDIR@
 
-# Start from an empty list for files to clean up
-CLEANFILES =
-
-# Start from an empty extra distribution file list
-EXTRA_DIST =
-
-# Pre Build requirements need to be compiled prior anything else
-BUILT_SOURCES =
 
 AM_CFLAGS = -Wall
 
-AM_CPPFLAGS = -D_COMPILE_UNIX \
+AM_CPPFLAGS = -DDEBUG \
+              -D_COMPILE_UNIX \
               -DCMPI_STANDALONE \
               -I${srcdir}/include \
               -I$(srcdir)/../resource-access \

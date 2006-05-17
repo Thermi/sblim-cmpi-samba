@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(SBLIM CMPI Provider for WBEM-SMT Samba task, 0.1.1, sblim-devel@lists.sourceforge.net, sblim-cmpi-samba)
+AC_INIT(SBLIM CMPI Provider for WBEM-SMT Samba task, 0.1.2, sblim-devel@lists.sourceforge.net, sblim-cmpi-samba)
 AC_CONFIG_SRCDIR([.])
 AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE([tar-ustar])
@@ -63,7 +63,9 @@ AC_FUNC_REALLOC
 AC_FUNC_SELECT_ARGTYPES
 AC_FUNC_STAT
 AC_CHECK_FUNCS([memmove select strchr strdup])
-AC_CONFIG_FILES(Makefile sblim-cmpi-samba.spec resource-access/Makefile resource-access/scripts/smt_smb_ra_get_defaults.sh.pre resource-access/smt_smb_ra_support.conf.pre provider/Makefile)
+AC_CONFIG_FILES(Makefile sblim-cmpi-samba.spec)
+AC_CONFIG_FILES(resource-access/Makefile resource-access/scripts/smt_smb_ra_get_defaults.sh.pre resource-access/smt_smb_ra_support.conf.pre) 
+AC_CONFIG_FILES(provider/Makefile)
 
 # Display configuration options
 echo "-------------------------------------------------------"
@@ -75,7 +77,10 @@ echo "PROVIDERDIR: " $PROVIDERDIR
 echo "CPPFLAGS:" $CPPFLAGS
 echo "LDFLAGS:" $LDFLAGS
 echo "-------------------------------------------------------"
+echo
 
 AC_OUTPUT
 
+echo
 echo "You may now run make"
+echo

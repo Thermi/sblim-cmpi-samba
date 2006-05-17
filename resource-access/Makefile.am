@@ -50,17 +50,9 @@ CLEANFILES =
 # Start from an empty extra distribution file list
 EXTRA_DIST =
 
-# Pre Build requirements need to be compiled prior anything else
-BUILT_SOURCES =
-
-
 
 ######################################################################################
 # Automake instructions for 'resource-access' dir
-
-#BUILT_SOURCES += \
-#        $(srcdir)/smt_smb_ra_support.conf \
-#        $(srcdir)/scripts/smt_smb_ra_get_defaults.sh
 
 smt_smb_ra_support.conf: smt_smb_ra_support.conf.pre
 	sed -e 's,[@]SCRIPTDIR[@],$(pkgdatadir),g' -e s?$$\{prefix\}?$(prefix)?g -e s?$$\{exec_prefix\}?$(prefix)?g $< > $@
@@ -86,13 +78,15 @@ lib_LTLIBRARIES += \
 libRaToolsSmb_la_SOURCES = \
         smt_smb_ra_synonyms.conf \
         smt_smb_ra_support.c \
+        smt_smb_ra_support.h \
         smt_smb_ra_data.c \
         smt_smb_ra_path.c \
-        smt_smb_ra_path.h \
-        smt_smb_ra_support.h 
+        smt_smb_ra_path.h 
 
 libRaToolsSmb_la_CPPFLAGS = \
-        -DUSE_CACHE -DCONFFILE=\"$(sysconfdir)/smt_smb_ra_support.conf\" -D_GNU_SOURCE
+        -DUSE_CACHE \
+        -DCONFFILE=\"$(sysconfdir)/smt_smb_ra_support.conf\" \
+        -D_GNU_SOURCE
 
 libRaToolsSmb_la_LIBADD = \
         -lpthread
@@ -129,6 +123,7 @@ pkgdata_SCRIPTS += \
         scripts/smt_smb_ra_set_user_mappings.py \
         scripts/smt_smb_ra_test.py 
 
+# Non distributed files
 nodist_pkgdata_SCRIPTS += \
         scripts/smt_smb_ra_get_defaults.sh
 

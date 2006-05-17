@@ -1,5 +1,5 @@
 scriptdir ="@SCRIPTDIR@/"
-smbconf   ="@sysconfdir@/samba/smb.conf"
+smbconf   ="/etc/samba/smb.conf"
 defaults  ="@sysconfdir@/smt_smb_ra_defaults.conf"
 synonyms  ="@sysconfdir@/smt_smb_ra_synonyms.conf" 
 groupmap  ="/var/lib/samba/group_mapping.tdb"
