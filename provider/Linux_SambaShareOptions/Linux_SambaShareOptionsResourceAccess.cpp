@@ -1,11 +1,11 @@
 // =======================================================================
 // Linux_SambaShareOptionsResourceAccess.cpp
-//     created on Fri, 24 Feb 2006 using ECUTE
-// 
+//     created on Mon, 26 Jun 2006 using ECUTE 2.2.1
+//
 // Copyright (c) 2006, International Business Machines
 //
 // THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
-// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
 // CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
 //
 // You can obtain a current copy of the Common Public License from
@@ -14,8 +14,10 @@
 // Author:        generated
 //
 // Contributors:
-//                Rodrigo Ceron    <rceron@br.ibm.com>
-//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
 //
 // =======================================================================
 //
@@ -170,6 +172,15 @@ namespace genProvider {
     Linux_SambaShareOptionsManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
     
+    if (!service_exists(aManualInstance.getInstanceName().getName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
+    }
+    
+    char* option = get_option(aManualInstance.getInstanceName().getName(),PRINTABLE);
+    if ( option )
+      if(strcasecmp(option,YES) == 0)
+        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The specified instance is not a valid share.");
+
     setInstanceProperties(aManualInstance);
     
     return aManualInstance; 
@@ -184,6 +195,13 @@ namespace genProvider {
      const char** aPropertiesPP,
      const Linux_SambaShareOptionsManualInstance& aManualInstance) {
     
+    if (!service_exists(aManualInstance.getInstanceName().getName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
+    }
+
+    if(aManualInstance.isPrintableSet() && aManualInstance.getPrintable())
+        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The specified instance is not a valid share.");
+
     setRAProperties(aManualInstance);
   }
 
@@ -221,8 +239,8 @@ namespace genProvider {
       if(delete_share(anInstanceName.getName())) 
 	throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Instance could not be deleted!");
       
-    }else
-      throw CmpiStatus(CMPI_RC_ERR_FAILED,"Instance does not exist!");
+    } else
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
   }
 
 	

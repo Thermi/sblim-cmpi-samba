@@ -1,11 +1,11 @@
 // =======================================================================
 // Linux_SambaScriptingForGlobalResourceAccess.cpp
-//     created on Fri, 24 Feb 2006 using ECUTE
-// 
+//     created on Mon, 26 Jun 2006 using ECUTE 2.2.1
+//
 // Copyright (c) 2006, International Business Machines
 //
 // THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
-// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
 // CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
 //
 // You can obtain a current copy of the Common Public License from
@@ -14,8 +14,10 @@
 // Author:        generated
 //
 // Contributors:
-//                Rodrigo Ceron    <rceron@br.ibm.com>
-//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
 //
 // =======================================================================
 //
@@ -122,6 +124,10 @@ namespace genProvider {
     const Linux_SambaScriptingOptionsInstanceName& aSourceInstanceName,
     Linux_SambaScriptingForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
     
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
+    }
+
     Linux_SambaScriptingForGlobalManualInstance manualInstance;
     
     Linux_SambaScriptingForGlobalInstanceName instName;
@@ -149,6 +155,10 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaScriptingForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
+    }
     
     Linux_SambaScriptingForGlobalManualInstance manualInstance;
     
@@ -177,6 +187,10 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaScriptingOptionsInstanceName& aSourceInstanceName,
     Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
+
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
+    }
     
     Linux_SambaGlobalOptionsInstance instance;
     
@@ -228,6 +242,10 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaScriptingOptionsInstanceEnumeration& anInstanceEnumeration) {
+
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
+    }
     
     Linux_SambaScriptingOptionsInstance instance;
     

@@ -1,0 +1,7 @@
+wbemsmt-test1 = sambauser1 sambauser2 sambauser3 sambauser4 sambauser5
+wbemsmt-test2 = sambauser6 sambauser7 sambauser8 sambauser9 sambauser10
+wbemsmt-test3 = sambauser11 sambauser12 sambauser13 sambauser14 sambauser15
+wbemsmt-test4 = sambauser16 sambauser17 sambauser18 sambauser19 sambauser20
+nobody = guest pcguest smbguest
+root = administrator admin
+

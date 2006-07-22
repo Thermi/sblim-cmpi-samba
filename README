@@ -106,3 +106,9 @@ is done during the "make postinstall".
 Start the cimbrowser (/usr/sniacimom/bin). Load the schema file Linux_Samba.mof with 
 "File" -> "Reload Mof" into the namespace root/cimv2. Before at least IBMQualifiers, 
 CIM Core and CIM System schemata have to be loaded into the repository.
+
+Contacting the WBEMSMT Project
+------------------------------ 
+To report weird behavior and bugs or suggestions and help contact the sblim project 
+by sending email to the sblim-devel mailing list at sblim-devel@lists.sourceforge.net.
+

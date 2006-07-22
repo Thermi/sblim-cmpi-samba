@@ -1,109 +1,127 @@
-/**
- *  CmpiLinux_SambaHostProvider.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// CmpiLinux_SambaHostProvider.h
+//     created on Fri, 23 Jun 2006 using ECUTE 2.2.1
+//
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
+//
+// =======================================================================
 #ifndef CmpiLinux_SambaHostProvider_h
 #define CmpiLinux_SambaHostProvider_h
+
+
 
 #include "CmpiInstanceMI.h"
 #include "CmpiMethodMI.h"
 #include "Linux_SambaHostFactory.h"
 
- namespace genProvider{
 
-  class CmpiLinux_SambaHostProvider : public CmpiInstanceMI,
-   public CmpiMethodMI{	
+namespace genProvider{
+
+  class CmpiLinux_SambaHostProvider : 
+    public CmpiInstanceMI,
+    public CmpiMethodMI {	
 	
-	private:
-
-	Linux_SambaHostInterface* interfaceP;
-	const static char * shadowNameSpaceP;
-	CmpiBroker cppBroker;
+	  private:
+	  Linux_SambaHostInterface* m_interfaceP;
+	  CmpiBroker m_cmpiBroker;
 	    
-    void completeInstance (
-     const Linux_SambaHostInstanceName& intanceNameP,
-     CmpiInstance& target, const CmpiContext& ctx);
+	  private:
+
+    void completeInstance(
+      const Linux_SambaHostInstanceName& anInstanceNameP,
+      CmpiInstance& aCmpiInstance,
+      const CmpiContext& aContext);
 	
-    void copyShadowData (
-     const CmpiInstance* source, CmpiInstance* target);
+    void copyShadowData(
+      const CmpiInstance* aSourceCmpiInstanceP,
+      CmpiInstance* aTargetCmpiInstanceP);
 	
-    CmpiInstance* getShadowInstance (
-     const CmpiInstance& original,
-     const Linux_SambaHostInstanceName& intanceName);
+    CmpiInstance* getShadowInstance(
+      const CmpiInstance& aCmpiInstance,
+      const Linux_SambaHostInstanceName& anInstanceName);
 	
     void removeDanglingShadowInstances (
-     const Linux_SambaHostInstanceNameEnumeration& dinInsNames);
-
+      const Linux_SambaHostInstanceNameEnumeration& anInstanceNameEnumeration);
 	  
-	public:
+	  public:
 
-    CmpiLinux_SambaHostProvider (
-     const CmpiBroker &mbp, const CmpiContext& ctx);
+    CmpiLinux_SambaHostProvider(
+      const CmpiBroker& aBroker,
+      const CmpiContext& aContext);
 
-    ~CmpiLinux_SambaHostProvider ();
+    ~CmpiLinux_SambaHostProvider();
 	
     int isUnloadable() const;
 	
     CmpiStatus enumInstanceNames (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop);
+      const CmpiContext& aContext,
+      CmpiResult& aResult,
+      const CmpiObjectPath& aCop);
      
     CmpiStatus enumInstances (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-     const char* *properties);
+      const CmpiContext& aContext,
+      CmpiResult& aResult,
+      const CmpiObjectPath& aCop,
+      const char** aPropertiesPP);
      
     CmpiStatus getInstance (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-     const char* *properties);
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop,
+     const char** aPropertiesPP);
     
     virtual CmpiStatus createInstance (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-     const CmpiInstance& inst);
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop,
+     const CmpiInstance& anInstance);
     
     virtual CmpiStatus setInstance (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-     const CmpiInstance& inst,
-     const char* *properties);
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop,
+     const CmpiInstance& anInstance,
+     const char** aPropertiesPP);
     
     virtual CmpiStatus deleteInstance (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop);
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop);
      
     /*
-    virtual CmpiStatus execQuery (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& cop,
-     const char* language,
-     const char* query);
+    virtual CmpiStatus execQuery(
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop,
+     const char* aLanguageP,
+     const char* aQueryP);
     */  
       
-    virtual CmpiStatus invokeMethod (
-     const CmpiContext& ctx, CmpiResult& rslt,
-     const CmpiObjectPath& ref,
-     const char* methodName,
-     const CmpiArgs& in,
-     CmpiArgs& out);
+    virtual CmpiStatus invokeMethod(
+     const CmpiContext& aContext,
+     CmpiResult& aResult,
+     const CmpiObjectPath& aCop,
+     const char* aMethodNameP,
+     const CmpiArgs& anInputArgSet,
+     CmpiArgs& anOutputArgSet);
  
   };
+
 }
 
 #endif

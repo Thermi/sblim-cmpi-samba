@@ -1,0 +1,13 @@
+********************************************************************************
+class : Linux_SambaScriptingOptions
+
+--------------------------------------------------------------------------------
+Linux_SambaScriptingOptions : -eq 1
+
+--------------------------------------------------------------------------------
+Name : -eq Global
+Caption : -empty
+Description : -empty
+InstanceID  : -eq InstanceID
+ElementName : -empty
+

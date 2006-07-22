@@ -1,11 +1,11 @@
 // =======================================================================
 // Linux_SambaGlobalSecurityOptionsResourceAccess.cpp
-//     created on Fri, 24 Feb 2006 using ECUTE
-// 
+//     created on Fri, 23 Jun 2006 using ECUTE 2.2.1
+//
 // Copyright (c) 2006, International Business Machines
 //
 // THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
-// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
 // CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
 //
 // You can obtain a current copy of the Common Public License from
@@ -14,8 +14,10 @@
 // Author:        generated
 //
 // Contributors:
-//                Rodrigo Ceron    <rceron@br.ibm.com>
-//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
 //
 // =======================================================================
 //
@@ -155,6 +157,10 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaGlobalSecurityOptionsInstanceName& anInstanceName) {
 
+    if (strcasecmp(DEFAULT_GLOBAL_NAME,anInstanceName.getName())!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
+    }
+
     Linux_SambaGlobalSecurityOptionsManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
     
@@ -172,6 +178,10 @@ namespace genProvider {
      const char** aPropertiesPP,
      const Linux_SambaGlobalSecurityOptionsManualInstance& aManualInstance) {
     
+    if (strcasecmp(DEFAULT_GLOBAL_NAME,aManualInstance.getInstanceName().getName())!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
+    }
+
     if ( aManualInstance.isAuthMethodsSet() )
       set_global_option(AUTH_METHODS, aManualInstance.getAuthMethods());
     

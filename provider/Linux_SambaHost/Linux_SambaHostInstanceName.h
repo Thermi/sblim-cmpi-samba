@@ -1,22 +1,25 @@
-/**
- *  Linux_SambaHostInstanceName.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaHostInstanceName.h
+//     created on Fri, 23 Jun 2006 using ECUTE 2.2.1
+//
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
+//
+// =======================================================================
 #ifndef Linux_SambaHostInstanceName_h
 #define Linux_SambaHostInstanceName_h
 
@@ -29,52 +32,55 @@
 #include "ArrayConverter.h"
 #include "CmpiErrorFormater.h"
 
+
 namespace genProvider {
 
   class Linux_SambaHostInstanceName {
-  public:
-       Linux_SambaHostInstanceName();
-  	
-       Linux_SambaHostInstanceName
-  	    (const Linux_SambaHostInstanceName& original);
-  	   
-       Linux_SambaHostInstanceName
-        (const CmpiObjectPath& path);
-  	 
-       ~Linux_SambaHostInstanceName();
        
-       Linux_SambaHostInstanceName& operator=
-  	    (const Linux_SambaHostInstanceName& original);
+    private:
+    void init();
+    void init(const Linux_SambaHostInstanceName& anInstanceName);
+    void reset();
        
-       CmpiObjectPath getObjectPath() const;
+    const char* m_CIMClassNameP;
+    const char* m_nameSpaceP;
+    
+    const char* m_Name;
        
-       void fillKeys(CmpiInstance& cmpiInstance) const;
-       
-       unsigned int isNameSpaceSet() const;
-       void setNamespace(const char * val, int makeCopy = 1);
-       const char * getNamespace() const;
+    struct isSetType{
+      unsigned int m_nameSpaceP:1;
+      unsigned int Name:1;
 
-       unsigned int isNameSet() const;
-       void setName(const char* val, int makeCopy = 1);
-       const char* getName() const;
+    } isSet;
+  
+    public:
+    Linux_SambaHostInstanceName();
+  	
+    Linux_SambaHostInstanceName(const Linux_SambaHostInstanceName& anInstanceName);
+  	   
+    Linux_SambaHostInstanceName(const CmpiObjectPath& path);
+  	 
+    ~Linux_SambaHostInstanceName();
        
-  private:
-       void init();
-       void init(const Linux_SambaHostInstanceName& original);
-       void reset();
+    Linux_SambaHostInstanceName& operator=(const Linux_SambaHostInstanceName& anInstanceName);
        
-       const char* m_CIMClassNameP;
-       const char* m_namespace;
-       const char* m_Name;
+    CmpiObjectPath getObjectPath() const;
        
-       struct isSetType{
-       	 unsigned int m_namespace:1;
-         unsigned int Name:1;
-       } isSet;
+    void fillKeys(CmpiInstance& cmpiInstance) const;
+       
+    unsigned int isNameSpaceSet() const;
+    void setNamespace(const char* aNameSpaceP, int aCopyFlag = 1);
+    const char* getNamespace() const;
+    
+    unsigned int isNameSet() const;
+    void setName(const char* aValue, int aCopyFlag = 1);
+    const char* getName() const;
+
+
   };
   
-  
-  struct Linux_SambaHostInstanceNameEnumerationElement{
+  //****************************************************************************
+  struct Linux_SambaHostInstanceNameEnumerationElement {
   	Linux_SambaHostInstanceName* m_elementP;
   	Linux_SambaHostInstanceNameEnumerationElement* m_nextP;
   	
@@ -82,38 +88,40 @@ namespace genProvider {
   	~Linux_SambaHostInstanceNameEnumerationElement();  	
   };
   
-
+  //****************************************************************************
   class Linux_SambaHostInstanceNameEnumeration {
+  
   	private:
-  	  Linux_SambaHostInstanceNameEnumerationElement* firstElementP;
-  	  Linux_SambaHostInstanceNameEnumerationElement* currentElementP;
-  	  Linux_SambaHostInstanceNameEnumerationElement* endElementP;
+    Linux_SambaHostInstanceNameEnumerationElement* m_firstElementP;
+  	Linux_SambaHostInstanceNameEnumerationElement* m_currentElementP;
+  	Linux_SambaHostInstanceNameEnumerationElement* m_endElementP;
   	
   	public:
-  	  Linux_SambaHostInstanceNameEnumeration();
+    Linux_SambaHostInstanceNameEnumeration();
   	  
-  	  Linux_SambaHostInstanceNameEnumeration(const CmpiArray& arr);
+    Linux_SambaHostInstanceNameEnumeration(const CmpiArray& arr);
   	  
-  	  Linux_SambaHostInstanceNameEnumeration(
-  	   const Linux_SambaHostInstanceNameEnumeration& original);
+    Linux_SambaHostInstanceNameEnumeration(const Linux_SambaHostInstanceNameEnumeration& anInstanceNameEnumeration);
+  	   
+    ~Linux_SambaHostInstanceNameEnumeration();
   	  
-  	  ~Linux_SambaHostInstanceNameEnumeration();
+    void reset();
   	  
-  	  void reset();
+    bool hasNext() const;
   	  
-  	  bool hasNext() const;
+    const Linux_SambaHostInstanceName& getNext();
   	  
-  	  const Linux_SambaHostInstanceName& getNext();
+    int getSize() const;
   	  
-  	  int getSize() const;
+    const Linux_SambaHostInstanceName& getElement(int anIndex) const;  	  
   	  
-  	  const Linux_SambaHostInstanceName& getElement(int pos) const;  	  
+    //no copy of the element is done
+    void addElement(const Linux_SambaHostInstanceName& anInstanceName);
   	  
-  	  //no copy of the element is done
-  	  void addElement(const Linux_SambaHostInstanceName& elementP);
-  	  
-  	  operator CmpiArray() const;
+    operator CmpiArray() const;
+
   };
+
 }
 #endif
 

@@ -1,0 +1,39 @@
+********************************************************************************
+association : Linux_SambaScriptingForGlobal
+objectPath : Linux_SambaScriptingForGlobal.SettingData=Linux_SambaScriptingOptions.InstanceID="InstanceID",Name="Global",ManagedElement=Linux_SambaGlobalOptions.InstanceID="InstanceID",Name="Global"
+sourceRole : SettingData
+targetRole : ManagedElement
+sourceClass : Linux_SambaScriptingOptions
+targetClass : Linux_SambaGlobalOptions
+
+--------------------------------------------------------------------------------
+Instance                                                       enumInstanceNames
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                           enumInstances
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                     get
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                     set
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                  delete
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Association                                                          associators
+
+--------------------------------------------------------------------------------
+Association                                                      associatorNames
+
+--------------------------------------------------------------------------------
+Association                                                           references
+
+--------------------------------------------------------------------------------
+Association                                                       referenceNames

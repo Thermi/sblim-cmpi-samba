@@ -1,0 +1,39 @@
+********************************************************************************
+association : Linux_SambaShareSecurityForGlobal
+objectPath : Linux_SambaShareSecurityForGlobal.SettingData=Linux_SambaShareSecurityOptions.InstanceID="InstanceID",Name="Global",ManagedElement=Linux_SambaGlobalOptions.InstanceID="InstanceID",Name="Global"
+sourceRole : SettingData
+targetRole : ManagedElement
+sourceClass : Linux_SambaShareSecurityOptions
+targetClass : Linux_SambaGlobalOptions
+
+--------------------------------------------------------------------------------
+Instance                                                       enumInstanceNames
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                           enumInstances
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                     get
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                     set
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                  delete
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Association                                                          associators
+
+--------------------------------------------------------------------------------
+Association                                                      associatorNames
+
+--------------------------------------------------------------------------------
+Association                                                           references
+
+--------------------------------------------------------------------------------
+Association                                                       referenceNames

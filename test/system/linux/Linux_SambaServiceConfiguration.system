@@ -1,0 +1,11 @@
+********************************************************************************
+class : Linux_SambaServiceConfiguration
+
+--------------------------------------------------------------------------------
+Linux_SambaServiceConfiguration : -eq 1
+
+--------------------------------------------------------------------------------
+Name : -eq smbd
+Caption : -empty
+Description : -empty
+ElementName : -empty

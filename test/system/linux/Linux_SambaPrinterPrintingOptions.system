@@ -1,0 +1,13 @@
+********************************************************************************
+class : Linux_SambaPrinterPrintingOptions
+
+--------------------------------------------------------------------------------
+Linux_SambaPrinterPrintingOptions : -eq 4
+
+--------------------------------------------------------------------------------
+Name : -eq wbemsmt-testprinter1
+
+InstanceID : -eq InstanceID
+Caption : -empty
+Description : -empty
+ElementName : -empty

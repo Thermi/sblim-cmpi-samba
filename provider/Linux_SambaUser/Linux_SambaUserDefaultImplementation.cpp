@@ -1,11 +1,11 @@
 // =======================================================================
 // Linux_SambaUserDefaultImplementation.cpp
-//     created on Fri, 24 Feb 2006 using ECUTE
-// 
+//     created on Fri, 23 Jun 2006 using ECUTE 2.2.1
+//
 // Copyright (c) 2006, International Business Machines
 //
 // THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
-// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
 // CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
 //
 // You can obtain a current copy of the Common Public License from
@@ -14,12 +14,12 @@
 // Author:        generated
 //
 // Contributors:
-//                Rodrigo Ceron    <rceron@br.ibm.com>
-//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
 //
 // =======================================================================
-//
-// 
 
 #include "Linux_SambaUserDefaultImplementation.h"
 #include "Linux_SambaUserRepositoryInstance.h"
@@ -41,7 +41,7 @@ namespace genProvider {
 #endif   	
 
    	throw CmpiErrorFormater::getErrorException(
-   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  CmpiErrorFormater::NOT_IMPLEMENTED,
    	  "enumInstanceEnumeration",
    	  "Linux_SambaUser");   
 
@@ -131,7 +131,7 @@ namespace genProvider {
     	
 
     throw CmpiErrorFormater::getErrorException(
-   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  CmpiErrorFormater::NOT_IMPLEMENTED,
    	  "getInstance",
    	  "Linux_SambaUser");
 
@@ -151,7 +151,7 @@ namespace genProvider {
     	
    
     throw CmpiErrorFormater::getErrorException(
-   	  CmpiErrorFormater::METHOD_NOT_FOUND,
+   	  CmpiErrorFormater::NOT_IMPLEMENTED,
    	  "setInstance",
    	  "Linux_SambaUser");
    	 
@@ -169,7 +169,7 @@ namespace genProvider {
 #endif
 
     throw CmpiErrorFormater::getErrorException(
-   	 CmpiErrorFormater::METHOD_NOT_FOUND,
+   	 CmpiErrorFormater::NOT_IMPLEMENTED,
    	 "createInstance",
    	 "Linux_SambaUser");
 
@@ -187,7 +187,7 @@ namespace genProvider {
 #endif
 
     throw CmpiErrorFormater::getErrorException(
-      CmpiErrorFormater::METHOD_NOT_FOUND,
+      CmpiErrorFormater::NOT_IMPLEMENTED,
       "deleteInstance",
       "Linux_SambaUser");
 
@@ -209,7 +209,7 @@ namespace genProvider {
 #endif    
     
  	  throw CmpiErrorFormater::getErrorException(
-      CmpiErrorFormater::METHOD_NOT_FOUND,
+      CmpiErrorFormater::NOT_IMPLEMENTED,
       "getAllSystemGroups",
       "Linux_SambaUser");
       
@@ -227,7 +227,7 @@ namespace genProvider {
 #endif    
     
  	  throw CmpiErrorFormater::getErrorException(
-      CmpiErrorFormater::METHOD_NOT_FOUND,
+      CmpiErrorFormater::NOT_IMPLEMENTED,
       "getAllSystemUsers",
       "Linux_SambaUser");
       

@@ -1,0 +1,8 @@
+********************************************************************************
+association : Linux_SambaScriptingForGlobal
+
+--------------------------------------------------------------------------------
+Linux_SambaScriptingOptions : -target Linux_SambaGlobalOptions -eq 1
+Linux_SambaGlobalOptions : -target Linux_SambaScriptingOptions -eq 1
+
+--------------------------------------------------------------------------------

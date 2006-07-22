@@ -1,0 +1,8 @@
+********************************************************************************
+association : Linux_SambaGlobalBrowseForGlobal
+
+--------------------------------------------------------------------------------
+Linux_SambaGlobalBrowseOptions : -target Linux_SambaGlobalOptions -eq 1
+Linux_SambaGlobalOptions : -target Linux_SambaGlobalBrowseOptions -eq 1
+
+--------------------------------------------------------------------------------

@@ -1,11 +1,11 @@
 // =======================================================================
 // Linux_SambaWriteListForGlobalResourceAccess.cpp
-//     created on Fri, 24 Feb 2006 using ECUTE
-// 
+//     created on Mon, 26 Jun 2006 using ECUTE 2.2.1
+//
 // Copyright (c) 2006, International Business Machines
 //
 // THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
-// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
 // CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
 //
 // You can obtain a current copy of the Common Public License from
@@ -14,8 +14,10 @@
 // Author:        generated
 //
 // Contributors:
-//                Rodrigo Ceron    <rceron@br.ibm.com>
-//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
 //
 // =======================================================================
 //
@@ -73,7 +75,7 @@ namespace genProvider {
     globalInstName.setName(DEFAULT_GLOBAL_NAME);
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
-    char* user_list = get_global_option("write list");
+    char* user_list = get_option(DEFAULT_GLOBAL_NAME,"write list");
     
     if(user_list){
       SambaArray array = SambaArray(user_list);
@@ -113,7 +115,7 @@ namespace genProvider {
     globalInstName.setName(DEFAULT_GLOBAL_NAME);
     globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
     
-    char* user_list = get_global_option("write list");
+    char* user_list = get_option(DEFAULT_GLOBAL_NAME,"write list");
     
     if(user_list){
       SambaArray array = SambaArray(user_list);
@@ -152,6 +154,28 @@ namespace genProvider {
 
     Linux_SambaWriteListForGlobalManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
+
+    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME) != 0) {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
+    }
+
+    if (!validUser(anInstanceName.getPartComponent().getSambaUserName())) {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not exist!");
+    }
+
+    SambaArray array = SambaArray();
+    char * user_list = get_option(DEFAULT_GLOBAL_NAME,"write list");
+
+    if(!user_list) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have 'write' access to the specified global options instance!");
+    }
+
+    array.populate(user_list);
+    
+    if(!array.isPresent(anInstanceName.getPartComponent().getSambaUserName())) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have 'write' access to the specified global options instance!");  
+    }
+
     
     return aManualInstance;
   }
@@ -174,6 +198,10 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaWriteListForGlobalManualInstance& aManualInstance) {
     
+    if (strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!"); 
+    }
+
     SambaArray array = SambaArray();
     char* user_list = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"write list");
     
@@ -181,13 +209,15 @@ namespace genProvider {
       array.populate(user_list);
     
     if(!validUser(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())){
-      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Invalid User!");
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
       
     }else{
       if(!array.isPresent(string( aManualInstance.getInstanceName().getPartComponent().getSambaUserName() ))){
 	array.add( string( aManualInstance.getInstanceName().getPartComponent().getSambaUserName() ) );
 	
 	set_global_option("write list",array.toString().c_str());
+      } else {
+         throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exist!");
       }
     }
     
@@ -203,11 +233,26 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaWriteListForGlobalInstanceName& anInstanceName) {
     
+    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
+    }
+     
+    if (!validUser(anInstanceName.getPartComponent().getSambaUserName())) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not exist!");
+    }
+ 
     SambaArray array = SambaArray();
     char* user_list = get_option(anInstanceName.getGroupComponent().getName(),"write list");
     
-    if(user_list)
+    if (!user_list) { 
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have 'write' access for the specified global options instance!"); 
+    }
+    
       array.populate(user_list);
+  
+    if (!array.isPresent(anInstanceName.getPartComponent().getSambaUserName())) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have 'write' access for the specified globla options instance!");
+    }
     
     if(array.size() > 1){
       array.remove( string(anInstanceName.getPartComponent().getSambaUserName() )); 
@@ -229,6 +274,10 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaWriteListForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+
+    if (strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified global options instance is unknown !");
+    }
     
     char* user_list = get_option(aSourceInstanceName.getName(),"write list");
     
@@ -269,7 +318,7 @@ namespace genProvider {
     Linux_SambaWriteListForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
     
     if(validUser(aSourceInstanceName.getSambaUserName())){
-      char * user_list = get_global_option("write list");
+      char * user_list = get_option(DEFAULT_GLOBAL_NAME,"write list");
       if(user_list){
 	SambaArray array = SambaArray(user_list);
 	SambaArrayConstIterator iter;
@@ -291,9 +340,11 @@ namespace genProvider {
 	  manualInstance.setInstanceName(instName);
 	  aManualInstanceEnumeration.addElement(manualInstance);
 	}
+       }
+      } else { 
+            throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified Samba user does not have 'write' access for the specified global options instance!");
       }
-    }
-  }
+     }
 
   
   //----------------------------------------------------------------------------
@@ -305,6 +356,11 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
+    
+    
+    if (strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified global options instance is unknown !");
+    }
     
     char* user_list = get_option(aSourceInstanceName.getName(),"write list");
     if(user_list){
@@ -344,7 +400,7 @@ namespace genProvider {
     Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
     
     if(validUser(aSourceInstanceName.getSambaUserName())){
-      char * user_list = get_global_option("write list");
+      char * user_list = get_option(DEFAULT_GLOBAL_NAME,"write list");
       if(user_list){
 	SambaArray array = SambaArray(user_list);
 	SambaArrayConstIterator iter;
@@ -360,37 +416,39 @@ namespace genProvider {
 	  instance.setInstanceName(globalInstName);
 	  
 	  char *option;
-	  option = get_global_option("bind interfaces only");	
+	  option = get_option(DEFAULT_GLOBAL_NAME,"bind interfaces only");	
 	  if ( option )
 	    if(strcasecmp(option,"yes") == 0)
 	      instance.setBindInterfacesOnly( true );
 	    else
 	      instance.setBindInterfacesOnly( false );
 	  
-	  option = get_global_option("interfaces");	
+	  option = get_option(DEFAULT_GLOBAL_NAME,"interfaces");	
 	  if ( option )
 	    instance.setInterfaces( option );
 	  
-	  option = get_global_option("netbios aliases");	
+	  option = get_option(DEFAULT_GLOBAL_NAME,"netbios aliases");	
 	  if ( option )
 	    instance.setNetbiosAlias( option );
 	  
-	  option = get_global_option("netbios name");	
+	  option = get_option(DEFAULT_GLOBAL_NAME,"netbios name");	
 	  if ( option )
 	    instance.setNetbiosName( option );
 	  
-	  option = get_global_option("server string");	
+	  option = get_option(DEFAULT_GLOBAL_NAME,"server string");	
 	  if ( option )
 	    instance.setServerString( option );
 	  
-	  option = get_global_option("workgroup");	
+	  option = get_option(DEFAULT_GLOBAL_NAME,"workgroup");	
 	  if ( option )
 	    instance.setWorkgroup( option );
 	  
 	  anInstanceEnumeration.addElement(instance);
 	}
       }
-    }
+      } else { 
+            throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified Samba user does not have 'write' access for the specified global options instance!");
+      }
   }
 
    

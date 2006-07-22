@@ -49,6 +49,9 @@ BUILT_SOURCES =
 
 # Build subdirectories
 SUBDIRS = resource-access provider
+if TESTSUITE
+SUBDIRS += test
+endif
 
 ######################################################################################
 # sed scriptlets for replacing values in .in files
@@ -59,7 +62,8 @@ do_substDir    = sed -e 's,[@]SYSCONFDIR[@],$(sysconfdir),g' \
 ######################################################################################
 # Automake instructions for documentation
 doc_DATA = README AUTHORS COPYING 
-
+doc_DATA  += README.tog-pegasus
+EXTRA_DIST+=README.tog-pegasus
 
 ######################################################################################
 # We must explicity add the RPM spec file to the distribution package
@@ -89,3 +93,4 @@ preuninstall:
 
 dist-hook:
 	test -d "$(distdir)" &&	rm -rf `find $(distdir) -type d -name CVS`
+

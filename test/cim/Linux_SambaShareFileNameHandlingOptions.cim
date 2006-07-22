@@ -1,0 +1,23 @@
+********************************************************************************
+class : Linux_SambaShareFileNameHandlingOptions
+objectPath : Linux_SambaShareFileNameHandlingOptions.InstanceID="InstanceID",Name="wbemsmt-share-interfacetest"
+
+--------------------------------------------------------------------------------
+Instance                                                       enumInstanceNames
+
+--------------------------------------------------------------------------------
+Instance                                                           enumInstances
+
+--------------------------------------------------------------------------------
+Instance                                                                     get
+
+--------------------------------------------------------------------------------
+Instance                                                                  create
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                     set
+
+--------------------------------------------------------------------------------
+Instance                                                                  delete
+Expected Exception : NOT_SUPPORTED

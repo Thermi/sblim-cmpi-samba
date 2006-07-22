@@ -13,6 +13,9 @@
  * Author:     Rodrigo Ceron <rceron@br.ibm.com>
  *
  * Contributors:
+ *                Wolfgang Taphorn   <taphorn@de.ibm.com>
+ *                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+ *                Ashoka S Rao       <ashoka.rao@in.ibm.com>
  *
  */
 
@@ -49,6 +52,7 @@ class SambaArray: list<string>  {
 	int size();
 
 	bool isPresent(string);
+	bool chkEmpty();
 	string toString();
 	const char **toArray();
 

@@ -1,0 +1,14 @@
+********************************************************************************
+class : Linux_SambaGlobalOptions
+
+--------------------------------------------------------------------------------
+Linux_SambaGlobalOptions : -eq 1
+
+--------------------------------------------------------------------------------
+Name : -eq Global
+
+InstanceID : -eq InstanceID
+Caption : -empty
+Description : -empty
+ElementName : -empty
+

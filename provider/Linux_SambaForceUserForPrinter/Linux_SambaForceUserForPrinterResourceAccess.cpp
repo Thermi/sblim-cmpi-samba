@@ -1,11 +1,11 @@
 // =======================================================================
 // Linux_SambaForceUserForPrinterResourceAccess.cpp
-//     created on Fri, 24 Feb 2006 using ECUTE
-// 
+//     created on Fri, 23 Jun 2006 using ECUTE 2.2.1
+//
 // Copyright (c) 2006, International Business Machines
 //
 // THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
-// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
 // CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
 //
 // You can obtain a current copy of the Common Public License from
@@ -14,8 +14,10 @@
 // Author:        generated
 //
 // Contributors:
-//                Rodrigo Ceron    <rceron@br.ibm.com>
-//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
 //
 // =======================================================================
 //
@@ -150,6 +152,36 @@ namespace genProvider {
     Linux_SambaForceUserForPrinterManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
 
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified printer is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    if (!validUser(anInstanceName.getPartComponent().getSambaUserName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not exist!");
+    }
+
+   SambaArray array = SambaArray();
+   char * user_list = get_option(anInstanceName.getGroupComponent().getName(),"force user");
+
+   if(!user_list) {
+     throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has force user enabled for the specified printer instance!");
+   }
+
+   array.populate(user_list);
+   if(!array.isPresent(anInstanceName.getPartComponent().getSambaUserName())) {
+     throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has force user enabled for the specified printer instance!");
+   }    
+
     return aManualInstance;
   }
 
@@ -171,9 +203,32 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceUserForPrinterManualInstance& aManualInstance) {
     
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+        int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),printers[i])==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified printer is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    if(!validUser(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())){
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The specified Samba user does not exist!");
+    }
+
     char* user = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force user");
-    if(user && validUser(user))
-      set_printer_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force user",user);
+    char* g_user = get_global_option("force user");
+
+    if (!user || (g_user && strcasecmp(user,g_user)==0)) {
+      set_printer_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force user",aManualInstance.getInstanceName().getPartComponent().getSambaUserName());
+    } else {
+      throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"There is an existent instance already!");
+    }
     
     return aManualInstance.getInstanceName();
   }
@@ -187,6 +242,24 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceUserForPrinterInstanceName& anInstanceName) {
     
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified printer is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    if (!validUser(anInstanceName.getPartComponent().getSambaUserName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not exist!");
+    }
+
     set_printer_option(anInstanceName.getGroupComponent().getName(),"force user",NULL);
   }
 
@@ -203,6 +276,20 @@ namespace genProvider {
     const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
     Linux_SambaForceUserForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) {
     
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified printer is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
     char* user = get_option(aSourceInstanceName.getName(),"force user");
     
     if(user && validUser(user)){
@@ -260,6 +347,8 @@ namespace genProvider {
 	  }
 	}
       }
+    } else {
+       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does note exist. The specified Samba user is unknown!");
     }
   }
 
@@ -274,6 +363,20 @@ namespace genProvider {
     const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
     Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
     
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified printer is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
     char* user = get_option(aSourceInstanceName.getName(),"force user");
     
     if(user && validUser(user)){
@@ -353,6 +456,8 @@ namespace genProvider {
 	  }
 	}
       }
+    } else {
+       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does note exist. The specified Samba user is unknown!");
     }
   }
   

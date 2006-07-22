@@ -1,0 +1,14 @@
+********************************************************************************
+class : Linux_SambaService
+
+--------------------------------------------------------------------------------
+Linux_SambaService : -eq 1
+
+--------------------------------------------------------------------------------
+Name : -eq smbd
+CreationClassName : -eq Linux_SambaService
+SystemCreationClassName : -eq Linux_SambaService
+SystemName : -eq localhost
+Caption : -empty
+Description : -empty
+ElementName : -empty

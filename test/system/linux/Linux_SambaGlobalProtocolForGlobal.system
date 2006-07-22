@@ -1,0 +1,8 @@
+********************************************************************************
+association : Linux_SambaGlobalProtocolForGlobal
+
+--------------------------------------------------------------------------------
+Linux_SambaGlobalProtocolOptions : -target Linux_SambaGlobalOptions -eq 1
+Linux_SambaGlobalOptions : -target Linux_SambaGlobalProtocolOptions -eq 1
+
+--------------------------------------------------------------------------------

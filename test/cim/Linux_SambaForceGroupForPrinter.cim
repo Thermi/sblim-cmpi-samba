@@ -1,0 +1,35 @@
+********************************************************************************
+association : Linux_SambaForceGroupForPrinter
+objectPath : Linux_SambaForceGroupForPrinter.PartComponent=Linux_SambaGroup.SambaGroupName="Users",GroupComponent=Linux_SambaPrinterOptions.InstanceID="InstanceID",Name="wbemsmt-testprinter1"
+sourceRole : PartComponent
+targetRole : GroupComponent
+sourceClass : Linux_SambaGroup
+targetClass : Linux_SambaPrinterOptions
+
+--------------------------------------------------------------------------------
+Instance                                                       enumInstanceNames
+
+--------------------------------------------------------------------------------
+Instance                                                           enumInstances
+
+--------------------------------------------------------------------------------
+Instance                                                                     get
+
+--------------------------------------------------------------------------------
+Instance                                                                     set
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                  delete
+
+--------------------------------------------------------------------------------
+Association                                                          associators
+
+--------------------------------------------------------------------------------
+Association                                                      associatorNames
+
+--------------------------------------------------------------------------------
+Association                                                           references
+
+--------------------------------------------------------------------------------
+Association                                                       referenceNames

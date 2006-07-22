@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: provider-register.sh,v 1.2 2006/05/17 14:57:12 taphorn Exp $
+# $Id: provider-register.sh,v 1.3 2006/07/22 14:34:24 taphorn Exp $
 # ==================================================================
 # (C) Copyright IBM Corp. 2005
 #
@@ -315,7 +315,6 @@ EOFX
 </CIM>
 EOFE
 	  $WBEMEXEC > /dev/null $_DELETE_NAME
-	  cat $_DELETE_NAME
 	done
     else
 	echo "Sorry, cimserver must be running to deregister the providers." >&2

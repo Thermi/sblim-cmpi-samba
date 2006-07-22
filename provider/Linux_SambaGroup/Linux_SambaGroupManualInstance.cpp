@@ -1,11 +1,11 @@
 // =======================================================================
 // Linux_SambaGroupManualInstance.cpp
-//     created on Fri, 24 Feb 2006 using ECUTE
-// 
+//     created on Fri, 23 Jun 2006 using ECUTE 2.2.1
+//
 // Copyright (c) 2006, International Business Machines
 //
 // THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
-// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
 // CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
 //
 // You can obtain a current copy of the Common Public License from
@@ -14,12 +14,12 @@
 // Author:        generated
 //
 // Contributors:
-//                Rodrigo Ceron    <rceron@br.ibm.com>
-//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
 //
 // =======================================================================
-//
-// 
 #include "Linux_SambaGroupManualInstance.h"
 #include "CmpiData.h"
 #include "CmpiString.h"
@@ -187,7 +187,7 @@ namespace genProvider {
     if ( ! isSet.SystemGroupName) {
    	  throw CmpiErrorFormater::getErrorException(
    	    CmpiErrorFormater::NOT_SET,
-        "SystemGroupName",
+        "SystemGroupName is a required attribute for ",
         "Linux_SambaGroup");
    	}
 

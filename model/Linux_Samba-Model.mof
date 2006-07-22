@@ -1,32 +1,52 @@
 // ===================================================================
 // This file was created using ECUTE.
-//   Version 2.1 beta 1h
+//   Version 2.2.1
 //   by exporting package Linux_Samba-Model
 //   from model Linux_Samba-Model
-//   on 9/26/2005
-// Origin of package: Manually created
+//   on 06/26/2006
+// Origin of package: Import of Linux_Samba-Model.mof
+//   on 6/23/2006
 // ===================================================================
 
+// #pragma include ("IBMQualifiers.mof")
 
-#pragma include ("IBMQualifiers.mof")
 
 
 
 // ===================================================================
 // Linux_SambaServiceConfiguration
 // ===================================================================
-[IBM_HasInstances, IBM_HasProvider, Description (
-    "Class representing Samba configuration. Its the anchor for the "
-    "Linux_SambaSettings class")]
+[IBM_HasInstances, IBM_HasProvider]
 class Linux_SambaServiceConfiguration : CIM_Configuration {
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "Fully qualified configuration file e.g. /etc/smb.conf")]
+    [Write, Description (
+        "Fully qualified configuration file e.g. /etc/smb.conf")
+        , IBM_ImplementationType ("Manual")]
     string ConfigurationFile;
 
-    [Key, Write, Override ("Name"), IBM_ImplementationType (
-        "Manual"), Description (
-        "Id of the Samba Service for this configuration")]
+    [Key, Write, Description (
+        "Id of the Samba Service for this configuration")
+        , Override ("Name"), IBM_ImplementationType ("Manual")]
+    string Name;
+};
+
+
+// ===================================================================
+// Linux_SambaFileNameHandlingOptions
+// ===================================================================
+[Abstract, IBM_HasProvider]
+class Linux_SambaFileNameHandlingOptions : CIM_SettingData {
+
+    [Write, IBM_ImplementationType ("Manual")]
+    boolean CaseSensitive;
+
+    [Write, IBM_ImplementationType ("Manual")]
+    boolean DosFiletimes;
+
+    [Write, IBM_ImplementationType ("Manual")]
+    boolean HideDotFiles;
+
+    [Key, Write, IBM_ImplementationType ("Manual")]
     string Name;
 };
 
@@ -35,18 +55,7 @@ class Linux_SambaServiceConfiguration : CIM_Configuration {
 // Linux_SambaShareFileNameHandlingOptions
 // ===================================================================
 [IBM_HasInstances, IBM_HasProvider]
-class Linux_SambaShareFileNameHandlingOptions : CIM_SettingData {
-
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "controls whether filenames are case sensitive")]
-    boolean CaseSensitive;
-
-    [Write, IBM_ImplementationType ("Manual")]
-    boolean DosFiletimes;
-
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "Whether files starting with a dot appear as hidden files")]
-    boolean HideDotFiles;
+class Linux_SambaShareFileNameHandlingOptions : Linux_SambaFileNameHandlingOptions {
 
     [Key, IBM_ImplementationType ("Manual")]
     string Name;
@@ -56,25 +65,19 @@ class Linux_SambaShareFileNameHandlingOptions : CIM_SettingData {
 // ===================================================================
 // Linux_SambaShareOptions
 // ===================================================================
-[IBM_HasInstances, IBM_HasProvider, Description (
-    "This class represents the collection of share  specific  "
-    "definitions")]
+[IBM_HasInstances, IBM_HasProvider]
 class Linux_SambaShareOptions : CIM_SettingData {
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "Is the share enabled or disabled")]
+    [Write, IBM_ImplementationType ("Manual")]
     boolean Available;
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "Self descriptory")]
+    [Write, IBM_ImplementationType ("Manual")]
     string Comment;
 
-    [Key, Write, IBM_ImplementationType ("Manual"), Description (
-        "Name of Share")]
+    [Key, Write, IBM_ImplementationType ("Manual")]
     string Name;
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "Specifies the share related  path")]
+    [Write, IBM_ImplementationType ("Manual")]
     string Path;
 
     [Write, IBM_ImplementationType ("Manual")]
@@ -97,8 +100,7 @@ class Linux_SambaShareSecurityOptions : CIM_SettingData {
     [Write, IBM_ImplementationType ("Manual")]
     uint16 DirectorySecurityMask;
 
-    [Key, Write, IBM_ImplementationType ("Manual"), Description (
-        "Name of Share to which these options belong to ")]
+    [Key, Write, IBM_ImplementationType ("Manual")]
     string Name;
 };
 
@@ -106,8 +108,7 @@ class Linux_SambaShareSecurityOptions : CIM_SettingData {
 // ===================================================================
 // Linux_SambaService
 // ===================================================================
-[IBM_HasInstances, IBM_HasProvider, Description (
-    "Service Process Identifier")]
+[IBM_HasInstances, IBM_HasProvider]
 class Linux_SambaService : CIM_Service {
 
     [Key, Write, Override ("Name"), IBM_ImplementationType (
@@ -125,120 +126,28 @@ class Linux_SambaService : CIM_Service {
 [IBM_HasInstances, IBM_HasProvider]
 class Linux_SambaGlobalOptions : CIM_SettingData {
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "This global parameter allows the Samba admin to limit what "
-        "interfaces on a machine will serve SMB requests. It affects "
-        "file service smbd(8) and name service nmbd(8) in a slightly "
-        "different ways.\n"
-        "For name service it causes nmbd to bind to ports 137 and 138"
-        " on the interfaces listed in the interfaces parameter. nmbd "
-        "also binds to the \"all addresses\" interface (0.0.0.0) on "
-        "ports 137 and 138 for the purposes of reading broadcast "
-        "messages. If this option is not set then nmbd will service "
-        "name requests on all of these sockets. If bind interfaces "
-        "only is set then nmbd will check the source address of any "
-        "packets coming in on the broadcast sockets and discard any "
-        "that don't match the broadcast addresses of the interfaces "
-        "in the interfaces parameter list. As unicast packets are "
-        "received on the other sockets it allows nmbd to refuse to "
-        "serve names to machines that send packets that arrive "
-        "through any interfaces not listed in the interfaces list. IP"
-        " Source address spoofing does defeat this simple check,"
-        " however, so it must not be used seriously as a security "
-        "feature for nmbd.\n"
-        "For file service it causes smbd(8) to bind only to the "
-        "interface list given in the interfaces parameter. This "
-        "restricts the networks that smbd will serve to packets "
-        "coming in those interfaces. Note that you should not use "
-        "this parameter for machines that are serving PPP or other "
-        "intermittent or non-broadcast network interfaces as it will "
-        "not cope with non-permanent interfaces.\n"
-        "If bind interfaces only is set then unless the network "
-        "address 127.0.0.1 is added to the interfaces parameter list "
-        "smbpasswd(8) and swat(8) may not work as expected due to the"
-        " reasons covered below.\n"
-        "To change a users SMB password, the smbpasswd by default "
-        "connects to the localhost - 127.0.0.1 address as an SMB "
-        "client to issue the password change request. If bind "
-        "interfaces only is set then unless the network address "
-        "127.0.0.1 is added to the interfaces parameter list then "
-        "smbpasswd will fail to connect in it's default mode. "
-        "smbpasswd can be forced to use the primary IP interface of "
-        "the local host by using its smbpasswd(8) -r remote machine "
-        "parameter, with remote machine set to the IP name of the "
-        "primary interface of the local host.\n"
-        "The swat status page tries to connect with smbd and nmbd at "
-        "the address 127.0.0.1 to determine if they are running. Not "
-        "adding 127.0.0.1 will cause smbd and nmbd to always show "
-        "\"not running\" even if they really are. This can prevent "
-        "swat from starting/stopping/restarting smbd and nmbd.")]
+    [Write, IBM_ImplementationType ("Manual")]
     boolean BindInterfacesOnly;
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "This option allows you to override the default network "
-        "interfaces list that Samba will use for browsing, name "
-        "registration and other NBT traffic. By default Samba will "
-        "query the kernel for the list of all active interfaces and "
-        "use any interfaces except 127.0.0.1 that are broadcast "
-        "capable.\n"
-        "The option takes a list of interface strings. Each string "
-        "can be in any of the following forms:\n"
-        " - a network interface name (such as eth0). This may include"
-        " shell-like wildcards so eth* will match any interface "
-        "starting with the substring \"eth\".\n"
-        " - an IP address. In this case the netmask is determined "
-        "from the list of interfaces obtained from the kernel.\n"
-        " - an IP/mask pair.\n"
-        " - a broadcast/mask pair.\n"
-        "\nThe \"mask\" parameters can either be a bit length (such "
-        "as 24 for a C class network) or a full netmask in dotted "
-        "decimal form.\n"
-        "The \"IP\" parameters above can either be a full dotted "
-        "decimal IP address or a hostname which will be looked up via"
-        " the OS's normal hostname resolution mechanisms.")]
+    [Write, IBM_ImplementationType ("Manual")]
     string Interfaces;
 
     [Key, IBM_ImplementationType ("Manual")]
     string Name;
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "This is a list of NetBIOS names that nmbd will advertise as "
-        "additional names by which the Samba server is known. This "
-        "allows one machine to appear in browse lists under multiple "
-        "names. If a machine is acting as a browse server or logon "
-        "server none of these names will be advertised as either "
-        "browse server or logon servers, only the primary name of the"
-        " machine will be advertised with these capabilities.")]
+    [Write, IBM_ImplementationType ("Manual")]
     string NetbiosAlias;
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "This sets the NetBIOS name by which a Samba server is known."
-        " By default it is the same as the first component of the "
-        "host's DNS name. If a machine is a browse server or logon "
-        "server this name (or the first component of the hosts DNS "
-        "name) will be the name that these services are advertised "
-        "under.")]
+    [Write, IBM_ImplementationType ("Manual")]
     string NetbiosName;
 
     [Write, IBM_ImplementationType ("Manual")]
     boolean Printable;
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "This controls what string will show up in the printer "
-        "comment box in print manager and next to the IPC connection "
-        "in net view. It can be any string that you wish to show to "
-        "your users.\n"
-        "It also sets what will appear in browse lists next to the "
-        "machine name.\n"
-        "A %v will be replaced with the Samba version number.\n"
-        "A %h will be replaced with the hostname.")]
+    [Write, IBM_ImplementationType ("Manual")]
     string ServerString;
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "This controls what workgroup your server will appear to be "
-        "in when queried by clients. Note that this parameter also "
-        "controls the Domain name used with the security = domain  "
-        "setting.")]
+    [Write, IBM_ImplementationType ("Manual")]
     string Workgroup;
 };
 
@@ -361,10 +270,10 @@ class Linux_SambaGlobalSecurityOptions : CIM_SettingData {
 
 
 // ===================================================================
-// Linux_SambaPrinterPrintingOptions
+// Linux_SambaPrintingOptions
 // ===================================================================
-[IBM_HasInstances, IBM_HasProvider]
-class Linux_SambaPrinterPrintingOptions : CIM_SettingData {
+[Abstract, IBM_HasProvider]
+class Linux_SambaPrintingOptions : CIM_SettingData {
 
     [Write, IBM_ImplementationType ("Manual")]
     string CupsOptions;
@@ -390,10 +299,21 @@ class Linux_SambaPrinterPrintingOptions : CIM_SettingData {
 
 
 // ===================================================================
+// Linux_SambaPrinterPrintingOptions
+// ===================================================================
+[IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaPrinterPrintingOptions : Linux_SambaPrintingOptions {
+
+    [Key, Write, IBM_ImplementationType ("Manual")]
+    string Name;
+};
+
+
+// ===================================================================
 // Linux_SambaGlobalFileNameHandlingOptions
 // ===================================================================
 [IBM_HasInstances, IBM_HasProvider]
-class Linux_SambaGlobalFileNameHandlingOptions : Linux_SambaShareFileNameHandlingOptions {
+class Linux_SambaGlobalFileNameHandlingOptions : Linux_SambaFileNameHandlingOptions {
 
     [Key, Override ("Name"), IBM_ImplementationType ("Manual")]
     string Name;
@@ -404,7 +324,7 @@ class Linux_SambaGlobalFileNameHandlingOptions : Linux_SambaShareFileNameHandlin
 // Linux_SambaGlobalPrintingOptions
 // ===================================================================
 [IBM_HasInstances, IBM_HasProvider]
-class Linux_SambaGlobalPrintingOptions : Linux_SambaPrinterPrintingOptions {
+class Linux_SambaGlobalPrintingOptions : Linux_SambaPrintingOptions {
 
     [Key, Override ("Name"), IBM_ImplementationType ("Manual")]
     string Name;
@@ -423,15 +343,13 @@ class Linux_SambaGlobalPrintingOptions : Linux_SambaPrinterPrintingOptions {
 [IBM_HasInstances, IBM_HasProvider]
 class Linux_SambaUser : CIM_ManagedElement {
 
-    [Key, Write, IBM_ImplementationType ("Manual"), Description (
-        "Samba user name ")]
+    [Key, Write, IBM_ImplementationType ("Manual")]
     string SambaUserName;
 
     [Write, Read (false), IBM_ImplementationType ("Manual")]
     string SambaUserPassword;
 
-    [Write, Override ("UserID"), IBM_ImplementationType ("Manual")
-        , Description ("User name as defined in system")]
+    [Write, IBM_ImplementationType ("Manual")]
     string SystemUserName;
 
     [Static, IBM_ImplementationType ("Manual")]
@@ -454,16 +372,10 @@ class Linux_SambaCommonSecurityOptions : CIM_SettingData {
     [Write, IBM_ImplementationType ("Manual")]
     boolean GuestOnly;
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "This parameter is a comma, space, or tab delimited set of "
-        "hosts which are permitted to access a service")]
+    [Write, IBM_ImplementationType ("Manual")]
     string HostsAllow;
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "The opposite of hosts allow - hosts listed here are NOT "
-        "permitted access to services unless the specific services "
-        "have their own lists to override this one. Where the lists "
-        "conflict, the allow list takes precedence.\n\n")]
+    [Write, IBM_ImplementationType ("Manual")]
     string HostsDeny;
 
     [Key, IBM_ImplementationType ("Manual")]
@@ -500,14 +412,24 @@ class Linux_SambaWinsOptions : CIM_SettingData {
 
 
 // ===================================================================
-// Linux_SambaSharePrinterBrowseOptions
+// Linux_SambaBrowseOptions
+// ===================================================================
+[Abstract, IBM_HasProvider]
+class Linux_SambaBrowseOptions : CIM_SettingData {
+
+    [Write, IBM_ImplementationType ("Manual")]
+    boolean Browsable;
+
+    [Key, Write, IBM_ImplementationType ("Manual")]
+    string Name;
+};
+
+
+// ===================================================================
+// Linux_SambaShareBrowseOptions
 // ===================================================================
 [IBM_HasInstances, IBM_HasProvider]
-class Linux_SambaSharePrinterBrowseOptions : CIM_SettingData {
-
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "Can this share be advertised to the clients")]
-    boolean Browsable;
+class Linux_SambaShareBrowseOptions : Linux_SambaBrowseOptions {
 
     [Key, Write, IBM_ImplementationType ("Manual")]
     string Name;
@@ -518,7 +440,7 @@ class Linux_SambaSharePrinterBrowseOptions : CIM_SettingData {
 // Linux_SambaGlobalBrowseOptions
 // ===================================================================
 [IBM_HasInstances, IBM_HasProvider]
-class Linux_SambaGlobalBrowseOptions : Linux_SambaSharePrinterBrowseOptions {
+class Linux_SambaGlobalBrowseOptions : Linux_SambaBrowseOptions {
 
     [Write, ValueMap ("\"No\",\n\"Yes\",\n\"Auto\""), Values (
         "\"0\",\n\"1\",\n\"2\""), IBM_ImplementationType ("Manual")]
@@ -545,7 +467,7 @@ class Linux_SambaScriptingOptions : CIM_SettingData {
     string addPrinterCommand;
 
     [Write, IBM_ImplementationType ("Manual")]
-    String addShareCommand;
+    string addShareCommand;
 
     [Write, IBM_ImplementationType ("Manual")]
     string addUserScript;
@@ -568,40 +490,32 @@ class Linux_SambaScriptingOptions : CIM_SettingData {
 
 
 // ===================================================================
-// Linux_SambaShareProtocolOptions
+// Linux_SambaProtocolOptions
 // ===================================================================
-[IBM_HasInstances, IBM_HasProvider, Description]
-class Linux_SambaShareProtocolOptions : CIM_SettingData {
+[Abstract, IBM_HasProvider]
+class Linux_SambaProtocolOptions : CIM_SettingData {
 
-    [Write, ValueMap ("\"Auto\",\"winnt\",\"win2k\""), Values (
-        "\"0\",\"1\",\"2\""), IBM_ImplementationType ("Manual")
-        , Description (
-        "This parameter specifies what OS ACL semantics should be "
-        "compatible with. Possible values are winnt for Windows NT 4,"
-        " win2k for Windows 2000 and above and auto. If you specify "
-        "auto, the value for this parameter will be based upon the "
-        "version of the client. There should be no reason to change "
-        "this parameter from the default.\n\n")]
+    [Write, IBM_ImplementationType ("Manual"), ValueMap (
+        "\"Auto\",\"winnt\",\"win2k\""), Values (
+        "\"0\",\"1\",\"2\"")]
     uint8 AclCompatibility;
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "This boolean parameter controls whether smbd(8) will allow "
-        "clients to attempt to store OS/2 style Extended attributes "
-        "on a share. In order to enable this parameter the underlying"
-        " filesystem exported by the share must support extended "
-        "attributes (such as provided on XFS and EXT3 on Linux, with "
-        "the correct kernel patches). On Linux the filesystem must "
-        "have been mounted with the mount option user_xattr in order "
-        "for extended attributes to work, also extended attributes "
-        "must be compiled into the Linux kernel.")]
+    [Write, IBM_ImplementationType ("Manual")]
     boolean EASupport;
 
-    [Write, IBM_ImplementationType ("Manual"), Description (
-        "This boolean parameter controls whether smbd(8) will attempt"
-        " to map UNIX permissions into Windows NT access control "
-        "lists. This parameter was formally a global parameter in "
-        "releases prior to 2.2.2.\n\n")]
+    [Write, IBM_ImplementationType ("Manual")]
     boolean NTACLSupport;
+
+    [Key, Write, IBM_ImplementationType ("Manual")]
+    string Name;
+};
+
+
+// ===================================================================
+// Linux_SambaShareProtocolOptions
+// ===================================================================
+[IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaShareProtocolOptions : Linux_SambaProtocolOptions {
 
     [Key, Write, IBM_ImplementationType ("Manual")]
     string Name;
@@ -612,7 +526,7 @@ class Linux_SambaShareProtocolOptions : CIM_SettingData {
 // Linux_SambaGlobalProtocolOptions
 // ===================================================================
 [IBM_HasInstances, IBM_HasProvider]
-class Linux_SambaGlobalProtocolOptions : Linux_SambaShareProtocolOptions {
+class Linux_SambaGlobalProtocolOptions : Linux_SambaProtocolOptions {
 
     [Key, Write, IBM_ImplementationType ("Manual")]
     string Name;
@@ -622,7 +536,8 @@ class Linux_SambaGlobalProtocolOptions : Linux_SambaShareProtocolOptions {
 // ===================================================================
 // Linux_SambaHost
 // ===================================================================
-class Linux_SambaHost {
+[IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaHost : CIM_ManagedElement {
 
     [Key, Write, IBM_ImplementationType ("Manual")]
     string Name;
@@ -653,6 +568,17 @@ class Linux_SambaGroup : CIM_ManagedElement {
 
     [Static, IBM_ImplementationType ("Manual")]
     string getAllSystemGroups();
+};
+
+
+// ===================================================================
+// Linux_SambaPrinterBrowseOptions
+// ===================================================================
+[IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaPrinterBrowseOptions : Linux_SambaBrowseOptions {
+
+    [Key, Write, IBM_ImplementationType ("Manual")]
+    string Name;
 };
 
 
@@ -743,8 +669,7 @@ class Linux_SambaShareFileNameHandlingForShare : CIM_ElementSettingData {
 // ===================================================================
 // Linux_SambaServiceConfigurationForService
 // ===================================================================
-[Association, IBM_HasInstances, IBM_HasProvider, Description (
-    "Association between a Samba Service and its configuration")]
+[Association, IBM_HasInstances, IBM_HasProvider]
 class Linux_SambaServiceConfigurationForService : CIM_ElementConfiguration {
 
     [Key, Min (1), Max (1)]
@@ -850,20 +775,6 @@ class Linux_SambaCommonSecurityForShare : CIM_ElementSettingData {
 
     [Min (1), Max (1)]
     Linux_SambaShareOptions REF ManagedElement;
-};
-
-
-// ===================================================================
-// Linux_SambaGlobalForService
-// ===================================================================
-[Association, IBM_HasInstances, IBM_HasProvider]
-class Linux_SambaGlobalForService : CIM_ElementSettingData {
-
-    [Min (1), Max (1)]
-    Linux_SambaGlobalOptions REF SettingData;
-
-    [Min (1), Max (1)]
-    Linux_SambaService REF ManagedElement;
 };
 
 
@@ -1176,13 +1087,13 @@ class Linux_SambaValidUsersForShare : CIM_Component {
 
 
 // ===================================================================
-// Linux_SambaSharePrinterBrowseForShare
+// Linux_SambaShareBrowseForShare
 // ===================================================================
 [Association, IBM_HasInstances, IBM_HasProvider]
-class Linux_SambaSharePrinterBrowseForShare : CIM_ElementSettingData {
+class Linux_SambaShareBrowseForShare : CIM_ElementSettingData {
 
     [Min (1), Max (1)]
-    Linux_SambaSharePrinterBrowseOptions REF SettingData;
+    Linux_SambaShareBrowseOptions REF SettingData;
 
     [Min (1), Max (1)]
     Linux_SambaShareOptions REF ManagedElement;
@@ -1260,16 +1171,16 @@ class Linux_SambaGlobalProtocolForGlobal : CIM_ElementSettingData {
 
 
 // ===================================================================
-// Linux_SambaSharePrinterBrowseForPrinter
+// Linux_SambaPrinterBrowseForPrinter
 // ===================================================================
 [Association, IBM_HasInstances, IBM_HasProvider]
-class Linux_SambaSharePrinterBrowseForPrinter : CIM_ElementSettingData {
+class Linux_SambaPrinterBrowseForPrinter : CIM_ElementSettingData {
 
     [Min (1), Max (1)]
     Linux_SambaPrinterOptions REF ManagedElement;
 
     [Min (1), Max (1)]
-    Linux_SambaSharePrinterBrowseOptions REF SettingData;
+    Linux_SambaPrinterBrowseOptions REF SettingData;
 };
 
 
@@ -1304,12 +1215,12 @@ class Linux_SambaWinbindForGlobal : CIM_ElementSettingData {
 // ===================================================================
 // Linux_SambaForceGroupForGlobal
 // ===================================================================
-[Association, IBM_HasInstances, IBM_HasProvider]
+[Association, Aggregation, IBM_HasInstances, IBM_HasProvider]
 class Linux_SambaForceGroupForGlobal : CIM_Component {
 
     Linux_SambaGlobalOptions REF GroupComponent;
 
-    [Min (1), Max (1)]
+    [Aggregate, Min (1), Max (1)]
     Linux_SambaGroup REF PartComponent;
 };
 
@@ -1317,12 +1228,12 @@ class Linux_SambaForceGroupForGlobal : CIM_Component {
 // ===================================================================
 // Linux_SambaForceGroupForShare
 // ===================================================================
-[Association, IBM_HasInstances, IBM_HasProvider]
+[Association, Aggregation, IBM_HasInstances, IBM_HasProvider]
 class Linux_SambaForceGroupForShare : CIM_Component {
 
     Linux_SambaShareOptions REF GroupComponent;
 
-    [Min (1), Max (1)]
+    [Aggregate, Min (1), Max (1)]
     Linux_SambaGroup REF PartComponent;
 };
 
@@ -1330,13 +1241,121 @@ class Linux_SambaForceGroupForShare : CIM_Component {
 // ===================================================================
 // Linux_SambaForceGroupForPrinter
 // ===================================================================
-[Association, IBM_HasInstances, IBM_HasProvider]
+[Association, Aggregation, IBM_HasInstances, IBM_HasProvider]
 class Linux_SambaForceGroupForPrinter : CIM_Component {
 
     Linux_SambaPrinterOptions REF GroupComponent;
 
-    [Min (1), Max (1)]
+    [Aggregate, Min (1), Max (1)]
     Linux_SambaGroup REF PartComponent;
+};
+
+
+// ===================================================================
+// Linux_SambaHostsForService
+// ===================================================================
+[Association, Aggregation, IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaHostsForService : CIM_Component {
+
+    [Aggregate]
+    Linux_SambaHost REF PartComponent;
+
+    [Min (1), Max (1)]
+    Linux_SambaService REF GroupComponent;
+};
+
+
+// ===================================================================
+// Linux_SambaAllowHostsForGlobal
+// ===================================================================
+[Association, Aggregation, IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaAllowHostsForGlobal : CIM_Component {
+
+    [Aggregate]
+    Linux_SambaHost REF PartComponent;
+
+    [Min (1), Max (1)]
+    Linux_SambaGlobalOptions REF GroupComponent;
+};
+
+
+// ===================================================================
+// Linux_SambaAllowHostsForPrinter
+// ===================================================================
+[Association, Aggregation, IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaAllowHostsForPrinter : CIM_Component {
+
+    [Aggregate]
+    Linux_SambaHost REF PartComponent;
+
+    Linux_SambaPrinterOptions REF GroupComponent;
+};
+
+
+// ===================================================================
+// Linux_SambaAllowHostsForShare
+// ===================================================================
+[Association, Aggregation, IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaAllowHostsForShare : CIM_Component {
+
+    [Aggregate]
+    Linux_SambaHost REF PartComponent;
+
+    Linux_SambaShareOptions REF GroupComponent;
+};
+
+
+// ===================================================================
+// Linux_SambaDenyHostsForShare
+// ===================================================================
+[Association, Aggregation, IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaDenyHostsForShare : CIM_Component {
+
+    [Aggregate]
+    Linux_SambaHost REF PartComponent;
+
+    Linux_SambaShareOptions REF GroupComponent;
+};
+
+
+// ===================================================================
+// Linux_SambaDenyHostsForGlobal
+// ===================================================================
+[Association, Aggregation, IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaDenyHostsForGlobal : CIM_Component {
+
+    [Aggregate]
+    Linux_SambaHost REF PartComponent;
+
+    [Min (1), Max (1)]
+    Linux_SambaGlobalOptions REF GroupComponent;
+};
+
+
+// ===================================================================
+// Linux_SambaDenyHostsForPrinter
+// ===================================================================
+[Association, Aggregation, IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaDenyHostsForPrinter : CIM_Component {
+
+    [Aggregate]
+    Linux_SambaHost REF PartComponent;
+
+    Linux_SambaPrinterOptions REF GroupComponent;
+};
+
+
+// ===================================================================
+// Linux_SambaGlobalForService
+// ===================================================================
+[Association, IBM_HasInstances, IBM_HasProvider]
+class Linux_SambaGlobalForService : CIM_ElementSettingData {
+
+    [Min (1), Max (1)]
+    Linux_SambaGlobalOptions REF SettingData;
+
+    [Min (1), Max (1)]
+    Linux_SambaService REF ManagedElement;
 };
 
 // ===================================================================

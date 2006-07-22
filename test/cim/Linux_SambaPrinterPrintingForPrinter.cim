@@ -1,0 +1,39 @@
+********************************************************************************
+association : Linux_SambaPrinterPrintingForPrinter
+objectPath : Linux_SambaPrinterPrintingForPrinter.SettingData=Linux_SambaPrinterPrintingOptions.InstanceID="InstanceID",Name="wbemsmt-testprinter1",ManagedElement=Linux_SambaPrinterOptions.InstanceID="InstanceID",Name="wbemsmt-testprinter1"
+sourceRole : SettingData
+targetRole : ManagedElement
+sourceClass : Linux_SambaPrinterPrintingOptions
+targetClass : Linux_SambaPrinterOptions
+
+--------------------------------------------------------------------------------
+Instance                                                       enumInstanceNames
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                           enumInstances
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                     get
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                     set
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                  delete
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Association                                                          associators
+
+--------------------------------------------------------------------------------
+Association                                                      associatorNames
+
+--------------------------------------------------------------------------------
+Association                                                           references
+
+--------------------------------------------------------------------------------
+Association                                                       referenceNames

@@ -1,0 +1,12 @@
+********************************************************************************
+class : Linux_SambaShareBrowseOptions
+
+--------------------------------------------------------------------------------
+Linux_SambaShareBrowseOptions : -eq 4
+
+--------------------------------------------------------------------------------
+Name : -eq wbemsmt-testshare1
+Caption : -empty
+Description : -empty
+InstanceID  : -eq InstanceID
+ElementName : -empty

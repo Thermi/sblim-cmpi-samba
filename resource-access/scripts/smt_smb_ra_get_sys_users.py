@@ -41,7 +41,7 @@ class Users:
         for line in p.readlines():
             if self.entry.search(line):
                 l = line.split(":")
-                if(int(l[2])>flt or int(l[2])==0): self.users_list.append(l[0])
+                if(int(l[2])>=flt or int(l[2])==0): self.users_list.append(l[0])
             else:
                 continue
         p.close()

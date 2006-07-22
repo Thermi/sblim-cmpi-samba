@@ -13,6 +13,11 @@
  * Author:     Rodrigo Ceron <rceron@br.ibm.com>
  *
  * Contributors:
+ *                Wolfgang Taphorn   <taphorn@de.ibm.com>
+ *                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+ *                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+ *                Rodrigo Ceron      <rceron@br.ibm.com>
+ *
  *
  */
 
@@ -35,12 +40,10 @@ SambaArray::~SambaArray() {};
 
 bool SambaArray::populate(const char *ptr)
 {
-  if ( samba_array.empty() )
-    {
-      splitArrayStr( string(ptr) );
-      return true;
-    }
-  else 
+  if ( samba_array.empty() ) {
+    splitArrayStr( string(ptr) );
+    return true;
+  } else 
     return false;
 }
 
@@ -156,3 +159,9 @@ int SambaArray::size()
 {
   return samba_array.size();
 }
+
+bool SambaArray::chkEmpty()
+{
+  return ( (samba_array.begin()== samba_array.end()) );
+}
+

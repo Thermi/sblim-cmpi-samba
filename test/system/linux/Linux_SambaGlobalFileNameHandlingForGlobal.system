@@ -1,0 +1,8 @@
+********************************************************************************
+association : Linux_SambaGlobalFileNameHandlingForGlobal
+
+--------------------------------------------------------------------------------
+Linux_SambaGlobalFileNameHandlingOptions : -target Linux_SambaGlobalOptions -eq 1
+Linux_SambaGlobalOptions : -target Linux_SambaGlobalFileNameHandlingOptions -eq 1
+
+--------------------------------------------------------------------------------

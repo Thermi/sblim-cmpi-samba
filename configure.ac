@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(SBLIM CMPI Provider for WBEM-SMT Samba task, 0.1.2, sblim-devel@lists.sourceforge.net, sblim-cmpi-samba)
+AC_INIT(SBLIM CMPI Provider for WBEM-SMT Samba task, 0.2.1, sblim-devel@lists.sourceforge.net, sblim-cmpi-samba)
 AC_CONFIG_SRCDIR([.])
 AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE([tar-ustar])
@@ -17,6 +17,7 @@ case $host_cpu in
      **) HW=GENERIC;;
 esac
 
+AC_ARG_VAR([TESTSUITEDIR],[the directory where the SBLIM testsuite resides.])
 AC_ARG_VAR([PROVIDERDIR],[the directory where the CMPI providers will be installed.])
 AC_ARG_VAR([CIMSERVER],[the target CIM server (pegasus|sfcb|openwbem|sniacimom).])
 
@@ -30,7 +31,7 @@ AC_PROG_LIBTOOL
 CHECK_CMPI
 
 # Check for required CMPI libraries (defined in acinclude.m4)
-CHECK_CMPI_LIB
+#CHECK_CMPI_LIB
 
 # Check for required libraries (defined in acinclude.m4)
 CHECK_PROVIDERDIR
@@ -40,6 +41,9 @@ CHECK_CIMSERVER
 
 # Check for tools-libra header files (defined in acinclude.m4)
 CHECK_SBLIM_LIBRA
+
+# Check for the Testsuite (defined in acinclude.m4)
+CHECK_TESTSUITE
 
 # Checks for libraries.
 AC_CHECK_LIB(pthread, main, [], [AC_MSG_ERROR(You have to install libpthread first)])
@@ -66,6 +70,90 @@ AC_CHECK_FUNCS([memmove select strchr strdup])
 AC_CONFIG_FILES(Makefile sblim-cmpi-samba.spec)
 AC_CONFIG_FILES(resource-access/Makefile resource-access/scripts/smt_smb_ra_get_defaults.sh.pre resource-access/smt_smb_ra_support.conf.pre) 
 AC_CONFIG_FILES(provider/Makefile)
+AC_CONFIG_FILES(provider/CIM_ConcreteJob/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaShareOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaCommonSecurityOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalBrowseOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalFileNameHandlingOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalPrintingOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalProtocolOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalSecurityOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaHost/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaPrinterBrowseOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaPrinterOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaPrinterPrintingOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaPrinterSecurityOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaScriptingOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaShareFileNameHandlingOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaShareBrowseOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaShareProtocolOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaShareSecurityOptions/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGroup/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaService/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaServiceConfiguration/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaUser/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaAdminUsersForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaAdminUsersForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaAllowHostsForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaAllowHostsForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaAllowHostsForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaCommonSecurityForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaCommonSecurityForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaCommonSecurityForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaDenyHostsForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaDenyHostsForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaDenyHostsForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaForceGroupForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaForceGroupForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaForceGroupForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaForceUserForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaForceUserForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaForceUserForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalBrowseForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalFileNameHandlingForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalForService/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalPrintingForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalProtocolForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGlobalSecurityForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGroupForUser/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaGuestAccountForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaHostsForService/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaInvalidUsersForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaInvalidUsersForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaInvalidUsersForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaPrinterAdminForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaPrinterAdminForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaPrinterBrowseForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaPrinterForService/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaPrinterPrintingForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaPrinterSecurityForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaPrinterSecurityForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaReadListForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaReadListForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaReadListForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaScriptingForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaServiceConfigurationForService/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaShareBrowseForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaShareFileNameHandlingForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaShareForService/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaShareProtocolForShare/Makefile) 
+AC_CONFIG_FILES(provider/Linux_SambaShareSecurityForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaShareSecurityForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaUsersForService/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaValidUsersForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaValidUsersForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaValidUsersForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaWriteListForGlobal/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaWriteListForPrinter/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaWriteListForShare/Makefile)
+AC_CONFIG_FILES(test/Makefile)
+
+if test x"$TESTSUITEDIR" == x; then
+   TESTSUITE_SUPPORT=Disabled
+else	
+   TESTSUITE_SUPPORT=Enabled
+fi
 
 # Display configuration options
 echo "-------------------------------------------------------"
@@ -76,6 +164,11 @@ echo "CIMSERVER: " $CIMSERVER
 echo "PROVIDERDIR: " $PROVIDERDIR
 echo "CPPFLAGS:" $CPPFLAGS
 echo "LDFLAGS:" $LDFLAGS
+echo
+echo "Test Suite Support" $TESTSUITE_SUPPORT
+if test x"$TESTSUITEDIR" != x; then
+echo "TESTSUITEDIR " $TESTSUITEDIR
+fi
 echo "-------------------------------------------------------"
 echo
 

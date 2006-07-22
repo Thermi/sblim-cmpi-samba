@@ -1,11 +1,11 @@
 // =======================================================================
 // Linux_SambaShareProtocolForShareResourceAccess.cpp
-//     created on Fri, 24 Feb 2006 using ECUTE
-// 
+//     created on Mon, 26 Jun 2006 using ECUTE 2.2.1
+//
 // Copyright (c) 2006, International Business Machines
 //
 // THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
-// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
 // CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
 //
 // You can obtain a current copy of the Common Public License from
@@ -14,8 +14,10 @@
 // Author:        generated
 //
 // Contributors:
-//                Rodrigo Ceron    <rceron@br.ibm.com>
-//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
 //
 // =======================================================================
 //
@@ -122,6 +124,20 @@ namespace genProvider {
     const Linux_SambaShareProtocolOptionsInstanceName& aSourceInstanceName,
     Linux_SambaShareProtocolForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
     
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified share is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
     Linux_SambaShareProtocolForShareManualInstance manualInstance;
     
     Linux_SambaShareProtocolForShareInstanceName instName;
@@ -149,7 +165,21 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
     Linux_SambaShareProtocolForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
-    
+
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified share is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }   
+ 
     Linux_SambaShareProtocolForShareManualInstance manualInstance;
     
     Linux_SambaShareProtocolForShareInstanceName instName;
@@ -178,6 +208,20 @@ namespace genProvider {
     const Linux_SambaShareProtocolOptionsInstanceName& aSourceInstanceName,
     Linux_SambaShareOptionsInstanceEnumeration& anInstanceEnumeration) {
     
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified share is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
     Linux_SambaShareOptionsInstance instance;
     
     Linux_SambaShareOptionsInstanceName shareInstName;
@@ -224,6 +268,20 @@ namespace genProvider {
     const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
     Linux_SambaShareProtocolOptionsInstanceEnumeration& anInstanceEnumeration) {
     
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified share is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
     Linux_SambaShareProtocolOptionsInstance instance;
     
     Linux_SambaShareProtocolOptionsInstanceName secInstName;

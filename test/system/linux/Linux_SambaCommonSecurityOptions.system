@@ -1,0 +1,13 @@
+********************************************************************************
+class : Linux_SambaCommonSecurityOptions
+
+--------------------------------------------------------------------------------
+Linux_SambaCommonSecurityOptions : -eq 9
+
+--------------------------------------------------------------------------------
+Name : -eq Global
+
+InstanceID : -eq InstanceID
+Caption : -empty
+Description : -empty
+ElementName : -empty

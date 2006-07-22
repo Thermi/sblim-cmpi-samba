@@ -1,11 +1,11 @@
 // =======================================================================
 // Linux_SambaPrinterOptionsResourceAccess.cpp
-//     created on Fri, 24 Feb 2006 using ECUTE
-// 
+//     created on Fri, 23 Jun 2006 using ECUTE 2.2.1
+//
 // Copyright (c) 2006, International Business Machines
 //
 // THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
-// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
 // CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
 //
 // You can obtain a current copy of the Common Public License from
@@ -14,8 +14,10 @@
 // Author:        generated
 //
 // Contributors:
-//                Rodrigo Ceron    <rceron@br.ibm.com>
-//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
 //
 // =======================================================================
 //
@@ -175,7 +177,16 @@ namespace genProvider {
 
     Linux_SambaPrinterOptionsManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
-    
+
+    if (!service_exists(anInstanceName.getName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
+    }
+
+    char* option = get_option(aManualInstance.getInstanceName().getName(),PRINTABLE);
+    if ( option )
+      if(strcasecmp(option,NO) == 0)
+        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The specified instance is not a valid printer.");
+
     setInstanceProperties(aManualInstance);
     
     return aManualInstance; 
@@ -190,6 +201,13 @@ namespace genProvider {
      const char** aPropertiesPP,
      const Linux_SambaPrinterOptionsManualInstance& aManualInstance) {
     
+    if (!service_exists(aManualInstance.getInstanceName().getName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
+    }
+
+    if(aManualInstance.isPrintableSet() && !aManualInstance.getPrintable())
+        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The specified instance is not a valid printer.");
+
     setRAProperties(aManualInstance);
   }
 
@@ -212,7 +230,7 @@ namespace genProvider {
       throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exists!");
 
     return aManualInstance.getInstanceName();
-  };
+  }
   
   
   //----------------------------------------------------------------------------
@@ -224,6 +242,11 @@ namespace genProvider {
     const Linux_SambaPrinterOptionsInstanceName& anInstanceName) {
     
     if(service_exists(anInstanceName.getName())){
+      char* option = get_option(anInstanceName.getName(),PRINTABLE);
+      if ( option )
+        if(strcasecmp(option,NO) == 0)
+          throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The specified instance is not a valid printer.");
+
       if(delete_samba_printer(anInstanceName.getName())) 
 	throw CmpiStatus(CMPI_RC_ERR_FAILED,"Instance could not be deleted!");
       

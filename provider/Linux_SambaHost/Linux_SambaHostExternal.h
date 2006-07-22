@@ -1,63 +1,74 @@
-/**
- *  Linux_SambaHostExternal.h
- * 
- * (C) Copyright IBM Corp. 2005
- *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
- *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
- *
- * Author:     Rodrigo Ceron <rceron@br.ibm.com>
- *
- * Contributors:
- *
- */
-
-
+// =======================================================================
+// Linux_SambaHostExternal.h
+//     created on Fri, 23 Jun 2006 using ECUTE 2.2.1
+//
+// Copyright (c) 2006, International Business Machines
+//
+// THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+// CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+//
+// You can obtain a current copy of the Common Public License from
+// http://oss.software.ibm.com/developerworks/opensource/license-cpl.html
+//
+// Author:        generated
+//
+// Contributors:
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
+//
+// =======================================================================
 #ifndef Linux_SambaHostExternal_h
 #define Linux_SambaHostExternal_h
 
+
 #include "Linux_SambaHostInstance.h"
+
 #include "CmpiBroker.h"
 
 namespace genProvider {
 
   class Linux_SambaHostExternal {
+    
+    private:
+    CmpiBroker m_broker;
+    CmpiContext m_context;
   	
     public:
     Linux_SambaHostExternal(
-     const CmpiBroker& brkr, const CmpiContext& ctx);
+      const CmpiBroker& aBroker,
+      const CmpiContext& aContext);
     virtual ~Linux_SambaHostExternal();
     
     virtual void enumInstanceNames(
-     const char *nsp,
-     Linux_SambaHostInstanceNameEnumeration&);
+      const char *aNameSpaceP,
+      Linux_SambaHostInstanceNameEnumeration& anInstanceNameEnumeration);
      
     virtual void enumInstances(
-     const char *nsp,
-     const char* *properties,
-     Linux_SambaHostInstanceEnumeration&);
+      const char *anNameSpaceP,
+      const char** aPropertiesPP,
+      Linux_SambaHostInstanceEnumeration& anInstanceEnumeration);
      
     virtual Linux_SambaHostInstance getInstance(
-     const char* *properties,
-     const Linux_SambaHostInstanceName&);
+      const char** aPropertiesPP,
+      const Linux_SambaHostInstanceName& anInstanceName);
      
     virtual void setInstance(
-     const char* *properties,
-     const Linux_SambaHostInstance&);
+      const char** aPropertiesPP,
+      const Linux_SambaHostInstance& anInstance);
      
-    virtual void createInstance(
-     const Linux_SambaHostInstance&);
+    virtual Linux_SambaHostInstanceName createInstance(
+      const Linux_SambaHostInstance& anInstance);
      
     virtual void deleteInstance(
-     const Linux_SambaHostInstanceName&);
-     
-    private:
-    CmpiBroker  broker;
-    CmpiContext context;
+      const Linux_SambaHostInstanceName& anInstanceName);
+
+ 
+  
   };
+
 }
+
 #endif

@@ -1,11 +1,11 @@
 // =======================================================================
 // Linux_SambaGuestAccountForGlobalResourceAccess.cpp
-//     created on Fri, 24 Feb 2006 using ECUTE
-// 
+//     created on Fri, 23 Jun 2006 using ECUTE 2.2.1
+//
 // Copyright (c) 2006, International Business Machines
 //
 // THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
-// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
 // CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
 //
 // You can obtain a current copy of the Common Public License from
@@ -14,8 +14,10 @@
 // Author:        generated
 //
 // Contributors:
-//                Rodrigo Ceron    <rceron@br.ibm.com>
-//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
 //
 // =======================================================================
 //
@@ -137,6 +139,28 @@ namespace genProvider {
 
     Linux_SambaGuestAccountForGlobalManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
+    
+    if(strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
+    }
+     
+    if(!validUser(anInstanceName.getPartComponent().getSambaUserName())){
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not exist!");
+    }
+
+    SambaArray array = SambaArray();
+    char * user_list = get_option(DEFAULT_GLOBAL_NAME,"guest account");
+
+    if(!user_list) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user is not guest account for the specified global options instance!");
+    }
+     
+    array.populate(user_list);
+    if(!array.isPresent(anInstanceName.getPartComponent().getSambaUserName())) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user is not guest account for the specified global options instance!");
+    }
+
+  
     return aManualInstance;
   }
 
@@ -157,10 +181,27 @@ namespace genProvider {
     const CmpiContext& aContext,
     const CmpiBroker& aBroker,
     const Linux_SambaGuestAccountForGlobalManualInstance& aManualInstance) {
-    
+
+    if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
+    }
+
+    if(!validUser(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())){
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not exist!");
+    }
+
     char* user = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"guest account");
-    if(user && validUser(user))
-      set_global_option("guest account",user);
+   // if(!user)
+      set_global_option("guest account",aManualInstance.getInstanceName().getPartComponent().getSambaUserName());
+   // else { 
+   //     SambaArray array = SambaArray(user);
+   //     if(array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())) {
+   //        throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exist!");
+   //     } else {
+   //        array.add(string(aManualInstance.getInstanceName().getPartComponent().getSambaUserName()));
+   //        set_global_option("guest account",array.toString().c_str()); 
+   //     }
+   // }  
     
     return aManualInstance.getInstanceName();
   }
@@ -174,6 +215,14 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaGuestAccountForGlobalInstanceName& anInstanceName) {
     
+     if(strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
+    }
+
+   /*f(!validUser(anInstanceName.getPartComponent().getSambaUserName())){
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not exist!");
+    }*/
+
     set_global_option("guest account",NULL);
   }
 
@@ -190,6 +239,10 @@ namespace genProvider {
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaGuestAccountForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
     
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified global options instance is unknown!");
+    }   
+ 
     char* user = get_option(aSourceInstanceName.getName(),"guest account");
     
     if(user && validUser(user)){
@@ -240,6 +293,8 @@ namespace genProvider {
 	manualInstance.setInstanceName(instName);
 	aManualInstanceEnumeration.addElement(manualInstance);
       }
+    } else {
+       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The speicified Samba user is not guest account for the specified global options instance!");
     }
   }
   
@@ -253,6 +308,10 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
+
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
+    }
     
     char* user = get_option(aSourceInstanceName.getName(),"guest account");
     
@@ -327,6 +386,8 @@ namespace genProvider {
     	
 	anInstanceEnumeration.addElement(instance);
       }
+    } else {
+       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The speicified Samba user is not guest account for the specified global options instance!");
     }
   }
 

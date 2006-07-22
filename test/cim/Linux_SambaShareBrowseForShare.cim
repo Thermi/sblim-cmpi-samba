@@ -1,0 +1,39 @@
+********************************************************************************
+association : Linux_SambaShareBrowseForShare
+objectPath : Linux_SambaShareBrowseForShare.SettingData=Linux_SambaShareBrowseOptions.InstanceID="InstanceID",Name="wbemsmt-testshare1",ManagedElement=Linux_SambaShareOptions.InstanceID="InstanceID",Name="wbemsmt.testshare1"
+sourceRole : SettingData
+targetRole : ManagedElement
+sourceClass : Linux_SambaShareBrowseOptions
+targetClass : Linux_SambaShareOptions
+
+--------------------------------------------------------------------------------
+Instance                                                       enumInstanceNames
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                           enumInstances
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                     get
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                     set
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Instance                                                                  delete
+Expected Exception : NOT_SUPPORTED
+
+--------------------------------------------------------------------------------
+Association                                                          associators
+
+--------------------------------------------------------------------------------
+Association                                                      associatorNames
+
+--------------------------------------------------------------------------------
+Association                                                           references
+
+--------------------------------------------------------------------------------
+Association                                                       referenceNames

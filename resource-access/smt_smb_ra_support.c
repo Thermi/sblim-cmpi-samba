@@ -31,7 +31,7 @@
 #include <fcntl.h>
 #include <libgen.h>
 #include <limits.h>
-
+#include <dirent.h>
 
 #define SCRIPT_NAME __FUNCTION__
 
@@ -113,7 +113,7 @@ static inline int may_override(const char *key){
 
   int i;
   for (i = 0; global_overrides[i] ; i++)
-    if (!strcmp(key,global_overrides[i]))
+    if (!strcasecmp(key,global_overrides[i]))
       return 1;
   return 0;
 }
@@ -128,7 +128,7 @@ static char **add_string_array(char **array, const char *elem){
     array[0] = NULL;
   }
 
-  while (array && array[i++]);
+  while ( array[i++] );
   
   array = (char**) realloc(array,(i+1)*sizeof(char*));
   if (!array){
@@ -156,12 +156,16 @@ static char **remove_string_array(char **array, const char *name){
   if (!name) return array;
 
   while(array[current]) {
-    if ( !strcmp(array[current],name) ) {
+    if ( !strcasecmp(array[current],name) ) {
       free(array[current]);
       count++;
     } else {
       if (last != current) {
-        array[last]=strdup(array[current]);
+        if (array[current]!= NULL) {
+          array[last]=strdup(array[current]);
+        } else {
+          array[last]=NULL;
+        }
       }
       last++;
     }
@@ -169,68 +173,36 @@ static char **remove_string_array(char **array, const char *name){
   }
   
   array[++last] = NULL;
-  array = (char**) realloc(array, (current-count)*sizeof(char*));
+  /* We need one more element for terminating NULL */
+  array = (char**) realloc(array, ((current+1)-count)*sizeof(char*));
 
   return array;
-
- //------------------------------
-/*  int index, i=0;
-
-  while (array && array[i]){
-    if ( !strcmp(array[i],name) ) index = i;
-    i++;
-  }
-  free(array[index]);
-
-  if(index<i-1){
-    array[index] = strdup(array[i-1]);
-    if (!array[index]){
-      errno = -ENOMEM;
-      return NULL;
-    }
-    free(array[i-1]);
-  }
-
-  array[i-1] = NULL;
-  array = (char**) realloc(array,i*sizeof(char*));
-
-  return array;
-*/
 }
 
 
 static int __create_path(const char *path){
 
   char built_path[PATH_MAX], *cur_dir, *mpath = (char*) path;
-  struct stat status;
-  gid_t gid;
-  uid_t uid;
-  mode_t mode;
-  int ret;
+  int ret=0;
+  DIR* shareDirectory;
 
   strcpy(built_path,"/");
 
-  while (mpath){
+  while (mpath) {
     cur_dir = strsep(&mpath,"/");
     
-    if( strlen(cur_dir) ){
+    if( strlen(cur_dir) ) {
       strcat(built_path,"/");
       strcat(built_path,cur_dir);
-      ret = stat(built_path,&status);
-      if (!ret){
-	gid = status.st_gid;
-	uid = status.st_uid;
-	mode = status.st_mode;
-      } else{
-	ret = mkdir(built_path,mode);
-	if (ret) goto out;
-	ret = chown(built_path,uid,gid);
-	if (ret) goto out;
+
+      if ((shareDirectory=opendir(built_path))==NULL) {
+	return mkdir(built_path,0755);
+      } else {
+        closedir(shareDirectory);
       }
     }
   }
 
- out:
   return ret;
 }
 
@@ -333,7 +305,7 @@ static struct smbopt *__create_smbopt(const char *key, const char *value){
 static struct smbopt *g_synonyms(int pipefd){
 
   char *chr, *buf, *buf_ptr = malloc(1024);
-  char *oficial, *syn;
+  char *official, *syn;
   struct smbopt *head = NULL, *synonym = NULL;
   FILE *fp = fdopen(pipefd,"r");
 
@@ -350,23 +322,23 @@ static struct smbopt *g_synonyms(int pipefd){
 
   while(!feof(fp)){
     buf = buf_ptr;
-    fgets(buf,1024,fp);
+    buf=fgets(buf,1024,fp);
 
-    if (!strncmp(buf,"EOF",3)) break;
+    if (!buf || !strncmp(buf,"EOF",3)) break;
     chr = strrchr(buf,'\n');
     if (chr) *chr = '\0';
 
     /* here we face a line which has at least two values separated by ";". The
-     * first one is the oficial option name; the others are synonims to it */
+     * first one is the official option name; the others are synonims to it */
 
-    oficial = strsep(&buf,",;");
+    official = strsep(&buf,",;");
 
     /*synonyms entries */
     for(syn = strsep(&buf,",;"); syn; syn=strsep(&buf,",;")){
-      if (!strcmp(syn,oficial)) continue;
+      if (!strcasecmp(syn,official)) continue;
       synonym = (struct smbopt*) malloc(sizeof(struct smbopt));
       synonym->key = strdup(syn);
-      synonym->value = strdup(oficial);
+      synonym->value = strdup(official);
       if (!head){
 	head = synonym;
 	head->next = NULL;
@@ -389,7 +361,7 @@ static struct smbopt *get_synonyms_array(){
   char *script = my_script_path("smt_smb_ra_get_synonyms.py");
   char *filename = get_conf(smb_conf,SMBSYNONYMS);
 
-  struct smbopt *syn = (struct smbopt*) readData1(script,filename,g_synonyms);
+  struct smbopt *syn = (struct smbopt*) readData1(script,filename,(void*)g_synonyms);
 
   free(script);
   free(filename);
@@ -418,14 +390,14 @@ static struct smbopt *g_map(int pipefd){
 
   while(!feof(fp)){
     buf = buf_ptr;
-    fgets(buf,1024,fp);
+    buf=fgets(buf,1024,fp);
 
-    if (!strncmp(buf,"EOF",3)) break;
+    if (!buf || !strncmp(buf,"EOF",3)) break;
     chr = strrchr(buf,'\n');
     if (chr) *chr = '\0';
 
     /* here we face a line which has at least two values separated by ";". The
-     * first one is the oficial option name; the others are synonims to it */
+     * first one is the official option name; the others are synonims to it */
 
     smb = strsep(&buf,",;");
 
@@ -450,8 +422,8 @@ static struct smbopt *g_map(int pipefd){
 }
 
 
-static char *get_oficial_name(const char *syn){
-  /* Checks the synonym list and returns the oficial name of the option. If no
+static char *get_official_name(const char *syn){
+  /* Checks the synonym list and returns the official name of the option. If no
    * entry is found in the list, we return the name passed as argument */
   
   struct smbopt *synlist;
@@ -460,7 +432,7 @@ static char *get_oficial_name(const char *syn){
   
   synlist = synonyms;
   while(synlist){
-    if (!strcmp(syn,synlist->key)) return synlist->value;
+    if (!strcasecmp(syn,synlist->key)) return synlist->value;
     synlist = synlist->next;
   }
   
@@ -481,8 +453,8 @@ static struct smbopt *g_service(FILE *fp){
 
   while (!feof(fp)){
     buf = buf_ptr;
-    fgets(buf,1024,fp);
-    if (!strncmp(buf,"ENDSHARE",8))
+    buf=fgets(buf,1024,fp);
+    if (!buf || !strncmp(buf,"ENDSHARE",8))
       break;
     
     chr = strrchr(buf,';');
@@ -494,13 +466,13 @@ static struct smbopt *g_service(FILE *fp){
     
     if (!head){
       head = (struct smbopt*)malloc(sizeof(struct smbopt));
-      head->key = strdup(get_oficial_name(strsep(&buf,";")));
+      head->key = strdup(get_official_name(strsep(&buf,";")));
       head->value = strdup(buf);
       head->next = NULL;
     }
     else{
       share_opts = (struct smbopt*)malloc(sizeof(struct smbopt));
-      share_opts->key = strdup( get_oficial_name(strsep(&buf,";")) );
+      share_opts->key = strdup( get_official_name(strsep(&buf,";")) );
       share_opts->value = strdup(buf);
       share_opts->next = NULL;
       list_add(head,share_opts);
@@ -531,9 +503,9 @@ struct smbmonitors *g_cache_info(int pipefd){
 
   while (!feof(fp)){
     buf = buf_ptr;
-    fgets(buf,1024,fp);
+    buf = fgets(buf,1024,fp);
     
-    if (!strncmp(buf,"SMBEOF",6))
+    if (!buf || !strncmp(buf,"SMBEOF",6))
       break;
     chr = strrchr(buf,'\n');
     if (chr)
@@ -583,9 +555,9 @@ static struct smbopt *g_defaults(int pipefd){
 
   while (!feof(fp)){
     buf = buf_ptr;
-    fgets(buf,1024,fp);
+    buf=fgets(buf,1024,fp);
     
-    if (!strncmp(buf,"SMBEOF",6))
+    if (!buf || !strncmp(buf,"SMBEOF",6))
       break;
     chr = strrchr(buf,'\n');
     if (chr)
@@ -613,7 +585,7 @@ static struct smbopt *g_defaults(int pipefd){
 
 static void *g_single_val_per_line_list(int pipefd){
 
-  char buf[1024];
+  char *buf, *buf_ptr = malloc(1024);
   char **list = (char **)malloc(sizeof(char *));
   int i=0;
   FILE *fp = fdopen(pipefd,"r");
@@ -631,8 +603,9 @@ static void *g_single_val_per_line_list(int pipefd){
   }
  
   while (!feof(fp)){
-    fgets(buf,1024,fp);
-    if (!strncmp(buf,"EOF",3))
+    buf=buf_ptr;
+    buf=fgets(buf,1024,fp);
+    if (!buf || !strncmp(buf,"EOF",3))
       break;
     list = realloc(list,(i+2)*sizeof(char *));
     list[i++] = strip(buf);
@@ -640,6 +613,7 @@ static void *g_single_val_per_line_list(int pipefd){
 
  out:
   list[i] = NULL;
+  free(buf_ptr);
   fclose(fp);
   //close(pipefd);
   return (void *) list; 
@@ -804,7 +778,7 @@ static void *smb_cache_flusher(void *arg){
   }else
     cache_flush_interval = CACHE_DFL;
   
-  printf("Using cache interval of %d for usermap\n",cache_flush_interval);
+  printf("Using cache interval of %d for smb.conf cache\n",cache_flush_interval);
 
   while(1){
     pthread_testcancel();
@@ -921,11 +895,13 @@ static void clean_up(){
 
 
 void terminator(){
-
   pthread_mutex_lock(&glob_mutex);
   flush_all_caches();
-  clean_up();
   pthread_mutex_unlock(&glob_mutex);
+
+  pthread_mutex_lock(&services_list_mutex);
+  clean_up();
+  pthread_mutex_unlock(&services_list_mutex);
 }
 
 
@@ -941,7 +917,7 @@ static struct smbopt *get_usermap_list(){
    * outputs data in the same format expected by g_synonyms */
   username_map = __get_option(GLOBAL,USERNAME_MAP);
   if (!username_map) goto out;
-  stounix = (struct smbopt*) readData1(script,username_map,g_synonyms);
+  stounix = (struct smbopt*) readData1(script,username_map,(void*)g_synonyms);
   
  out:
   free(script);
@@ -956,7 +932,7 @@ static struct smbopt *__get_groupmap_list(){
   /* we can use g_synonyms to read it because smt_smb_ra_get_group_mappings.py 
    * outputs data in the same format expected by g_synonyms */
   struct smbopt *stounix = (struct smbopt*) readData1(script,GET_GRPMAP_CMD,
-						                      g_map); 
+						                      (void*)g_map); 
 
   free(script);
   return stounix;
@@ -1035,7 +1011,7 @@ static int populate_cache(struct smbcache *cache){
     goto out;
   }
   cache->thread_running = 1;
-  cache->content = (void *)readData1(script,filename,g_cache_info);
+  cache->content = (void *)readData1(script,filename,(void*)g_cache_info);
   cache->is_dirty = 0;
 
   if (!services_list_monitor)
@@ -1138,7 +1114,7 @@ static struct smbopt *get_defaults_array(void){
   char *script = my_script_path("smt_smb_ra_get_all_services.py");
   char *filename = get_conf(smb_conf,SMBDEFAULTS);
   
-  struct smbopt *dfl = (struct smbopt*) readData1(script,filename,g_defaults);
+  struct smbopt *dfl = (struct smbopt*) readData1(script,filename,(void*)g_defaults);
 
   free(script);
   free(filename);
@@ -1205,7 +1181,7 @@ static char **__g_system_users_list(){
 
   /* get users whose uig is higher than 500 */
   ret = (char**) readData1(script,LOWEST_UID,g_single_val_per_line_list);
-  
+
   free(script);
   return ret;
 }
@@ -1320,29 +1296,30 @@ static char *__g_option(const char *share, const char *opt){
 }
 
 	
-static char *__get_option(const char *share, const char *opt){
+static char *__get_option(const char *service, const char *opt){
 
-  char *oficial, *value, *gvalue;
+  char *official, *value, *gvalue;
 
-  oficial = get_oficial_name(opt);
-  value = __g_option(share, oficial );
+  official = get_official_name(opt);
+  value = __g_option(service, official);
 
-  if (!value || may_override(oficial) ){
-    gvalue = __g_option(GLOBAL, oficial);
+  if (!value /*|| may_override(official) */){
+    gvalue = __g_option(GLOBAL, official);      
     if (gvalue) return gvalue;
-    else return get_default_value(oficial);
+//    else if (value) return value;  
+    else return get_default_value(official);
   }
 
   return value;
 }
 
 
-char *get_option(const char *share, const char *opt){
+char *get_option(const char *service, const char *opt){
 
   char *value;
 
   pthread_mutex_lock(&glob_mutex);
-  value = __get_option(share,opt);
+  value = __get_option(service,opt);
   pthread_mutex_unlock(&glob_mutex);
 
   return value;
@@ -1354,20 +1331,43 @@ char *get_global_option(const char *opt){
 }
 
 
-static int __check_default_and_global(const char *key, const char *value){
-  /* Returns 0 if different from default value
-   * Returns 1 if equals to default value but the global value is different
-   * Returns -1 if equals to default value and global */
+static int __check_default_and_global(const char *service, const char *key, const char *value){
+  /* 
+     Return 0 Is different to global value and/or default value
+     Return 1 Equals to default value and/or global value
+   */
 
-  char *global = __get_option(GLOBAL,key);
-  char *dfl = get_default_value(key);
+  char *global_value = __get_option(GLOBAL,key);
+  char *default_value = get_default_value(key);
 
-  if ( dfl && strcasecmp(value,dfl) ) return 0; 
+  if (strcasecmp(GLOBAL,service) == 0) {
+    if ( default_value && strcasecmp(value,default_value) == 0 ) { 
+      return 1;
+    }
+    else {
+      return 0;
+    }
+  } else {
+    if (global_value && strcasecmp(global_value,value) == 0) {
+      return 1;
+    }
+    else if (default_value && strcasecmp(default_value,value) == 0) {
+      return 1;
+    }
+    else {
+      return 0;
+    }
+  }
+
+
+/*  if ( default_value && strcasecmp(value,default_value) ) return 0; 
   
-  if ( global && !strcasecmp(value,global) ) return -1;
-  else return 1;
-
+  if (global_value && !strcasecmp(value,global_value) ) 
+     return -1;
+  else 
+     return 1;
   return 0;
+*/
 
 }
 
@@ -1395,12 +1395,12 @@ static int __set_option_in_cache(struct smbcache *cache,
 
   for(; monitor; monitor = monitor->next ){
 
-    if ( !strcmp(monitor->service,share) ){
+    if ( !strcasecmp(monitor->service,share) ){
       /* found share */
       first = opt = monitor->opts;
       
       for(; opt; last = opt, opt = opt->next){
-	if ( !strcmp(key,opt->key) ) {
+	if ( !strcasecmp(key,opt->key) ) {
 	  /* opt exists, update */
 	  if (value){
 	    oldvalue = opt->value;
@@ -1444,12 +1444,12 @@ static int __set_option_in_cache(struct smbcache *cache,
 }
 
 
-static int __set_option(const char *share, const char *key, const char *value){
+static int __set_option(const char *service, const char *key, const char *value){
   /* This function returns zero on success and an error code on failure */
 
   int whattodo = -1,ret;
   char *mvalue = NULL;
-  char *oficial = get_oficial_name(key);
+  char *official = get_official_name(key);
   struct smbcache *cache = __get_monitors_cache();
 
   if (!cache) return -ENOENT;
@@ -1459,26 +1459,36 @@ static int __set_option(const char *share, const char *key, const char *value){
    * a global value different from the default, then we need to write the opt
    * anyway. If value is NULL we should remove the entry (-1) */
 
-  if (value) whattodo = __check_default_and_global(oficial,value);
-
+  if (value) whattodo = __check_default_and_global(service,official,value);
+  
   switch(whattodo){
-
-  case 0:
-  case 1:
-    mvalue = (char*) value;
-    break;
-  case -1:
-    mvalue = NULL;
-    break;
+    case 0:
+      mvalue = (char*) value;
+      break;
+    case 1:
+      mvalue = NULL;
+      break;
   }
 
   pthread_mutex_lock(&(cache->mutex));
   if (!cache)
-    ret = __set_option_no_cache(share, oficial, (const char*)mvalue);
+    ret = __set_option_no_cache(service, official, (const char*)mvalue);
   
-  ret = __set_option_in_cache(cache,share,oficial,
+  ret = __set_option_in_cache(cache,service,official,
 			               (const char*) mvalue);
   pthread_mutex_unlock(&(cache->mutex));
+  return ret;
+}
+
+
+int set_option(const char* service, const char *key, const char *value){
+  
+  int ret;
+
+  pthread_mutex_lock(&glob_mutex);
+  ret = __set_option(service,key,value);
+  pthread_mutex_unlock(&glob_mutex);
+
   return ret;
 }
 
@@ -1503,11 +1513,11 @@ static int __delete_service_no_cache(const char *name){
   char **s_list;
   
   ret = -ENOENT;
-  if (!strcmp(name,GLOBAL))
+  if (!strcasecmp(name,GLOBAL))
     goto out;
   
   for (s_list = get_services_list(), i=0; s_list[i]; i++)
-    if (!strcmp(s_list[i],name))
+    if (!strcasecmp(s_list[i],name))
       ret = execScript2(script,filename,name);
   
  out:
@@ -1524,11 +1534,11 @@ static int __delete_service_in_cache(struct smbcache *cache,
   struct smbopt *opts, *curopt;
   int ret = -EINVAL;
 
-  if (!strcmp(GLOBAL,name)) goto out;
+  if (!strcasecmp(GLOBAL,name)) goto out;
 
   cur = first = (struct smbmonitors *) cache->content;
 
-  while (cur && strcmp(cur->service,name) ){
+  while (cur && strcasecmp(cur->service,name) ){
     last = cur;
     cur = cur->next;
   }
@@ -1591,7 +1601,7 @@ static int __create_service_no_cache(const char *name){
   /* check if a service with this name already exists */
   ret = -EINVAL;
   for (s_list = get_services_list(), i=0; s_list && s_list[i]; i++)
-    if (!strcmp(s_list[i],name))
+    if (!strcasecmp(s_list[i],name))
       goto out;
   
   fp = fopen(filename,"a");
@@ -1669,7 +1679,7 @@ int disable_service(const char *share){
 	
   char *filename = get_conf(smb_conf,SMBCONF);
   char *script = my_script_path("smt_smb_ra_disable.py");
-  if (!strcmp(share,GLOBAL))
+  if (!strcasecmp(share,GLOBAL))
     return -EINVAL;
   
   return execScript2(script,filename,share);	
@@ -1693,14 +1703,60 @@ int service_exists(const char *name){
   pthread_mutex_lock(&glob_mutex);
   services = get_services_list();
 
-  while (services && services[i])
-    if ( !strcmp(name,services[i++]) ){
+  while (services && services[i]) {
+    if ( !strcasecmp(name,services[i++]) ){
       ret = 1;
       break;
     }
+  }
   
   pthread_mutex_unlock(&glob_mutex);
   return ret;
+}
+
+
+int share_exists(const char *share_name) {
+  char **shares;
+  int i=0;
+  if (!share_name) return 0;
+
+  pthread_mutex_lock(&glob_mutex);
+  shares = get_shares_list();
+
+  if(shares) {
+    for(i=0; shares[i]; i++) {
+      if(strcasecmp(share_name, shares[i]) == 0)
+        return 1;
+    }
+  }
+
+  pthread_mutex_unlock(&glob_mutex);
+  return 0;
+}
+
+int printer_exists(const char *printer_name) {
+  char **printer;
+  int i=0;
+
+  if (!printer_name) return 0;
+
+  pthread_mutex_lock(&glob_mutex);
+  printer = get_samba_printers_list();
+
+  if(printer) {
+    for(i=0; printer[i]; i++) {
+      if(strcasecmp(printer_name, printer[i]) == 0)
+        return 1;
+    }
+  }
+
+  pthread_mutex_unlock(&glob_mutex);
+  return 0;
+}
+
+
+int validHostName(const char* host_name) {
+  return 1;
 }
 
 
@@ -1720,7 +1776,7 @@ char **get_shares_list(){
   for(i=0;all_services && all_services[i];i++){
     printable = __get_option(all_services[i],"printable");
     if (!strcasecmp("yes",printable) ||
-	!strcmp(GLOBAL,all_services[i]) ) continue;
+	!strcasecmp(GLOBAL,all_services[i]) ) continue;
     shares_list = (char**) realloc(shares_list,(j+2)*sizeof(char *));
     shares_list[j++] = strdup(all_services[i]);
   }
@@ -1887,7 +1943,6 @@ int set_printer_option(const char *name, const char* key, const char *value){
   return ret;
 }
  
-
 static int __entry_exists(const char *username, char **list){
   /* Returns 1 if true or 0 if false */
 
@@ -2420,7 +2475,7 @@ int create_samba_group(const char* samba_grp, const char *unix_grp){
   char *script = my_script_path("smt_smb_ra_create_samba_group.py");
   char **smb_grps, **unx_grps;
   char *funix_grp = NULL;
-  int ret = -EEXIST;
+  int ret;
   char create_sys_grp[] = "0"; //Leave this as 0 in order NOT to create new
                                //system groups
 
@@ -2429,13 +2484,16 @@ int create_samba_group(const char* samba_grp, const char *unix_grp){
   unx_grps = __get_system_groups_list();
 
   /* check if samba group already exists */
-  if (__entry_exists(samba_grp,smb_grps) ) goto out;
+  if (__entry_exists(samba_grp,smb_grps) ) {
+    ret = -EEXIST;
+    goto out;
+  }
 
   if (!unix_grp) funix_grp = DEF_GRP;
   else funix_grp = (char *) unix_grp;
 
   if (!__entry_exists((const char*)funix_grp,unx_grps) ){
-    ret = -EINVAL;
+    ret = -ENOENT;
     goto out;
   }
 
@@ -2459,16 +2517,20 @@ int delete_samba_group(const char* samba_grp){
   char *script = my_script_path("smt_smb_ra_delete_samba_group.py");
   char *groupmap_file = NULL;
   char **smb_grps;
-  int ret = -EINVAL;
+  int ret;
 
   pthread_mutex_lock(&glob_mutex);   
   smb_grps = __get_samba_groups_list();
 
-  if (!__entry_exists(samba_grp, smb_grps) ) goto out;
+  if (!__entry_exists(samba_grp, smb_grps) ) {
+    ret = -ENOENT;
+    goto out;
+  }
 
   if (!smb_conf) smb_conf = read_conf(CONFFILE,CONFFILE);
-  groupmap_file = get_conf(smb_conf,SMBGRPMAP);
-  if (!groupmap_file) groupmap_file = strdup(DEF_SMBGRPMAPF);
+    groupmap_file = get_conf(smb_conf,SMBGRPMAP);
+  if (!groupmap_file) 
+    groupmap_file = strdup(DEF_SMBGRPMAPF);
 
   ret = execScript2(script,samba_grp,groupmap_file);
 

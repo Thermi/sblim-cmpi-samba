@@ -1,0 +1,12 @@
+********************************************************************************
+class : Linux_SambaShareSecurityOptions
+
+--------------------------------------------------------------------------------
+Linux_SambaShareSecurityOptions : -eq 5
+
+--------------------------------------------------------------------------------
+Name : -eq wbemsmt-testshare1
+Caption : -empty
+Description : -empty
+InstanceID  : -eq InstanceID
+ElementName : -empty

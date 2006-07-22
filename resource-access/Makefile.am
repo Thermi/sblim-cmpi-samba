@@ -12,8 +12,6 @@
 # Description:  Automake input file for resource access layer.
 # ==================================================================
 
-AM_CFLAGS = -Wall
-
 # SBLIM Include Directory
 sblimincdir = $(includedir)/sblim
 

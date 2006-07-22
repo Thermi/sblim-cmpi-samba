@@ -1,11 +1,11 @@
 // =======================================================================
 // Linux_SambaPrinterSecurityForPrinterResourceAccess.cpp
-//     created on Fri, 24 Feb 2006 using ECUTE
-// 
+//     created on Fri, 23 Jun 2006 using ECUTE 2.2.1
+//
 // Copyright (c) 2006, International Business Machines
 //
 // THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
-// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
+// ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
 // CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
 //
 // You can obtain a current copy of the Common Public License from
@@ -14,8 +14,10 @@
 // Author:        generated
 //
 // Contributors:
-//                Rodrigo Ceron    <rceron@br.ibm.com>
-//                Wolfgang Taphorn <taphorn@de.ibm.com>
+//                Wolfgang Taphorn   <taphorn@de.ibm.com>
+//                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
+//                Ashoka S Rao       <ashoka.rao@in.ibm.com>
+//                Rodrigo Ceron      <rceron@br.ibm.com>
 //
 // =======================================================================
 //
@@ -121,7 +123,21 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
     Linux_SambaPrinterSecurityForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) {
-    
+   
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified printer is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+ 
     Linux_SambaPrinterSecurityForPrinterManualInstance manualInstance;
     
     Linux_SambaPrinterSecurityForPrinterInstanceName instName;
@@ -149,7 +165,11 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaPrinterSecurityOptionsInstanceName& aSourceInstanceName,
     Linux_SambaPrinterSecurityForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) {
-    
+   
+    if(!service_exists(aSourceInstanceName.getName())) {
+       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
+    }
+ 
     Linux_SambaPrinterSecurityForPrinterManualInstance manualInstance;
     
     Linux_SambaPrinterSecurityForPrinterInstanceName instName;
@@ -177,6 +197,20 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
     Linux_SambaPrinterSecurityOptionsInstanceEnumeration& anInstanceEnumeration) {
+
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified printer is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
     
     Linux_SambaPrinterSecurityOptionsInstance instance;
     
@@ -202,7 +236,11 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaPrinterSecurityOptionsInstanceName& aSourceInstanceName,
     Linux_SambaPrinterOptionsInstanceEnumeration& anInstanceEnumeration) {
-    
+
+    if(!service_exists(aSourceInstanceName.getName())) {
+       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
+    }   
+ 
     Linux_SambaPrinterOptionsInstance instance;
     
     Linux_SambaPrinterOptionsInstanceName printerInstName;
