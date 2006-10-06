@@ -167,6 +167,9 @@ extern "C" {
   
   
   
+  char *get_default_option(const char *); 
+  /*(option name). This returns the value of the option from the defaults */
+  
   char *get_option(const char *,const char *); 
   /*(service name, option name). This returns the value of the option from the 
    * service */

@@ -1204,7 +1204,6 @@ static char **__g_system_groups_list(){
   char **ret = NULL;
   char *script = my_script_path("smt_smb_ra_get_db_entries.py");
 
-  printf("getting groups list\n");
   ret = (char**) readData1(script,GET_SYSGRPS_CMD,g_single_val_per_line_list);
   
   free(script);
@@ -1305,9 +1304,13 @@ static char *__get_option(const char *service, const char *opt){
 
   if (!value /*|| may_override(official) */){
     gvalue = __g_option(GLOBAL, official);      
-    if (gvalue) return gvalue;
-//    else if (value) return value;  
-    else return get_default_value(official);
+    if (gvalue) {
+      return gvalue;
+//    } else if {
+//    	(value) return value
+    } else {
+      return get_default_value(official);
+    }
   }
 
   return value;
@@ -1325,6 +1328,15 @@ char *get_option(const char *service, const char *opt){
   return value;
 }
 
+char *get_default_option(const char *opt) {
+  char *official, *value;
+  
+  official = get_official_name(opt);
+  value = get_default_value(official);
+
+  if(official)free(official);
+  return value;
+}
 
 char *get_global_option(const char *opt){
   return get_option(GLOBAL,opt);
@@ -1358,17 +1370,6 @@ static int __check_default_and_global(const char *service, const char *key, cons
       return 0;
     }
   }
-
-
-/*  if ( default_value && strcasecmp(value,default_value) ) return 0; 
-  
-  if (global_value && !strcasecmp(value,global_value) ) 
-     return -1;
-  else 
-     return 1;
-  return 0;
-*/
-
 }
 
 
@@ -1463,7 +1464,7 @@ static int __set_option(const char *service, const char *key, const char *value)
   
   switch(whattodo){
     case 0:
-      mvalue = (char*) value;
+      mvalue = strdup(value);
       break;
     case 1:
       mvalue = NULL;
@@ -2196,7 +2197,7 @@ int add_samba_user(const char *samba_name, const char *unix_name,
     goto out;
   }
   
-  if (!unix_name) unix_name = samba_name;
+  if (!unix_name) unix_name = strdup(samba_name);
 
   /* verify if unix_name is a valid system user */
   if (!__entry_exists(unix_name,system_users) ){
