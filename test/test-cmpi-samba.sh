@@ -18,39 +18,69 @@ export TESTPASSWDFILE=smbpasswd
 
 #******************************************************************************#
 
-# Install an example config file and save the original if one exists
-if [[ -a $SMBCONFFILE ]]; then
-  echo "Saving original config file $SMBCONFFILE to $SMBCONFFILE.sblimsave..."
-  cp -p $SMBCONFFILE $SMBCONFFILE.sblimsave
-fi
+init() {
+  # Install an example config file and save the original if one exists
+  if [[ -a $SMBCONFFILE ]]; then
+    echo "Saving original config file $SMBCONFFILE to $SMBCONFFILE.sblimsave..."
+    cp -p $SMBCONFFILE $SMBCONFFILE.sblimsave
+  fi
 
-# Install an example smbusers file and save the original if one exists
-if [[ -a $SMBUSERSFILE ]]; then
-  echo "Saving original smbusers file $SMBUSERSFILE to $SMBUSERSFILE.sblimsave..."
-  cp -p $SMBUSERSFILE $SMBUSERSFILE.sblimsave
-fi
+  # Install an example smbusers file and save the original if one exists
+  if [[ -a $SMBUSERSFILE ]]; then
+    echo "Saving original smbusers file $SMBUSERSFILE to $SMBUSERSFILE.sblimsave..."
+    cp -p $SMBUSERSFILE $SMBUSERSFILE.sblimsave
+  fi
 
-# Install an example smbpassswd file and save the original if one exists
-if [[ -a $SMBPASSWDFILE ]]; then
-  echo "Saving original smbpasswd file $SMBPASSWDFILE to $SMBPASSWDFILE.sblimsave..."
-  cp -p $SMBPASSWDFILE $SMBPASSWDFILE.sblimsave
-fi
+  # Install an example smbpassswd file and save the original if one exists
+  if [[ -a $SMBPASSWDFILE ]]; then
+    echo "Saving original smbpasswd file $SMBPASSWDFILE to $SMBPASSWDFILE.sblimsave..."
+    cp -p $SMBPASSWDFILE $SMBPASSWDFILE.sblimsave
+  fi
 
 
-echo "Copying test config file $TESTCONFFILE to $SMBCONFFILE ..."
-cp -p $TESTCONFFILE $SMBCONFFILE
+  echo "Copying test config file $TESTCONFFILE to $SMBCONFFILE ..."
+  cp -p $TESTCONFFILE $SMBCONFFILE
 
-echo "Copying test smbusers file $TESTUSERSFILE to $SMBUSERSFILE ..."
-cp -p $TESTUSERSFILE $SMBUSERSFILE
+  echo "Copying test smbusers file $TESTUSERSFILE to $SMBUSERSFILE ..."
+  cp -p $TESTUSERSFILE $SMBUSERSFILE
 
-echo "Copying test smbpasswd $TESTPASSWDFILE to $SMBPASSWDFILE ..."
-cp -p $TESTPASSWDFILE $SMBPASSWDFILE
+  echo "Copying test smbpasswd $TESTPASSWDFILE to $SMBPASSWDFILE ..."
+  cp -p $TESTPASSWDFILE $SMBPASSWDFILE
 
-echo "Creating system users: wbemsmt-test1, wbemsmt-test2, wbemsmt-test3, wbemsmt-test4"
-useradd -u 732 wbemsmt-test1 
-useradd -u 733 wbemsmt-test2
-useradd -u 734 wbemsmt-test3
-useradd -u 735 wbemsmt-test4
+  echo "Creating system users: wbemsmt-test1, wbemsmt-test2, wbemsmt-test3, wbemsmt-test4"
+  useradd -u 732 wbemsmt-test1 
+  useradd -u 733 wbemsmt-test2
+  useradd -u 734 wbemsmt-test3
+  useradd -u 735 wbemsmt-test4
+}
+
+#*****************************************************************************#
+cleanup() {
+  echo "Removing system users: wbemsmt-test1, wbemsmt-test2, wbemsmt-test3, wbemsmt-test4"
+  userdel -r wbemsmt-test1
+  userdel -r wbemsmt-test2
+  userdel -r wbemsmt-test3
+  userdel -r wbemsmt-test4
+
+  if [[ -a $SMBCONFFILE.sblimsave ]]; then
+    echo "Moving back the original config file ..."
+    mv $SMBCONFFILE.sblimsave $SMBCONFFILE
+  fi
+
+  if [[ -a $SMBUSERSFILE.sblimsave ]]; then
+    echo "Moving back the original smbusers file ..."
+    mv $SMBUSERSFILE.sblimsave $SMBUSERSFILE
+  fi
+
+  if [[ -a $SMBPASSWDFILE.sblimsave ]]; then
+    echo "Moving back the original smbpasswd file ..."
+    mv $SMBPASSWDFILE.sblimsave $SMBPASSWDFILE
+  fi
+  exit 1
+}
+
+#*****************************************************************************#
+trap cleanup 2 3 4 6 9 15
 
 #*****************************************************************************#
 
@@ -125,6 +155,8 @@ CLASSNAMES=(
 
 #*****************************************************************************#
 
+init
+
 declare -i max=62;
 declare -i i=0;
 
@@ -135,24 +167,5 @@ do
   i=$i+1;
 done
 
-#*****************************************************************************#
-echo "Removing system users: wbemsmt-test1, wbemsmt-test2, wbemsmt-test3, wbemsmt-test4"
-userdel -r wbemsmt-test1
-userdel -r wbemsmt-test2
-userdel -r wbemsmt-test3
-userdel -r wbemsmt-test4
+cleanup
 
-if [[ -a $SMBCONFFILE.sblimsave ]]; then
-  echo "Moving back the original config file ..."
-  mv $SMBCONFFILE.sblimsave $SMBCONFFILE
-fi
-
-if [[ -a $SMBUSERSFILE.sblimsave ]]; then
-  echo "Moving back the original smbusers file ..."
-  mv $SMBUSERSFILE.sblimsave $SMBUSERSFILE
-fi
-
-if [[ -a $SMBPASSWDFILE.sblimsave ]]; then
-  echo "Moving back the original smbpasswd file ..."
-  mv $SMBPASSWDFILE.sblimsave $SMBPASSWDFILE
-fi
