@@ -13,6 +13,8 @@
 #               access layer.
 # ==================================================================
 
+#Include local M4 macros
+ACLOCAL_AMFLAGS = -I m4
 
 # SBLIM Include Directory
 sblimincdir = $(includedir)/sblim
@@ -48,10 +50,10 @@ EXTRA_DIST =
 BUILT_SOURCES = 
 
 # Build subdirectories
-SUBDIRS = resource-access provider
-if TESTSUITE
-SUBDIRS += test
+if TESTSUITE_SUPPORT
+  TESTCASE_DIR = test
 endif
+SUBDIRS = $(TESTCASE_DIR) resource-access provider
 
 ######################################################################################
 # sed scriptlets for replacing values in .in files

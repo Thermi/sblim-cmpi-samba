@@ -19,7 +19,7 @@ esac
 
 AC_ARG_VAR([TESTSUITEDIR],[the directory where the SBLIM testsuite resides.])
 AC_ARG_VAR([PROVIDERDIR],[the directory where the CMPI providers will be installed.])
-AC_ARG_VAR([CIMSERVER],[the target CIM server (pegasus|sfcb|openwbem|sniacimom).])
+AC_ARG_VAR([CIMSERVER],[the target CIM server (pegasus|sfcb|openwbem).])
 
 # Checks for programs.
 AC_PROG_AWK
@@ -27,23 +27,20 @@ AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 
-# Check for required CMPI header files (defined in acinclude.m4)
-CHECK_CMPI
-
-# Check for required CMPI libraries (defined in acinclude.m4)
-#CHECK_CMPI_LIB
-
-# Check for required libraries (defined in acinclude.m4)
-CHECK_PROVIDERDIR
-
-# Check for CIM Server (defined in acinclude.m4)
+# Check for installed CIM Server (defined in local m4 macro)
 CHECK_CIMSERVER
 
-# Check for tools-libra header files (defined in acinclude.m4)
-CHECK_SBLIM_LIBRA
+# Check for required CIM Server provider directory (defined in local m4 macro)
+CHECK_CIMSERVER_PROVIDERDIR
 
-# Check for the Testsuite (defined in acinclude.m4)
-CHECK_TESTSUITE
+# Check for required CMPI header files (defined in local m4 macro)
+CHECK_CMPI_HEADER
+
+# Check for SBLIM TestSuite support (defined in local m4 macro)
+CHECK_SBLIM_TESTSUITE
+
+# Check for required WBEM-SMT Resource Access header files (defined in local m4 macro)
+CHECK_SBLIM_LIBRA_HEADER
 
 # Checks for libraries.
 AC_CHECK_LIB(pthread, main, [], [AC_MSG_ERROR(You have to install libpthread first)])
@@ -67,6 +64,9 @@ AC_FUNC_REALLOC
 AC_FUNC_SELECT_ARGTYPES
 AC_FUNC_STAT
 AC_CHECK_FUNCS([memmove select strchr strdup])
+
+AM_CONDITIONAL([TESTSUITE_SUPPORT], test "$TESTSUITEDIR")
+
 AC_CONFIG_FILES(Makefile sblim-cmpi-samba.spec)
 AC_CONFIG_FILES(resource-access/Makefile resource-access/scripts/smt_smb_ra_get_defaults.sh.pre resource-access/smt_smb_ra_support.conf.pre) 
 AC_CONFIG_FILES(provider/Makefile)
@@ -149,12 +149,6 @@ AC_CONFIG_FILES(provider/Linux_SambaWriteListForPrinter/Makefile)
 AC_CONFIG_FILES(provider/Linux_SambaWriteListForShare/Makefile)
 AC_CONFIG_FILES(test/Makefile)
 
-if test x"$TESTSUITEDIR" == x; then
-   TESTSUITE_SUPPORT=Disabled
-else	
-   TESTSUITE_SUPPORT=Enabled
-fi
-
 # Display configuration options
 echo "-------------------------------------------------------"
 echo "Configuration for $PACKAGE complete."
@@ -165,9 +159,11 @@ echo "PROVIDERDIR: " $PROVIDERDIR
 echo "CPPFLAGS:" $CPPFLAGS
 echo "LDFLAGS:" $LDFLAGS
 echo
-echo "Test Suite Support" $TESTSUITE_SUPPORT
-if test x"$TESTSUITEDIR" != x; then
-echo "TESTSUITEDIR " $TESTSUITEDIR
+if test $TESTSUITEDIR; then
+  echo "Test Suite Support: enabled"
+  echo "TESTSUITEDIR = $TESTSUITEDIR"
+else
+  echo "Test Suite Support: disabled"
 fi
 echo "-------------------------------------------------------"
 echo

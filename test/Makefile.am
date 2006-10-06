@@ -19,7 +19,7 @@ docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
 
 ######################################################################################
 # Automake instructions for ./test subdir
-EXTRA_DIST=../test README.test
+EXTRA_DIST=README.test test-cmpi-samba.sh smb.conf smbusers smbpasswd system cim
 
 doc_DATA=README.test
 
