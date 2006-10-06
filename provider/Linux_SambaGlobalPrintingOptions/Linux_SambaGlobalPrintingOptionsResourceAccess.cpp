@@ -148,12 +148,10 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaGlobalPrintingOptionsInstanceName& anInstanceName) {
 
-    cout << "!!!!!!!!!!!!!!!!! We are in the getInstance Method" << endl;
     if (strcasecmp(DEFAULT_GLOBAL_NAME,anInstanceName.getName())!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
     }
 
-    cout << "!!!!!!!!!!!!!!!!! We are in the getInstance Method #2" << endl;
     Linux_SambaGlobalPrintingOptionsManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
     
@@ -171,13 +169,11 @@ namespace genProvider {
      const char** aPropertiesPP,
      const Linux_SambaGlobalPrintingOptionsManualInstance& aManualInstance) {
     
-    cout << "!!!!!!!!!!!!!!!!! We are in the setInstance Method" << endl;
     if (strcasecmp(DEFAULT_GLOBAL_NAME,aManualInstance.getInstanceName().getName())!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
     }
     cout << aManualInstance.getCupsOptions()<< endl;
     cout << aManualInstance.getMaxPrintjobs()<< endl;
-    cout << "!!!!!!!!!!!!!!!!! We are in the setInstance Method #2" << endl;
     if ( aManualInstance.isCupsOptionsSet() )
       set_global_option(CUPS_OPTIONS,aManualInstance.getCupsOptions());
     
