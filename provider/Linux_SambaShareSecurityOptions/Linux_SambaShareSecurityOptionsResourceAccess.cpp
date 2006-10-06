@@ -91,6 +91,7 @@ namespace genProvider {
 	char *option = (char *) malloc( 5*sizeof(char) );
 	sprintf(option,"%04d",aManualInstance.getDirectorySecurityMask());
 	set_share_option(aManualInstance.getInstanceName().getName(),DIRECTORY_SECURITY_MASK, option);
+        free(option);
       }
   };
 
