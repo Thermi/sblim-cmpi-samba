@@ -1,4 +1,17 @@
-dnl
+ dnl 
+ dnl (C) Copyright IBM Corp. 2005
+ dnl
+ dnl THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+ dnl ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ dnl CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+ dnl
+ dnl You can obtain a current copy of the Common Public License from
+ dnl http://www.opensource.org/licenses/cpl1.0.php
+ dnl
+ dnl Author:       Wolfgang Taphorn <taphorn@de.ibm.com>
+ dnl Date  :	   10/06/2006
+ dnl
+
 dnl The main function to check for the cmpi-base common header
 dnl Modifies the CPPFLAGS with the right include directory and sets
 dnl the 'have_SBLIMBASE' to either 'no' or 'yes'
