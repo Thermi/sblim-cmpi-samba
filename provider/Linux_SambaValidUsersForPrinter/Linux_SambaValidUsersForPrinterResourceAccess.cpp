@@ -500,9 +500,7 @@ namespace genProvider {
             SambaArrayConstIterator iter;
 
             for ( iter = g_array.begin(); iter != g_array.end(); ++iter) {
-              if(array.isPresent((*iter).c_str())) {
-                array.remove((*iter).c_str());
-              } else {
+              if(!array.isPresent((*iter).c_str())) {
                 array.add((*iter).c_str());
               }
             }
