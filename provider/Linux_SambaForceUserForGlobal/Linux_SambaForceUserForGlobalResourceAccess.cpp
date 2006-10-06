@@ -191,7 +191,9 @@ namespace genProvider {
     }
  
     char* user = get_global_option("force user");
-    if(!user) {
+    char* default_user = get_default_option("force user");
+
+    if(!user || (default_user && strcmp(default_user,user))) {
       set_global_option("force user",aManualInstance.getInstanceName().getPartComponent().getSambaUserName());
     } else {
       throw CmpiStatus(CMPI_RC_ERR_FAILED,"There is an existent instance already!");

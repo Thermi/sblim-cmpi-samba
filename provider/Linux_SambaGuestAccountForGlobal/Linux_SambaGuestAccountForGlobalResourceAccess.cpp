@@ -191,17 +191,28 @@ namespace genProvider {
     }
 
     char* user = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"guest account");
-   // if(!user)
+    char* default_user = get_default_option("guest account");
+
+    if(!user || (default_user && strcmp(default_user,user)))
       set_global_option("guest account",aManualInstance.getInstanceName().getPartComponent().getSambaUserName());
-   // else { 
-   //     SambaArray array = SambaArray(user);
-   //     if(array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())) {
-   //        throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exist!");
-   //     } else {
-   //        array.add(string(aManualInstance.getInstanceName().getPartComponent().getSambaUserName()));
-   //        set_global_option("guest account",array.toString().c_str()); 
-   //     }
-   // }  
+    else { 
+        SambaArray array = SambaArray(user);
+        SambaArray default_array = SambaArray();
+        if (default_user) default_array.populate(default_user);
+
+        if(array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName()) &&
+           !default_array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())) {
+           throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exist!");
+
+        } else if(!array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName()) &&
+                  !default_array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())) {
+           set_global_option("guest account", aManualInstance.getInstanceName().getPartComponent().getSambaUserName()); 
+
+        } else if(array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName()) &&
+                  default_array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())) {
+           set_global_option("guest account", NULL);
+        }
+    }  
     
     return aManualInstance.getInstanceName();
   }
