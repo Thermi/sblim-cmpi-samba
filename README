@@ -42,6 +42,7 @@ If checked out from CVS:
 Build-time Prerequisites
 ------------------------
 - CMPI enabled CIMOM installed (e.g. Pegasus 2.5)
+- CMPI C++ header files and library installed
 - automake 1.9.2 or higher
 - libtool 1.5.8 or higher 
 - tools-libra built and installed
@@ -49,11 +50,12 @@ Build-time Prerequisites
 Run-time Prerequisites
 ----------------------
 - CMPI enabled CIMOM installed 
-  Pegasus 2.5 requires Patch for Pegasus Bug 4220 
+- Pegasus 2.5 requires Patch for Pegasus Bug 4220
+- CMPI C++ library installed
 - CIM Schema Version 2.9 or higher loaded into the CIMOM's repository
 - CIMOM running as root
 - Python interpreter 
-- samba 3.0.10 or higher 
+- samba 3.0.10 or higher
 - correctly configured properties in smt_smb_ra_support.conf
  
 Build/Install Instructions
@@ -61,16 +63,19 @@ Build/Install Instructions
 
 The simplest way to compile and install this package is:
 
-  1. If checked out from CVS 'cd' to the directory containing the package's source code and type
+  1. Check your system to provide the libcmpiCppImpl.so library. If this is not the case, but
+     libcmpiCppImpl.so.1 is present, this can easily be linked to get the dependency solved.
+
+  2. If checked out from CVS 'cd' to the directory containing the package's source code and type
      './autoconfiscate.sh' to setup the autoconf/automake build environment.
        
-  2. Type './configure' to configure the package for your system.
+  3. Type './configure' to configure the package for your system.
 
-  3. Type 'make' to build the libraries
+  4. Type 'make' to build the libraries
 
-  4. su to root and type 'make install' to install the libraries and the header files.
+  5. su to root and type 'make install' to install the libraries and the header files.
 
-  5. su to root and type 'make postinstall' to load and register the classes/associations and their providers
+  6. su to root and type 'make postinstall' to load and register the classes/associations and their providers
 
 This package is GNU autotool enabled, refer to the file named INSTALL for generic instructions.
 
@@ -78,6 +83,13 @@ The generated configure script tries to determine where the CMPI header files
 are located. For this purpose it searches a set of well-known locations.
 The "canonical" location is /usr/include/cmpi or /usr/local/include/cmpi,
 depending on how configure is invoked.
+
+Additionally, configure checks for the 'libcmpiCppImpl.so' library because the providers are
+implemented in C++ and so the CMPI C++ library is required for the build process.
+tog-pegasus includes the libcmpiCppImpl.so.1 but this is not sufficient. tog-pegasus-devel
+should normally create the link from libcmpiCppImpl.so.1 to libcmpiCppImpl.so but it does 
+not since version 2.5.2. In the case you want to run the CMPI provider in the OpenPegasus
+environment, please create the link manually to fullfill this requirement.
 
 Further, configure "determines" where providers are to be installed. Actually,
 there's no detection logic. The provider directory will always be
