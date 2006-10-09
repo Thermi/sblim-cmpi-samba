@@ -83,7 +83,7 @@ pkgdata_DATA = $(SCHEMAS) $(REGISTRATIONS)
 
 pkgdata_SCRIPTS += provider-register.sh
 
-EXTRA_DIST += model $(pkgdata_SCRIPTS)
+EXTRA_DIST += $(pkgdata_SCRIPTS) $(pkgdata_DATA)
 
 
 # Register the provider(s) and class definition(s) to the current CIM server/CIMOM
