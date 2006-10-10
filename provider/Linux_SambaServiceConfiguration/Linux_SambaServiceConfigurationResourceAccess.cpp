@@ -111,14 +111,25 @@ namespace genProvider {
   }
 
   //----------------------------------------------------------------------------
-  /*
+  
   void
   Linux_SambaServiceConfigurationResourceAccess::setInstance(
      const CmpiContext& aContext,
      const CmpiBroker& aBroker,
      const char** aPropertiesPP,
-     const Linux_SambaServiceConfigurationManualInstance& aManualInstance) { }
-  */
+     const Linux_SambaServiceConfigurationManualInstance& aManualInstance) { 
+
+    if (strcasecmp(aManualInstance.getInstanceName().getName(),DEFAULT_SERVICE_NAME) != 0) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
+    }
+    
+    // Right now do not set the ConfigurationFile... 
+    //aManualInstance.setConfigurationFile(aManualInstance.getConfigurationFile());
+    
+     
+     
+  }
+  
   
   //----------------------------------------------------------------------------
   /*

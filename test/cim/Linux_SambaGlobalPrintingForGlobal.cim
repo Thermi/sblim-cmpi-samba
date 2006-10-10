@@ -7,15 +7,12 @@ sourceClass : Linux_SambaGlobalPrintingOptions
 targetClass : Linux_SambaGlobalOptions
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
-Expected Exception : NOT_SUPPORTED
 
 --------------------------------------------------------------------------------
 Instance                                                           enumInstances
-Expected Exception : NOT_SUPPORTED
 
 --------------------------------------------------------------------------------
 Instance                                                                     get
-Expected Exception : NOT_SUPPORTED
 
 --------------------------------------------------------------------------------
 Instance                                                                     set

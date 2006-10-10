@@ -130,14 +130,19 @@ namespace genProvider {
   }
 
   //----------------------------------------------------------------------------
-  /*
+  
   void
   Linux_SambaPrinterSecurityOptionsResourceAccess::setInstance(
      const CmpiContext& aContext,
      const CmpiBroker& aBroker,
      const char** aPropertiesPP,
-     const Linux_SambaPrinterSecurityOptionsManualInstance& aManualInstance) { }
-  */
+     const Linux_SambaPrinterSecurityOptionsManualInstance& aManualInstance) {
+
+    if (!service_exists(aManualInstance.getInstanceName().getName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
+    }
+  }
+  
   
   //----------------------------------------------------------------------------
   /*

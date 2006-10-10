@@ -71,13 +71,13 @@ namespace genProvider {
       const Linux_SambaPrinterSecurityOptionsInstanceName& anInstanceName);
 
   	
-    /*
+    
     virtual void setInstance(
       const CmpiContext& aContext,
       const CmpiBroker& aBroker,
       const char** aPropertiesPP,
       const Linux_SambaPrinterSecurityOptionsManualInstance& aManualInstance);
-    */
+    
   	
     /*
     virtual Linux_SambaPrinterSecurityOptionsInstanceName createInstance(

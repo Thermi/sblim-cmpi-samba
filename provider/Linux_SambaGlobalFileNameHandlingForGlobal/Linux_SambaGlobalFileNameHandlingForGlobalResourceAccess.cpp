@@ -38,7 +38,7 @@ namespace genProvider {
   }
     
   // intrinsic methods
-  /*
+  
   //----------------------------------------------------------------------------
   void
   Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::enumInstanceNames(
@@ -47,31 +47,63 @@ namespace genProvider {
      const char* aNameSpaceP,
      Linux_SambaGlobalFileNameHandlingForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-    int instanceNameN = 1;
-    for (int x=0; x < instanceNameN; ++x) {
-      
-      //place here the code retrieving your instanceName
-      
-      Linux_SambaGlobalFileNameHandlingForGlobalInstanceName instanceName;
-      
-    }      
-  
+    Linux_SambaGlobalFileNameHandlingForGlobalInstanceName instName;
+    instName.setNamespace(aNameSpaceP);
+
+    Linux_SambaGlobalOptionsInstanceName globalInstName;
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(DEFAULT_GLOBAL_NAME);
+    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+    instName.setManagedElement(globalInstName);
+
+    Linux_SambaGlobalFileNameHandlingOptionsInstanceName elemInstanceName;
+    elemInstanceName.setNamespace(aNameSpaceP);
+    elemInstanceName.setName(DEFAULT_GLOBAL_NAME);
+    elemInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+    instName.setSettingData(elemInstanceName);
+    anInstanceNameEnumeration.addElement(instName);  
   }
-  */
+  
   
   //----------------------------------------------------------------------------
-  /*
+  
   void
   Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::enumInstances(
     const CmpiContext& aContext,
     const CmpiBroker& aBroker,
      const char* aNameSpaceP,
      const char** aPropertiesPP,
-  	 Linux_SambaGlobalFileNameHandlingForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) { }
-  */
+  	 Linux_SambaGlobalFileNameHandlingForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
+
+    Linux_SambaGlobalFileNameHandlingForGlobalManualInstance manualInstance;
+
+    Linux_SambaGlobalFileNameHandlingForGlobalInstanceName instName;
+    instName.setNamespace(aNameSpaceP);
+
+    Linux_SambaGlobalOptionsInstanceName globalInstName;
+    globalInstName.setNamespace(aNameSpaceP);
+    globalInstName.setName(DEFAULT_GLOBAL_NAME);
+    globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+    instName.setManagedElement(globalInstName);
+
+    Linux_SambaGlobalFileNameHandlingOptionsInstanceName elemInstanceName;
+    elemInstanceName.setNamespace(aNameSpaceP);
+    elemInstanceName.setName(DEFAULT_GLOBAL_NAME);
+    elemInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+    instName.setSettingData(elemInstanceName);
+
+    manualInstance.setInstanceName(instName);
+    aManualInstanceEnumeration.addElement(manualInstance);
+
+  }
   
+ 
   //----------------------------------------------------------------------------
-  /*
+  
   Linux_SambaGlobalFileNameHandlingForGlobalManualInstance 
   Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess::getInstance(
     const CmpiContext& aContext,
@@ -82,8 +114,18 @@ namespace genProvider {
     Linux_SambaGlobalFileNameHandlingForGlobalManualInstance manualInstance;
 
   
-  }
-  */
+    if (strcasecmp(anInstanceName.getSettingData().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist. The specified GlobalFileNameHandlingOptions instance is unknown");
+    }
+
+    if (strcasecmp(anInstanceName.getManagedElement().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist. The specified GlobalOptions instance is unknown");
+    }
+
+    manualInstance.setInstanceName(anInstanceName);
+    return manualInstance;
+ }
+  
   //----------------------------------------------------------------------------
   /*
   void

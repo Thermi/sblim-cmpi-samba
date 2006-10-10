@@ -83,6 +83,7 @@ extern struct smbcache groupmap_cache;
 
 static char *__get_option(const char *share, const char *opt);
 static int __set_option(const char *share, const char *key, const char *value);
+static int create_service(const char* service);
 
 /* Helper functions */
 
@@ -957,8 +958,7 @@ static int init_usermap_cache(struct smbcache *cache){
     start_monitor(&usermap_file_monitor,usermap_file);
 
   /*set up threading */  
-  if (pthread_create(&(cache->thread),NULL,usermap_cache_flusher,
-  		                                              &usermap_cache)){
+  if (pthread_create(&(cache->thread),NULL,usermap_cache_flusher,&usermap_cache)){
     free(cache);
     goto out;
   }  
@@ -1005,8 +1005,7 @@ static int populate_cache(struct smbcache *cache){
   char *filename = get_conf(smb_conf,SMBCONF);
   int ret = 0;
 
-  if (pthread_create(&(cache->thread),NULL,smb_cache_flusher,
-		                                             &monitors_cache)){
+  if (pthread_create(&(cache->thread), NULL, smb_cache_flusher, &monitors_cache)){
     free(cache);
     goto out;
   }
@@ -1024,8 +1023,7 @@ static int populate_cache(struct smbcache *cache){
 }
 
 
-static struct smbopt *find_in_cache(struct smbcache *cache,
-				       const char *service){
+static struct smbopt *find_in_cache(struct smbcache *cache, const char *service){
   /* Search the global monitor for a specified cache hit. Finding it in the 
    * structure DOES NOT mean it is up to date. */
 	
@@ -1270,7 +1268,7 @@ static char **get_services_list(){
 }
 
 
-static char *__g_option(const char *share, const char *opt){
+static char *__g_option(const char *service, const char *opt){
   /* This functions returns the option value from the cache, if it exists */
 
   struct smbopt *opt_list;
@@ -1281,10 +1279,12 @@ static char *__g_option(const char *share, const char *opt){
     errno = -ENOMEM;
     return NULL;
   }
+  if (!opt) {
+  	return NULL;
+  }
   
   pthread_mutex_lock(&cache->mutex);
-  for (opt_list = find_in_cache(cache,share); opt_list; 
-                                              opt_list = opt_list->next)
+  for (opt_list = find_in_cache(cache,service); opt_list; opt_list = opt_list->next)
     if (!strcasecmp(opt_list->key,opt)){
       value = opt_list->value;
       break;
@@ -1373,21 +1373,19 @@ static int __check_default_and_global(const char *service, const char *key, cons
 }
 
 
-static int __set_option_no_cache(const char *share, const char *key, 
-				                    const char *value){
+static int __set_option_no_cache(const char *service, const char *key, const char *value){
 
   char *script = my_script_path("smt_smb_ra_set_option.py");
   char *filename = get_conf(smb_conf,SMBCONF);
   
-  if (service_exists(share) ) return -EINVAL;
+  if (service_exists(service) ) return -EINVAL;
 
-  return execScript4(script,filename,share,key,value);
+  return execScript4(script,filename,service,key,value);
   
 }
 
 
-static int __set_option_in_cache(struct smbcache *cache, 
-		        const char *share, const char* key, const char *value){
+static int __set_option_in_cache(struct smbcache *cache, const char *service, const char* key, const char *value){
 
   struct smbopt *opt, *first, *last = NULL;
   char *oldvalue = NULL;
@@ -1396,14 +1394,14 @@ static int __set_option_in_cache(struct smbcache *cache,
 
   for(; monitor; monitor = monitor->next ){
 
-    if ( !strcasecmp(monitor->service,share) ){
-      /* found share */
+    if ( !strcasecmp(monitor->service,service) ){
+      /* found service */
       first = opt = monitor->opts;
       
-      for(; opt; last = opt, opt = opt->next){
+      for(; opt; last = opt, opt = opt->next) {
 	if ( !strcasecmp(key,opt->key) ) {
 	  /* opt exists, update */
-	  if (value){
+	  if (value) {
 	    oldvalue = opt->value;
 	    opt->value = strdup(value);
 	    if (!opt->value){
@@ -1453,7 +1451,7 @@ static int __set_option(const char *service, const char *key, const char *value)
   char *official = get_official_name(key);
   struct smbcache *cache = __get_monitors_cache();
 
-  if (!cache) return -ENOENT;
+//  if (!cache) return -ENOENT;
   
   /* check if the new option is a default. If it is and there's a global opt
    * of the same value, it does not need to be in the opt_list. If there's
@@ -1469,15 +1467,18 @@ static int __set_option(const char *service, const char *key, const char *value)
     case 1:
       mvalue = NULL;
       break;
+    default:
+      printf("set_option: No value give\n");
   }
 
-  pthread_mutex_lock(&(cache->mutex));
-  if (!cache)
-    ret = __set_option_no_cache(service, official, (const char*)mvalue);
+  if (!cache) {
+    ret = __set_option_no_cache(service, official, mvalue);
+  } else {
+    pthread_mutex_lock(&(cache->mutex));
+    ret = __set_option_in_cache(cache,service,official, mvalue);
+    pthread_mutex_unlock(&(cache->mutex));
+  }
   
-  ret = __set_option_in_cache(cache,service,official,
-			               (const char*) mvalue);
-  pthread_mutex_unlock(&(cache->mutex));
   return ret;
 }
 
@@ -1510,10 +1511,9 @@ static int __delete_service_no_cache(const char *name){
   
   char *filename = get_conf(smb_conf,SMBCONF);
   char *script = my_script_path("smt_smb_ra_delete_service.py");
-  int i,ret;
+  int i,ret = -ENOENT;
   char **s_list;
   
-  ret = -ENOENT;
   if (!strcasecmp(name,GLOBAL))
     goto out;
   
@@ -1552,7 +1552,8 @@ static int __delete_service_in_cache(struct smbcache *cache,
   opts = cur->opts;
   while(opts){
     curopt = opts;
-    free(opts->key); free(opts->value);
+    free(opts->key);
+    free(opts->value);
     opts = opts->next;
     free(curopt);
   }
@@ -1565,9 +1566,7 @@ static int __delete_service_in_cache(struct smbcache *cache,
   global_services_list = remove_string_array(global_services_list,name);
   pthread_mutex_unlock(&services_list_mutex);
   ret = 0;
-
  out:
-  pthread_mutex_unlock(&(cache->mutex));
   return ret;
   
 }
@@ -1576,17 +1575,16 @@ static int __delete_service_in_cache(struct smbcache *cache,
 static int delete_service(const char *name){
 
   int ret = 0;
-  struct smbcache *cache;
-  
-  cache = __get_monitors_cache();
-  pthread_mutex_lock(&(cache->mutex));
+  struct smbcache *cache = __get_monitors_cache();
 
-  if (!cache)
+  if (!cache) {
     ret = __delete_service_no_cache(name);
 
-  ret = __delete_service_in_cache(cache,name);
-
-  pthread_mutex_unlock(&(cache->mutex));
+  } else {
+    pthread_mutex_lock(&(cache->mutex));
+    ret = __delete_service_in_cache(cache,name);
+    pthread_mutex_unlock(&(cache->mutex));
+  }
 
   return ret;
 }
@@ -1621,8 +1619,7 @@ static int __create_service_no_cache(const char *name){
 }
 
 
-static int __create_service_in_cache(struct smbcache *cache,
-				           const char *name ){
+static int __create_service_in_cache(struct smbcache *cache, const char *name ){
   /* This function has to update everything in cache cause the monitors only
    * detect changes in disk files */
 
@@ -1655,8 +1652,10 @@ static int __create_service_in_cache(struct smbcache *cache,
   return ret;
 
  err:
-  if(service && service->service) free(service->service);
-  free(service);
+  if(service) { 
+    if(service->service) free(service->service);
+    free(service);
+  }
   return ret;
 }
 
@@ -1666,12 +1665,14 @@ static int create_service(const char *name){
   int ret = 0;
   struct smbcache *cache = __get_monitors_cache();
 
-  pthread_mutex_lock(&(cache->mutex));
-  if (!cache)
+  if (!cache) {
     ret = __create_service_no_cache(name);
+  } else {
+    pthread_mutex_lock(&(cache->mutex));
+    ret = __create_service_in_cache(cache,name);
+    pthread_mutex_unlock(&(cache->mutex));
+  }
 
-  ret = __create_service_in_cache(cache,name);
-  pthread_mutex_unlock(&(cache->mutex));
   return ret;
 }
 
@@ -1711,6 +1712,11 @@ int service_exists(const char *name){
     }
   }
   
+  if(!ret && !strcasecmp(name,"global")) {
+    create_service("global");
+    ret=1;
+  }
+    
   pthread_mutex_unlock(&glob_mutex);
   return ret;
 }
@@ -1970,10 +1976,14 @@ static int __remove_usermap_reverse(const char *unix_name){
   while(p){
     
     if ( !strcmp(unix_name,p->value) ){
-      if (p==cache->content) cache->content = (void*) p->next;
-      else last->next = p->next;
+      if (p==cache->content) 
+          cache->content = (void*) p->next;
+      else 
+          last->next = p->next;
       if(p){
-	free(p->key); free(p->value); free(p);
+	      if(p->key) free(p->key);
+	      if(p->value) free(p->value);
+	      free(p);
       }
       p = last->next;
     }else{
@@ -2010,7 +2020,9 @@ static int __remove_usermap(const char *samba_name){
   else last->next = p->next;
   
   if(p){
-    free(p->key); free(p->value); free(p);
+    if(p->key) free(p->key);
+    if(p->value) free(p->value);
+    free(p);
     ret = 0;
   }
 
@@ -2023,29 +2035,30 @@ static int __remove_usermap(const char *samba_name){
 static int __add_usermap(const char *samba_name, const char *unix_name){
   /* Returns 0 on success or an error code on falilure */  
 
-  struct smbopt *new = NULL;
+  struct smbopt *newEntry = NULL;
   struct smbcache *cache = __get_usermap_cache();
   int ret = -ENOMEM;
      
   pthread_mutex_lock(&(cache->mutex));
 
-  new = (struct smbopt*) malloc(sizeof(struct smbopt));
-  if (!new) goto out;
+  newEntry = (struct smbopt*) malloc(sizeof(struct smbopt));
+  if (!newEntry) goto out;
   
-  new->next = NULL;
-  new->key = strdup(samba_name);
-  new->value = strdup(unix_name);
-  if (!new->key || !new->value) goto out;
+  newEntry->next = NULL;
+  newEntry->key = strdup(samba_name);
+  newEntry->value = strdup(unix_name);
+  if (!newEntry->key || !newEntry->value) goto out;
   
-  list_add(cache->content, new);
+  list_add(cache->content, newEntry);
   cache->is_dirty = 1;
   ret = 0;
 
  out:
-  if (ret && new){
-    free(new->key); free(new->value);
+  if (ret && newEntry){
+    if(newEntry->key) free(newEntry->key); 
+    if(newEntry->value) free(newEntry->value);
+    free(newEntry);
   } 
-  if (ret) free(new);
   pthread_mutex_unlock(&(cache->mutex));
   return ret;
 }
@@ -2084,6 +2097,15 @@ static int __delete_smb_user(const char *user){
   return ret;
 }
 
+static int __modify_smb_user(const char *user, const char *password) {
+
+  char *script = my_script_path("smt_smb_ra_modify_samba_user.py");
+  int ret;
+
+  ret = execScript2(script,user,password);
+  free(script);
+  return ret;
+}
 
 static char *__get_user_unix_name(const char* samba_user){
 
@@ -2179,6 +2201,60 @@ char **get_system_users_list(){
   pthread_mutex_unlock(&glob_mutex);
  
   return value;
+}
+
+int modify_samba_user(const char *samba_name, const char *unix_name_cur, 
+                      const char *unix_name_new, const char *password){
+
+     char **system_users, **samba_users;
+     int ret = 0;
+
+     pthread_mutex_lock(&glob_mutex);
+
+     system_users = __get_system_users_list();
+     samba_users = __get_samba_users_list();
+
+     if (!__entry_exists(samba_name,samba_users)) {
+        ret = -ENOENT;
+        goto out;
+     }
+
+     /*if (!unix_name_cur) unix_name_cur = samba_name;
+     
+     if (!__entry_exists(unix_name_cur,system_users)) {
+        ret = -ENOENT;
+        goto out;
+     }*/
+
+     if (!unix_name_new) unix_name_new = samba_name;
+
+     if (!__entry_exists(unix_name_new,system_users)) {
+        ret = -ENOENT;
+        goto out;
+     }
+
+     /* delete user mapping */
+     if (!strcmp(samba_name,unix_name_cur)) {
+        ret = __remove_usermap_reverse(unix_name_cur);
+        if (ret) goto out;
+     } else {
+        ret = __remove_usermap(samba_name);
+        if (ret) goto out;
+     }
+
+     if (!__entry_exists(unix_name_new,samba_users)) {
+        ret = __modify_smb_user(unix_name_new,password);
+        if (ret) goto out;
+     }
+
+     /* create mapping if necessary */
+     if (strcmp(samba_name,unix_name_new) )
+        ret = __add_usermap(samba_name,unix_name_new);
+
+ out:
+  pthread_mutex_unlock(&glob_mutex);
+  return ret;
+
 }
 
 int add_samba_user(const char *samba_name, const char *unix_name, 
@@ -2470,6 +2546,56 @@ int set_group_mapping(const char *samba_grp, const char *unix_grp){
   return ret;
 }
 
+int modify_samba_group(const char* samba_grp,const char* cur_unix_grp, const char *unix_grp){
+
+  char *script = my_script_path("smt_smb_ra_modify_samba_group.py");
+  char **smb_grps, **unx_grps;
+  char *funix_grp = NULL;
+  int ret=0;
+  char create_sys_grp[] = "0"; //Leave this as 0 in order NOT to create new
+                               //system groups
+
+
+  pthread_mutex_lock(&glob_mutex);
+  smb_grps = __get_samba_groups_list();
+  unx_grps = __get_system_groups_list();
+
+
+  /* check if samba group already exists - else return */
+  if (!__entry_exists(samba_grp,smb_grps) ) {
+    ret = -ENOENT;
+    goto out;
+  }
+
+  /*if (!cur_unix_grp) funix_grp = DEF_GRP;
+  else funix_grp = (char *) cur_unix_grp;
+
+  if (!__entry_exists((const char*)funix_grp,unx_grps) ){
+    ret = -ENOENT;
+    goto out;
+  }*/
+
+  if (!unix_grp) funix_grp = DEF_GRP;
+  else funix_grp = (char *) unix_grp;
+
+  if (!__entry_exists((const char*)funix_grp,unx_grps) ){
+    ret = -ENOENT;
+    goto out;
+  }
+
+
+  //Use this only if RA is to create a system group if it does not exist
+  /*
+  if (!__entry_exists((const char*)funix_grp,unx_grps) )
+    strcpy(create_sys_grp,"1");
+  */
+
+  ret = execScript3(script,samba_grp,funix_grp,create_sys_grp);
+ out:
+  free(script);
+  pthread_mutex_unlock(&glob_mutex);
+  return ret;
+}
 
 int create_samba_group(const char* samba_grp, const char *unix_grp){
 

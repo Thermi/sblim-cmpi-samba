@@ -38,7 +38,7 @@ namespace genProvider {
   }
     
   // intrinsic methods
-  /*
+  
   //----------------------------------------------------------------------------
   void
   Linux_SambaPrinterBrowseForPrinterResourceAccess::enumInstanceNames(
@@ -47,31 +47,81 @@ namespace genProvider {
      const char* aNameSpaceP,
      Linux_SambaPrinterBrowseForPrinterInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-    int instanceNameN = 1;
-    for (int x=0; x < instanceNameN; ++x) {
-      
-      //place here the code retrieving your instanceName
-      
-      Linux_SambaPrinterBrowseForPrinterInstanceName instanceName;
-      
-    }      
-  
+    char ** printers = get_samba_printers_list();
+
+    if (printers) {
+       for (int i = 0; printers[i]; i++) {
+
+         Linux_SambaPrinterBrowseForPrinterInstanceName instName;
+         instName.setNamespace(aNameSpaceP);
+
+         Linux_SambaPrinterOptionsInstanceName printerInstName;
+         printerInstName.setNamespace(aNameSpaceP);
+         printerInstName.setName(printers[i]);
+         printerInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setManagedElement(printerInstName);
+
+         Linux_SambaPrinterBrowseOptionsInstanceName elemInstanceName;
+         elemInstanceName.setNamespace(aNameSpaceP);
+         elemInstanceName.setName(printers[i]);
+         elemInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setSettingData(elemInstanceName);
+
+         anInstanceNameEnumeration.addElement(instName);
+
+      }
+    }
+        
   }
-  */
+  
   
   //----------------------------------------------------------------------------
-  /*
+  
   void
   Linux_SambaPrinterBrowseForPrinterResourceAccess::enumInstances(
     const CmpiContext& aContext,
     const CmpiBroker& aBroker,
      const char* aNameSpaceP,
      const char** aPropertiesPP,
-  	 Linux_SambaPrinterBrowseForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) { }
-  */
+  	 Linux_SambaPrinterBrowseForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) {
+
+   
+    char ** printers = get_samba_printers_list();
+
+    if (printers) {
+       for (int i = 0; printers[i]; i++) {
+
+         Linux_SambaPrinterBrowseForPrinterManualInstance manualInstance;
+
+         Linux_SambaPrinterBrowseForPrinterInstanceName instName;
+         instName.setNamespace(aNameSpaceP);
+
+         Linux_SambaPrinterOptionsInstanceName printerInstName;
+         printerInstName.setNamespace(aNameSpaceP);
+         printerInstName.setName(printers[i]);
+         printerInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setManagedElement(printerInstName);
+
+         Linux_SambaPrinterBrowseOptionsInstanceName elemInstanceName;
+         elemInstanceName.setNamespace(aNameSpaceP);
+         elemInstanceName.setName(printers[i]);
+         elemInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setSettingData(elemInstanceName);
+
+         manualInstance.setInstanceName(instName);
+         aManualInstanceEnumeration.addElement(manualInstance);
+
+      }
+    }
+ }
+  
   
   //----------------------------------------------------------------------------
-  /*
+  
   Linux_SambaPrinterBrowseForPrinterManualInstance 
   Linux_SambaPrinterBrowseForPrinterResourceAccess::getInstance(
     const CmpiContext& aContext,
@@ -81,9 +131,32 @@ namespace genProvider {
 
     Linux_SambaPrinterBrowseForPrinterManualInstance manualInstance;
 
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(anInstanceName.getManagedElement().getName(),printers[i])==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified PrinterOptions instance is unknown!");
+        }
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(anInstanceName.getSettingData().getName(),printers[i])==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified PrinterBrowseOptions instance is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    manualInstance.setInstanceName(anInstanceName);
+    return manualInstance;
   
   }
-  */
+  
   //----------------------------------------------------------------------------
   /*
   void

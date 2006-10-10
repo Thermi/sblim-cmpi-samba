@@ -50,30 +50,28 @@ namespace genProvider {
     virtual ~Linux_SambaCommonSecurityForPrinterResourceAccess() ;
     
     /* intrinsic methods */
-    /*
+    
     virtual void enumInstanceNames(
       const CmpiContext& aContext,
       const CmpiBroker& aBroker,
       const char* aNameSpaceP,
       Linux_SambaCommonSecurityForPrinterInstanceNameEnumeration& anInstanceNameEnumeration);
-    */
+    
   	
-    /*
     virtual void enumInstances(
       const CmpiContext& aContext,
       const CmpiBroker& aBroker,
       const char* aNameSpaceP,
       const char** aPropertiesPP,
   	  Linux_SambaCommonSecurityForPrinterManualInstanceEnumeration& aManualInstanceEnumeration);
-  	*/
   	
-    /*
+    
     virtual Linux_SambaCommonSecurityForPrinterManualInstance getInstance(
       const CmpiContext& aContext,
       const CmpiBroker& aBroker,
       const char** aPropertiesPP,
       const Linux_SambaCommonSecurityForPrinterInstanceName& anInstanceName);
-    */
+
   	
     /*
     virtual void setInstance(

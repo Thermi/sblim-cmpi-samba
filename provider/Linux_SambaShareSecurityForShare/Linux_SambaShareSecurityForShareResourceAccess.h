@@ -50,30 +50,30 @@ namespace genProvider {
     virtual ~Linux_SambaShareSecurityForShareResourceAccess() ;
     
     /* intrinsic methods */
-    /*
+    
     virtual void enumInstanceNames(
       const CmpiContext& aContext,
       const CmpiBroker& aBroker,
       const char* aNameSpaceP,
       Linux_SambaShareSecurityForShareInstanceNameEnumeration& anInstanceNameEnumeration);
-    */
+    
   	
-    /*
+    
     virtual void enumInstances(
       const CmpiContext& aContext,
       const CmpiBroker& aBroker,
       const char* aNameSpaceP,
       const char** aPropertiesPP,
   	  Linux_SambaShareSecurityForShareManualInstanceEnumeration& aManualInstanceEnumeration);
-  	*/
   	
-    /*
+  	
+    
     virtual Linux_SambaShareSecurityForShareManualInstance getInstance(
       const CmpiContext& aContext,
       const CmpiBroker& aBroker,
       const char** aPropertiesPP,
       const Linux_SambaShareSecurityForShareInstanceName& anInstanceName);
-    */
+    
   	
     /*
     virtual void setInstance(

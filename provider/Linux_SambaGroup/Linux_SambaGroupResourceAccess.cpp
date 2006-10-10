@@ -128,14 +128,31 @@ namespace genProvider {
   }
 
   //----------------------------------------------------------------------------
-  /*
+ 
   void
   Linux_SambaGroupResourceAccess::setInstance(
      const CmpiContext& aContext,
      const CmpiBroker& aBroker,
      const char** aPropertiesPP,
-     const Linux_SambaGroupManualInstance& aManualInstance) { }
-  */
+     const Linux_SambaGroupManualInstance& aManualInstance) { 
+  
+    int ret;
+    char* option;
+    option = get_unix_group_name(aManualInstance.getInstanceName().getSambaGroupName());
+
+    if(ret = modify_samba_group(aManualInstance.getInstanceName().getSambaGroupName(), option, aManualInstance.getSystemGroupName())){
+      if (ret==-ENOENT)
+        throw CmpiStatus(CMPI_RC_ERR_FAILED,"The specified SystemGroupName or UnixGroupName is not known in the system");
+      else
+        throw CmpiStatus(CMPI_RC_ERR_FAILED,"Instance could not be added!");
+    }
+  }
+
+
+
+
+
+
   
   //----------------------------------------------------------------------------
   

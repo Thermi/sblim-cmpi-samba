@@ -148,14 +148,26 @@ namespace genProvider {
   }
 
   //----------------------------------------------------------------------------
-  /*
+  
   void
   Linux_SambaUserResourceAccess::setInstance(
      const CmpiContext& aContext,
      const CmpiBroker& aBroker,
      const char** aPropertiesPP,
-     const Linux_SambaUserManualInstance& aManualInstance) { }
-  */
+     const Linux_SambaUserManualInstance& aManualInstance) { 
+      
+     int ret;
+     char * option = get_user_unix_name(aManualInstance.getInstanceName().getSambaUserName());
+
+    if(ret = modify_samba_user(aManualInstance.getInstanceName().getSambaUserName(), option, aManualInstance.getSystemUserName(), aManualInstance.getSambaUserPassword())){
+      if (ret==-EEXIST)
+	throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exists!");
+      else if(ret==-ENOENT)
+        throw CmpiStatus(CMPI_RC_ERR_FAILED,"The specified SystemUserName is not known in the system");
+      else
+	throw CmpiStatus(CMPI_RC_ERR_FAILED,"Instance could not be added!");
+    }
+  }
   
   //----------------------------------------------------------------------------
 

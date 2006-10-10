@@ -50,30 +50,30 @@ namespace genProvider {
     virtual ~Linux_SambaGlobalFileNameHandlingForGlobalResourceAccess() ;
     
     /* intrinsic methods */
-    /*
+    
     virtual void enumInstanceNames(
       const CmpiContext& aContext,
       const CmpiBroker& aBroker,
       const char* aNameSpaceP,
       Linux_SambaGlobalFileNameHandlingForGlobalInstanceNameEnumeration& anInstanceNameEnumeration);
-    */
+    
   	
-    /*
+    
     virtual void enumInstances(
       const CmpiContext& aContext,
       const CmpiBroker& aBroker,
       const char* aNameSpaceP,
       const char** aPropertiesPP,
   	  Linux_SambaGlobalFileNameHandlingForGlobalManualInstanceEnumeration& aManualInstanceEnumeration);
-  	*/
   	
-    /*
+  	
+    
     virtual Linux_SambaGlobalFileNameHandlingForGlobalManualInstance getInstance(
       const CmpiContext& aContext,
       const CmpiBroker& aBroker,
       const char** aPropertiesPP,
       const Linux_SambaGlobalFileNameHandlingForGlobalInstanceName& anInstanceName);
-    */
+    
   	
     /*
     virtual void setInstance(

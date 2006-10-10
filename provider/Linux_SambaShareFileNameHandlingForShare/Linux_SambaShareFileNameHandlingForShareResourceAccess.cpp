@@ -38,7 +38,7 @@ namespace genProvider {
   }
     
   // intrinsic methods
-  /*
+  
   //----------------------------------------------------------------------------
   void
   Linux_SambaShareFileNameHandlingForShareResourceAccess::enumInstanceNames(
@@ -47,31 +47,81 @@ namespace genProvider {
      const char* aNameSpaceP,
      Linux_SambaShareFileNameHandlingForShareInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-    int instanceNameN = 1;
-    for (int x=0; x < instanceNameN; ++x) {
-      
-      //place here the code retrieving your instanceName
-      
-      Linux_SambaShareFileNameHandlingForShareInstanceName instanceName;
-      
-    }      
+    char ** shares = get_shares_list();
+
+    if (shares) {
+       for (int i = 0; shares[i]; i++) {
+
+         Linux_SambaShareFileNameHandlingForShareInstanceName instName;
+         instName.setNamespace(aNameSpaceP);
+
+         Linux_SambaShareOptionsInstanceName shareInstName;
+         shareInstName.setNamespace(aNameSpaceP);
+         shareInstName.setName(shares[i]);
+         shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setManagedElement(shareInstName);
+
+         Linux_SambaShareFileNameHandlingOptionsInstanceName elemInstanceName;
+         elemInstanceName.setNamespace(aNameSpaceP);
+         elemInstanceName.setName(shares[i]);
+         elemInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setSettingData(elemInstanceName);
+
+         anInstanceNameEnumeration.addElement(instName);
+
+      }
+    }
   
   }
-  */
+  
   
   //----------------------------------------------------------------------------
-  /*
+  
   void
   Linux_SambaShareFileNameHandlingForShareResourceAccess::enumInstances(
     const CmpiContext& aContext,
     const CmpiBroker& aBroker,
      const char* aNameSpaceP,
      const char** aPropertiesPP,
-  	 Linux_SambaShareFileNameHandlingForShareManualInstanceEnumeration& aManualInstanceEnumeration) { }
-  */
+  	 Linux_SambaShareFileNameHandlingForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
+
+    char ** shares = get_shares_list();
+
+    if (shares) {
+       for (int i = 0; shares[i]; i++) {
+
+         Linux_SambaShareFileNameHandlingForShareManualInstance manualInstance;
+
+         Linux_SambaShareFileNameHandlingForShareInstanceName instName;
+         instName.setNamespace(aNameSpaceP);
+
+         Linux_SambaShareOptionsInstanceName shareInstName;
+         shareInstName.setNamespace(aNameSpaceP);
+         shareInstName.setName(shares[i]);
+         shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setManagedElement(shareInstName);
+
+         Linux_SambaShareFileNameHandlingOptionsInstanceName elemInstanceName;
+         elemInstanceName.setNamespace(aNameSpaceP);
+         elemInstanceName.setName(shares[i]);
+         elemInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setSettingData(elemInstanceName);
+
+         manualInstance.setInstanceName(instName);
+         aManualInstanceEnumeration.addElement(manualInstance);
+
+      }
+    }
+          
+  }
+  
   
   //----------------------------------------------------------------------------
-  /*
+  
   Linux_SambaShareFileNameHandlingForShareManualInstance 
   Linux_SambaShareFileNameHandlingForShareResourceAccess::getInstance(
     const CmpiContext& aContext,
@@ -81,9 +131,33 @@ namespace genProvider {
 
     Linux_SambaShareFileNameHandlingForShareManualInstance manualInstance;
 
-  
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(anInstanceName.getManagedElement().getName(),shares[i])==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified ShareOptions instance is unknown!");
+        }
+        valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(anInstanceName.getSettingData().getName(),shares[i])==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified ShareFileNameHandlingOptions instance is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    manualInstance.setInstanceName(anInstanceName);
+    return manualInstance;
+             
   }
-  */
+  
   //----------------------------------------------------------------------------
   /*
   void

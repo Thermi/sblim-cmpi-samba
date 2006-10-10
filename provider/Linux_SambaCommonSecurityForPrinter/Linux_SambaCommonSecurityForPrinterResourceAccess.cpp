@@ -38,7 +38,7 @@ namespace genProvider {
   }
     
   // intrinsic methods
-  /*
+  
   //----------------------------------------------------------------------------
   void
   Linux_SambaCommonSecurityForPrinterResourceAccess::enumInstanceNames(
@@ -47,31 +47,81 @@ namespace genProvider {
      const char* aNameSpaceP,
      Linux_SambaCommonSecurityForPrinterInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-    int instanceNameN = 1;
-    for (int x=0; x < instanceNameN; ++x) {
-      
-      //place here the code retrieving your instanceName
-      
-      Linux_SambaCommonSecurityForPrinterInstanceName instanceName;
-      
-    }      
-  
+    char ** printers = get_samba_printers_list();
+
+    if (printers) {
+       for(int i =0; printers[i];i++) {
+
+         Linux_SambaCommonSecurityForPrinterInstanceName instName;
+         instName.setNamespace(aNameSpaceP);
+
+         Linux_SambaPrinterOptionsInstanceName printerInstName;
+         printerInstName.setNamespace(aNameSpaceP);
+         printerInstName.setName(printers[i]);
+         printerInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setManagedElement(printerInstName);
+
+         Linux_SambaCommonSecurityOptionsInstanceName elemInstanceName;
+         elemInstanceName.setNamespace(aNameSpaceP);
+         elemInstanceName.setName(printers[i]);
+         elemInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setSettingData(elemInstanceName);
+
+         anInstanceNameEnumeration.addElement(instName);
+          
+       }
+    }
+
   }
-  */
+  
   
   //----------------------------------------------------------------------------
-  /*
+  
   void
   Linux_SambaCommonSecurityForPrinterResourceAccess::enumInstances(
     const CmpiContext& aContext,
     const CmpiBroker& aBroker,
      const char* aNameSpaceP,
      const char** aPropertiesPP,
-  	 Linux_SambaCommonSecurityForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) { }
-  */
+  	 Linux_SambaCommonSecurityForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) {
+
+    char ** printers = get_samba_printers_list();
+
+    if (printers) {
+       for(int i =0; printers[i];i++) {
+
+         Linux_SambaCommonSecurityForPrinterManualInstance manualInstance;      
+   
+         Linux_SambaCommonSecurityForPrinterInstanceName instName;
+         instName.setNamespace(aNameSpaceP);
+
+         Linux_SambaPrinterOptionsInstanceName printerInstName;
+         printerInstName.setNamespace(aNameSpaceP);
+         printerInstName.setName(printers[i]);
+         printerInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setManagedElement(printerInstName);
+
+         Linux_SambaCommonSecurityOptionsInstanceName elemInstanceName;
+         elemInstanceName.setNamespace(aNameSpaceP);
+         elemInstanceName.setName(printers[i]);
+         elemInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setSettingData(elemInstanceName);
+   
+         manualInstance.setInstanceName(instName);
+         aManualInstanceEnumeration.addElement(manualInstance);
+          
+       }
+    }
+
+  }
+  
   
   //----------------------------------------------------------------------------
-  /*
+  
   Linux_SambaCommonSecurityForPrinterManualInstance 
   Linux_SambaCommonSecurityForPrinterResourceAccess::getInstance(
     const CmpiContext& aContext,
@@ -81,9 +131,29 @@ namespace genProvider {
 
     Linux_SambaCommonSecurityForPrinterManualInstance manualInstance;
 
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(anInstanceName.getManagedElement().getName(),printers[i])==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified PrinterOptions instance is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }   
+
+    if (!service_exists(anInstanceName.getSettingData().getName())) {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    manualInstance.setInstanceName(anInstanceName);
+    return manualInstance;
   
   }
-  */
+  
   //----------------------------------------------------------------------------
   /*
   void
@@ -199,6 +269,7 @@ namespace genProvider {
     Linux_SambaCommonSecurityOptionsInstanceEnumeration& anInstanceEnumeration) {
 
     char ** printers = get_samba_printers_list();
+
     if(printers) {
     int valid_printer = false;
         for(int i=0;printers[i];i++) {

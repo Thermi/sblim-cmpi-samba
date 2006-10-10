@@ -285,7 +285,13 @@ extern "C" {
   /* (samba_user_name). Returns a list of samba groups to which this samba user
    * belongs. The last element of the list points to NULL. Returns NULL on 
    * failure. */ 
-  
+
+  int modify_samba_user(const char*, const char*, const char*, const char*);
+  /* (samba_user_name, unix_user_name_cur, unix_user_name_new, password). This adds a 
+   * samba user to samba. If unix_user_name_new is NULL, then it will make the unix 
+   * name be the same of the samba user name. Returns 0 on success or and error 
+   * code on failure */
+
   int add_samba_user(const char*, const char*, const char*);
   /* (samba_user_name, unix_user_name, samba_group_name, password). This adds a 
    * samba user to samba. If unix_user_name is NULL, then it will make the unix 
@@ -296,7 +302,12 @@ extern "C" {
   /* (samba_user_name). This deletes the specified samba user. This will also
    * delete the corresponding system user name. Returns 0 on success or an error
    * code on failure */
-  
+
+  int modify_samba_group(const char*, const char*, const char*);
+   /* (samba_group_name, current_system_group, target_group_name). This modifies the 
+   * system group to which the samba group belongs. Returns 0 on success and error
+   * code on failure */
+
   int add_user_to_group(const char*, const char*);
   /* (samba_username, samba_groupname). Adds samba user to the specified samba
    * group. Returns 0 on sucess or an error code on failure */

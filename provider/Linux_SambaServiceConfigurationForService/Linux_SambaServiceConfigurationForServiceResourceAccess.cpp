@@ -38,40 +38,74 @@ namespace genProvider {
   }
     
   // intrinsic methods
-  /*
+  
   //----------------------------------------------------------------------------
   void
   Linux_SambaServiceConfigurationForServiceResourceAccess::enumInstanceNames(
      const CmpiContext& aContext,
      const CmpiBroker& aBroker,
      const char* aNameSpaceP,
-     Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& anInstanceNameEnumeration) {
+     Linux_SambaServiceConfigurationForServiceInstanceNameEnumeration& serviceInstNameEnumeration) {
       
-    int instanceNameN = 1;
-    for (int x=0; x < instanceNameN; ++x) {
-      
-      //place here the code retrieving your instanceName
-      
-      Linux_SambaServiceConfigurationForServiceInstanceName instanceName;
-      
-    }      
-  
+         Linux_SambaServiceConfigurationForServiceInstanceName instName;
+         instName.setNamespace(aNameSpaceP);
+
+         Linux_SambaServiceInstanceName serviceInstName;
+         serviceInstName.setNamespace(aNameSpaceP);
+         serviceInstName.setName(DEFAULT_SERVICE_NAME);
+         serviceInstName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
+         serviceInstName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
+         serviceInstName.setSystemName(DEFAULT_SYSTEM_NAME);
+
+         instName.setElement(serviceInstName);
+
+         Linux_SambaServiceConfigurationInstanceName elemInstanceName;
+         elemInstanceName.setNamespace(aNameSpaceP);
+         elemInstanceName.setName(DEFAULT_SERVICE_NAME);
+
+         instName.setConfiguration(elemInstanceName);
+
+         serviceInstNameEnumeration.addElement(instName);
   }
-  */
+  
   
   //----------------------------------------------------------------------------
-  /*
+  
   void
   Linux_SambaServiceConfigurationForServiceResourceAccess::enumInstances(
     const CmpiContext& aContext,
     const CmpiBroker& aBroker,
      const char* aNameSpaceP,
      const char** aPropertiesPP,
-  	 Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& aManualInstanceEnumeration) { }
-  */
+  	 Linux_SambaServiceConfigurationForServiceManualInstanceEnumeration& aManualInstanceEnumeration) {
+
+         Linux_SambaServiceConfigurationForServiceManualInstance manualInstance;
+         Linux_SambaServiceConfigurationForServiceInstanceName instName;
+         instName.setNamespace(aNameSpaceP);
+
+         Linux_SambaServiceInstanceName serviceInstName;
+         serviceInstName.setNamespace(aNameSpaceP);
+         serviceInstName.setName(DEFAULT_SERVICE_NAME);
+         serviceInstName.setCreationClassName(DEFAULT_CREATION_CLASS_NAME);
+         serviceInstName.setSystemCreationClassName(DEFAULT_SYSTEM_CREATION_CLASS_NAME);
+         serviceInstName.setSystemName(DEFAULT_SYSTEM_NAME);
+
+         instName.setElement(serviceInstName);
+
+         Linux_SambaServiceConfigurationInstanceName elemInstanceName;
+         elemInstanceName.setNamespace(aNameSpaceP);
+         elemInstanceName.setName(DEFAULT_SERVICE_NAME);
+
+         instName.setConfiguration(elemInstanceName);
+
+         manualInstance.setInstanceName(instName);
+         aManualInstanceEnumeration.addElement(manualInstance);
+    
+  }
+  
   
   //----------------------------------------------------------------------------
-  /*
+  
   Linux_SambaServiceConfigurationForServiceManualInstance 
   Linux_SambaServiceConfigurationForServiceResourceAccess::getInstance(
     const CmpiContext& aContext,
@@ -82,8 +116,18 @@ namespace genProvider {
     Linux_SambaServiceConfigurationForServiceManualInstance manualInstance;
 
   
-  }
-  */
+    if (strcasecmp(anInstanceName.getConfiguration().getName(),DEFAULT_SERVICE_NAME)!=0) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist. The specified ServiceConfiguration instance is unknown");
+    }
+
+    if (strcasecmp(anInstanceName.getElement().getName(),DEFAULT_SERVICE_NAME)!=0) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist. The specified Service instance is unknown");
+    }
+
+    manualInstance.setInstanceName(anInstanceName);
+    return manualInstance;
+}
+  
   //----------------------------------------------------------------------------
   /*
   void

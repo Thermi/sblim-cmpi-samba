@@ -93,7 +93,9 @@ libRaToolsSmb_la_LIBADD = \
 pkgdata_SCRIPTS += \
         scripts/smt_smb_ra_add_user_to_group.py \
         scripts/smt_smb_ra_create_samba_group.py \
+        scripts/smt_smb_ra_modify_samba_group.py \
         scripts/smt_smb_ra_create_samba_user.py \
+        scripts/smt_smb_ra_modify_samba_user.py \
         scripts/smt_smb_ra_create_sys_user.py \
         scripts/smt_smb_ra_delete_samba_group.py \
         scripts/smt_smb_ra_delete_samba_user.py \

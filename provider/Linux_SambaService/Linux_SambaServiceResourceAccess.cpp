@@ -119,14 +119,36 @@ namespace genProvider {
   }
 
   //----------------------------------------------------------------------------
-  /*
+  
   void
   Linux_SambaServiceResourceAccess::setInstance(
      const CmpiContext& aContext,
      const CmpiBroker& aBroker,
      const char** aPropertiesPP,
-     const Linux_SambaServiceManualInstance& aManualInstance) { }
-  */
+     const Linux_SambaServiceManualInstance& aManualInstance) { 
+
+     if (strcasecmp(aManualInstance.getInstanceName().getName(),DEFAULT_SERVICE_NAME)!=0) {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!"); 
+     }
+     
+     if ((aManualInstance.getStarted()!=true) && 
+         (aManualInstance.getStarted()!=false)) {
+        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER, "The instance has invalid parameters for Started!");
+     } 
+     
+     if ((aManualInstance.getStarted()==true) && !(aManualInstance.isStartedSet())) {
+        if (start_server()) {
+            throw CmpiStatus(CMPI_RC_ERR_FAILED, "The service could not be Started!");
+        }
+        
+     } else if ( (aManualInstance.getStarted()==false) && (aManualInstance.isStartedSet())  ) {
+        if (stop_server()) {
+            throw CmpiStatus(CMPI_RC_ERR_FAILED, "The service could not be Stopped!");
+        }
+     }
+
+  }
+  
   
   //----------------------------------------------------------------------------
   /*

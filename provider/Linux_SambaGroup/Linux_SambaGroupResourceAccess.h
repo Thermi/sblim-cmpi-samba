@@ -71,13 +71,13 @@ namespace genProvider {
       const Linux_SambaGroupInstanceName& anInstanceName);
 
   	
-    /*
+    
     virtual void setInstance(
       const CmpiContext& aContext,
       const CmpiBroker& aBroker,
       const char** aPropertiesPP,
       const Linux_SambaGroupManualInstance& aManualInstance);
-    */
+    
   	
 
     virtual Linux_SambaGroupInstanceName createInstance(

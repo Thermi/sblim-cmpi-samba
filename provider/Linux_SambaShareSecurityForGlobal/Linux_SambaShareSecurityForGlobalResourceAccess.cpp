@@ -38,7 +38,7 @@ namespace genProvider {
   }
     
   // intrinsic methods
-  /*
+  
   //----------------------------------------------------------------------------
   void
   Linux_SambaShareSecurityForGlobalResourceAccess::enumInstanceNames(
@@ -47,31 +47,81 @@ namespace genProvider {
      const char* aNameSpaceP,
      Linux_SambaShareSecurityForGlobalInstanceNameEnumeration& anInstanceNameEnumeration) {
       
-    int instanceNameN = 1;
-    for (int x=0; x < instanceNameN; ++x) {
-      
-      //place here the code retrieving your instanceName
-      
-      Linux_SambaShareSecurityForGlobalInstanceName instanceName;
-      
-    }      
+    char ** shares = get_shares_list();
+
+    if (shares) {
+       for (int i = 0; shares[i]; i++) {
+
+         Linux_SambaShareSecurityForGlobalInstanceName instName;
+         instName.setNamespace(aNameSpaceP);
+
+         Linux_SambaGlobalOptionsInstanceName globalInstName;
+         globalInstName.setNamespace(aNameSpaceP);
+         globalInstName.setName(DEFAULT_GLOBAL_NAME);
+         globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setManagedElement(globalInstName);
+
+         Linux_SambaShareSecurityOptionsInstanceName elemInstanceName;
+         elemInstanceName.setNamespace(aNameSpaceP);
+         elemInstanceName.setName(shares[i]);
+         elemInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setSettingData(elemInstanceName);
+
+         anInstanceNameEnumeration.addElement(instName);
+
+      }
+    }
   
   }
-  */
+  
   
   //----------------------------------------------------------------------------
-  /*
+  
   void
   Linux_SambaShareSecurityForGlobalResourceAccess::enumInstances(
     const CmpiContext& aContext,
     const CmpiBroker& aBroker,
      const char* aNameSpaceP,
      const char** aPropertiesPP,
-  	 Linux_SambaShareSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) { }
-  */
+  	 Linux_SambaShareSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) { 
+   
+    char ** shares = get_shares_list();
+
+    if (shares) {
+       for (int i = 0; shares[i]; i++) {
+
+         Linux_SambaShareSecurityForGlobalManualInstance manualInstance;
+
+         Linux_SambaShareSecurityForGlobalInstanceName instName;
+         instName.setNamespace(aNameSpaceP);
+
+         Linux_SambaGlobalOptionsInstanceName globalInstName;
+         globalInstName.setNamespace(aNameSpaceP);
+         globalInstName.setName(DEFAULT_GLOBAL_NAME);
+         globalInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setManagedElement(globalInstName);
+
+         Linux_SambaShareSecurityOptionsInstanceName elemInstanceName;
+         elemInstanceName.setNamespace(aNameSpaceP);
+         elemInstanceName.setName(shares[i]);
+         elemInstanceName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+         instName.setSettingData(elemInstanceName);
+
+         manualInstance.setInstanceName(instName);
+         aManualInstanceEnumeration.addElement(manualInstance);
+
+      }
+    }
+    
+  }
+  
   
   //----------------------------------------------------------------------------
-  /*
+  
   Linux_SambaShareSecurityForGlobalManualInstance 
   Linux_SambaShareSecurityForGlobalResourceAccess::getInstance(
     const CmpiContext& aContext,
@@ -81,9 +131,29 @@ namespace genProvider {
 
     Linux_SambaShareSecurityForGlobalManualInstance manualInstance;
 
-  
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(anInstanceName.getSettingData().getName(),shares[i])==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified ShareSecurityOptions instance is unknown!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    if (strcasecmp(anInstanceName.getManagedElement().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist. The specified GlobalOptions instance is unknown");
+    }
+
+    manualInstance.setInstanceName(anInstanceName);
+    return manualInstance;
+   
   }
-  */
+  
   //----------------------------------------------------------------------------
   /*
   void
