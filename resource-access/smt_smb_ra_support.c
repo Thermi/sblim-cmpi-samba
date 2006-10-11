@@ -1334,7 +1334,6 @@ char *get_default_option(const char *opt) {
   official = get_official_name(opt);
   value = get_default_value(official);
 
-  if(official)free(official);
   return value;
 }
 

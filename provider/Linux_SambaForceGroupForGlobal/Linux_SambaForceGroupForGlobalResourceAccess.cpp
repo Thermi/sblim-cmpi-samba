@@ -164,11 +164,26 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceGroupForGlobalManualInstance& aManualInstance) {
     
-    char* group = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force group");
-    
-    if(group && validGroup(group))
-      set_global_option("force group",group);
-    
+    if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
+    }
+
+    if(!validGroup(aManualInstance.getInstanceName().getPartComponent().getSambaGroupName())){
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba Group does not exist!");
+    }
+
+    char* global_group = get_global_option("force group");
+    char* default_group = get_default_option("force group");
+
+    if (!global_group || (default_group && !strcmp(global_group,default_group))) {
+        if (default_group && !strcmp(default_group,aManualInstance.getInstanceName().getPartComponent().getSambaGroupName())) {
+            set_global_option("force group", NULL);
+        } else {
+            set_global_option("force group", aManualInstance.getInstanceName().getPartComponent().getSambaGroupName());
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exist!");
+    }
     return aManualInstance.getInstanceName();
   }
 
@@ -181,7 +196,21 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceGroupForGlobalInstanceName& anInstanceName) {
     
-    set_global_option("force group",NULL);
+    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
+    }
+
+    if(!validGroup(anInstanceName.getPartComponent().getSambaGroupName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba group does not exist!");
+    }
+
+    char* global_group = get_global_option("force group");
+
+    if (!global_group || strcmp(global_group, anInstanceName.getPartComponent().getSambaGroupName())) {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified Samba Group is not a 'force group' for 'global'");
+    } else {
+        set_global_option("force group", NULL);
+    }
   }
 
 	

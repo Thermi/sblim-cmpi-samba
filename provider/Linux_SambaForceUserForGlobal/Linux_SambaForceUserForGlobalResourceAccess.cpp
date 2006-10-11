@@ -186,19 +186,24 @@ namespace genProvider {
     if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
     }
+
     if(!validUser(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())){
-      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The specified Samba user does not exist!");
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not exist!");
     }
- 
-    char* user = get_global_option("force user");
+
+    char* global_user = get_global_option("force user");
     char* default_user = get_default_option("force user");
 
-    if(!user || (default_user && strcmp(default_user,user))) {
-      set_global_option("force user",aManualInstance.getInstanceName().getPartComponent().getSambaUserName());
+    if (!global_user || (default_user && !strcmp(global_user,default_user))) {
+        if (default_user && !strcmp(default_user,aManualInstance.getInstanceName().getPartComponent().getSambaUserName())) {
+            set_global_option("force user", NULL);
+        } else {
+            set_global_option("force user", aManualInstance.getInstanceName().getPartComponent().getSambaUserName());
+        }
     } else {
-      throw CmpiStatus(CMPI_RC_ERR_FAILED,"There is an existent instance already!");
+        throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exist!");
     }
-    
+
     return aManualInstance.getInstanceName();
   }
 
@@ -219,7 +224,13 @@ namespace genProvider {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not exist!");
     }
   
-    set_global_option("force user",NULL);
+    char* global_user = get_global_option("force user");
+
+    if (!global_user || strcmp(global_user, anInstanceName.getPartComponent().getSambaUserName())) {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified Samba User is not a 'force user' for 'global'");
+    } else {
+        set_global_option("force user", NULL);
+    }
   }
 
 	

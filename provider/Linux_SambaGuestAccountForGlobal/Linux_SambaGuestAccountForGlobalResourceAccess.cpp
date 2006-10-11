@@ -181,7 +181,7 @@ namespace genProvider {
     const CmpiContext& aContext,
     const CmpiBroker& aBroker,
     const Linux_SambaGuestAccountForGlobalManualInstance& aManualInstance) {
-
+    
     if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
     }
@@ -190,30 +190,19 @@ namespace genProvider {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not exist!");
     }
 
-    char* user = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"guest account");
+    char* global_user = get_global_option("guest account");
     char* default_user = get_default_option("guest account");
 
-    if(!user || (default_user && strcmp(default_user,user)))
-      set_global_option("guest account",aManualInstance.getInstanceName().getPartComponent().getSambaUserName());
-    else { 
-        SambaArray array = SambaArray(user);
-        SambaArray default_array = SambaArray();
-        if (default_user) default_array.populate(default_user);
-
-        if(array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName()) &&
-           !default_array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())) {
-           throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exist!");
-
-        } else if(!array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName()) &&
-                  !default_array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())) {
-           set_global_option("guest account", aManualInstance.getInstanceName().getPartComponent().getSambaUserName()); 
-
-        } else if(array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName()) &&
-                  default_array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaUserName())) {
-           set_global_option("guest account", NULL);
+    if (!global_user || (default_user && !strcmp(global_user,default_user))) {
+        if (default_user && !strcmp(default_user,aManualInstance.getInstanceName().getPartComponent().getSambaUserName())) {
+            set_global_option("guest account", NULL);
+        } else {
+            set_global_option("guest account", aManualInstance.getInstanceName().getPartComponent().getSambaUserName());
         }
-    }  
-    
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exist!");
+    }
+
     return aManualInstance.getInstanceName();
   }
 
@@ -226,15 +215,21 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaGuestAccountForGlobalInstanceName& anInstanceName) {
     
-     if(strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
-      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
+    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
     }
 
-   /*f(!validUser(anInstanceName.getPartComponent().getSambaUserName())){
+    if(!validUser(anInstanceName.getPartComponent().getSambaUserName())) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not exist!");
-    }*/
+    }
 
-    set_global_option("guest account",NULL);
+    char* global_user = get_global_option("guest account");
+
+    if (!global_user || strcmp(global_user, anInstanceName.getPartComponent().getSambaUserName())) {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified Samba User is not a 'guest account' for 'global'");
+    } else {
+        set_global_option("guest account", NULL);
+    }
   }
 
 	
