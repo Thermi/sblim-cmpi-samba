@@ -1,3 +1,16 @@
+Changes in 0.2.1-2
+==============================================================================
+- #1574612  smb: Implement full functionality for ei, ein, gi, si
+- #1573860  smb: build pics up needless files
+- #1572281  smb: libcmpiCppImpl.so not found
+- #1572276  smb: invalid existency checks in cI of ForceUserForGlobal
+- #1572262  smb: Build does not include correct system libraries
+- #1572257  smb: SBLIM TestSuite execution script with trapping
+- #1572250  smb: Allocated memory not freed
+- #1572235  Smb: Associator calls for Users do return wrong results
+
+Changes in 0.2.1-1
+==============================================================================
 This is a major release upgrade for our inital release.
 
 - Lots of bug fixes
