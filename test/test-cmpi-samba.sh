@@ -167,5 +167,10 @@ do
   i=$i+1;
 done
 
+perl test-ci-samba-assoc.pl 
+
+# SECOND TIME Invocation of CreateInstance Script should fail creation of instances...
+perl test-ci-samba-assoc.pl  
+
 cleanup
 

@@ -19,15 +19,17 @@ docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
 
 ######################################################################################
 # Automake instructions for ./test subdir
-EXTRA_DIST=README.test test-cmpi-samba.sh smb.conf smbusers smbpasswd system cim
+EXTRA_DIST=README.test test-ci-samba-assoc.pl test-cmpi-samba.sh $(testsuiteconf_DATA) system cim xml
 
 doc_DATA=README.test
 
 testsuitedir=@TESTSUITEDIR@
 testsuitesystemdir=@TESTSUITEDIR@/system/linux
 testsuitecimdir=@TESTSUITEDIR@/cim
+testsuitexmldir=@TESTSUITEDIR@/xml
+testsuiteconfdir=@TESTSUITEDIR@/
 
-testsuite_SCRIPTS=test-cmpi-samba.sh smb.conf smbusers smbpasswd
+testsuite_SCRIPTS=test-cmpi-samba.sh test-ci-samba-assoc.pl
 testsuitecim_DATA= \
     cim/Linux_SambaCommonSecurityOptions.cim \
     cim/Linux_SambaGlobalBrowseOptions.cim \
@@ -121,6 +123,40 @@ testsuitesystem_DATA= \
     system/linux/Linux_SambaGlobalProtocolForGlobal.system \
     system/linux/Linux_SambaGlobalSecurityForGlobal.system \
     system/linux/Linux_SambaScriptingForGlobal.system
+
+
+testsuitexml_DATA= \
+    xml/Linux_SambaAdminUsersForGlobal.xml \
+    xml/Linux_SambaAdminUsersForShare.xml \
+    xml/Linux_SambaAllowHostsForGlobal.xml \
+    xml/Linux_SambaAllowHostsForPrinter.xml \
+    xml/Linux_SambaAllowHostsForShare.xml \
+    xml/Linux_SambaDenyHostsForGlobal.xml \
+    xml/Linux_SambaDenyHostsForPrinter.xml \
+    xml/Linux_SambaDenyHostsForShare.xml \
+    xml/Linux_SambaForceUserForGlobal.xml \
+    xml/Linux_SambaForceUserForPrinter.xml \
+    xml/Linux_SambaForceUserForShare.xml \
+    xml/Linux_SambaGuestAccountForGlobal.xml \
+    xml/Linux_SambaInvalidUsersForGlobal.xml \
+    xml/Linux_SambaInvalidUsersForPrinter.xml \
+    xml/Linux_SambaInvalidUsersForShare.xml \
+    xml/Linux_SambaPrinterAdminForGlobal.xml \
+    xml/Linux_SambaPrinterAdminForPrinter.xml \
+    xml/Linux_SambaReadListForGlobal.xml \
+    xml/Linux_SambaReadListForPrinter.xml \
+    xml/Linux_SambaReadListForShare.xml \
+    xml/Linux_SambaValidUsersForGlobal.xml \
+    xml/Linux_SambaValidUsersForPrinter.xml \
+    xml/Linux_SambaValidUsersForShare.xml \
+    xml/Linux_SambaWriteListForGlobal.xml \
+    xml/Linux_SambaWriteListForPrinter.xml \
+    xml/Linux_SambaWriteListForShare.xml
+
+testsuiteconf_DATA= \
+    smb.conf \
+    smbusers \
+    smbpasswd 
 
 runtest: install
 	cd $(DESTDIR)$(TESTSUITEDIR) && ./test-cmpi-samba.sh
