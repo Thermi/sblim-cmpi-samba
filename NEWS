@@ -1,4 +1,9 @@
-Changes in 0.2.2-2
+Changes in 0.2.3-1
+==============================================================================
+- #1608539  cmpi-samba: existency checks in gi methods for Host classes
+- #1608544  cmpi-samba: Improvements to test cases for ci on assocs
+
+Changes in 0.2.2-1
 ==============================================================================
 - #1574612  smb: Implement full functionality for ei, ein, gi, si
 - #1573860  smb: build pics up needless files

@@ -14,7 +14,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(SBLIM CMPI Provider for WBEM-SMT Samba task, 0.2.2, sblim-devel@lists.sourceforge.net, sblim-cmpi-samba)
+AC_INIT(SBLIM CMPI Provider for WBEM-SMT Samba task, 0.2.3, sblim-devel@lists.sourceforge.net, sblim-cmpi-samba)
 AC_CONFIG_SRCDIR([.])
 AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE([tar-ustar])
@@ -83,6 +83,7 @@ AC_CONFIG_FILES(Makefile sblim-cmpi-samba.spec)
 AC_CONFIG_FILES(resource-access/Makefile resource-access/scripts/smt_smb_ra_get_defaults.sh.pre resource-access/smt_smb_ra_support.conf.pre) 
 AC_CONFIG_FILES(provider/Makefile)
 AC_CONFIG_FILES(provider/CIM_ConcreteJob/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaRegisteredProfile/Makefile)
 AC_CONFIG_FILES(provider/Linux_SambaGlobalOptions/Makefile)
 AC_CONFIG_FILES(provider/Linux_SambaShareOptions/Makefile)
 AC_CONFIG_FILES(provider/Linux_SambaCommonSecurityOptions/Makefile)
@@ -161,6 +162,9 @@ AC_CONFIG_FILES(provider/Linux_SambaWriteListForPrinter/Makefile)
 AC_CONFIG_FILES(provider/Linux_SambaWriteListForShare/Makefile)
 AC_CONFIG_FILES(test/Makefile)
 
+AC_OUTPUT
+echo
+
 # Display configuration options
 echo "-------------------------------------------------------"
 echo "Configuration for $PACKAGE complete."
@@ -178,10 +182,6 @@ else
   echo "Test Suite Support: disabled"
 fi
 echo "-------------------------------------------------------"
-echo
-
-AC_OUTPUT
-
 echo
 echo "You may now run make"
 echo

@@ -1,5 +1,63 @@
 // =========================================================================
-// new in version 0.2.1-2 :
+// new in version 0.2.3-1 :
+
+2006-12-04 17:06  taphorn
+
+	* test/: xml/Linux_SambaAdminUsersForGlobal.xml,
+	  xml/Linux_SambaDenyHostsForPrinter.xml,
+	  xml/Linux_SambaValidUsersForGlobal.xml,
+	  xml/Linux_SambaValidUsersForPrinter.xml,
+	  xml/Linux_SambaForceUserForShare.xml,
+	  xml/Linux_SambaForceUserForPrinter.xml,
+	  xml/Linux_SambaWriteListForGlobal.xml,
+	  xml/Linux_SambaWriteListForShare.xml,
+	  xml/Linux_SambaAllowHostsForGlobal.xml,
+	  xml/Linux_SambaDenyHostsForGlobal.xml,
+	  xml/Linux_SambaGuestAccountForGlobal.xml,
+	  xml/Linux_SambaPrinterAdminForGlobal.xml,
+	  xml/Linux_SambaValidUsersForShare.xml,
+	  xml/Linux_SambaAllowHostsForPrinter.xml,
+	  xml/Linux_SambaDenyHostsForShare.xml,
+	  xml/Linux_SambaReadListForGlobal.xml,
+	  xml/Linux_SambaReadListForPrinter.xml,
+	  xml/Linux_SambaInvalidUsersForGlobal.xml,
+	  xml/Linux_SambaInvalidUsersForPrinter.xml,
+	  xml/Linux_SambaInvalidUsersForShare.xml,
+	  xml/Linux_SambaPrinterAdminForPrinter.xml,
+	  xml/Linux_SambaWriteListForPrinter.xml,
+	  cim/Linux_SambaForceUserForGlobal.cim,
+	  cim/Linux_SambaGuestAccountForGlobal.cim,
+	  xml/Linux_SambaAdminUsersForShare.xml,
+	  xml/Linux_SambaAllowHostsForShare.xml,
+	  xml/Linux_SambaForceUserForGlobal.xml,
+	  xml/Linux_SambaReadListForShare.xml, Makefile.am,
+	  test-ci-samba-assoc.pl, test-cmpi-samba.sh: Fix for #1608544
+
+	  Test ar enow running for ci on association classes using the
+	  wbemexec command.
+
+2006-12-04 17:02  taphorn
+
+	* model/Linux_Samba-Model.emx, model/Linux_Samba-Model.mof,
+	  model/Linux_Samba.registration, model/Linux_Samba.mof,
+	  provider/Linux_SambaRegisteredProfile/CmpiLinux_SambaRegisteredProfileProvider.c,
+	  provider/Linux_SambaRegisteredProfile/Makefile.am, AUTHORS, NEWS,
+	  provider/Makefile.am,
+	  provider/Linux_SambaAllowHostsForShare/Linux_SambaAllowHostsForShareResourceAccess.cpp,
+	  provider/Linux_SambaDenyHostsForGlobal/Linux_SambaDenyHostsForGlobalResourceAccess.cpp,
+	  provider/Linux_SambaDenyHostsForPrinter/Linux_SambaDenyHostsForPrinterResourceAccess.cpp,
+	  provider/Linux_SambaHost/Linux_SambaHostResourceAccess.cpp,
+	  provider/Linux_SambaAllowHostsForPrinter/Linux_SambaAllowHostsForPrinterResourceAccess.cpp,
+	  provider/Linux_SambaDenyHostsForShare/Linux_SambaDenyHostsForShareResourceAccess.cpp,
+	  provider/Linux_SambaHostsForService/Linux_SambaHostsForServiceResourceAccess.cpp:
+	  Fix for #1608539
+
+	  The host related classes have received an upgrade to include more
+	  checking
+
+
+// =========================================================================
+// new in version 0.2.2-1 :
 
 
 2006-10-11 20:54  taphorn

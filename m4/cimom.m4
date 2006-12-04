@@ -1,23 +1,24 @@
+dnl
+ dnl cimom.m4
+dnl
  dnl 
- dnl (C) Copyright IBM Corp. 2005
+ dnl (C) Copyright IBM Corp. 2004, 2005
  dnl
  dnl THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
  dnl ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
  dnl CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
  dnl
  dnl You can obtain a current copy of the Common Public License from
- dnl http://www.opensource.org/licenses/cpl1.0.php
+ dnl  http://www.opensource.org/licenses/cpl1.0.php
  dnl
  dnl Author:       Konrad Rzeszutek <konradr@us.ibm.com>
  dnl Contributors: Viktor Mihajlovski <mihajlov@de.ibm.com>
- dnl               Wolfgang Taphorn <taphorn@de.ibm.com>
- dnl Date  :	      10/06/2006
+ dnl               Wolfgang Taphotn   <taphorn@de.ibm.com>
  dnl
-
-dnl
-dnl The "check" for the CIM server type in PATH and
-dnl the sbin directories.
-dnl Sets the CIMSERVER variable.
+ dnl Description:
+ dnl The "check" for the CIM server type in PATH and
+ dnl the sbin directories.
+ dnl Sets the CIMSERVER variable.
 dnl
 
 AC_DEFUN([CHECK_CIMSERVER],
