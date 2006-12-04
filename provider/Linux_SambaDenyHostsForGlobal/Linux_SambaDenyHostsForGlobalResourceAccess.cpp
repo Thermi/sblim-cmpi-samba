@@ -245,6 +245,23 @@ namespace genProvider {
     Linux_SambaDenyHostsForGlobalManualInstance manualInstance;
     manualInstance.setInstanceName(anInstanceName);
 
+
+   if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME) != 0) {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,("The instance does not exist. The specified global options instance is unknown!"));
+    }
+
+    SambaArray array = SambaArray();
+    char* user_list = get_option(DEFAULT_GLOBAL_NAME,"hosts deny");
+
+    if(!user_list) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba host is unknown!");
+    }
+    array.populate(user_list);
+
+    if(!array.isPresent(anInstanceName.getPartComponent().getName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba host is unknown!");
+    }
+
     return manualInstance;
 
   }

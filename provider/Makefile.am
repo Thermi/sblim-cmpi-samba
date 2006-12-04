@@ -106,6 +106,7 @@ libLinux_SmbGeneralProviderBasic_la_LIBADD   = \
 # *The* library build config...
 SUBDIRS = . \
           CIM_ConcreteJob \
+          Linux_SambaRegisteredProfile \
           Linux_SambaGlobalOptions \
           Linux_SambaShareOptions \
           Linux_SambaCommonSecurityOptions \

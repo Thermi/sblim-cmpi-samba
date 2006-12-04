@@ -49,8 +49,8 @@ namespace genProvider {
 
     const char * hosts_list;
     char * ret_value;
-
     SambaArray temp1, temp2;
+    string str_hosts_list;
 
     hosts_list = get_global_option(option);
     if (hosts_list)
@@ -65,12 +65,17 @@ namespace genProvider {
       for (iter = temp2.begin(); iter != temp2.end(); ++iter)
          if ( !temp1.isPresent( string((*iter).c_str())) )
            temp1.add( string((*iter).c_str()));
-      hosts_list = temp1.toString().c_str();
+      str_hosts_list = temp1.toString();
+      hosts_list = str_hosts_list.c_str();
     }
-    else if (!temp1.chkEmpty())
-           hosts_list = temp1.toString().c_str();
-    else if (!temp2.chkEmpty())
-           hosts_list = temp2.toString().c_str();
+    else if (!temp1.chkEmpty()) {
+           str_hosts_list = temp1.toString();
+           hosts_list = str_hosts_list.c_str();
+    }
+    else if (!temp2.chkEmpty()) {
+           str_hosts_list = temp2.toString();
+           hosts_list = str_hosts_list.c_str();
+    }
     else
       hosts_list = NULL;
 
@@ -302,11 +307,49 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const char** aPropertiesPP,
     const Linux_SambaDenyHostsForPrinterInstanceName& anInstanceName) {
-
+    
     Linux_SambaDenyHostsForPrinterManualInstance manualInstance;
-    manualInstance.setInstanceName(anInstanceName);
+    int flag = 0; 
+    char **printers = get_samba_printers_list();
 
-    return manualInstance;
+    int i;
+
+    for (i=0; printers[i] ; i++)
+       if (!strcmp(anInstanceName.getGroupComponent().getName(),printers[i])) {
+         flag = 1;
+         break;
+       }
+
+    if (!flag) 
+    	throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The specified printer instance does not exist!");
+
+    if(!validHostName(anInstanceName.getPartComponent().getName())){
+        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Invalid Host Name!");
+    }
+
+    const char * hosts_allow = get_effective_hosts_list(printers[i],HOSTS_ALLOW);
+    const char * hosts_deny  = get_effective_hosts_list(printers[i],HOSTS_DENY);
+
+    if (hosts_deny)
+    {
+
+      SambaArray array_deny = SambaArray(hosts_deny);
+      SambaArray array_allow  = SambaArray(hosts_allow);
+      SambaArrayConstIterator iter;
+
+      for ( iter = array_deny.begin(); iter != array_deny.end(); ++iter){
+         if (!array_allow.isPresent( (*iter).c_str())){
+           manualInstance.setInstanceName(anInstanceName);
+           if (hosts_allow) free((char *)hosts_allow);
+           if (hosts_deny) free((char *)hosts_deny);
+           return manualInstance;
+         }
+      }
+    }
+
+    if (hosts_allow) free((char *)hosts_allow);
+    if (hosts_deny) free((char *)hosts_deny);
+    throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The specified instance does not exist!");
 
   }
 
@@ -358,20 +401,6 @@ namespace genProvider {
       }
 
       //delete hostname from global and share's allow list if present...
-
-      SambaArray array_global = SambaArray();
-
-      hosts_list = get_global_option(HOSTS_ALLOW);
-
-      if(hosts_list)
-        array_global.populate(hosts_list);
-
-
-        if(array_global.isPresent(string( aManualInstance.getInstanceName().getPartComponent().getName() ))) {
-	  array_global.remove( string( aManualInstance.getInstanceName().getPartComponent().getName() ) );
-
-	  set_global_option(HOSTS_ALLOW,array_global.toString().c_str());
-        }
 
 
       hosts_list = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),HOSTS_ALLOW);

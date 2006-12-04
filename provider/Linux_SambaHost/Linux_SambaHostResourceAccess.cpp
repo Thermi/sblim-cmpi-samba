@@ -321,9 +321,105 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaHostInstanceName& anInstanceName) {
 
-    Linux_SambaHostManualInstance aManualInstance ;
-    aManualInstance.setInstanceName(anInstanceName);
-    return aManualInstance;
+    Linux_SambaHostManualInstance manualInstance ;
+    manualInstance.setInstanceName(anInstanceName);
+   
+    char* hosts_list = get_global_option(HOSTS_ALLOW);
+    SambaArray array_allow ;
+
+    if (hosts_list){
+       array_allow = SambaArray(hosts_list);
+       SambaArrayConstIterator iter ;
+
+      for (iter = array_allow.begin(); iter != array_allow.end(); ++iter){
+         if(array_allow.isPresent(anInstanceName.getName())) {
+           return manualInstance;
+         }
+      }
+    }
+
+    hosts_list = get_global_option(HOSTS_DENY);
+
+    if (hosts_list){
+       array_allow = SambaArray(hosts_list);
+       SambaArrayConstIterator iter ;
+
+      for (iter = array_allow.begin(); iter != array_allow.end(); ++iter){
+         if(array_allow.isPresent(anInstanceName.getName())) {
+           return manualInstance;
+         }
+      }
+    }
+
+    char **printers = get_samba_printers_list();
+
+    if (printers) {
+    for (int i=0;printers[i];i++) {
+
+    hosts_list = get_option(printers[i],HOSTS_ALLOW);
+
+    if (hosts_list){
+       array_allow = SambaArray(hosts_list);
+       SambaArrayConstIterator iter ;
+
+      for (iter = array_allow.begin(); iter != array_allow.end(); ++iter){
+         if(array_allow.isPresent(anInstanceName.getName())) {
+           return manualInstance;
+         }
+      }
+    }
+
+    hosts_list = get_global_option(HOSTS_DENY);
+
+    if (hosts_list){
+       array_allow = SambaArray(hosts_list);
+       SambaArrayConstIterator iter ;
+
+      for (iter = array_allow.begin(); iter != array_allow.end(); ++iter){
+         if(array_allow.isPresent(anInstanceName.getName())) {
+           return manualInstance;
+         }
+      }
+    }
+    }
+    }
+
+    char **shares = get_shares_list();
+
+    if (shares) {
+
+    for (int i=0;shares[i];i++) {
+    hosts_list = get_option(shares[i],HOSTS_ALLOW);
+
+    if (hosts_list){
+       array_allow = SambaArray(hosts_list);
+       SambaArrayConstIterator iter ;
+
+      for (iter = array_allow.begin(); iter != array_allow.end(); ++iter){
+         if(array_allow.isPresent(anInstanceName.getName())) {
+           return manualInstance;
+         }
+      }
+    }
+
+    hosts_list = get_global_option(HOSTS_DENY);
+
+    if (hosts_list){
+       array_allow = SambaArray(hosts_list);
+       SambaArrayConstIterator iter ;
+
+      for (iter = array_allow.begin(); iter != array_allow.end(); ++iter){
+         if(array_allow.isPresent(anInstanceName.getName())) {
+           return manualInstance;
+         }
+      }
+    }
+    }
+    }
+
+    throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Host is not defined!");
+
+    return manualInstance;
 
   }
 

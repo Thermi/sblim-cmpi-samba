@@ -13,7 +13,16 @@
 
 
 
+
 // ===================================================================
+// Samba Registered Profile
+// ===================================================================
+//[ Description("Class to provide a registered profile for Samba.") ]
+//class Linux_SambaRegisteredProfile : CIM_RegisteredProfile
+//{
+//};
+
+
 // Linux_SambaServiceConfiguration
 // ===================================================================
 [IBM_HasInstances, IBM_HasProvider]

@@ -47,6 +47,7 @@ namespace genProvider {
     const char * hosts_list;
     char * ret_value;
     SambaArray temp1, temp2;
+    string str_hosts_list;
 
     hosts_list = get_global_option(option);
     if (hosts_list)
@@ -61,12 +62,17 @@ namespace genProvider {
       for (iter = temp2.begin(); iter != temp2.end(); ++iter)
          if ( !temp1.isPresent( string((*iter).c_str())) )
            temp1.add( string((*iter).c_str()));
-      hosts_list = temp1.toString().c_str();
+      str_hosts_list = temp1.toString();
+      hosts_list = str_hosts_list.c_str();
     }
-    else if (!temp1.chkEmpty())
-           hosts_list = temp1.toString().c_str();
-    else if (!temp2.chkEmpty())
-           hosts_list = temp2.toString().c_str();
+    else if (!temp1.chkEmpty()) {
+      str_hosts_list = temp1.toString();
+      hosts_list = str_hosts_list.c_str();
+    }
+    else if (!temp2.chkEmpty()) {
+      str_hosts_list = temp2.toString();
+      hosts_list = str_hosts_list.c_str();
+    }
     else
       hosts_list = NULL;
 
@@ -423,7 +429,7 @@ namespace genProvider {
         if(array.isPresent(string( anInstanceName.getPartComponent().getName() ))) {
 	  array.remove( string( anInstanceName.getPartComponent().getName() ) );
 
-	  set_printer_option(anInstanceName.getGroupComponent().getName(),HOSTS_DENY,array.toString().c_str());
+	  set_printer_option(anInstanceName.getGroupComponent().getName(),HOSTS_ALLOW,array.toString().c_str());
         }
         else
         	throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "Instance could not be found!");

@@ -46,6 +46,7 @@ namespace genProvider {
 
     const char * hosts_list;
     char * ret_value;
+    string str_hosts_list; 
 
     SambaArray temp1, temp2;
 
@@ -62,12 +63,18 @@ namespace genProvider {
       for (iter = temp2.begin(); iter != temp2.end(); ++iter)
          if ( !temp1.isPresent( string((*iter).c_str())) )
            temp1.add( string((*iter).c_str()));
-      hosts_list = temp1.toString().c_str();
+      str_hosts_list = temp1.toString();
+      hosts_list = str_hosts_list.c_str();
+           
     }
-    else if (!temp1.chkEmpty())
-           hosts_list = temp1.toString().c_str();
-    else if (!temp2.chkEmpty())
-           hosts_list = temp2.toString().c_str();
+    else if (!temp1.chkEmpty()) {
+      str_hosts_list = temp1.toString();
+      hosts_list = str_hosts_list.c_str();
+    }
+    else if (!temp2.chkEmpty()) {
+      str_hosts_list = temp2.toString();
+      hosts_list = str_hosts_list.c_str();
+    }
     else
       hosts_list = NULL;
 
@@ -78,7 +85,6 @@ namespace genProvider {
     }
     else
 	ret_value = NULL;
-
     return (const char *)ret_value;
 
   }
@@ -284,7 +290,36 @@ namespace genProvider {
     Linux_SambaAllowHostsForShareManualInstance manualInstance;
     manualInstance.setInstanceName(anInstanceName);
 
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+    SambaArray array = SambaArray();
+    static const char* host_list;
+       for(int i=0;shares[i];i++) {
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0)
+           {
+               valid_share = true;
+               host_list = get_effective_hosts_list(shares[i],"hosts allow");
+               if(!host_list) {
+               throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba host is unknown!");
+               }
+               array.populate(host_list);
+               free((char*)host_list);
+
+               if(!array.isPresent(anInstanceName.getPartComponent().getName())) {
+               throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba host is unknown!");
+               }
+           }
+        }
+        if(!valid_share) {
+               throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Share is unknown!");
+        }
+    }
+    else
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Share instance does not exist!");
+
     return manualInstance;
+
 
   }
 
