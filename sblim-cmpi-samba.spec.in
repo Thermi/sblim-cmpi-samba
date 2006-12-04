@@ -156,7 +156,18 @@ fi
 
 ###############################################################################
 %changelog
-* Wed Jun 7 2006 Wolfgang Taphorn <taphorn@de.ibm.com>
-  - Added Tests
-* Tue Sep 16 2005 Wolfgang Taphorn <taphorn@de.ibm.com>
+* Mon Dec 4 2006 Wolfgang Taphorn <taphorn@de.ibm.com> 0.2.3-1
+  - Inclusion of fixes for the following bug entries:
+    #1608539  cmpi-samba: existency checks in gi methods for Host classes
+    #1608544  cmpi-samba: Improvements to test cases for ci on assocs
+    
+* Tue Oct 17 2006 Wolfgang Taphorn <taphorn@de.ibm.com> 0.2.2-1
+  - Added Test cases
+  - fix for #1572262 smb: build does not include correct system libraries
+  
+* Tue Sat 22 2005 Wolfgang Taphorn <taphorn@de.ibm.com> 0.2.1-1
+  - Build process improvements
+  - Model changes, regeneration of providers
+  
+* Tue Sep 16 2005 Wolfgang Taphorn <taphorn@de.ibm.com> 0.1.1-1
   - initial support
