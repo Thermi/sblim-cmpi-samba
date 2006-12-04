@@ -158,12 +158,14 @@ fi
 %changelog
 * Mon Dec 4 2006 Wolfgang Taphorn <taphorn@de.ibm.com> 0.2.3-1
   - Inclusion of fixes for the following bug entries:
-    #1608539  cmpi-samba: existency checks in gi methods for Host classes
-    #1608544  cmpi-samba: Improvements to test cases for ci on assocs
+    o 1608539  cmpi-samba: existency checks in gi methods for Host classes
+    o 1608544  cmpi-samba: Improvements to test cases for ci on assocs
+    o 1608698  cmpi-samba: Build does not pass 'make distcheck'
     
 * Tue Oct 17 2006 Wolfgang Taphorn <taphorn@de.ibm.com> 0.2.2-1
   - Added Test cases
-  - fix for #1572262 smb: build does not include correct system libraries
+  - Fix for the following bug:
+    o 1572262 smb: build does not include correct system libraries
   
 * Sat Jul 22 2006 Wolfgang Taphorn <taphorn@de.ibm.com> 0.2.1-1
   - Build process improvements

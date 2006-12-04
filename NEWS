@@ -2,6 +2,7 @@ Changes in 0.2.3-1
 ==============================================================================
 - #1608539  cmpi-samba: existency checks in gi methods for Host classes
 - #1608544  cmpi-samba: Improvements to test cases for ci on assocs
+- #1608698  cmpi-samba: Build does not pass 'make distcheck'
 
 Changes in 0.2.2-1
 ==============================================================================
