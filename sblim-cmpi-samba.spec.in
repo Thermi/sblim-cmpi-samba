@@ -165,7 +165,7 @@ fi
   - Added Test cases
   - fix for #1572262 smb: build does not include correct system libraries
   
-* Tue Sat 22 2005 Wolfgang Taphorn <taphorn@de.ibm.com> 0.2.1-1
+* Sat Jul 22 2006 Wolfgang Taphorn <taphorn@de.ibm.com> 0.2.1-1
   - Build process improvements
   - Model changes, regeneration of providers
   
