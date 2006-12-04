@@ -39,30 +39,30 @@ providerdir = @PROVIDERDIR@
 AM_CPPFLAGS = -D_COMPILE_UNIX \
               -DCMPI_STANDALONE \
               -I${srcdir}/include \
-              -I$(srcdir)/../resource-access \
-              -I$(srcdir)/CIM_ConcreteJob \
-              -I$(srcdir)/Linux_SambaCommonSecurityOptions \
-              -I$(srcdir)/Linux_SambaGlobalOptions \
-              -I$(srcdir)/Linux_SambaGlobalBrowseOptions \
-              -I$(srcdir)/Linux_SambaGlobalFileNameHandlingOptions \
-              -I$(srcdir)/Linux_SambaGlobalPrintingOptions \
-              -I$(srcdir)/Linux_SambaGlobalProtocolOptions \
-              -I$(srcdir)/Linux_SambaGlobalSecurityOptions \
-              -I$(srcdir)/Linux_SambaPrinterOptions \
-              -I$(srcdir)/Linux_SambaPrinterPrintingOptions \
-              -I$(srcdir)/Linux_SambaPrinterSecurityOptions \
-              -I$(srcdir)/Linux_SambaShareOptions \
-              -I$(srcdir)/Linux_SambaShareFileNameHandlingOptions \
-              -I$(srcdir)/Linux_SambaShareBrowseOptions \
-              -I$(srcdir)/Linux_SambaPrinterBrowseOptions \
-              -I$(srcdir)/Linux_SambaShareProtocolOptions \
-              -I$(srcdir)/Linux_SambaShareSecurityOptions \
-              -I$(srcdir)/Linux_SambaScriptingOptions \
-              -I$(srcdir)/Linux_SambaService \
+              -I${srcdir}/../resource-access \
+              -I${srcdir}/CIM_ConcreteJob \
+              -I${srcdir}/Linux_SambaCommonSecurityOptions \
+              -I${srcdir}/Linux_SambaGlobalOptions \
+              -I${srcdir}/Linux_SambaGlobalBrowseOptions \
+              -I${srcdir}/Linux_SambaGlobalFileNameHandlingOptions \
+              -I${srcdir}/Linux_SambaGlobalPrintingOptions \
+              -I${srcdir}/Linux_SambaGlobalProtocolOptions \
+              -I${srcdir}/Linux_SambaGlobalSecurityOptions \
+              -I${srcdir}/Linux_SambaPrinterOptions \
+              -I${srcdir}/Linux_SambaPrinterPrintingOptions \
+              -I${srcdir}/Linux_SambaPrinterSecurityOptions \
+              -I${srcdir}/Linux_SambaShareOptions \
+              -I${srcdir}/Linux_SambaShareFileNameHandlingOptions \
+              -I${srcdir}/Linux_SambaShareBrowseOptions \
+              -I${srcdir}/Linux_SambaPrinterBrowseOptions \
+              -I${srcdir}/Linux_SambaShareProtocolOptions \
+              -I${srcdir}/Linux_SambaShareSecurityOptions \
+              -I${srcdir}/Linux_SambaScriptingOptions \
+              -I${srcdir}/Linux_SambaService \
               -I${srcdir}/Linux_SambaServiceConfiguration \
-              -I$(srcdir)/Linux_SambaGroup \
-              -I$(srcdir)/Linux_SambaHost \
-              -I$(srcdir)/Linux_SambaUser
+              -I${srcdir}/Linux_SambaGroup \
+              -I${srcdir}/Linux_SambaHost \
+              -I${srcdir}/Linux_SambaUser
 
 ################################################################################
 #
@@ -183,7 +183,5 @@ SUBDIRS = . \
           Linux_SambaWriteListForGlobal \
           Linux_SambaWriteListForPrinter \
           Linux_SambaWriteListForShare
-
-
 
 

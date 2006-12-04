@@ -41,32 +41,31 @@ AM_CFLAGS = -Wall
 AM_CPPFLAGS = -DDEBUG \
               -D_COMPILE_UNIX \
               -DCMPI_STANDALONE \
-              -I./../include \
-              -I./../../resource-access \
-              -I./../CIM_ConcreteJob \
-              -I./../Linux_SambaCommonSecurityOptions \
-              -I./../Linux_SambaGlobalOptions \
-              -I./../Linux_SambaGlobalBrowseOptions \
-              -I./../Linux_SambaGlobalFileNameHandlingOptions \
-              -I./../Linux_SambaGlobalPrintingOptions \
-              -I./../Linux_SambaGlobalProtocolOptions \
-              -I./../Linux_SambaGlobalSecurityOptions \
-              -I./../Linux_SambaPrinterOptions \
-              -I./../Linux_SambaPrinterPrintingOptions \
-              -I./../Linux_SambaPrinterSecurityOptions \
-              -I./../Linux_SambaShareOptions \
-              -I./../Linux_SambaShareFileNameHandlingOptions \
-              -I./../Linux_SambaShareBrowseOptions \
-              -I./../Linux_SambaPrinterBrowseOptions \
-              -I./../Linux_SambaShareProtocolOptions \
-              -I./../Linux_SambaShareSecurityOptions \
-              -I./../Linux_SambaScriptingOptions \
-              -I./../Linux_SambaService \
-              -I./../Linux_SambaServiceConfiguration \
-              -I./../Linux_SambaGroup \
-              -I./../Linux_SambaHost \
-              -I./../Linux_SambaUser
-
+              -I${srcdir}/../include \
+              -I${srcdir}/../../resource-access \
+              -I${srcdir}/../CIM_ConcreteJob \
+              -I${srcdir}/../Linux_SambaCommonSecurityOptions \
+              -I${srcdir}/../Linux_SambaGlobalOptions \
+              -I${srcdir}/../Linux_SambaGlobalBrowseOptions \
+              -I${srcdir}/../Linux_SambaGlobalFileNameHandlingOptions \
+              -I${srcdir}/../Linux_SambaGlobalPrintingOptions \
+              -I${srcdir}/../Linux_SambaGlobalProtocolOptions \
+              -I${srcdir}/../Linux_SambaGlobalSecurityOptions \
+              -I${srcdir}/../Linux_SambaPrinterOptions \
+              -I${srcdir}/../Linux_SambaPrinterPrintingOptions \
+              -I${srcdir}/../Linux_SambaPrinterSecurityOptions \
+              -I${srcdir}/../Linux_SambaShareOptions \
+              -I${srcdir}/../Linux_SambaShareFileNameHandlingOptions \
+              -I${srcdir}/../Linux_SambaShareBrowseOptions \
+              -I${srcdir}/../Linux_SambaPrinterBrowseOptions \
+              -I${srcdir}/../Linux_SambaShareProtocolOptions \
+              -I${srcdir}/../Linux_SambaShareSecurityOptions \
+              -I${srcdir}/../Linux_SambaScriptingOptions \
+              -I${srcdir}/../Linux_SambaService \
+              -I${srcdir}/../Linux_SambaServiceConfiguration \
+              -I${srcdir}/../Linux_SambaGroup \
+              -I${srcdir}/../Linux_SambaHost \
+              -I${srcdir}/../Linux_SambaUser
 AM_LDFLAGS = -L./../ \
              -L./../../resource-access \
              -L./../CIM_ConcreteJob \
