@@ -1,6 +1,6 @@
 ********************************************************************************
 class : Linux_SambaGlobalFileNameHandlingOptions
-objectPath : Linux_SambaGlobalFileNameHandlingOptions.InstanceID="InstanceID",Name="Global"
+objectPath : Linux_SambaGlobalFileNameHandlingOptions.InstanceID="smbd",Name="Global"
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames

@@ -35,7 +35,7 @@ namespace genProvider {
 
   static void setInstanceNameProperties(
       const char* aNameSpaceP,
-      char *instanceName,
+      const char *instanceName,
       Linux_SambaShareOptionsInstanceName& anInstanceName) {
     
     anInstanceName.setNamespace(aNameSpaceP);
@@ -172,7 +172,8 @@ namespace genProvider {
     Linux_SambaShareOptionsManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
     
-    if (!service_exists(aManualInstance.getInstanceName().getName())) {
+    if (!service_exists(aManualInstance.getInstanceName().getName()) ||
+        strcasecmp(aManualInstance.getInstanceName().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
     }
     
@@ -195,7 +196,8 @@ namespace genProvider {
      const char** aPropertiesPP,
      const Linux_SambaShareOptionsManualInstance& aManualInstance) {
     
-    if (!service_exists(aManualInstance.getInstanceName().getName())) {
+    if (!service_exists(aManualInstance.getInstanceName().getName()) ||
+        strcasecmp(aManualInstance.getInstanceName().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
     }
 
@@ -214,16 +216,21 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaShareOptionsManualInstance& aManualInstance) {
     
+    Linux_SambaShareOptionsInstanceName instanceName;
+
     if(!service_exists(aManualInstance.getInstanceName().getName())){
-      if(!add_share(aManualInstance.getInstanceName().getName()))
+      if(!add_share(aManualInstance.getInstanceName().getName())) {
 	setRAProperties(aManualInstance);
-      else
+        setInstanceNameProperties(aManualInstance.getInstanceName().getNamespace(),
+                                  aManualInstance.getInstanceName().getName(),
+                                  instanceName);
+      } else
 	throw CmpiStatus(CMPI_RC_ERR_FAILED,"Instance could not be created!");
 
     } else
       throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exists!");
 
-    return aManualInstance.getInstanceName();
+    return instanceName;
   }
 
   
@@ -235,7 +242,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaShareOptionsInstanceName& anInstanceName) {
     
-    if(service_exists(anInstanceName.getName())){
+    if(service_exists(anInstanceName.getName()) &&
+       strcasecmp(anInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0){
       if(delete_share(anInstanceName.getName())) 
 	throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"Instance could not be deleted!");
       

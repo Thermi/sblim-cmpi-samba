@@ -1,6 +1,6 @@
 ********************************************************************************
 association : Linux_SambaReadListForGlobal
-objectPath : Linux_SambaReadListForGlobal.PartComponent=Linux_SambaUser.SambaUserName="sambauser12",GroupComponent=Linux_SambaGlobalOptions.InstanceID="InstanceID",Name="Global"
+objectPath : Linux_SambaReadListForGlobal.PartComponent=Linux_SambaUser.SambaUserName="sambauser12",GroupComponent=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaUser

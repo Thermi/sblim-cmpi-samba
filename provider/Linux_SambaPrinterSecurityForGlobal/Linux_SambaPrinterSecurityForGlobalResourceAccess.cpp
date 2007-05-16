@@ -135,7 +135,8 @@ namespace genProvider {
     if(printers) {
     int valid_printer = false;
         for(int i=0;printers[i];i++) {
-           if(strcasecmp(anInstanceName.getSettingData().getName(),printers[i])==0)
+           if(strcasecmp(anInstanceName.getSettingData().getName(),printers[i])==0 &&
+              strcasecmp(anInstanceName.getSettingData().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_printer = true;
         }
         if(!valid_printer) {
@@ -145,7 +146,8 @@ namespace genProvider {
         throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
     }
 
-    if (strcasecmp(anInstanceName.getManagedElement().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if (strcasecmp(anInstanceName.getManagedElement().getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+        strcasecmp(anInstanceName.getManagedElement().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist. The specified GlobalOptions instance is unknown");
     }
 
@@ -194,7 +196,8 @@ namespace genProvider {
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaPrinterSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
 
-    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }
     
@@ -226,7 +229,8 @@ namespace genProvider {
     const Linux_SambaPrinterSecurityOptionsInstanceName& aSourceInstanceName,
     Linux_SambaPrinterSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
 
-    if(!service_exists(aSourceInstanceName.getName())) {
+    if(!service_exists(aSourceInstanceName.getName()) ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }   
  
@@ -258,7 +262,8 @@ namespace genProvider {
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaPrinterSecurityOptionsInstanceEnumeration& anInstanceEnumeration) {
 
-    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }
     
@@ -287,7 +292,8 @@ namespace genProvider {
     const Linux_SambaPrinterSecurityOptionsInstanceName& aSourceInstanceName,
     Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
 
-    if(!service_exists(aSourceInstanceName.getName())) {
+    if(!service_exists(aSourceInstanceName.getName()) ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }   
  

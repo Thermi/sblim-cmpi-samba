@@ -141,7 +141,8 @@ namespace genProvider {
     Linux_SambaForceUserForGlobalManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
 
-    if(strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
     }
 
@@ -153,13 +154,13 @@ namespace genProvider {
     char * user_list = get_option(anInstanceName.getGroupComponent().getName(),"force user");
 
     if (!user_list) {
-       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has force user enabled for the specified global options instance!");
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have force user enabled for the specified global options instance!");
     }
 
     array.populate(user_list);
 
     if(!array.isPresent(anInstanceName.getPartComponent().getSambaUserName())) {
-       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has force user enabled for the specified global options instance!");
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have force user enabled for the specified global options instance!");
     }
     
     return aManualInstance;
@@ -183,7 +184,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceUserForGlobalManualInstance& aManualInstance) {
    
-    if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
     }
 
@@ -216,7 +218,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceUserForGlobalInstanceName& anInstanceName) {
      
-    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+        strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
     }
 
@@ -246,10 +249,10 @@ namespace genProvider {
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaForceUserForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
     
-    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     } 
-
     char* user = get_option(aSourceInstanceName.getName(),"force user");
     
     if(user && validUser(user)){
@@ -318,11 +321,10 @@ namespace genProvider {
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
     
-    
-    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     } 
-
 
     char* user = get_option(aSourceInstanceName.getName(),"force user");
     

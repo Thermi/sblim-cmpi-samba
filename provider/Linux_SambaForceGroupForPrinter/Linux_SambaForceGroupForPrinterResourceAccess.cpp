@@ -153,6 +153,45 @@ namespace genProvider {
     Linux_SambaForceGroupForPrinterManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
 
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified instance is not a printer!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    if(!validGroup(anInstanceName.getPartComponent().getSambaGroupName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba group is unknown!");
+    }
+
+    SambaArray array = SambaArray();
+    char* user_list = get_option(anInstanceName.getGroupComponent().getName(),"force group");
+
+    if(!user_list) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba group is not a force group!");
+    }
+
+    array.populate(user_list);
+    if(!array.isPresent(anInstanceName.getPartComponent().getSambaGroupName())) {
+      SambaArray g_array = SambaArray();
+      char * g_user_list = get_global_option("force group");
+      if(!user_list) {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba group is not a force group!");
+      }
+      g_array.populate(g_user_list);
+
+      if(!g_array.isPresent(anInstanceName.getPartComponent().getSambaGroupName()))
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba group is not a force group!");
+    }
+
     return aManualInstance;
   }
 
@@ -174,10 +213,55 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceGroupForPrinterManualInstance& aManualInstance) {
     
-    char* group = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force group");
-    if(group)
-      set_printer_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force group",group);
-    
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),printers[i])==0 &&
+              strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified instance is not a valid Samba printer!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    if(!validGroup(aManualInstance.getInstanceName().getPartComponent().getSambaGroupName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba group does not exist!");
+    }
+
+    SambaArray g_array = SambaArray();
+    char* g_user_list = get_global_option("force group");
+
+    if (g_user_list) {
+      g_array.populate(g_user_list);
+      if (g_array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaGroupName()))
+        return aManualInstance.getInstanceName();
+    }
+
+    SambaArray array = SambaArray();
+    char* user_list = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force group");
+
+    if(user_list) {
+      array.populate(user_list);
+      if(g_user_list) {
+        SambaArrayConstIterator iter;
+        for ( iter = g_array.begin(); iter != g_array.end(); ++iter) {
+          if (array.isPresent((*iter).c_str())) {
+            array.remove((*iter).c_str());
+          }
+        }
+      }
+      if(array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaGroupName() )) {
+        throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exist");
+      }
+    }
+
+    array.add(aManualInstance.getInstanceName().getPartComponent().getSambaGroupName());
+    set_printer_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force group",array.toString().c_str());
+
     return aManualInstance.getInstanceName();
   }
 
@@ -190,6 +274,50 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceGroupForPrinterInstanceName& anInstanceName) {
     
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified instance is not a printer!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    if(!validGroup(anInstanceName.getPartComponent().getSambaGroupName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba group does not exist!");
+    }
+
+    SambaArray g_array = SambaArray();
+    char* g_user_list = get_global_option("force group");
+
+    if (g_user_list) {
+      g_array.populate(g_user_list);
+    }
+
+    SambaArray array = SambaArray();
+    char* user_list = get_option(anInstanceName.getGroupComponent().getName(),"force group");
+
+    if (user_list)
+      array.populate(user_list);
+
+    SambaArrayConstIterator iter;
+    for ( iter = g_array.begin(); iter != g_array.end(); ++iter) {
+      if (array.isPresent((*iter).c_str())) {
+        array.remove((*iter).c_str());
+      }
+    }
+
+    if (array.isPresent(anInstanceName.getPartComponent().getSambaGroupName())) {
+      array.remove( string(anInstanceName.getPartComponent().getSambaGroupName() ));
+    }
+
+    //Only an single attribute value possible
     set_printer_option(anInstanceName.getGroupComponent().getName(),"force group",NULL);
   }
 
@@ -206,6 +334,10 @@ namespace genProvider {
     const Linux_SambaGroupInstanceName& aSourceInstanceName,
     Linux_SambaForceGroupForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) {
     
+    if(!validGroup(aSourceInstanceName.getSambaGroupName())) {
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified Samba group is unknown!");
+    }
+
     char ** printers = get_samba_printers_list();
     if(printers){
       for (int i=0; printers[i]; i++){
@@ -246,6 +378,22 @@ namespace genProvider {
     const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
     Linux_SambaForceGroupForPrinterManualInstanceEnumeration& aManualInstanceEnumeration) {
     
+
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0&&
+              strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified instance is not a valid printer!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
     char* group = get_option(aSourceInstanceName.getName(),"force group");
     
     if(group){
@@ -277,6 +425,10 @@ namespace genProvider {
     const Linux_SambaGroupInstanceName& aSourceInstanceName,
     Linux_SambaPrinterOptionsInstanceEnumeration& anInstanceEnumeration) {
     
+    if(!validGroup(aSourceInstanceName.getSambaGroupName())) {
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified Samba group is unknown!");
+    }
+
     char ** printers = get_samba_printers_list();
     
     if(printers){
@@ -339,6 +491,21 @@ namespace genProvider {
     const Linux_SambaPrinterOptionsInstanceName& aSourceInstanceName,
     Linux_SambaGroupInstanceEnumeration& anInstanceEnumeration) {
     
+    char ** printers = get_samba_printers_list();
+    if(printers) {
+    int valid_printer = false;
+        for(int i=0;printers[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0 &&
+              strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0)
+                valid_printer = true;
+        }
+        if(!valid_printer) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The specified instance is not a printer!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
     char* group = get_option(aSourceInstanceName.getName(),"force group");
     
     if(group){

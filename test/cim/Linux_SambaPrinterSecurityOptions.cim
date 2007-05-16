@@ -1,6 +1,6 @@
 ********************************************************************************
 class : Linux_SambaPrinterSecurityOptions
-objectPath : Linux_SambaPrinterSecurityOptions.InstanceID="InstanceID",Name="wbemsmt-printer-interfacetest"
+objectPath : Linux_SambaPrinterSecurityOptions.InstanceID="smbd",Name="wbemsmt-printer-interfacetest"
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames

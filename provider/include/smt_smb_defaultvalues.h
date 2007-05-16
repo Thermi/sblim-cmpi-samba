@@ -25,7 +25,7 @@
 #define _DEFAULTVALUES_H_
 
 #define DEFAULT_GLOBAL_NAME                "Global"
-#define DEFAULT_INSTANCE_ID                "InstanceID"
+#define DEFAULT_INSTANCE_ID                "smbd"
 #define DEFAULT_NAME                       "smbd"
 #define	DEFAULT_SYSTEM_CREATION_CLASS_NAME "Linux_SambaService"
 #define DEFAULT_SYSTEM_NAME	           "localhost"

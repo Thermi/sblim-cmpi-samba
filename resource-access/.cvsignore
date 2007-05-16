@@ -2,3 +2,8 @@ Makefile.in
 Makefile
 smt_smb_ra_support.conf.pre
 .deps
+libRaToolsSmb_la-smt_smb_ra_support.lo
+libRaToolsSmb_la-smt_smb_ra_path.lo
+libRaToolsSmb.la
+libRaToolsSmb_la-smt_smb_ra_data.lo
+smt_smb_ra_support.conf

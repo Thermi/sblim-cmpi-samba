@@ -296,7 +296,8 @@ namespace genProvider {
     SambaArray array = SambaArray();
     static const char* host_list;
        for(int i=0;shares[i];i++) {
-           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0)
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
            {
                valid_share = true;
                host_list = get_effective_hosts_list(shares[i],"hosts allow");
@@ -345,7 +346,8 @@ namespace genProvider {
     char **shares = get_shares_list();
 
     for (int i=0; shares[i] ; i++)
-       if (!strcmp(aManualInstance.getInstanceName().getGroupComponent().getName(),shares[i])) {
+       if (strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),shares[i])==0&&
+           strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0) {
          flag = 1;
          break;
        }
@@ -406,7 +408,8 @@ namespace genProvider {
     char **shares = get_shares_list();
 
     for (int i=0; shares[i] ; i++)
-       if (!strcmp(anInstanceName.getGroupComponent().getName(),shares[i])) {
+       if (strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0 &&
+           strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0) {
          flag = 1;
          break;
        }

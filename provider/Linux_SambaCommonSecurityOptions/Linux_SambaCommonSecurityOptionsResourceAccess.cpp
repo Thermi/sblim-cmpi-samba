@@ -215,7 +215,8 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaCommonSecurityOptionsInstanceName& anInstanceName) {
 
-    if (!service_exists(anInstanceName.getName())) {
+    if (!service_exists(anInstanceName.getName()) ||
+        strcasecmp(anInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
     }
 
@@ -236,7 +237,8 @@ namespace genProvider {
      const char** aPropertiesPP,
      const Linux_SambaCommonSecurityOptionsManualInstance& aManualInstance) {
     
-    if (!service_exists(aManualInstance.getInstanceName().getName())) {
+    if (!service_exists(aManualInstance.getInstanceName().getName()) ||
+        strcasecmp(aManualInstance.getInstanceName().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
     }
 

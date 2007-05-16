@@ -135,7 +135,8 @@ namespace genProvider {
     if(shares) {
     int valid_share = false;
         for(int i=0;shares[i];i++) {
-           if(strcasecmp(anInstanceName.getSettingData().getName(),shares[i])==0)
+           if(strcasecmp(anInstanceName.getSettingData().getName(),shares[i])==0 &&
+              strcasecmp(anInstanceName.getSettingData().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_share = true;
         }
         if(!valid_share) {
@@ -145,7 +146,8 @@ namespace genProvider {
         throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
     }
 
-    if (strcasecmp(anInstanceName.getManagedElement().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if (strcasecmp(anInstanceName.getManagedElement().getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+        strcasecmp(anInstanceName.getManagedElement().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist. The specified GlobalOptions instance is unknown");
     }
 
@@ -194,7 +196,8 @@ namespace genProvider {
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaShareSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
 
-    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }
     
@@ -226,7 +229,8 @@ namespace genProvider {
     const Linux_SambaShareSecurityOptionsInstanceName& aSourceInstanceName,
     Linux_SambaShareSecurityForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
     
-    if(!service_exists(aSourceInstanceName.getName())) {
+    if(!service_exists(aSourceInstanceName.getName()) ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }
 
@@ -258,7 +262,8 @@ namespace genProvider {
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaShareSecurityOptionsInstanceEnumeration& anInstanceEnumeration) {
     
-    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }
 
@@ -298,7 +303,8 @@ namespace genProvider {
     const Linux_SambaShareSecurityOptionsInstanceName& aSourceInstanceName,
     Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
     
-    if(!service_exists(aSourceInstanceName.getName())) {
+    if(!service_exists(aSourceInstanceName.getName()) ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }        
 

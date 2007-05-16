@@ -151,6 +151,45 @@ namespace genProvider {
     Linux_SambaForceGroupForShareManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
 
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified instance is not a share!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    if(!validGroup(anInstanceName.getPartComponent().getSambaGroupName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba user is unknown!");
+    }
+
+    SambaArray array = SambaArray();
+    char* user_list = get_option(anInstanceName.getGroupComponent().getName(),"force group");
+
+    if(!user_list) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba group is not a force group!");
+    }
+
+    array.populate(user_list);
+    if(!array.isPresent(anInstanceName.getPartComponent().getSambaGroupName())) {
+      SambaArray g_array = SambaArray();
+      char * g_user_list = get_global_option("force group");
+      if(!user_list) {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba group is not a force group!");
+      }
+      g_array.populate(g_user_list);
+
+      if(!g_array.isPresent(anInstanceName.getPartComponent().getSambaGroupName()))
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba group is not a force group!");
+    }
+
     return aManualInstance;
   }
 
@@ -172,10 +211,55 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceGroupForShareManualInstance& aManualInstance) {
     
-    char* group = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force group");
-    if(group && validGroup(group))
-      set_share_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force group",group);
-    
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),shares[i])==0 &&
+              strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified instance is not a share!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    if(!validGroup(aManualInstance.getInstanceName().getPartComponent().getSambaGroupName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba user does not exist!");
+    }
+
+    SambaArray g_array = SambaArray();
+    char* g_user_list = get_global_option("force group");
+
+    if (g_user_list) {
+      g_array.populate(g_user_list);
+      if (g_array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaGroupName()))
+        return aManualInstance.getInstanceName();
+    }
+
+    SambaArray array = SambaArray();
+    char* user_list = get_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force group");
+
+    if(user_list) {
+      array.populate(user_list);
+      if(g_user_list) {
+        SambaArrayConstIterator iter;
+        for ( iter = g_array.begin(); iter != g_array.end(); ++iter) {
+          if (array.isPresent((*iter).c_str())) {
+            array.remove((*iter).c_str());
+          }
+        }
+      }
+      if(array.isPresent(aManualInstance.getInstanceName().getPartComponent().getSambaGroupName() )) {
+        throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exist");
+      }
+    }
+
+    array.add(aManualInstance.getInstanceName().getPartComponent().getSambaGroupName());
+    set_share_option(aManualInstance.getInstanceName().getGroupComponent().getName(),"force group",array.toString().c_str());
+
     return aManualInstance.getInstanceName();
   }
 
@@ -188,6 +272,49 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceGroupForShareInstanceName& anInstanceName) {
     
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified instance is not a share!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    if(!validGroup(anInstanceName.getPartComponent().getSambaGroupName())) {
+      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND, "The Instance does not exist. The specified Samba user does not exist!");
+    }
+
+    SambaArray g_array = SambaArray();
+    char* g_user_list = get_global_option("force group");
+
+    if (g_user_list) {
+      g_array.populate(g_user_list);
+    }
+
+    SambaArray array = SambaArray();
+    char* user_list = get_option(anInstanceName.getGroupComponent().getName(),"force group");
+
+    if (user_list)
+      array.populate(user_list);
+
+    SambaArrayConstIterator iter;
+    for ( iter = g_array.begin(); iter != g_array.end(); ++iter) {
+      if (array.isPresent((*iter).c_str())) {
+        array.remove((*iter).c_str());
+      }
+    }
+
+    if (array.isPresent(anInstanceName.getPartComponent().getSambaGroupName())) {
+      array.remove( string(anInstanceName.getPartComponent().getSambaGroupName() ));
+    }
+
     set_share_option(anInstanceName.getGroupComponent().getName(),"force group",NULL);
   }
 
@@ -204,31 +331,48 @@ namespace genProvider {
     const Linux_SambaGroupInstanceName& aSourceInstanceName,
     Linux_SambaForceGroupForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
     
+    if(!validGroup(aSourceInstanceName.getSambaGroupName())) {
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified Samba group is unknown!");
+    }
+
     char ** shares = get_shares_list();
-    
+
     if(shares){
       for (int i=0; shares[i]; i++){
-	char* group = get_option(shares[i],"force group");
-	
-	if(group && validGroup(group)){
-	  if(!strcmp(group,aSourceInstanceName.getSambaGroupName())){
-	    Linux_SambaForceGroupForShareManualInstance manualInstance;
-	    
-	    Linux_SambaForceGroupForShareInstanceName instName;
-	    instName.setNamespace(aNameSpaceP);
-	    instName.setPartComponent(aSourceInstanceName);
-	    
-	    Linux_SambaShareOptionsInstanceName shareInstName;
-	    shareInstName.setNamespace(aNameSpaceP);
-	    shareInstName.setName(shares[i]);
-	    shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
-	    
-	    instName.setGroupComponent(shareInstName);
-	    
-	    manualInstance.setInstanceName(instName);
-	    aManualInstanceEnumeration.addElement(manualInstance);
-	  }
-	}
+        char * user_list = get_option(shares[i],"force group");
+        char * global_user_list = get_global_option("force group");
+
+        if(user_list){
+          SambaArray array = SambaArray(user_list);
+          if (global_user_list) {
+            SambaArray g_array = SambaArray(global_user_list);
+            SambaArrayConstIterator iter;
+
+            for ( iter = g_array.begin(); iter != g_array.end(); ++iter) {
+              if(!array.isPresent((*iter).c_str())) {
+                array.add((*iter).c_str());
+              }
+            }
+          }
+
+          if(array.isPresent(aSourceInstanceName.getSambaGroupName())){
+            Linux_SambaForceGroupForShareManualInstance manualInstance;
+
+            Linux_SambaForceGroupForShareInstanceName instName;
+            instName.setNamespace(aNameSpaceP);
+            instName.setPartComponent(aSourceInstanceName);
+
+            Linux_SambaShareOptionsInstanceName shareInstName;
+            shareInstName.setNamespace(aNameSpaceP);
+            shareInstName.setName(shares[i]);
+            shareInstName.setInstanceID(DEFAULT_INSTANCE_ID);
+
+            instName.setGroupComponent(shareInstName);
+
+            manualInstance.setInstanceName(instName);
+            aManualInstanceEnumeration.addElement(manualInstance);
+          }
+        }
       }
     }
   }
@@ -244,23 +388,71 @@ namespace genProvider {
     const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
     Linux_SambaForceGroupForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
     
-    char* group = get_option(aSourceInstanceName.getName(),"force group");
-    
-    if(group && validGroup(group)){
-      Linux_SambaForceGroupForShareManualInstance manualInstance;
-      
-      Linux_SambaForceGroupForShareInstanceName instName;
-      instName.setNamespace(aNameSpaceP);
-      instName.setGroupComponent(aSourceInstanceName);
-      
-      Linux_SambaGroupInstanceName groupInstName;
-      groupInstName.setNamespace(aNameSpaceP);
-      groupInstName.setSambaGroupName( group );
-      
-      instName.setPartComponent(groupInstName);
-      
-      manualInstance.setInstanceName(instName);
-      aManualInstanceEnumeration.addElement(manualInstance);
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0&&
+              strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified instance is not a valid share!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    char* user_list = get_option(aSourceInstanceName.getName(),"force group");
+    char* g_user_list = get_global_option("force group");
+    SambaArray array = SambaArray();
+    SambaArray g_array = SambaArray();
+
+    if(user_list){
+      array.populate(user_list);
+      SambaArrayConstIterator iter;
+
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+        if(validGroup((*iter).c_str())){
+          Linux_SambaForceGroupForShareManualInstance manualInstance;
+          Linux_SambaForceGroupForShareInstanceName instName;
+          instName.setNamespace(aNameSpaceP);
+          instName.setGroupComponent(aSourceInstanceName);
+
+          Linux_SambaGroupInstanceName userInstName;
+          userInstName.setNamespace(aNameSpaceP);
+          userInstName.setSambaGroupName( (*iter).c_str() );
+
+          instName.setPartComponent(userInstName);
+
+          manualInstance.setInstanceName(instName);
+          aManualInstanceEnumeration.addElement(manualInstance);
+        }
+      }
+    }
+
+    if(g_user_list){
+      g_array.populate(g_user_list);
+      SambaArrayConstIterator iter;
+
+      for ( iter = g_array.begin(); iter != g_array.end(); ++iter) {
+        if(validGroup((*iter).c_str()) && !array.isPresent((*iter).c_str())){
+          Linux_SambaForceGroupForShareManualInstance manualInstance;
+
+          Linux_SambaForceGroupForShareInstanceName instName;
+          instName.setNamespace(aNameSpaceP);
+          instName.setGroupComponent(aSourceInstanceName);
+
+          Linux_SambaGroupInstanceName userInstName;
+          userInstName.setNamespace(aNameSpaceP);
+          userInstName.setSambaGroupName( (*iter).c_str() );
+
+          instName.setPartComponent(userInstName);
+
+          manualInstance.setInstanceName(instName);
+          aManualInstanceEnumeration.addElement(manualInstance);
+        }
+      }
     }
   }
   
@@ -275,6 +467,10 @@ namespace genProvider {
     const Linux_SambaGroupInstanceName& aSourceInstanceName,
     Linux_SambaShareOptionsInstanceEnumeration& anInstanceEnumeration) {
     
+    if(!validGroup(aSourceInstanceName.getSambaGroupName())) {
+      throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist. The specified Samba group is unknown!");
+    }
+
     char ** shares = get_shares_list();
     
     if(shares){
@@ -334,23 +530,70 @@ namespace genProvider {
     const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
     Linux_SambaGroupInstanceEnumeration& anInstanceEnumeration) {
     
-    char* group = get_option(aSourceInstanceName.getName(),"force group");
-    
-    if(group && validGroup(group)){
-      Linux_SambaGroupInstance instance;
-      
-      Linux_SambaGroupInstanceName groupInstName;
-      groupInstName.setNamespace(aNameSpaceP);
-      groupInstName.setSambaGroupName( group );
-      
-      instance.setInstanceName(groupInstName);
-      char* option;
-      
-      option = get_unix_group_name( group );
-      if ( option )
-	instance.setSystemGroupName( option );
-      
-      anInstanceEnumeration.addElement(instance);
+    char ** shares = get_shares_list();
+    if(shares) {
+    int valid_share = false;
+        for(int i=0;shares[i];i++) {
+           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0 &&
+              strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0)
+                valid_share = true;
+        }
+        if(!valid_share) {
+           throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The specified instance is not a share!");
+        }
+    } else {
+        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
+    }
+
+    char* user_list = get_option(aSourceInstanceName.getName(),"force group");
+    SambaArray array = SambaArray();
+    if(user_list){
+      array.populate(user_list);
+      SambaArrayConstIterator iter;
+
+      for ( iter = array.begin(); iter != array.end(); ++iter) {
+        if(validGroup((*iter).c_str())){
+          Linux_SambaGroupInstance instance;
+
+          Linux_SambaGroupInstanceName userInstName;
+          userInstName.setNamespace(aNameSpaceP);
+          userInstName.setSambaGroupName( (*iter).c_str() );
+
+          instance.setInstanceName(userInstName);
+          char *option;
+
+          option = get_user_unix_name((*iter).c_str() );
+          if ( option )
+            instance.setSystemGroupName( option );
+
+          anInstanceEnumeration.addElement(instance);
+        }
+      }
+    }
+
+    char* g_user_list = get_global_option("force group");
+    if(g_user_list){
+      SambaArray g_array = SambaArray(g_user_list);
+      SambaArrayConstIterator iter;
+
+      for ( iter = g_array.begin(); iter != g_array.end(); ++iter) {
+        if(validGroup((*iter).c_str())){
+          Linux_SambaGroupInstance instance;
+
+          Linux_SambaGroupInstanceName userInstName;
+          userInstName.setNamespace(aNameSpaceP);
+          userInstName.setSambaGroupName( (*iter).c_str() );
+
+          instance.setInstanceName(userInstName);
+          char *option;
+
+          option = get_user_unix_name((*iter).c_str() );
+          if ( option )
+            instance.setSystemGroupName( option );
+
+          anInstanceEnumeration.addElement(instance);
+        }
+      }
     }
   }
   

@@ -152,7 +152,8 @@ namespace genProvider {
     Linux_SambaForceUserForShareManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
 
-    if(!service_exists(anInstanceName.getGroupComponent().getName())) {
+    if(!service_exists(anInstanceName.getGroupComponent().getName()) ||
+       strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified share is unknown!");
     }
 
@@ -164,12 +165,12 @@ namespace genProvider {
    char * user_list = get_option(anInstanceName.getGroupComponent().getName(),"force user");
 
    if(!user_list) {
-     throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has force user enabled for the specified share!");
+     throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have force user enabled for the specified share!");
    }
 
    array.populate(user_list);
    if(!array.isPresent(anInstanceName.getPartComponent().getSambaUserName())) {
-     throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has force user enabled for the specified share!");
+     throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have force user enabled for the specified share!");
    }
     
     return aManualInstance;
@@ -193,7 +194,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceUserForShareManualInstance& aManualInstance) {
    
-    if(!service_exists(aManualInstance.getInstanceName().getGroupComponent().getName())) {
+    if(!service_exists(aManualInstance.getInstanceName().getGroupComponent().getName()) ||
+       strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)!=0)  {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified share is unknown!");
     }
 
@@ -222,7 +224,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaForceUserForShareInstanceName& anInstanceName) {
 
-    if(!service_exists(anInstanceName.getGroupComponent().getName())) {
+    if(!service_exists(anInstanceName.getGroupComponent().getName()) ||
+       strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
      throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified share is unknown!");
     }
 
@@ -246,7 +249,8 @@ namespace genProvider {
     const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
     Linux_SambaForceUserForShareManualInstanceEnumeration& aManualInstanceEnumeration) {
     
-    if(!service_exists(aSourceInstanceName.getName())) {
+    if(!service_exists(aSourceInstanceName.getName()) ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }     
 
@@ -324,7 +328,8 @@ namespace genProvider {
     const Linux_SambaShareOptionsInstanceName& aSourceInstanceName,
     Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
     
-    if(!service_exists(aSourceInstanceName.getName())) {
+    if(!service_exists(aSourceInstanceName.getName()) ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
        throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }
 

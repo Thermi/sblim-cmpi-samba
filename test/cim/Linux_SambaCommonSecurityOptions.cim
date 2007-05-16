@@ -1,6 +1,6 @@
 ********************************************************************************
 class : Linux_SambaCommonSecurityOptions
-objectPath : Linux_SambaCommonSecurityOptions.InstanceID="InstanceID",Name="Global"
+objectPath : Linux_SambaCommonSecurityOptions.InstanceID="smbd",Name="Global"
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames

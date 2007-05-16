@@ -1,6 +1,6 @@
 ********************************************************************************
 class : Linux_SambaGlobalPrintingOptions
-objectPath : Linux_SambaGlobalPrintingOptions.InstanceID="InstanceID",Name="Global"
+objectPath : Linux_SambaGlobalPrintingOptions.InstanceID="smbd",Name="Global"
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames

@@ -225,7 +225,8 @@ namespace genProvider {
     if(printers) {
     int valid_printer = false;
         for(int i=0;printers[i];i++) {
-           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0)
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_printer = true;
         }
         if(!valid_printer) {
@@ -284,7 +285,8 @@ namespace genProvider {
     if(printers) {
     int valid_printer = false;
         for(int i=0;printers[i];i++) {
-           if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),printers[i])==0)
+           if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),printers[i])==0 &&
+              strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_printer = true;
         }
         if(!valid_printer) {
@@ -345,7 +347,8 @@ namespace genProvider {
     if(printers) {
     int valid_printer = false;
         for(int i=0;printers[i];i++) {
-           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0)
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_printer = true;
         }
         if(!valid_printer) {
@@ -407,7 +410,8 @@ namespace genProvider {
     if(printers) {
     int valid_printer = false;
         for(int i=0;printers[i];i++) {
-           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0)
+           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0 &&
+              strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_printer = true;
         }
         if(!valid_printer) {
@@ -542,7 +546,8 @@ namespace genProvider {
     if(printers) {
     int valid_printer = false;
         for(int i=0;printers[i];i++) {
-           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0)
+           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0 &&
+              strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_printer = true;
         }
         if(!valid_printer) {

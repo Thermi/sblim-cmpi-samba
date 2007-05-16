@@ -8,5 +8,5 @@ Linux_SambaShareFileNameHandlingOptions : -eq 4
 Name : -eq wbemsmt-testshare1
 Caption : -empty
 Description : -empty
-InstanceID  : -eq InstanceID
+InstanceID  : -eq smbd
 ElementName : -empty

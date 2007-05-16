@@ -1,6 +1,6 @@
 ********************************************************************************
 association : Linux_SambaGlobalSecurityForGlobal
-objectPath : Linux_SambaGlobalSecurityForGlobal.SettingData=Linux_SambaGlobalSecurityOptions.InstanceID="InstanceID",Name="Global",ManagedElement=Linux_SambaGlobalOptions.InstanceID="InstanceID",Name="Global"
+objectPath : Linux_SambaGlobalSecurityForGlobal.SettingData=Linux_SambaGlobalSecurityOptions.InstanceID="smbd",Name="Global",ManagedElement=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
 sourceRole : SettingData
 targetRole : ManagedElement
 sourceClass : Linux_SambaGlobalSecurityOptions

@@ -1,6 +1,6 @@
 ********************************************************************************
 class : Linux_SambaGlobalBrowseOptions
-objectPath : Linux_SambaGlobalBrowseOptions.InstanceID="InstanceID",Name="Global"
+objectPath : Linux_SambaGlobalBrowseOptions.InstanceID="smbd",Name="Global"
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames

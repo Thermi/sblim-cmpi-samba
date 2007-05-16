@@ -153,7 +153,8 @@ namespace genProvider {
     Linux_SambaAdminUsersForGlobalManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
     
-    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME) != 0) {
+    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME) != 0 ||
+        strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID) != 0) {
         throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,("The instance does not exist. The specified global options instance is unknown!"));
     }
 
@@ -194,7 +195,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaAdminUsersForGlobalManualInstance& aManualInstance) { 
     
-    if (strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME) != 0) {
+    if (strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME) != 0 ||
+        strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID) != 0) {
         throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The instance does not exist. The specified global options instance is unknown!");
     }
 
@@ -230,7 +232,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaAdminUsersForGlobalInstanceName& anInstanceName) {
     
-    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME) != 0) {
+    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME) != 0 ||
+        strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID) != 0) {
         throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,("The instance does not exist. The specified global options instance is unknown!"));
     }
 
@@ -272,7 +275,8 @@ namespace genProvider {
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaAdminUsersForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
     
-    if (strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME) != 0) {
+    if (strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME) != 0 ||
+        strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID) != 0) {
         throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,("The instance does not exist. The specified global options instance is unknown!"));
     }
     char* user_list = get_option(DEFAULT_GLOBAL_NAME,"admin users");
@@ -352,7 +356,8 @@ namespace genProvider {
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) { 
     
-    if (strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME) != 0) {
+    if (strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME) != 0 ||
+        strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID) != 0) {
         throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,("The instance does not exist. The specified global options instance is unknown!"));
     }
 
@@ -393,7 +398,7 @@ namespace genProvider {
     Linux_SambaGlobalOptionsInstanceEnumeration& anInstanceEnumeration) {
     
     if(validUser(aSourceInstanceName.getSambaUserName())) {
-      char * user_list = get_option(DEFAULT_GLOBAL_NAME,"admin users");
+      char * user_list = get_global_option("admin users");
       if(user_list) {
 	SambaArray array = SambaArray(user_list);
 	

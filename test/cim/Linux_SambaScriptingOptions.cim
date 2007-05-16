@@ -1,6 +1,6 @@
 ********************************************************************************
 class : Linux_SambaScriptingOptions
-objectPath : Linux_SambaScriptingOptions.InstanceID="InstanceID",Name="Global"
+objectPath : Linux_SambaScriptingOptions.InstanceID="smbd",Name="Global"
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames

@@ -155,7 +155,8 @@ namespace genProvider {
     Linux_SambaReadListForGlobalManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
 
-    if(strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
     }
 
@@ -167,13 +168,13 @@ namespace genProvider {
     char * user_list = get_option(anInstanceName.getGroupComponent().getName(),"read list");
 
     if (!user_list) {
-       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has 'read' access for the specified global options instance!");
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have 'read' access for the specified global options instance!");
     }
 
     array.populate(user_list);
 
     if(!array.isPresent(anInstanceName.getPartComponent().getSambaUserName())) {
-       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has 'read' access for the specified global options instance!");
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have 'read' access for the specified global options instance!");
     } 
       
     return aManualInstance;
@@ -197,7 +198,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaReadListForGlobalManualInstance& aManualInstance) {
 
-    if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
     }
     
@@ -231,7 +233,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaReadListForGlobalInstanceName& anInstanceName) {
    
-    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+        strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
        throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified global options instance is unknown!");
     }
 
@@ -243,13 +246,13 @@ namespace genProvider {
     char* user_list = get_option(anInstanceName.getGroupComponent().getName(),"read list");
     
     if(!user_list) {
-       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has 'read' access for the specified global options instance!");
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have 'read' access for the specified global options instance!");
     }
 
       array.populate(user_list);
 
     if(!array.isPresent(anInstanceName.getPartComponent().getSambaUserName())) {
-       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has 'read' access for the specified global options instance!");
+       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have 'read' access for the specified global options instance!");
     }    
 
     if(array.size() > 1){
@@ -273,7 +276,8 @@ namespace genProvider {
     const Linux_SambaGlobalOptionsInstanceName& aSourceInstanceName,
     Linux_SambaReadListForGlobalManualInstanceEnumeration& aManualInstanceEnumeration) {
   
-    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }
   
@@ -356,7 +360,8 @@ namespace genProvider {
     Linux_SambaUserInstanceEnumeration& anInstanceEnumeration) {
     
      
-    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0) {
+    if(strcasecmp(aSourceInstanceName.getName(),DEFAULT_GLOBAL_NAME)!=0 ||
+       strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_INVALID_PARAMETER,"The Instance does not exist!");
     }
 

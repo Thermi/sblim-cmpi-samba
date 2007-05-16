@@ -1,6 +1,6 @@
 ********************************************************************************
 association : Linux_SambaScriptingForGlobal
-objectPath : Linux_SambaScriptingForGlobal.SettingData=Linux_SambaScriptingOptions.InstanceID="InstanceID",Name="Global",ManagedElement=Linux_SambaGlobalOptions.InstanceID="InstanceID",Name="Global"
+objectPath : Linux_SambaScriptingForGlobal.SettingData=Linux_SambaScriptingOptions.InstanceID="smbd",Name="Global",ManagedElement=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
 sourceRole : SettingData
 targetRole : ManagedElement
 sourceClass : Linux_SambaScriptingOptions

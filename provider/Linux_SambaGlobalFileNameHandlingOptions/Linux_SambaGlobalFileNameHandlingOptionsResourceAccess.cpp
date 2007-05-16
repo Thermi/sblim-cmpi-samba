@@ -129,7 +129,8 @@ namespace genProvider {
     const char** aPropertiesPP,
     const Linux_SambaGlobalFileNameHandlingOptionsInstanceName& anInstanceName) {
 
-    if (strcasecmp(DEFAULT_GLOBAL_NAME,anInstanceName.getName())!=0) {
+    if (strcasecmp(DEFAULT_GLOBAL_NAME,anInstanceName.getName())!=0 ||
+        strcasecmp(anInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
     }
 
@@ -150,7 +151,8 @@ namespace genProvider {
      const char** aPropertiesPP,
      const Linux_SambaGlobalFileNameHandlingOptionsManualInstance& aManualInstance) {
     
-    if (strcasecmp(DEFAULT_GLOBAL_NAME,aManualInstance.getInstanceName().getName())!=0) {
+    if (strcasecmp(DEFAULT_GLOBAL_NAME,aManualInstance.getInstanceName().getName())!=0 ||
+        strcasecmp(aManualInstance.getInstanceName().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
     }
 

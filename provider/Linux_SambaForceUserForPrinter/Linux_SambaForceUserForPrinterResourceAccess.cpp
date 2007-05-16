@@ -156,7 +156,8 @@ namespace genProvider {
     if(printers) {
     int valid_printer = false;
         for(int i=0;printers[i];i++) {
-           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0)
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_printer = true;
         }
         if(!valid_printer) {
@@ -174,12 +175,12 @@ namespace genProvider {
    char * user_list = get_option(anInstanceName.getGroupComponent().getName(),"force user");
 
    if(!user_list) {
-     throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has force user enabled for the specified printer instance!");
+     throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have force user enabled for the specified printer instance!");
    }
 
    array.populate(user_list);
    if(!array.isPresent(anInstanceName.getPartComponent().getSambaUserName())) {
-     throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not has force user enabled for the specified printer instance!");
+     throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist. The specified Samba user does not have force user enabled for the specified printer instance!");
    }    
 
     return aManualInstance;
@@ -207,7 +208,8 @@ namespace genProvider {
     if(printers) {
         int valid_printer = false;
         for(int i=0;printers[i];i++) {
-           if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),printers[i])==0)
+           if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),printers[i])==0 &&
+              strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_printer = true;
         }
         if(!valid_printer) {
@@ -246,7 +248,8 @@ namespace genProvider {
     if(printers) {
     int valid_printer = false;
         for(int i=0;printers[i];i++) {
-           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0)
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_printer = true;
         }
         if(!valid_printer) {
@@ -280,7 +283,8 @@ namespace genProvider {
     if(printers) {
     int valid_printer = false;
         for(int i=0;printers[i];i++) {
-           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0)
+           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0 &&
+              strcasecmp(aSourceInstanceName.getInstanceID(), DEFAULT_INSTANCE_ID)==0)
                 valid_printer = true;
         }
         if(!valid_printer) {
@@ -367,7 +371,8 @@ namespace genProvider {
     if(printers) {
     int valid_printer = false;
         for(int i=0;printers[i];i++) {
-           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0)
+           if(strcasecmp(aSourceInstanceName.getName(),printers[i])==0 &&
+              strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_printer = true;
         }
         if(!valid_printer) {

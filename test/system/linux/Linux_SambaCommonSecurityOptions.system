@@ -7,7 +7,7 @@ Linux_SambaCommonSecurityOptions : -eq 9
 --------------------------------------------------------------------------------
 Name : -eq Global
 
-InstanceID : -eq InstanceID
+InstanceID : -eq smbd
 Caption : -empty
 Description : -empty
 ElementName : -empty

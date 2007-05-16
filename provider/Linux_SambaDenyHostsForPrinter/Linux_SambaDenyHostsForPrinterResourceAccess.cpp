@@ -315,7 +315,8 @@ namespace genProvider {
     int i;
 
     for (i=0; printers[i] ; i++)
-       if (!strcmp(anInstanceName.getGroupComponent().getName(),printers[i])) {
+       if (strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0 &&
+           strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0) {
          flag = 1;
          break;
        }
@@ -375,7 +376,8 @@ namespace genProvider {
     char **printers = get_samba_printers_list();
 
     for (int i=0; printers[i] ; i++)
-       if (!strcmp(aManualInstance.getInstanceName().getGroupComponent().getName(),printers[i])) {
+       if (strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),printers[i])==0 &&
+           strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0) {
          flag = 1;
          break;
        }
@@ -436,7 +438,8 @@ namespace genProvider {
     char **printers = get_samba_printers_list();
 
     for (int i=0; printers[i] ; i++)
-       if (!strcmp(anInstanceName.getGroupComponent().getName(),printers[i])) {
+       if (strcasecmp(anInstanceName.getGroupComponent().getName(),printers[i])==0 &&
+           strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0) {
          flag = 1;
          break;
        }

@@ -7,7 +7,7 @@ Linux_SambaPrinterSecurityOptions : -eq 5
 --------------------------------------------------------------------------------
 Name : -eq wbemsmt-testprinter1
 
-InstanceID : -eq InstanceID
+InstanceID : -eq smbd
 Caption : -empty
 Description : -empty
 ElementName : -empty

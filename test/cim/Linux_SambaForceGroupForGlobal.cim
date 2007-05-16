@@ -1,6 +1,6 @@
 ********************************************************************************
 association : Linux_SambaForceGroupForGlobal
-objectPath : Linux_SambaForceGroupForGlobal.PartComponent=Linux_SambaGroup.SambaGroupName="Users",GroupComponent=Linux_SambaGlobalOptions.InstanceID="InstanceID",Name="Global"
+objectPath : Linux_SambaForceGroupForGlobal.PartComponent=Linux_SambaGroup.SambaGroupName="Users",GroupComponent=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaGroup

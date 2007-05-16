@@ -226,7 +226,8 @@ namespace genProvider {
     if(shares) {
     int valid_share = false;
         for(int i=0;shares[i];i++) {
-           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0)
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_share = true;
         }
         if(!valid_share) {
@@ -285,7 +286,8 @@ namespace genProvider {
     if(shares) {
     int valid_share = false;
         for(int i=0;shares[i];i++) {
-           if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),shares[i])==0)
+           if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),shares[i])==0 &&
+              strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_share = true;
         }
         if(!valid_share) {
@@ -346,7 +348,8 @@ namespace genProvider {
     if(shares) {
     int valid_share = false;
         for(int i=0;shares[i];i++) {
-           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0)
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_share = true;
         }
         if(!valid_share) {
@@ -408,7 +411,8 @@ namespace genProvider {
     if(shares) {
     int valid_share = false;
         for(int i=0;shares[i];i++) {
-           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0)
+           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0 &&
+              strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_share = true;
         }
         if(!valid_share) {
@@ -544,7 +548,8 @@ namespace genProvider {
     if(shares) {
     int valid_share = false;
         for(int i=0;shares[i];i++) {
-           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0)
+           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0 &&
+              strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_share = true;
         }
         if(!valid_share) {

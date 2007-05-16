@@ -246,7 +246,8 @@ namespace genProvider {
     manualInstance.setInstanceName(anInstanceName);
 
 
-   if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME) != 0) {
+   if (strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME) != 0 ||
+       strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
         throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,("The instance does not exist. The specified global options instance is unknown!"));
     }
 
@@ -284,7 +285,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaDenyHostsForGlobalManualInstance& aManualInstance) {
 
-    if(!strcmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME))
+    if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME ==0) &&
+       strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
     {
       SambaArray array = SambaArray();
       char* hosts_list = get_global_option(HOSTS_DENY);
@@ -335,7 +337,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaDenyHostsForGlobalInstanceName& anInstanceName) {
 
-    if(!strcmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME))
+    if(strcasecmp(anInstanceName.getGroupComponent().getName(),DEFAULT_GLOBAL_NAME)==0 &&
+       strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
     {
       SambaArray array = SambaArray();
       char* hosts_list = get_global_option(HOSTS_DENY);

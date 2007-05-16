@@ -8,6 +8,6 @@ Linux_SambaScriptingOptions : -eq 1
 Name : -eq Global
 Caption : -empty
 Description : -empty
-InstanceID  : -eq InstanceID
+InstanceID  : -eq smbd
 ElementName : -empty
 

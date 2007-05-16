@@ -34,7 +34,7 @@ namespace genProvider {
 
   static void setInstanceNameProperties(
       const char* aNameSpaceP, 
-      char *instanceName, 
+      const char *instanceName, 
       Linux_SambaPrinterOptionsInstanceName& anInstanceName) {
 
     anInstanceName.setNamespace(aNameSpaceP);
@@ -178,7 +178,8 @@ namespace genProvider {
     Linux_SambaPrinterOptionsManualInstance aManualInstance;
     aManualInstance.setInstanceName(anInstanceName);
 
-    if (!service_exists(anInstanceName.getName())) {
+    if (!service_exists(anInstanceName.getName()) ||
+        strcasecmp(anInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
     }
 
@@ -201,7 +202,8 @@ namespace genProvider {
      const char** aPropertiesPP,
      const Linux_SambaPrinterOptionsManualInstance& aManualInstance) {
     
-    if (!service_exists(aManualInstance.getInstanceName().getName())) {
+    if (!service_exists(aManualInstance.getInstanceName().getName()) ||
+        strcasecmp(aManualInstance.getInstanceName().getInstanceID(),DEFAULT_INSTANCE_ID)!=0) {
       throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!");
     }
 
@@ -220,16 +222,23 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaPrinterOptionsManualInstance& aManualInstance) {
     
+    Linux_SambaPrinterOptionsInstanceName instanceName;
+
     if(!service_exists(aManualInstance.getInstanceName().getName())){
-      if(!add_samba_printer(aManualInstance.getInstanceName().getName()))
+      if(!add_samba_printer(aManualInstance.getInstanceName().getName())) {
 	setRAProperties(aManualInstance);
-      else
+
+        setInstanceNameProperties(aManualInstance.getInstanceName().getNamespace(),
+                                  aManualInstance.getInstanceName().getName(),
+                                  instanceName);
+
+      } else
 	throw CmpiStatus(CMPI_RC_ERR_FAILED,"Instance could not be created!");
 
     } else
       throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exists!");
 
-    return aManualInstance.getInstanceName();
+    return instanceName;
   }
   
   
@@ -241,7 +250,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaPrinterOptionsInstanceName& anInstanceName) {
     
-    if(service_exists(anInstanceName.getName())){
+    if(service_exists(anInstanceName.getName()) &&
+       strcasecmp(anInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0){
       char* option = get_option(anInstanceName.getName(),PRINTABLE);
       if ( option )
         if(strcasecmp(option,NO) == 0)

@@ -1,6 +1,6 @@
 ********************************************************************************
 class : Linux_SambaGlobalProtocolOptions
-objectPath : Linux_SambaGlobalProtocolOptions.InstanceID="InstanceID",Name="Global"
+objectPath : Linux_SambaGlobalProtocolOptions.InstanceID="smbd",Name="Global"
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames

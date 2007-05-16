@@ -224,7 +224,8 @@ namespace genProvider {
     if(shares) {
     int valid_share = false;
         for(int i=0;shares[i];i++) {
-           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0)
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_share = true;
         }
         if(!valid_share) {
@@ -283,7 +284,8 @@ namespace genProvider {
     if(shares) {
     int valid_share = false;
         for(int i=0;shares[i];i++) {
-           if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),shares[i])==0)
+           if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),shares[i])==0 &&
+              strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_share = true;
         }
         if(!valid_share) {
@@ -344,7 +346,8 @@ namespace genProvider {
     if(shares) {
     int valid_share = false;
         for(int i=0;shares[i];i++) {
-           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0)
+           if(strcasecmp(anInstanceName.getGroupComponent().getName(),shares[i])==0 &&
+              strcasecmp(anInstanceName.getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_share = true;
         }
         if(!valid_share) {
@@ -406,11 +409,12 @@ namespace genProvider {
     if(shares) {
     int valid_share = false;
         for(int i=0;shares[i];i++) {
-           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0)
+           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0&&
+              strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_share = true;
         }
         if(!valid_share) {
-           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified instance is not a share!");
+           throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The specified instance is not a valid share!");
         }
     } else {
         throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"The Instance does not exist!");
@@ -541,7 +545,8 @@ namespace genProvider {
     if(shares) {
     int valid_share = false;
         for(int i=0;shares[i];i++) {
-           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0)
+           if(strcasecmp(aSourceInstanceName.getName(),shares[i])==0 &&
+              strcasecmp(aSourceInstanceName.getInstanceID(),DEFAULT_INSTANCE_ID)==0)
                 valid_share = true;
         }
         if(!valid_share) {
