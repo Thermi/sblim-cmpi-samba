@@ -18,6 +18,7 @@
 //                Mukunda Chowdaiah  <cmukunda@in.ibm.com>
 //                Ashoka S Rao       <ashoka.rao@in.ibm.com>
 //                Rodrigo Ceron      <rceron@br.ibm.com>
+//                Riyashmon Haneefa  <riyashh1@in.ibm.com>
 //
 // =======================================================================
 #include "CmpiLinux_SambaCommonSecurityOptionsProvider.h"
@@ -244,6 +245,7 @@ namespace genProvider {
     // convert to instanceName
     Linux_SambaCommonSecurityOptionsInstanceName instanceName(aCop);
     
+    /*
     CmpiInstance* repositoryCmpiInstanceP = 0;
     
     // try to fetch repository instance
@@ -257,7 +259,8 @@ namespace genProvider {
           repositoryCmpiObjectPath,
           aPropertiesPP));
     } catch (const CmpiStatus& rc) { }                             
-      
+    */
+
     // get instance for instanceName
     Linux_SambaCommonSecurityOptionsManualInstance instance;
     instance = m_interfaceP->getInstance(
@@ -269,12 +272,14 @@ namespace genProvider {
     // convert the instance in a cmpiInstance
     CmpiInstance cmpiInstance = instance.getCmpiInstance(aPropertiesPP);
       
+    /*  
     // add the static data 
     copyShadowData(repositoryCmpiInstanceP,&cmpiInstance);
-      
+    
     if (repositoryCmpiInstanceP) {
       delete repositoryCmpiInstanceP;
     }
+    */
 
     aResult.returnData(cmpiInstance);
     aResult.returnDone();
