@@ -1,7 +1,7 @@
 ********************************************************************************
 class : Linux_SambaPrinterOptions
 objectPath : Linux_SambaPrinterOptions.InstanceID="smbd",Name="wbemsmt-printer-interfacetest",Caption="",Description="",ElementName="",Available=TRUE,Comment="This is a test printer #3",Path="/var/tmp/testprinter3",Printable=TRUE,SystemPrinterName=""
-
+modifyInst : Linux_SambaPrinterOptions.InstanceID="smbd",Name="wbemsmt-printer-interfacetest",Caption="",Description="",ElementName="",Available=TRUE,Comment="This is a test printer #3",Path="/var/tmp/testprinter2",Printable=FALSE,SystemPrinterName=""
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

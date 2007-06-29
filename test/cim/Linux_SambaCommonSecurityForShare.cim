@@ -1,6 +1,7 @@
 ********************************************************************************
 association : Linux_SambaCommonSecurityForShare
 objectPath : Linux_SambaCommonSecurityForShare.IsDefault="",IsCurrent="",SettingData=Linux_SambaCommonSecurityOptions.InstanceID="smbd",Name="Global",ManagedElement=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1"
+modifyInst : Linux_SambaCommonSecurityForShare.IsDefault="",IsCurrent="",SettingData=Linux_SambaCommonSecurityOptions.InstanceID="smbd",Name="Global",ManagedElement=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare3"
 SourceRole : SettingData
 targetRole : ManagedElement
 sourceClass : Linux_SambaCommonSecurityOptions

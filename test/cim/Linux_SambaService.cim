@@ -1,7 +1,7 @@
 ********************************************************************************
 class : Linux_SambaService
 objectPath : Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="localhost",Started=FALSE
-
+modifyInst : Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="testmachine",Started=TRUE
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

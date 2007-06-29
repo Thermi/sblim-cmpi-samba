@@ -1,6 +1,7 @@
 ********************************************************************************
 association : Linux_SambaShareProtocolForShare
 objectPath : Linux_SambaShareProtocolForShare.SettingData=Linux_SambaShareProtocolOptions.InstanceID="smbd",Name="wbemsmt-testshare1",ManagedElement=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1"
+modifyInst : Linux_SambaShareProtocolForShare.SettingData=Linux_SambaShareProtocolOptions.InstanceID="smbd",Name="wbemsmt-testshare1",ManagedElement=Linux_SambaShareOptions.InstanceID="smbd",Name="testshare1"
 sourceRole : SettingData
 targetRole : ManagedElement
 sourceClass : Linux_SambaShareProtocolOptions

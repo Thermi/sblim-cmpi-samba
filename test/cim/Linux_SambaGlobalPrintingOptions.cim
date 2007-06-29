@@ -1,7 +1,7 @@
 ********************************************************************************
 class : Linux_SambaGlobalPrintingOptions
 objectPath : Linux_SambaGlobalPrintingOptions.InstanceID="smbd",Name="Global",Caption="",Description="",ElementName="",CupsOptions="raw",DefaultDevMode=TRUE,MaxPrintjobs=500,MaxReportedPrintjobs=0,PrintCommand="lpr -r -P",UseClientDriver=FALSE,PrintcapCacheTime=750,SystemPrinterName=""
-
+modifyInst : Linux_SambaGlobalPrintingOptions.InstanceID="smbd",Name="Global",Caption="",Description="",ElementName="",CupsOptions="raw",DefaultDevMode=TRUE,MaxPrintjobs=1500,MaxReportedPrintjobs=0,PrintCommand="lpr -r -P",UseClientDriver=TRUE,PrintcapCacheTime=100,SystemPrinterName=""
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

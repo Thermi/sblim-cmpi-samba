@@ -1,7 +1,7 @@
 ********************************************************************************
 class : Linux_SambaCommonSecurityOptions
 objectPath : Linux_SambaCommonSecurityOptions.InstanceID="smbd",ElementName="",GuestOK=FALSE,GuestOnly=FALSE,HostsAllow="host6, host7, host8, host9, host10",HostsDeny="host11, host12, host13, host14",Name="Global",ReadOnly=TRUE
-
+modifyInst : Linux_SambaCommonSecurityOptions.InstanceID="smbd",ElementName="",GuestOK=TRUE,GuestOnly=FALSE,HostsAllow="host6, host7, host8, host9, host10",HostsDeny="host11, host12",Name="Global",ReadOnly=TRUE
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

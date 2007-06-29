@@ -1,6 +1,7 @@
 ********************************************************************************
 association : Linux_SambaCommonSecurityForPrinter
 objectPath : Linux_SambaCommonSecurityForPrinter.IsDefault="",IsCurrent="",SettingData=Linux_SambaCommonSecurityOptions.InstanceID="smbd",Name="Global",ManagedElement=Linux_SambaPrinterOptions.InstanceID="smbd",Name="wbemsmt-testprinter1"
+modifyInst : Linux_SambaCommonSecurityForPrinter.IsDefault="NO",IsCurrent="TEST",SettingData=Linux_SambaCommonSecurityOptions.InstanceID="smbd",Name="Global",ManagedElement=Linux_SambaPrinterOptions.InstanceID="smbd",Name="wbemsmt-testprinter1"
 SourceRole : SettingData
 targetRole : ManagedElement
 sourceClass : Linux_SambaCommonSecurityOptions

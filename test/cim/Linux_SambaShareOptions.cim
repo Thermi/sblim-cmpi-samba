@@ -1,7 +1,7 @@
 ********************************************************************************
 class : Linux_SambaShareOptions
 objectPath : Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-share-interfacetest",Caption="",Description="",ElementName="",Available=TRUE,Comment="This is a test share 1",Path="/tmp/testshare2",Printable=FALSE
-
+modifyInst : Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-share-interfacetest",Caption="",Description="",ElementName="",Available=FALSE,Comment="This is a test share 1",Path="/tmp/testshare2",Printable=TRUE
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

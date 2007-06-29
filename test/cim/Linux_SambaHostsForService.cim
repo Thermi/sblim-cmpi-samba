@@ -1,6 +1,7 @@
 ********************************************************************************
 association : Linux_SambaHostsForService
 objectPath : Linux_SambaHostsForService.GroupComponent=Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="localhost",PartComponent=Linux_SambaHost.Name="host1"
+modifyInst : Linux_SambaHostsForService.GroupComponent=Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="testmachine",PartComponent=Linux_SambaHost.Name="host3"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaHost

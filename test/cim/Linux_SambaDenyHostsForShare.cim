@@ -1,6 +1,7 @@
 ********************************************************************************
 association : Linux_SambaDenyHostsForShare
 objectPath : Linux_SambaDenyHostsForShare.PartComponent=Linux_SambaHost.Name="host15",GroupComponent=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1"
+modifyInst : Linux_SambaDenyHostsForShare.PartComponent=Linux_SambaHost.Name="host5",GroupComponent=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-share1"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaHost

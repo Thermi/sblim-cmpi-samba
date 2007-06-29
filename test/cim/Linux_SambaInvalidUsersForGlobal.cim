@@ -1,6 +1,7 @@
 ********************************************************************************
 association : Linux_SambaInvalidUsersForGlobal
 objectPath : Linux_SambaInvalidUsersForGlobal.PartComponent=Linux_SambaUser.SambaUserName="sambauser6",GroupComponent=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
+modifyInst : Linux_SambaInvalidUsersForGlobal.PartComponent=Linux_SambaUser.SambaUserName="unknown",GroupComponent=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaUser

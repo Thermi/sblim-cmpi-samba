@@ -1,6 +1,7 @@
 ********************************************************************************
 association : Linux_SambaShareFileNameHandlingForShare
 objectPath : Linux_SambaShareFileNameHandlingForShare.SettingData=Linux_SambaShareFileNameHandlingOptions.InstanceID="smbd",Name="wbemsmt-testshare1",ManagedElement=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1"
+modifyInst : Linux_SambaShareFileNameHandlingForShare.SettingData=Linux_SambaShareFileNameHandlingOptions.InstanceID="smbd",Name="wbemsmt-testshare1",ManagedElement=Linux_SambaShareOptions.InstanceID="smbd",Name="testshare1"
 sourceRole : SettingData
 targetRole : ManagedElement
 sourceClass : Linux_SambaShareFileNameHandlingOptions

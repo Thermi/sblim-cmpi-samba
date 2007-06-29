@@ -1,7 +1,7 @@
 ********************************************************************************
 class : Linux_SambaScriptingOptions
 objectPath : Linux_SambaScriptingOptions.Caption="",Description="",InstanceID="smbd",ElementName="",Name="Global",addGroupScript="",addPrinterCommand="",addShareCommand="",addUserScript="",addUsertoGroupScript="",deleteGrouprScript="",deleteUserScript="",deleteUserfromGroupScript="",setPrimaryGroupScript=""
-
+modifyInst : Linux_SambaScriptingOptions.Caption="",Description="Testing",InstanceID="smbd",ElementName="",Name="Global",addGroupScript="nothing",addPrinterCommand="to",addShareCommand="add",addUserScript="",addUsertoGroupScript="",deleteGrouprScript="",deleteUserScript="",deleteUserfromGroupScript="",setPrimaryGroupScript=""
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

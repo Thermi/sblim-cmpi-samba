@@ -1,6 +1,7 @@
 ********************************************************************************
 association : Linux_SambaPrinterAdminForGlobal
 objectPath : Linux_SambaPrinterAdminForGlobal.PartComponent=Linux_SambaUser.SambaUserName="sambauser1",GroupComponent=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
+modifyInst : Linux_SambaPrinterAdminForGlobal.PartComponent=Linux_SambaUser.SambaUserName="usernun",GroupComponent=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaUser
