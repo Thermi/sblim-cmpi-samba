@@ -1,6 +1,6 @@
 ********************************************************************************
 class : Linux_SambaHost
-objectPath : Linux_SambaHost.Name="host1"
+objectPath : Linux_SambaHost.Name="host1",Caption="",Description="",ElementName=""
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames

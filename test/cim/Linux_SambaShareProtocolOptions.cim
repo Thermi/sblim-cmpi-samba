@@ -1,6 +1,6 @@
 ********************************************************************************
 class : Linux_SambaShareProtocolOptions
-objectPath : Linux_SambaShareProtocolOptions.InstanceID="smbd",Name="wbemsmt-share-interfacetest"
+objectPath : Linux_SambaShareProtocolOptions.InstanceID="smbd",Name="wbemsmt-share-interfacetest",Caption="",Description="",ElementName="",AclCompatibility=0,EASupport=FALSE,NTACLSupport=TRUE
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
