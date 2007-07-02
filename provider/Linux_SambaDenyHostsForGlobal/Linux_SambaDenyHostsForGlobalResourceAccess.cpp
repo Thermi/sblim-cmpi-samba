@@ -285,7 +285,7 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaDenyHostsForGlobalManualInstance& aManualInstance) {
 
-    if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME ==0) &&
+    if(strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getName(),DEFAULT_GLOBAL_NAME) == 0 &&
        strcasecmp(aManualInstance.getInstanceName().getGroupComponent().getInstanceID(),DEFAULT_INSTANCE_ID)==0)
     {
       SambaArray array = SambaArray();
