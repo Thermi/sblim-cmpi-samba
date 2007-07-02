@@ -19,7 +19,7 @@ docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
 
 ######################################################################################
 # Automake instructions for ./test subdir
-EXTRA_DIST=README.test test-ci-samba-assoc.pl test-cmpi-samba.sh $(testsuiteconf_DATA) system cim xml
+EXTRA_DIST=README.test test-cmpi-samba-associations.pl test-cmpi-samba.sh $(testsuiteconf_DATA) system cim xml
 
 doc_DATA=README.test
 
@@ -29,7 +29,7 @@ testsuitecimdir=@TESTSUITEDIR@/cim
 testsuitexmldir=@TESTSUITEDIR@/xml
 testsuiteconfdir=@TESTSUITEDIR@/
 
-testsuite_SCRIPTS=test-cmpi-samba.sh test-ci-samba-assoc.pl
+testsuite_SCRIPTS=test-cmpi-samba.sh test-cmpi-samba-associations.pl
 testsuitecim_DATA= \
     cim/Linux_SambaCommonSecurityOptions.cim \
     cim/Linux_SambaGlobalBrowseOptions.cim \

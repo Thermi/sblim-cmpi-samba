@@ -1,7 +1,7 @@
 ********************************************************************************
 class : Linux_SambaShareProtocolOptions
 objectPath : Linux_SambaShareProtocolOptions.InstanceID="smbd",Name="wbemsmt-testshare2",Caption="",Description="",ElementName="",AclCompatibility=0,EASupport=FALSE,NTACLSupport=TRUE
-modifyInst : Linux_SambaShareProtocolOptions.InstanceID="smbd",Name="wbemsmt-testshare2",Caption="",Description="",ElementName="",AclCompatibility=0,EASupport=FALSE,NTACLSupport=FALSE
+modifyInst : Linux_SambaShareProtocolOptions.InstanceID="smbd",Name="wbemsmt-testshare2",Caption="",Description="",ElementName="",AclCompatibility=0,EASupport=FALSE,NTACLSupport=TRUE
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

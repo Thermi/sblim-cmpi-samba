@@ -1,7 +1,7 @@
 ********************************************************************************
 class : Linux_SambaServiceConfiguration
 objectPath : Linux_SambaServiceConfiguration.Name="smbd",ConfigurationFile="/etc/samba/smb.conf"
-modifyInst : Linux_SambaServiceConfiguration.Name="smbd",ConfigurationFile="/etc/samba/smb.conf.orig"
+modifyInst : Linux_SambaServiceConfiguration.Name="smbd",ConfigurationFile="/etc/samba/smb.conf"
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

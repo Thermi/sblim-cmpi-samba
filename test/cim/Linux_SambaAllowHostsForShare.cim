@@ -1,7 +1,7 @@
 ********************************************************************************
 association : Linux_SambaAllowHostsForShare
 objectPath : Linux_SambaAllowHostsForShare.PartComponent=Linux_SambaHost.Name="host1",GroupComponent=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1"
-modifyInst : Linux_SambaAllowHostsForShare.PartComponent=Linux_SambaHost.Name="host1",GroupComponent=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-test2"
+modifyInst : Linux_SambaAllowHostsForShare.PartComponent=Linux_SambaHost.Name="host1",GroupComponent=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaHost

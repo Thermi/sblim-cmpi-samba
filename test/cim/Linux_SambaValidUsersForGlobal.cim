@@ -1,7 +1,7 @@
 ********************************************************************************
 association : Linux_SambaValidUsersForGlobal
 objectPath : Linux_SambaValidUsersForGlobal.PartComponent=Linux_SambaUser.SambaUserName="sambauser10",GroupComponent=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
-modifyInst : Linux_SambaValidUsersForGlobal.PartComponent=Linux_SambaUser.SambaUserName="sambauser10",GroupComponent=Linux_SambaGlobalOptions.InstanceID="smbd",Name="homes"
+modifyInst : Linux_SambaValidUsersForGlobal.PartComponent=Linux_SambaUser.SambaUserName="sambauser10",GroupComponent=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaUser

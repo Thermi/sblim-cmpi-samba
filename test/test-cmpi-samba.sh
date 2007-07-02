@@ -48,10 +48,11 @@ init() {
   cp -p $TESTPASSWDFILE $SMBPASSWDFILE
 
   echo "Creating system users: wbemsmt-test1, wbemsmt-test2, wbemsmt-test3, wbemsmt-test4"
-  useradd -u 732 wbemsmt-test1 
-  useradd -u 733 wbemsmt-test2
-  useradd -u 734 wbemsmt-test3
-  useradd -u 735 wbemsmt-test4
+  groupadd wbemsmt-testgrp
+  useradd wbemsmt-test1 -g wbemsmt-testgrp
+  useradd wbemsmt-test2 -g wbemsmt-testgrp
+  useradd wbemsmt-test3 -g wbemsmt-testgrp
+  useradd wbemsmt-test4 -g wbemsmt-testgrp
 }
 
 #*****************************************************************************#
@@ -61,6 +62,7 @@ cleanup() {
   userdel -r wbemsmt-test2
   userdel -r wbemsmt-test3
   userdel -r wbemsmt-test4
+  groupdel wbemsmt-testgrp
 
   if [[ -a $SMBCONFFILE.sblimsave ]]; then
     echo "Moving back the original config file ..."
@@ -167,10 +169,10 @@ do
   i=$i+1;
 done
 
-perl test-ci-samba-assoc.pl 
-
+#perl test-cmpi-samba-associations.pl 
+#
 # SECOND TIME Invocation of CreateInstance Script should fail creation of instances...
-perl test-ci-samba-assoc.pl  
+#perl test-cmpi-samba-associations.pl  
 
 cleanup
 

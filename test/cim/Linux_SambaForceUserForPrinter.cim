@@ -1,7 +1,7 @@
 ********************************************************************************
 association : Linux_SambaForceUserForPrinter
-objectPath : Linux_SambaForceUserForPrinter.PartComponent=Linux_SambaUser.SambaUserName="sambauser1",GroupComponent=Linux_SambaPrinterOptions.InstanceID="smbd",Name="wbemsmt-testprinter1"
-modifyInst : Linux_SambaForceUserForPrinter.PartComponent=Linux_SambaUser.SambaUserName="user1",GroupComponent=Linux_SambaPrinterOptions.InstanceID="smbd",Name="wbemsmt-printer1"
+objectPath : Linux_SambaForceUserForPrinter.PartComponent=Linux_SambaUser.SambaUserName="sambauser3",GroupComponent=Linux_SambaPrinterOptions.InstanceID="smbd",Name="wbemsmt-testprinter1"
+modifyInst : Linux_SambaForceUserForPrinter.PartComponent=Linux_SambaUser.SambaUserName="sambauser3",GroupComponent=Linux_SambaPrinterOptions.InstanceID="smbd",Name="wbemsmt-testprinter1"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaUser

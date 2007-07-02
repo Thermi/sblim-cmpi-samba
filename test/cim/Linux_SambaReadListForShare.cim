@@ -1,7 +1,7 @@
 ********************************************************************************
 association : Linux_SambaReadListForShare
 objectPath : Linux_SambaReadListForShare.PartComponent=Linux_SambaUser.SambaUserName="sambauser9",GroupComponent=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1"
-modifyInst : Linux_SambaReadListForShare.PartComponent=Linux_SambaUser.SambaUserName="sambauser19",GroupComponent=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare2"
+modifyInst : Linux_SambaReadListForShare.PartComponent=Linux_SambaUser.SambaUserName="sambauser9",GroupComponent=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaUser

@@ -1,7 +1,7 @@
 ********************************************************************************
 class : Linux_SambaGlobalSecurityOptions
 objectPath : Linux_SambaGlobalSecurityOptions.InstanceID="smbd",Name="Global",Caption="",Description="",ElementName="",AuthMethods="",EncryptPasswords=TRUE,MinPasswordLength=8,NullPasswords=FALSE,PassdbBackend="smbpasswd",SMBPasswdFile="/var/lib/samba/private/smbpasswd",Security=0
-modifyInst : Linux_SambaGlobalSecurityOptions.InstanceID="smbd",Name="Global",Caption="",Description="",ElementName="",AuthMethods="",EncryptPasswords=TRUE,MinPasswordLength=10,NullPasswords=FALSE,PassdbBackend="smbpasswd",SMBPasswdFile="/etc/smbpasswd",Security=1
+modifyInst : Linux_SambaGlobalSecurityOptions.InstanceID="smbd",Name="Global",Caption="",Description="",ElementName="",AuthMethods="",EncryptPasswords=TRUE,MinPasswordLength=8,NullPasswords=FALSE,PassdbBackend="smbpasswd",SMBPasswdFile="/var/lib/samba/private/smbpasswd",Security=0
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

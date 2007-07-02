@@ -1,7 +1,7 @@
 ********************************************************************************
 class : Linux_SambaUser
 objectPath : Linux_SambaUser.SambaUserName="sambauser1n",SambaUserPassword="hugo",SystemUserName="wbemsmt-test1"
-modifyInst : Linux_SambaUser.SambaUserName="sambauser1n",SambaUserPassword="teraa",SystemUserName="wbemsmt-test1"
+modifyInst : Linux_SambaUser.SambaUserName="sambauser1n",SambaUserPassword="hugo",SystemUserName="wbemsmt-test1"
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

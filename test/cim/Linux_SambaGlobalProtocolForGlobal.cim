@@ -1,7 +1,7 @@
 ********************************************************************************
 association : Linux_SambaGlobalProtocolForGlobal
 objectPath : Linux_SambaGlobalProtocolForGlobal.SettingData=Linux_SambaGlobalProtocolOptions.InstanceID="smbd",Name="Global",ManagedElement=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
-modifyInst : Linux_SambaGlobalProtocolForGlobal.SettingData=Linux_SambaGlobalProtocolOptions.InstanceID="smbd",Name="Global",ManagedElement=Linux_SambaGlobalOptions.InstanceID="smbd",Name="homes"
+modifyInst : Linux_SambaGlobalProtocolForGlobal.SettingData=Linux_SambaGlobalProtocolOptions.InstanceID="smbd",Name="Global",ManagedElement=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
 sourceRole : SettingData
 targetRole : ManagedElement
 sourceClass : Linux_SambaGlobalProtocolOptions
