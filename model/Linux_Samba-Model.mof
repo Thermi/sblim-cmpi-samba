@@ -180,7 +180,7 @@ class Linux_SambaPrinterOptions : CIM_SettingData {
     string Path;
 
     [Write, IBM_ImplementationType ("Manual")]
-    boolean Printable = "yes";
+    boolean Printable = true;
 
     [Write, IBM_ImplementationType ("Manual")]
     string SystemPrinterName;
