@@ -14,7 +14,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(SBLIM CMPI Provider for WBEM-SMT Samba task, 0.2.4, sblim-devel@lists.sourceforge.net, sblim-cmpi-samba)
+AC_INIT(SBLIM CMPI Provider for WBEM-SMT Samba task, 0.5.0, sblim-devel@lists.sourceforge.net, sblim-cmpi-samba)
 AC_CONFIG_SRCDIR([.])
 AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE([tar-ustar])
@@ -36,8 +36,10 @@ AC_ARG_VAR([CIMSERVER],[the target CIM server (pegasus|sfcb|openwbem).])
 # Checks for programs.
 AC_PROG_AWK
 AC_PROG_CC
+AC_PROG_CXX
 AC_PROG_INSTALL
 AC_PROG_LIBTOOL
+AC_PROG_MAKE_SET
 
 # Check for installed CIM Server (defined in local m4 macro)
 CHECK_CIMSERVER
@@ -62,20 +64,23 @@ AC_CHECK_LIB(cmpiCppImpl, main, [], [AC_MSG_ERROR(You have to install cmpiCppImp
 # Checks for header files.
 AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
-AC_CHECK_HEADERS([fcntl.h stdlib.h string.h sys/time.h unistd.h])
+AC_HEADER_DIRENT
+AC_HEADER_TIME
+AC_HEADER_STDBOOL
+AC_CHECK_HEADERS([fcntl.h stdlib.h string.h sys/time.h unistd.h limits.h malloc.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 AC_C_INLINE
 AC_TYPE_OFF_T
-AC_HEADER_TIME
 
 # Checks for library functions.
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 AC_FUNC_SELECT_ARGTYPES
 AC_FUNC_STAT
-AC_CHECK_FUNCS([memmove select strchr strdup])
+AC_FUNC_CLOSEDIR_VOID
+AC_CHECK_FUNCS([memmove select strchr strdup ftruncate mkdir strcasecmp strrchr strtol])
 
 AM_CONDITIONAL([TESTSUITE_SUPPORT], test "$TESTSUITEDIR")
 

@@ -30,10 +30,10 @@ via CIMOM technology/infrastructure.
 Package Contents
 ----------------
 
-./README		    This file
-./model/*           Contains Linux_Samba-Model.mof and corresponding Rational model .emx file
-./provider/*		The instrumented classes/associations    
-./resource-access/*	cmpi-samba specific resource access layer code 
+./README                This file
+./model/*               Contains Linux_Samba-Model.mof and corresponding Rational model .emx file
+./provider/*            The instrumented classes/associations    
+./resource-access/*     cmpi-samba specific resource access layer code 
 
 If checked out from CVS:
 ./autoconfiscate.sh contains support to setup the autoconf/automake build environment 

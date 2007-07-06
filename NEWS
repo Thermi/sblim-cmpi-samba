@@ -1,3 +1,15 @@
+Changes in 0.5.0-1
+==============================================================================
+- 1747732  cmpi-samba: Model upgrade for ECUTE 2.3.6 usage
+- 1746588  cmpi-samba: Linux_SambaDenyHostsForGlobal not working
+- 1746584  cmpi-samba: Cleanup for test cases
+- 1741424  cmpi-samba: no modifyInst value in the test case
+- 1741421  cmpi-samba: providing full Object Path in the test cases
+- 1741033  cmpi-samba: reordered the test cases
+- 1737895  cmpi-samba: Unresolved symbols in service class
+- 1724483  cmpi-samba: GetInstance uses still shadow repository
+- 1632460  cmpi-samba: Use Servicename as InstanceId
+
 Changes in 0.2.3-1
 ==============================================================================
 - #1608539  cmpi-samba: existency checks in gi methods for Host classes

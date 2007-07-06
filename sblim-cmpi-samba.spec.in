@@ -16,7 +16,6 @@ License: CPL
 Requires: sblim-tools-libra
 Requires: samba >= 3.0.10
 BuildRequires: sblim-tools-libra-devel
-BuildRequires: sblim-cmpi-devel
 
 Provides: cmpi-samba
 
@@ -79,12 +78,7 @@ make DESTDIR=$RPM_BUILD_ROOT install
 
 # remove unused libtool files
 rm -f $RPM_BUILD_ROOT/%{_libdir}/*a
-
-%if %{?tog_pegasus:0}%{!?tog_pegasus:1}
-   rm -f $RPM_BUILD_ROOT/%{_libdir}/cmpi/*a
-%else
-   rm -f $RPM_BUILD_ROOT/opt/tog-pegasus/providers/lib/*a
-%endif
+rm -f $RPM_BUILD_ROOT/%{_libdir}/cmpi/*a
 
 
 ###############################################################################
@@ -136,12 +130,8 @@ fi
 %doc %{_datadir}/doc/%{name}-%{version}
 %{_datadir}/%{name}
 %{_libdir}/*.so.*
-%config(noreplace) %{_sysconfdir}/*.conf
-%if %{?tog_pegasus:0}%{!?tog_pegasus:1}
 %{_libdir}/cmpi/*.so
-%else
-/opt/tog-pegasus/providers/lib/*.so
-%endif
+%config(noreplace) %{_sysconfdir}/*.conf
 
 %files devel
 %defattr(-,root,root)
@@ -156,6 +146,18 @@ fi
 
 ###############################################################################
 %changelog
+* Fri Jul 6 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.0-1
+  - Inclusion of fixes for the following issues:
+    o 1747732  cmpi-samba: Model upgrade for ECUTE 2.3.6 usage
+    o 1746588  cmpi-samba: Linux_SambaDenyHostsForGlobal not working
+    o 1746584  cmpi-samba: Cleanup for test cases
+    o 1741424  cmpi-samba: no modifyInst value in the test case
+    o 1741421  cmpi-samba: providing full Object Path in the test cases
+    o 1741033  cmpi-samba: reordered the test cases
+    o 1737895  cmpi-samba: Unresolved symbols in service class
+    o 1724483  cmpi-samba: GetInstance uses still shadow repository
+    o 1632460  cmpi-samba: Use Servicename as InstanceId
+
 * Mon Dec 4 2006 Wolfgang Taphorn <taphorn@de.ibm.com> 0.2.3-1
   - Inclusion of fixes for the following bug entries:
     o 1608539  cmpi-samba: existency checks in gi methods for Host classes
