@@ -65,7 +65,7 @@ namespace genProvider {
       for(int i=0; users[i];i++){
 	char ** groups = get_user_groups(users[i]);
         if (!groups && errno)
-          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", users[i]);
+          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group!");
 	if(groups){
 	  for(int j=0; groups[j];j++){    
 	    Linux_SambaGroupForUserInstanceName instName;
@@ -115,7 +115,7 @@ namespace genProvider {
       for(int i=0; users[i];i++){
 	char ** groups = get_user_groups(users[i]);
         if (!groups && errno)
-          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", users[i]);
+          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group!");
 	if(groups){
 	  for(int j=0; groups[j];j++){    
 	    Linux_SambaGroupForUserManualInstance manualInstance;
@@ -210,7 +210,7 @@ namespace genProvider {
     
     char ** groups = get_user_groups(aSourceInstanceName.getSambaUserName());
     if (!groups && errno)
-      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", aSourceInstanceName.getSambaUserName());
+      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group!");
     
     if(groups){
       for(int j=0; groups[j];j++){
@@ -260,7 +260,7 @@ namespace genProvider {
       for(int i=0; users[i];i++){
 	char ** groups = get_user_groups(users[i]);
         if (!groups && errno)
-          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", users[i]);
+          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group!");
 	if(groups){
 	  for(int j=0; groups[j];j++){    
 	    if(!strcmp(groups[j],aSourceInstanceName.getSambaGroupName())){
@@ -300,7 +300,7 @@ namespace genProvider {
     
     char ** groups = get_user_groups(aSourceInstanceName.getSambaUserName());
     if (!groups && errno)
-      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", aSourceInstanceName.getSambaUserName());
+      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group!");
     
     if(groups){
       for(int j=0; groups[j];j++){
@@ -351,7 +351,7 @@ namespace genProvider {
 	
 	char ** groups = get_user_groups(users[i]);
         if (!groups && errno)
-          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", users[i]);
+          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group!");
 	if(groups){
 	  for(int j=0; groups[j];j++){
 	    
