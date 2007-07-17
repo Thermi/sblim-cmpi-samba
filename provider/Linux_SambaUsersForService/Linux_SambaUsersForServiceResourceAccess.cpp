@@ -24,8 +24,11 @@
 // 
 #include "Linux_SambaUsersForServiceResourceAccess.h"
 
+#include <errno.h>
 #include "smt_smb_ra_support.h"
 #include "smt_smb_defaultvalues.h"
+
+extern int errno;
 
 namespace genProvider {
   
@@ -35,6 +38,8 @@ namespace genProvider {
   
   static bool validUser(const char* user) {
     char ** users = get_samba_users_list();
+    if (!users && errno)
+      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve Samba user list!");
     if(users){
       for (int i=0; users[i]; i++){
 	if(!strcmp(users[i],user))
@@ -121,6 +126,8 @@ namespace genProvider {
 
 
       char ** users = get_samba_users_list();
+      if (!users && errno)
+        throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve Samba user list!");
       if(users) {
       for (int i=0; users[i]; i++) {
           setInstanceNameProperties(aNameSpaceP,users[i],anInstanceNameEnumeration);
@@ -140,6 +147,8 @@ namespace genProvider {
   	 Linux_SambaUsersForServiceManualInstanceEnumeration& aManualInstanceEnumeration) { 
 
       char ** users = get_samba_users_list();
+      if (!users && errno)
+        throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve Samba user list!");
       if(users) {
       for (int i=0; users[i]; i++) {
       
@@ -226,6 +235,8 @@ namespace genProvider {
     }
 
     char ** users = get_samba_users_list();
+    if (!users && errno)
+      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve Samba user list!");
     
     if(users){
       for (int i=0; users[i]; i++){
@@ -298,6 +309,8 @@ namespace genProvider {
     }
  
     char ** users = get_samba_users_list();
+    if (!users && errno)
+      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve Samba user list!");
     
     if(users){
       for (int i=0; users[i]; i++){

@@ -148,6 +148,7 @@ fi
 %changelog
 * Fri Jul 6 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.0-1
   - Inclusion of fixes for the following issues:
+    o 1755726  cmpi-samba: Retrieval of smb users wrong
     o 1747732  cmpi-samba: Model upgrade for ECUTE 2.3.6 usage
     o 1746588  cmpi-samba: Linux_SambaDenyHostsForGlobal not working
     o 1746584  cmpi-samba: Cleanup for test cases

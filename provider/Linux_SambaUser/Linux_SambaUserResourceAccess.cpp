@@ -29,6 +29,8 @@
 #include "smt_smb_ra_support.h"
 #include "smt_smb_defaultvalues.h"
 
+extern int errno;
+
 namespace genProvider {
 
   
@@ -37,6 +39,8 @@ namespace genProvider {
   
   static bool validUser(const char* user) {
     char ** users = get_samba_users_list();
+    if (!users && errno) 
+	throw CmpiStatus(CMPI_RC_ERR_FAILED,"Failed to retrieve Samba user list");
     if(users){
       for (int i=0; users[i]; i++){
 	if(!strcmp(users[i],user))
@@ -82,6 +86,9 @@ namespace genProvider {
      Linux_SambaUserInstanceNameEnumeration& anInstanceNameEnumeration) {
       
     char ** users = get_samba_users_list();
+    if (!users && errno) {
+	throw CmpiStatus(CMPI_RC_ERR_FAILED,"Failed to retrieve Samba user list");
+    }
     
     if(users){
       for (int i=0; users[i]; i++){
@@ -104,6 +111,9 @@ namespace genProvider {
     Linux_SambaUserManualInstanceEnumeration& aManualInstanceEnumeration) {
     
     char ** users = get_samba_users_list();
+    if (!users && errno) {
+	throw CmpiStatus(CMPI_RC_ERR_FAILED,"Failed to retrieve Samba user list");
+    }
     
     if(users){
       for (int i=0; users[i]; i++){

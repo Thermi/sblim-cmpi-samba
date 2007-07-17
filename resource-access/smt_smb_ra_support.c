@@ -45,6 +45,8 @@
 #define CONFFILE "/etc/smt_smb_ra_support.conf"
 #endif
 
+extern int errno;
+
 extern struct conf *smb_conf;
 extern struct monitor *services_list_monitor;
 extern struct monitor *usermap_file_monitor;
@@ -1215,12 +1217,18 @@ static char **__g_samba_users_list(){
   char *script = my_script_path("smt_smb_ra_get_db_entries.py");
   struct smbopt *p = NULL;
   struct smbcache *cache = __get_usermap_cache();
+  int lErrno = 0;
  
+  ret = (char**) readData1(script,GET_SMBUSRS_CMD,g_single_val_per_line_list);
+  if (!ret) {
+    lErrno = errno;
+    if (errno) {
+        return ret;
+    }
+  }
+
   if (!cache) p = NULL;
   else p = (struct smbopt *) cache->content;
-  
-  ret = (char**) readData1(script,GET_SMBUSRS_CMD,g_single_val_per_line_list);
-
  /* by now we have samba users defined in samba. Still need to get the samba
   * users defined in the user mappings */
   //p = (struct smbopt *) cache->content; 
@@ -2142,6 +2150,7 @@ char *get_user_unix_name(const char* samba_user){
 
 
 static char **__get_samba_users_list(){
+  int lErrno = 0;
   /* We don't implement a cache for this function since it will be called few
    * times. Although we don't cache the return array, we need to keep track of
    * it in order not to leak memory */
@@ -2154,20 +2163,28 @@ static char **__get_samba_users_list(){
   }
 
   global_samba_users_list = __g_samba_users_list();
+  if (!global_samba_users_list) {
+    lErrno = errno;
+  }
   pthread_mutex_unlock(&samba_users_list_mutex);
 
+  errno = lErrno;
   return global_samba_users_list;
 }
 
 
 char **get_samba_users_list(){
-
+  int lErrno = 0;
   char **value;
 
   pthread_mutex_lock(&glob_mutex);
   value = __get_samba_users_list();
+  if (!value) {
+    lErrno = errno;
+  }
   pthread_mutex_unlock(&glob_mutex);
 
+  errno = lErrno;
   return value;
 }
 
@@ -2212,6 +2229,10 @@ int modify_samba_user(const char *samba_name, const char *unix_name_cur,
 
      system_users = __get_system_users_list();
      samba_users = __get_samba_users_list();
+     if (!samba_users && errno) {
+        ret = -ENOENT;
+        goto out;
+     }
 
      if (!__entry_exists(samba_name,samba_users)) {
         ret = -ENOENT;
@@ -2266,6 +2287,10 @@ int add_samba_user(const char *samba_name, const char *unix_name,
 
   system_users = __get_system_users_list();
   samba_users = __get_samba_users_list();
+  if (!samba_users && errno) {
+     ret = -ENOENT;
+     goto out;
+  }
 
   if ( __entry_exists(samba_name,samba_users) ){
     ret = -EEXIST;
@@ -2313,6 +2338,10 @@ int delete_samba_user(const char *samba_user){
 
   pthread_mutex_lock(&glob_mutex);
   samba_users = __get_samba_users_list();
+  if (!samba_users && errno) {
+    ret = -ENOENT;
+    goto out;
+  }
 
   if (!__entry_exists(samba_user,samba_users)){
     ret = -ENOENT;
@@ -2477,6 +2506,9 @@ static char **__get_user_groups(const char *user){
   int i,j=0;
 
   smb_users = __get_samba_users_list();
+  if (!smb_users && errno) {
+      return NULL;
+  }
   unix_username = __get_user_unix_name(user);
 
   if (!__entry_exists(unix_username,smb_users)) return NULL;
@@ -2507,13 +2539,17 @@ static char **__get_user_groups(const char *user){
 
 
 char **get_user_groups(const char *user){
-
+  int lErrno = 0;
   char **value;
 
   pthread_mutex_lock(&glob_mutex);
   value = __get_user_groups(user);
+  if (!value && errno) {
+    lErrno = errno;
+  }
   pthread_mutex_unlock(&glob_mutex);
 
+  errno = lErrno;
   return value;
 }
 
@@ -2681,7 +2717,9 @@ int add_user_to_group(const char *samba_user, const char *samba_group){
 
   pthread_mutex_lock(&glob_mutex);   
   usr_grps = __get_user_groups(samba_user);
+  if (!usr_grps && errno) goto out;
   smb_users = __get_samba_users_list();
+  if (!smb_users && errno) goto out;
   smb_groups = __get_samba_groups_list();
 
   if (!__entry_exists(samba_user,smb_users) ) goto out;
@@ -2712,7 +2750,9 @@ int remove_user_from_group(const char *samba_user, const char *samba_group){
 
   pthread_mutex_lock(&glob_mutex);   
   usr_grps = __get_user_groups(samba_user);
+  if (!usr_grps && errno) goto out;
   smb_users = __get_samba_users_list();
+  if (!smb_users && errno) goto out;
   smb_groups = __get_samba_groups_list();
   
   if (!__entry_exists(samba_user,smb_users) ) goto out;

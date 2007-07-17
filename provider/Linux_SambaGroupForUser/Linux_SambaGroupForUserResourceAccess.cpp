@@ -24,8 +24,11 @@
 // 
 #include "Linux_SambaGroupForUserResourceAccess.h"
 
+#include <errno.h>
 #include "smt_smb_ra_support.h"
 #include "smt_smb_defaultvalues.h"
+
+extern int errno;
 
 namespace genProvider {
   
@@ -49,6 +52,8 @@ namespace genProvider {
 
     int k;
     char ** get_users = get_samba_users_list();
+    if (!get_users && errno)
+      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve Samba user list!");
     if(get_users) {
       char ** users = (char **)malloc(sizeof(char *));
       for(k=0; get_users[k];k++) {
@@ -59,6 +64,8 @@ namespace genProvider {
       users[k] = NULL;
       for(int i=0; users[i];i++){
 	char ** groups = get_user_groups(users[i]);
+        if (!groups && errno)
+          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", users[i]);
 	if(groups){
 	  for(int j=0; groups[j];j++){    
 	    Linux_SambaGroupForUserInstanceName instName;
@@ -95,6 +102,8 @@ namespace genProvider {
     
     int k;
     char ** get_users = get_samba_users_list();
+    if (!get_users && errno)
+      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve Samba user list!");
     
     if(get_users){
       char ** users = (char **)malloc(sizeof(char *));
@@ -105,6 +114,8 @@ namespace genProvider {
       users[k] = NULL;
       for(int i=0; users[i];i++){
 	char ** groups = get_user_groups(users[i]);
+        if (!groups && errno)
+          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", users[i]);
 	if(groups){
 	  for(int j=0; groups[j];j++){    
 	    Linux_SambaGroupForUserManualInstance manualInstance;
@@ -198,6 +209,8 @@ namespace genProvider {
     Linux_SambaGroupForUserManualInstanceEnumeration& aManualInstanceEnumeration) {
     
     char ** groups = get_user_groups(aSourceInstanceName.getSambaUserName());
+    if (!groups && errno)
+      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", aSourceInstanceName.getSambaUserName());
     
     if(groups){
       for(int j=0; groups[j];j++){
@@ -234,6 +247,8 @@ namespace genProvider {
     
     int k;
     char ** get_users = get_samba_users_list();
+    if (!get_users && errno)
+      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve Samba user list!");
     
     if(get_users){
       char ** users = (char **)malloc(sizeof(char *));
@@ -244,6 +259,8 @@ namespace genProvider {
       users[k] = NULL;
       for(int i=0; users[i];i++){
 	char ** groups = get_user_groups(users[i]);
+        if (!groups && errno)
+          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", users[i]);
 	if(groups){
 	  for(int j=0; groups[j];j++){    
 	    if(!strcmp(groups[j],aSourceInstanceName.getSambaGroupName())){
@@ -282,6 +299,8 @@ namespace genProvider {
     Linux_SambaGroupInstanceEnumeration& anInstanceEnumeration) {
     
     char ** groups = get_user_groups(aSourceInstanceName.getSambaUserName());
+    if (!groups && errno)
+      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", aSourceInstanceName.getSambaUserName());
     
     if(groups){
       for(int j=0; groups[j];j++){
@@ -317,6 +336,8 @@ namespace genProvider {
     
     int k;
     char ** get_users = get_samba_users_list();
+    if (!get_users && errno)
+      throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve Samba user list!");
     
     if(get_users){
       char ** users = (char **)malloc(sizeof(char *));
@@ -329,6 +350,8 @@ namespace genProvider {
       for(int i=0; users[i];i++){
 	
 	char ** groups = get_user_groups(users[i]);
+        if (!groups && errno)
+          throw CmpiStatus(CMPI_RC_ERR_FAILED, "Failed to retrieve group for user %s!", users[i]);
 	if(groups){
 	  for(int j=0; groups[j];j++){
 	    

@@ -32,6 +32,7 @@ class Users:
         #self.entry = re.compile(r"^[^:]*:.*$")
         self.entry = re.compile(r"^[^:]*:[^:]*:.*$")
         self.users_list = []
+        self.retval = None
         self.parse()
 
     def parse(self):
@@ -44,7 +45,10 @@ class Users:
                 self.users_list.append(u)
             else:
                 continue
-        p.close()
+        self.retval = p.close()
+        if self.retval:
+            self.users_list = []
+            exit(EFAILED)
         
     def get_users(self):
         return self.users_list

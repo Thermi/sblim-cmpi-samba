@@ -14,6 +14,7 @@
 # Author:  Rodrigo Ceron <rceron@br.ibm.com>
 #
 # Contributors:
+#          Wolfgang Taphorn <taphorn (at) de.ibm.com>
 #
 #####################################################################
 
@@ -22,4 +23,5 @@ EACCES = 13
 ENOSHARE = 2
 ENOOPT = 3
 ENOFILE = 4
+EFAILED = 42
 

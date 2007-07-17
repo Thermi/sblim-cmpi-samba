@@ -1,5 +1,6 @@
 Changes in 0.5.0-1
 ==============================================================================
+- 1755726  cmpi-samba: Retrieval of smb users wrong
 - 1747732  cmpi-samba: Model upgrade for ECUTE 2.3.6 usage
 - 1746588  cmpi-samba: Linux_SambaDenyHostsForGlobal not working
 - 1746584  cmpi-samba: Cleanup for test cases
