@@ -1,6 +1,56 @@
 // =========================================================================
 // new in version 0.5.0-1 :
 
+2007-07-20 13:14  taphorn
+
+	* resource-access/smt_smb_ra_support.c: fix for issue 1757460
+	  cmpi-samba: Server status not reflected properly
+
+2007-07-17 23:35  taphorn
+
+	*
+	  provider/Linux_SambaGroupForUser/Linux_SambaGroupForUserResourceAccess.cpp:
+	  Fix for issue [ 1755726 ]  cmpi-samba: Retrieval of smb users
+	  wrong
+
+2007-07-17 23:05  taphorn
+
+	* NEWS, sblim-cmpi-samba.spec.in,
+	  provider/Linux_SambaInvalidUsersForGlobal/Linux_SambaInvalidUsersForGlobalResourceAccess.cpp,
+	  provider/Linux_SambaWriteListForShare/Linux_SambaWriteListForShareResourceAccess.cpp,
+	  provider/Linux_SambaAdminUsersForShare/Linux_SambaAdminUsersForShareResourceAccess.cpp,
+	  provider/Linux_SambaForceUserForPrinter/Linux_SambaForceUserForPrinterResourceAccess.cpp,
+	  provider/Linux_SambaInvalidUsersForPrinter/Linux_SambaInvalidUsersForPrinterResourceAccess.cpp,
+	  provider/Linux_SambaUser/Linux_SambaUserResourceAccess.cpp,
+	  provider/Linux_SambaValidUsersForPrinter/Linux_SambaValidUsersForPrinterResourceAccess.cpp,
+	  provider/Linux_SambaWriteListForGlobal/Linux_SambaWriteListForGlobalResourceAccess.cpp,
+	  resource-access/smt_smb_ra_support.c,
+	  resource-access/scripts/smt_smb_ra_errors.py,
+	  resource-access/scripts/smt_smb_ra_get_db_entries.py,
+	  provider/Linux_SambaForceUserForShare/Linux_SambaForceUserForShareResourceAccess.cpp,
+	  provider/Linux_SambaGuestAccountForGlobal/Linux_SambaGuestAccountForGlobalResourceAccess.cpp,
+	  provider/Linux_SambaInvalidUsersForShare/Linux_SambaInvalidUsersForShareResourceAccess.cpp,
+	  provider/Linux_SambaPrinterAdminForGlobal/Linux_SambaPrinterAdminForGlobalResourceAccess.cpp,
+	  provider/Linux_SambaReadListForPrinter/Linux_SambaReadListForPrinterResourceAccess.cpp,
+	  provider/Linux_SambaReadListForShare/Linux_SambaReadListForShareResourceAccess.cpp,
+	  provider/Linux_SambaValidUsersForGlobal/Linux_SambaValidUsersForGlobalResourceAccess.cpp,
+	  provider/Linux_SambaValidUsersForShare/Linux_SambaValidUsersForShareResourceAccess.cpp,
+	  provider/Linux_SambaAdminUsersForGlobal/Linux_SambaAdminUsersForGlobalResourceAccess.cpp,
+	  provider/Linux_SambaForceUserForGlobal/Linux_SambaForceUserForGlobalResourceAccess.cpp,
+	  provider/Linux_SambaGroupForUser/Linux_SambaGroupForUserResourceAccess.cpp,
+	  provider/Linux_SambaPrinterAdminForPrinter/Linux_SambaPrinterAdminForPrinterResourceAccess.cpp,
+	  provider/Linux_SambaReadListForGlobal/Linux_SambaReadListForGlobalResourceAccess.cpp,
+	  provider/Linux_SambaUsersForService/Linux_SambaUsersForServiceResourceAccess.cpp,
+	  provider/Linux_SambaWriteListForPrinter/Linux_SambaWriteListForPrinterResourceAccess.cpp:
+	  Fix for issue [ 1755726 ]  cmpi-samba: Retrieval of smb users
+	  wrong
+
+2007-07-07 00:04  taphorn
+
+	* AUTHORS, ChangeLog, NEWS, README, configure.ac,
+	  provider-register.sh, sblim-cmpi-samba.spec.in: Latest changes
+	  for 0.5.0 release
+
 2007-07-04 15:37  taphorn
 
 	* .settings/org.eclipse.cdt.core.prefs,
