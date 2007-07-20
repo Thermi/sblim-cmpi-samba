@@ -2803,7 +2803,9 @@ int start_server(){
  out:
   free(copy);
   free(service);
-  return ret;
+  if ( ret ) return ret;
+  else if ( !status_server() ) return 1;
+  else return 0;
 }
 
 
