@@ -1,6 +1,21 @@
 // =========================================================================
 // new in version 0.5.0-1 :
 
+2007-07-27 17:26  taphorn
+
+	* provider/support/ArrayConverter.cpp: Fix for issue [ 1762059 ]
+	  cmpi-samba: Type conversion issue for string arrays
+
+2007-07-25 18:41  taphorn
+
+	* test/cim/Linux_SambaPrinterForService.cim: Removed needless
+	  'create' test
+
+2007-07-20 13:34  taphorn
+
+	* ChangeLog, NEWS, sblim-cmpi-samba.spec.in: Modified documentation
+	  for latest bug fixes
+
 2007-07-20 13:14  taphorn
 
 	* resource-access/smt_smb_ra_support.c: fix for issue 1757460

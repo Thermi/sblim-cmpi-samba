@@ -1,5 +1,6 @@
 Changes in 0.5.0-1
 ==============================================================================
+- 1762059  cmpi-samba: Type conversion issue for string arrays
 - 1757460  cmpi-samba: Server status not reflected properly
 - 1755726  cmpi-samba: Retrieval of smb users wrong
 - 1747732  cmpi-samba: Model upgrade for ECUTE 2.3.6 usage
