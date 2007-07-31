@@ -169,7 +169,8 @@ namespace genProvider {
      int ret;
      char * option = get_user_unix_name(aManualInstance.getInstanceName().getSambaUserName());
 
-    if(ret = modify_samba_user(aManualInstance.getInstanceName().getSambaUserName(), option, aManualInstance.getSystemUserName(), aManualInstance.getSambaUserPassword())){
+    ret = modify_samba_user(aManualInstance.getInstanceName().getSambaUserName(), option, aManualInstance.getSystemUserName(), aManualInstance.getSambaUserPassword());
+    if(ret){
       if (ret==-EEXIST)
 	throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exists!");
       else if(ret==-ENOENT)
@@ -189,7 +190,8 @@ namespace genProvider {
     
     int ret;
     
-    if(ret = add_samba_user(aManualInstance.getInstanceName().getSambaUserName(), aManualInstance.getSystemUserName(), aManualInstance.getSambaUserPassword())){
+    ret = add_samba_user(aManualInstance.getInstanceName().getSambaUserName(), aManualInstance.getSystemUserName(), aManualInstance.getSambaUserPassword());
+    if(ret){
       if (ret==-EEXIST)
 	throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exists!");
       else if(ret==-ENOENT)
@@ -211,7 +213,8 @@ namespace genProvider {
     const Linux_SambaUserInstanceName& anInstanceName) {
     
     int ret;
-    if(ret = delete_samba_user(anInstanceName.getSambaUserName())){
+    ret = delete_samba_user(anInstanceName.getSambaUserName());
+    if(ret){
       if(ret == -ENOENT)
 	throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!"); 
       else
@@ -282,5 +285,4 @@ namespace genProvider {
 
 	
 }
-
 

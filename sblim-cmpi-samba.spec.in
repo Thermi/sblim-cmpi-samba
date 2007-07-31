@@ -15,7 +15,10 @@ URL: http://www.sblim.org
 License: CPL
 Requires: sblim-tools-libra
 Requires: samba >= 3.0.10
+#Requires: tog-pegasus >= 2.6.0
 BuildRequires: sblim-tools-libra-devel
+#BuildRequires: tog-pegasus-devel
+#BuildRequires: sblim-cmpi-devel
 
 Provides: cmpi-samba
 
@@ -51,15 +54,16 @@ SBLIM WBEM-SMT Samba Provider Testcase Files for the SBLIM Testsuite
 %prep
 
 %setup -n %{name}-%{version}
-export PATCH_GET=0
-#%patch0 -p0
 
 
 ###############################################################################
 %build
 
 %configure \
-   TESTSUITEDIR=%{_datadir}/sblim-testsuite 
+   TESTSUITEDIR=%{_datadir}/sblim-testsuite \
+   CIMSERVER=pegasus \
+   PROVIDERDIR=%{_libdir}/cmpi 
+ 
 make
 
 
@@ -80,6 +84,7 @@ make DESTDIR=$RPM_BUILD_ROOT install
 rm -f $RPM_BUILD_ROOT/%{_libdir}/*a
 rm -f $RPM_BUILD_ROOT/%{_libdir}/cmpi/*a
 
+/usr/lib/rpm/brp-compress
 
 ###############################################################################
 %pre
@@ -126,28 +131,46 @@ fi
 
 ###############################################################################
 %files
-%defattr(-,root,root)
+%defattr(-,root,root,0644)
 %doc %{_datadir}/doc/%{name}-%{version}
+%config(noreplace) %{_sysconfdir}/smt_smb*.conf
+%defattr(-,root,root,0755)
 %{_datadir}/%{name}
-%{_libdir}/*.so.*
-%{_libdir}/cmpi/*.so
-%config(noreplace) %{_sysconfdir}/*.conf
+%exclude %{_datadir}/%{name}/*.pyc
+%exclude %{_datadir}/%{name}/*.pyo
+%{_libdir}/libIBM_SmbProviderTooling.so.*
+%{_libdir}/libLinux_SmbGeneralProviderBasic.so.*
+%{_libdir}/libRaToolsSmb.so.*
+%{_libdir}/cmpi/libcmpiCIM_ConcreteJob.so
+%{_libdir}/cmpi/libcmpiLinux_Samba*.so
 
 %files devel
-%defattr(-,root,root)
-%{_includedir}/sblim
-%{_libdir}/*.so
-
+%defattr(-,root,root,0644)
+%dir %{_includedir}/sblim
+%{_includedir}/sblim/smt_smb*.h
+%defattr(-,root,root,0755)
+%{_libdir}/libIBM_SmbProviderTooling.so
+%{_libdir}/libLinux_SmbGeneralProviderBasic.so
+%{_libdir}/libRaToolsSmb.so
 
 %files test
+%defattr(-,root,root,0755)
+%{_datadir}/sblim-testsuite/test-cmpi-samba.sh
+%{_datadir}/sblim-testsuite/test-cmpi-samba-associations.pl
+%defattr(-,root,root,0644)
+%{_datadir}/sblim-testsuite/smb.conf
+%{_datadir}/sblim-testsuite/smbpasswd
+%{_datadir}/sblim-testsuite/smbusers
+%{_datadir}/sblim-testsuite/cim/Linux_Samba*
+%{_datadir}/sblim-testsuite/system/linux/Linux_Samba*
+%{_datadir}/sblim-testsuite/xml/Linux_Samba*
 
-%defattr(-,root,root)
-%{_datadir}/sblim-testsuite
 
 ###############################################################################
 %changelog
 * Fri Jul 6 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.0-1
   - Inclusion of fixes for the following issues:
+    o 1764888  cmpi-samba: More specific on package content
     o 1762059  cmpi-samba: Type conversion issue for string arrays
     o 1757460  cmpi-samba: Server status not reflected properly
     o 1755726  cmpi-samba: Retrieval of smb users wrong

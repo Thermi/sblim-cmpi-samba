@@ -17,6 +17,7 @@
 #include <cmpidt.h>
 #include <cmpift.h>
 #include <cmpimacs.h>
+#include <stdio.h>
 
 #ifdef CMPI_VER_100
 #define Linux_SambaRegisteredProfile_SetInstance Linux_SambaRegisteredProfile_ModifyInstance 

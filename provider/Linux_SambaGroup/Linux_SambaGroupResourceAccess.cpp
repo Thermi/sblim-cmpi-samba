@@ -140,7 +140,8 @@ namespace genProvider {
     char* option;
     option = get_unix_group_name(aManualInstance.getInstanceName().getSambaGroupName());
 
-    if(ret = modify_samba_group(aManualInstance.getInstanceName().getSambaGroupName(), option, aManualInstance.getSystemGroupName())){
+    ret = modify_samba_group(aManualInstance.getInstanceName().getSambaGroupName(), option, aManualInstance.getSystemGroupName());
+    if(ret){
       if (ret==-ENOENT)
         throw CmpiStatus(CMPI_RC_ERR_FAILED,"The specified SystemGroupName or UnixGroupName is not known in the system");
       else
@@ -162,8 +163,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaGroupManualInstance& aManualInstance) {
     
-    int ret;
-    if(ret = create_samba_group(aManualInstance.getInstanceName().getSambaGroupName(), aManualInstance.getSystemGroupName())){
+    int ret = create_samba_group(aManualInstance.getInstanceName().getSambaGroupName(), aManualInstance.getSystemGroupName());
+    if(ret){
       if (ret==-EEXIST)
 	throw CmpiStatus(CMPI_RC_ERR_ALREADY_EXISTS,"Instance already exists!");
       else if (ret==-ENOENT)
@@ -184,8 +185,8 @@ namespace genProvider {
     const CmpiBroker& aBroker,
     const Linux_SambaGroupInstanceName& anInstanceName) {
     
-    int ret;
-    if(ret = delete_samba_group(anInstanceName.getSambaGroupName())){
+    int ret = delete_samba_group(anInstanceName.getSambaGroupName());
+    if(ret){
       if(ret == -ENOENT)
 	throw CmpiStatus(CMPI_RC_ERR_NOT_FOUND,"Instance does not exist!"); 
       else

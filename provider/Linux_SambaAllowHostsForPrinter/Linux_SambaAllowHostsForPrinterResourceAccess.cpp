@@ -45,7 +45,7 @@ namespace genProvider {
   {
 
     const char * hosts_list;
-    char * ret_value;
+    char * ret_value = NULL;
     SambaArray temp1, temp2;
     string str_hosts_list;
 
