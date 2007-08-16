@@ -406,12 +406,12 @@ namespace genProvider {
     Linux_SambaDenyHostsForShareInstanceName instanceName = Linux_SambaDenyHostsForShareInstanceName(aCop);
     m_interfaceP->deleteInstance(aContext,m_cmpiBroker,instanceName);
 
-    instanceName.setNamespace("IBMShadow/cimv2");
-    CmpiObjectPath op = instanceName.getObjectPath();
-      
-    try { // The instance could not have static data
-      m_cmpiBroker.deleteInstance(aContext,op);
-    } catch (CmpiStatus& rc) {}
+//    instanceName.setNamespace("IBMShadow/cimv2");
+//    CmpiObjectPath op = instanceName.getObjectPath();
+//      
+//    try { // The instance could not have static data
+//      m_cmpiBroker.deleteInstance(aContext,op);
+//    } catch (CmpiStatus& rc) {}
       
     aResult.returnDone();
     return CmpiStatus(CMPI_RC_OK);

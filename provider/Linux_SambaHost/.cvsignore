@@ -2,3 +2,14 @@
 .libs
 Makefile
 Makefile.in
+Linux_SambaHostResourceAccess.lo
+Linux_SambaHostInstanceName.lo
+Linux_SambaHostFactory.lo
+libcmpiLinux_SambaHost.la
+CmpiLinux_SambaHostProvider.lo
+Linux_SambaHostRepositoryInstance.lo
+Linux_SambaHostRepositoryExternal.lo
+Linux_SambaHostManualInstance.lo
+Linux_SambaHostInstance.lo
+Linux_SambaHostExternal.lo
+Linux_SambaHostDefaultImplementation.lo

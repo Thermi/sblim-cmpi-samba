@@ -2,3 +2,14 @@
 .libs
 Makefile
 Makefile.in
+Linux_SambaGroupResourceAccess.lo
+Linux_SambaGroupInstanceName.lo
+Linux_SambaGroupFactory.lo
+libcmpiLinux_SambaGroup.la
+CmpiLinux_SambaGroupProvider.lo
+Linux_SambaGroupRepositoryInstance.lo
+Linux_SambaGroupRepositoryExternal.lo
+Linux_SambaGroupManualInstance.lo
+Linux_SambaGroupInstance.lo
+Linux_SambaGroupExternal.lo
+Linux_SambaGroupDefaultImplementation.lo

@@ -2,3 +2,14 @@
 .libs
 Makefile
 Makefile.in
+Linux_SambaShareOptionsResourceAccess.lo
+Linux_SambaShareOptionsInstanceName.lo
+Linux_SambaShareOptionsFactory.lo
+libcmpiLinux_SambaShareOptions.la
+CmpiLinux_SambaShareOptionsProvider.lo
+Linux_SambaShareOptionsRepositoryInstance.lo
+Linux_SambaShareOptionsRepositoryExternal.lo
+Linux_SambaShareOptionsManualInstance.lo
+Linux_SambaShareOptionsInstance.lo
+Linux_SambaShareOptionsExternal.lo
+Linux_SambaShareOptionsDefaultImplementation.lo

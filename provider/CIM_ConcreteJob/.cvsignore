@@ -2,3 +2,7 @@
 .libs
 Makefile
 Makefile.in
+libcmpiCIM_ConcreteJob.la
+CIM_ConcreteJobInstanceName.lo
+CIM_ConcreteJobInstance.lo
+CIM_ConcreteJobExternal.lo
