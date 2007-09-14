@@ -1,7 +1,6 @@
 ********************************************************************************
 association : Linux_SambaPrinterPrintingForPrinter
 objectPath : Linux_SambaPrinterPrintingForPrinter.SettingData=Linux_SambaPrinterPrintingOptions.InstanceID="smbd",Name="wbemsmt-testprinter1",ManagedElement=Linux_SambaPrinterOptions.InstanceID="smbd",Name="wbemsmt-testprinter1"
-modifyInst : Linux_SambaPrinterPrintingForPrinter.SettingData=Linux_SambaPrinterPrintingOptions.InstanceID="smbd",Name="wbemsmt-testprinter1",ManagedElement=Linux_SambaPrinterOptions.InstanceID="smbd",Name="wbemsmt-testprinter1"
 sourceRole : SettingData
 targetRole : ManagedElement
 sourceClass : Linux_SambaPrinterPrintingOptions

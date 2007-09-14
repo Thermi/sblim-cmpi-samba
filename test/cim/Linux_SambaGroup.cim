@@ -1,7 +1,6 @@
 ********************************************************************************
 class : Linux_SambaGroup
 objectPath : Linux_SambaGroup.SambaGroupName="wbemsmt-test-smbgroup",SystemGroupName="wbemsmt-test1"
-modifyInst : Linux_SambaGroup.SambaGroupName="wbemsmt-test-smbgroup",SystemGroupName="wbemsmt-test1"
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

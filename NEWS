@@ -1,5 +1,6 @@
 Changes in Next Release
 ==============================================================================
+- 1794679  cmpi-samba: base tests on current delivered testsuite
 - 1794656  cmpi-samba: Creation of new system user does not appear
 - 1794654  cmpi-samba: Include information on WBEM-SMT client app
 

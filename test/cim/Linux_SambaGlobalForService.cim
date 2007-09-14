@@ -1,7 +1,6 @@
 ********************************************************************************
 association : Linux_SambaGlobalForService
 objectPath : Linux_SambaGlobalForService.ManagedElement=Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="localhost",SettingData=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
-modifyInst : Linux_SambaGlobalForService.ManagedElement=Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="localhost",SettingData=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
 sourceRole : ManagedElement
 targetRole : SettingData
 sourceClass : Linux_SambaService

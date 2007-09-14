@@ -1,7 +1,6 @@
 ********************************************************************************
 association : Linux_SambaGlobalBrowseForGlobal
 objectPath : Linux_SambaGlobalBrowseForGlobal.SettingData=Linux_SambaGlobalBrowseOptions.InstanceID="smbd",Name="Global",ManagedElement=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
-modifyInst : Linux_SambaGlobalBrowseForGlobal.SettingData=Linux_SambaGlobalBrowseOptions.InstanceID="smbd",Name="Global",ManagedElement=Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global"
 sourceRole : SettingData
 targetRole : ManagedElement
 sourceClass : Linux_SambaGlobalBrowseOptions

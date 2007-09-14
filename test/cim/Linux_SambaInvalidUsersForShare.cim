@@ -1,7 +1,6 @@
 ********************************************************************************
 association : Linux_SambaInvalidUsersForShare
 objectPath : Linux_SambaInvalidUsersForShare.PartComponent=Linux_SambaUser.SambaUserName="sambauser6",GroupComponent=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1"
-modifyInst : Linux_SambaInvalidUsersForShare.PartComponent=Linux_SambaUser.SambaUserName="sambauser6",GroupComponent=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaUser

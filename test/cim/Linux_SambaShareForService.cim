@@ -1,7 +1,6 @@
 ********************************************************************************
 association : Linux_SambaShareForService
 objectPath : Linux_SambaShareForService.SettingData=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1",ManagedElement=Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="localhost"
-modifyInst : Linux_SambaShareForService.SettingData=Linux_SambaShareOptions.InstanceID="smbd",Name="wbemsmt-testshare1",ManagedElement=Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="localhost"
 sourceRole : SettingData
 targetRole : ManagedElement
 sourceClass : Linux_SambaShareOptions

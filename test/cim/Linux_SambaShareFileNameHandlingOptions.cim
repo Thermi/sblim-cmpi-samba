@@ -1,7 +1,6 @@
 ********************************************************************************
 class : Linux_SambaShareFileNameHandlingOptions
 objectPath : Linux_SambaShareFileNameHandlingOptions.Caption="",Description="",InstanceID="smbd",ElementName="",CaseSensitive=FALSE,DosFiletimes=TRUE,HideDotFiles=TRUE,Name="wbemsmt-testshare3"
-modifyInst : Linux_SambaShareFileNameHandlingOptions.Caption="",Description="",InstanceID="smbd",ElementName="",CaseSensitive=FALSE,DosFiletimes=TRUE,HideDotFiles=TRUE,Name="wbemsmt-testshare3"
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames

@@ -1,7 +1,6 @@
 ********************************************************************************
 class : Linux_SambaShareSecurityOptions
 objectPath : Linux_SambaShareSecurityOptions.InstanceID="smbd",Name="wbemsmt-testshare1",Caption="",Description="",ElementName="",CreateMask=744,DirectoryMask=755,DirectorySecurityMask=777
-modifyInst : Linux_SambaShareSecurityOptions.InstanceID="smbd",Name="wbemsmt-testshare1",Caption="",Description="",ElementName="",CreateMask=744,DirectoryMask=755,DirectorySecurityMask=777
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

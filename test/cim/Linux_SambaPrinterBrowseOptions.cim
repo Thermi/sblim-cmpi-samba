@@ -1,7 +1,6 @@
 ********************************************************************************
 class : Linux_SambaPrinterBrowseOptions
 objectPath : Linux_SambaPrinterBrowseOptions.InstanceID="smbd",Name="wbemsmt-testprinter2",Caption="",Description="",ElementName="",Browsable=FALSE
-modifyInst : Linux_SambaPrinterBrowseOptions.InstanceID="smbd",Name="wbemsmt-testprinter2",Caption="",Description="",ElementName="",Browsable=FALSE
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

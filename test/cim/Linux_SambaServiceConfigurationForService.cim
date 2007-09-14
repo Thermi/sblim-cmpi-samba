@@ -1,7 +1,6 @@
 ********************************************************************************
 association : Linux_SambaServiceConfigurationForService
 objectPath : Linux_SambaServiceConfigurationForService.Element=Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="localhost",Configuration=Linux_SambaServiceConfiguration.Name="smbd"
-modifyInst : Linux_SambaServiceConfigurationForService.Element=Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="localhost",Configuration=Linux_SambaServiceConfiguration.Name="smbd"
 sourceRole : Element
 targetRole : Configuration
 sourceClass : Linux_SambaService

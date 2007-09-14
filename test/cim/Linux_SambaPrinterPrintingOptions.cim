@@ -1,7 +1,6 @@
 ********************************************************************************
 class : Linux_SambaPrinterPrintingOptions
 objectPath : Linux_SambaPrinterPrintingOptions.Caption="",Description="",InstanceID="smbd",ElementName="",CupsOptions="raw",DefaultDevMode=TRUE,MaxPrintjobs=500,MaxReportedPrintjobs=0,PrintCommand="lpr -r -P",UseClientDriver=FALSE,Name="wbemsmt-testprinter3"
-modifyInst : Linux_SambaPrinterPrintingOptions.Caption="",Description="",InstanceID="smbd",ElementName="",CupsOptions="raw",DefaultDevMode=TRUE,MaxPrintjobs=500,MaxReportedPrintjobs=0,PrintCommand="lpr -r -P",UseClientDriver=FALSE,Name="wbemsmt-testprinter3"
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

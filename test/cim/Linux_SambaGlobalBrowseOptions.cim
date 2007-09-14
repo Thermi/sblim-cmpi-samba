@@ -1,7 +1,6 @@
 ********************************************************************************
 class : Linux_SambaGlobalBrowseOptions
 objectPath : Linux_SambaGlobalBrowseOptions.InstanceID="smbd",Name="Global",Browsable=TRUE,DomainMaster=2
-modifyInst : Linux_SambaGlobalBrowseOptions.InstanceID="smbd",Name="Global",Browsable=TRUE,DomainMaster=2
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
 

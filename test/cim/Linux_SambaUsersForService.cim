@@ -1,7 +1,6 @@
 ********************************************************************************
 association : Linux_SambaUsersForService
 objectPath : Linux_SambaUsersForService.PartComponent=Linux_SambaUser.SambaUserName="sambauser1",GroupComponent=Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="localhost"
-modifyInst : Linux_SambaUsersForService.PartComponent=Linux_SambaUser.SambaUserName="sambauser1",GroupComponent=Linux_SambaService.CreationClassName="Linux_SambaService",Name="smbd",SystemCreationClassName="Linux_SambaService",SystemName="localhost"
 sourceRole : PartComponent
 targetRole : GroupComponent
 sourceClass : Linux_SambaUser

@@ -1,7 +1,6 @@
 ********************************************************************************
 class : Linux_SambaGlobalOptions
 objectPath : Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global",Caption="",Description="",ElementName="",BindInterfacesOnly=FALSE,Interfaces="",NetbiosAlias="",NetbiosName="net-new",Printable=TRUE,ServerString="Samba 3.0.25a-2.fc8",Workgroup="NewNet"
-modifyInst : Linux_SambaGlobalOptions.InstanceID="smbd",Name="Global",Caption="",Description="",ElementName="",BindInterfacesOnly=FALSE,Interfaces="",NetbiosAlias="",NetbiosName="net-new",Printable=TRUE,ServerString="Samba 3.0.25a-2.fc8",Workgroup="NewNet"
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames

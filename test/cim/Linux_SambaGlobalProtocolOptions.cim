@@ -1,7 +1,6 @@
 ********************************************************************************
 class : Linux_SambaGlobalProtocolOptions
 objectPath : Linux_SambaGlobalProtocolOptions.InstanceID="smbd",Name="Global",Caption="",Description="",ElementName="",AclCompatibility=0,EASupport=FALSE,NTACLSupport=TRUE
-modifyInst : Linux_SambaGlobalProtocolOptions.InstanceID="smbd",Name="Global",Caption="",Description="",ElementName="",AclCompatibility=0,EASupport=FALSE,NTACLSupport=TRUE
 
 --------------------------------------------------------------------------------
 Instance                                                       enumInstanceNames
