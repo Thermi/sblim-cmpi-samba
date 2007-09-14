@@ -1,3 +1,7 @@
+Changes in Next Release
+==============================================================================
+- 1794654  cmpi-samba: Include information on WBEM-SMT client app
+
 Changes in 0.5.1-1
 ==============================================================================
 - 1775667  cmpi-samba: Still using ShadowRepository

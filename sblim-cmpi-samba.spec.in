@@ -29,6 +29,9 @@ The cmpi-samba package provides access to the samba configuration data
 via CIMOM technology/infrastructure.
 It contains the Samba CIM Model, CMPI Provider with the Samba task specific 
 Resource Access.
+A web based client application is available on SourceForge. Please refer to
+http://sblim.wiki.sourceforge.net to get more information the WBEM-SMT Client 
+Application.
 
 ###############################################################################
 %Package devel
@@ -168,6 +171,10 @@ fi
 
 ###############################################################################
 %changelog
+* Wed Sep 12 2007 Wolfgang Taphorn <taphorn@de.ibm.com> - next release
+  - Inclusion of fixes for the following issues:
+    o 1794654  cmpi-samba: Include information on WBEM-SMT client app
+
 * Mon Aug 27 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.1-1
   - Inclusion of fixes for the following issues:
     o 1775667  cmpi-samba: Still using ShadowRepository
