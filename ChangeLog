@@ -1,4 +1,109 @@
 // =========================================================================
+// new in version 0.5.2-1 :
+
+2007-09-14 14:30  taphorn
+
+	* sblim-cmpi-samba.spec.in: Added correct time stamp in change
+	  history
+
+2007-09-14 14:27  taphorn
+
+	* NEWS, configure.ac, sblim-cmpi-samba.spec.in: Preparation for
+	  next release
+
+2007-09-14 14:22  taphorn
+
+	* test/cim/Linux_SambaForceUserForGlobal.cim,
+	  test/cim/Linux_SambaGroup.cim,
+	  test/cim/Linux_SambaGroupForUser.cim,
+	  test/cim/Linux_SambaHost.cim,
+	  test/cim/Linux_SambaInvalidUsersForPrinter.cim,
+	  test/cim/Linux_SambaPrinterAdminForPrinter.cim,
+	  test/cim/Linux_SambaPrinterOptions.cim,
+	  test/cim/Linux_SambaPrinterPrintingOptions.cim,
+	  test/cim/Linux_SambaPrinterSecurityForPrinter.cim,
+	  test/cim/Linux_SambaReadListForPrinter.cim,
+	  test/cim/Linux_SambaServiceConfiguration.cim,
+	  test/cim/Linux_SambaServiceConfigurationForService.cim,
+	  test/cim/Linux_SambaShareProtocolOptions.cim,
+	  test/cim/Linux_SambaShareSecurityForGlobal.cim,
+	  test/cim/Linux_SambaValidUsersForShare.cim,
+	  test/cim/Linux_SambaWriteListForGlobal.cim,
+	  test/cim/Linux_SambaWriteListForPrinter.cim, NEWS,
+	  sblim-cmpi-samba.spec.in,
+	  test/cim/Linux_SambaAdminUsersForGlobal.cim,
+	  test/cim/Linux_SambaAdminUsersForShare.cim,
+	  test/cim/Linux_SambaAllowHostsForGlobal.cim,
+	  test/cim/Linux_SambaAllowHostsForPrinter.cim,
+	  test/cim/Linux_SambaAllowHostsForShare.cim,
+	  test/cim/Linux_SambaCommonSecurityForGlobal.cim,
+	  test/cim/Linux_SambaCommonSecurityForPrinter.cim,
+	  test/cim/Linux_SambaCommonSecurityForShare.cim,
+	  test/cim/Linux_SambaCommonSecurityOptions.cim,
+	  test/cim/Linux_SambaDenyHostsForGlobal.cim,
+	  test/cim/Linux_SambaDenyHostsForPrinter.cim,
+	  test/cim/Linux_SambaDenyHostsForShare.cim,
+	  test/cim/Linux_SambaForceGroupForGlobal.cim,
+	  test/cim/Linux_SambaForceGroupForPrinter.cim,
+	  test/cim/Linux_SambaForceGroupForShare.cim,
+	  test/cim/Linux_SambaForceUserForPrinter.cim,
+	  test/cim/Linux_SambaForceUserForShare.cim,
+	  test/cim/Linux_SambaGlobalBrowseForGlobal.cim,
+	  test/cim/Linux_SambaGlobalBrowseOptions.cim,
+	  test/cim/Linux_SambaGlobalFileNameHandlingForGlobal.cim,
+	  test/cim/Linux_SambaGlobalFileNameHandlingOptions.cim,
+	  test/cim/Linux_SambaGlobalForService.cim,
+	  test/cim/Linux_SambaGlobalOptions.cim,
+	  test/cim/Linux_SambaGlobalPrintingForGlobal.cim,
+	  test/cim/Linux_SambaGlobalPrintingOptions.cim,
+	  test/cim/Linux_SambaGlobalProtocolForGlobal.cim,
+	  test/cim/Linux_SambaGlobalProtocolOptions.cim,
+	  test/cim/Linux_SambaGlobalSecurityForGlobal.cim,
+	  test/cim/Linux_SambaGlobalSecurityOptions.cim,
+	  test/cim/Linux_SambaGuestAccountForGlobal.cim,
+	  test/cim/Linux_SambaHostsForService.cim,
+	  test/cim/Linux_SambaInvalidUsersForGlobal.cim,
+	  test/cim/Linux_SambaInvalidUsersForShare.cim,
+	  test/cim/Linux_SambaPrinterAdminForGlobal.cim,
+	  test/cim/Linux_SambaPrinterBrowseForPrinter.cim,
+	  test/cim/Linux_SambaPrinterBrowseOptions.cim,
+	  test/cim/Linux_SambaPrinterForService.cim,
+	  test/cim/Linux_SambaPrinterPrintingForPrinter.cim,
+	  test/cim/Linux_SambaPrinterSecurityForGlobal.cim,
+	  test/cim/Linux_SambaPrinterSecurityOptions.cim,
+	  test/cim/Linux_SambaReadListForGlobal.cim,
+	  test/cim/Linux_SambaReadListForShare.cim,
+	  test/cim/Linux_SambaScriptingForGlobal.cim,
+	  test/cim/Linux_SambaScriptingOptions.cim,
+	  test/cim/Linux_SambaService.cim,
+	  test/cim/Linux_SambaShareBrowseForShare.cim,
+	  test/cim/Linux_SambaShareBrowseOptions.cim,
+	  test/cim/Linux_SambaShareFileNameHandlingForShare.cim,
+	  test/cim/Linux_SambaShareFileNameHandlingOptions.cim,
+	  test/cim/Linux_SambaShareForService.cim,
+	  test/cim/Linux_SambaShareOptions.cim,
+	  test/cim/Linux_SambaShareProtocolForShare.cim,
+	  test/cim/Linux_SambaShareSecurityForShare.cim,
+	  test/cim/Linux_SambaShareSecurityOptions.cim,
+	  test/cim/Linux_SambaUser.cim,
+	  test/cim/Linux_SambaUsersForService.cim,
+	  test/cim/Linux_SambaValidUsersForGlobal.cim,
+	  test/cim/Linux_SambaValidUsersForPrinter.cim,
+	  test/cim/Linux_SambaWriteListForShare.cim: Fix for issue
+	  [1794679]  cmpi-samba: base tests on current delivered testsuite
+
+2007-09-14 14:07  taphorn
+
+	* sblim-cmpi-samba.spec.in, resource-access/smt_smb_ra_support.c,
+	  NEWS: Fix for issue [ 1794656 ] cmpi-samba: Creation of new
+	  system user does not appear
+
+2007-09-14 13:56  taphorn
+
+	* NEWS, README, sblim-cmpi-samba.spec.in: Fix for issue [1794654]
+	  cmpi-samba: Include information on WBEM-SMT client app
+
+// =========================================================================
 // new in version 0.5.1-1 :
 
 2007-08-16 20:56  taphorn
