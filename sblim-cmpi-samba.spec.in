@@ -171,7 +171,7 @@ fi
 
 ###############################################################################
 %changelog
-* Wed Sep 12 2007 Wolfgang Taphorn <taphorn@de.ibm.com> - next release
+* Wed Sep 12 2007 Wolfgang Taphorn <taphorn@de.ibm.com> - 0.5.2-1
   - Inclusion of fixes for the following issues:
     o 1794679  cmpi-samba: base tests on current delivered testsuite
     o 1794656  cmpi-samba: Creation of new system user does not appear
