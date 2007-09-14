@@ -2070,7 +2070,6 @@ static int __add_usermap(const char *samba_name, const char *unix_name){
   return ret;
 }
 
-/*
 static int __create_sys_user(const char *user){
   // Creates a user in the system
 
@@ -2081,7 +2080,6 @@ static int __create_sys_user(const char *user){
   free(script);
   return ret;
 }
-*/
 
 static int __create_smb_user(const char *user, const char *password){
   
@@ -2307,12 +2305,10 @@ int add_samba_user(const char *samba_name, const char *unix_name,
   
   /* create unix user if needed. If you want to make it possible to create
      system users, comment the above verification and uncomment this */
-  /*
   if (!__entry_exists(unix_name,system_users) ){
     ret = __create_sys_user(unix_name);
     if (ret) goto out;
   }
-  */
  
   /* add unix user to samba */
   if (!__entry_exists(unix_name,samba_users) ){

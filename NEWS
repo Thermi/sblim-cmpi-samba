@@ -1,5 +1,6 @@
 Changes in Next Release
 ==============================================================================
+- 1794656  cmpi-samba: Creation of new system user does not appear
 - 1794654  cmpi-samba: Include information on WBEM-SMT client app
 
 Changes in 0.5.1-1
