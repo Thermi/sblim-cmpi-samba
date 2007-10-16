@@ -43,61 +43,12 @@ AM_CPPFLAGS = -DDEBUG \
               -DCMPI_STANDALONE \
               -I${srcdir}/../include \
               -I${srcdir}/../../resource-access \
-              -I${srcdir}/../CIM_ConcreteJob \
-              -I${srcdir}/../Linux_SambaCommonSecurityOptions \
-              -I${srcdir}/../Linux_SambaGlobalOptions \
-              -I${srcdir}/../Linux_SambaGlobalBrowseOptions \
-              -I${srcdir}/../Linux_SambaGlobalFileNameHandlingOptions \
-              -I${srcdir}/../Linux_SambaGlobalPrintingOptions \
-              -I${srcdir}/../Linux_SambaGlobalProtocolOptions \
-              -I${srcdir}/../Linux_SambaGlobalSecurityOptions \
-              -I${srcdir}/../Linux_SambaPrinterOptions \
-              -I${srcdir}/../Linux_SambaPrinterPrintingOptions \
-              -I${srcdir}/../Linux_SambaPrinterSecurityOptions \
               -I${srcdir}/../Linux_SambaShareOptions \
-              -I${srcdir}/../Linux_SambaShareFileNameHandlingOptions \
-              -I${srcdir}/../Linux_SambaShareBrowseOptions \
-              -I${srcdir}/../Linux_SambaPrinterBrowseOptions \
-              -I${srcdir}/../Linux_SambaShareProtocolOptions \
-              -I${srcdir}/../Linux_SambaShareSecurityOptions \
-              -I${srcdir}/../Linux_SambaScriptingOptions \
-              -I${srcdir}/../Linux_SambaService \
-              -I${srcdir}/../Linux_SambaServiceConfiguration \
-              -I${srcdir}/../Linux_SambaGroup \
-              -I${srcdir}/../Linux_SambaHost \
-              -I${srcdir}/../Linux_SambaUser
-
-AM_LDFLAGS = -L./../ \
-             -L./../../resource-access \
-             -L./../CIM_ConcreteJob \
-             -L./../Linux_SambaCommonSecurityOptions \
-             -L./../Linux_SambaGlobalOptions \
-             -L./../Linux_SambaGlobalBrowseOptions \
-             -L./../Linux_SambaGlobalFileNameHandlingOptions \
-             -L./../Linux_SambaGlobalPrintingOptions \
-             -L./../Linux_SambaGlobalProtocolOptions \
-             -L./../Linux_SambaGlobalSecurityOptions \
-             -L./../Linux_SambaPrinterOptions \
-             -L./../Linux_SambaPrinterPrintingOptions \
-             -L./../Linux_SambaPrinterSecurityOptions \
-             -L./../Linux_SambaShareOptions \
-             -L./../Linux_SambaShareFileNameHandlingOptions \
-             -L./../Linux_SambaShareBrowseOptions \
-             -L./../Linux_SambaPrinterBrowseOptions \
-             -L./../Linux_SambaShareProtocolOptions \
-             -L./../Linux_SambaShareSecurityOptions \
-             -L./../Linux_SambaScriptingOptions \
-             -L./../Linux_SambaService \
-             -L./../Linux_SambaServiceConfiguration \
-             -L./../Linux_SambaGroup \
-             -L./../Linux_SambaHost \
-             -L./../Linux_SambaUser
-
+              -I${srcdir}/../Linux_SambaShareProtocolOptions
 
 ################################################################################
 provider_LTLIBRARIES = \
                libcmpiLinux_SambaShareProtocolForShare.la 
-
 
 ################################################################################
 # Linux_SambaShareProtocolForShare
@@ -126,20 +77,11 @@ noinst_HEADERS+= \
         Linux_SambaShareProtocolForShareRepositoryInstance.h \
         Linux_SambaShareProtocolForShareResourceAccess.h
 
-#libcmpiLinux_SambaShareProtocolForShare_la_DEPENDENCIES = \
-#        libcmpiLinux_SambaGlobalOptions.la \
-#        libcmpiLinux_SambaShareSecurityOptions.la \
-#        libcmpiCIM_ConcreteJob.la
-
 libcmpiLinux_SambaShareProtocolForShare_la_LIBADD = \
-        -lRaToolsSmb \
-        -lIBM_SmbProviderTooling \
-        -lLinux_SmbGeneralProviderBasic \
-        -lcmpiLinux_SambaShareOptions \
-        -lcmpiLinux_SambaShareProtocolOptions \
-        -lcmpiCIM_ConcreteJob
+        $(top_builddir)/resource-access/libRaToolsSmb.la \
+        $(top_builddir)/provider/libIBM_SmbProviderTooling.la \
+        $(top_builddir)/provider/libLinux_SmbGeneralProviderBasic.la \
+        $(top_builddir)/provider/Linux_SambaShareOptions/libcmpiLinux_SambaShareOptions.la \
+        $(top_builddir)/provider/Linux_SambaShareProtocolOptions/libcmpiLinux_SambaShareProtocolOptions.la
 
 libcmpiLinux_SambaShareProtocolForShare_la_LDFLAGS = -avoid-version
-
-
-

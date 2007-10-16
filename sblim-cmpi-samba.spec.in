@@ -9,7 +9,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 Summary: SBLIM WBEM-SMT Samba
 Name: @PACKAGE_TARNAME@
 Version: @PACKAGE_VERSION@
-Release: 1
+Release: CVS
 Group: Systems Management/Base
 URL: http://www.sblim.org
 License: CPL
@@ -144,7 +144,7 @@ fi
 %{_libdir}/libIBM_SmbProviderTooling.so.*
 %{_libdir}/libLinux_SmbGeneralProviderBasic.so.*
 %{_libdir}/libRaToolsSmb.so.*
-%{_libdir}/cmpi/libcmpiCIM_ConcreteJob.so
+%{_libdir}/cmpi/libcmpiSambaCIM_ConcreteJob.so
 %{_libdir}/cmpi/libcmpiLinux_Samba*.so
 
 %files devel
@@ -171,6 +171,10 @@ fi
 
 ###############################################################################
 %changelog
+* Tue Oct 16 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.2-CVS
+  - Inclusion of fixes for the following issues:
+    o 1814509  cmpi-samba: Enhancements to build process
+
 * Fri Sep 14 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.2-1
   - Inclusion of fixes for the following issues:
     o 1794679  cmpi-samba: base tests on current delivered testsuite

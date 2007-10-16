@@ -1,3 +1,7 @@
+Changes on top of 0.5.2-1
+==============================================================================
+- 1814509  cmpi-samba: Enhancements to build process
+
 Changes in 0.5.2-1
 ==============================================================================
 - 1794679  cmpi-samba: base tests on current delivered testsuite
