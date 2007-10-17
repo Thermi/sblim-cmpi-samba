@@ -53,7 +53,7 @@ BUILT_SOURCES =
 if TESTSUITE_SUPPORT
   TESTCASE_DIR = test
 endif
-SUBDIRS = $(TESTCASE_DIR) resource-access provider
+SUBDIRS = $(TESTCASE_DIR) man resource-access provider
 
 ######################################################################################
 # sed scriptlets for replacing values in .in files

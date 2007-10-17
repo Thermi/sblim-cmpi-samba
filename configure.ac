@@ -86,6 +86,7 @@ AM_CONDITIONAL([TESTSUITE_SUPPORT], test "$TESTSUITEDIR")
 
 AC_CONFIG_FILES(Makefile sblim-cmpi-samba.spec)
 AC_CONFIG_FILES(resource-access/Makefile resource-access/scripts/smt_smb_ra_get_defaults.sh.pre resource-access/smt_smb_ra_support.conf.pre) 
+AC_CONFIG_FILES(man/Makefile man/smt_smb_ra_support.conf.5.pre)
 AC_CONFIG_FILES(provider/Makefile)
 AC_CONFIG_FILES(provider/CIM_ConcreteJob/Makefile)
 AC_CONFIG_FILES(provider/Linux_SambaRegisteredProfile/Makefile)

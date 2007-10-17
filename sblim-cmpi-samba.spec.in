@@ -4,6 +4,8 @@
 # Package spec for cmpi-samba
 #
 
+%define cmpi_provider_dir %{_libdir}/cmpi
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 Summary: SBLIM WBEM-SMT Samba
@@ -136,6 +138,7 @@ fi
 %files
 %defattr(-,root,root,0644)
 %doc %{_datadir}/doc/%{name}-%{version}
+%doc %{_mandir}/man5/smt_smb_ra_support.conf.5.gz
 %config(noreplace) %{_sysconfdir}/smt_smb*.conf
 %defattr(-,root,root,0755)
 %{_datadir}/%{name}
@@ -144,8 +147,8 @@ fi
 %{_libdir}/libIBM_SmbProviderTooling.so.*
 %{_libdir}/libLinux_SmbGeneralProviderBasic.so.*
 %{_libdir}/libRaToolsSmb.so.*
-%{_libdir}/cmpi/libcmpiSambaCIM_ConcreteJob.so
-%{_libdir}/cmpi/libcmpiLinux_Samba*.so
+%{cmpi_provider_dir}/libcmpiSambaCIM_ConcreteJob.so
+%{cmpi_provider_dir}/libcmpiLinux_Samba*.so
 
 %files devel
 %defattr(-,root,root,0644)
@@ -173,6 +176,7 @@ fi
 %changelog
 * Tue Oct 16 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.2-CVS
   - Inclusion of fixes for the following issues:
+    o 1815306  cmpi-samba: Man page for the samba specific config file
     o 1814509  cmpi-samba: Enhancements to build process
 
 * Fri Sep 14 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.2-1

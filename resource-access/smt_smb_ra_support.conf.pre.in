@@ -4,33 +4,33 @@
 #
 
 ##############################################################################
-# The 'scriptdir' variable is used to define the directory where the
-# python scripts are located used by the resource access layer.
-scriptdir ="@SCRIPTDIR@/"
-
-##############################################################################
-# The 'smbconf' variable is used to define the location and the name of the 
+# The 'smbconf' attribute is used to define the location and the name of the 
 # samba configuration file.
 smbconf   ="/etc/samba/smb.conf"
 
 ##############################################################################
-# The 'defaults' variable is used to define the location and the name of the
+# The 'scriptdir' attribute is used to define the directory where several
+# scripts are located. These are used by the resource access layer.
+scriptdir ="@SCRIPTDIR@/"
+
+##############################################################################
+# The 'defaults' attribute is used to define the location and the name of the
 # file which contains the default values for all samba properties. This file
 # will be created during the startup of the instrumentation.
 defaults  ="@sysconfdir@/smt_smb_ra_defaults.conf"
 
 ##############################################################################
-# The 'synonyms' variable is used to define the location and the name of the
+# The 'synonyms' attribute is used to define the location and the name of the
 # file which includes the synonym names for several samba properties.
 synonyms  ="@sysconfdir@/smt_smb_ra_synonyms.conf" 
 
 ##############################################################################
-# The 'groupmap' variable is used to define the location and the name of the
+# The 'groupmap' attribute is used to define the location and the name of the
 # group map database.
 groupmap  ="/var/lib/samba/group_mapping.tdb"
 
 ##############################################################################
-# The 'cacheinterval' variable is used to define an intervall when the
+# The 'cacheinterval' attribute is used to define an interval when the
 # cache of the resource access layer will be flushed to the configuration 
 # file. A value of '0' will disable the caching.
 cacheinterval ="10"

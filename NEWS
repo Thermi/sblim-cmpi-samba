@@ -1,5 +1,6 @@
 Changes on top of 0.5.2-1
 ==============================================================================
+- 1815306  cmpi-samba: Man page for the samba specific config file
 - 1814509  cmpi-samba: Enhancements to build process
 
 Changes in 0.5.2-1
