@@ -2,6 +2,7 @@ Changes on top of 0.5.2-1
 ==============================================================================
 - 1815306  cmpi-samba: Man page for the samba specific config file
 - 1814509  cmpi-samba: Enhancements to build process
+- 1769647  cmpi-samba: Parallel requests cause provider to quit
 
 Changes in 0.5.2-1
 ==============================================================================

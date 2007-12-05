@@ -11,7 +11,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 Summary: SBLIM WBEM-SMT Samba
 Name: @PACKAGE_TARNAME@
 Version: @PACKAGE_VERSION@
-Release: CVS
+Release: 2
 Group: Systems Management/Base
 URL: http://www.sblim.org
 License: CPL
@@ -174,10 +174,11 @@ fi
 
 ###############################################################################
 %changelog
-* Tue Oct 16 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.2-CVS
+* Tue Oct 16 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.2-2
   - Inclusion of fixes for the following issues:
     o 1815306  cmpi-samba: Man page for the samba specific config file
     o 1814509  cmpi-samba: Enhancements to build process
+    o 1769647  cmpi-samba: Parallel requests cause provider to quit
 
 * Fri Sep 14 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.2-1
   - Inclusion of fixes for the following issues:

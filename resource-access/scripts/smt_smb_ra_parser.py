@@ -19,6 +19,8 @@
 
 from string import strip
 from smt_smb_ra_errors import *
+from os import write,close,path
+from sys import argv,exit,stdin
 import re
 
 class Parser:
@@ -33,29 +35,33 @@ class Parser:
 
 
 	def parse(self):
-		self.file = file(self.filename)
-		self.tokens = {}
-		self.sec_order = [] # These 2 exists basically to allow us to determine the
-		self.all_order = {} # order in wich the shares appear in the file.  
-		for i in self.file.xreadlines():
-			if self.comment.search(i):
-				continue
-			try:
-				sh = self.share.search(strip(i)).groups()[0]
-				self.tokens[sh] = {} 
-				self.sec_order.append(sh)
-				self.all_order[sh] = []
-			except AttributeError:
+        	if path.exists(self.filename):
+
+			self.file = file(self.filename)
+			self.tokens = {}
+			self.sec_order = [] # These 2 exists basically to allow us to determine the
+			self.all_order = {} # order in wich the shares appear in the file.  
+			for i in self.file.xreadlines():
+				if self.comment.search(i):
+					continue
 				try:
-					op = self.opts.search(strip(i)).groups()
-					self.tokens[sh][op[0]] = op[1]
-					self.all_order[sh].append(op[0])
+					sh = self.share.search(strip(i)).groups()[0]
+					self.tokens[sh] = {} 
+					self.sec_order.append(sh)
+					self.all_order[sh] = []
+				except AttributeError:
+					try:
+						op = self.opts.search(strip(i)).groups()
+						self.tokens[sh][op[0]] = op[1]
+						self.all_order[sh].append(op[0])
+					except:
+						continue
 				except:
 					continue
-			except:
-				continue
-		self.file.close()		
-		return self.tokens
+			self.file.close()		
+			return self.tokens
+		else:
+			exit(EINVAL)
 
 	def get_order(self):
 		return self.sec_order,self.all_order

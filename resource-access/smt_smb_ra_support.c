@@ -1789,10 +1789,12 @@ char **get_shares_list(){
 
   for(i=0;all_services && all_services[i];i++){
     printable = __get_option(all_services[i],"printable");
-    if (!strcasecmp("yes",printable) ||
-	!strcasecmp(GLOBAL,all_services[i]) ) continue;
-    shares_list = (char**) realloc(shares_list,(j+2)*sizeof(char *));
-    shares_list[j++] = strdup(all_services[i]);
+    if (strcasecmp(GLOBAL,all_services[i]) && (!printable || !strcasecmp("no",printable))) {
+        shares_list = (char**) realloc(shares_list,(j+2)*sizeof(char *));
+        shares_list[j++] = strdup(all_services[i]);
+    } else {
+        continue;
+    }
   }
 
   shares_list[j] = (char *) NULL;
@@ -1900,7 +1902,7 @@ char **get_samba_printers_list(){
 
   for(i=0;all_services && all_services[i];i++){
     printable = __get_option(all_services[i],"printable");
-    if (!strcasecmp("no",printable)) continue;
+    if (!strcasecmp(GLOBAL,all_services[i]) || !printable || !strcasecmp("no",printable)) continue;
     printer_list = realloc(printer_list,(j+2)*sizeof(char *));
     printer_list[j++] = strdup(all_services[i]);
   }
