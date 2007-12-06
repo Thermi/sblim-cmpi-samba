@@ -11,8 +11,8 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 Summary: SBLIM WBEM-SMT Samba
 Name: @PACKAGE_TARNAME@
 Version: @PACKAGE_VERSION@
-Release: 2
-Group: Systems Management/Base
+Release: CVS
+Group: Systems Management/Instrumentation
 URL: http://www.sblim.org
 License: CPL
 Requires: sblim-tools-libra
@@ -38,7 +38,7 @@ Application.
 ###############################################################################
 %Package devel
 Summary: SBLIM WBEM-SMT Samba - Header Development Files
-Group: Systems Management/Base
+Group: Systems Management/Instrumentation
 Requires: %{name} = %{version}-%{release}
 
 %Description devel
@@ -48,7 +48,7 @@ link libraries for dependent provider packages
 ###############################################################################
 %Package test
 Summary: SBLIM WBEM-SMT Samba - Testcase Files
-Group: Systems Management/Base
+Group: Systems Management/Instrumentation/Test
 Requires: %{name} = %{version}-%{release}
 Requires: sblim-testsuite
 
@@ -174,8 +174,9 @@ fi
 
 ###############################################################################
 %changelog
-* Tue Oct 16 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.2-2
+* Tue Oct 16 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.2-CVS
   - Inclusion of fixes for the following issues:
+    o 1845493  cmpi-samba: Include proper group definition for RPM build
     o 1815306  cmpi-samba: Man page for the samba specific config file
     o 1814509  cmpi-samba: Enhancements to build process
     o 1769647  cmpi-samba: Parallel requests cause provider to quit
