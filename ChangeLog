@@ -1,4 +1,130 @@
 // =========================================================================
+// new in version 0.5.3-1 :
+
+2007-12-11 10:38  skanan
+
+	* NEWS, configure.ac, sblim-cmpi-samba.spec.in: Maintenance release
+	  0.5.3-1
+
+2007-12-06 10:56  skanan
+
+	* NEWS, sblim-cmpi-samba.spec.in: Fix for issue: [1769647]
+	  Parallel requests cause provider to quit
+
+2007-12-06 09:13  taphorn
+
+	* NEWS, sblim-cmpi-samba.spec.in: Fix for issue [ 1845493 ]
+	  cmpi-samba: Include proper group definition for RPM build
+
+2007-12-05 12:18  skanan
+
+	* resource-access/smt_smb_ra_support.c, NEWS,
+	  sblim-cmpi-samba.spec.in,
+	  resource-access/scripts/smt_smb_ra_get_user_mappings.py,
+	  resource-access/scripts/smt_smb_ra_parser.py: Fix for issue:
+	  [1769647]  Parallel requests cause provider to quit
+
+2007-12-05 11:36  skanan
+
+	* NEWS, sblim-cmpi-samba.spec.in,
+	  resource-access/smt_smb_ra_support.c,
+	  resource-access/scripts/smt_smb_ra_get_user_mappings.py,
+	  resource-access/scripts/smt_smb_ra_parser.py: Fix for issue:
+	  [1769647]  Parallel requests cause provider to quit
+
+2007-10-17 16:04  taphorn
+
+	* Makefile.am, NEWS, configure.ac, sblim-cmpi-samba.spec.in,
+	  man/.cvsignore, man/Makefile.am,
+	  man/smt_smb_ra_support.conf.5.pre.in,
+	  provider/CIM_ConcreteJob/.cvsignore,
+	  resource-access/smt_smb_ra_support.conf.pre.in: Fix for issue [
+	  1815306 ] cmpi-samba: Man page for the samba specific config file
+
+2007-10-16 10:45  taphorn
+
+	* provider/Linux_SambaGlobalPrintingForGlobal/Makefile.am,
+	  provider/Linux_SambaHost/Makefile.am,
+	  provider/Linux_SambaPrinterPrintingForPrinter/Makefile.am,
+	  provider/Linux_SambaReadListForShare/Makefile.am,
+	  provider/Linux_SambaScriptingForGlobal/Makefile.am,
+	  provider/Linux_SambaWriteListForPrinter/Makefile.am,
+	  provider/Linux_SambaHostsForService/Makefile.am,
+	  provider/Linux_SambaReadListForPrinter/Makefile.am,
+	  provider/Linux_SambaScriptingOptions/Makefile.am,
+	  provider/Linux_SambaUser/Makefile.am,
+	  provider/Linux_SambaValidUsersForPrinter/Makefile.am,
+	  provider/Linux_SambaWriteListForGlobal/Makefile.am, .cproject,
+	  NEWS, sblim-cmpi-samba.spec.in,
+	  provider/CIM_ConcreteJob/Makefile.am,
+	  provider/Linux_SambaGlobalProtocolForGlobal/Makefile.am,
+	  provider/Linux_SambaGlobalProtocolOptions/Makefile.am,
+	  provider/Linux_SambaGlobalSecurityForGlobal/Makefile.am,
+	  provider/Linux_SambaCommonSecurityForGlobal/Makefile.am,
+	  provider/Linux_SambaForceGroupForGlobal/Makefile.am,
+	  provider/Linux_SambaGlobalPrintingOptions/Makefile.am,
+	  provider/Linux_SambaPrinterAdminForPrinter/Makefile.am,
+	  provider/Linux_SambaReadListForGlobal/Makefile.am,
+	  provider/Linux_SambaShareOptions/Makefile.am,
+	  provider/Linux_SambaShareSecurityForShare/Makefile.am,
+	  provider/Linux_SambaShareSecurityOptions/Makefile.am,
+	  provider/Linux_SambaForceUserForPrinter/Makefile.am,
+	  provider/Linux_SambaGlobalBrowseOptions/Makefile.am,
+	  provider/Linux_SambaInvalidUsersForPrinter/Makefile.am,
+	  provider/Linux_SambaPrinterOptions/Makefile.am,
+	  provider/Linux_SambaPrinterSecurityForPrinter/Makefile.am,
+	  provider/Linux_SambaShareForService/Makefile.am,
+	  provider/Linux_SambaGlobalForService/Makefile.am,
+	  provider/Linux_SambaGlobalOptions/Makefile.am,
+	  provider/Linux_SambaInvalidUsersForShare/Makefile.am,
+	  provider/Linux_SambaPrinterBrowseForPrinter/Makefile.am,
+	  provider/Linux_SambaShareSecurityForGlobal/Makefile.am,
+	  provider/Linux_SambaAllowHostsForPrinter/Makefile.am,
+	  provider/Linux_SambaGlobalFileNameHandlingForGlobal/Makefile.am,
+	  provider/Linux_SambaGlobalSecurityOptions/Makefile.am,
+	  provider/Linux_SambaPrinterPrintingOptions/Makefile.am,
+	  provider/Linux_SambaService/Makefile.am,
+	  provider/Linux_SambaServiceConfiguration/Makefile.am,
+	  provider/Linux_SambaAllowHostsForGlobal/Makefile.am,
+	  provider/Linux_SambaCommonSecurityForShare/Makefile.am,
+	  provider/Linux_SambaGlobalFileNameHandlingOptions/Makefile.am,
+	  provider/Linux_SambaGroupForUser/Makefile.am,
+	  provider/Linux_SambaInvalidUsersForGlobal/Makefile.am,
+	  provider/Linux_SambaPrinterSecurityForGlobal/Makefile.am,
+	  provider/Linux_SambaShareBrowseOptions/Makefile.am,
+	  provider/Linux_SambaValidUsersForGlobal/Makefile.am,
+	  provider/Linux_SambaCommonSecurityOptions/Makefile.am,
+	  provider/Linux_SambaForceGroupForPrinter/Makefile.am,
+	  provider/Linux_SambaGroup/Makefile.am,
+	  provider/Linux_SambaPrinterForService/Makefile.am,
+	  provider/Linux_SambaShareBrowseForShare/Makefile.am,
+	  provider/Linux_SambaShareProtocolOptions/Makefile.am,
+	  provider/Linux_SambaDenyHostsForShare/Makefile.am,
+	  provider/Linux_SambaPrinterBrowseOptions/Makefile.am,
+	  provider/Linux_SambaUsersForService/Makefile.am,
+	  provider/Linux_SambaWriteListForShare/Makefile.am,
+	  provider/Linux_SambaDenyHostsForGlobal/Makefile.am,
+	  provider/Linux_SambaForceUserForGlobal/Makefile.am,
+	  provider/Linux_SambaGlobalBrowseForGlobal/Makefile.am,
+	  provider/Linux_SambaShareFileNameHandlingOptions/Makefile.am,
+	  provider/Linux_SambaShareProtocolForShare/Makefile.am,
+	  provider/Linux_SambaValidUsersForShare/Makefile.am,
+	  provider/Linux_SambaAllowHostsForShare/Makefile.am,
+	  provider/Linux_SambaForceGroupForShare/Makefile.am,
+	  provider/Linux_SambaGuestAccountForGlobal/Makefile.am,
+	  provider/Linux_SambaPrinterAdminForGlobal/Makefile.am,
+	  provider/Linux_SambaPrinterSecurityOptions/Makefile.am,
+	  provider/Linux_SambaShareFileNameHandlingForShare/Makefile.am,
+	  provider/Linux_SambaAdminUsersForGlobal/Makefile.am,
+	  provider/Linux_SambaAdminUsersForShare/Makefile.am,
+	  provider/Linux_SambaDenyHostsForPrinter/Makefile.am,
+	  provider/Linux_SambaForceUserForShare/Makefile.am,
+	  provider/Linux_SambaCommonSecurityForPrinter/Makefile.am,
+	  provider/Linux_SambaServiceConfigurationForService/Makefile.am:
+	  Fix for issue [ 1814509 ] cmpi-samba: Enhancements to build
+	  process
+
+// =========================================================================
 // new in version 0.5.2-1 :
 
 2007-09-14 14:30  taphorn
