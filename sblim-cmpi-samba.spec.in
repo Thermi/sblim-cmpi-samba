@@ -11,7 +11,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 Summary: SBLIM WBEM-SMT Samba
 Name: @PACKAGE_TARNAME@
 Version: @PACKAGE_VERSION@
-Release: CVS
+Release: 1
 Group: Systems Management/Instrumentation
 URL: http://www.sblim.org
 License: CPL
@@ -174,7 +174,7 @@ fi
 
 ###############################################################################
 %changelog
-* Tue Oct 16 2007 Wolfgang Taphorn <taphorn@de.ibm.com> 0.5.2-CVS
+* Tue Dec 11 2007 Sam Kannan <skanan@us.ibm.com> 0.5.3-1
   - Inclusion of fixes for the following issues:
     o 1845493  cmpi-samba: Include proper group definition for RPM build
     o 1815306  cmpi-samba: Man page for the samba specific config file

@@ -14,7 +14,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(SBLIM CMPI Provider for WBEM-SMT Samba task, 0.5.2, sblim-devel@lists.sourceforge.net, sblim-cmpi-samba)
+AC_INIT(SBLIM CMPI Provider for WBEM-SMT Samba task, 0.5.3, sblim-devel@lists.sourceforge.net, sblim-cmpi-samba)
 AC_CONFIG_SRCDIR([.])
 AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE([tar-ustar])

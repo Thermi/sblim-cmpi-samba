@@ -1,4 +1,4 @@
-Changes on top of 0.5.2-1
+Changes in 0.5.3-1
 ==============================================================================
 - 1845493  cmpi-samba: Include proper group definition for RPM build
 - 1815306  cmpi-samba: Man page for the samba specific config file
