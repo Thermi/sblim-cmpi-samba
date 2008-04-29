@@ -11,17 +11,6 @@
 // #pragma include ("IBMQualifiers.mof")
 
 
-
-
-// ===================================================================
-// Samba Registered Profile
-// ===================================================================
-//[ Description("Class to provide a registered profile for Samba.") ]
-//class Linux_SambaRegisteredProfile : CIM_RegisteredProfile
-//{
-//};
-
-
 // ===================================================================
 // Linux_SambaServiceConfiguration
 // ===================================================================
@@ -112,19 +101,6 @@ class Linux_SambaShareSecurityOptions : CIM_SettingData {
     string Name;
 };
 
-
-// ===================================================================
-// Linux_SambaService
-// ===================================================================
-
-class Linux_SambaService : CIM_Service {
-
-    [Key, Write, Override ("Name")]
-    string Name;
-
-    [Write]
-    boolean Started;
-};
 
 
 // ===================================================================
@@ -1368,4 +1344,3 @@ class Linux_SambaGlobalForService : CIM_ElementSettingData {
 // ===================================================================
 // end of file
 // ===================================================================
-

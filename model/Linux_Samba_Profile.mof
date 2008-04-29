@@ -1,0 +1,35 @@
+// ===================================================================
+// Linux_SambaService
+// ===================================================================
+
+class Linux_SambaService : CIM_Service {
+
+    [Key, Write, Override ("Name")]
+    string Name;
+
+    [Write]
+    boolean Started;
+};
+
+// ===================================================================
+// Samba Registered Profile
+// ===================================================================
+[Description ("A class which is used during SLP discovery to identify"
+              "that the Samba task is available")]
+class Linux_SambaRegisteredProfile : CIM_RegisteredProfile {
+
+};
+
+
+// ===================================================================
+// Samba Element Conforms To Profile
+// ===================================================================
+[Description("Association between the Samba Registered Profile and the Samba Service"), Association]
+class Linux_SambaElementConformsToProfile : CIM_ElementConformsToProfile {
+    
+  	[Override ("ConformantStandard")]  	
+  	Linux_SambaRegisteredProfile REF ConformantStandard;
+
+    [Override("ManagedElement")]
+ 	Linux_SambaService REF ManagedElement;
+};

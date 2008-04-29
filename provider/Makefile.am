@@ -182,6 +182,5 @@ SUBDIRS = . \
           Linux_SambaValidUsersForShare \
           Linux_SambaWriteListForGlobal \
           Linux_SambaWriteListForPrinter \
+          Linux_SambaElementConformsToProfile \
           Linux_SambaWriteListForShare
-
-

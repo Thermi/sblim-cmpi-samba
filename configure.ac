@@ -166,6 +166,7 @@ AC_CONFIG_FILES(provider/Linux_SambaValidUsersForShare/Makefile)
 AC_CONFIG_FILES(provider/Linux_SambaWriteListForGlobal/Makefile)
 AC_CONFIG_FILES(provider/Linux_SambaWriteListForPrinter/Makefile)
 AC_CONFIG_FILES(provider/Linux_SambaWriteListForShare/Makefile)
+AC_CONFIG_FILES(provider/Linux_SambaElementConformsToProfile/Makefile)
 AC_CONFIG_FILES(test/Makefile)
 
 AC_OUTPUT
