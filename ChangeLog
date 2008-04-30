@@ -1,5 +1,27 @@
-// =========================================================================
-// new in version 0.5.3-1 :
+2008-04-30 15:56  skanan
+
+	* NEWS: Maintenance release 0.5.4-1
+
+2008-04-30 15:06  skanan
+
+	* configure.ac, sblim-cmpi-samba.spec.in,
+	  .settings/org.eclipse.cdt.core.prefs: Updated Version info
+
+2008-04-29 19:43  skanan
+
+	* Makefile.am, configure.ac, sblim-cmpi-samba.spec.in,
+	  model/Linux_Samba.mof, model/Linux_Samba.registration,
+	  model/Linux_Samba_Profile.mof,
+	  model/Linux_Samba_Profile.registration, provider/Makefile.am,
+	  provider/Linux_SambaElementConformsToProfile/.cvsignore,
+	  provider/Linux_SambaElementConformsToProfile/Linux_ElementConformsToProfile_Resource.c,
+	  provider/Linux_SambaElementConformsToProfile/Linux_ElementConformsToProfile_Resource.h,
+	  provider/Linux_SambaElementConformsToProfile/Linux_SambaElementConformsToProfile.c,
+	  provider/Linux_SambaElementConformsToProfile/Makefile.am,
+	  .settings/org.eclipse.cdt.core.prefs,
+	  test/cim/Linux_SambaElementConformsToProfile.cim,
+	  test/cim/Linux_SambaRegisteredProfile.cim: Bug# 1939839
+	  Registered Profile implementation
 
 2007-12-11 10:38  skanan
 
