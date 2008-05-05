@@ -107,7 +107,7 @@ then
 	-r %{REGISTRATION} -m %{SCHEMA} > /dev/null
 
   %{_datadir}/%{name}/provider-register.sh -d %{?tog_pegasus:-t pegasus} \
-	-n \"root/PG_InterOp\" -r %{INTEROP_REGISTRATIONS} -m %{INTEROP_SCHEMAS} > /dev/null	
+	-n "root/PG_InterOp" -r %{INTEROP_REGISTRATIONS} -m %{INTEROP_SCHEMAS} > /dev/null	
 fi
 
 
@@ -130,7 +130,7 @@ fi
 	-r %{REGISTRATION} -m %{SCHEMA} > /dev/null
 
 %{_datadir}/%{name}/provider-register.sh %{?tog_pegasus:-t pegasus} \
-	-n \"root/PG_InterOp\" -r %{INTEROP_REGISTRATIONS} -m %{INTEROP_SCHEMAS} > /dev/null	
+	-n "root/PG_InterOp" -r %{INTEROP_REGISTRATIONS} -m %{INTEROP_SCHEMAS} > /dev/null	
 
 /sbin/ldconfig
 
@@ -144,7 +144,7 @@ then
 	-r %{REGISTRATION} -m %{SCHEMA} > /dev/null
 
   %{_datadir}/%{name}/provider-register.sh -d %{?tog_pegasus:-t pegasus} \
-	-n \"root/PG_InterOp\" -r %{INTEROP_REGISTRATIONS} -m %{INTEROP_SCHEMAS} > /dev/null	
+	-n "root/PG_InterOp" -r %{INTEROP_REGISTRATIONS} -m %{INTEROP_SCHEMAS} > /dev/null	
 fi
 
 
