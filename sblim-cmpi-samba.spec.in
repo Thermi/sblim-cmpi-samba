@@ -197,6 +197,13 @@ fi
 
 ###############################################################################
 %changelog
+* Mon May 12 2008 Saravanan Kannan <skanan(at)us.ibm.com> 0.5.5-1
+    o Fixes for testsuite issues.
+    
+* Wed Apr 30 2008 Saravanan Kannan <skanan(at)us.ibm.com>  0.5.4-1
+  - Inclusion of fixes for the following issues:
+    o 1939839  cmpi-samba: Registered Profile support
+    
 * Tue Dec 11 2007 Sam Kannan <skanan@us.ibm.com> 0.5.3-1
   - Inclusion of fixes for the following issues:
     o 1845493  cmpi-samba: Include proper group definition for RPM build

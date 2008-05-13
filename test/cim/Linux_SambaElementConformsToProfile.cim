@@ -1,6 +1,6 @@
 ********************************************************************************
 association : Linux_SambaElementConformsToProfile
-objectPath : Linux_SambaElementConformsToProfile.ConformantStandard="root/PG_InterOp:Linux_SambaRegisteredProfile.InstanceID=\"IBM:Samba Server Profile-0.1.1\"",ManagedElement="root/cimv2:Linux_SambaService.CreationClassName=\"Linux_SambaService\",Name=\"Samba\",SystemCreationClassName=\"Linux_SambaService\",SystemName=\"localhost\""
+objectPath : Linux_SambaElementConformsToProfile.ConformantStandard="root/PG_InterOp:Linux_SambaRegisteredProfile.InstanceID=\"IBM:Samba Server Profile-0.1.2\"",ManagedElement="root/cimv2:Linux_SambaService.CreationClassName=\"Linux_SambaService\",Name=\"Samba\",SystemCreationClassName=\"Linux_SambaService\",SystemName=\"localhost\""
 sourceRole : ConformantStandard
 targetRole : ManagedElement
 sourceClass : Linux_SambaRegisteredProfile

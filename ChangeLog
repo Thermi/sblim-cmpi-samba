@@ -1,3 +1,13 @@
+2008-05-12  skannan  <skannan@skannanlaptop.ibm.com>
+
+	* configure.ac, NEWS, sblim-cmpi-samba.spec.in, test/Makefile.am,  
+	  test/test-cmpi-samba.sh, test/cim/Linux_SambaRegisteredProfile.cim, 
+	  test/cim/Linux_SambaElementConformsToProfile.cim,
+	  test/system/linux/Linux_SambaRegisteredProfile.system, 
+	  test/system/linux/Linux_SambaElementConformsToProfile.system:
+	  Maintenance release 0.5.5-1 & testsuite fixes
+	  
+	
 2008-04-30 15:56  skanan
 
 	* NEWS: Maintenance release 0.5.4-1

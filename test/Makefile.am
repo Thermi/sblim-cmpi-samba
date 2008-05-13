@@ -31,6 +31,7 @@ testsuiteconfdir=@TESTSUITEDIR@/
 
 testsuite_SCRIPTS=test-cmpi-samba.sh test-cmpi-samba-associations.pl
 testsuitecim_DATA= \
+    cim/Linux_SambaElementConformsToProfile.cim \
     cim/Linux_SambaCommonSecurityOptions.cim \
     cim/Linux_SambaGlobalBrowseOptions.cim \
     cim/Linux_SambaGlobalFileNameHandlingOptions.cim \
@@ -96,6 +97,7 @@ testsuitecim_DATA= \
     cim/Linux_SambaWriteListForShare.cim
 
 testsuitesystem_DATA= \
+	system/linux/Linux_SambaElementConformsToProfile.system \
     system/linux/Linux_SambaCommonSecurityOptions.system \
     system/linux/Linux_SambaGlobalBrowseOptions.system \
     system/linux/Linux_SambaGlobalFileNameHandlingOptions.system \

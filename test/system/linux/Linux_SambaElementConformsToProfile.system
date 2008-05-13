@@ -1,0 +1,8 @@
+********************************************************************************
+association : Linux_SambaElementConformsToProfile
+
+--------------------------------------------------------------------------------
+Linux_SambaRegisteredProfile : -target Linux_SambaService -lt 2
+Linux_SambaService : -target Linux_SambaRegisteredProfile -eq 1
+
+--------------------------------------------------------------------------------

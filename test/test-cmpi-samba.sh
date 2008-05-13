@@ -169,6 +169,11 @@ do
   i=$i+1;
 done
 
+# Test RegisteredProfile classes
+. ${SCRIPT_PATH}/run.sh Linux_SambaRegisteredProfile -n /root/PG_InterOp || exit 1;
+. ${SCRIPT_PATH}/run.sh Linux_SambaElementConformsToProfile -n /root/PG_InterOp || exit 1;
+
+
 #perl test-cmpi-samba-associations.pl 
 #
 # SECOND TIME Invocation of CreateInstance Script should fail creation of instances...
