@@ -1,3 +1,8 @@
+2009-06-17 14:43  jbongio
+
+	* NEWS, configure.ac, sblim-cmpi-samba.spec.in: Maintenance release
+	  for 0.5.6-1
+
 2008-05-12  skannan  <skannan@skannanlaptop.ibm.com>
 
 	* configure.ac, NEWS, sblim-cmpi-samba.spec.in, test/Makefile.am,  
