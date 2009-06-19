@@ -11,7 +11,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 Summary: SBLIM WBEM-SMT Samba
 Name: @PACKAGE_TARNAME@
 Version: @PACKAGE_VERSION@
-Release: 1
+Release: CVS
 Group: Systems Management/Instrumentation
 URL: http://www.sblim.org
 License: CPL
@@ -165,8 +165,8 @@ fi
 %config(noreplace) %{_sysconfdir}/smt_smb*.conf
 %defattr(-,root,root,0755)
 %{_datadir}/%{name}
-%exclude %{_datadir}/%{name}/*.pyc
-%exclude %{_datadir}/%{name}/*.pyo
+# %exclude %{_datadir}/%{name}/*.pyc
+# %exclude %{_datadir}/%{name}/*.pyo
 %{_libdir}/libIBM_SmbProviderTooling.so.*
 %{_libdir}/libLinux_SmbGeneralProviderBasic.so.*
 %{_libdir}/libRaToolsSmb.so.*
@@ -197,6 +197,9 @@ fi
 
 ###############################################################################
 %changelog
+* Fri Jun 19 2009 Jeremy Bongio <jbongio@us.ibm.com> 0.5.6-CVS
+    o 2809046 cmpi-samba: Fixes RPM build process
+
 * Wed Jun 17 2009 Jeremy Bongio <jbongio@us.ibm.com> 0.5.6-1
     o Maintenance release
 
