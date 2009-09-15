@@ -1,9 +1,0 @@
-.deps
-.libs
-Makefile
-Makefile.in
-smt_smb_array.lo
-libLinux_SmbGeneralProviderBasic.la
-libIBM_SmbProviderTooling.la
-CmpiErrorFormater.lo
-ArrayConverter.lo
