@@ -9,7 +9,7 @@ dnl
  dnl CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
  dnl
  dnl You can obtain a current copy of the Common Public License from
- dnl  http://www.opensource.org/licenses/cpl1.0.php
+ dnl  http://www.opensource.org/licenses/eclipse-1.0.php
  dnl
  dnl Author:       Konrad Rzeszutek <konradr@us.ibm.com>
  dnl Contributors: Viktor Mihajlovski <mihajlov@de.ibm.com>
